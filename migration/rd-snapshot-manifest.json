@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "path": "/Users/jasonchen/Downloads/yce-frontend-gm-260909",
+    "packageName": "youcam-enhance-frontend",
+    "packageVersion": "1.34.1",
+    "referenceStack": {
+      "next": "13.0.5",
+      "react": "18.2.0",
+      "styling": "SCSS Modules"
+    }
+  },
+  "copiedFiles": [
+    {
+      "source": "src/styles/variables.css",
+      "destination": "platform/tokens/rd/yce-frontend-1.34.1/variables.css",
+      "sha256": "77a17110a637a4be5dd1afed752765b0b0802828c336b1ea57d81822c7ee4a3e",
+      "role": "rd-token-baseline"
+    },
+    {
+      "source": "src/styles/variables-custom.css",
+      "destination": "platform/tokens/rd/yce-frontend-1.34.1/variables-custom.css",
+      "sha256": "c693ea915025ad9cec9bbc2c7b757d1a460918d9f6efd4ad4e9a29c4c0d529a2",
+      "role": "rd-runtime-token-extension"
+    }
+  ],
+  "referenceOnly": [
+    "package.json",
+    "src/pages/_app.js",
+    "src/pages/photo-enhance/index.js"
+  ],
+  "rejectedPatterns": [
+    ".env*",
+    "*.key",
+    "*.pem",
+    "*.p12",
+    "node_modules/**",
+    ".next/**",
+    "out/**",
+    "deploy*",
+    "gulpfile*"
+  ],
+  "notes": [
+    "variables-custom.css is supplied by RD but explicitly says it is not from the Designer export.",
+    "No RD application, environment, deployment or backend code is a runtime dependency."
+  ]
+}

@@ -1,0 +1,7 @@
+schemaVersion: 1
+feature: factory-readiness
+gaps:
+  - id: DESIGN-001
+    status: accepted-temporary
+    description: No final Figma exists for this internal readiness fixture.
+    resolutionOwner: Designer

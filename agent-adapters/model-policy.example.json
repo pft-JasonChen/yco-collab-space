@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "main": {
+    "selection": "environment-selected-high-capability-model"
+  },
+  "subagents": {
+    "mechanicalValidation": {
+      "preferredProvider": "claude",
+      "fallbackProvider": "codex"
+    },
+    "independentFinalReview": {
+      "mustDifferFromBuilder": true,
+      "crossProviderPreferred": true
+    }
+  }
+}

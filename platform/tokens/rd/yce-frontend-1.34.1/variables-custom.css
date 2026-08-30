@@ -1,0 +1,26 @@
+/* =============================================================================
+   Custom tokens — NOT from the designer export
+   =============================================================================
+   Kept separate so variables.css can be a straight paste of the designer export.
+   Re-syncing variables.css must NOT touch this file.
+   ============================================================================= */
+
+/* heading-0 (48px / 56px): used by pricing plan-total-price; the designer scale
+   has no equivalent. Pending designer alignment — see docs/scss-token-migration.md §8. */
+:root {
+  --font-size-heading-0: 3rem;
+  --line-height-heading-0: 3.5rem;
+
+  /* video-result-gutter (24px desktop / 16px mobile): the horizontal gutter
+     shared by the video result pages' tab control and history list, so the two
+     stay flush. The designer export has no spacing token that switches at a
+     breakpoint, so this one is composed from its --spacing-* scale. Keep the
+     query below in sync with $width-md in breakpoints.module.scss. */
+  --video-result-gutter: var(--spacing-24);
+}
+
+@media (max-width: 768px) {
+  :root {
+    --video-result-gutter: var(--spacing-16);
+  }
+}

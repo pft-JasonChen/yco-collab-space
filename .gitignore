@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.DS_Store
+.env
+.env.*
+!.env.example
+playwright-report/
+test-results/
+features/*/evidence/screenshots/
+features/*/evidence/*.png
+features/*/evidence/*.json
+features/*/evidence/*.md

@@ -1,0 +1,26 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+html {
+  background: var(--background-sunken);
+}
+
+body {
+  margin: var(--spacing-0);
+  color: var(--text-strong);
+  background: var(--background-sunken);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}

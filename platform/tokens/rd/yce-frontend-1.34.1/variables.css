@@ -1,0 +1,450 @@
+/* stylelint-disable no-duplicate-selectors */
+
+/* =============================================================================
+   1. Colors Primitive
+   ============================================================================= */
+:root {
+  /* Amber */
+  --amber-dark-1000: #e0be70;
+  --amber-dark-200: #e0be7033;
+  --amber-dark-50: #e0be7014;
+  --amber-dark-800: #e0be70cc;
+  --amber-light-1000: #ef9b00;
+  --amber-light-200: #ef9b0033;
+  --amber-light-50: #ffc02e0d;
+  --amber-light-800: #ef9b00cc;
+
+  /* Blue */
+  --blue-dark-1000: #a3eaff;
+  --blue-dark-200: #a3eaff33;
+  --blue-dark-50: #a3eaff0f;
+  --blue-dark-500: #a3eaff80;
+  --blue-dark-800: #a3eaffcc;
+  --blue-light-1000: #03ade2;
+  --blue-light-200: #03ade233;
+  --blue-light-50: #03ade20d;
+  --blue-light-500: #03ade280;
+  --blue-light-800: #03ade2cc;
+
+  /* Green */
+  --green-dark-1000: #77c7af;
+  --green-dark-200: #77c7af33;
+  --green-dark-50: #77c7af14;
+  --green-dark-800: #77c7afcc;
+  --green-light-1000: #067a57;
+  --green-light-200: #067a5733;
+  --green-light-50: #0acc920d;
+  --green-light-800: #067a57cc;
+
+  /* Grey Neutral Solid */
+  --grey-neutral-solid-0: #fff;
+  --grey-neutral-solid-1000: #000;
+  --grey-neutral-solid-50: #f7f7f7;
+  --grey-neutral-solid-800: #333;
+  --grey-neutral-solid-850: #262626;
+  --grey-neutral-solid-900: #1a1a1a;
+
+  /* Grey Neutral Dark */
+  --grey-neutral-dark-100: #ffffff1f;
+  --grey-neutral-dark-1000: #fff;
+  --grey-neutral-dark-200: #ffffff38;
+  --grey-neutral-dark-25: #ffffff08;
+  --grey-neutral-dark-50: #ffffff0f;
+  --grey-neutral-dark-500: #fff9;
+  --grey-neutral-dark-700: #ffffffc7;
+
+  /* Grey Neutral Light */
+  --grey-neutral-light-100: #0000001a;
+  --grey-neutral-light-1000: #000000e5;
+  --grey-neutral-light-25: #00000005;
+  --grey-neutral-light-50: #0000000a;
+  --grey-neutral-light-500: #00000073;
+  --grey-neutral-light-700: #0009;
+  --grey-neutral-light-800: #000c;
+
+  /* Grey Slate Solid */
+  --grey-slate-solid-0: #fff;
+  --grey-slate-solid-1000: #000;
+  --grey-slate-solid-50: #f5f9fa;
+  --grey-slate-solid-800: #293133;
+  --grey-slate-solid-850: #1d2426;
+  --grey-slate-solid-900: #12181a;
+
+  /* Grey Slate Light */
+  --grey-slate-light-100: #11181a1a;
+  --grey-slate-light-1000: #09161af2;
+  --grey-slate-light-200: #11181a33;
+  --grey-slate-light-25: #11181a05;
+  --grey-slate-light-50: #11181a0a;
+  --grey-slate-light-500: #11181a73;
+  --grey-slate-light-700: #11181aa6;
+  --grey-slate-light-900: #11181ae5;
+
+  /* Perfect */
+  --perfect-1000: #f23b77;
+
+  /* Purple */
+  --purple-dark-1000: #d2b2ff;
+  --purple-dark-200: #d2b2ff33;
+  --purple-dark-50: #d2b2ff0d;
+  --purple-dark-800: #d2b2ffcc;
+  --purple-light-1000: #7e47cc;
+  --purple-light-200: #7e47cc33;
+  --purple-light-50: #7e47cc0d;
+  --purple-light-800: #7e47cccc;
+
+  /* Red */
+  --red-dark-1000: #ff9c9c;
+  --red-dark-200: #ff9c9c33;
+  --red-dark-50: #ff9c9c14;
+  --red-dark-800: #ff9c9ccc;
+  --red-light-1000: #de0000;
+  --red-light-200: #de000024;
+  --red-light-50: #de00000d;
+  --red-light-800: #de0000cc;
+
+  /* Teal */
+  --teal-dark-1000: #7ec0e5;
+  --teal-dark-200: #7ec0e533;
+  --teal-dark-50: #7ec0e514;
+  --teal-dark-800: #7ec0e5cc;
+  --teal-light-1000: #1a74a8;
+  --teal-light-200: #1a74a833;
+  --teal-light-50: #26b0ff0d;
+  --teal-light-800: #1a74a8cc;
+
+  /* Yellow */
+  --yellow-solid-1000: #fec62e;
+}
+
+/* =============================================================================
+   2. Theme (Brand & Grey Aliases)
+   ============================================================================= */
+:root {
+  /* Brand */
+  --brand-dark-1000: var(--blue-dark-1000);
+  --brand-dark-200: var(--blue-dark-200);
+  --brand-dark-50: var(--blue-dark-50);
+  --brand-dark-500: var(--blue-dark-500);
+  --brand-dark-800: var(--blue-dark-800);
+  --brand-light-1000: var(--blue-light-1000);
+  --brand-light-200: var(--blue-light-200);
+  --brand-light-50: var(--blue-light-50);
+  --brand-light-500: var(--blue-light-500);
+  --brand-light-800: var(--blue-light-800);
+
+  /* Grey Solid */
+  --grey-solid-0: var(--grey-slate-solid-0);
+  --grey-solid-1000: var(--grey-slate-solid-1000);
+  --grey-solid-50: var(--grey-slate-solid-50);
+  --grey-solid-800: var(--grey-slate-solid-800);
+  --grey-solid-850: var(--grey-slate-solid-850);
+  --grey-solid-900: var(--grey-slate-solid-900);
+
+  /* Grey Dark */
+  --grey-dark-100: var(--grey-neutral-dark-100);
+  --grey-dark-1000: var(--grey-neutral-dark-1000);
+  --grey-dark-200: var(--grey-neutral-dark-200);
+  --grey-dark-25: var(--grey-neutral-dark-25);
+  --grey-dark-50: var(--grey-neutral-dark-50);
+  --grey-dark-500: var(--grey-neutral-dark-500);
+  --grey-dark-700: var(--grey-neutral-dark-700);
+
+  /* Grey Light */
+  --grey-light-100: var(--grey-slate-light-100);
+  --grey-light-1000: var(--grey-slate-light-1000);
+  --grey-light-200: var(--grey-slate-light-200);
+  --grey-light-25: var(--grey-slate-light-25);
+  --grey-light-50: var(--grey-slate-light-50);
+  --grey-light-500: var(--grey-slate-light-500);
+  --grey-light-700: var(--grey-slate-light-700);
+  --grey-light-900: var(--grey-slate-light-900);
+}
+
+/* =============================================================================
+   3. Colors Semantic — Light
+   ============================================================================= */
+:root {
+  /* Background */
+  --background-alternate: var(--grey-solid-50);
+  --background-base: var(--grey-solid-0);
+  --background-brand: var(--brand-light-1000);
+  --background-inverse: var(--grey-solid-900);
+  --background-overlay: var(--grey-solid-0);
+  --background-raised: var(--grey-solid-0);
+  --background-sunken: var(--grey-solid-50);
+
+  /* Fill */
+  --fill-badge: var(--perfect-1000);
+  --fill-brand-hover: var(--brand-light-50);
+  --fill-brand-press: var(--brand-light-200);
+  --fill-brand-disable: var(--brand-light-500);
+  --fill-brand-strong: var(--brand-light-1000);
+  --fill-brand-weak: var(--brand-light-50);
+  --fill-disabled: var(--grey-light-200);
+  --fill-error-strong: var(--red-light-1000);
+  --fill-error-weak: var(--red-light-50);
+  --fill-hover: var(--grey-light-50);
+  --fill-information-strong: var(--teal-light-1000);
+  --fill-information-weak: var(--teal-light-50);
+  --fill-inverse-disabled: var(--grey-dark-100);
+  --fill-inverse-hover: var(--grey-dark-100);
+  --fill-inverse-press: var(--grey-dark-50);
+  --fill-inverse-strong: var(--grey-solid-0);
+  --fill-inverse-weak: var(--grey-dark-50);
+  --fill-overlay: var(--grey-neutral-light-700);
+  --fill-overlay-strong: var(--grey-neutral-light-800);
+  --fill-overlay-weak: var(--grey-neutral-light-500);
+  --fill-press: var(--grey-light-100);
+  --fill-selected: var(--brand-light-1000);
+  --fill-strong: var(--grey-light-1000);
+  --fill-success-strong: var(--green-light-1000);
+  --fill-success-weak: var(--green-light-50);
+  --fill-warning-strong: var(--amber-light-1000);
+  --fill-warning-weak: var(--amber-light-50);
+  --fill-weak: var(--grey-light-50);
+  --fill-weaker: var(--grey-light-25);
+  --fill-white: var(--grey-solid-0);
+  --fill-yellow: var(--yellow-solid-1000);
+
+  /* Icon */
+  --icon-brand: var(--brand-light-1000);
+  --icon-disabled: var(--grey-light-200);
+  --icon-error: var(--red-light-800);
+  --icon-information: var(--teal-light-800);
+  --icon-inverse: var(--grey-dark-500);
+  --icon-inverse-disabled: var(--grey-dark-100);
+  --icon-inverse-strong: var(--grey-dark-1000);
+  --icon-neutral: var(--grey-light-1000);
+  --icon-success: var(--green-light-800);
+  --icon-warning: var(--amber-light-800);
+
+  /* Stroke */
+  --stroke-brand-strong: var(--brand-light-800);
+  --stroke-brand-weak: var(--brand-light-200);
+  --stroke-disabled: var(--grey-light-100);
+  --stroke-error-strong: var(--red-light-800);
+  --stroke-error-weak: var(--red-light-200);
+  --stroke-focus: var(--brand-light-200);
+  --stroke-information-strong: var(--teal-light-800);
+  --stroke-information-weak: var(--teal-light-200);
+  --stroke-inverse-disabled: var(--grey-dark-100);
+  --stroke-inverse-strong: var(--grey-dark-500);
+  --stroke-inverse-weak: var(--grey-dark-100);
+  --stroke-selected: var(--brand-light-1000);
+  --stroke-strong: var(--grey-light-200);
+  --stroke-success-strong: var(--green-light-800);
+  --stroke-success-weak: var(--green-light-200);
+  --stroke-warning-strong: var(--amber-light-800);
+  --stroke-warning-weak: var(--amber-light-200);
+  --stroke-weak: var(--grey-light-100);
+
+  /* Text */
+  --text-brand: var(--brand-light-1000);
+  --text-disabled: var(--grey-light-200);
+  --text-error: var(--red-light-1000);
+  --text-information: var(--teal-light-1000);
+  --text-inverse-disabled: var(--grey-dark-100);
+  --text-inverse-strong: var(--grey-dark-1000);
+  --text-inverse-weak: var(--grey-dark-700);
+  --text-strong: var(--grey-light-1000);
+  --text-success: var(--green-light-1000);
+  --text-warning: var(--amber-light-1000);
+  --text-weak: var(--grey-light-700);
+  --text-weaker: var(--grey-light-500);
+}
+
+/* =============================================================================
+   4. Spacing & Corner Radius
+   ============================================================================= */
+:root {
+  /* Corner Radius */
+  --corner-radius-0: 0;
+  --corner-radius-4: 0.25rem;
+  --corner-radius-8: 0.5rem;
+  --corner-radius-12: 0.75rem;
+  --corner-radius-16: 1rem;
+  --corner-radius-20: 1.25rem;
+  --corner-radius-24: 1.5rem;
+  --corner-radius-32: 2rem;
+
+  /* Spacing */
+  --spacing-0: 0;
+  --spacing-4: 0.25rem;
+  --spacing-8: 0.5rem;
+  --spacing-12: 0.75rem;
+  --spacing-16: 1rem;
+  --spacing-20: 1.25rem;
+  --spacing-24: 1.5rem;
+  --spacing-32: 2rem;
+  --spacing-40: 2.5rem;
+  --spacing-48: 3rem;
+  --spacing-56: 3.5rem;
+  --spacing-64: 4rem;
+  --spacing-80: 5rem;
+  --spacing-96: 6rem;
+  --spacing-128: 8rem;
+  --spacing-192: 12rem;
+  --spacing-256: 16rem;
+}
+
+/* =============================================================================
+   5. Typography — Desktop (default)
+   ============================================================================= */
+:root {
+  /* Font Size */
+  --font-size-caption: 0.75rem;
+  --font-size-micro: 0.75rem;
+  --font-size-tiny: 0.875rem;
+  --font-size-annotation: 0.875rem;
+  --font-size-uppercase: 0.875rem;
+  --font-size-small: 1rem;
+  --font-size-heading-5: 1.125rem;
+  --font-size-heading-4: 1.25rem;
+  --font-size-heading-3: 1.5rem;
+  --font-size-heading-2: 2rem;
+  --font-size-heading-1: 2.5rem;
+  --font-size-display: 3.5rem;
+
+  /* Line Height */
+  --line-height-caption: 0.75rem;
+  --line-height-micro: 1rem;
+  --line-height-tiny: 1.25rem;
+  --line-height-annotation: 150%;
+  --line-height-uppercase: 1.25rem;
+  --line-height-small: 1.5rem;
+  --line-height-heading-5: 1.625rem;
+  --line-height-heading-4: 1.75rem;
+  --line-height-heading-3: 2rem;
+  --line-height-heading-2: 2.5rem;
+  --line-height-heading-1: 3rem;
+  --line-height-display: 4rem;
+
+  /* Font Family & Weight */
+  --font-family-body: "Roboto", sans-serif;
+  --font-family-heading: var(--font-family-body);
+  --font-family-mono: "Roboto Mono", monospace;
+  --font-weight-strong: 600;
+  --font-weight-weak: 400;
+}
+
+/* Typography — Mobile override */
+@media (max-width: 768px) {
+  :root {
+    /* Font Size */
+    --font-size-heading-2: 1.75rem;
+    --font-size-heading-1: 2.25rem;
+    --font-size-display: 2.5rem;
+
+    /* Line Height */
+    --line-height-heading-2: 2.25rem;
+    --line-height-heading-1: 2.75rem;
+    --line-height-display: 3rem;
+  }
+}
+
+/* =============================================================================
+   Typography preset layer (utility classes)
+   ============================================================================= */
+
+/*
+  Usage:
+  <h1 class="text-heading-1 text-bold">Page title</h1>
+  <p class="text-small text-regular">Body text</p>
+  <a class="text-tiny text-bold text-underlined">Learn more</a>
+*/
+body {
+  font-family: var(--font-family-body);
+}
+
+.text-display,
+.text-heading-1,
+.text-heading-2,
+.text-heading-3,
+.text-heading-4,
+.text-heading-5,
+.text-small,
+.text-tiny,
+.text-micro,
+.text-caption,
+.text-uppercase {
+  font-family: var(--font-family-body);
+}
+
+/* Typography scale */
+.text-display {
+  font-size: var(--font-size-display);
+  line-height: var(--line-height-display);
+}
+
+.text-heading-1 {
+  font-size: var(--font-size-heading-1);
+  line-height: var(--line-height-heading-1);
+}
+
+.text-heading-2 {
+  font-size: var(--font-size-heading-2);
+  line-height: var(--line-height-heading-2);
+}
+
+.text-heading-3 {
+  font-size: var(--font-size-heading-3);
+  line-height: var(--line-height-heading-3);
+}
+
+.text-heading-4 {
+  font-size: var(--font-size-heading-4);
+  line-height: var(--line-height-heading-4);
+}
+
+.text-heading-5 {
+  font-size: var(--font-size-heading-5);
+  line-height: var(--line-height-heading-5);
+}
+
+.text-small {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.text-tiny {
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+}
+
+.text-micro {
+  font-size: var(--font-size-micro);
+  line-height: var(--line-height-micro);
+}
+
+.text-annotation {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-annotation);
+  line-height: var(--line-height-annotation);
+}
+
+.text-caption {
+  font-size: var(--font-size-caption);
+  line-height: var(--line-height-caption);
+}
+
+.text-uppercase {
+  font-size: var(--font-size-uppercase);
+  line-height: var(--line-height-uppercase);
+  text-transform: uppercase;
+}
+
+/* Typography weight */
+.text-regular {
+  font-weight: var(--font-weight-weak);
+}
+
+.text-bold {
+  font-weight: var(--font-weight-strong);
+}
+
+/* Typography decoration */
+.text-underlined {
+  text-decoration: underline;
+  text-underline-offset: 0.08em;
+}

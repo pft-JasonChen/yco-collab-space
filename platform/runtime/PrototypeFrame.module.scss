@@ -1,0 +1,38 @@
+.shell {
+  min-height: 100vh;
+  color: var(--text-strong);
+  background: var(--background-sunken);
+}
+
+.banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-16);
+  padding: var(--spacing-12) var(--spacing-24);
+  color: var(--text-inverse-strong);
+  background: var(--background-inverse);
+}
+
+.banner p {
+  margin: var(--spacing-0);
+}
+
+.ready,
+.working {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--spacing-8) var(--spacing-12);
+  border-radius: var(--corner-radius-20);
+}
+
+.ready {
+  color: var(--text-success);
+  background: var(--fill-success-weak);
+}
+
+.working {
+  color: var(--text-warning);
+  background: var(--fill-warning-weak);
+}

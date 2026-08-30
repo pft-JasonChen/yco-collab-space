@@ -1,0 +1,19 @@
+{
+  "inputs": [
+    {
+      "id": "contract",
+      "label": "PM contract",
+      "description": "Screens, states and acceptance criteria are versioned."
+    },
+    {
+      "id": "tokens",
+      "label": "RD token baseline",
+      "description": "The supplied CSS variables are hash-locked."
+    },
+    {
+      "id": "mock-data",
+      "label": "Synthetic data",
+      "description": "The prototype does not connect to a backend."
+    }
+  ]
+}

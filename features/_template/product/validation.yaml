@@ -1,0 +1,9 @@
+schemaVersion: 1
+feature: __FEATURE_SLUG__
+route: /features/__FEATURE_SLUG__/
+checks:
+  - id: initial-render
+    criterion: AC-001
+    assertions:
+      - type: visible
+        selector: "[data-testid='feature-root']"

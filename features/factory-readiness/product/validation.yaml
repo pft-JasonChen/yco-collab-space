@@ -1,0 +1,37 @@
+schemaVersion: 1
+feature: factory-readiness
+route: /features/factory-readiness/
+checks:
+  - id: initial-draft
+    criterion: P0-001
+    assertions:
+      - type: visible
+        selector: "[data-testid='factory-readiness-page']"
+      - type: text
+        selector: "[data-testid='feature-status']"
+        value: Draft
+      - type: count
+        selector: "[data-testid='readiness-input']"
+        value: 3
+  - id: mark-review-ready
+    criterion: P0-002
+    steps:
+      - action: click
+        selector: "[data-testid='start-review']"
+    assertions:
+      - type: text
+        selector: "[data-testid='feature-status']"
+        value: Review-ready
+      - type: visible
+        selector: "[data-testid='ready-message']"
+  - id: reset-to-draft
+    criterion: P0-003
+    steps:
+      - action: click
+        selector: "[data-testid='start-review']"
+      - action: click
+        selector: "[data-testid='reset-draft']"
+    assertions:
+      - type: text
+        selector: "[data-testid='feature-status']"
+        value: Draft

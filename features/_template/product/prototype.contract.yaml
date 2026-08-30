@@ -1,0 +1,20 @@
+schemaVersion: 1
+feature:
+  slug: __FEATURE_SLUG__
+  title: __FEATURE_TITLE__
+  stage: pm-draft
+  entryRoute: /features/__FEATURE_SLUG__/
+design:
+  status: temporary
+  reference: null
+states:
+  - id: initial
+    description: Initial prototype state
+actions: []
+mocks:
+  - mocks/example.json
+acceptance:
+  - id: AC-001
+    given: The feature route is open
+    when: The initial state renders
+    then: The temporary prototype is visible

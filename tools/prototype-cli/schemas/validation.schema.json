@@ -1,0 +1,87 @@
+{
+  "$id": "feature-validation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "feature", "route", "checks"],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "feature": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "route": {
+      "type": "string",
+      "pattern": "^/features/[a-z0-9-]+/$"
+    },
+    "checks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "criterion", "assertions"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "criterion": {
+            "type": "string",
+            "minLength": 1
+          },
+          "steps": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["action", "selector"],
+              "properties": {
+                "action": {
+                  "enum": ["click"]
+                },
+                "selector": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          },
+          "assertions": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["type", "selector"],
+              "properties": {
+                "type": {
+                  "enum": ["visible", "text", "count", "attribute"]
+                },
+                "selector": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "value": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "number"
+                    }
+                  ]
+                },
+                "name": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

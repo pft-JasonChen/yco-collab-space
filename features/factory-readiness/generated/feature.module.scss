@@ -1,0 +1,91 @@
+.page {
+  width: min(100%, calc(var(--spacing-256) * 4));
+  margin: var(--spacing-0) auto;
+  padding: var(--spacing-64) var(--spacing-24) var(--spacing-96);
+}
+
+.hero {
+  display: grid;
+  gap: var(--spacing-16);
+}
+
+.hero p,
+.hero h1 {
+  margin: var(--spacing-0);
+}
+
+.hero > p:last-child {
+  max-width: calc(var(--spacing-256) * 2);
+  color: var(--text-weak);
+}
+
+.statusPanel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-20);
+  margin-top: var(--spacing-40);
+  padding: var(--spacing-20);
+  background: var(--background-raised);
+  border-radius: var(--corner-radius-16);
+}
+
+.statusPanel p {
+  margin: var(--spacing-0);
+}
+
+.readyDot,
+.draftDot {
+  width: var(--spacing-16);
+  height: var(--spacing-16);
+  flex: none;
+  border-radius: var(--corner-radius-20);
+}
+
+.readyDot {
+  background: var(--fill-success-strong);
+}
+
+.draftDot {
+  background: var(--fill-warning-strong);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--spacing-256)), 1fr));
+  gap: var(--spacing-16);
+  margin-top: var(--spacing-24);
+}
+
+.card {
+  min-height: var(--spacing-192);
+  padding: var(--spacing-20);
+  background: var(--background-raised);
+  border-radius: var(--corner-radius-16);
+}
+
+.card p {
+  margin: var(--spacing-0);
+}
+
+.card p + p {
+  margin-top: var(--spacing-12);
+  color: var(--text-weak);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-20);
+  margin-top: var(--spacing-24);
+  padding: var(--spacing-20);
+  color: var(--text-strong);
+  background: var(--fill-brand-weak);
+  border-radius: var(--corner-radius-16);
+}
+
+.actions p {
+  margin: var(--spacing-0);
+}

@@ -1,0 +1,36 @@
+{
+  "name": "yco-prototype-factory",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "node tools/prototype-cli/run-vite.mjs dev",
+    "preview": "node tools/prototype-cli/run-vite.mjs preview",
+    "validate:inputs": "node tools/prototype-cli/validate-inputs.mjs",
+    "validate:tokens": "node tools/prototype-cli/validate-tokens.mjs",
+    "validate:network": "node tools/prototype-cli/validate-network.mjs",
+    "validate": "npm run validate:inputs && npm run validate:tokens && npm run validate:network",
+    "build:app": "vite build",
+    "build": "npm run validate && npm run build:app",
+    "test": "node --test",
+    "test:rendered": "node tools/validation/run-rendered-checks.mjs",
+    "prototype:record": "node tools/prototype-cli/record-generation.mjs",
+    "prototype:create": "node tools/prototype-cli/create-feature.mjs",
+    "prototype:check": "npm run build && npm run test:rendered"
+  },
+  "dependencies": {
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "6.1.1",
+    "ajv": "8.20.0",
+    "playwright": "1.59.0",
+    "sass": "1.103.1",
+    "vite": "8.2.2",
+    "yaml": "2.9.0"
+  }
+}

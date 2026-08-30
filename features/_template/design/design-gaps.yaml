@@ -1,0 +1,7 @@
+schemaVersion: 1
+feature: __FEATURE_SLUG__
+gaps:
+  - id: DESIGN-001
+    status: open
+    description: Final Figma has not been provided.
+    resolutionOwner: Designer

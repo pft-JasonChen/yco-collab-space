@@ -1,0 +1,38 @@
+schemaVersion: 1
+feature:
+  slug: factory-readiness
+  title: Prototype Factory Readiness
+  stage: pm-draft
+  entryRoute: /features/factory-readiness/
+design:
+  status: temporary
+  reference: null
+states:
+  - id: draft
+    description: The readiness demonstration has not been promoted for review.
+  - id: review-ready
+    description: The local interaction demonstration is ready for manager review.
+actions:
+  - id: mark-review-ready
+    from: draft
+    event: User selects Start manager review
+    to: review-ready
+  - id: reset-draft
+    from: review-ready
+    event: User selects Reset
+    to: draft
+mocks:
+  - mocks/readiness.json
+acceptance:
+  - id: P0-001
+    given: The readiness page is open
+    when: No interaction has occurred
+    then: The page shows draft status and three local readiness inputs
+  - id: P0-002
+    given: The page is in draft state
+    when: The user selects Start manager review
+    then: The demonstration changes to review-ready without a network request
+  - id: P0-003
+    given: The demonstration is review-ready
+    when: The user selects Reset
+    then: The demonstration returns to draft

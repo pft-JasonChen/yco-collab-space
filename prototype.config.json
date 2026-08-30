@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "server": {
+    "host": "127.0.0.1",
+    "devPort": 5177,
+    "previewPort": 4177
+  },
+  "routes": {
+    "featurePrefix": "/features"
+  },
+  "viewports": [
+    {
+      "name": "desktop",
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "name": "compact-desktop",
+      "width": 1024,
+      "height": 768
+    },
+    {
+      "name": "tablet",
+      "width": 768,
+      "height": 1024
+    }
+  ],
+  "paths": {
+    "features": "features",
+    "dist": "dist"
+  },
+  "preview": {
+    "public": true,
+    "mockDataOnly": true
+  }
+}
