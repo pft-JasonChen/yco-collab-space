@@ -40,6 +40,21 @@ feature pilot:
 The first real feature remains the cutover gate. Phase 0.5 infrastructure passing on the
 readiness fixture does not replace PM review of an actual product brief.
 
+## Contract and shared-library extension
+
+The repository now also implements:
+
+- `collab-space.map.yaml` as the machine-readable stage／role／artifact authority;
+- generated role and path reference with a drift gate;
+- a global Designer-owned `design-library/**` with collection-scoped automatic indexes;
+- natural-language collection intent and exact file／hash provenance;
+- PM temporary assets that are allowed for review but blocked at design-final;
+- token lock provenance and evidence-bound multi-role stage approvals;
+- a local-only Design Library Browser and a public-build isolation check.
+
+Still deferred are automatic Figma API ingestion, human CODEOWNERS enforcement,
+protected preview authentication, calibrated automated visual judgment, and the YCO-spec adapter.
+
 ## Decision basis
 
 - Intake must precede Surface selection because a new feature may not match any current

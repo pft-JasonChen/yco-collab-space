@@ -1,0 +1,5 @@
+schemaVersion: 1
+feature: __FEATURE_SLUG__
+requestedCollections: []
+decisionBasis:
+  - No shared media collection has been requested during Intake yet.

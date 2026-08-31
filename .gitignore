@@ -12,3 +12,4 @@ features/*/evidence/*.json
 features/*/evidence/*.md
 evals/runs/
 .prototype-state/
+.collab-cache/

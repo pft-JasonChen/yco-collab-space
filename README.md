@@ -1,7 +1,7 @@
 # YCO Collab Space
 
-Shared React prototype collaboration space for PM review and later Designer/RD/QA
-handoff.
+Shared React prototype collaboration space for PM review, Designer refinement and
+evidence-bound RD／QA handoff.
 
 不同角色第一次使用時，請先閱讀
 [`COLLABORATION.md`](COLLABORATION.md)：包含跨部門流程圖、角色責任、
@@ -66,8 +66,35 @@ When Intake passes, run:
 The update workflow snapshots `product/**` and `design/**` before generation and fails
 if either source tree changes while React／SCSS is being generated.
 
+若功能需要共用圖片、icon或影片，PM只要在需求中說「請 index
+`assets/<type>/<collection>`」；Designer把檔案上傳至相同的
+`design-library/assets/<type>/<collection>/`。Designer不需要寫 manifest，實際採用檔案與
+hash會自動記錄在 `generation.json`。PM第一版暫時素材可放在
+`features/<feature>/product/mock-assets/`，但不能進入 design-final。
+
 Review and approve `product/prototype.contract.yaml` before generation. Do not edit
 `generated/` by hand.
+
+本機瀏覽所有 Designer collections：
+
+```bash
+npm run library:browser
+```
+
+頁面只綁定 `127.0.0.1`，不會被打進公開 prototype。
+
+## Review stage
+
+PM／Designer可直接用自然語言請 Agent「把 `<feature>` 送到 PM review／design review／
+design final」。Agent會先列出本次輸入、token、素材 selection與 gaps，再等待必要角色明確
+同意。維護者使用的底層指令是：
+
+```bash
+npm run stage:transition -- --feature <feature> --to <stage> --actor <actor> --confirm
+```
+
+正式角色、階段與路徑速查由契約生成：
+[`docs/generated/collab-space-reference.md`](docs/generated/collab-space-reference.md)。
 
 ## Validate in a browser
 
@@ -107,6 +134,7 @@ in and approves the destination project.
 
 ## Current limits
 
-Phase 0.5 includes Intake, flexible Surface resolution and workflow evaluation. It does
-not yet include Figma ingestion, YCO-spec generation, automatic promotion,
-repository-policy enforcement or protected preview URLs. See `docs/phase0-scope.md`.
+目前已包含 Intake、flexible Surface resolution、shared Design Library、素材／token
+provenance、stage approval gate與 workflow evaluation。仍未包含自動 Figma API ingestion、
+YCO-spec adapter、human Git path enforcement或 protected preview URLs。見
+`docs/phase0-scope.md`。

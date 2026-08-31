@@ -21,6 +21,11 @@ import {
   resolveSurfaceContext,
   surfacePackRelativeRoot,
 } from './surface-policy.mjs';
+import {
+  mediaIntentSemanticErrors,
+  resourceProvenanceErrors,
+  tokenProvenanceErrors,
+} from './resource-provenance.mjs';
 
 const ajv = new Ajv({ allErrors: true, strict: false });
 const contractSchema = await readJson(
@@ -35,10 +40,14 @@ const surfaceIntentSchema = await readJson(
 const surfacePackSchema = await readJson(
   'tools/prototype-cli/schemas/surface-pack.schema.json',
 );
+const mediaIntentSchema = await readJson(
+  'tools/prototype-cli/schemas/media-intent.schema.json',
+);
 const validateContract = ajv.compile(contractSchema);
 const validateValidation = ajv.compile(validationSchema);
 const validateSurfaceIntent = ajv.compile(surfaceIntentSchema);
 const validateSurfacePack = ajv.compile(surfacePackSchema);
+const validateMediaIntent = ajv.compile(mediaIntentSchema);
 const config = await readJson('prototype.config.json');
 const intakeOnly = process.argv.includes('--intake-only');
 
@@ -53,6 +62,9 @@ async function validateFeature(feature) {
   );
   const surfaceIntent = await readYaml(
     path.join('features', feature, 'product', 'surface-intent.yaml'),
+  );
+  const mediaIntent = await readYaml(
+    path.join('features', feature, 'product', 'media-intent.yaml'),
   );
   const gaps = await readYaml(
     path.join('features', feature, 'design', 'design-gaps.yaml'),
@@ -77,6 +89,12 @@ async function validateFeature(feature) {
     );
   }
 
+  if (!validateMediaIntent(mediaIntent)) {
+    errors.push(
+      'media-intent.yaml: ' + formatSchemaErrors(validateMediaIntent.errors),
+    );
+  }
+
   if (errors.length > 0) {
     return errors;
   }
@@ -95,6 +113,8 @@ async function validateFeature(feature) {
   if (surfaceIntent.feature !== feature) {
     errors.push('surface-intent.yaml feature does not match folder: ' + feature);
   }
+
+  errors.push(...mediaIntentSemanticErrors(mediaIntent, feature));
 
   if (contract.feature.entryRoute !== expectedRoute) {
     errors.push('Contract entryRoute must be ' + expectedRoute);
@@ -228,9 +248,9 @@ async function validateFeature(feature) {
         );
       }
 
-      if (generation.schemaVersion !== 2) {
+      if (generation.schemaVersion !== 3) {
         errors.push(
-          'generation.json must be regenerated with Phase 0.5 metadata.',
+          'generation.json must be regenerated with Collab Contract resource metadata.',
         );
       } else if (
         surfaceResult.context &&
@@ -239,6 +259,11 @@ async function validateFeature(feature) {
         errors.push(
           'Generated code is stale because Surface context changed.',
         );
+      }
+
+      if (generation.schemaVersion === 3) {
+        errors.push(...(await resourceProvenanceErrors(generation.resources)));
+        errors.push(...(await tokenProvenanceErrors(generation.tokens)));
       }
     }
   }

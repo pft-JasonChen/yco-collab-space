@@ -28,6 +28,7 @@ requirements, decisions and decision basis.
    - in-scope and out-of-scope behavior;
    - entry, success outcome, states, actions, loading, empty, error and recovery;
    - synthetic mock-data cases and prototype simplifications;
+   - reusable media collections to index, plus any PM temporary assets needed before Designer input;
    - acceptance criteria;
    - surface strategy.
 5. Recommend exactly one surface strategy with a decision basis:
@@ -45,8 +46,10 @@ requirements, decisions and decision basis.
    - `product/prototype.contract.yaml`;
    - `product/validation.yaml`;
    - `product/surface-intent.yaml`;
+   - `product/media-intent.yaml`;
    - `product/decisions.md`;
    - `product/mocks/**`;
+   - optional temporary files in `product/mock-assets/**`;
    - explicit `design/design-gaps.yaml` entries when needed.
 9. Set `feature.intakeStatus: confirmed` only after the confirmation in step 8.
 10. Run:
@@ -64,4 +67,3 @@ requirements, decisions and decision basis.
 - Two surface strategies remain materially different and PM has not chosen.
 - A mock would require real user data, credentials or backend access.
 - A required pack is referenced as reuse／hybrid but remains `planned` or missing.
-

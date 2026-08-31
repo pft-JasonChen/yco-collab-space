@@ -1,0 +1,157 @@
+{
+  "$id": "collab-space-map",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "status", "owner", "actors", "stages", "transitions", "artifacts", "systems", "indexes", "workflows", "rules", "decisionBasis"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "status": { "enum": ["proposed", "active", "deprecated"] },
+    "owner": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["actor", "id"],
+      "properties": {
+        "actor": { "$ref": "#/$defs/id" },
+        "id": { "$ref": "#/$defs/id" }
+      }
+    },
+    "actors": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "label"],
+        "properties": {
+          "id": { "$ref": "#/$defs/id" },
+          "label": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "stages": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "kind", "allowedActors", "requiredArtifacts", "exitApprovals"],
+        "properties": {
+          "id": { "$ref": "#/$defs/id" },
+          "kind": { "enum": ["lifecycle", "downstream"] },
+          "allowedActors": { "$ref": "#/$defs/idList" },
+          "requiredArtifacts": { "$ref": "#/$defs/idList" },
+          "exitApprovals": { "$ref": "#/$defs/idList" }
+        }
+      }
+    },
+    "transitions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "from", "to", "approvals"],
+        "properties": {
+          "id": { "$ref": "#/$defs/id" },
+          "from": { "$ref": "#/$defs/id" },
+          "to": { "$ref": "#/$defs/id" },
+          "approvals": { "$ref": "#/$defs/idList" },
+          "parallelOutput": { "type": "boolean" }
+        }
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "owner", "path", "nature"],
+        "properties": {
+          "id": { "$ref": "#/$defs/id" },
+          "owner": { "$ref": "#/$defs/id" },
+          "path": { "type": "string", "minLength": 1 },
+          "nature": { "enum": ["source", "derived", "record"] },
+          "status": { "enum": ["proposed", "active", "deprecated"] }
+        }
+      }
+    },
+    "systems": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "owner", "direction", "visibility", "productionDataAllowed"],
+        "properties": {
+          "id": { "$ref": "#/$defs/id" },
+          "owner": { "$ref": "#/$defs/id" },
+          "direction": { "enum": ["input", "output", "both"] },
+          "visibility": { "enum": ["private", "public", "public-selected-assets-only"] },
+          "productionDataAllowed": { "type": "boolean" }
+        }
+      }
+    },
+    "indexes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["features", "designLibrary"],
+      "properties": {
+        "features": { "type": "string", "pattern": "^\\.collab-cache/" },
+        "designLibrary": { "type": "string", "pattern": "^\\.collab-cache/" }
+      }
+    },
+    "workflows": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "actors", "readablePaths", "writablePaths", "protectedPaths", "enforcement"],
+        "properties": {
+          "id": { "$ref": "#/$defs/id" },
+          "actors": { "$ref": "#/$defs/idList" },
+          "readablePaths": { "$ref": "#/$defs/pathList" },
+          "writablePaths": { "$ref": "#/$defs/pathList" },
+          "protectedPaths": { "$ref": "#/$defs/pathList" },
+          "enforcement": { "$ref": "#/$defs/enforcement" }
+        }
+      }
+    },
+    "rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "status", "enforcement", "actors", "stages", "decisionBasis"],
+        "properties": {
+          "id": { "$ref": "#/$defs/id" },
+          "status": { "enum": ["proposed", "active", "deprecated"] },
+          "enforcement": { "$ref": "#/$defs/enforcement" },
+          "actors": { "$ref": "#/$defs/idList" },
+          "stages": { "$ref": "#/$defs/idList" },
+          "decisionBasis": { "$ref": "#/$defs/nonEmptyStrings" }
+        }
+      }
+    },
+    "decisionBasis": { "$ref": "#/$defs/nonEmptyStrings" }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "enforcement": { "enum": ["info", "warning", "error"] },
+    "idList": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/id" }
+    },
+    "pathList": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "nonEmptyStrings": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    }
+  }
+}

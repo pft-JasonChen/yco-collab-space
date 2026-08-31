@@ -1,0 +1,247 @@
+schemaVersion: 1
+status: active
+owner:
+  actor: pm
+  id: collab-space-owner
+actors:
+  - id: pm
+    label: Product manager
+  - id: designer
+    label: Designer
+  - id: rd
+    label: Research and development
+  - id: qa
+    label: Quality assurance
+  - id: manager
+    label: Manager reviewer
+  - id: agent
+    label: AI agent
+stages:
+  - id: intake
+    kind: lifecycle
+    allowedActors: [pm, agent]
+    requiredArtifacts: [pm-product-source]
+    exitApprovals: [pm]
+  - id: pm-prototype-working
+    kind: lifecycle
+    allowedActors: [pm, agent]
+    requiredArtifacts: [pm-product-source, generated-prototype]
+    exitApprovals: [pm]
+  - id: pm-review
+    kind: lifecycle
+    allowedActors: [pm, manager, agent]
+    requiredArtifacts: [frozen-revision]
+    exitApprovals: [pm]
+  - id: design-working
+    kind: lifecycle
+    allowedActors: [designer, pm, agent]
+    requiredArtifacts: [design-library, generated-prototype]
+    exitApprovals: [designer]
+  - id: design-review
+    kind: lifecycle
+    allowedActors: [designer, manager, pm, agent]
+    requiredArtifacts: [frozen-revision]
+    exitApprovals: [designer, pm]
+  - id: design-final
+    kind: lifecycle
+    allowedActors: [designer, pm, agent]
+    requiredArtifacts: [frozen-revision, approved-design-selection]
+    exitApprovals: [designer, pm]
+  - id: rd-handoff
+    kind: downstream
+    allowedActors: [pm, rd, agent]
+    requiredArtifacts: [frozen-revision]
+    exitApprovals: [pm]
+  - id: qa-spec
+    kind: downstream
+    allowedActors: [pm, qa, agent]
+    requiredArtifacts: [frozen-revision, qa-human-spec]
+    exitApprovals: [pm]
+transitions:
+  - id: intake-to-working
+    from: intake
+    to: pm-prototype-working
+    approvals: [pm]
+  - id: working-to-pm-review
+    from: pm-prototype-working
+    to: pm-review
+    approvals: [pm]
+  - id: pm-review-revision
+    from: pm-review
+    to: pm-prototype-working
+    approvals: [pm]
+  - id: pm-review-to-design
+    from: pm-review
+    to: design-working
+    approvals: [pm]
+  - id: design-to-review
+    from: design-working
+    to: design-review
+    approvals: [designer]
+  - id: design-review-revision
+    from: design-review
+    to: design-working
+    approvals: [designer]
+  - id: design-review-to-final
+    from: design-review
+    to: design-final
+    approvals: [designer, pm]
+  - id: final-to-rd
+    from: design-final
+    to: rd-handoff
+    approvals: [pm]
+    parallelOutput: true
+  - id: final-to-qa
+    from: design-final
+    to: qa-spec
+    approvals: [pm]
+    parallelOutput: true
+artifacts:
+  - id: pm-product-source
+    owner: pm
+    path: features/{feature}/product/**
+    nature: source
+  - id: design-library
+    owner: designer
+    path: design-library/**
+    nature: source
+  - id: feature-design-record
+    owner: designer
+    path: features/{feature}/design/**
+    nature: source
+    status: proposed
+  - id: generated-prototype
+    owner: agent
+    path: features/{feature}/generated/**
+    nature: derived
+  - id: validation-evidence
+    owner: agent
+    path: features/{feature}/evidence/**
+    nature: derived
+  - id: frozen-revision
+    owner: pm
+    path: features/{feature}/releases.json
+    nature: record
+  - id: approved-design-selection
+    owner: designer
+    path: features/{feature}/generated/generation.json
+    nature: record
+    status: proposed
+  - id: qa-human-spec
+    owner: qa
+    path: features/{feature}/specs/**
+    nature: derived
+    status: proposed
+systems:
+  - id: figma
+    owner: designer
+    direction: input
+    visibility: private
+    productionDataAllowed: false
+  - id: private-github
+    owner: pm
+    direction: both
+    visibility: private
+    productionDataAllowed: false
+  - id: local-workspace
+    owner: pm
+    direction: both
+    visibility: private
+    productionDataAllowed: false
+  - id: public-preview
+    owner: pm
+    direction: output
+    visibility: public-selected-assets-only
+    productionDataAllowed: false
+  - id: rd-repository
+    owner: rd
+    direction: output
+    visibility: private
+    productionDataAllowed: true
+  - id: yco-spec
+    owner: qa
+    direction: output
+    visibility: private
+    productionDataAllowed: false
+indexes:
+  features: .collab-cache/features-index.json
+  designLibrary: .collab-cache/design-library-index.json
+workflows:
+  - id: prototype-intake
+    actors: [pm, agent]
+    readablePaths:
+      - collab-space.map.yaml
+      - features/{feature}/**
+      - design-library/**
+    writablePaths:
+      - features/{feature}/product/**
+      - features/{feature}/design/design-gaps.yaml
+      - features/{feature}/releases.json
+    protectedPaths:
+      - platform
+      - design-library
+    enforcement: error
+  - id: prototype-update
+    actors: [agent]
+    readablePaths:
+      - collab-space.map.yaml
+      - features/{feature}/product/**
+      - features/{feature}/design/**
+      - design-library/**
+      - platform/**
+    writablePaths:
+      - features/{feature}/generated/**
+      - features/{feature}/evidence/**
+      - .prototype-state/**
+      - .collab-cache/**
+    protectedPaths:
+      - collab-space.map.yaml
+      - features/{feature}/product
+      - features/{feature}/design
+      - design-library
+      - platform
+    enforcement: error
+  - id: design-library-upload
+    actors: [designer]
+    readablePaths:
+      - design-library/**
+    writablePaths:
+      - design-library/assets/**
+      - design-library/tokens/**
+      - design-library/components/**
+      - design-library/patterns/**
+    protectedPaths:
+      - features
+      - platform
+    enforcement: warning
+rules:
+  - id: mock-only-prototypes
+    status: active
+    enforcement: error
+    actors: [pm, designer, agent]
+    stages:
+      - intake
+      - pm-prototype-working
+      - pm-review
+      - design-working
+      - design-review
+      - design-final
+    decisionBasis:
+      - Collab Space prototypes never connect to a backend or contain production data.
+  - id: human-git-path-enforcement
+    status: proposed
+    enforcement: warning
+    actors: [pm, designer, rd, qa]
+    stages:
+      - intake
+      - pm-prototype-working
+      - pm-review
+      - design-working
+      - design-review
+      - design-final
+    decisionBasis:
+      - Human CODEOWNERS and protected paths require team review before enforcement.
+decisionBasis:
+  - The contract is the control plane for roles, stages, paths and external-system boundaries.
+  - Shared design resources live once in the global Design Library; feature revisions pin exact selections.
+  - Agent and validator rules are enforced now, while human Git enforcement remains proposed.

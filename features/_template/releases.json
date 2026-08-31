@@ -1,4 +1,8 @@
 {
-  "schemaVersion": 1,
-  "releases": []
+  "schemaVersion": 2,
+  "feature": "__FEATURE_SLUG__",
+  "currentStage": "intake",
+  "pendingTransition": null,
+  "transitions": [],
+  "downstreamOutputs": []
 }

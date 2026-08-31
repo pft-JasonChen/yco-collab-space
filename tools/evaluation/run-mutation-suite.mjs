@@ -25,6 +25,13 @@ async function updateYaml(workspace, relativePath, update) {
   await fs.writeFile(absolutePath, stringifyYaml(value));
 }
 
+async function updateJson(workspace, relativePath, update) {
+  const absolutePath = path.join(workspace, relativePath);
+  const value = JSON.parse(await fs.readFile(absolutePath, 'utf8'));
+  update(value);
+  await fs.writeFile(absolutePath, JSON.stringify(value, null, 2) + '\n');
+}
+
 async function replace(workspace, relativePath, pattern, replacement) {
   const absolutePath = path.join(workspace, relativePath);
   const source = await fs.readFile(absolutePath, 'utf8');
@@ -37,6 +44,39 @@ async function replace(workspace, relativePath, pattern, replacement) {
 }
 
 const mutations = [
+  {
+    id: 'contract-unknown-artifact',
+    expected: /references unknown artifact: missing-artifact/,
+    mutate: (workspace) =>
+      updateYaml(workspace, 'collab-space.map.yaml', (map) => {
+        map.stages[0].requiredArtifacts.push('missing-artifact');
+      }),
+    grader: ['npm', ['run', 'validate:contract']],
+  },
+  {
+    id: 'invalid-release-stage',
+    expected: /Unknown lifecycle currentStage: imaginary-stage/,
+    mutate: (workspace) =>
+      updateJson(workspace, 'features/collab-space-readiness/releases.json', (release) => {
+        release.currentStage = 'imaginary-stage';
+      }),
+    grader: ['npm', ['run', 'validate:stages', '--', '--feature', feature]],
+  },
+  {
+    id: 'media-collection-provenance-drift',
+    expected: /Media collection changed since generation: assets\/video\/dance/,
+    mutate: (workspace) =>
+      updateJson(workspace, 'features/collab-space-readiness/generated/generation.json', (generation) => {
+        generation.resources.requestedCollections.push({ path: 'assets/video/dance', contextHash: 'stale', fileCount: 0 });
+      }),
+    grader: ['npm', ['run', 'validate:inputs', '--', '--feature', feature]],
+  },
+  {
+    id: 'token-provenance-drift',
+    expected: /Token baseline changed since generation/,
+    mutate: (workspace) => append(workspace, 'platform/tokens/tokens.lock.json', ' '),
+    grader: ['npm', ['run', 'validate:inputs', '--', '--feature', feature]],
+  },
   {
     id: 'unknown-token',
     expected: /Unknown token --token-that-must-not-exist/,

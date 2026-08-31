@@ -19,6 +19,29 @@ async function walk(directory) {
   return files.sort();
 }
 
+export async function snapshotWorkspacePaths(workspace, relativePaths) {
+  const snapshot = {};
+
+  for (const relativeRoot of [...new Set(relativePaths)].sort()) {
+    const absoluteRoot = path.join(workspace, relativeRoot);
+    const stat = await fs.stat(absoluteRoot).catch(() => null);
+
+    if (!stat) {
+      snapshot[relativeRoot.replace(/\/$/, '') + '/.missing'] = null;
+      continue;
+    }
+
+    const files = stat.isDirectory() ? await walk(absoluteRoot) : [absoluteRoot];
+    for (const file of files) {
+      const relativePath = path.relative(workspace, file).split(path.sep).join('/');
+      const contents = await fs.readFile(file);
+      snapshot[relativePath] = createHash('sha256').update(contents).digest('hex');
+    }
+  }
+
+  return snapshot;
+}
+
 export async function snapshotFeatureSources(workspace, feature) {
   const featureRoot = path.join(workspace, 'features', feature);
   const snapshot = {};
@@ -58,4 +81,3 @@ export function diffSourceSnapshots(before, after) {
 
   return changed;
 }
-

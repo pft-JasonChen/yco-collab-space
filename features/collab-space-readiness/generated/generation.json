@@ -1,15 +1,33 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "feature": "collab-space-readiness",
-  "inputHash": "66898bd1b7271afc8604c8932ec4e80dffe9404ffbf96cc5e9bd4f2fae89425f",
-  "generatorInstructionsVersion": "phase0.5-v1",
-  "adapter": "repository-rename",
+  "inputHash": "4335a084742b19493296dae0111da501775269bd9a610186a31de1ed6e48081d",
+  "generatorInstructionsVersion": "collab-contract-v1",
+  "adapter": "contract-shared-library-migration",
   "model": "not-recorded",
-  "generatedAt": "2026-08-31T04:17:46.467Z",
+  "generatedAt": "2026-08-31T13:24:29.329Z",
   "files": [
     "feature.jsx",
     "feature.module.scss"
   ],
+  "collabContract": {
+    "schemaVersion": 1,
+    "workflow": "prototype-update"
+  },
+  "resources": {
+    "requestedCollections": [],
+    "selected": [],
+    "warnings": []
+  },
+  "tokens": {
+    "sourcePackage": {
+      "name": "youcam-enhance-frontend",
+      "version": "1.34.1"
+    },
+    "lockPath": "platform/tokens/tokens.lock.json",
+    "lockSha256": "6c6f374a2ea4045d740571e3d9d55e3399ce00db232a38692deb25ebf6e49ed8",
+    "activationStatus": "rd-compatible"
+  },
   "surface": {
     "strategy": "novel",
     "temporary": true,

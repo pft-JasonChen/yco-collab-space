@@ -3,7 +3,8 @@
   "server": {
     "host": "127.0.0.1",
     "devPort": 5177,
-    "previewPort": 4177
+    "previewPort": 4177,
+    "libraryPort": 5178
   },
   "routes": {
     "featurePrefix": "/features"

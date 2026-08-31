@@ -1,0 +1,5 @@
+schemaVersion: 1
+feature: collab-space-readiness
+requestedCollections: []
+decisionBasis:
+  - The readiness fixture does not need image, video, icon, illustration or logo collections.

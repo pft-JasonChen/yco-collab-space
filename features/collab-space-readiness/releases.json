@@ -1,4 +1,8 @@
 {
-  "schemaVersion": 1,
-  "releases": []
+  "schemaVersion": 2,
+  "feature": "collab-space-readiness",
+  "currentStage": "pm-prototype-working",
+  "pendingTransition": null,
+  "transitions": [],
+  "downstreamOutputs": []
 }

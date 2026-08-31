@@ -5,6 +5,11 @@
 > **參考 RD snapshot：`youcam-enhance-frontend` 1.34.1**  
 > **決策狀態：本文件目前是 PM 提案；Designer 與 RD review、修正並同意後，才成為強制規範。**
 
+> **已實作的正式契約優先：** 素材已採用全域 `design-library/**`、feature 自然語言指定
+> collection、工具自動 index 與 `generation.json` 鎖定實際檔案。Designer 不需要編寫
+> manifest。角色與路徑以 `collab-space.map.yaml` 及自動產生的
+> `docs/generated/collab-space-reference.md` 為準。
+
 ## 1. 這份文件解決什麼問題
 
 YCO Collab Space 已能由 PM source-of-truth 生成臨時 React prototype，但目前的
@@ -273,20 +278,21 @@ Designer 與 RD 必須記錄：
 
 ## 9. P1D — Assets、Patterns 與 Content Rules
 
-### 9.1 Asset 的兩個層級
+### 9.1 全域 Design Library
 
-Designer 交付的圖片、icon、illustration 與影片也是 source-of-truth，必須依重用範圍分層：
+所有 Designer web-ready 素材，不論目前只給一個 feature 用或已知可共用，都集中在：
 
-| Asset 類型 | 存放位置 | 例子 |
-|---|---|---|
-| 全平台共用 | `platform/design-system/assets/**` | Logo、共用 icons、upload／empty illustrations |
-| 單一 feature 專用 | `features/<feature>/design/assets/**` | Feature hero、範例圖片、教學影片、專用 icon |
-| Prototype evidence | `features/<feature>/evidence/**` | Browser screenshots、validation images；不是 Designer source |
-| Build output | `dist/**` | Vite 產物；可重建、不可手改 |
+```text
+design-library/assets/<type>/<collection>/
+```
 
-Figma、PSD、AI、AE project 等 editable master 可留在 Designer 的 authoring tool；repo 必須保存
-能精確重建當次 prototype 的 web-ready export、manifest 與來源版本。不要以 Figma preview URL
-或 Designer 本機路徑作為 runtime asset。
+固定 type 為 `image`、`video`、`icon`、`illustration`、`logo`；collection 名稱由
+Designer用容易理解的 kebab-case 命名，例如 `assets/video/dance`。不複製到每個 feature，
+也不要求 Designer 撰寫 YAML／manifest。
+
+PM 尚在做第一版 prototype 時的暫時素材放在
+`features/<feature>/product/mock-assets/**`。它可供 PM review，但 `design-final` gate
+一定阻擋。Evidence 與 build output 仍分別放在 `evidence/**`、`dist/**`，都不是 Designer source。
 
 ### 9.2 Asset catalog 與 Designer／RD 整理項目
 
@@ -324,71 +330,20 @@ Designer 與 RD 要整理：
 不要把 Base64 塞進 React code，也不要使用不穩定的第三方 CDN、Google Drive、Figma preview
 URL、`file://` 或 production-only asset endpoint。
 
-### 9.4 Feature asset manifest
+### 9.4 不使用 Designer manifest
 
-單一 feature 的 assets 必須由 manifest 管理，不能只把檔案丟進資料夾讓 AI 猜用途。
-
-建議結構：
-
-```text
-features/<feature>/design/assets/
-├── manifest.yaml
-├── images/
-├── icons/
-├── videos/
-└── posters/
-```
-
-建議的 manifest 草案：
-
-```yaml
-schemaVersion: 1
-feature: image-relight
-assets:
-  - id: relight-hero
-    type: image
-    file: images/relight-hero.webp
-    status: final
-    usage: Product introduction hero image
-    alt: Portrait showing an AI relighting result
-    decorative: false
-    aspectRatio: "16:9"
-    figma:
-      reference: pending-format-definition
-
-  - id: lighting-direction
-    type: icon
-    file: icons/lighting-direction.svg
-    status: final
-    usage: Lighting direction selector
-    decorative: true
-    colorBehavior: current-color
-
-  - id: relight-tutorial
-    type: video
-    file: videos/relight-tutorial.mp4
-    poster: posters/relight-tutorial.webp
-    status: final
-    usage: Explain how to position the light
-    autoplay: false
-    muted: true
-    loop: false
-    controls: true
-```
-
-這是 Phase 1 schema proposal，不是目前已實作格式。Designer／RD 要先確認 Figma reference、
-status vocabulary、size budget、licence 與 video accessibility 欄位。
+Designer只需上傳素材。PM／Designer在功能需求中用自然語言說「請 index
+`assets/video/dance`」，Agent才掃描該 collection。若 Designer沒有另外說明，所有新檔案
+自動視為 `candidate`；Agent依功能需求選出實際使用檔案，`generation.json` 記錄檔案路徑與
+hash。進入 `design-final` 前，Designer一次確認本版實際 selection，不需逐檔登記。
 
 ### 9.5 Prototype ingestion 規則
 
-`prototype-update` 應依 manifest 的 asset ID 產生靜態 imports，由 Vite 打包並產生 hashed
-filenames：
+`prototype-update` 依 feature 的 `product/media-intent.yaml` 查詢指定 collection，並以靜態
+imports 讓 Vite只打包本功能實際使用的素材：
 
 ```jsx
-import heroImage from '../design/assets/images/relight-hero.webp';
-import lightingIcon from '../design/assets/icons/lighting-direction.svg';
-import tutorialVideo from '../design/assets/videos/relight-tutorial.mp4';
-import tutorialPoster from '../design/assets/posters/relight-tutorial.webp';
+import tutorialVideo from '../../../design-library/assets/video/dance/tutorial.mp4';
 ```
 
 不應在 mock JSON 直接寫相對檔案路徑，因為 Vite 不會可靠地轉換 JSON 中的字串。Mock data
@@ -408,10 +363,9 @@ const assetRegistry = {
 };
 ```
 
-目前系統已遞迴 hash 與 snapshot `features/<feature>/design/**`，因此新增或修改 asset 會讓舊
-generated code 失效，且 update source guard 能偵測 generation 期間的變動。Vite 也已允許從
-repo root import。Phase 1 尚需補上 manifest schema、asset validator、icon pipeline、size
-budget 與 Figma asset mapping schema。
+只有被 `media-intent.yaml` 指定的 collection 會進入 context。Working revision跟隨 global
+Design Library變化並標示 stale；凍結 revision則鎖定 selection、collection hash、檔案 hash
+與 token lock。`.collab-cache/**` 是本機自動索引，不 commit、不公開。
 
 ### 9.6 Icon ingestion
 
@@ -440,10 +394,9 @@ Designer 必須為每支影片定義：
 
 Phase 1 asset validator 至少要阻擋：
 
-- manifest 指向不存在的檔案；
-- duplicate／unknown asset ID；
-- generated code 引用未宣告 asset；
-- 未經 manifest 管理的 runtime asset；
+- collection 路徑逃逸、類型不支援或 required collection 不存在；
+- generated code 引用未被 provenance 鎖定的素材；
+- selected file 遺失或 hash 改變；
 - 大小寫錯誤或不支援格式；
 - 非 decorative image 缺少 alt；
 - decorative image 未正確隱藏；
@@ -451,8 +404,8 @@ Phase 1 asset validator 至少要阻擋：
 - 影片缺少 poster、fallback 或必要 accessibility decision；
 - asset 超過團隊核准的 size budget；
 - runtime 使用遠端 URL、Figma URL、`file://` 或 production endpoint；
-- Figma reference／export version／licence 狀態缺失；
-- platform asset 尚未 approved 就被 feature 當成 canonical source。
+- design-final仍引用 PM mock asset；
+- public build夾帶本機 index、source manifest或未選素材。
 
 ### 9.9 Patterns
 
@@ -507,58 +460,15 @@ Surface，必須回到本流程接受 Designer／RD review。
 
 ## 11. 建議的 repo 結構
 
-以下是 Phase 1 target proposal，實作前需由 Designer、RD 與 PM 確認：
+目前採用的分層如下；component/token authoring細節仍可由 Designer、RD 與 PM後續調整：
 
 ```text
-platform/
-├── design-system/                       # Designer-approved structured source
-│   ├── inventory/
-│   │   ├── rd-component-inventory.yaml  # AI 產生草稿
-│   │   ├── component-decisions.yaml     # Designer／RD 決策
-│   │   ├── duplicate-decisions.yaml
-│   │   └── migration-map.yaml
-│   ├── foundations/
-│   │   ├── typography.yaml
-│   │   ├── spacing.yaml
-│   │   ├── radius.yaml
-│   │   ├── elevation.yaml
-│   │   ├── grid.yaml
-│   │   ├── breakpoints.yaml
-│   │   └── responsive-rules.md
-│   ├── tokens/
-│   │   ├── token-inventory.yaml
-│   │   ├── figma-token-map.yaml
-│   │   ├── token-decisions.yaml
-│   │   ├── token-gaps.yaml
-│   │   └── token-usage-rules.md
-│   ├── components/
-│   │   ├── catalog.yaml
-│   │   └── <component-id>/
-│   │       ├── component.yaml
-│   │       ├── anatomy.md
-│   │       ├── variants.yaml
-│   │       ├── token-map.yaml
-│   │       ├── responsive.md
-│   │       ├── figma.ref.json
-│   │       └── rd-mapping.yaml
-│   ├── patterns/
-│   ├── assets/
-│   │   ├── catalog.yaml
-│   │   ├── icons.yaml
-│   │   ├── illustrations.yaml
-│   │   ├── figma-asset-map.yaml
-│   │   ├── asset-export-rules.md
-│   │   └── files/
-│   │       ├── icons/
-│   │       ├── illustrations/
-│   │       ├── logos/
-│   │       └── placeholders/
-│   └── governance/
-│       ├── naming.md
-│       ├── contribution.md
-│       ├── versioning.md
-│       ├── deprecations.yaml
-│       └── changelog.md
+design-library/                         # Designer-owned shared source
+├── assets/<type>/<collection>/         # upload only; no manifest required
+├── tokens/                             # future Figma token exports
+├── components/                         # future Designer/RD contracts
+└── patterns/                           # future reusable design patterns
+platform/                               # runnable implementation; Designer不手改
 ├── tokens/
 │   ├── rd/<version>/                    # RD immutable snapshot
 │   └── tokens.lock.json
@@ -572,11 +482,12 @@ platform/
 | 路徑 | 性質 | 誰決策／修改 |
 |---|---|---|
 | `platform/tokens/rd/**` | Immutable upstream evidence | RD 提供；工具 lock；不手改 |
-| `platform/design-system/**` | Designer-approved structured source | Designer＋RD 決策；PM 管理流程 |
+| `design-library/**` | Designer-owned shared source | Designer上傳；Designer＋RD決策；PM管理流程 |
 | `platform/ui/**` | Derived implementation | AI／Platform Owner 實作；Designer review |
 | `platform/surfaces/**` | Derived／versioned implementation | Platform Owner 實作；Designer＋PM approve |
 | `platform/runtime/**` | Prototype infrastructure | Platform Owner |
-| `features/*/design/**` | 單一 feature final reference／gaps／web-ready assets／manifest | Designer |
+| `features/*/design/**` | 單一 feature Figma reference／gaps；長期 schema待定 | Designer／Agent依確認更新 |
+| `features/*/product/mock-assets/**` | PM暫時素材 | PM；design-final禁止 |
 | `features/*/generated/**` | AI-generated prototype | AI；禁止手改 |
 
 ## 12. 單一 feature 的 Designer 工作
@@ -587,11 +498,12 @@ platform/
 2. 在 Figma 使用 approved tokens、components、patterns 與 Surface Pack。
 3. 更新 `features/<feature>/design/design.ref.json`。
 4. 更新 `features/<feature>/design/design-gaps.yaml`。
-5. 將 web-ready images／icons／videos／posters 放入 `design/assets/**` 並更新 manifest。
-6. 若 final design 改變 product flow／state／validation，退回 PM 更新 product source。
-7. Designer 或 PM 觸發 `/prototype-update <feature>`。
-8. Review rendered prototype、responsive screenshots、asset behavior 與 visual evidence。
-9. 所有 blocking gaps 解決後，確認 design final。
+5. 將 web-ready images／icons／videos放入全域 `design-library/assets/<type>/<collection>/`。
+6. 告訴 Agent 本功能要 index 哪個 collection；不需寫 manifest。
+7. 若 final design 改變 product flow／state／validation，退回 PM 更新 product source。
+8. Designer 或 PM 觸發 `/prototype-update <feature>`。
+9. Review rendered prototype、responsive screenshots、selection 與 visual evidence。
+10. 所有 blocking gaps 解決後，一次確認實際 selection與 design final。
 
 Designer 不直接修改 `generated/**`；Designer 可以觸發 update，因為安全邊界是可修改的
 source paths，不是執行指令的人。
@@ -626,8 +538,8 @@ Phase 1 Design System Foundation 完成，至少要證明：
 - 249 baseline tokens 與 3 extensions 都有 mapping 或明確 pending decision；
 - 沒有 platform component 使用 raw colour 或 unknown token；
 - 第一批 component contracts 通過 schema validation；
-- asset manifest schema 與 validation gates 通過；
-- 所有 prototype runtime assets 都能追溯到 approved platform catalog 或 feature manifest；
+- collection index、selection provenance 與 validation gates 通過；
+- 所有 prototype runtime assets 都能追溯到 Design Library 或 PM temporary source；
 - 沒有 runtime Figma／Drive／`file://`／production asset URL；
 - SVG safety、alt／decorative、video poster／fallback 與 size budget checks 通過；
 - Figma references、RD mappings 與 platform implementations 可追溯；
@@ -666,7 +578,7 @@ Phase 1 Design System Foundation 完成，至少要證明：
 | DTCG JSON | 不轉換 | Token build pipeline |
 | Component naming／status vocabulary | 使用本文件提案做 workshop 起點 | Canonical catalog schema |
 | Designer extension 與 RD baseline 衝突 | 記錄 gap，Designer＋RD 討論 | Design final |
-| Asset manifest schema | Feature assets 先以人工約定管理 | 自動 asset ingestion／validation |
+| Asset metadata schema | Designer不需逐檔填寫；需要時由工具推導或日後共同決定 | Alt、licence、video accessibility自動化 |
 | Asset repository／export format／size budget | 不自動搬 RD assets | Approved asset library |
 | Icon color pipeline | Static SVG 只能以 URL import；不可由 AI 任意改 fill／stroke | Token-driven canonical icons |
 | Video accessibility defaults | 每個 feature 記錄 poster／controls／captions gap | Approved video component／design final |
@@ -686,7 +598,7 @@ Phase 1 Design System Foundation 完成，至少要證明：
 - 不要把 production auth、API、CMS、Redux、analytics 或 payment dependencies 搬入 prototype。
 - 不要以 Figma preview、Drive、`file://` 或 production CDN URL 當 runtime asset。
 - 不要把 Base64、PSD、AI、AE project 或未壓縮大型影片塞進 generated code。
-- 不要在 mock JSON 寫入期待 Vite 自動處理的相對 asset path；使用 stable asset ID。
+- 不要要求 Designer替每個 asset寫 manifest；feature以 collection intent決定候選範圍。
 - 不要讓 AI 未經核准改寫 SVG fill／stroke 或自動壓縮 final asset。
 - 不要要求 Designer 完成全部 inventory 才允許第一批 platform component 開始。
 
@@ -705,8 +617,8 @@ Phase 1 Design System Foundation 完成，至少要證明：
 | Novel feature 不等待 catalog 完整 | 新產品可能沒有既有 mental model；Surface Pack 是加速器，不是准入白名單 |
 | Designer 可 trigger update 但不手改 generated code | Source ownership 由路徑與 mutation guard 保護，不需要以「誰按指令」限制協作效率 |
 | 所有 unresolved items 都要有 owner | 沒有 owner 的 gap 會被 AI 當成可自由猜測，造成 prototype、Figma 與 RD implementation 漂移 |
-| 共用與 feature assets 分層 | 共用資產需要單一 canonical source；feature 專用素材若提前升為 platform asset，會造成 catalog 污染 |
-| Asset manifest 使用 stable ID | 檔名與資料夾可能改變；stable ID 能讓 PM mock、Designer source 與 generated imports 解耦 |
+| 所有 Designer assets集中全域 library | 多數資產能跨 feature重用；即使目前 feature-specific，也避免複製與日後搬移 |
+| Designer不寫 manifest | 操作者以 PM／Designer為主；由 feature自然語言指定 collection、工具鎖定 selection與 hash較不易漏登記 |
 | Vite 靜態 import，不用 JSON path／remote URL | 靜態 import 可在 build 時抓到 missing file、產生 hash 並部署完整資產；字串路徑與遠端 URL 無法提供相同保證 |
 | Editable master 與 web-ready export 分開 | Figma／PSD／AE 是設計 authoring source，但 prototype 需要可版本化、可打包、可重建的瀏覽器格式 |
 | Icon／video 需要專門 gates | SVG 可能含危險或不可換色內容；影片涉及 poster、autoplay、captions、fallback、效能與 reduced-motion，不能只當一般檔案 |

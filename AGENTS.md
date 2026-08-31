@@ -6,21 +6,26 @@ later, Designer-owned Figma and token inputs.
 ## Read first
 
 1. Read `prototype.config.json`.
-2. Read the target feature's `product/intake.md`, `product/prd.md`,
+2. Read `collab-space.map.yaml`; it is the machine-readable authority for stages,
+   actors, artifacts and path boundaries.
+3. Read the target feature's `product/intake.md`, `product/prd.md`,
    `product/prototype.contract.yaml`, `product/surface-intent.yaml`,
    `product/decisions.md` and `product/validation.yaml`.
-3. Read `design/design-gaps.yaml`.
-4. Resolve the feature's `reuse`, `hybrid` or `novel` Surface context.
-5. Never infer a backend or production API from mock data.
+4. Read `product/media-intent.yaml`, `design/design-gaps.yaml` and `releases.json`.
+5. Index only the Design Library collections named in media intent; do not search every asset.
+6. Resolve the feature's `reuse`, `hybrid` or `novel` Surface context.
+7. Never infer a backend or production API from mock data.
 
 ## Source-of-truth boundaries
 
 - `features/*/product/**`: PM-owned product behaviour and fake-data requirements.
+- `design-library/**`: Designer-owned shared assets, tokens, components and patterns.
 - `features/*/design/**`: design references and explicitly recorded gaps.
 - `features/*/generated/**`: AI-generated derived code. Do not hand-edit it outside an
   explicit `prototype-update` run.
 - `platform/**` and `tools/**`: shared platform code. Changes require the Prototype
   Platform Owner's approval.
+- `.collab-cache/**`: generated local indexes. Never commit or publish them.
 
 Phase 0 documents these boundaries but does not enforce CODEOWNERS yet.
 
@@ -35,6 +40,11 @@ Phase 0 documents these boundaries but does not enforce CODEOWNERS yet.
 - Ports, routes, URLs and viewports come from `prototype.config.json`.
 - A PASS requires an HTTP-rendered browser check and a clean browser console.
 - Generated code is committed with input and generator metadata.
+- PM temporary media belongs in `product/mock-assets/**` and cannot reach `design-final`.
+- Designer uploads media into `design-library/assets/<type>/<collection>/`; the feature
+  selects a collection in natural language and `generation.json` pins exact files/hashes.
+- Stage approvals must use `stage:transition`; never infer approval from prose or edit
+  `releases.json` by hand.
 
 ## Commands
 
@@ -43,8 +53,10 @@ npm run dev
 npm run validate
 npm run validate:intake -- --feature <feature>
 npm run build
+npm run library:browser
 npm run test:rendered -- --feature <feature>
 npm run prototype:create -- <feature> "<Feature title>"
+npm run stage:transition -- --feature <feature> --to <stage> --actor <actor> --confirm
 npm run eval:workflow -- --case collab-space-readiness-regression
 npm run eval:mutations
 ```

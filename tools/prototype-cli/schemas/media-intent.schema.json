@@ -1,0 +1,29 @@
+{
+  "$id": "media-intent",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "feature", "requestedCollections", "decisionBasis"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "feature": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "requestedCollections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "purpose", "selectionGuidance", "requiredForGeneration"],
+        "properties": {
+          "path": { "type": "string", "pattern": "^assets/(image|video|icon|illustration|logo)/[a-z0-9]+(?:-[a-z0-9]+)*$" },
+          "purpose": { "type": "string", "minLength": 1 },
+          "selectionGuidance": { "type": "string" },
+          "requiredForGeneration": { "type": "boolean" }
+        }
+      }
+    },
+    "decisionBasis": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    }
+  }
+}

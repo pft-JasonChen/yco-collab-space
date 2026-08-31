@@ -8,6 +8,7 @@ import {
   walkFiles,
 } from './project.mjs';
 import { resolveSurfaceContext } from './surface-policy.mjs';
+import { buildResourceProvenance, buildTokenProvenance } from './resource-provenance.mjs';
 
 const feature = normaliseFeatureSlug(process.argv[2]);
 const adapterIndex = process.argv.indexOf('--adapter');
@@ -32,14 +33,20 @@ const files = (await walkFiles(generatedRoot))
   .filter((file) => path.basename(file) !== 'generation.json')
   .map((file) => path.relative(generatedRoot, file).split(path.sep).join('/'));
 const metadata = {
-  schemaVersion: 2,
+  schemaVersion: 3,
   feature,
   inputHash: await hashFeatureInputs(feature),
-  generatorInstructionsVersion: 'phase0.5-v1',
+  generatorInstructionsVersion: 'collab-contract-v1',
   adapter,
   model: process.env.PROTOTYPE_MODEL || 'not-recorded',
   generatedAt: new Date().toISOString(),
   files,
+  collabContract: {
+    schemaVersion: 1,
+    workflow: 'prototype-update',
+  },
+  resources: await buildResourceProvenance(feature),
+  tokens: await buildTokenProvenance(),
   surface: surfaceResult.context,
 };
 

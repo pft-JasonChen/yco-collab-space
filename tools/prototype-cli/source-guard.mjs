@@ -7,13 +7,16 @@ import {
 } from './project.mjs';
 import {
   diffSourceSnapshots,
-  snapshotFeatureSources,
+  snapshotWorkspacePaths,
 } from '../evaluation/source-boundary.mjs';
+import { loadCollabMap, workflowPolicy } from '../collab-space/policy.mjs';
 
 const mode = process.argv[2];
 const feature = normaliseFeatureSlug(process.argv[3]);
 const stateRoot = fromRoot('.prototype-state');
 const statePath = path.join(stateRoot, feature + '-source.json');
+const map = await loadCollabMap();
+const policy = workflowPolicy(map, 'prototype-update', { feature });
 
 if (!['snapshot', 'check'].includes(mode)) {
   throw new Error('Source guard mode must be snapshot or check.');
@@ -21,7 +24,7 @@ if (!['snapshot', 'check'].includes(mode)) {
 
 if (mode === 'snapshot') {
   await fs.mkdir(stateRoot, { recursive: true });
-  const snapshot = await snapshotFeatureSources(fromRoot(), feature);
+  const snapshot = await snapshotWorkspacePaths(fromRoot(), policy.protectedPaths);
 
   await fs.writeFile(
     statePath,
@@ -30,6 +33,9 @@ if (mode === 'snapshot') {
         schemaVersion: 1,
         feature,
         createdAt: new Date().toISOString(),
+        contractSchemaVersion: map.schemaVersion,
+        workflow: policy.id,
+        protectedPaths: policy.protectedPaths,
         snapshot,
       },
       null,
@@ -45,7 +51,10 @@ if (mode === 'snapshot') {
   }
 
   const before = JSON.parse(await fs.readFile(statePath, 'utf8'));
-  const after = await snapshotFeatureSources(fromRoot(), feature);
+  const after = await snapshotWorkspacePaths(
+    fromRoot(),
+    before.protectedPaths ?? policy.protectedPaths,
+  );
   const changes = diffSourceSnapshots(before.snapshot, after);
 
   if (changes.length > 0) {
@@ -59,4 +68,3 @@ if (mode === 'snapshot') {
     process.stdout.write('[source-guard] PASS ' + feature + '\n');
   }
 }
-

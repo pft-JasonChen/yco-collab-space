@@ -1,8 +1,9 @@
 ---
-description: Reserved Phase 1 command for immutable milestone promotion
+description: Confirm an evidence-bound prototype stage transition
 argument-hint: <feature> <stage>
 ---
 
-Stop. Automated promotion is intentionally unavailable in Phase 0. Explain that the
-feature may be reviewed as a working preview, but no immutable milestone should be
-created until the Phase 1 promotion gate is implemented.
+Read and follow `agent-adapters/workflows/stage-transition.md` for `$ARGUMENTS`.
+
+Do not infer approval. Show the evidence and wait for the required PM／Designer role to
+confirm before running the internal stage command.

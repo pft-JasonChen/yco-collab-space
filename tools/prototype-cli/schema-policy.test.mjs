@@ -8,6 +8,10 @@ const surfaceIntentSchema = await readJson(
   'tools/prototype-cli/schemas/surface-intent.schema.json',
 );
 const validateSurfaceIntent = ajv.compile(surfaceIntentSchema);
+const mediaIntentSchema = await readJson(
+  'tools/prototype-cli/schemas/media-intent.schema.json',
+);
+const validateMediaIntent = ajv.compile(mediaIntentSchema);
 
 function baseIntent() {
   return {
@@ -52,4 +56,42 @@ test('surface-intent schema rejects hybrid without a borrowed pack', () => {
   };
 
   assert.equal(validateSurfaceIntent(intent), false);
+});
+
+test('media-intent accepts a shared collection reference without per-file manifests', () => {
+  assert.equal(
+    validateMediaIntent({
+      schemaVersion: 1,
+      feature: 'example-feature',
+      requestedCollections: [
+        {
+          path: 'assets/video/dance',
+          purpose: 'Offer dance examples.',
+          selectionGuidance: 'Show different dance styles.',
+          requiredForGeneration: false,
+        },
+      ],
+      decisionBasis: ['The collection is reusable across features.'],
+    }),
+    true,
+  );
+});
+
+test('media-intent rejects a traversal instead of scanning the repository', () => {
+  assert.equal(
+    validateMediaIntent({
+      schemaVersion: 1,
+      feature: 'example-feature',
+      requestedCollections: [
+        {
+          path: 'assets/video/../secret',
+          purpose: 'Invalid.',
+          selectionGuidance: '',
+          requiredForGeneration: false,
+        },
+      ],
+      decisionBasis: ['Negative test.'],
+    }),
+    false,
+  );
 });

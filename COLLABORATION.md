@@ -3,8 +3,8 @@
 這個空間讓 PM、主管、Designer、RD 與 QA 使用同一份可追溯的產品資料，
 但不要求每個角色都直接修改 prototype code。
 
-> 目前狀態：Phase 0.5 已可完成「PM Intake → AI 生成 React prototype → 自動驗證 →
-> 人工 review」。Designer final、YCO-spec 自動產生與正式 promote 流程仍在後續階段。
+> 目前狀態：已可完成「PM Intake → AI 生成 React prototype → 自動驗證 → 人工 review →
+> Designer refinement → evidence-bound design-final」。YCO-spec adapter與Figma API自動匯入仍在後續階段。
 
 Designer 與 RD 在建立正式 `/platform` 前，請共同 review
 [`Phase 1 Design System Foundation 指南`](docs/design-system/phase1-designer-rd-foundation-guide.md)。
@@ -42,7 +42,7 @@ source-of-truth 後，再重新生成 prototype。
 |---|---|---|---|
 | PM（目前也是 Collab Space Owner） | Intake、PRD、行為 Contract、驗收條件、假資料、Surface 策略與最終範圍決策 | 執行本機 preview 或之後的公開 preview URL | 不手改 `generated/**` |
 | 主管 | 操作 prototype、判斷是否允許開發、把修改方向告訴 PM | 只需開啟 preview URL | 不必操作 repo，也不必另寫 feedback log |
-| Designer | 提供 Figma final 與 design tokens；可觸發 update 即時查看結果 | 本機或公開 preview URL | 目前建議不手改 prototype code，也不改 PM 的產品行為；此規範仍待 Designer review 後確認 |
+| Designer | 提供 Figma final、design tokens與全域 Design Library素材；可觸發 update 即時查看結果 | 本機或公開 preview URL／本機 Library Browser | 不需寫 manifest；目前建議不手改 prototype code，也不改 PM 的產品行為 |
 | AI Agent | 訪談 Intake、依來源檔生成 React／SCSS、執行驗證並留下 provenance | 回報 gate 與 evidence | Update 時不得改 PM／Designer source-of-truth |
 | RD | 在 design-final 後取得整個 private repo，參考 UI code、tokens 與行為規格，再搬到 RD repo 串後端 | clone／下載 repo | 不需把 RD repo 合回這個空間；這裡的 prototype 永遠不串後端 |
 | QA | 使用保留的 YCO-spec 做人工測試 | 規格頁與 prototype | 新 repo 的 YCO-spec adapter 尚未實作，Phase 1 前仍沿用既有流程 |
@@ -60,19 +60,25 @@ source-of-truth 後，再重新生成 prototype。
 | `product/surface-intent.yaml` | `reuse`／`hybrid`／`novel` 的 Surface 決策 | PM | Source of truth |
 | `product/mocks/**` | 假資料；不得包含正式資料或後端連線 | PM | Source of truth |
 | `product/decisions.md` | 會影響產品或架構的決策與判斷依據 | PM | Source of truth |
+| `product/media-intent.yaml` | 本功能要查詢的全域素材 collection與用途 | PM | Source of truth |
+| `product/mock-assets/**` | PM第一版暫時素材；design-final禁止 | PM | Temporary source |
 | `design/design.ref.json`、`design/design-gaps.yaml` | 設計參考與尚缺的 token／component | Designer；初期可由 PM 標示缺口 | Source of truth |
 | `generated/**` | AI 依上述來源產生的 React／SCSS | AI | 衍生物，可重建；禁止手改 |
 | `evidence/**` | Browser check、截圖與驗證結果 | 工具／AI | 衍生物，可重建 |
-| `releases.json` | 未來的 review／final 狀態紀錄 | 流程工具 | Phase 1 才完整啟用 |
+| `releases.json` | 綁定輸入、token、素材 hash與角色核准的階段紀錄 | 流程工具 | Record；不要手改 |
 
 共用平台資料不屬於單一功能：
 
 | 位置 | 用途 | 變更權限 |
 |---|---|---|
+| `design-library/assets/<type>/<collection>/**` | 全域共用或目前feature-specific的 Designer素材 | Designer上傳；不需 manifest |
+| `design-library/tokens/**`、`components/**`、`patterns/**` | 未來 Figma export與Designer/RD共同契約 | Designer／RD共同決定；目前可逐步補 |
 | `platform/tokens/rd/**` | RD 提供的 design token snapshot，現階段的 token 基準 | 視為唯讀；缺漏由 Designer／RD 討論後補充 |
 | `platform/surfaces/**` | 可重用的 Surface Pack | Collab Space Owner 管理 |
 | `platform/ui/**`、`platform/runtime/**` | 共用 UI 與 prototype runtime | 平台層變更，需比單一 feature 更嚴格 review |
 | `tools/**`、`evals/**` | 生成、驗證與 evaluation 系統 | Collab Space Owner／工具開發者 |
+
+`.collab-cache/**` 是工具自動建立的本機 index，不需人工維護、不 commit、也不會進公開 preview。
 
 ## 新功能怎麼開始
 
@@ -115,6 +121,13 @@ Surface Pack 是加速器，不是新功能的准入條件。Catalog 草案見
 Update 只應改 `generated/**` 和可重建的 evidence；若偵測到 `product/**` 或
 `design/**` 被生成步驟改動，流程必須失敗。
 
+素材不需逐檔登記。PM在功能需求中指定例如 `assets/video/dance`，Agent只 index該
+collection，再把本版實際使用的檔案與 hash鎖進 `generation.json`。Designer沒特別說明時，
+新上傳檔案預設都是 candidate；到 design-final前才一次確認本版 selection。
+
+Designer／PM可用 `npm run library:browser` 在本機看所有 collection。這個 browser不屬於
+公開 Vite app，public build只會包含prototype實際引用的素材。
+
 ### 5. 驗證與 review
 
 ```bash
@@ -131,6 +144,10 @@ npm run test:rendered -- --feature <feature-slug>
 | `FUNCTIONALLY_READY` | 功能與自動 gate 通過，但尚未完成視覺人工審核 | 可給 PM／主管操作，不能宣稱 design final |
 | `PM_REVIEW_READY` | PM 已確認功能與 review 目標 | 可送主管／Designer |
 | `DESIGN_FINAL_READY` | Designer final、必要視覺 review 與交付條件已完成 | 可交 RD；完整自動 promote 屬 Phase 1 |
+
+請直接用自然語言請 Agent移到下一階段。Agent會列出 evidence並等待必要角色同意；底層
+`stage:transition` 會把核准綁定當下 input／generation hash。內容變更後舊核准不會沿用。
+`rd-handoff` 與 `qa-spec` 都從同一個 design-final平行產生。
 
 ## 常見修改情境
 
@@ -166,7 +183,8 @@ npm run test:rendered -- --feature <feature-slug>
 | 視覺品質自動判定 | 尚未校準，仍需人工 review |
 | Designer／Figma final ingestion | Phase 1；流程規則待 Designer 確認 |
 | YCO-spec 自動產生 | Phase 1；既有 QA 人工 spec 必須保留 |
-| 自動 promote／release tag | Phase 1 |
+| Evidence-bound stage transition／design-final gate | 已完成；Git tag仍可後續加入 |
+| Shared Design Library collection index／local browser | 已完成 |
 | GitHub | 已設定 private `origin` |
 | Vercel 綁定 | 尚未執行，由 repo owner 後續處理 |
 | Preview 存取權限 | 後續團隊討論，本版不強制 |
