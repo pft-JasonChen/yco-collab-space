@@ -7,6 +7,9 @@ handoff.
 [`COLLABORATION.md`](COLLABORATION.md)：包含跨部門流程圖、角色責任、
 source-of-truth 地圖、操作方式、目前限制與 repo 使用原則。
 
+Designer 與 RD 規劃 Phase 1 Design System Foundation 時，請閱讀
+[`docs/design-system/phase1-designer-rd-foundation-guide.md`](docs/design-system/phase1-designer-rd-foundation-guide.md)。
+
 ## What it does
 
 - PM owns PRD, executable feature contract, validation and fake data.

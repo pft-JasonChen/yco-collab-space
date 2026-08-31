@@ -6,6 +6,9 @@
 > 目前狀態：Phase 0.5 已可完成「PM Intake → AI 生成 React prototype → 自動驗證 →
 > 人工 review」。Designer final、YCO-spec 自動產生與正式 promote 流程仍在後續階段。
 
+Designer 與 RD 在建立正式 `/platform` 前，請共同 review
+[`Phase 1 Design System Foundation 指南`](docs/design-system/phase1-designer-rd-foundation-guide.md)。
+
 ## 一張圖看懂流程
 
 ```mermaid
@@ -164,7 +167,8 @@ npm run test:rendered -- --feature <feature-slug>
 | Designer／Figma final ingestion | Phase 1；流程規則待 Designer 確認 |
 | YCO-spec 自動產生 | Phase 1；既有 QA 人工 spec 必須保留 |
 | 自動 promote／release tag | Phase 1 |
-| GitHub／Vercel 綁定 | 尚未執行，由 repo owner 後續處理 |
+| GitHub | 已設定 private `origin` |
+| Vercel 綁定 | 尚未執行，由 repo owner 後續處理 |
 | Preview 存取權限 | 後續團隊討論，本版不強制 |
 
 ## Repo 身分與 GitHub 串接
@@ -176,7 +180,7 @@ evaluation case 已統一使用 `yco-collab-space`／`YCO Collab Space`。
 |---|---|---|
 | 本機路徑 | `/Users/jasonchen/Documents/Claude/Projects/yco-collab-space` | Codex、Terminal 或 Editor 若仍指向舊路徑，重新開啟本資料夾 |
 | Git history | 隨整個 `.git` 目錄保留 | 建立 GitHub private repo 後再設定 remote |
-| GitHub | 尚未設定 remote | 直接建立名為 `yco-collab-space` 的 private repo |
+| GitHub | 已設定 private `origin` | 團隊以 `yco-collab-space` repo 協作 |
 | Vercel | 尚未 link | GitHub 完成後，再由 repo owner 以新名稱建立／link project |
 | Evaluation evidence | 改名後應重新生成 | 以新 slug 執行 workflow、mutation 與 visual packet evaluation |
 | Dependencies | package identity 已改名 | 執行 `npm install` 與完整 gates，確認 lockfile 和 build |
