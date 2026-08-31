@@ -273,22 +273,188 @@ Designer 與 RD 必須記錄：
 
 ## 9. P1D — Assets、Patterns 與 Content Rules
 
-### 9.1 Assets／icons
+### 9.1 Asset 的兩個層級
+
+Designer 交付的圖片、icon、illustration 與影片也是 source-of-truth，必須依重用範圍分層：
+
+| Asset 類型 | 存放位置 | 例子 |
+|---|---|---|
+| 全平台共用 | `platform/design-system/assets/**` | Logo、共用 icons、upload／empty illustrations |
+| 單一 feature 專用 | `features/<feature>/design/assets/**` | Feature hero、範例圖片、教學影片、專用 icon |
+| Prototype evidence | `features/<feature>/evidence/**` | Browser screenshots、validation images；不是 Designer source |
+| Build output | `dist/**` | Vite 產物；可重建、不可手改 |
+
+Figma、PSD、AI、AE project 等 editable master 可留在 Designer 的 authoring tool；repo 必須保存
+能精確重建當次 prototype 的 web-ready export、manifest 與來源版本。不要以 Figma preview URL
+或 Designer 本機路徑作為 runtime asset。
+
+### 9.2 Asset catalog 與 Designer／RD 整理項目
 
 Designer 與 RD 要整理：
 
-- icon stable ID、名稱與用途；
-- Figma node 與 repo asset mapping；
-- filled／outlined／active／disabled variants；
-- viewBox、尺寸、stroke 與可否換色；
-- logo variants；
+- asset stable ID、名稱、類型、用途與 owner；
+- Figma file／node／version 與 repo file mapping；
+- final、temporary、experimental、deprecated 狀態；
+- desktop／tablet／mobile、light／dark variants；
+- 圖片尺寸、aspect ratio、crop／focal-point 規則；
+- image alt text 或 decorative status；
+- icon filled／outlined／active／disabled variants；
+- SVG viewBox、尺寸、stroke、fill 與是否可透過 `currentColor` 換色；
+- logo variants 與禁止變形規則；
 - empty、error、upload、placeholder illustrations；
-- SVG／PNG／WebP／video export rules；
-- light／dark behavior；
+- video poster、autoplay、muted、loop、controls、captions 與 reduced-motion；
+- export format、quality、compression 與待決定的檔案大小 budget；
 - copyright／licence／production-only restrictions；
-- deprecated assets 與 replacement。
+- deprecated assets 與 replacement；
+- 每項選擇的 decision basis。
 
-### 9.2 Patterns
+### 9.3 建議格式
+
+| 類型 | 建議格式 | 規則 |
+|---|---|---|
+| 一般照片 | WebP | Prototype 預設；保留必要畫質並控制檔案大小 |
+| 透明圖片 | WebP 或 PNG | 依透明度與畫質需求選擇 |
+| Logo／vector illustration | SVG | 必須通過安全檢查，不可含 script 或 external reference |
+| Icon | SVG | 必須宣告 static 或 `currentColor` color behavior |
+| Pixel-perfect reference | PNG | 只在確實需要時使用，避免大量高解析 PNG |
+| 一般影片 | MP4 H.264 | 預設相容格式；WebM 可作 optional variant |
+| Video poster | WebP | 每支影片原則上必須提供 |
+| 有口白影片 | MP4＋字幕／transcript 決策 | 需要 accessibility review |
+
+不要把 Base64 塞進 React code，也不要使用不穩定的第三方 CDN、Google Drive、Figma preview
+URL、`file://` 或 production-only asset endpoint。
+
+### 9.4 Feature asset manifest
+
+單一 feature 的 assets 必須由 manifest 管理，不能只把檔案丟進資料夾讓 AI 猜用途。
+
+建議結構：
+
+```text
+features/<feature>/design/assets/
+├── manifest.yaml
+├── images/
+├── icons/
+├── videos/
+└── posters/
+```
+
+建議的 manifest 草案：
+
+```yaml
+schemaVersion: 1
+feature: image-relight
+assets:
+  - id: relight-hero
+    type: image
+    file: images/relight-hero.webp
+    status: final
+    usage: Product introduction hero image
+    alt: Portrait showing an AI relighting result
+    decorative: false
+    aspectRatio: "16:9"
+    figma:
+      reference: pending-format-definition
+
+  - id: lighting-direction
+    type: icon
+    file: icons/lighting-direction.svg
+    status: final
+    usage: Lighting direction selector
+    decorative: true
+    colorBehavior: current-color
+
+  - id: relight-tutorial
+    type: video
+    file: videos/relight-tutorial.mp4
+    poster: posters/relight-tutorial.webp
+    status: final
+    usage: Explain how to position the light
+    autoplay: false
+    muted: true
+    loop: false
+    controls: true
+```
+
+這是 Phase 1 schema proposal，不是目前已實作格式。Designer／RD 要先確認 Figma reference、
+status vocabulary、size budget、licence 與 video accessibility 欄位。
+
+### 9.5 Prototype ingestion 規則
+
+`prototype-update` 應依 manifest 的 asset ID 產生靜態 imports，由 Vite 打包並產生 hashed
+filenames：
+
+```jsx
+import heroImage from '../design/assets/images/relight-hero.webp';
+import lightingIcon from '../design/assets/icons/lighting-direction.svg';
+import tutorialVideo from '../design/assets/videos/relight-tutorial.mp4';
+import tutorialPoster from '../design/assets/posters/relight-tutorial.webp';
+```
+
+不應在 mock JSON 直接寫相對檔案路徑，因為 Vite 不會可靠地轉換 JSON 中的字串。Mock data
+只保存 asset ID，generated code 建立 registry：
+
+```json
+{
+  "imageAssetId": "relight-result-01"
+}
+```
+
+```jsx
+import relightResult01 from '../design/assets/images/result-01.webp';
+
+const assetRegistry = {
+  'relight-result-01': relightResult01,
+};
+```
+
+目前系統已遞迴 hash 與 snapshot `features/<feature>/design/**`，因此新增或修改 asset 會讓舊
+generated code 失效，且 update source guard 能偵測 generation 期間的變動。Vite 也已允許從
+repo root import。Phase 1 尚需補上 manifest schema、asset validator、icon pipeline、size
+budget 與 Figma asset mapping schema。
+
+### 9.6 Icon ingestion
+
+- 不需換色的 static SVG 可由 Vite URL import，使用 `<img>` 呈現。
+- 需要 hover／disabled／selected token color 的 icon，不可由 AI 任意修改 fill／stroke。
+- Phase 1 應建立安全的 SVG → Platform Icon pipeline，驗證 SVG 後轉成使用 `currentColor` 的
+  canonical icon component。
+- Pipeline 尚未完成前，Designer 要提供明確 variant 或將缺口記錄為 blocking gap。
+
+### 9.7 Video ingestion
+
+Designer 必須為每支影片定義：
+
+- poster image；
+- aspect ratio 與 responsive behavior；
+- autoplay／muted／loop／controls／playsInline；
+- loading、error 與 static fallback；
+- 是否有聲音、口白、字幕或 transcript；
+- reduced-motion 行為；
+- desktop／mobile 是否使用不同 export。
+
+一般教學影片預設不 autoplay、顯示 controls、提供 poster；純裝飾性循環影片才考慮
+`autoplay + muted + loop + playsInline`，並仍需 static fallback。
+
+### 9.8 Asset validation gates
+
+Phase 1 asset validator 至少要阻擋：
+
+- manifest 指向不存在的檔案；
+- duplicate／unknown asset ID；
+- generated code 引用未宣告 asset；
+- 未經 manifest 管理的 runtime asset；
+- 大小寫錯誤或不支援格式；
+- 非 decorative image 缺少 alt；
+- decorative image 未正確隱藏；
+- SVG 包含 script、external reference 或不允許的 raw color behavior；
+- 影片缺少 poster、fallback 或必要 accessibility decision；
+- asset 超過團隊核准的 size budget；
+- runtime 使用遠端 URL、Figma URL、`file://` 或 production endpoint；
+- Figma reference／export version／licence 狀態缺失；
+- platform asset 尚未 approved 就被 feature 當成 canonical source。
+
+### 9.9 Patterns
 
 Pattern 是多個 components 共同完成的可重用互動，不等於單一 component。優先盤點：
 
@@ -377,10 +543,16 @@ platform/
 │   │       └── rd-mapping.yaml
 │   ├── patterns/
 │   ├── assets/
+│   │   ├── catalog.yaml
 │   │   ├── icons.yaml
 │   │   ├── illustrations.yaml
 │   │   ├── figma-asset-map.yaml
-│   │   └── asset-export-rules.md
+│   │   ├── asset-export-rules.md
+│   │   └── files/
+│   │       ├── icons/
+│   │       ├── illustrations/
+│   │       ├── logos/
+│   │       └── placeholders/
 │   └── governance/
 │       ├── naming.md
 │       ├── contribution.md
@@ -404,7 +576,7 @@ platform/
 | `platform/ui/**` | Derived implementation | AI／Platform Owner 實作；Designer review |
 | `platform/surfaces/**` | Derived／versioned implementation | Platform Owner 實作；Designer＋PM approve |
 | `platform/runtime/**` | Prototype infrastructure | Platform Owner |
-| `features/*/design/**` | 單一 feature final reference／gaps | Designer |
+| `features/*/design/**` | 單一 feature final reference／gaps／web-ready assets／manifest | Designer |
 | `features/*/generated/**` | AI-generated prototype | AI；禁止手改 |
 
 ## 12. 單一 feature 的 Designer 工作
@@ -415,10 +587,11 @@ platform/
 2. 在 Figma 使用 approved tokens、components、patterns 與 Surface Pack。
 3. 更新 `features/<feature>/design/design.ref.json`。
 4. 更新 `features/<feature>/design/design-gaps.yaml`。
-5. 若 final design 改變 product flow／state／validation，退回 PM 更新 product source。
-6. Designer 或 PM 觸發 `/prototype-update <feature>`。
-7. Review rendered prototype、responsive screenshots 與 visual evidence。
-8. 所有 blocking gaps 解決後，確認 design final。
+5. 將 web-ready images／icons／videos／posters 放入 `design/assets/**` 並更新 manifest。
+6. 若 final design 改變 product flow／state／validation，退回 PM 更新 product source。
+7. Designer 或 PM 觸發 `/prototype-update <feature>`。
+8. Review rendered prototype、responsive screenshots、asset behavior 與 visual evidence。
+9. 所有 blocking gaps 解決後，確認 design final。
 
 Designer 不直接修改 `generated/**`；Designer 可以觸發 update，因為安全邊界是可修改的
 source paths，不是執行指令的人。
@@ -434,6 +607,8 @@ source paths，不是執行指令的人。
 - Figma mapping 已存在；
 - token mapping 只引用 approved tokens；
 - responsive 與 accessibility rules 已定義；
+- asset IDs、formats、Figma mappings、licences 與 export rules 已定義；
+- video behavior、poster、fallback 與 accessibility decision 已完成；
 - duplicate／deprecated decisions 已記錄；
 - unresolved questions 有 owner 與狀態；
 - decision basis 已留下；
@@ -451,6 +626,10 @@ Phase 1 Design System Foundation 完成，至少要證明：
 - 249 baseline tokens 與 3 extensions 都有 mapping 或明確 pending decision；
 - 沒有 platform component 使用 raw colour 或 unknown token；
 - 第一批 component contracts 通過 schema validation；
+- asset manifest schema 與 validation gates 通過；
+- 所有 prototype runtime assets 都能追溯到 approved platform catalog 或 feature manifest；
+- 沒有 runtime Figma／Drive／`file://`／production asset URL；
+- SVG safety、alt／decorative、video poster／fallback 與 size budget checks 通過；
 - Figma references、RD mappings 與 platform implementations 可追溯；
 - 至少一個真實 feature 使用 approved foundation 完成 design review；
 - desktop／tablet／mobile rendered checks 通過；
@@ -471,8 +650,10 @@ Phase 1 Design System Foundation 完成，至少要證明：
 6. 哪些 RD component paths 最接近這些 families？
 7. Component status vocabulary 與 versioning 如何定義？
 8. Figma／RD mapping 要用 URL、file key、node ID 還是其他格式？
-9. Asset export 格式與存放方式？
-10. 誰 review AI 產生的 inventory 與 platform implementation？
+9. Asset export 格式、size budget、licence 與存放方式？
+10. Icon 是否需要 SVG-to-React／`currentColor` pipeline？
+11. Video poster、captions、autoplay 與 reduced-motion 的預設規則？
+12. 誰 review AI 產生的 inventory 與 platform implementation？
 
 不建議第一次 meeting 就審核全部 2,226 個 JavaScript files。
 
@@ -485,7 +666,10 @@ Phase 1 Design System Foundation 完成，至少要證明：
 | DTCG JSON | 不轉換 | Token build pipeline |
 | Component naming／status vocabulary | 使用本文件提案做 workshop 起點 | Canonical catalog schema |
 | Designer extension 與 RD baseline 衝突 | 記錄 gap，Designer＋RD 討論 | Design final |
-| Asset repository／export format | 不自動搬 RD assets | Approved asset library |
+| Asset manifest schema | Feature assets 先以人工約定管理 | 自動 asset ingestion／validation |
+| Asset repository／export format／size budget | 不自動搬 RD assets | Approved asset library |
+| Icon color pipeline | Static SVG 只能以 URL import；不可由 AI 任意改 fill／stroke | Token-driven canonical icons |
+| Video accessibility defaults | 每個 feature 記錄 poster／controls／captions gap | Approved video component／design final |
 | Surface Pack approval process | 現有 packs 保持 provisional | Designer-approved reusable surfaces |
 | CODEOWNERS／protected paths | Phase 1 team discussion 後實施 | 強制 ownership governance |
 
@@ -500,6 +684,10 @@ Phase 1 Design System Foundation 完成，至少要證明：
 - 不要因為 Figma 與 RD code 不一致，就由 AI 靜默選一邊；必須留下 gap 與 owner。
 - 不要讓 visual design 變更偷偷改變 PM-owned product behavior。
 - 不要把 production auth、API、CMS、Redux、analytics 或 payment dependencies 搬入 prototype。
+- 不要以 Figma preview、Drive、`file://` 或 production CDN URL 當 runtime asset。
+- 不要把 Base64、PSD、AI、AE project 或未壓縮大型影片塞進 generated code。
+- 不要在 mock JSON 寫入期待 Vite 自動處理的相對 asset path；使用 stable asset ID。
+- 不要讓 AI 未經核准改寫 SVG fill／stroke 或自動壓縮 final asset。
 - 不要要求 Designer 完成全部 inventory 才允許第一批 platform component 開始。
 
 ## 18. 決策判斷依據
@@ -517,4 +705,8 @@ Phase 1 Design System Foundation 完成，至少要證明：
 | Novel feature 不等待 catalog 完整 | 新產品可能沒有既有 mental model；Surface Pack 是加速器，不是准入白名單 |
 | Designer 可 trigger update 但不手改 generated code | Source ownership 由路徑與 mutation guard 保護，不需要以「誰按指令」限制協作效率 |
 | 所有 unresolved items 都要有 owner | 沒有 owner 的 gap 會被 AI 當成可自由猜測，造成 prototype、Figma 與 RD implementation 漂移 |
-
+| 共用與 feature assets 分層 | 共用資產需要單一 canonical source；feature 專用素材若提前升為 platform asset，會造成 catalog 污染 |
+| Asset manifest 使用 stable ID | 檔名與資料夾可能改變；stable ID 能讓 PM mock、Designer source 與 generated imports 解耦 |
+| Vite 靜態 import，不用 JSON path／remote URL | 靜態 import 可在 build 時抓到 missing file、產生 hash 並部署完整資產；字串路徑與遠端 URL 無法提供相同保證 |
+| Editable master 與 web-ready export 分開 | Figma／PSD／AE 是設計 authoring source，但 prototype 需要可版本化、可打包、可重建的瀏覽器格式 |
+| Icon／video 需要專門 gates | SVG 可能含危險或不可換色內容；影片涉及 poster、autoplay、captions、fallback、效能與 reduced-motion，不能只當一般檔案 |
