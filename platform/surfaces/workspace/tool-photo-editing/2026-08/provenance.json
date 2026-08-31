@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "pack": "workspace/tool-photo-editing",
+  "version": "2026-08",
+  "sourceCatalog": "legacy-yco-surface-taxonomy",
+  "evidenceStatus": "requires-current-production-capture",
+  "capturedAt": null,
+  "figma": null,
+  "decisionBasis": [
+    "This provisional pack records the reusable workspace roles without importing legacy token values."
+  ]
+}
+

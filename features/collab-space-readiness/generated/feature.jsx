@@ -4,20 +4,20 @@ import mockData from '../product/mocks/readiness.json';
 import styles from './feature.module.scss';
 
 export const featureMeta = {
-  slug: 'factory-readiness',
-  title: 'Prototype Factory Readiness',
+  slug: 'collab-space-readiness',
+  title: 'Collab Space Readiness',
   stage: 'pm-draft',
   readiness: 'working',
 };
 
-export default function FactoryReadinessFeature() {
+export default function CollabSpaceReadinessFeature() {
   const [status, setStatus] = useState('draft');
   const isReady = status === 'review-ready';
 
   return (
     <main
       className={styles.page}
-      data-testid="factory-readiness-page"
+      data-testid="collab-space-readiness-page"
       data-state={status}
     >
       <section className={styles.hero}>
@@ -31,7 +31,12 @@ export default function FactoryReadinessFeature() {
         </p>
       </section>
 
-      <section className={styles.statusPanel} aria-live="polite">
+      <section
+        className={styles.statusPanel}
+        aria-live="polite"
+        data-component-role="status-summary"
+        data-surface-zone="readiness-status"
+      >
         <div>
           <p className="text-tiny text-regular">Demonstration status</p>
           <p
@@ -44,7 +49,12 @@ export default function FactoryReadinessFeature() {
         <span className={isReady ? styles.readyDot : styles.draftDot} />
       </section>
 
-      <section className={styles.grid} aria-label="Readiness inputs">
+      <section
+        className={styles.grid}
+        aria-label="Readiness inputs"
+        data-component-role="readiness-list"
+        data-surface-zone="readiness-inputs"
+      >
         {mockData.inputs.map((input) => (
           <article
             className={styles.card}
@@ -57,7 +67,11 @@ export default function FactoryReadinessFeature() {
         ))}
       </section>
 
-      <section className={styles.actions}>
+      <section
+        className={styles.actions}
+        data-component-role="primary-action"
+        data-surface-zone="readiness-actions"
+      >
         {isReady ? (
           <>
             <p

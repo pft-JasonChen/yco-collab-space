@@ -1,8 +1,8 @@
-# Prototype Factory Readiness
+# Collab Space Readiness
 
 ## Goal
 
-Prove that the new factory can render a React prototype from PM-owned inputs without
+Prove that the new collab space can render a React prototype from PM-owned inputs without
 Designer involvement or backend access.
 
 ## User

@@ -1,0 +1,16 @@
+schemaVersion: 1
+pack: marketing/product-page
+version: 2026-08
+visualReview:
+  status: human-required
+  dimensions:
+    - information-hierarchy
+    - yco-recognition
+    - responsive-composition
+structuralAnchors:
+  - navigation
+  - feature-hero
+  - use-cases
+  - conversion-action
+  - footer
+

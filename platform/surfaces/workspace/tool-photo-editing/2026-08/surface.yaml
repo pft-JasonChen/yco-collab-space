@@ -1,0 +1,28 @@
+schemaVersion: 1
+id: workspace/tool-photo-editing
+version: 2026-08
+kind: surface
+status: provisional
+shell: editor-workspace
+zones:
+  - id: navigation
+    required: true
+    description: Shared editor navigation.
+  - id: tool-navigation
+    required: true
+    description: Tool family navigation or rail.
+  - id: inspector
+    required: true
+    description: Feature settings and actions.
+  - id: image-canvas
+    required: true
+    description: Upload, comparison and result area.
+  - id: canvas-controls
+    required: true
+    description: Image controls available when media is loaded.
+responsivePriority:
+  - Preserve the image result before secondary inspector controls.
+  - Keep the primary action reachable when the shell stacks.
+decisionBasis:
+  - Photo editing features share an inspector and image-canvas mental model.
+

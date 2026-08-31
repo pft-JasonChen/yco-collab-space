@@ -1,0 +1,25 @@
+schemaVersion: 1
+id: workspace/tool-video
+version: 2026-08
+kind: surface
+status: provisional
+shell: video-workspace
+zones:
+  - id: navigation
+    required: true
+    description: Shared video-tool navigation.
+  - id: video-input
+    required: true
+    description: Upload and feature settings.
+  - id: video-status
+    required: true
+    description: Processing, progress and recovery.
+  - id: video-result
+    required: true
+    description: Video playback and final actions.
+responsivePriority:
+  - Preserve playback and progress before secondary controls.
+  - Keep the main action reachable without covering the video result.
+decisionBasis:
+  - Video tools share upload, processing and playback states even when settings differ.
+

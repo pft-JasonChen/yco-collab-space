@@ -1,0 +1,206 @@
+{
+  "$id": "surface-intent",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "feature",
+    "strategy",
+    "temporary",
+    "primaryPack",
+    "borrowedPacks",
+    "layoutIntent",
+    "deviations",
+    "decisionBasis"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "feature": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "strategy": {
+      "enum": ["reuse", "hybrid", "novel"]
+    },
+    "temporary": {
+      "type": "boolean"
+    },
+    "primaryPack": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/packReference"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "borrowedPacks": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/borrowedPackReference"
+      }
+    },
+    "layoutIntent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["zones", "componentRoles", "responsivePriority"],
+      "properties": {
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          },
+          "uniqueItems": true
+        },
+        "componentRoles": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          },
+          "uniqueItems": true
+        },
+        "responsivePriority": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "deviations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "decisionBasis": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "$defs": {
+    "packReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9-]+(?:/[a-z0-9-]+)+$"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}(?:-[a-z0-9-]+)?$"
+        }
+      }
+    },
+    "borrowedPackReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version", "roles"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9-]+(?:/[a-z0-9-]+)+$"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}(?:-[a-z0-9-]+)?$"
+        },
+        "roles": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "strategy": {
+            "const": "reuse"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "primaryPack": {
+            "$ref": "#/$defs/packReference"
+          },
+          "borrowedPacks": {
+            "maxItems": 0
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "strategy": {
+            "const": "hybrid"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "primaryPack": {
+            "$ref": "#/$defs/packReference"
+          },
+          "borrowedPacks": {
+            "minItems": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "strategy": {
+            "const": "novel"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "primaryPack": {
+            "type": "null"
+          },
+          "borrowedPacks": {
+            "maxItems": 0
+          },
+          "layoutIntent": {
+            "properties": {
+              "zones": {
+                "minItems": 1
+              },
+              "componentRoles": {
+                "minItems": 1
+              },
+              "responsivePriority": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}
+

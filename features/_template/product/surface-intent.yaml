@@ -1,0 +1,17 @@
+schemaVersion: 1
+feature: __FEATURE_SLUG__
+strategy: novel
+temporary: true
+primaryPack: null
+borrowedPacks: []
+layoutIntent:
+  zones:
+    - primary-content
+  componentRoles:
+    - primary-action
+  responsivePriority:
+    - Preserve the primary content and action at every configured viewport.
+deviations: []
+decisionBasis:
+  - No Surface Pack has been selected during Intake yet.
+

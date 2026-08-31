@@ -10,3 +10,5 @@ features/*/evidence/screenshots/
 features/*/evidence/*.png
 features/*/evidence/*.json
 features/*/evidence/*.md
+evals/runs/
+.prototype-state/

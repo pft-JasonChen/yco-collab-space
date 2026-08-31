@@ -1,0 +1,25 @@
+schemaVersion: 1
+id: workspace/tool-image-generator
+version: 2026-08
+kind: surface
+status: provisional
+shell: generator-workspace
+zones:
+  - id: navigation
+    required: true
+    description: Shared generator navigation.
+  - id: generation-input
+    required: true
+    description: Prompt, source and generation controls.
+  - id: generation-status
+    required: true
+    description: Processing and recovery feedback.
+  - id: result-gallery
+    required: true
+    description: Generated results and selection.
+responsivePriority:
+  - Preserve prompt context and the selected result before secondary options.
+  - Keep the generation action visible when controls stack.
+decisionBasis:
+  - Image generation needs a wider intake area and a multi-result destination.
+

@@ -1,4 +1,4 @@
-# YCO Prototype Factory — target architecture
+# YCO Collab Space — target architecture
 
 > **Status:** architecture direction confirmed with the project PM on 2026-08-30.
 > Phase 0 local implementation started the same day. This repository implements the
@@ -185,8 +185,8 @@ integration.
 The agreed repository is:
 
 ```text
-Git repository: yco-prototype-factory
-Local path:     /Users/jasonchen/Documents/Claude/Projects/yco-prototype-factory
+Git repository: yco-collab-space
+Local path:     /Users/jasonchen/Documents/Claude/Projects/yco-collab-space
 GitHub:         private
 ```
 
@@ -195,7 +195,7 @@ It must be a standalone sibling repository, not nested inside the legacy reposit
 Recommended structure:
 
 ```text
-yco-prototype-factory/
+yco-collab-space/
 ├── AGENTS.md
 ├── README.md
 ├── package.json

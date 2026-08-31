@@ -1,9 +1,10 @@
 schemaVersion: 1
 feature:
-  slug: factory-readiness
-  title: Prototype Factory Readiness
+  slug: collab-space-readiness
+  title: Collab Space Readiness
   stage: pm-draft
-  entryRoute: /features/factory-readiness/
+  entryRoute: /features/collab-space-readiness/
+  intakeStatus: confirmed
 design:
   status: temporary
   reference: null

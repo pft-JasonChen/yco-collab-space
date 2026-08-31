@@ -1,0 +1,23 @@
+schemaVersion: 1
+pack: workspace/tool-image-generator
+version: 2026-08
+slots:
+  - id: navigation-header
+    required: true
+    description: Shared generator navigation.
+  - id: prompt-input
+    required: true
+    description: Prompt or source intake.
+  - id: generation-options
+    required: true
+    description: Style and generation settings.
+  - id: primary-action
+    required: true
+    description: Generate action.
+  - id: processing-feedback
+    required: true
+    description: Loading or recovery status.
+  - id: result-gallery
+    required: true
+    description: Generated result selection.
+

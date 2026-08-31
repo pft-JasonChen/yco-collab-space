@@ -1,0 +1,28 @@
+schemaVersion: 1
+id: marketing/product-page
+version: 2026-08
+kind: surface
+status: provisional
+shell: marketing
+zones:
+  - id: navigation
+    required: true
+    description: Product navigation and account entry.
+  - id: feature-hero
+    required: true
+    description: Feature value, primary action and optional temporary demo.
+  - id: use-cases
+    required: true
+    description: Product use cases or benefits.
+  - id: conversion-action
+    required: true
+    description: Final primary action before the footer.
+  - id: footer
+    required: true
+    description: Shared marketing footer.
+responsivePriority:
+  - Preserve the value proposition and primary action before supporting proof.
+  - Stack marketing sections without changing their information order.
+decisionBasis:
+  - Product pages explain one feature and lead the user toward a tool or conversion action.
+

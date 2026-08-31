@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "pack": "marketing/product-page",
+  "version": "2026-08",
+  "sourceCatalog": "legacy-yco-surface-taxonomy",
+  "evidenceStatus": "requires-current-production-capture",
+  "capturedAt": null,
+  "figma": null,
+  "decisionBasis": [
+    "This provisional pack preserves the legacy product-page hierarchy while current visual evidence is collected."
+  ]
+}
+

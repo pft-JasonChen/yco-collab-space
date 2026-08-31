@@ -1,0 +1,16 @@
+schemaVersion: 1
+pack: workspace/tool-photo-editing
+version: 2026-08
+visualReview:
+  status: human-required
+  dimensions:
+    - workspace-hierarchy
+    - canvas-priority
+    - responsive-composition
+structuralAnchors:
+  - navigation
+  - tool-navigation
+  - inspector
+  - image-canvas
+  - canvas-controls
+

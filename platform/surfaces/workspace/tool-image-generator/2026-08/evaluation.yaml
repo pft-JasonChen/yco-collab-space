@@ -1,0 +1,15 @@
+schemaVersion: 1
+pack: workspace/tool-image-generator
+version: 2026-08
+visualReview:
+  status: human-required
+  dimensions:
+    - prompt-result-hierarchy
+    - result-comparison
+    - responsive-composition
+structuralAnchors:
+  - navigation
+  - generation-input
+  - generation-status
+  - result-gallery
+

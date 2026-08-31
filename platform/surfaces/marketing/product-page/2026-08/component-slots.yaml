@@ -1,0 +1,20 @@
+schemaVersion: 1
+pack: marketing/product-page
+version: 2026-08
+slots:
+  - id: navigation-header
+    required: true
+    description: Shared product navigation.
+  - id: feature-hero
+    required: true
+    description: Feature message and primary action.
+  - id: use-case-list
+    required: true
+    description: Repeated product use-case content.
+  - id: primary-action
+    required: true
+    description: Main conversion action.
+  - id: marketing-footer
+    required: true
+    description: Shared footer role.
+

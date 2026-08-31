@@ -1,0 +1,23 @@
+schemaVersion: 1
+pack: workspace/tool-photo-editing
+version: 2026-08
+slots:
+  - id: navigation-header
+    required: true
+    description: Shared editor navigation.
+  - id: tool-rail
+    required: true
+    description: Tool navigation role.
+  - id: settings-inspector
+    required: true
+    description: Feature controls and actions.
+  - id: media-upload
+    required: true
+    description: Local fake-media entry.
+  - id: image-result
+    required: true
+    description: Image preview or comparison result.
+  - id: primary-action
+    required: true
+    description: Main feature action.
+

@@ -1,12 +1,12 @@
 schemaVersion: 1
-feature: factory-readiness
-route: /features/factory-readiness/
+feature: collab-space-readiness
+route: /features/collab-space-readiness/
 checks:
   - id: initial-draft
     criterion: P0-001
     assertions:
       - type: visible
-        selector: "[data-testid='factory-readiness-page']"
+        selector: "[data-testid='collab-space-readiness-page']"
       - type: text
         selector: "[data-testid='feature-status']"
         value: Draft

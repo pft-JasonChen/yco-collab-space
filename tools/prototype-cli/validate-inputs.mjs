@@ -11,6 +11,16 @@ import {
   readYaml,
   requestedFeature,
 } from './project.mjs';
+import {
+  acceptanceCoverageErrors,
+  missingMarkdownSections,
+  requiredDecisionSections,
+  requiredIntakeSections,
+} from './intake-policy.mjs';
+import {
+  resolveSurfaceContext,
+  surfacePackRelativeRoot,
+} from './surface-policy.mjs';
 
 const ajv = new Ajv({ allErrors: true, strict: false });
 const contractSchema = await readJson(
@@ -19,9 +29,18 @@ const contractSchema = await readJson(
 const validationSchema = await readJson(
   'tools/prototype-cli/schemas/validation.schema.json',
 );
+const surfaceIntentSchema = await readJson(
+  'tools/prototype-cli/schemas/surface-intent.schema.json',
+);
+const surfacePackSchema = await readJson(
+  'tools/prototype-cli/schemas/surface-pack.schema.json',
+);
 const validateContract = ajv.compile(contractSchema);
 const validateValidation = ajv.compile(validationSchema);
+const validateSurfaceIntent = ajv.compile(surfaceIntentSchema);
+const validateSurfacePack = ajv.compile(surfacePackSchema);
 const config = await readJson('prototype.config.json');
+const intakeOnly = process.argv.includes('--intake-only');
 
 async function validateFeature(feature) {
   const errors = [];
@@ -31,6 +50,9 @@ async function validateFeature(feature) {
   );
   const validation = await readYaml(
     path.join('features', feature, 'product', 'validation.yaml'),
+  );
+  const surfaceIntent = await readYaml(
+    path.join('features', feature, 'product', 'surface-intent.yaml'),
   );
   const gaps = await readYaml(
     path.join('features', feature, 'design', 'design-gaps.yaml'),
@@ -48,6 +70,13 @@ async function validateFeature(feature) {
     );
   }
 
+  if (!validateSurfaceIntent(surfaceIntent)) {
+    errors.push(
+      'surface-intent.yaml: ' +
+        formatSchemaErrors(validateSurfaceIntent.errors),
+    );
+  }
+
   if (errors.length > 0) {
     return errors;
   }
@@ -57,6 +86,14 @@ async function validateFeature(feature) {
 
   if (contract.feature.slug !== feature) {
     errors.push('Contract slug does not match folder: ' + feature);
+  }
+
+  if (contract.feature.intakeStatus !== 'confirmed') {
+    errors.push('Intake is not confirmed by PM. Run prototype-intake first.');
+  }
+
+  if (surfaceIntent.feature !== feature) {
+    errors.push('surface-intent.yaml feature does not match folder: ' + feature);
   }
 
   if (contract.feature.entryRoute !== expectedRoute) {
@@ -85,17 +122,58 @@ async function validateFeature(feature) {
     }
   }
 
-  const acceptanceIds = new Set(
-    contract.acceptance.map((criterion) => criterion.id),
-  );
+  errors.push(...acceptanceCoverageErrors(contract, validation));
 
-  for (const check of validation.checks) {
-    if (!acceptanceIds.has(check.criterion)) {
+  const intakePath = path.join(productRoot, 'intake.md');
+  const decisionsPath = path.join(productRoot, 'decisions.md');
+
+  for (const [filePath, requiredSections] of [
+    [intakePath, requiredIntakeSections],
+    [decisionsPath, requiredDecisionSections],
+  ]) {
+    if (!(await pathExists(filePath))) {
+      errors.push('Missing Intake source file: ' + path.basename(filePath));
+      continue;
+    }
+
+    const source = await fs.readFile(filePath, 'utf8');
+    const missingSections = missingMarkdownSections(source, requiredSections);
+
+    if (missingSections.length > 0) {
       errors.push(
-        'Validation check references unknown criterion: ' + check.criterion,
+        path.basename(filePath) +
+          ' is missing sections: ' +
+          missingSections.join(', '),
       );
     }
   }
+
+  const packReferences = [
+    surfaceIntent.primaryPack,
+    ...surfaceIntent.borrowedPacks,
+  ].filter(Boolean);
+
+  for (const reference of packReferences) {
+    const manifestPath = path.join(
+      surfacePackRelativeRoot(reference),
+      'surface.yaml',
+    );
+
+    if (!(await pathExists(fromRoot(manifestPath)))) {
+      continue;
+    }
+
+    const manifest = await readYaml(manifestPath);
+
+    if (!validateSurfacePack(manifest)) {
+      errors.push(
+        manifestPath + ': ' + formatSchemaErrors(validateSurfacePack.errors),
+      );
+    }
+  }
+
+  const surfaceResult = await resolveSurfaceContext(feature);
+  errors.push(...surfaceResult.errors);
 
   for (const mock of contract.mocks) {
     const mockPath = path.join(productRoot, mock);
@@ -116,35 +194,52 @@ async function validateFeature(feature) {
     errors.push('design-gaps.yaml must identify the feature and contain gaps.');
   }
 
-  const generatedFeature = fromRoot(
-    'features',
-    feature,
-    'generated',
-    'feature.jsx',
-  );
-  const generationMetadataPath = fromRoot(
-    'features',
-    feature,
-    'generated',
-    'generation.json',
-  );
-
-  if (!(await pathExists(generatedFeature))) {
-    errors.push('Generated feature.jsx is missing. Run prototype-update.');
-  }
-
-  if (!(await pathExists(generationMetadataPath))) {
-    errors.push('generation.json is missing. Run prototype:record after generation.');
-  } else {
-    const generation = JSON.parse(
-      await fs.readFile(generationMetadataPath, 'utf8'),
+  if (!intakeOnly) {
+    const generatedFeature = fromRoot(
+      'features',
+      feature,
+      'generated',
+      'feature.jsx',
     );
-    const currentInputHash = await hashFeatureInputs(feature);
+    const generationMetadataPath = fromRoot(
+      'features',
+      feature,
+      'generated',
+      'generation.json',
+    );
 
-    if (generation.inputHash !== currentInputHash) {
+    if (!(await pathExists(generatedFeature))) {
+      errors.push('Generated feature.jsx is missing. Run prototype-update.');
+    }
+
+    if (!(await pathExists(generationMetadataPath))) {
       errors.push(
-        'Generated code is stale because product or design inputs changed.',
+        'generation.json is missing. Run prototype:record after generation.',
       );
+    } else {
+      const generation = JSON.parse(
+        await fs.readFile(generationMetadataPath, 'utf8'),
+      );
+      const currentInputHash = await hashFeatureInputs(feature);
+
+      if (generation.inputHash !== currentInputHash) {
+        errors.push(
+          'Generated code is stale because product or design inputs changed.',
+        );
+      }
+
+      if (generation.schemaVersion !== 2) {
+        errors.push(
+          'generation.json must be regenerated with Phase 0.5 metadata.',
+        );
+      } else if (
+        surfaceResult.context &&
+        generation.surface?.contextHash !== surfaceResult.context.contextHash
+      ) {
+        errors.push(
+          'Generated code is stale because Surface context changed.',
+        );
+      }
     }
   }
 
@@ -163,14 +258,22 @@ for (const feature of features) {
   } else {
     const inputHash = await hashFeatureInputs(feature);
     process.stdout.write(
-      '[inputs] PASS ' + feature + ' ' + inputHash.slice(0, 12) + '\n',
+      (intakeOnly ? '[intake] PASS ' : '[inputs] PASS ') +
+        feature +
+        ' ' +
+        inputHash.slice(0, 12) +
+        '\n',
     );
   }
 }
 
 if (failures.length > 0) {
   for (const failure of failures) {
-    process.stderr.write('[inputs] FAIL ' + failure.feature + '\n');
+    process.stderr.write(
+      (intakeOnly ? '[intake] FAIL ' : '[inputs] FAIL ') +
+        failure.feature +
+        '\n',
+    );
     for (const error of failure.errors) {
       process.stderr.write('  - ' + error + '\n');
     }

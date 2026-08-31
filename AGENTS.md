@@ -1,4 +1,4 @@
-# AGENTS.md — YCO Prototype Factory
+# AGENTS.md — YCO Collab Space
 
 This repository generates reviewable React prototypes from PM-owned product inputs and,
 later, Designer-owned Figma and token inputs.
@@ -6,10 +6,12 @@ later, Designer-owned Figma and token inputs.
 ## Read first
 
 1. Read `prototype.config.json`.
-2. Read the target feature's `product/prd.md`,
-   `product/prototype.contract.yaml` and `product/validation.yaml`.
+2. Read the target feature's `product/intake.md`, `product/prd.md`,
+   `product/prototype.contract.yaml`, `product/surface-intent.yaml`,
+   `product/decisions.md` and `product/validation.yaml`.
 3. Read `design/design-gaps.yaml`.
-4. Never infer a backend or production API from mock data.
+4. Resolve the feature's `reuse`, `hybrid` or `novel` Surface context.
+5. Never infer a backend or production API from mock data.
 
 ## Source-of-truth boundaries
 
@@ -39,10 +41,14 @@ Phase 0 documents these boundaries but does not enforce CODEOWNERS yet.
 ```bash
 npm run dev
 npm run validate
+npm run validate:intake -- --feature <feature>
 npm run build
 npm run test:rendered -- --feature <feature>
 npm run prototype:create -- <feature> "<Feature title>"
+npm run eval:workflow -- --case collab-space-readiness-regression
+npm run eval:mutations
 ```
 
-The user-facing AI workflow is `/prototype-update <feature>`. Phase 0 reserves
+The user-facing AI workflows are `/prototype-intake <feature>` and
+`/prototype-update <feature>`. Phase 0 reserves
 `/prototype-promote` but does not automate promotion.

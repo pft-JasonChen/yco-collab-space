@@ -5,7 +5,7 @@ import styles from './App.module.scss';
 function FeatureIndex() {
   return (
     <main className={styles.index}>
-      <p className="text-uppercase text-bold">YCO Prototype Factory</p>
+      <p className="text-uppercase text-bold">YCO Collab Space</p>
       <h1 className="text-heading-1 text-bold">Available prototype features</h1>
       <p className="text-small text-regular">
         Every page is a static prototype that uses synthetic data only.

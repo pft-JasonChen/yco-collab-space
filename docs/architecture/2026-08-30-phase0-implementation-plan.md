@@ -1,11 +1,11 @@
-# YCO Prototype Factory — Phase 0 implementation plan
+# YCO Collab Space — Phase 0 implementation plan
 
 > **Plan status:** approved; implementation in progress.
 >
 > **Target:** make the next PM prototype eligible to run through the new repository
 > by 2026-09-01, provided the cutover gate passes.
 >
-> **Architecture:** [2026-08-30-prototype-factory-architecture.md](./2026-08-30-prototype-factory-architecture.md)
+> **Architecture:** [2026-08-30-collab-space-architecture.md](./2026-08-30-collab-space-architecture.md)
 
 ## Implementation checkpoint — 2026-08-30
 
@@ -33,7 +33,7 @@ configured viewports.
 
 ## 1. Objective
 
-Create the smallest complete vertical slice of `yco-prototype-factory` that lets PM:
+Create the smallest complete vertical slice of `yco-collab-space` that lets PM:
 
 1. provide a PRD, approved structured contract, validation and fake data;
 2. ask an AI agent to generate a temporary React prototype;
@@ -53,7 +53,7 @@ Phase 0 is done only when all of the following are true:
 
 - A standalone local repository exists at:
 
-  `/Users/jasonchen/Documents/Claude/Projects/yco-prototype-factory`
+  `/Users/jasonchen/Documents/Claude/Projects/yco-collab-space`
 
 - It is linked to a private GitHub repository.
 - Vite builds a React and JavaScript prototype using SCSS Modules.
@@ -131,7 +131,7 @@ initially Claude-first with Codex compatibility.
 The implementation should begin with this minimum shape:
 
 ```text
-yco-prototype-factory/
+yco-collab-space/
 ├── AGENTS.md
 ├── README.md
 ├── package.json
@@ -431,7 +431,7 @@ Actions:
 **Cutover decision:**
 
 - If every Phase 0 Definition of Done item passes, all later new features start in
-  `yco-prototype-factory`.
+  `yco-collab-space`.
 - If any blocking item remains on 2026-09-01, the immediate feature uses the legacy
   workflow and is explicitly marked transition work.
 - Do not freeze the legacy repository until a real new-repo pilot passes.
@@ -499,7 +499,25 @@ design decisions must produce explicit gaps, not block a temporary PM prototype.
 
 ---
 
-## 10. Phase 1 and later backlog
+## 10. Phase 0.5 before the first real-feature pilot
+
+Before treating the first real feature as a normal production run, complete the
+approved parts of
+[`2026-08-31-phase0.5-intake-surface-evaluation-plan.md`](./2026-08-31-phase0.5-intake-surface-evaluation-plan.md):
+
+1. add the Intake／需求訪談 workflow and keep it separate from generation;
+2. support `reuse`, `hybrid` and non-blocking `novel` surface strategies;
+3. let PM edit and approve the
+   [Surface Pack catalog draft](../surfaces/surface-pack-catalog-draft.md);
+4. add workflow-level evaluation and mutation tests;
+5. run the first real feature as the cutover pilot.
+
+The pilot may use a feature-specific novel surface. It does not need an existing
+Surface Pack to reach PM review.
+
+---
+
+## 11. Phase 1 and later backlog
 
 After the pilot succeeds:
 
@@ -518,7 +536,7 @@ After the pilot succeeds:
 
 ---
 
-## 11. Approval gate before implementation
+## 12. Approval gate before implementation
 
 No implementation should begin until PM reviews this plan and confirms:
 

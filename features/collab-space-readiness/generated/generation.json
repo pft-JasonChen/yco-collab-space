@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 2,
+  "feature": "collab-space-readiness",
+  "inputHash": "66898bd1b7271afc8604c8932ec4e80dffe9404ffbf96cc5e9bd4f2fae89425f",
+  "generatorInstructionsVersion": "phase0.5-v1",
+  "adapter": "repository-rename",
+  "model": "not-recorded",
+  "generatedAt": "2026-08-31T04:17:46.467Z",
+  "files": [
+    "feature.jsx",
+    "feature.module.scss"
+  ],
+  "surface": {
+    "strategy": "novel",
+    "temporary": true,
+    "primaryPack": null,
+    "borrowedPacks": [],
+    "requiredZones": [
+      "readiness-status",
+      "readiness-inputs",
+      "readiness-actions"
+    ],
+    "requiredComponentRoles": [
+      "status-summary",
+      "readiness-list",
+      "primary-action"
+    ],
+    "responsivePriority": [
+      "Keep the readiness status and primary action visible before supporting details."
+    ],
+    "visualReview": "human-required",
+    "contextHash": "79ef9de35276a798858ceb75423d8f02bd354a16ec403f928500e4a7f63f1355",
+    "sourceFiles": []
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "pack": "workspace/tool-video",
+  "version": "2026-08",
+  "sourceCatalog": "legacy-yco-surface-taxonomy",
+  "evidenceStatus": "requires-current-production-capture",
+  "capturedAt": null,
+  "figma": null,
+  "decisionBasis": [
+    "This provisional pack captures stable video workflow roles without claiming final visual parity."
+  ]
+}
+

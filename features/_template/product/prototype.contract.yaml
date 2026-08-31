@@ -4,6 +4,7 @@ feature:
   title: __FEATURE_TITLE__
   stage: pm-draft
   entryRoute: /features/__FEATURE_SLUG__/
+  intakeStatus: draft
 design:
   status: temporary
   reference: null

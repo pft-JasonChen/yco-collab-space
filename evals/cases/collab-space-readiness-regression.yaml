@@ -1,0 +1,10 @@
+schemaVersion: 1
+id: collab-space-readiness-regression
+suite: regression
+feature: collab-space-readiness
+trials: 1
+rendered: true
+expectedSurfaceStrategy: novel
+decisionBasis:
+  - This fixture exercises confirmed Intake, novel surface context, generation provenance and rendered validation together.
+

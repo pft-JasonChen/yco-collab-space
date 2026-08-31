@@ -34,5 +34,5 @@ for (const file of await walkFiles(targetRoot)) {
 process.stdout.write(
   'Created features/' +
     slug +
-    '. Review product/prototype.contract.yaml before generation.\n',
+    '. Run prototype-intake and confirm PM inputs before generation.\n',
 );

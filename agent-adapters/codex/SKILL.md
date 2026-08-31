@@ -1,6 +1,6 @@
 ---
 name: prototype-update
-description: Generate or update one feature in yco-prototype-factory from approved PM inputs, then run deterministic and rendered validation.
+description: Generate or update one feature in yco-collab-space from approved PM inputs, then run deterministic and rendered validation.
 ---
 
 # Prototype update

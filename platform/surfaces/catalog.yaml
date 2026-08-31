@@ -1,0 +1,67 @@
+schemaVersion: 1
+entries:
+  - id: marketing/home-anonymous
+    kind: surface
+    status: planned
+  - id: marketing/home-authenticated
+    kind: surface
+    status: planned
+  - id: marketing/product-page
+    kind: surface
+    status: provisional
+    defaultVersion: 2026-08
+  - id: developer/api-product
+    kind: surface
+    status: planned
+  - id: developer/api-product-search
+    kind: surface
+    status: planned
+  - id: workspace/tool-photo-editing
+    kind: surface
+    status: provisional
+    defaultVersion: 2026-08
+  - id: workspace/tool-ai-portrait
+    kind: surface
+    status: planned
+  - id: workspace/tool-image-generator
+    kind: surface
+    status: provisional
+    defaultVersion: 2026-08
+  - id: workspace/tool-video
+    kind: surface
+    status: provisional
+    defaultVersion: 2026-08
+  - id: workspace/tool-ai-agent
+    kind: surface
+    status: planned
+  - id: library/gallery
+    kind: surface
+    status: planned
+  - id: commerce/pricing-page
+    kind: surface
+    status: planned
+  - id: commerce/pricing-overlay
+    kind: module
+    status: planned
+  - id: commerce/checkout
+    kind: surface
+    status: planned
+  - id: account/member
+    kind: surface
+    status: planned
+  - id: account/auth
+    kind: surface
+    status: planned
+  - id: content/whats-new
+    kind: module
+    status: planned
+  - id: content/promo-banner
+    kind: module
+    status: planned
+  - id: content/seasonal-skin
+    kind: module
+    status: planned
+  - id: content/marketing-grid
+    kind: module
+    status: planned
+

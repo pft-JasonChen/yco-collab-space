@@ -2,6 +2,10 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { normaliseFeatureSlug } from './project.mjs';
 import {
+  acceptanceCoverageErrors,
+  missingMarkdownSections,
+} from './intake-policy.mjs';
+import {
   extractTokenDefinitions,
   extractTokenReferences,
   findRawColours,
@@ -30,4 +34,31 @@ test('token policy finds raw colours', () => {
 test('network policy detects client request APIs', () => {
   assert.deepEqual(findNetworkApis('fetch("/api/example")'), ['fetch']);
   assert.deepEqual(findNetworkApis('const data = localMock;'), []);
+});
+
+test('intake policy finds missing required sections', () => {
+  const missing = missingMarkdownSections(
+    '# Feature\n\n## Problem\n\nExample\n',
+    ['Problem', 'Review goal'],
+  );
+
+  assert.deepEqual(missing, ['Review goal']);
+});
+
+test('acceptance coverage requires every criterion to have a check', () => {
+  const errors = acceptanceCoverageErrors(
+    {
+      acceptance: [
+        { id: 'AC-001' },
+        { id: 'AC-002' },
+      ],
+    },
+    {
+      checks: [{ criterion: 'AC-001' }],
+    },
+  );
+
+  assert.deepEqual(errors, [
+    'Acceptance criterion has no executable validation check: AC-002',
+  ]);
 });

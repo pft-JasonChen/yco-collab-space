@@ -1,0 +1,23 @@
+schemaVersion: 1
+pack: workspace/tool-video
+version: 2026-08
+slots:
+  - id: navigation-header
+    required: true
+    description: Shared video-tool navigation.
+  - id: media-upload
+    required: true
+    description: Local fake-video entry.
+  - id: video-settings
+    required: true
+    description: Feature controls.
+  - id: primary-action
+    required: true
+    description: Main video action.
+  - id: processing-feedback
+    required: true
+    description: Progress and recovery.
+  - id: video-player
+    required: true
+    description: Result playback role.
+

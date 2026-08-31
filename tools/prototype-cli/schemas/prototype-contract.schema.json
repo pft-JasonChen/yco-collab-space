@@ -18,7 +18,7 @@
     "feature": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["slug", "title", "stage", "entryRoute"],
+      "required": ["slug", "title", "stage", "entryRoute", "intakeStatus"],
       "properties": {
         "slug": {
           "type": "string",
@@ -34,6 +34,9 @@
         "entryRoute": {
           "type": "string",
           "pattern": "^/features/[a-z0-9-]+/$"
+        },
+        "intakeStatus": {
+          "enum": ["draft", "confirmed"]
         }
       }
     },

@@ -1,0 +1,21 @@
+schemaVersion: 1
+feature: collab-space-readiness
+strategy: novel
+temporary: true
+primaryPack: null
+borrowedPacks: []
+layoutIntent:
+  zones:
+    - readiness-status
+    - readiness-inputs
+    - readiness-actions
+  componentRoles:
+    - status-summary
+    - readiness-list
+    - primary-action
+  responsivePriority:
+    - Keep the readiness status and primary action visible before supporting details.
+deviations: []
+decisionBasis:
+  - This internal fixture has no matching product surface and should remain feature-specific.
+

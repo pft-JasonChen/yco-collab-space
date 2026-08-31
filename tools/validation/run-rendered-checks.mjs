@@ -8,6 +8,7 @@ import {
   readJson,
   readYaml,
 } from '../prototype-cli/project.mjs';
+import { resolveSurfaceContext } from '../prototype-cli/surface-policy.mjs';
 
 function cliFeature() {
   const index = process.argv.indexOf('--feature');
@@ -40,8 +41,40 @@ async function waitForServer(url, child) {
 }
 
 async function applyStep(page, step) {
+  const locator = page.locator(step.selector);
+
   if (step.action === 'click') {
-    await page.locator(step.selector).click();
+    await locator.click();
+    return;
+  }
+
+  if (step.action === 'fill') {
+    await locator.fill(String(step.value));
+    return;
+  }
+
+  if (step.action === 'select') {
+    await locator.selectOption(String(step.value));
+    return;
+  }
+
+  if (step.action === 'check') {
+    await locator.check();
+    return;
+  }
+
+  if (step.action === 'uncheck') {
+    await locator.uncheck();
+    return;
+  }
+
+  if (step.action === 'press') {
+    await locator.press(String(step.value));
+    return;
+  }
+
+  if (step.action === 'hover') {
+    await locator.hover();
     return;
   }
 
@@ -54,6 +87,13 @@ async function applyAssertion(page, assertion) {
   if (assertion.type === 'visible') {
     if (!(await locator.isVisible())) {
       throw new Error('Expected visible: ' + assertion.selector);
+    }
+    return;
+  }
+
+  if (assertion.type === 'hidden') {
+    if (!(await locator.isHidden())) {
+      throw new Error('Expected hidden: ' + assertion.selector);
     }
     return;
   }
@@ -104,7 +144,72 @@ async function applyAssertion(page, assertion) {
     return;
   }
 
+  if (assertion.type === 'value') {
+    const value = await locator.inputValue();
+    if (value !== String(assertion.value)) {
+      throw new Error(
+        'Expected value "' +
+          assertion.value +
+          '" on ' +
+          assertion.selector +
+          ', received "' +
+          value +
+          '"',
+      );
+    }
+    return;
+  }
+
+  if (assertion.type === 'checked') {
+    const checked = await locator.isChecked();
+    if (checked !== Boolean(assertion.value)) {
+      throw new Error(
+        'Expected checked=' +
+          Boolean(assertion.value) +
+          ' on ' +
+          assertion.selector,
+      );
+    }
+    return;
+  }
+
   throw new Error('Unsupported assertion type: ' + assertion.type);
+}
+
+async function assertNoHorizontalOverflow(page, viewport) {
+  const dimensions = await page.evaluate(() => ({
+    clientWidth: document.documentElement.clientWidth,
+    scrollWidth: document.documentElement.scrollWidth,
+  }));
+
+  if (dimensions.scrollWidth > dimensions.clientWidth + 1) {
+    throw new Error(
+      'Horizontal overflow at ' +
+        viewport.name +
+        ': scrollWidth=' +
+        dimensions.scrollWidth +
+        ', clientWidth=' +
+        dimensions.clientWidth,
+    );
+  }
+}
+
+async function assertSurfaceStructure(page, surface) {
+  for (const zone of surface.requiredZones) {
+    const selector = '[data-surface-zone="' + zone + '"]';
+
+    if (!(await page.locator(selector).isVisible())) {
+      throw new Error('Missing required surface zone: ' + zone);
+    }
+  }
+
+  for (const role of surface.requiredComponentRoles) {
+    const selector = '[data-component-role~="' + role + '"]';
+
+    if (!(await page.locator(selector).isVisible())) {
+      throw new Error('Missing required component role: ' + role);
+    }
+  }
 }
 
 function reportMarkdown(feature, baseUrl, results) {
@@ -142,6 +247,15 @@ const config = await readJson('prototype.config.json');
 const validation = await readYaml(
   path.join('features', feature, 'product', 'validation.yaml'),
 );
+const surfaceResult = await resolveSurfaceContext(feature);
+
+if (surfaceResult.errors.length > 0 || !surfaceResult.context) {
+  throw new Error(
+    'Surface context cannot be rendered:\n' + surfaceResult.errors.join('\n'),
+  );
+}
+
+const surface = surfaceResult.context;
 const host = config.server.host;
 const port = config.server.previewPort;
 const baseUrl = 'http://' + host + ':' + port;
@@ -198,6 +312,59 @@ try {
       }
     });
 
+    const surfaceScreenshotName =
+      viewport.name + '-surface-structure.png';
+    const surfaceScreenshotPath = path.join(
+      screenshotRoot,
+      surfaceScreenshotName,
+    );
+    let surfacePassed = true;
+    let surfaceError = null;
+
+    try {
+      const response = await page.goto(routeUrl, {
+        waitUntil: 'networkidle',
+      });
+
+      if (!response?.ok()) {
+        throw new Error('HTTP navigation failed: ' + response?.status());
+      }
+
+      await assertSurfaceStructure(page, surface);
+      await assertNoHorizontalOverflow(page, viewport);
+
+      if (consoleErrors.length > 0) {
+        throw new Error('Console errors: ' + consoleErrors.join('; '));
+      }
+
+      if (pageErrors.length > 0) {
+        throw new Error('Page errors: ' + pageErrors.join('; '));
+      }
+
+      if (unexpectedRequests.length > 0) {
+        throw new Error(
+          'Unexpected network requests: ' + unexpectedRequests.join('; '),
+        );
+      }
+    } catch (caughtError) {
+      surfacePassed = false;
+      surfaceError = caughtError.message;
+    }
+
+    await page.screenshot({
+      path: surfaceScreenshotPath,
+      fullPage: true,
+    });
+
+    results.push({
+      viewport: viewport.name,
+      check: 'surface-structure',
+      criterion: 'surface:' + surface.strategy,
+      passed: surfacePassed,
+      error: surfaceError,
+      screenshot: 'screenshots/' + surfaceScreenshotName,
+    });
+
     for (const check of validation.checks) {
       const errorStart = {
         console: consoleErrors.length,
@@ -226,6 +393,8 @@ try {
         for (const assertion of check.assertions) {
           await applyAssertion(page, assertion);
         }
+
+        await assertNoHorizontalOverflow(page, viewport);
 
         const newConsoleErrors = consoleErrors.slice(errorStart.console);
         const newPageErrors = pageErrors.slice(errorStart.page);
@@ -276,11 +445,18 @@ try {
 }
 
 const report = {
-  schemaVersion: 1,
+  schemaVersion: 2,
   feature,
   baseUrl,
   generatedAt: new Date().toISOString(),
   passed: results.every((result) => result.passed),
+  surface: {
+    strategy: surface.strategy,
+    primaryPack: surface.primaryPack,
+    borrowedPacks: surface.borrowedPacks,
+    contextHash: surface.contextHash,
+    visualReview: surface.visualReview,
+  },
   results,
 };
 

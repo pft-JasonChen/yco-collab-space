@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "pack": "workspace/tool-image-generator",
+  "version": "2026-08",
+  "sourceCatalog": "legacy-yco-surface-taxonomy",
+  "evidenceStatus": "requires-current-production-capture",
+  "capturedAt": null,
+  "figma": null,
+  "decisionBasis": [
+    "This provisional pack captures the stable generator workflow while leaving feature controls open."
+  ]
+}
+

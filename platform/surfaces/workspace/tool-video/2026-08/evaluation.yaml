@@ -1,0 +1,15 @@
+schemaVersion: 1
+pack: workspace/tool-video
+version: 2026-08
+visualReview:
+  status: human-required
+  dimensions:
+    - playback-priority
+    - progress-clarity
+    - responsive-composition
+structuralAnchors:
+  - navigation
+  - video-input
+  - video-status
+  - video-result
+

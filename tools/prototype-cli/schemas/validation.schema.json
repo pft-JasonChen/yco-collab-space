@@ -39,25 +39,15 @@
               "required": ["action", "selector"],
               "properties": {
                 "action": {
-                  "enum": ["click"]
-                },
-                "selector": {
-                  "type": "string",
-                  "minLength": 1
-                }
-              }
-            }
-          },
-          "assertions": {
-            "type": "array",
-            "minItems": 1,
-            "items": {
-              "type": "object",
-              "additionalProperties": false,
-              "required": ["type", "selector"],
-              "properties": {
-                "type": {
-                  "enum": ["visible", "text", "count", "attribute"]
+                  "enum": [
+                    "click",
+                    "fill",
+                    "select",
+                    "check",
+                    "uncheck",
+                    "press",
+                    "hover"
+                  ]
                 },
                 "selector": {
                   "type": "string",
@@ -70,6 +60,62 @@
                     },
                     {
                       "type": "number"
+                    },
+                    {
+                      "type": "boolean"
+                    }
+                  ]
+                }
+              },
+              "allOf": [
+                {
+                  "if": {
+                    "properties": {
+                      "action": {
+                        "enum": ["fill", "select", "press"]
+                      }
+                    }
+                  },
+                  "then": {
+                    "required": ["value"]
+                  }
+                }
+              ]
+            }
+          },
+          "assertions": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["type", "selector"],
+              "properties": {
+                "type": {
+                  "enum": [
+                    "visible",
+                    "hidden",
+                    "text",
+                    "count",
+                    "attribute",
+                    "value",
+                    "checked"
+                  ]
+                },
+                "selector": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "value": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "boolean"
                     }
                   ]
                 },
@@ -77,7 +123,33 @@
                   "type": "string",
                   "minLength": 1
                 }
-              }
+              },
+              "allOf": [
+                {
+                  "if": {
+                    "properties": {
+                      "type": {
+                        "enum": ["text", "count", "value", "checked"]
+                      }
+                    }
+                  },
+                  "then": {
+                    "required": ["value"]
+                  }
+                },
+                {
+                  "if": {
+                    "properties": {
+                      "type": {
+                        "const": "attribute"
+                      }
+                    }
+                  },
+                  "then": {
+                    "required": ["name", "value"]
+                  }
+                }
+              ]
             }
           }
         }
