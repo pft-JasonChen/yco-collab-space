@@ -26,6 +26,7 @@ import {
   resourceProvenanceErrors,
   tokenProvenanceErrors,
 } from './resource-provenance.mjs';
+import { sharedComponentProvenanceErrors } from '../design-library/component-provenance.mjs';
 
 const ajv = new Ajv({ allErrors: true, strict: false });
 const contractSchema = await readJson(
@@ -264,6 +265,9 @@ async function validateFeature(feature) {
       if (generation.schemaVersion === 3) {
         errors.push(...(await resourceProvenanceErrors(generation.resources)));
         errors.push(...(await tokenProvenanceErrors(generation.tokens)));
+        if (generation.components !== undefined) {
+          errors.push(...(await sharedComponentProvenanceErrors(feature, generation.components)));
+        }
       }
     }
   }

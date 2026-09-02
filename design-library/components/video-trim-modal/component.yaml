@@ -1,0 +1,92 @@
+schemaVersion: 1
+id: video-trim-modal
+displayName: Video Trim Modal
+classification: composite
+status: pilot-approved
+rd:
+  sourcePackage: youcam-enhance-frontend
+  sourceVersion: 1.34.1
+  snapshot: yce-frontend-gm-260909
+  sourcePaths:
+    - src/components/ai-agent-page/components/video-trim-modal/index.js
+    - src/components/ai-agent-page/components/video-trim-modal/index.module.scss
+    - src/components/ai-agent-page/components/video-trim-modal/constants.js
+    - src/components/ai-agent-page/components/video-trim-modal/use-video-trim.js
+    - src/components/ai-agent-page/components/video-trim-modal/use-trim-drag.js
+    - src/components/ai-agent-page/components/video-trim-modal/use-frame-thumbnails.js
+    - src/components/ai-agent-page/components/video-trim-modal/trim-video-preview.js
+    - src/components/ai-agent-page/components/video-trim-modal/trim-timeline.js
+    - public/assets/images/objRemVidV2/models/YCE_default_model_before-1.mp4
+    - public/assets/images/objRemVidV2/models/YCE_default_model_thumb-1.jpg
+  sourceHashes:
+    - path: src/components/ai-agent-page/components/video-trim-modal/index.js
+      sha256: 0f81dcdae8a0df7419144776f9ddc2de55fadc258b75b8acbf9e8c342818d8e9
+    - path: src/components/ai-agent-page/components/video-trim-modal/index.module.scss
+      sha256: bfc688c6081afb0014d64cf6429a81b8f316e74f4a7d493b750ba5c55de94764
+    - path: src/components/ai-agent-page/components/video-trim-modal/constants.js
+      sha256: bfee24bb2833d8de467f0a14b2d9711a0764abfbf032a72a26ab65d677c0387c
+    - path: src/components/ai-agent-page/components/video-trim-modal/use-video-trim.js
+      sha256: e3558fc382504aa1f3688f9c890b132948b8085c01c6daa00ffe31e2a20f8ad6
+    - path: src/components/ai-agent-page/components/video-trim-modal/use-trim-drag.js
+      sha256: 1b00974a078cdc989eb9ce9cf9e69e9180c315962cd0313ef4d8ee74b7225efc
+    - path: src/components/ai-agent-page/components/video-trim-modal/use-frame-thumbnails.js
+      sha256: c6b4c8ff4977e6f7c9e232b484ecdda552e26066c4aa5dedb5a59e5fda7e5cca
+    - path: src/components/ai-agent-page/components/video-trim-modal/trim-video-preview.js
+      sha256: ce071fdebb26ba356c17bdebaea25e5b5ab26dea1fd0802b3b3dd951c05a9c74
+    - path: src/components/ai-agent-page/components/video-trim-modal/trim-timeline.js
+      sha256: 1b1db17f30478edac40d71e7c833821c3894d788e8cb7614337ecdf402721f50
+    - path: public/assets/images/objRemVidV2/models/YCE_default_model_before-1.mp4
+      sha256: eded2028375909de25a4ba2a1a7e31912ce9b8e2313cdf886e6f51d2eaf437e8
+    - path: public/assets/images/objRemVidV2/models/YCE_default_model_thumb-1.jpg
+      sha256: 49ba37be8715be940d42bf9a719940dbf7527c35ded1f2b5bdf9eb0628034f83
+figma:
+  status: pending
+  fileKey: null
+  componentSetNodeId: null
+  variants: []
+implementation:
+  importPath: platform/ui/video-trim-modal/index.js
+  storyId: ui-video-trim-modal
+  framework: react
+  dependencies: [react, react-dom, mediabunny]
+  removedDependencies: [shared-modal, i18n, production-scroll-lock, production-object-url]
+publicApi:
+  props:
+    - name: opened
+      required: true
+    - name: videoFile
+      required: false
+    - name: videoUrl
+      required: false
+    - name: fallbackThumbnailUrl
+      required: false
+    - name: maximumSeconds
+      required: false
+    - name: minimumSeconds
+      required: false
+    - name: durationOverride
+      required: false
+    - name: labels
+      required: false
+    - name: onCancel
+      required: false
+    - name: onConfirm
+      required: false
+  states: [closed, loading, ready, playing, muted, invalid-range, confirming]
+tokens:
+  lockPath: platform/tokens/tokens.lock.json
+  uses: [--background-base, --fill-brand-strong, --stroke-focus, --text-strong]
+assets:
+  - path: assets/video/rd-component-fixtures
+    usage: storybook
+review:
+  pilotApprover:
+    actor: pm
+    id: collab-space-owner
+    date: 2026-09-01
+  canonicalReview:
+    designer: pending
+    rd: pending
+decisionBasis:
+  - AI Agent supplies the closest existing trim behavior and presentation in the RD snapshot.
+  - The port keeps local media processing only and does not import production task or account behavior.

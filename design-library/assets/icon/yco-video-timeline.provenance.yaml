@@ -1,0 +1,11 @@
+schemaVersion: 1
+collection: assets/icon/yco-video-timeline
+source:
+  snapshot: yce-frontend-gm-260909
+files:
+  - name: play.svg
+    path: public/assets/images/videoObjectRemover/play2.svg
+    sha256: d9da5b483c641b4a9df8b0064ebb7f73cd61ea9dc449b934cec3410e3aea4f72
+  - name: pause.svg
+    path: public/assets/images/videoObjectRemover/pause.svg
+    sha256: c1cf17b442fde98c21b493512c08cd8b46a864521fbe96747603602e46c5e4db

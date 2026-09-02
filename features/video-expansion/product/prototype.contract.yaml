@@ -1,0 +1,137 @@
+schemaVersion: 1
+feature:
+  slug: video-expansion
+  title: Video Expansion
+  stage: pm-draft
+  entryRoute: /features/video-expansion/
+  intakeStatus: confirmed
+design:
+  status: temporary
+  reference: null
+states:
+  - id: empty
+    description: No source video is loaded and local upload is available.
+  - id: upload-error
+    description: The selected local file is unsupported or corrupt and can be replaced.
+  - id: editing
+    description: A source video is loaded in the shared uploaded-media block for trimming, ratio selection, direct canvas positioning, and playback.
+  - id: processing
+    description: A synthetic generation task is visible in the current History flow.
+  - id: history-success
+    description: A completed video thumbnail is available in History.
+  - id: history-failed
+    description: A failed History card offers Retry.
+  - id: video-detail
+    description: The shared video-information dialog is open for a completed result.
+actions:
+  - id: load-sample-video
+    from: empty
+    event: User uploads a supported video or selects the supplied sample
+    to: editing
+  - id: show-upload-error
+    from: empty
+    event: User selects an unsupported or corrupt file
+    to: upload-error
+  - id: recover-upload
+    from: upload-error
+    event: User chooses another file
+    to: empty
+  - id: update-trim
+    from: editing
+    event: User opens the shared trim dialog and adjusts the selected segment without exceeding 30 seconds
+    to: editing
+  - id: select-ratio
+    from: editing
+    event: User selects a target aspect ratio
+    to: editing
+  - id: reposition-video
+    from: editing
+    event: User drags the source directly in the canvas within the valid movement axis
+    to: editing
+  - id: control-playback
+    from: editing
+    event: User plays, pauses, or seeks the source from the canvas timeline
+    to: editing
+  - id: start-generation
+    from: editing
+    event: User selects Generate
+    to: processing
+  - id: complete-generation
+    from: processing
+    event: The synthetic task completes successfully
+    to: history-success
+  - id: fail-generation
+    from: processing
+    event: The synthetic task fails
+    to: history-failed
+  - id: retry-generation
+    from: history-failed
+    event: User selects Retry
+    to: processing
+  - id: open-video-detail
+    from: history-success
+    event: User selects the completed video thumbnail
+    to: video-detail
+  - id: use-video-expansion-next-action
+    from: video-detail
+    event: User selects Video Expansion in Next Action
+    to: editing
+mocks:
+  - mocks/video-expansion.json
+acceptance:
+  - id: VE-001
+    given: The Video Expansion route is open with no source loaded
+    when: The initial state renders
+    then: The upload entry and current Edit and History structure are visible without a network request
+  - id: VE-002
+    given: A supported source video is available
+    when: The user loads the supplied sample
+    then: The shared trim dialog accepts a segment of up to 30 seconds and the editor shows the shared uploaded-media block with a feature Trim action and duration badge, the video canvas, five target ratios, and 16:9 selected by default
+  - id: VE-003
+    given: The supplied portrait source is loaded
+    when: The user selects a ratio matching the portrait source
+    then: The target frame updates, direct four-direction canvas dragging is available, and the trim selection is preserved
+  - id: VE-004
+    given: A valid source, segment, and target ratio are selected
+    when: The user selects Generate
+    then: The RD-backed Generate action shows a synthetic cost of 10, and selecting it activates History with a synthetic processing card without deducting credits
+  - id: VE-005
+    given: The synthetic generation task completes successfully
+    when: The user selects its completed History thumbnail
+    then: The shared RD-backed video-information dialog opens over a dark backdrop and includes Video Expansion in Next Action
+  - id: VE-006
+    given: A completed result is open in the video-information dialog
+    when: The user selects Video Expansion in Next Action
+    then: The dialog closes and that result is preloaded in the Video Expansion editor
+  - id: VE-007
+    given: The feature is in the empty state
+    when: The user selects an unsupported or corrupt local file
+    then: An upload error appears and the user can return to upload another file
+  - id: VE-008
+    given: A synthetic generation task has failed in History
+    when: The user selects Retry
+    then: The failed card returns to processing without a network request
+  - id: VE-009
+    given: The supplied sample is loaded
+    when: The feature renders at a configured viewport
+    then: The inspector, uploaded-media Trim action, target-frame checkerboard, non-overlapping shared playback timeline, shared trim dialog, and Generate action remain reachable without horizontal overflow
+  - id: VE-010
+    given: A source video is loaded in any supported target ratio
+    when: The source is fitted or directly dragged inside the target canvas
+    then: Its complete visible bounds remain inside the frame and neither rendered dimension exceeds the frame
+  - id: VE-011
+    given: The Video Expansion route is open
+    when: The production-style workspace shell renders
+    then: The YouCam Online Editor header and tool-family menu are present, AI Video is selected, title information is hidden, and an inert synthetic credit balance of 436 is shown with no purchase behavior
+  - id: VE-012
+    given: A Video Expansion task is visible in History
+    when: Its History card renders
+    then: The card shows exactly one feature tag named Video Expansion and no model, engine, or ratio tag
+  - id: VE-013
+    given: A source video is loaded in the fixed canvas viewport
+    when: The user switches among supported ratios and controls playback from the timeline
+    then: The viewport height stays fixed, every complete blue ratio frame remains inside it, and the visible canvas video and timeline playback stay synchronized
+  - id: VE-014
+    given: A source video and selected trim segment are loaded in the editor
+    when: The canvas and playback timeline render
+    then: The canvas has no separate poster layer and the timeline uses ten browser-captured frames sampled evenly from the current video segment without a network request

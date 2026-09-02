@@ -1,0 +1,16 @@
+schemaVersion: 1
+collection: assets/icon/yco-video-actions
+source:
+  snapshot: yce-frontend-gm-260909
+files:
+  - { name: like-default.svg, path: public/assets/images/img2Vid/next-action/like-default.svg, sha256: b5b27e88987a0df81e947009f6fff81b2aa345d973c17fb7cb087209fb11fb9c }
+  - { name: dislike-default.svg, path: public/assets/images/img2Vid/next-action/dislike-default.svg, sha256: 702bf2b89b86e1d597b325d632fce264d79bf039885e4625b246982d1e2aa8b2 }
+  - { name: download.svg, path: public/assets/images/img2Vid/next-action/download.svg, sha256: d6ceeae58963faff01c6cee2c9cc29ce538f3dc8b860b0f1bce8a87f0b6a3d16 }
+  - { name: edit.svg, path: public/assets/images/img2Vid/next-action/edit.svg, sha256: f914e3e78f3ce54b6aca49d70f787c999b59e131b9b8b76521c7186e168a2126 }
+  - { name: video-enhancer.svg, path: public/assets/images/img2Vid/next-action/video-enhancer.svg, sha256: 3d2155f48519c756725109e88e6ff7a4b247b3b9788f2a294418afc2b0c18699 }
+  - { name: face-swap.svg, path: public/assets/images/img2Vid/next-action/face-swap.svg, sha256: 1bb962d9fd8ce06c0fbb9711fb4b7a191b28bdcbd5e0de2604c51f6dbd40f0f6 }
+  - { name: style-transfer.svg, path: public/assets/images/img2Vid/next-action/style-transfer.svg, sha256: 82a2a4171450c071f364e7c704c0ebedaa04f2cd703fc1e6cccae94d81c28673 }
+  - { name: object-removal.svg, path: public/assets/images/img2Vid/next-action/object-removal.svg, sha256: 841af11f71a400e35c866054f5a47625fa9cd7e9fe52ca1be958ab3ef185e9d2 }
+  - { name: video-editor.svg, path: public/assets/images/img2Vid/next-action/video-editor.svg, sha256: a5535b4f3c352c92fad512b67c077ca0cf7e1fd8847449a36c752938e9d35e32 }
+  - { name: character-motion-swap.svg, path: public/assets/images/img2Vid/next-action/character-motion-swap.svg, sha256: a788966b6b65a98de0f00a551ac23d4f4d6b94c0f4f6ba54930714f288c80724 }
+  - { name: video-expansion.svg, path: public/assets/images/img2Vid/next-action/ai-extend.svg, sha256: ed22a5af79880bf9e3ea7e2ca4982ed8955640c73833aef33b04cf435212f87e }

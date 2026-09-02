@@ -1,0 +1,134 @@
+schemaVersion: 1
+id: result-page-shell
+displayName: Result Page Shell
+classification: composite
+status: pilot-approved
+rd:
+  sourcePackage: youcam-enhance-frontend
+  sourceVersion: 1.34.1
+  snapshot: yce-frontend-gm-260909
+  sourcePaths:
+    - src/components/common/headers/components/logo/logo.js
+    - src/components/common/headers/components/logo/logo.module.scss
+    - src/components/common/headers/components/module-name/module-name.js
+    - src/components/common/headers/components/module-name/module-name.module.scss
+    - src/components/result-page/common/features-panel/components/sideBarMenu/index.js
+    - src/components/result-page/common/features-panel/components/sideBarMenu/index.module.scss
+    - src/components/result-page/common/features-panel/utils/sideBarMenuUtils.js
+    - src/styles/home-icon-styles.css
+    - src/components/common/headers/components/credits-left/index.js
+    - src/components/common/headers/components/credits-left/index.module.scss
+    - public/assets/images/logo/logo_YC_OnlineEditor_d_ENU_dt.svg
+    - public/assets/images/logo/logo_YC_OnlineEditor_d_ENU_mb.svg
+    - public/assets/images/logo/logo_symbol.svg
+    - public/assets/images/header/icon_profile.svg
+    - public/assets/images/header/info icon.svg
+    - public/assets/images/header/icon_home.svg
+    - public/assets/images/aiAgent/icon_agent.svg
+    - public/assets/fonts/icomoon.woff
+    - public/assets/images/header/icon_credit.svg
+    - public/assets/images/header/icon_add.svg
+  sourceHashes:
+    - path: src/components/common/headers/components/logo/logo.js
+      sha256: b4253262bbe9c039d55c3dd3dfed57276280b0d1d7bd7180ea6ccacb392c2709
+    - path: src/components/common/headers/components/logo/logo.module.scss
+      sha256: a8b16700377873b468dfae0f7ebb193738d004e3efec1ff4f59254ad86fcc5b4
+    - path: src/components/common/headers/components/module-name/module-name.js
+      sha256: 99cf2631007de48242d55203fe6171ddbe27a396e8e39141cf4267f4b0da9b64
+    - path: src/components/common/headers/components/module-name/module-name.module.scss
+      sha256: e9f2b6b1f95597ea2c2d26614f41a6617b871e4f229ef41a951d31621e3b8523
+    - path: src/components/result-page/common/features-panel/components/sideBarMenu/index.js
+      sha256: 6a6cf2d1f55f9adc4ee0f429a08fee52751e79c34fe1891eed8ecf23bf8eb46f
+    - path: src/components/result-page/common/features-panel/components/sideBarMenu/index.module.scss
+      sha256: d89265892f470fea2c314fc43969350c411856bb30c0e1c940ad73049a906147
+    - path: src/components/result-page/common/features-panel/utils/sideBarMenuUtils.js
+      sha256: b802342dfadc495f08f8523b3f9f860102bff276f958b04942e21a7147c4bffa
+    - path: src/styles/home-icon-styles.css
+      sha256: 6cd44d764ed017f1c3d263f1cfaebcdc54e4f77103a21ab77f9da004a693d7b5
+    - path: src/components/common/headers/components/credits-left/index.js
+      sha256: e4cea9a8210fb78271c2cd03569803f2592fc9e57cdb886073127d991f65d0f7
+    - path: src/components/common/headers/components/credits-left/index.module.scss
+      sha256: 9a46e44a4f599e280563ddbc3bd1dbcb178c9b74f7ca66d7a4eaef938900c846
+    - path: public/assets/images/logo/logo_YC_OnlineEditor_d_ENU_dt.svg
+      sha256: d0af397b427c61f93e5cc595f8ecc53ed157d499b4b4ab923b1841df4e3c66dc
+    - path: public/assets/images/logo/logo_YC_OnlineEditor_d_ENU_mb.svg
+      sha256: b6b9606792f9022ed3b237d5d4cc2439be9f500e050f60e39f6c14c91aecf35f
+    - path: public/assets/images/logo/logo_symbol.svg
+      sha256: 7db00edf467cbb8c3102df17b2b75b8e476f908c2b078fa05c874893ea38f81a
+    - path: public/assets/images/header/icon_profile.svg
+      sha256: 302b3d1eeecd1d1307b0a0185ac65f0ff57a478732585c8438b9c7bc22a6f37c
+    - path: public/assets/images/header/info icon.svg
+      sha256: e86991187d89775a46a7d805bd445a510756709a8959d7cb420cfc9ad5d33035
+    - path: public/assets/images/header/icon_home.svg
+      sha256: 72246fa21d718fee15b74e58ae1bbd15890e3e2afb84ca4d0db720d1d866c726
+    - path: public/assets/images/aiAgent/icon_agent.svg
+      sha256: eea1f8c5ac2fd20a880a512e0629afed3bf313dfacb9ff06df1419fe30215c14
+    - path: public/assets/fonts/icomoon.woff
+      sha256: 746d8b88009c7cf0c9b03a160361e1dc8de8406dc3ef893f65e2399e9054ebec
+    - path: public/assets/images/header/icon_credit.svg
+      sha256: fe13827402ad85122458ba7de848cbf47e0cb4401d319a6ebc8bfd511245b1d1
+    - path: public/assets/images/header/icon_add.svg
+      sha256: 2bb3284338e2893ec78d567ba65f511f11ca1b004d0948e6b737fe3417758457
+figma:
+  status: pending
+  fileKey: null
+  componentSetNodeId: null
+  variants: []
+implementation:
+  importPath: platform/ui/result-page-shell/index.js
+  storyId: ui-result-page-shell
+  framework: react
+  dependencies: [react]
+  removedDependencies: [next-router, redux, i18n, authentication, credit-service, pricing-modal, cms, analytics, textfit, lodash]
+publicApi:
+  props:
+    - name: title
+      required: true
+    - name: activeToolId
+      required: false
+    - name: showInfo
+      required: false
+    - name: toolItems
+      required: false
+    - name: onToolSelect
+      required: false
+    - name: onInfo
+      required: false
+    - name: onAccount
+      required: false
+    - name: onBrand
+      required: false
+    - name: creditBalance
+      required: false
+    - name: showCredits
+      required: false
+    - name: onCredits
+      required: false
+    - name: children
+      required: false
+  states: [desktop, compact-desktop, tablet, inert-navigation, active-tool, title-info-hidden, synthetic-credit]
+tokens:
+  lockPath: platform/tokens/tokens.lock.json
+  uses: [--background-base, --fill-brand-weak, --stroke-weak, --text-information, --text-strong]
+assets:
+  - path: assets/logo/yco-online-editor
+    usage: runtime
+  - path: assets/icon/yco-result-page-shell
+    usage: runtime
+  - path: assets/font/yco-interface-icons
+    usage: runtime
+  - path: assets/icon/yco-credit-controls
+    usage: runtime
+review:
+  pilotApprover:
+    actor: pm
+    id: collab-space-owner
+    date: 2026-09-01
+  canonicalReview:
+    designer: pending
+    rd: pending
+decisionBasis:
+  - Header and tool-family menu exist in RD but require a pure-props port because their production implementations depend on routing, state, accounts and analytics.
+  - Active tool labels use an existing accessible information token because the RD cyan label measures 2.59:1 on white in axe; the icon and selected fill retain the brand treatment.
+  - The PM approved a presentational Result Page shell with AI Video active and an inert synthetic credit balance of 436.
+  - Feature titles may hide the optional information action when no information surface exists.

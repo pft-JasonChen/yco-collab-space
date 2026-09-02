@@ -78,6 +78,15 @@ async function applyStep(page, step) {
     return;
   }
 
+  if (step.action === 'set-files') {
+    await locator.setInputFiles({
+      name: String(step.name || 'synthetic-file.txt'),
+      mimeType: String(step.mimeType || 'text/plain'),
+      buffer: Buffer.from(String(step.value || 'synthetic test file')),
+    });
+    return;
+  }
+
   throw new Error('Unsupported action: ' + step.action);
 }
 

@@ -9,6 +9,7 @@ import {
 } from './project.mjs';
 import { resolveSurfaceContext } from './surface-policy.mjs';
 import { buildResourceProvenance, buildTokenProvenance } from './resource-provenance.mjs';
+import { buildSharedComponentProvenance } from '../design-library/component-provenance.mjs';
 
 const feature = normaliseFeatureSlug(process.argv[2]);
 const adapterIndex = process.argv.indexOf('--adapter');
@@ -46,6 +47,7 @@ const metadata = {
     workflow: 'prototype-update',
   },
   resources: await buildResourceProvenance(feature),
+  components: await buildSharedComponentProvenance(feature),
   tokens: await buildTokenProvenance(),
   surface: surfaceResult.context,
 };

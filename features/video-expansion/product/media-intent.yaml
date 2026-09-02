@@ -1,0 +1,7 @@
+schemaVersion: 1
+feature: video-expansion
+requestedCollections: []
+decisionBasis:
+  - No shared Design Library collection is required for the PM prototype.
+  - The PM supplied a temporary local MP4 and JPEG under product/mock-assets for deterministic review and validation.
+  - Temporary PM media must be replaced by Designer-selected media before design-final.

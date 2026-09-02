@@ -67,6 +67,13 @@ flowchart LR
 - 保護區：`features`、`platform`
 - Enforcement: `warning`
 
+### `component-foundation-pilot`
+
+- Actors: Product manager、Designer、Research and development、AI agent
+- 可寫入：`design-library/components/**`、`design-library/assets/**`、`platform/ui/**`、`.storybook/**`、`tools/design-library/**`、`docs/architecture/**`、`docs/design-system/**`、`package.json`、`package-lock.json`、`prototype.config.json`
+- 保護區：`features/{feature}/product`、`features/{feature}/generated`、`platform/tokens/rd`、`.env`
+- Enforcement: `error`
+
 ## 外部系統邊界
 
 | 系統 | Owner | 方向 | 可見性 | 可否有 production data |
@@ -83,3 +90,4 @@ flowchart LR
 - The contract is the control plane for roles, stages, paths and external-system boundaries.
 - Shared design resources live once in the global Design Library; feature revisions pin exact selections.
 - Agent and validator rules are enforced now, while human Git enforcement remains proposed.
+- The Product Owner authorised the component-foundation pilot so Designer, RD and Agent can iteratively adjust shared components and Storybook without changing feature product behaviour.

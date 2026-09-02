@@ -1,0 +1,91 @@
+schemaVersion: 1
+id: video-info-dialog
+displayName: Video Info Dialog
+classification: pattern
+status: pilot-approved
+rd:
+  sourcePackage: youcam-enhance-frontend
+  sourceVersion: 1.34.1
+  snapshot: yce-frontend-gm-260909
+  sourcePaths:
+    - src/components/common/modal/index.js
+    - src/components/common/modal/index.module.scss
+    - src/components/result-page/common/video-feature/video-detail-modal/index.js
+    - src/components/result-page/common/video-feature/video-detail-modal/index.module.scss
+    - src/components/result-page/common/video-feature/next-action/index.js
+    - src/components/result-page/common/video-feature/next-action/index.module.scss
+  sourceHashes:
+    - path: src/components/common/modal/index.js
+      sha256: 57750d3170a0da5aa89349a909083438462d161484fb9750de5ce25f85860cd1
+    - path: src/components/common/modal/index.module.scss
+      sha256: 905742acb0bccca4f4b75a55362f4a854990d72b983296877d940b07142b6ab8
+    - path: src/components/result-page/common/video-feature/video-detail-modal/index.js
+      sha256: 2f2bbbbce49d6854058e4b8fb5c5ef16f9e8a0d147d76f886486531192d63ef3
+    - path: src/components/result-page/common/video-feature/video-detail-modal/index.module.scss
+      sha256: 0875645618e482faafd6c5cd5795e3abdc667cb3fc61ebeb2ae0566338771581
+    - path: src/components/result-page/common/video-feature/next-action/index.js
+      sha256: 8cf0b6200e4e06c6ca57ed21b55824a2843d485f9ce42cd4b645c6cc691890a2
+    - path: src/components/result-page/common/video-feature/next-action/index.module.scss
+      sha256: 5dd9d13a12f301728930cc1d96fd9d5692f77b322b17e1a79bb7f5b5d09b3a24
+figma:
+  status: pending
+  fileKey: null
+  componentSetNodeId: null
+  variants: []
+implementation:
+  importPath: platform/ui/video-info-dialog/index.js
+  storyId: ui-video-info-dialog
+  framework: react
+  dependencies: [react, react-dom]
+  removedDependencies: [redux, i18n, lodash, routing, scroll-hooks, cms, analytics, authentication, download-service, media-preview-modal]
+publicApi:
+  props:
+    - name: opened
+      required: true
+    - name: title
+      required: true
+    - name: date
+      required: false
+    - name: videoUrl
+      required: false
+    - name: posterUrl
+      required: false
+    - name: sources
+      required: false
+    - name: metadata
+      required: false
+    - name: prompt
+      required: false
+    - name: nextActions
+      required: false
+    - name: onClose
+      required: false
+    - name: onRetry
+      required: false
+    - name: onLike
+      required: false
+    - name: onDislike
+      required: false
+    - name: onDownload
+      required: false
+  states: [closed, open, backdrop, responsive, source-media, metadata, optional-prompt, next-actions, inert-actions]
+tokens:
+  lockPath: platform/tokens/tokens.lock.json
+  uses: [--background-base, --fill-strong, --fill-weak, --stroke-strong, --text-strong, --text-weak]
+assets:
+  - path: assets/icon/yco-video-actions
+    usage: runtime
+  - path: assets/video/rd-component-fixtures
+    usage: storybook
+review:
+  pilotApprover:
+    actor: pm
+    id: collab-space-owner
+    date: 2026-09-02
+  canonicalReview:
+    designer: pending
+    rd: pending
+decisionBasis:
+  - RD common Modal supplies the dark backdrop and focus boundary while video-detail-modal supplies the split media, metadata and Next Action composition.
+  - The pure-props pilot does not expose production routing, account, analytics, task or download services.
+  - Next Action and reaction affordances use the allowlisted RD img2Vid icon assets; Video Expansion reuses the RD AI Extend glyph pending canonical icon design.

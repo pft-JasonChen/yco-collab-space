@@ -35,3 +35,25 @@ test('source boundary reports PM source mutations', async () => {
   }
 });
 
+test('source boundary ignores macOS metadata files', async () => {
+  const workspace = await fs.mkdtemp(
+    path.join(os.tmpdir(), 'yco-source-boundary-metadata-test-'),
+  );
+  const featureRoot = path.join(workspace, 'features', 'example');
+
+  try {
+    await fs.mkdir(path.join(featureRoot, 'product'), { recursive: true });
+    await fs.mkdir(path.join(featureRoot, 'design'), { recursive: true });
+    await fs.writeFile(path.join(featureRoot, 'product', 'prd.md'), 'stable\n');
+    await fs.writeFile(path.join(featureRoot, 'product', '.DS_Store'), 'before\n');
+    const before = await snapshotFeatureSources(workspace, 'example');
+
+    await fs.writeFile(path.join(featureRoot, 'product', '.DS_Store'), 'after\n');
+    const after = await snapshotFeatureSources(workspace, 'example');
+
+    assert.deepEqual(diffSourceSnapshots(before, after), []);
+    assert.equal(Object.keys(after).includes('product/.DS_Store'), false);
+  } finally {
+    await fs.rm(workspace, { recursive: true, force: true });
+  }
+});

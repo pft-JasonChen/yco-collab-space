@@ -1,0 +1,14 @@
+schemaVersion: 1
+collection: assets/icon/yco-credit-controls
+source:
+  snapshot: yce-frontend-gm-260909
+files:
+  - name: credit.svg
+    path: public/assets/images/header/icon_credit.svg
+    sha256: fe13827402ad85122458ba7de848cbf47e0cb4401d319a6ebc8bfd511245b1d1
+  - name: add.svg
+    path: public/assets/images/header/icon_add.svg
+    sha256: 2bb3284338e2893ec78d567ba65f511f11ca1b004d0948e6b737fe3417758457
+  - name: loading.png
+    path: public/assets/images/loading.png
+    sha256: 4d7e85e273326aca344a9e3db9766661ea15398b626694508d1d6ca03d4b0ef0

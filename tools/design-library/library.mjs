@@ -3,18 +3,20 @@ import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { fromRoot, sha256File } from '../prototype-cli/project.mjs';
 
-export const assetTypes = ['image', 'video', 'icon', 'illustration', 'logo'];
+export const assetTypes = ['image', 'video', 'icon', 'illustration', 'logo', 'font'];
 const supportedExtensions = {
   image: new Set(['.avif', '.jpeg', '.jpg', '.png', '.webp']),
   video: new Set(['.avif', '.jpeg', '.jpg', '.mp4', '.png', '.webm', '.webp']),
   icon: new Set(['.png', '.svg']),
   illustration: new Set(['.png', '.svg', '.webp']),
   logo: new Set(['.png', '.svg', '.webp']),
+  font: new Set(['.woff', '.woff2']),
 };
 const mediaKindByExtension = new Map([
   ['.mp4', 'video'], ['.webm', 'video'], ['.svg', 'vector'],
   ['.avif', 'image'], ['.jpeg', 'image'], ['.jpg', 'image'],
   ['.png', 'image'], ['.webp', 'image'],
+  ['.woff', 'font'], ['.woff2', 'font'],
 ]);
 
 function toPosix(value) {
@@ -27,7 +29,7 @@ export function normaliseCollectionReference(reference) {
     .replace(/^\.\//, '')
     .replace(/^design-library\//, '')
     .replace(/\/$/, '');
-  const match = value.match(/^assets\/(image|video|icon|illustration|logo)\/([a-z0-9][a-z0-9-]*)$/);
+  const match = value.match(/^assets\/(image|video|icon|illustration|logo|font)\/([a-z0-9][a-z0-9-]*)$/);
   if (!match) {
     throw new Error(
       'Collection must be assets/<type>/<collection> using a supported type and kebab-case collection.',

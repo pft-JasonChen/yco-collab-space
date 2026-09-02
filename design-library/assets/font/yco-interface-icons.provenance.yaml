@@ -1,0 +1,24 @@
+schemaVersion: 1
+collection: assets/font/yco-interface-icons
+source:
+  snapshot: yce-frontend-gm-260909
+  path: public/assets/fonts/icomoon.woff
+  sha256: 746d8b88009c7cf0c9b03a160361e1dc8de8406dc3ef893f65e2399e9054ebec
+glyphMappingSource:
+  path: src/components/result-page/common/features-panel/utils/sideBarMenuUtils.js
+  sha256: b802342dfadc495f08f8523b3f9f860102bff276f958b04942e21a7147c4bffa
+glyphs:
+  - codepoint: U+E904
+    tool: ai-photo-editing
+  - codepoint: U+E922
+    tool: basic-editing
+  - codepoint: U+E918
+    tool: ai-video
+  - codepoint: U+E917
+    tool: ai-image
+  - codepoint: U+E91C
+    tool: ai-portrait
+  - codepoint: U+E900
+    tool: batch-editing
+  - codepoint: U+E907
+    tool: template

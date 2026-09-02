@@ -669,7 +669,8 @@ Contract
 - 長期feature design record要一份檔或多份檔；
 - Figma token export的正式格式、plugin／API與version naming；
 - Feature-scoped token repository schema；
-- Designer／RD canonical component catalog完整schema；
+- Designer／RD canonical component catalog完整schema；2026-09-01 已另啟動 v0.1
+  Storybook pilot，完整 schema仍須以 pilot evidence決定；
 - SVG安全轉換、media size budgets、licence、caption／transcript policy；
 - CODEOWNERS、GitHub protected paths與真正角色驗證；
 - Protected preview authentication；

@@ -10,6 +10,12 @@
 > manifest。角色與路徑以 `collab-space.map.yaml` 及自動產生的
 > `docs/generated/collab-space-reference.md` 為準。
 
+> **2026-09-02 pilot activation：** Button、Ratio、Video Trim Modal、Result Page Shell、
+> Upload Media Block、Video History 與 Video Info Dialog
+> 已依 `docs/architecture/2026-09-01-rd-components-storybook-pilot.md` 啟動 v0.1
+> component-contract＋Storybook pilot。完整 canonical schema仍待 Designer／RD依 pilot
+> evidence review。
+
 ## 1. 這份文件解決什麼問題
 
 YCO Collab Space 已能由 PM source-of-truth 生成臨時 React prototype，但目前的

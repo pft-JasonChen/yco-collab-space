@@ -1,0 +1,41 @@
+schemaVersion: 1
+id: tool-page-layout
+displayName: Tool Page Layout
+classification: pattern
+status: pilot-approved
+rd:
+  sourcePackage: youcam-enhance-frontend
+  sourceVersion: 1.34.1
+  snapshot: yce-frontend-gm-260909
+  sourcePaths:
+    - src/components/result-page/common/feature-layout/index.js
+    - src/components/result-page/common/feature-layout/index.module.scss
+  sourceHashes:
+    - { path: src/components/result-page/common/feature-layout/index.js, sha256: cb690ae1ca0baade3413de367b602896b9790798a35f611b00dbce786dcf2945 }
+    - { path: src/components/result-page/common/feature-layout/index.module.scss, sha256: 81e20a3ac1f1bcc5a6bbfd6bcf20d3bbbfc36260ee552f0c35acfc46ff7b847d }
+figma: { status: pending, fileKey: null, componentSetNodeId: null, variants: [] }
+implementation:
+  importPath: platform/ui/tool-page-layout/index.js
+  storyId: ui-tool-page-layout
+  framework: react
+  dependencies: [react]
+  removedDependencies: [redux, i18n, auto-scroll, device-detection, interaction-tools]
+publicApi:
+  props:
+    - { name: panel, required: true }
+    - { name: result, required: true }
+    - { name: footer, required: false }
+    - { name: panelHeader, required: false }
+    - { name: panelContentClassName, required: false }
+    - { name: className, required: false }
+  states: [desktop, compact-desktop, tablet, panel-scroll, stacked]
+tokens:
+  lockPath: platform/tokens/tokens.lock.json
+  uses: [--background-base, --background-alternate, --spacing-16, --spacing-24]
+assets: []
+review:
+  pilotApprover: { actor: pm, id: collab-space-owner, date: 2026-09-02 }
+  canonicalReview: { designer: pending, rd: pending }
+decisionBasis:
+  - RD FeatureLayout is the production composition source for settings and results blocks, but its state and device dependencies are replaced with pure props and CSS breakpoints.
+  - The PO approved production-surface-first composition for the Video Expansion manager-review prototype.

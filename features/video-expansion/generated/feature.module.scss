@@ -1,0 +1,262 @@
+.page {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  color: var(--text-strong);
+  background: var(--background-alternate);
+}
+
+.page button,
+.page input {
+  font: inherit;
+}
+
+.page button:focus-visible,
+.page input:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 var(--spacing-4) var(--stroke-focus);
+}
+
+.panelContent {
+  padding: 0;
+}
+
+.settingsSection {
+  padding: var(--spacing-20) var(--spacing-24);
+  border-bottom: 1px solid var(--stroke-weak);
+}
+
+.sectionTitle {
+  margin: 0 0 var(--spacing-8);
+  color: var(--text-strong);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  font-weight: var(--font-weight-strong);
+}
+
+.trimMediaAction { color: var(--icon-neutral); }
+
+.fileInput {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+.inlineError,
+.historySourceBadge {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  margin: var(--spacing-12) var(--spacing-24) 0;
+  padding: var(--spacing-8) var(--spacing-12);
+  border-radius: var(--corner-radius-4);
+  font-size: var(--font-size-micro);
+  line-height: var(--line-height-micro);
+}
+
+.inlineError {
+  color: var(--text-error);
+  background: var(--fill-error-weak);
+  border: 1px solid var(--stroke-error-weak);
+}
+
+.historySourceBadge {
+  color: var(--text-success);
+  background: var(--fill-success-weak);
+}
+
+.editResult {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+.canvasArea,
+.canvasAreaLoaded {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  min-height: 360px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--background-base);
+  border-radius: var(--corner-radius-20);
+}
+
+.canvasWorkspace {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-16);
+  padding: var(--spacing-12) var(--spacing-20);
+}
+
+.canvasViewport {
+  display: grid;
+  width: 100%;
+  height: 430px;
+  flex: 0 0 430px;
+  place-items: center;
+  overflow: hidden;
+  background: var(--fill-weak);
+  border-radius: var(--corner-radius-20);
+}
+
+.targetCanvas {
+  position: relative;
+  display: flex;
+  box-sizing: border-box;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  touch-action: none;
+  background-color: var(--background-base);
+  background-image: conic-gradient(var(--fill-weaker) 25%, var(--background-base) 0 50%, var(--fill-weaker) 0 75%, var(--background-base) 0);
+  background-size: var(--spacing-16) var(--spacing-16);
+  border: 2px solid var(--stroke-brand-strong);
+  cursor: grab;
+}
+
+.targetCanvas:active { cursor: grabbing; }
+
+.canvasVideo {
+  position: absolute;
+  z-index: 1;
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+}
+
+.derivedTimeline[data-frame-source='pending'] {
+  opacity: 0.72;
+}
+
+.emptyResult {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-40) var(--spacing-20);
+  text-align: center;
+}
+
+.emptyVideoIcon,
+.emptyVideoIconError {
+  display: grid;
+  width: var(--spacing-96);
+  height: var(--spacing-96);
+  margin-bottom: var(--spacing-16);
+  place-items: center;
+  color: var(--icon-brand);
+  background: var(--fill-brand-weak);
+  border-radius: var(--corner-radius-20);
+}
+
+.emptyVideoIconError {
+  color: var(--icon-error);
+  background: var(--fill-error-weak);
+}
+
+.emptyResult h1 {
+  margin: 0 0 var(--spacing-4);
+  color: var(--text-strong);
+  font-size: var(--font-size-heading-4);
+  line-height: var(--line-height-heading-4);
+  font-weight: var(--font-weight-strong);
+}
+
+.emptyResult p {
+  max-width: calc(var(--spacing-256) + var(--spacing-96));
+  margin: 0 0 var(--spacing-24);
+  color: var(--text-weak);
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+}
+
+.emptyUploadButton {
+  display: flex;
+  min-height: var(--spacing-48);
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-4);
+  padding: var(--spacing-8) var(--spacing-16);
+  color: var(--text-inverse-strong);
+  background: var(--fill-brand-strong);
+  border: none;
+  border-radius: var(--corner-radius-32);
+  cursor: pointer;
+  font-size: var(--font-size-heading-5);
+  line-height: var(--line-height-heading-5);
+  font-weight: var(--font-weight-strong);
+}
+
+.sampleArea {
+  display: flex;
+  margin-top: var(--spacing-24);
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-12);
+  color: var(--text-weak);
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+}
+
+.sampleArea button {
+  width: var(--spacing-64);
+  height: var(--spacing-64);
+  padding: 0;
+  overflow: hidden;
+  background: transparent;
+  border: none;
+  border-radius: var(--corner-radius-12);
+  cursor: pointer;
+}
+
+.sampleArea img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.icon {
+  display: block;
+  flex: 0 0 auto;
+}
+
+@media (max-width: 1200px) {
+  .settingsSection { padding: var(--spacing-16) var(--spacing-20); }
+}
+
+@media (max-width: 900px) {
+  .page {
+    height: auto;
+    min-height: 1280px;
+    overflow: visible;
+  }
+
+  .panelContent { overflow: visible; }
+  .editResult { min-height: 560px; }
+
+  .canvasWorkspace {
+    justify-content: flex-start;
+    padding: var(--spacing-12) var(--spacing-8);
+  }
+
+  .canvasViewport {
+    height: 400px;
+    flex-basis: 400px;
+  }
+}

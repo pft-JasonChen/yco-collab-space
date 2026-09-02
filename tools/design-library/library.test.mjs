@@ -7,7 +7,24 @@ import { normaliseCollectionReference, scanCollection, scanLibrary } from './lib
 
 test('collection reference accepts the fixed type and a free kebab-case collection', () => {
   assert.equal(normaliseCollectionReference('design-library/assets/video/dance/'), 'assets/video/dance');
+  assert.equal(normaliseCollectionReference('assets/font/yco-interface-icons'), 'assets/font/yco-interface-icons');
   assert.throws(() => normaliseCollectionReference('assets/video/../secret'));
+});
+
+test('font collections accept allowlisted web font files', async () => {
+  const workspace = await fs.mkdtemp(path.join(os.tmpdir(), 'yco-font-library-'));
+  try {
+    const collection = path.join(workspace, 'design-library/assets/font/yco-icons');
+    await fs.mkdir(collection, { recursive: true });
+    await fs.writeFile(path.join(collection, 'icons.woff'), 'font-data');
+    await fs.writeFile(path.join(collection, 'icons.ttf'), 'unsupported-font');
+    const result = await scanCollection('assets/font/yco-icons', workspace);
+    assert.equal(result.files.length, 1);
+    assert.equal(result.files[0].mediaKind, 'font');
+    assert.match(result.warnings[0], /Unsupported font collection file/);
+  } finally {
+    await fs.rm(workspace, { recursive: true, force: true });
+  }
 });
 
 test('scanner indexes only a requested collection and records exact hashes', async () => {

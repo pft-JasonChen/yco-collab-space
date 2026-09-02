@@ -1,0 +1,77 @@
+{
+  "synthetic": true,
+  "networkAllowed": false,
+  "assets": {
+    "video": "mock-assets/sample-video.mp4",
+    "thumbnail": "mock-assets/sample image.jpg",
+    "status": "pm-temporary"
+  },
+  "sourceVideo": {
+    "id": "sample-portrait-video",
+    "name": "sample-video.mp4",
+    "orientation": "portrait",
+    "ratio": "3:4",
+    "mockDurationSeconds": 42,
+    "trimStartSeconds": 5,
+    "trimEndSeconds": 35,
+    "selectedDurationSeconds": 30,
+    "entrySource": "local-upload"
+  },
+  "timeline": {
+    "thumbnailCount": 10,
+    "frameStrategy": "browser-capture",
+    "networkAllowed": false
+  },
+  "credits": {
+    "headerBalance": 436,
+    "generateCost": 10,
+    "synthetic": true,
+    "interactive": false
+  },
+  "ratios": [
+    { "id": "16-9", "label": "16:9", "selected": true, "movement": "horizontal" },
+    { "id": "9-16", "label": "9:16", "selected": false, "movement": "horizontal" },
+    { "id": "4-3", "label": "4:3", "selected": false, "movement": "horizontal" },
+    { "id": "3-4", "label": "3:4", "selected": false, "movement": "free" },
+    { "id": "1-1", "label": "1:1", "selected": false, "movement": "horizontal" }
+  ],
+  "generation": {
+    "processingDelayMs": 1200,
+    "processingLabel": "Expanding your video",
+    "successLabel": "Video expansion complete",
+    "failureLabel": "Video expansion failed",
+    "retryLabel": "Retry"
+  },
+  "history": {
+    "completed": {
+      "id": "history-video-expansion-success",
+      "status": "success",
+      "title": "Video Expansion",
+      "ratio": "16:9",
+      "durationSeconds": 30,
+      "resolution": "1920 x 1080"
+    },
+    "failed": {
+      "id": "history-video-expansion-failed",
+      "status": "failed",
+      "title": "Video Expansion"
+    }
+  },
+  "videoDetail": {
+    "title": "Video Expansion",
+    "sourceLabel": "Original source",
+    "nextActions": [
+      { "id": "video-enhancer", "label": "Video Enhancer", "interactive": false },
+      { "id": "face-swap", "label": "Face Swap", "interactive": false },
+      { "id": "style-transfer", "label": "Style Transfer", "interactive": false },
+      { "id": "object-removal", "label": "Object Removal", "interactive": false },
+      { "id": "video-editor", "label": "Video Editor", "interactive": false },
+      { "id": "character-motion-swap", "label": "Character Motion Swap", "interactive": false },
+      { "id": "video-expansion", "label": "Video Expansion", "interactive": true }
+    ]
+  },
+  "errors": {
+    "upload": "This video cannot be opened. Choose another file.",
+    "generation": "Video expansion failed. Try again."
+  }
+}
