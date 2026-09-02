@@ -1,20 +1,10 @@
+import { ratioTitleTypes, ratioTypes } from './ratioTypes.js';
 import styles from './Ratio.module.scss';
 
 const noop = () => {};
 const emptyRatioList = [];
 const defaultRatio = { w: 16, h: 9 };
 
-const ratioTypes = {
-  DEFAULT: 'default',
-  GERY: 'gery',
-  GERY_V2: 'gery_v2',
-  IMAGE_EXTENDER: 'image_extender',
-};
-
-const ratioTitleTypes = {
-  DEFAULT: 'default',
-  GERY: 'gery',
-};
 
 function optionLabel(item) {
   if (item?.w && item?.h) return `${item.w}:${item.h}`;

@@ -29,11 +29,36 @@
     "interactive": false
   },
   "ratios": [
-    { "id": "16-9", "label": "16:9", "selected": true, "movement": "horizontal" },
-    { "id": "9-16", "label": "9:16", "selected": false, "movement": "horizontal" },
-    { "id": "4-3", "label": "4:3", "selected": false, "movement": "horizontal" },
-    { "id": "3-4", "label": "3:4", "selected": false, "movement": "free" },
-    { "id": "1-1", "label": "1:1", "selected": false, "movement": "horizontal" }
+    {
+      "id": "16-9",
+      "label": "16:9",
+      "selected": true,
+      "movement": "horizontal"
+    },
+    {
+      "id": "9-16",
+      "label": "9:16",
+      "selected": false,
+      "movement": "horizontal"
+    },
+    {
+      "id": "4-3",
+      "label": "4:3",
+      "selected": false,
+      "movement": "horizontal"
+    },
+    {
+      "id": "3-4",
+      "label": "3:4",
+      "selected": false,
+      "movement": "free"
+    },
+    {
+      "id": "1-1",
+      "label": "1:1",
+      "selected": false,
+      "movement": "horizontal"
+    }
   ],
   "generation": {
     "processingDelayMs": 1200,
@@ -61,13 +86,48 @@
     "title": "Video Expansion",
     "sourceLabel": "Original source",
     "nextActions": [
-      { "id": "video-enhancer", "label": "Video Enhancer", "interactive": false },
-      { "id": "face-swap", "label": "Face Swap", "interactive": false },
-      { "id": "style-transfer", "label": "Style Transfer", "interactive": false },
-      { "id": "object-removal", "label": "Object Removal", "interactive": false },
-      { "id": "video-editor", "label": "Video Editor", "interactive": false },
-      { "id": "character-motion-swap", "label": "Character Motion Swap", "interactive": false },
-      { "id": "video-expansion", "label": "Video Expansion", "interactive": true }
+      {
+        "id": "video-enhancer",
+        "label": "Video Enhancer",
+        "interactive": false,
+        "labelKey": "header.items.product.video.enhancer"
+      },
+      {
+        "id": "face-swap",
+        "label": "Face Swap",
+        "interactive": false,
+        "labelKey": "cross.promote.to.face.swap"
+      },
+      {
+        "id": "style-transfer",
+        "label": "Style Transfer",
+        "interactive": false,
+        "labelKey": "text.to.video.next.action.option.title.style.transfer"
+      },
+      {
+        "id": "object-removal",
+        "label": "Object Removal",
+        "interactive": false,
+        "labelKey": "header.items.product.object.removal"
+      },
+      {
+        "id": "video-editor",
+        "label": "Video Editor",
+        "interactive": false,
+        "labelKey": "header.items.product.ai.video.editor"
+      },
+      {
+        "id": "character-motion-swap",
+        "label": "Character Motion Swap",
+        "interactive": false,
+        "labelKey": "header.items.product.ai.motion.transfer"
+      },
+      {
+        "id": "video-expansion",
+        "label": "Video Expansion",
+        "interactive": true,
+        "labelKey": "header.items.product.video.expansion"
+      }
     ]
   },
   "errors": {

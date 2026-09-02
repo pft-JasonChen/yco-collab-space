@@ -1,0 +1,95 @@
+schemaVersion: 1
+feature: video-expansion
+moduleFamily: ai-video
+inputs:
+  - id: source-video
+    kind: video
+    origin: user-upload
+    required: true
+    contract: load-sample-video
+    constraints:
+      container: [mp4, mov, webm]
+      maxSelectedSeconds: 30
+    description: >-
+      The video the user uploads or reloads from History. The prototype accepts the three
+      containers the file picker declares; RD confirms the real accepted set.
+  - id: trim-range
+    kind: time-range
+    origin: user-input
+    required: true
+    unit: seconds
+    contract: update-trim
+    constraints:
+      min: 1
+      max: 30
+      relativeTo: source-start
+      wholeSeconds: true
+    description: >-
+      Absolute start and end seconds measured from the start of the uploaded source, not
+      from any earlier trim. The trim dialog floors the range to whole seconds before
+      confirming, so the submitted duration always matches the duration shown to the user.
+  - id: target-ratio
+    kind: enum
+    origin: user-input
+    required: true
+    contract: select-ratio
+    values: ['16:9', '9:16', '4:3', '3:4', '1:1']
+    description: >-
+      Aspect ratio of the expanded output. The source is never cropped; the canvas is
+      extended to this ratio.
+  - id: source-offset
+    kind: point2d
+    origin: user-input
+    required: false
+    unit: css-pixels
+    contract: reposition-video
+    constraints:
+      originPoint: target-frame-centre
+      axis: single-axis-only
+      boundedBy: rendered-frame
+    description: >-
+      Where the source sits inside the target frame after dragging. Zero means centred.
+      Only one axis is free: a source narrower than the target moves horizontally, a taller
+      one vertically, a matching one not at all.
+outputs:
+  - id: expanded-video
+    kind: video
+    required: true
+    contract: complete-generation
+    constraints:
+      container: mp4
+    description: The source video rendered onto the expanded canvas at the target ratio.
+cost:
+  credits: 10
+  basis: per-generation
+asyncStates: [queued, processing, success, failed]
+retryable: true
+openQuestions:
+  - id: TC-001
+    owner: rd
+    question: >-
+      source-offset is currently CSS pixels relative to the rendered target-frame centre,
+      which depends on the viewport. The engine most likely wants a resolution-independent
+      value. Should the client normalise it to a -1..1 fraction of the available travel, or
+      send output-pixel coordinates computed from the target resolution?
+  - id: TC-002
+    owner: rd
+    question: >-
+      Does the engine expect the trim to be applied client-side before upload, or does it
+      accept the full source plus a trim-range parameter? The prototype only selects a
+      range; it never re-encodes.
+  - id: TC-003
+    owner: rd
+    question: >-
+      Is the output resolution derived from the source, from the target ratio, or chosen by
+      the user? The detail dialog currently shows a fixed synthetic 1920 x 1080.
+  - id: TC-004
+    owner: pm
+    question: >-
+      Is 30 seconds a product decision or an engine limit? If it is an engine limit, the
+      constraint belongs in the MSR model config rather than hard-coded in the feature.
+decisionBasis:
+  - This file records what the feature needs from a backend, not how to call one. AGENTS.md forbids inferring a production API from mock data, and a guessed endpoint or payload shape would be exactly that.
+  - Every input names the contract state or action it is observable through, so RD can trace a parameter back to the behaviour that produces it and to the rendered check that covers it.
+  - Open questions are recorded rather than answered. An unanswered question costs one RD conversation; a guessed answer costs a wrong implementation plus the conversation.
+  - A real engine request shape, once known, goes into product/payload-samples/ and is referenced from payloadSamples here. That file is PM-owned external fact, which is why it lives under product/ and is scanned for de-identification.

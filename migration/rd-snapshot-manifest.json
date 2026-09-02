@@ -42,6 +42,29 @@
   ],
   "notes": [
     "variables-custom.css is supplied by RD but explicitly says it is not from the Designer export.",
-    "No RD application, environment, deployment or backend code is a runtime dependency."
-  ]
+    "No RD application, environment, deployment or backend code is a runtime dependency.",
+    "2026-09-03: the Product Owner chose vendoring an allowlisted subset (D1). This round vendors only the files declared rd.verbatimFiles; extending the manifest to every ported source path and asset stays Phase B."
+  ],
+  "vendoredBaseline": {
+    "root": "platform/rd-baseline/yce-frontend-gm-260909",
+    "purpose": "Read-only RD reference for validate:rd-parity. Only files that a component contract declares under rd.verbatimFiles may live here; the gate rejects unclaimed files.",
+    "scope": "verbatim-only",
+    "files": [
+      {
+        "source": "src/components/common/button-wrapper/button.module.css",
+        "sha256": "e4b2cb3af9f71ec03933aaf6fa610458f005ab8b2f08e087c59dc2499c1640ca",
+        "claimedBy": "button"
+      },
+      {
+        "source": "src/components/common/ratio/utils/ratioTypes.js",
+        "sha256": "319a37000e75223ac3432743967cb06b3e071a3ad2d248bd2352f0f72dca42f2",
+        "claimedBy": "ratio"
+      },
+      {
+        "source": "src/components/ai-agent-page/components/video-trim-modal/constants.js",
+        "sha256": "bfee24bb2833d8de467f0a14b2d9711a0764abfbf032a72a26ab65d677c0387c",
+        "claimedBy": "video-trim-modal"
+      }
+    ]
+  }
 }

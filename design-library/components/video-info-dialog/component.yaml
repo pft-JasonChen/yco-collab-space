@@ -7,6 +7,7 @@ rd:
   sourcePackage: youcam-enhance-frontend
   sourceVersion: 1.34.1
   snapshot: yce-frontend-gm-260909
+  portability: drop-in
   sourcePaths:
     - src/components/common/modal/index.js
     - src/components/common/modal/index.module.scss

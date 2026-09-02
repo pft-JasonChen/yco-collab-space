@@ -23,6 +23,8 @@ later, Designer-owned Figma and token inputs.
 - `features/*/design/**`: design references and explicitly recorded gaps.
 - `features/*/generated/**`: AI-generated derived code. Do not hand-edit it outside an
   explicit `prototype-update` run.
+- `platform/rd-baseline/**`: vendored read-only RD source for `validate:rd-parity`. Only
+  files a component contract declares under `rd.verbatimFiles` may live here.
 - `platform/**` and `tools/**`: shared platform code. Changes require the Prototype
   Platform Owner's approval.
 - `.collab-cache/**`: generated local indexes. Never commit or publish them.
@@ -36,6 +38,14 @@ Phase 0 documents these boundaries but does not enforce CODEOWNERS yet.
   from the RD snapshot.
 - RD token CSS under `platform/tokens/rd/**` is immutable upstream input.
 - Feature styles use existing CSS variables. Do not invent token names or raw colours.
+- Generated code contains no hardcoded user-facing strings. Copy comes from
+  `product/i18n.json` through `platform/runtime/i18n.js`, keyed the way RD keys it.
+- Shared components in `platform/ui/**` take copy through props with English defaults;
+  they never translate internally.
+- A component role a catalogued shared component already covers must reuse it. Record
+  the resolution in `surface-intent.yaml` `componentReuse[]`.
+- `product/payload-samples/**` is optional, PM-owned and must be de-identified. It never
+  reaches the public build.
 - Missing design decisions go into `design/design-gaps.yaml`.
 - Ports, routes, URLs and viewports come from `prototype.config.json`.
 - A PASS requires an HTTP-rendered browser check and a clean browser console.
@@ -54,6 +64,8 @@ npm run validate
 npm run validate:intake -- --feature <feature>
 npm run build
 npm run library:browser
+npm run library:components
+npm run validate:rd-parity
 npm run test:rendered -- --feature <feature>
 npm run prototype:create -- <feature> "<Feature title>"
 npm run stage:transition -- --feature <feature> --to <stage> --actor <actor> --confirm

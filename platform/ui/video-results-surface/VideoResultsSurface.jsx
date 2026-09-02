@@ -6,9 +6,17 @@ const defaultTabs = [
   { id: 'history', label: 'History' },
 ];
 
-export function ResultTabs({ tabs = defaultTabs, value = 'edit', onChange, processing = false }) {
+/** Every user-facing string is a prop so RD can hand them straight to its own t(). */
+const defaultLabels = {
+  tabs: 'Video result views',
+  processing: 'Generation in progress',
+  filter: 'Filter history',
+};
+
+export function ResultTabs({ tabs = defaultTabs, value = 'edit', onChange, processing = false, labels: labelOverrides = {} }) {
+  const labels = { ...defaultLabels, ...labelOverrides };
   return (
-    <div className={styles.tabs} role="tablist" aria-label="Video result views" data-component-role="edit-history-tabs">
+    <div className={styles.tabs} role="tablist" aria-label={labels.tabs} data-component-role="edit-history-tabs">
       {tabs.map((tab) => {
         const active = tab.id === value;
         return (
@@ -24,7 +32,7 @@ export function ResultTabs({ tabs = defaultTabs, value = 'edit', onChange, proce
             onClick={() => onChange?.(tab.id)}
           >
             <span data-surface-zone={tab.id === 'history' ? 'video-detail-dialog' : undefined}>{tab.label}</span>
-            {processing && tab.id === 'history' ? <span className={styles.taskDot} aria-label="Generation in progress" /> : null}
+            {processing && tab.id === 'history' ? <span className={styles.taskDot} aria-label={labels.processing} /> : null}
           </button>
         );
       })}
@@ -32,7 +40,8 @@ export function ResultTabs({ tabs = defaultTabs, value = 'edit', onChange, proce
   );
 }
 
-export function HistoryFilter({ value = 'all', options = [{ value: 'all', label: 'All' }], onChange }) {
+export function HistoryFilter({ value = 'all', options = [{ value: 'all', label: 'All' }], onChange, labels: labelOverrides = {} }) {
+  const labels = { ...defaultLabels, ...labelOverrides };
   const [opened, setOpened] = useState(false);
   const rootRef = useRef(null);
   const selected = options.find((option) => option.value === value) ?? options[0];
@@ -52,7 +61,7 @@ export function HistoryFilter({ value = 'all', options = [{ value: 'all', label:
         <span>{selected?.label ?? 'All'}</span><span className={styles.chevron} aria-hidden="true" />
       </button>
       {opened ? (
-        <ul role="listbox" aria-label="Filter history">
+        <ul role="listbox" aria-label={labels.filter}>
           {options.map((option) => (
             <li key={option.value}>
               <button
@@ -73,6 +82,7 @@ export function HistoryFilter({ value = 'all', options = [{ value: 'all', label:
 }
 
 export default function VideoResultsSurface({
+  labels: labelOverrides = {},
   activeTab = 'edit',
   onTabChange,
   processing = false,
@@ -83,12 +93,13 @@ export default function VideoResultsSurface({
   onFilterChange,
   className = '',
 }) {
+  const labels = { ...defaultLabels, ...labelOverrides };
   const isHistory = activeTab === 'history';
   return (
     <div className={`${styles.surface} ${className}`} data-component-role="video-results-surface">
       <div className={styles.toolbar}>
-        <ResultTabs value={activeTab} onChange={onTabChange} processing={processing} />
-        {isHistory ? <HistoryFilter value={filterValue} options={filterOptions} onChange={onFilterChange} /> : null}
+        <ResultTabs labels={labels} value={activeTab} onChange={onTabChange} processing={processing} />
+        {isHistory ? <HistoryFilter labels={labels} value={filterValue} options={filterOptions} onChange={onFilterChange} /> : null}
       </div>
       <div className={isHistory ? styles.historyContent : styles.editContent}>
         {isHistory ? historyContent : editContent}
