@@ -1,16 +1,26 @@
 {
   "schemaVersion": 3,
   "feature": "video-expansion",
-  "inputHash": "17043f58cc1f9737d050d19d2ca3a191e55b301fef1189a75ad20bbf18e6d960",
+  "inputHash": "c5d3825b1c3d88cac7b63df32cf3a5c6e43ac79cd630c5538a1ddaa6c9b4ad8c",
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "claude",
-  "model": "not-recorded",
-  "generatedAt": "2026-09-02T06:12:07.329Z",
+  "model": "claude-opus-5",
+  "generatedAt": "2026-09-02T17:51:23.247Z",
   "files": [
     "README.md",
+    "contract/integration.yaml",
+    "contract/task-contract.yaml",
+    "data/canvas-geometry.js",
+    "data/defaults.js",
+    "data/requirements.js",
     "extract-video-frames.js",
     "feature.jsx",
-    "feature.module.scss"
+    "icons.jsx",
+    "icons.module.scss",
+    "index.jsx",
+    "index.module.scss",
+    "settings/index.jsx",
+    "settings/index.module.scss"
   ],
   "collabContract": {
     "schemaVersion": 1,
@@ -42,7 +52,7 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/credit-controls/component.yaml",
-        "contractSha256": "bb1fa0ebbb9f543438844d38ac30643b4ccf9818f81f2ce84e52fd0bfc91e352",
+        "contractSha256": "5f848f1998c13660981f7451859580e37cfe8e0e78707e2fb9d5466ff89a9ec5",
         "implementationImport": "platform/ui/credit-controls/index.js",
         "implementationSha256": "4b3b79cbbdcfaeb7a5ffd74419190b6a663f2167fbdfc386f00e6ecaaf52467b",
         "runtimeAssets": [
@@ -65,9 +75,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/ratio/component.yaml",
-        "contractSha256": "90a1aa7c3d2d70f53979e047e90b60f63bdc30c454afbfab8351d7c5be0866e1",
+        "contractSha256": "3acc9408875fd7be8d99b44d9af693ca5b4a2ed2e7e1829a9d2cbbb52ca48d26",
         "implementationImport": "platform/ui/ratio/index.js",
-        "implementationSha256": "e0670127571081ac223e5488444d16999b233afefc77ca657989a09482b2b0d3",
+        "implementationSha256": "1c111553c535afa412e6885daec02c1a8142944e76b81d49ed0a9d6eae21175d",
         "runtimeAssets": []
       },
       {
@@ -75,9 +85,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/result-page-shell/component.yaml",
-        "contractSha256": "991cbcd7ad38886584911e4218efa77e9549ebfe1ac3f7618317d580e91dab28",
+        "contractSha256": "066abe92f173e8a17de9e2cbfe134fb14cb6039b8bdc70d95ab8f703348ca322",
         "implementationImport": "platform/ui/result-page-shell/index.js",
-        "implementationSha256": "73fdf4fb696d1e2f73492349834346ac4aad1b31bf26a7a8e99dc6154b73b531",
+        "implementationSha256": "195df12a7a6f8b6eeb8e3497a6ea840b830e06b8ac64ea89a3a2bff8db211b36",
         "runtimeAssets": [
           {
             "repositoryPath": "design-library/assets/font/yco-interface-icons/icomoon.woff",
@@ -130,7 +140,7 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/tool-page-layout/component.yaml",
-        "contractSha256": "1064649ec4a963e98d417fb61513941fa75eb62044d81f98e035f008f613f3a3",
+        "contractSha256": "a31cd9d9a8ac29c101e81b1b49a9281cd2004f0463d9396e9d1f261482dc7c60",
         "implementationImport": "platform/ui/tool-page-layout/index.js",
         "implementationSha256": "2076d23d3c96e1efa3ace685d4e3a877d70f8f4f16eec46ff8167479bd5f8d30",
         "runtimeAssets": []
@@ -140,9 +150,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/upload-media-block/component.yaml",
-        "contractSha256": "868c9529817443f948c6281c3fce8f1912f23c86d6e6570633a1292e31e59211",
+        "contractSha256": "af58b3cc68daeb1f0590ee0af7740617878423792ceec731f80788bf47695b79",
         "implementationImport": "platform/ui/upload-media-block/index.js",
-        "implementationSha256": "a408ba0ca4f8833d3c6e17785865b2f79c545c74c59d9a1151e93e01e9055015",
+        "implementationSha256": "f2d5aa83f7bd851f24e31b0cfc9bf45ee6857c860c4f6bf504d3e060d21206a4",
         "runtimeAssets": [
           {
             "repositoryPath": "design-library/assets/icon/yco-upload-media-block/add.svg",
@@ -163,9 +173,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/video-history/component.yaml",
-        "contractSha256": "d80a8c72d39d609f3512845200724b83499e8f86fc7a4201855ee1b2d3034038",
+        "contractSha256": "e901374d841b9dad26eb45ffc18e2a3ccfa5350d67cec9ebfdbb47c6cd37d911",
         "implementationImport": "platform/ui/video-history/index.js",
-        "implementationSha256": "5eaccd0bfe5d53772f3177b88c9d45ad9a399c91be96da7b97b04c6757f5292b",
+        "implementationSha256": "bd831ac8a00e6239abfb158c93ffa8b7e747c3ba49f048c60e86f3ccf85555cb",
         "runtimeAssets": [
           {
             "repositoryPath": "design-library/assets/icon/yco-video-actions/character-motion-swap.svg",
@@ -226,9 +236,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/video-info-dialog/component.yaml",
-        "contractSha256": "809905927478e78f0560902c3b0663e378b2fd8dc7324522f96d411bd87f3e0f",
+        "contractSha256": "562ce88616bf6e7e61404373b21d96c49ec392c9f7d1ceb06ef7c3f00fbef8ab",
         "implementationImport": "platform/ui/video-info-dialog/index.js",
-        "implementationSha256": "eb3e8c805f789ef66d4af523cf14e3c52772409880c64dda4bd3d67a2476b6f7",
+        "implementationSha256": "abfc3c89eaea7d82bac1ef2b0fc7a147f99481437a1c0eca82f3fba0face042f",
         "runtimeAssets": [
           {
             "repositoryPath": "design-library/assets/icon/yco-video-actions/character-motion-swap.svg",
@@ -289,9 +299,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/video-results-surface/component.yaml",
-        "contractSha256": "b1f2d2d7150ec6efa9a243ab1a86df131d2de8823e6bf2e7829855a3bab4c399",
+        "contractSha256": "272519eb485a6f13999cf4f6cff69d6cc4690d0d11dc1b87b55445eaea7ce95e",
         "implementationImport": "platform/ui/video-results-surface/index.js",
-        "implementationSha256": "bc230f05dd524371ecf3d8eb52c2ddbc4f0b20075b8e446eb410b893d2022357",
+        "implementationSha256": "4e9d71145d5ce4e917d9e77c63b009a6296f43c55a73b399034f0d76cc2ece85",
         "runtimeAssets": []
       },
       {
@@ -299,9 +309,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/video-timeline/component.yaml",
-        "contractSha256": "c1124905b13dad5e16017589050b39bbb790deffc14556d175d698e8e3756545",
+        "contractSha256": "da8d8deac49477fdd68aebcc04d353a902f1a3f0ba3e6dcbb71e6ab48ef6c396",
         "implementationImport": "platform/ui/video-timeline/index.js",
-        "implementationSha256": "b80fcf764ad74904457ff91168717fc6edc14ae9e3aaf06e137d501f51945666",
+        "implementationSha256": "a5068fbb428c30f43cc1b24585c276b0a39b7b987cbf7382abe506d938dcacfc",
         "runtimeAssets": [
           {
             "repositoryPath": "design-library/assets/icon/yco-video-timeline/pause.svg",
@@ -318,9 +328,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/video-trim-modal/component.yaml",
-        "contractSha256": "d42ed1e4aa36ab004c1b96f15020f661fe7f603e62c74e16d01d351f82bea2fe",
+        "contractSha256": "6f55e5c6865906b60e716472c811907620f7eb0372bc74e2d82d45f4eea2bc36",
         "implementationImport": "platform/ui/video-trim-modal/index.js",
-        "implementationSha256": "5186da354699b9f803f6c97df45ebf3baa09d84afa5741d1bd3fe291dc03304c",
+        "implementationSha256": "7cdc0778225c96afc1e402eb15eb52596792bf765ef2ee057a204a7214760d34",
         "runtimeAssets": []
       }
     ]

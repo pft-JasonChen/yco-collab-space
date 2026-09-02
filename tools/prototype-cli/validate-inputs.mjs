@@ -27,6 +27,16 @@ import {
   tokenProvenanceErrors,
 } from './resource-provenance.mjs';
 import { sharedComponentProvenanceErrors } from '../design-library/component-provenance.mjs';
+import { validateComponentContracts } from '../design-library/component-contracts.mjs';
+import {
+  collectUsedI18nKeys,
+  componentReuseErrors,
+  i18nDictionaryErrors,
+  i18nPlaceholderErrors,
+  integrationErrors,
+  payloadSampleErrors,
+  taskContractErrors,
+} from './handoff-policy.mjs';
 
 const ajv = new Ajv({ allErrors: true, strict: false });
 const contractSchema = await readJson(
@@ -44,11 +54,19 @@ const surfacePackSchema = await readJson(
 const mediaIntentSchema = await readJson(
   'tools/prototype-cli/schemas/media-intent.schema.json',
 );
+const taskContractSchema = await readJson(
+  'tools/prototype-cli/schemas/task-contract.schema.json',
+);
+const integrationSchema = await readJson(
+  'tools/prototype-cli/schemas/integration.schema.json',
+);
 const validateContract = ajv.compile(contractSchema);
 const validateValidation = ajv.compile(validationSchema);
 const validateSurfaceIntent = ajv.compile(surfaceIntentSchema);
 const validateSurfacePack = ajv.compile(surfacePackSchema);
 const validateMediaIntent = ajv.compile(mediaIntentSchema);
+const validateTaskContract = ajv.compile(taskContractSchema);
+const validateIntegration = ajv.compile(integrationSchema);
 const config = await readJson('prototype.config.json');
 const intakeOnly = process.argv.includes('--intake-only');
 
@@ -116,6 +134,50 @@ async function validateFeature(feature) {
   }
 
   errors.push(...mediaIntentSemanticErrors(mediaIntent, feature));
+
+  const catalogue = await validateComponentContracts();
+  errors.push(
+    ...componentReuseErrors(
+      surfaceIntent,
+      new Set(catalogue.contracts.map(({ contract }) => contract.id)),
+    ),
+  );
+
+  // Handoff inputs: PM-owned copy keyed the RD way, and the optional
+  // de-identified engine payload samples RD can wire an API against.
+  const featureRoot = fromRoot('features', feature);
+  const dictionaryPath = path.join('features', feature, 'product', 'i18n.json');
+  if (await pathExists(fromRoot(dictionaryPath))) {
+    const dictionary = await readJson(dictionaryPath);
+    if (dictionary.feature !== feature) {
+      errors.push('i18n.json feature does not match folder: ' + feature);
+    }
+    errors.push(...i18nDictionaryErrors(dictionary, await collectUsedI18nKeys(featureRoot)));
+    errors.push(...i18nPlaceholderErrors(dictionary));
+  }
+  const payloadSamples = await payloadSampleErrors(featureRoot);
+  errors.push(...payloadSamples.errors);
+
+  // Handoff contracts: what the feature needs from a backend, and which RD files
+  // a new module has to touch. Both are agent-derived and live under generated/.
+  const taskContractPath = path.join('features', feature, 'generated', 'contract', 'task-contract.yaml');
+  if (await pathExists(fromRoot(taskContractPath))) {
+    const taskContract = await readYaml(taskContractPath);
+    if (!validateTaskContract(taskContract)) {
+      errors.push('task-contract.yaml: ' + formatSchemaErrors(validateTaskContract.errors));
+    } else {
+      errors.push(...taskContractErrors(taskContract, contract, feature, payloadSamples.files));
+    }
+  }
+  const integrationPath = path.join('features', feature, 'generated', 'contract', 'integration.yaml');
+  if (await pathExists(fromRoot(integrationPath))) {
+    const integration = await readYaml(integrationPath);
+    if (!validateIntegration(integration)) {
+      errors.push('integration.yaml: ' + formatSchemaErrors(validateIntegration.errors));
+    } else {
+      errors.push(...integrationErrors(integration, feature, catalogue.contracts[0]?.contract?.rd?.snapshot));
+    }
+  }
 
   if (contract.feature.entryRoute !== expectedRoute) {
     errors.push('Contract entryRoute must be ' + expectedRoute);

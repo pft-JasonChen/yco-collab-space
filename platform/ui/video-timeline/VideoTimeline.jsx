@@ -11,7 +11,13 @@ export function formatTimelineTime(seconds) {
   return `${Math.floor(value / 60)}:${String(Math.floor(value % 60)).padStart(2, '0')}`;
 }
 
+/** Every user-facing string is a prop so RD can hand them straight to its own t(). */
+const defaultLabels = {
+  position: 'Video playback position',
+};
+
 export default function VideoTimeline({
+  labels: labelOverrides = {},
   posterUrl,
   frameUrls = [],
   duration = 0,
@@ -27,6 +33,7 @@ export default function VideoTimeline({
   thumbnailCount = 10,
   className = '',
 }) {
+  const labels = { ...defaultLabels, ...labelOverrides };
   const selectionEnd = Number.isFinite(endTime) ? endTime : duration;
   const safeEnd = Math.max(startTime, selectionEnd);
   const value = clamp(currentTime, startTime, safeEnd);
@@ -65,7 +72,7 @@ export default function VideoTimeline({
         </div>
         <span className={styles.playhead} style={{ left: `${progress}%` }} aria-hidden="true" />
         <input
-          aria-label="Video playback position"
+          aria-label={labels.position}
           type="range"
           min={startTime}
           max={safeEnd || 0}

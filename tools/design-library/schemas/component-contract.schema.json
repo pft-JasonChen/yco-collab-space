@@ -20,24 +20,74 @@
     "decisionBasis"
   ],
   "properties": {
-    "schemaVersion": { "const": 1 },
-    "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
-    "displayName": { "type": "string", "minLength": 1 },
-    "classification": { "enum": ["foundation", "composite", "pattern", "feature-only"] },
-    "status": { "enum": ["draft", "needs-review", "pilot-approved", "canonical-approved", "deprecated"] },
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "displayName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "classification": {
+      "enum": [
+        "foundation",
+        "composite",
+        "pattern",
+        "feature-only"
+      ]
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "needs-review",
+        "pilot-approved",
+        "canonical-approved",
+        "deprecated"
+      ]
+    },
     "rd": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["sourcePackage", "sourceVersion", "snapshot", "sourcePaths", "sourceHashes"],
+      "required": [
+        "sourcePackage",
+        "sourceVersion",
+        "snapshot",
+        "portability",
+        "sourcePaths",
+        "sourceHashes"
+      ],
       "properties": {
-        "sourcePackage": { "type": "string", "minLength": 1 },
-        "sourceVersion": { "type": "string", "minLength": 1 },
-        "snapshot": { "type": "string", "minLength": 1 },
+        "sourcePackage": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "snapshot": {
+          "type": "string",
+          "minLength": 1
+        },
+        "portability": {
+          "description": "How RD can consume this component. verbatim: one or more files are byte-identical to the RD baseline and guarded by validate:rd-parity. drop-in: RD only needs to change the import alias and reconnect i18n/redux. reference: behaviour and visual reference only; RD keeps its own implementation.",
+          "enum": [
+            "verbatim",
+            "drop-in",
+            "reference"
+          ]
+        },
         "sourcePaths": {
           "type": "array",
           "minItems": 1,
           "uniqueItems": true,
-          "items": { "type": "string", "minLength": 1 }
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
         },
         "sourceHashes": {
           "type": "array",
@@ -45,10 +95,43 @@
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": ["path", "sha256"],
+            "required": [
+              "path",
+              "sha256"
+            ],
             "properties": {
-              "path": { "type": "string", "minLength": 1 },
-              "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+              "path": {
+                "type": "string",
+                "minLength": 1
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              }
+            }
+          }
+        },
+        "verbatimFiles": {
+          "description": "File-level parity pairs. Each implementation file must be byte-identical to the vendored RD baseline at platform/rd-baseline/<snapshot>/<baseline>. Required when portability is verbatim.",
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "implementation",
+              "baseline"
+            ],
+            "properties": {
+              "implementation": {
+                "type": "string",
+                "pattern": "^platform/ui/[A-Za-z0-9/._-]+$"
+              },
+              "baseline": {
+                "type": "string",
+                "minLength": 1
+              }
             }
           }
         }
@@ -57,62 +140,153 @@
     "figma": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["status", "fileKey", "componentSetNodeId", "variants"],
+      "required": [
+        "status",
+        "fileKey",
+        "componentSetNodeId",
+        "variants"
+      ],
       "properties": {
-        "status": { "enum": ["pending", "mapped"] },
-        "fileKey": { "type": ["string", "null"] },
-        "componentSetNodeId": { "type": ["string", "null"] },
+        "status": {
+          "enum": [
+            "pending",
+            "mapped"
+          ]
+        },
+        "fileKey": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "componentSetNodeId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
         "variants": {
           "type": "array",
-          "items": { "type": "string", "minLength": 1 }
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
         }
       }
     },
     "implementation": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["importPath", "storyId", "framework", "dependencies", "removedDependencies"],
+      "required": [
+        "importPath",
+        "storyId",
+        "framework",
+        "dependencies",
+        "removedDependencies"
+      ],
       "properties": {
-        "importPath": { "type": "string", "pattern": "^platform/ui/[a-z0-9/-]+\\.(?:js|jsx)$" },
+        "importPath": {
+          "type": "string",
+          "pattern": "^platform/ui/[a-z0-9/-]+\\.(?:js|jsx)$"
+        },
         "compatibilityImportPaths": {
           "type": "array",
           "uniqueItems": true,
-          "items": { "type": "string", "pattern": "^platform/ui/[A-Za-z0-9/_-]+\\.(?:js|jsx)$" }
+          "items": {
+            "type": "string",
+            "pattern": "^platform/ui/[A-Za-z0-9/_-]+\\.(?:js|jsx)$"
+          }
         },
-        "storyId": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
-        "framework": { "const": "react" },
-        "dependencies": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
-        "removedDependencies": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } }
+        "storyId": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "framework": {
+          "const": "react"
+        },
+        "dependencies": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "removedDependencies": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
       }
     },
     "publicApi": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["props", "states"],
+      "required": [
+        "props",
+        "states"
+      ],
       "properties": {
         "props": {
           "type": "array",
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": ["name", "required"],
+            "required": [
+              "name",
+              "required"
+            ],
             "properties": {
-              "name": { "type": "string", "minLength": 1 },
-              "required": { "type": "boolean" },
-              "values": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } }
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "required": {
+                "type": "boolean"
+              },
+              "values": {
+                "type": "array",
+                "uniqueItems": true,
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
             }
           }
         },
-        "states": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } }
+        "states": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
       }
     },
     "tokens": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["lockPath", "uses"],
+      "required": [
+        "lockPath",
+        "uses"
+      ],
       "properties": {
-        "lockPath": { "const": "platform/tokens/tokens.lock.json" },
-        "uses": { "type": "array", "uniqueItems": true, "items": { "type": "string", "pattern": "^--[a-z0-9-]+$" } }
+        "lockPath": {
+          "const": "platform/tokens/tokens.lock.json"
+        },
+        "uses": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^--[a-z0-9-]+$"
+          }
+        }
       }
     },
     "assets": {
@@ -120,35 +294,74 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["path", "usage"],
+        "required": [
+          "path",
+          "usage"
+        ],
         "properties": {
-          "path": { "type": "string", "pattern": "^assets/(?:image|video|icon|illustration|logo|font)/[a-z0-9][a-z0-9-]*$" },
-          "usage": { "enum": ["runtime", "storybook"] }
+          "path": {
+            "type": "string",
+            "pattern": "^assets/(?:image|video|icon|illustration|logo|font)/[a-z0-9][a-z0-9-]*$"
+          },
+          "usage": {
+            "enum": [
+              "runtime",
+              "storybook"
+            ]
+          }
         }
       }
     },
     "review": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["pilotApprover", "canonicalReview"],
+      "required": [
+        "pilotApprover",
+        "canonicalReview"
+      ],
       "properties": {
         "pilotApprover": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["actor", "id", "date"],
+          "required": [
+            "actor",
+            "id",
+            "date"
+          ],
           "properties": {
-            "actor": { "const": "pm" },
-            "id": { "type": "string", "minLength": 1 },
-            "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" }
+            "actor": {
+              "const": "pm"
+            },
+            "id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "date": {
+              "type": "string",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+            }
           }
         },
         "canonicalReview": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["designer", "rd"],
+          "required": [
+            "designer",
+            "rd"
+          ],
           "properties": {
-            "designer": { "enum": ["pending", "approved"] },
-            "rd": { "enum": ["pending", "approved"] }
+            "designer": {
+              "enum": [
+                "pending",
+                "approved"
+              ]
+            },
+            "rd": {
+              "enum": [
+                "pending",
+                "approved"
+              ]
+            }
           }
         }
       }
@@ -156,7 +369,10 @@
     "decisionBasis": {
       "type": "array",
       "minItems": 1,
-      "items": { "type": "string", "minLength": 1 }
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
     }
   }
 }

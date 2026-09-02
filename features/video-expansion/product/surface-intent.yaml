@@ -38,6 +38,65 @@ layoutIntent:
     - Keep the pre-generation video canvas dominant before secondary inspector details.
     - Preserve the uploaded-media Trim action, canvas playback timeline, and Generate action when the inspector stacks at tablet width, and keep the shared trim dialog within the viewport.
     - Keep History cards and the video-information dialog usable without horizontal overflow.
+componentReuse:
+  - role: aspect-ratio-selector
+    resolution: existing-component
+    component: ratio
+    evidence: RD common/ratio ported as platform/ui/ratio; Video Expansion passes the IMAGE_EXTENDER variant with no new UI.
+  - role: tool-rail
+    resolution: existing-component
+    component: result-page-shell
+    evidence: ToolFamilyMenu inside the shared shell already renders the production tool rail.
+  - role: trim-control
+    resolution: existing-component
+    component: video-trim-modal
+    evidence: Shared trim modal covers the segment selection; only the trigger button is feature-owned.
+  - role: uploaded-media
+    resolution: existing-component
+    component: upload-media-block
+    evidence: RD common upload block covers empty, uploaded, remove and replace; the Trim action is injected through actionSlot.
+  - role: canvas-drag-positioning
+    resolution: feature-only
+    evidence: No RD component owns direct source dragging inside a target ratio frame; PM closed DESIGN-004 keeping it feature behaviour.
+  - role: video-playback-timeline
+    resolution: existing-component
+    component: video-timeline
+    evidence: Video Object Remover derived timeline ported as platform/ui/video-timeline; the feature only supplies captured frames.
+  - role: history-list
+    resolution: existing-component
+    component: video-history
+    evidence: RD video-feature history list ported as platform/ui/video-history.
+  - role: history-card
+    resolution: existing-component
+    component: video-history
+    evidence: VideoHistoryCard is exported by the same shared family.
+  - role: edit-history-tabs
+    resolution: existing-component
+    component: video-results-surface
+    evidence: ResultTabs inside the shared results surface reproduces the RD BLACK_VIDEO_RESULT segmented control.
+  - role: history-filter
+    resolution: existing-component
+    component: video-results-surface
+    evidence: HistoryFilter is composed by the shared results surface rather than duplicated in the list.
+  - role: video-detail-dialog
+    resolution: existing-component
+    component: video-info-dialog
+    evidence: RD common Modal plus video-detail-modal ported as platform/ui/video-info-dialog.
+  - role: next-action
+    resolution: existing-component
+    component: video-info-dialog
+    evidence: The Next Action grid is part of the same shared dialog family.
+  - role: error-recovery
+    resolution: feature-only
+    evidence: The empty and upload-error states use feature copy and the feature's own upload entry; no RD component covers this pairing.
+  - role: credit-control
+    resolution: existing-component
+    component: credit-controls
+    evidence: Header balance uses the shared CreditControl with an inert synthetic value.
+  - role: generate-action-with-credit
+    resolution: existing-component
+    component: credit-controls
+    evidence: GenerateActionBar reproduces the RD ApplyButtonWithCoinCredit single-tool treatment on the shared Button.
 deviations:
   - The primary video result is presented through YCO History and the shared video-information dialog rather than a standalone inline app result page.
   - The borrowed photo-editing pack contributes the settings-inspector and tool-rail roles; its image-result role is not used.

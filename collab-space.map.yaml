@@ -227,6 +227,9 @@ workflows:
       - design-library/components/**
       - design-library/assets/**
       - platform/ui/**
+      - platform/rd-baseline/**
+      - platform/runtime/**
+      - migration/**
       - .storybook/**
       - tools/design-library/**
       - docs/architecture/**

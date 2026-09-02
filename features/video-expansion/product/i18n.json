@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "feature": "video-expansion",
+  "locale": "en",
+  "note": "RD global flat dot-notation keys. origin rd-existing means the key already exists in RD src/i18n/json/*.json with this exact value and must not be re-declared; origin new means RD must add it. Shape matches RD's own i18n JSON so the new subset merges directly.",
+  "keys": {
+    "header.items.product.video.expansion": {
+      "value": "Video Expansion",
+      "origin": "new"
+    },
+    "video.expansion.settings.video.title": {
+      "value": "Video",
+      "origin": "new"
+    },
+    "text.to.image.settings.advance.settings.aspect.ratio": {
+      "value": "Aspect ratio",
+      "origin": "rd-existing"
+    },
+    "video.object.remover.generate.button": {
+      "value": "Generate",
+      "origin": "rd-existing"
+    },
+    "text.to.image.settings.styles.all": {
+      "value": "All",
+      "origin": "rd-existing"
+    },
+    "video.expansion.empty.title": {
+      "value": "Expand your video canvas",
+      "origin": "new"
+    },
+    "video.expansion.empty.desc": {
+      "value": "Upload a video, select up to {{seconds}} seconds, then choose a new aspect ratio.",
+      "origin": "new"
+    },
+    "video.expansion.empty.sample": {
+      "value": "Or try the sample video",
+      "origin": "new"
+    },
+    "ai.agent.dialog.upload.video": {
+      "value": "Upload Video",
+      "origin": "rd-existing"
+    },
+    "video.expansion.error.upload.title": {
+      "value": "This video can’t be opened",
+      "origin": "new"
+    },
+    "video.expansion.error.upload.button": {
+      "value": "Choose another video",
+      "origin": "new"
+    },
+    "video.expansion.trim.title": {
+      "value": "Trim video",
+      "origin": "new"
+    },
+    "video.expansion.trim.max.length": {
+      "value": "Select up to {{seconds}} seconds",
+      "origin": "new"
+    },
+    "video.expansion.trim.action": {
+      "value": "Trim video",
+      "origin": "new"
+    },
+    "general.cancel": {
+      "value": "Cancel",
+      "origin": "rd-existing"
+    },
+    "ai.agent.trim.use.video": {
+      "value": "Use Video",
+      "origin": "rd-existing"
+    },
+    "video.expansion.history.source.badge": {
+      "value": "Loaded from History",
+      "origin": "new"
+    },
+    "video.expansion.processing.desc": {
+      "value": "Expanding the selected frame…",
+      "origin": "new"
+    },
+    "video.expansion.failure.title": {
+      "value": "Video expansion failed",
+      "origin": "new"
+    },
+    "video.expansion.history.just.now": {
+      "value": "Just now",
+      "origin": "new"
+    },
+    "video.detail.modal.original.source": {
+      "value": "Original Source",
+      "origin": "rd-existing"
+    },
+    "video.detail.modal.video.length": {
+      "value": "Video Length",
+      "origin": "rd-existing"
+    },
+    "image.to.video.settings.image.resolution": {
+      "value": "Resolution",
+      "origin": "rd-existing"
+    },
+    "header.items.product.video.enhancer": {
+      "value": "Video Enhancer",
+      "origin": "rd-existing"
+    },
+    "cross.promote.to.face.swap": {
+      "value": "Face Swap",
+      "origin": "rd-existing"
+    },
+    "text.to.video.next.action.option.title.style.transfer": {
+      "value": "Style Transfer",
+      "origin": "rd-existing"
+    },
+    "header.items.product.object.removal": {
+      "value": "Object Removal",
+      "origin": "rd-existing"
+    },
+    "header.items.product.ai.video.editor": {
+      "value": "Video Editor",
+      "origin": "rd-existing"
+    },
+    "header.items.product.ai.motion.transfer": {
+      "value": "Character Motion Swap",
+      "origin": "rd-existing"
+    },
+    "video.expansion.processing.label": {
+      "value": "Generating video",
+      "origin": "new"
+    }
+  }
+}

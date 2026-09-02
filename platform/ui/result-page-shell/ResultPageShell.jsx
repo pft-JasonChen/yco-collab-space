@@ -20,7 +20,16 @@ const defaultToolFamilies = [
   { id: 'template', label: 'Template', glyph: '\ue907' },
 ];
 
+/** Every user-facing string is a prop so RD can hand them straight to its own t(). */
+const defaultLabels = {
+  home: 'YouCam Online Editor home',
+  account: 'Account',
+  toolFamilies: 'Tool families',
+  toolList: 'YCO tools',
+};
+
 export function ProductHeader({
+  labels: labelOverrides = {},
   title,
   showInfo = true,
   onInfo,
@@ -30,6 +39,7 @@ export function ProductHeader({
   showCredits = true,
   onCredits,
 }) {
+  const labels = { ...defaultLabels, ...labelOverrides };
   return (
     <header
       className={styles.productHeader}
@@ -42,7 +52,7 @@ export function ProductHeader({
         type="button"
         onClick={onBrand}
         disabled={!onBrand}
-        aria-label="YouCam Online Editor home"
+        aria-label={labels.home}
       >
         <img className={styles.logoSymbol} src={logoSymbol} alt="" aria-hidden="true" />
         <picture>
@@ -65,7 +75,7 @@ export function ProductHeader({
           type="button"
           onClick={onAccount}
           disabled={!onAccount}
-          aria-label="Account"
+          aria-label={labels.account}
         >
           <img src={profileIcon} alt="" aria-hidden="true" />
         </button>
@@ -75,19 +85,21 @@ export function ProductHeader({
 }
 
 export function ToolFamilyMenu({
+  labels: labelOverrides = {},
   items = defaultToolFamilies,
   activeId = 'ai-video',
   onSelect,
 }) {
+  const labels = { ...defaultLabels, ...labelOverrides };
   return (
     <aside
       className={styles.toolMenu}
       data-testid="tool-family-menu"
       data-surface-zone="tool-navigation"
       data-component-role="tool-rail"
-      aria-label="Tool families"
+      aria-label={labels.toolFamilies}
     >
-      <nav className={styles.toolMenuScroller} aria-label="YCO tools">
+      <nav className={styles.toolMenuScroller} aria-label={labels.toolList}>
         {items.map((item) => {
           const active = item.id === activeId;
           return (
@@ -115,6 +127,7 @@ export function ToolFamilyMenu({
 }
 
 export default function ResultPageShell({
+  labels: labelOverrides = {},
   title,
   showInfo = true,
   activeToolId = 'ai-video',
@@ -128,11 +141,12 @@ export default function ResultPageShell({
   onCredits,
   children,
 }) {
+  const labels = { ...defaultLabels, ...labelOverrides };
   return (
     <div className={styles.shell}>
-      <ProductHeader title={title} showInfo={showInfo} onInfo={onInfo} onAccount={onAccount} onBrand={onBrand} creditBalance={creditBalance} showCredits={showCredits} onCredits={onCredits} />
+      <ProductHeader labels={labels} title={title} showInfo={showInfo} onInfo={onInfo} onAccount={onAccount} onBrand={onBrand} creditBalance={creditBalance} showCredits={showCredits} onCredits={onCredits} />
       <div className={styles.shellBody}>
-        <ToolFamilyMenu items={toolItems} activeId={activeToolId} onSelect={onToolSelect} />
+        <ToolFamilyMenu labels={labels} items={toolItems} activeId={activeToolId} onSelect={onToolSelect} />
         <main className={styles.shellContent}>{children}</main>
       </div>
     </div>

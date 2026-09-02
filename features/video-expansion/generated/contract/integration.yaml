@@ -1,0 +1,76 @@
+schemaVersion: 1
+feature: video-expansion
+derivedFrom:
+  snapshot: yce-frontend-gm-260909
+  sourceVersion: 1.34.1
+  referenceModule: src/components/result-page/character-motion-swap
+registrationSurface:
+  - path: src/utils/moduleTypes.js
+    need: >-
+      Add the moduleType, its pageKey, and the crossPromote mapping so History cards,
+      Next Action and the tool menu can resolve this module.
+    evidence: characterMotionSwap appears at moduleTypes.js:1435 and in the crossPromoteTypes tables.
+  - path: src/utils/task/strategies/ai-video.js
+    need: >-
+      Add acts / payload / body strategies for the new moduleType. See
+      contract/task-contract.yaml for the parameters and their bounds.
+    evidence: _buildCharacterMotionSwapActs plus its entries in actsStrategies, payloadStrategies and bodyStrategies.
+  - path: src/utils/indexedDBController.js
+    need: Task polling list, red-dot store and task-to-history store for the new module.
+    evidence: yceCharacterMotionSwapTaskPollingList / RedDot / Task2HistoryList stores.
+  - path: src/utils/videoUtils.js
+    need: History-item predicate so extractData resolves this module's results.
+    evidence: isCharacterMotionSwapItem and its use in videoUtils.js:600.
+  - path: src/components/result-page/index.js
+    need: Mount the module component for its moduleType.
+    evidence: The result-page router switches on moduleType across its 785 lines.
+  - path: src/pages/<route>/index.js
+    need: Page entry using getCMSStaticProps plus the shared Layout.
+    evidence: src/pages/ai-character-generator/index.js is the reference shape.
+  - path: src/pages/[locale]/<route>/index.js
+    need: Locale-routed duplicate of the page entry.
+    evidence: Every product page has a matching entry under src/pages/[locale]/.
+  - path: src/utils/cmsTypes.js
+    need: Only if the page needs CMS content. Video Expansion has no CMS requirement in this prototype.
+  - path: src/i18n/json/*.json
+    need: >-
+      Add the keys whose origin is "new" in features/video-expansion/product/i18n.json.
+      Keys marked rd-existing already ship with the exact same value and must not be
+      re-declared.
+portedLayers:
+  - layer: L1-composition
+    path: features/video-expansion/generated/settings/
+    handling: copy-with-alias-swap
+    notes: >-
+      Imports only platform/ui components, ../data and the t() passed in as a prop. Swap the
+      relative platform/ui paths for the RD @/ aliases, pass RD's getTranslationFunction
+      result as t, and connect the callbacks to RD state.
+  - layer: L2-data
+    path: features/video-expansion/generated/data/
+    handling: copy-as-is
+    notes: >-
+      Pure data and pure functions with no framework imports. canvas-geometry.js carries the
+      target-frame sizing, movement-axis and clamping maths that the canvas depends on.
+  - layer: L3-orchestration
+    path: features/video-expansion/generated/index.jsx
+    handling: rewrite-against-rd-hooks
+    notes: >-
+      Read it as the executable behaviour spec, then rebuild against useProcess, useV2vApply,
+      useUpdateResultRedux and the rest of the production orchestration. The prototype's
+      synthetic setTimeout generation lifecycle has no production counterpart.
+  - layer: L4-contract
+    path: features/video-expansion/generated/contract/task-contract.yaml
+    handling: reference-only
+    notes: Input semantics and bounds for the task strategy, plus the open questions RD must resolve.
+  - layer: assets
+    path: features/video-expansion/generated/icons.jsx
+    handling: reference-only
+    notes: >-
+      Placeholder inline SVG. RD uses its own icon assets; these exist only so the prototype
+      does not depend on an icon collection the Design Library has not published.
+i18nKeySource: features/video-expansion/product/i18n.json
+decisionBasis:
+  - The surface is derived from an existing RD module rather than maintained by hand, so it tracks the snapshot instead of drifting from it. character-motion-swap was chosen because it is the most recent complete video module in the snapshot.
+  - Paths are recorded with the evidence that identified them, so RD can check the derivation rather than trusting it.
+  - Route and page-entry paths stay as placeholders because the product route is a PM and Product Owner decision, not something the snapshot can supply.
+  - Verifying that every recorded path still exists in the snapshot requires the full vendored snapshot; until then this file is structurally validated and manually cross-checked.

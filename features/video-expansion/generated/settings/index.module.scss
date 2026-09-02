@@ -1,0 +1,45 @@
+.settingsSection {
+  padding: var(--spacing-20) var(--spacing-24);
+  border-bottom: 1px solid var(--stroke-weak);
+}
+
+.sectionTitle {
+  margin: 0 0 var(--spacing-8);
+  color: var(--text-strong);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  font-weight: var(--font-weight-strong);
+}
+
+.trimMediaAction { color: var(--icon-neutral); }
+
+.fileInput {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+.inlineError,
+.historySourceBadge {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  margin: var(--spacing-12) var(--spacing-24) 0;
+  padding: var(--spacing-8) var(--spacing-12);
+  border-radius: var(--corner-radius-4);
+  font-size: var(--font-size-micro);
+  line-height: var(--line-height-micro);
+}
+
+.inlineError {
+  color: var(--text-error);
+  background: var(--fill-error-weak);
+  border: 1px solid var(--stroke-error-weak);
+}
+
+.historySourceBadge {
+  color: var(--text-success);
+  background: var(--fill-success-weak);
+}
