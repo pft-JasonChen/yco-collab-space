@@ -1,0 +1,284 @@
+schemaVersion: 1
+feature: video-expansion
+route: /features/video-expansion/
+checks:
+  - id: production-workspace-shell
+    criterion: VE-011
+    assertions:
+      - type: visible
+        selector: "[data-testid='production-header']"
+      - type: visible
+        selector: "[data-testid='tool-family-menu']"
+      - type: attribute
+        selector: "[data-testid='tool-family-ai-video']"
+        name: aria-current
+        value: page
+      - type: count
+        selector: "[data-testid='credit-control']"
+        value: 1
+      - type: text
+        selector: "[data-testid='credit-balance']"
+        value: "436"
+      - type: count
+        selector: "[data-testid='product-title-info']"
+        value: 0
+  - id: open-shared-trim-dialog
+    criterion: VE-002
+    steps:
+      - action: click
+        selector: "[data-testid='load-sample-video']"
+    assertions:
+      - type: visible
+        selector: "[data-testid='video-trim-dialog']"
+      - type: visible
+        selector: "[data-testid='trim-handle-start']"
+      - type: visible
+        selector: "[data-testid='trim-handle-end']"
+      - type: visible
+        selector: "[data-testid='trim-use-video']"
+  - id: initial-empty-state
+    criterion: VE-001
+    assertions:
+      - type: visible
+        selector: "[data-testid='video-expansion-page']"
+      - type: visible
+        selector: "[data-testid='video-upload-entry']"
+      - type: visible
+        selector: "[data-testid='edit-tab']"
+      - type: visible
+        selector: "[data-testid='history-tab']"
+  - id: load-sample-editor
+    criterion: VE-002
+    steps:
+      - action: click
+        selector: "[data-testid='load-sample-video']"
+      - action: click
+        selector: "[data-testid='trim-use-video']"
+    assertions:
+      - type: visible
+        selector: "[data-testid='video-canvas']"
+      - type: visible
+        selector: "[data-testid='open-trim-dialog']"
+      - type: visible
+        selector: "[data-testid='selected-duration']"
+      - type: count
+        selector: "[data-testid='ratio-option']"
+        value: 5
+      - type: attribute
+        selector: "[data-testid='ratio-16-9']"
+        name: aria-pressed
+        value: "true"
+  - id: matching-ratio-positioning
+    criterion: VE-003
+    steps:
+      - action: click
+        selector: "[data-testid='load-sample-video']"
+      - action: click
+        selector: "[data-testid='trim-use-video']"
+      - action: click
+        selector: "[data-testid='ratio-3-4']"
+    assertions:
+      - type: attribute
+        selector: "[data-testid='video-canvas']"
+        name: data-ratio
+        value: "3:4"
+      - type: attribute
+        selector: "[data-testid='canvas-video']"
+        name: data-movement
+        value: free
+      - type: text
+        selector: "[data-testid='selected-duration']"
+        value: "0:30"
+  - id: portrait-ratio-frame-contained
+    criterion: VE-013
+    steps:
+      - action: click
+        selector: "[data-testid='load-sample-video']"
+      - action: click
+        selector: "[data-testid='trim-use-video']"
+      - action: click
+        selector: "[data-testid='ratio-9-16']"
+    assertions:
+      - type: attribute
+        selector: "[data-testid='canvas-viewport']"
+        name: data-fixed-height
+        value: "true"
+      - type: attribute
+        selector: "[data-testid='target-ratio-frame']"
+        name: data-frame-contained
+        value: "true"
+  - id: start-generation
+    criterion: VE-004
+    steps:
+      - action: click
+        selector: "[data-testid='load-sample-video']"
+      - action: click
+        selector: "[data-testid='trim-use-video']"
+      - action: click
+        selector: "[data-testid='generate-video']"
+    assertions:
+      - type: text
+        selector: "[data-testid='generate-credit-cost']"
+        value: "10"
+      - type: attribute
+        selector: "[data-testid='history-tab']"
+        name: aria-selected
+        value: "true"
+      - type: visible
+        selector: "[data-testid='generation-processing-card']"
+  - id: open-completed-video-detail
+    criterion: VE-005
+    steps:
+      - action: click
+        selector: "[data-testid='load-sample-video']"
+      - action: click
+        selector: "[data-testid='trim-use-video']"
+      - action: click
+        selector: "[data-testid='generate-video']"
+      - action: click
+        selector: "[data-testid='generated-history-thumbnail']"
+    assertions:
+      - type: visible
+        selector: "[data-testid='video-detail-dialog']"
+      - type: visible
+        selector: "[data-testid='video-info-backdrop']"
+      - type: visible
+        selector: "[data-testid='next-action-video-expansion']"
+  - id: next-action-handoff
+    criterion: VE-006
+    steps:
+      - action: click
+        selector: "[data-testid='history-tab']"
+      - action: click
+        selector: "[data-testid='history-success-thumbnail']"
+      - action: click
+        selector: "[data-testid='next-action-video-expansion']"
+    assertions:
+      - type: hidden
+        selector: "[data-testid='video-detail-dialog']"
+      - type: visible
+        selector: "[data-testid='video-canvas']"
+      - type: visible
+        selector: "[data-testid='history-source-badge']"
+  - id: upload-error-recovery
+    criterion: VE-007
+    steps:
+      - action: set-files
+        selector: "[data-testid='video-file-input']"
+        name: unsupported.txt
+        mimeType: text/plain
+        value: synthetic invalid video
+    assertions:
+      - type: visible
+        selector: "[data-testid='upload-error']"
+      - type: visible
+        selector: "[data-testid='choose-another-video']"
+  - id: retry-failed-generation
+    criterion: VE-008
+    steps:
+      - action: click
+        selector: "[data-testid='history-tab']"
+      - action: click
+        selector: "[data-testid='retry-failed-generation']"
+    assertions:
+      - type: visible
+        selector: "[data-testid='generation-processing-card']"
+  - id: responsive-workspace
+    criterion: VE-009
+    steps:
+      - action: click
+        selector: "[data-testid='load-sample-video']"
+      - action: click
+        selector: "[data-testid='trim-use-video']"
+    assertions:
+      - type: visible
+        selector: "[data-testid='settings-inspector']"
+      - type: visible
+        selector: "[data-testid='video-canvas']"
+      - type: visible
+        selector: "[data-testid='open-trim-dialog']"
+      - type: visible
+        selector: "[data-testid='canvas-playback-timeline']"
+      - type: attribute
+        selector: "[data-testid='canvas-playback-timeline']"
+        name: data-placement
+        value: below-canvas
+      - type: visible
+        selector: "[data-testid='generate-video']"
+  - id: canvas-containment
+    criterion: VE-010
+    steps:
+      - action: click
+        selector: "[data-testid='load-sample-video']"
+      - action: click
+        selector: "[data-testid='trim-use-video']"
+    assertions:
+      - type: attribute
+        selector: "[data-testid='canvas-video']"
+        name: data-contained
+        value: "true"
+      - type: attribute
+        selector: "[data-testid='canvas-video']"
+        name: data-fit
+        value: contain
+      - type: attribute
+        selector: "[data-testid='canvas-video']"
+        name: data-draggable
+        value: "true"
+      - type: attribute
+        selector: "[data-testid='canvas-viewport']"
+        name: data-fixed-height
+        value: "true"
+      - type: attribute
+        selector: "[data-testid='target-ratio-frame']"
+        name: data-frame-contained
+        value: "true"
+  - id: canvas-playback-sync
+    criterion: VE-013
+    steps:
+      - action: click
+        selector: "[data-testid='load-sample-video']"
+      - action: click
+        selector: "[data-testid='trim-use-video']"
+      - action: click
+        selector: "[data-testid='canvas-playback-toggle']"
+    assertions:
+      - type: attribute
+        selector: "[data-testid='canvas-video']"
+        name: data-playing
+        value: "true"
+      - type: attribute
+        selector: "[data-testid='canvas-playback-timeline']"
+        name: data-synchronized
+        value: "true"
+  - id: canvas-video-and-derived-timeline
+    criterion: VE-014
+    steps:
+      - action: click
+        selector: "[data-testid='load-sample-video']"
+      - action: click
+        selector: "[data-testid='trim-use-video']"
+    assertions:
+      - type: count
+        selector: "[data-testid='canvas-poster']"
+        value: 0
+      - type: count
+        selector: "[data-testid='canvas-video']"
+        value: 1
+      - type: attribute
+        selector: "[data-testid='canvas-playback-timeline']"
+        name: data-frame-strategy
+        value: browser-capture-10
+  - id: history-single-feature-tag
+    criterion: VE-012
+    steps:
+      - action: click
+        selector: "[data-testid='history-tab']"
+    assertions:
+      - type: attribute
+        selector: "[data-testid='history-success-card']"
+        name: data-tag-count
+        value: "1"
+      - type: text
+        selector: "[data-testid='history-success-feature-tag']"
+        value: "Video Expansion"

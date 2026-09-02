@@ -1,0 +1,437 @@
+/* =====================================================================
+   YCO Button — variant API · SINGLE SOURCE OF TRUTH
+   ---------------------------------------------------------------------
+   Plain CSS, CSS-Modules class names (.ycoButton / .variant_* / .tone_* /
+   .size_*). Edit THIS file to change the button everywhere.
+
+   Consumed by:
+   - yco-component-library doc site  →  <link> (plain stylesheet, preview)
+   - yce-frontend button-wrapper     →  import styles from './button.module.css'
+                                        (Next.js CSS Modules: scoped, no leak)
+
+   The two repos hold a VERBATIM copy of this file. Keep them identical.
+   ===================================================================== */
+
+.ycoButton {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  max-width: 100%;
+  min-width: 0;
+  border: 1px solid transparent;
+  border-radius: var(--corner-radius-32);
+  background: transparent;
+  cursor: pointer;
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-strong);
+  letter-spacing: 0;
+  line-height: 1;
+  text-decoration: none;
+  transition:
+    background 140ms ease,
+    border-color 140ms ease,
+    box-shadow 140ms ease;
+}
+
+.ycoButton::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  background: transparent;
+  pointer-events: none;
+  transition: background 140ms ease;
+}
+
+.ycoButton > * {
+  position: relative;
+  z-index: 1;
+}
+
+.ycoButton:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 4px var(--stroke-focus);
+}
+
+.ycoButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* ----- Sizes ----- */
+.size_tiny {
+  min-height: var(--spacing-32);
+  gap: var(--spacing-4);
+  padding: 0 var(--spacing-12);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+}
+
+.size_small {
+  min-height: var(--spacing-40);
+  gap: var(--spacing-4);
+  padding: 0 var(--spacing-16);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.size_medium {
+  min-height: var(--spacing-48);
+  gap: var(--spacing-4);
+  padding: 0 var(--spacing-16);
+  font-size: var(--font-size-heading-5, 1.125rem);
+  line-height: var(--line-height-small);
+}
+
+.size_large {
+  min-height: var(--spacing-56);
+  gap: var(--spacing-4);
+  padding: 0 var(--spacing-24);
+  font-size: var(--font-size-heading-4);
+  line-height: var(--line-height-heading-4);
+}
+
+/* ----- Brand × variants ----- */
+.tone_brand.variant_primary {
+  background: var(--fill-brand-strong);
+  color: var(--text-strong);
+}
+
+.tone_brand.variant_primary:hover::before {
+  background: var(--fill-hover);
+}
+
+.tone_brand.variant_primary:active::before {
+  background: var(--fill-press);
+}
+
+.tone_brand.variant_secondary {
+  border-color: var(--stroke-brand-strong);
+  background: transparent;
+  color: var(--text-information);
+}
+
+.tone_brand.variant_secondary:hover::before {
+  background: var(--fill-hover);
+}
+
+.tone_brand.variant_secondary:active::before {
+  background: var(--fill-press);
+}
+
+.tone_brand.variant_tertiary {
+  background: transparent;
+  color: var(--text-information);
+}
+
+.tone_brand.variant_tertiary:hover::before {
+  background: var(--fill-hover);
+}
+
+.tone_brand.variant_tertiary:active::before {
+  background: var(--fill-press);
+}
+
+/* ----- Neutral × variants ----- */
+.tone_neutral.variant_primary {
+  background: var(--fill-strong);
+  color: var(--text-inverse-strong);
+}
+
+.tone_neutral.variant_primary:hover::before {
+  background: var(--fill-inverse-hover);
+}
+
+.tone_neutral.variant_primary:active::before {
+  background: var(--fill-inverse-press);
+}
+
+.tone_neutral.variant_secondary {
+  border-color: var(--stroke-strong);
+  background: var(--grey-slate-light-25);
+  color: var(--text-strong);
+}
+
+.tone_neutral.variant_secondary:hover::before {
+  background: var(--fill-hover);
+}
+
+.tone_neutral.variant_secondary:active {
+  background: var(--fill-press);
+}
+
+.tone_neutral.variant_tertiary {
+  background: transparent;
+  color: var(--text-strong);
+}
+
+.tone_neutral.variant_tertiary:hover::before {
+  background: var(--fill-hover);
+}
+
+.tone_neutral.variant_tertiary:active {
+  background: var(--fill-press);
+}
+
+/* ----- Destructive × variants ----- */
+.tone_destructive.variant_primary {
+  background: var(--fill-error-strong);
+  color: var(--text-inverse-strong);
+}
+
+.tone_destructive.variant_primary:hover::before {
+  background: var(--fill-hover);
+}
+
+.tone_destructive.variant_primary:active::before {
+  background: var(--fill-press);
+}
+
+.tone_destructive.variant_secondary {
+  border-color: var(--stroke-error-strong);
+  background: transparent;
+  color: var(--text-error);
+}
+
+.tone_destructive.variant_secondary:hover::before {
+  background: var(--fill-hover);
+}
+
+.tone_destructive.variant_secondary:active::before {
+  background: var(--fill-press);
+}
+
+.tone_destructive.variant_tertiary {
+  background: transparent;
+  color: var(--text-error);
+}
+
+.tone_destructive.variant_tertiary:hover::before {
+  background: var(--fill-hover);
+}
+
+.tone_destructive.variant_tertiary:active::before {
+  background: var(--fill-press);
+}
+
+/* ----- Inverse × variants ----- */
+.tone_inverse.variant_primary {
+  background: var(--fill-inverse-strong);
+  color: var(--text-strong);
+}
+
+.tone_inverse.variant_primary:hover::before {
+  background: var(--fill-hover);
+}
+
+.tone_inverse.variant_primary:active::before {
+  background: var(--fill-press);
+}
+
+.tone_inverse.variant_secondary {
+  border-color: var(--stroke-inverse-strong);
+  background: transparent;
+  color: var(--text-inverse-strong);
+}
+
+.tone_inverse.variant_secondary:hover {
+  background: var(--fill-inverse-hover);
+}
+
+.tone_inverse.variant_secondary:active {
+  background: var(--fill-inverse-press);
+}
+
+.tone_inverse.variant_tertiary {
+  background: transparent;
+  color: var(--text-inverse-strong);
+}
+
+.tone_inverse.variant_tertiary:hover {
+  background: var(--fill-inverse-hover);
+}
+
+.tone_inverse.variant_tertiary:active {
+  background: var(--fill-inverse-press);
+}
+
+/* ----- Custom: warning (not in designer spec, used for legacy ffc700) ----- */
+.tone_warning.variant_primary {
+  background: var(--fill-warning-strong);
+  color: var(--text-inverse-strong);
+}
+
+.tone_warning.variant_primary:hover::before {
+  background: var(--fill-hover);
+}
+
+.tone_warning.variant_primary:active::before {
+  background: var(--fill-press);
+}
+
+.tone_warning.variant_secondary {
+  border-color: var(--stroke-warning-strong);
+  background: transparent;
+  color: var(--text-warning);
+}
+
+.tone_warning.variant_secondary:hover::before {
+  background: var(--fill-hover);
+}
+
+.tone_warning.variant_secondary:active::before {
+  background: var(--fill-press);
+}
+
+.tone_warning.variant_tertiary {
+  background: transparent;
+  color: var(--text-warning);
+}
+
+.tone_warning.variant_tertiary:hover::before {
+  background: var(--fill-hover);
+}
+
+.tone_warning.variant_tertiary:active::before {
+  background: var(--fill-press);
+}
+
+/* ----- Custom: success (not in designer spec, used for legacy 0ea639) ----- */
+.tone_success.variant_primary {
+  background: var(--fill-success-strong);
+  color: var(--text-inverse-strong);
+}
+
+.tone_success.variant_primary:hover::before {
+  background: var(--fill-hover);
+}
+
+.tone_success.variant_primary:active::before {
+  background: var(--fill-press);
+}
+
+.tone_success.variant_secondary {
+  border-color: var(--stroke-success-strong);
+  background: transparent;
+  color: var(--text-success);
+}
+
+.tone_success.variant_secondary:hover::before {
+  background: var(--fill-hover);
+}
+
+.tone_success.variant_secondary:active::before {
+  background: var(--fill-press);
+}
+
+.tone_success.variant_tertiary {
+  background: transparent;
+  color: var(--text-success);
+}
+
+.tone_success.variant_tertiary:hover::before {
+  background: var(--fill-hover);
+}
+
+.tone_success.variant_tertiary:active::before {
+  background: var(--fill-press);
+}
+
+/* ----- Tertiary label gets underline ----- */
+.variant_tertiary .label {
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  text-underline-position: from-font;
+}
+
+/* ----- Loading state ----- */
+.isLoading {
+  pointer-events: none;
+}
+
+.isLoading .label {
+  opacity: 0.72;
+}
+
+/* ----- Icon slots ----- */
+.buttonIcon {
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  line-height: 1;
+}
+
+.buttonIcon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentcolor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.5;
+}
+
+.size_medium .buttonIcon,
+.size_small .buttonIcon {
+  width: 20px;
+  height: 20px;
+  flex-basis: 20px;
+}
+
+.size_tiny .buttonIcon {
+  width: 16px;
+  height: 16px;
+  flex-basis: 16px;
+}
+
+/* ----- Icon colors per tone × variant -----
+   (lower-specificity default first, then secondary/tertiary overrides) */
+.tone_brand .buttonIcon,
+.tone_neutral .buttonIcon,
+.tone_destructive .buttonIcon,
+.tone_warning .buttonIcon,
+.tone_success .buttonIcon {
+  color: var(--icon-inverse-strong);
+}
+
+.tone_inverse .buttonIcon {
+  color: var(--icon-neutral);
+}
+
+.tone_brand.variant_secondary .buttonIcon,
+.tone_brand.variant_tertiary .buttonIcon {
+  color: var(--icon-brand);
+}
+
+.tone_neutral.variant_secondary .buttonIcon,
+.tone_neutral.variant_tertiary .buttonIcon {
+  color: var(--icon-neutral);
+}
+
+.tone_destructive.variant_secondary .buttonIcon,
+.tone_destructive.variant_tertiary .buttonIcon {
+  color: var(--icon-error);
+}
+
+.tone_inverse.variant_secondary .buttonIcon,
+.tone_inverse.variant_tertiary .buttonIcon {
+  color: var(--icon-inverse-strong);
+}
+
+.tone_warning.variant_secondary .buttonIcon,
+.tone_warning.variant_tertiary .buttonIcon {
+  color: var(--icon-warning);
+}
+
+.tone_success.variant_secondary .buttonIcon,
+.tone_success.variant_tertiary .buttonIcon {
+  color: var(--icon-success);
+}

@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 2,
+  "feature": "video-expansion",
+  "currentStage": "intake",
+  "pendingTransition": null,
+  "transitions": [],
+  "downstreamOutputs": []
+}

@@ -1,0 +1,68 @@
+schemaVersion: 1
+id: button
+displayName: Button
+classification: foundation
+status: pilot-approved
+rd:
+  sourcePackage: youcam-enhance-frontend
+  sourceVersion: 1.34.1
+  snapshot: yce-frontend-gm-260909
+  sourcePaths:
+    - src/components/common/button-wrapper/index.js
+    - src/components/common/button-wrapper/button.module.css
+    - src/components/common/button-wrapper/types/variants.js
+  sourceHashes:
+    - path: src/components/common/button-wrapper/index.js
+      sha256: 665fc38dc350168489d537eed78e79d5d17b0f709c26f6bc87fa22a0a9c6498a
+    - path: src/components/common/button-wrapper/button.module.css
+      sha256: e4b2cb3af9f71ec03933aaf6fa610458f005ab8b2f08e087c59dc2499c1640ca
+    - path: src/components/common/button-wrapper/types/variants.js
+      sha256: 10d6639763b4d842fe0cd2e66baaa8a4bb9bc668ed055fff643fb70281b899cb
+figma:
+  status: pending
+  fileKey: null
+  componentSetNodeId: null
+  variants: []
+implementation:
+  importPath: platform/ui/button/index.js
+  compatibilityImportPaths: [platform/ui/Button.jsx]
+  storyId: ui-button
+  framework: react
+  dependencies: [react]
+  removedDependencies: [browser-utils, lodash, next-router, link-with-locale]
+publicApi:
+  props:
+    - name: variant
+      required: false
+      values: [primary, secondary, tertiary]
+    - name: tone
+      required: false
+      values: [brand, neutral, destructive, inverse, warning, success]
+    - name: size
+      required: false
+      values: [tiny, small, medium, large]
+    - name: leadingIcon
+      required: false
+    - name: trailingIcon
+      required: false
+    - name: isLoading
+      required: false
+    - name: disabled
+      required: false
+  states: [default, hover, focus, active, disabled, loading]
+tokens:
+  lockPath: platform/tokens/tokens.lock.json
+  uses: [--fill-brand-strong, --stroke-focus, --text-information, --text-strong, --corner-radius-32]
+assets: []
+review:
+  pilotApprover:
+    actor: pm
+    id: collab-space-owner
+    date: 2026-09-01
+  canonicalReview:
+    designer: pending
+    rd: pending
+decisionBasis:
+  - The RD variant API is portable once browser detection, locale links and production tracking hooks are removed.
+  - The pilot maps brand labels to existing accessible foreground tokens because the exact RD cyan/white pairing measures 2.59:1 in axe; Designer and RD canonical review remains pending.
+  - Pilot approval permits Collab Space prototype use but does not claim production package compatibility.

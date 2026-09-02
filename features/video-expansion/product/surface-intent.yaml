@@ -1,0 +1,56 @@
+schemaVersion: 1
+feature: video-expansion
+strategy: hybrid
+temporary: true
+primaryPack:
+  id: workspace/tool-video
+  version: 2026-08
+borrowedPacks:
+  - id: workspace/tool-photo-editing
+    version: 2026-08
+    roles:
+      - settings-inspector
+      - tool-rail
+layoutIntent:
+  zones:
+    - tool-navigation
+    - video-input
+    - canvas-playback-timeline
+    - history-results
+    - video-detail-dialog
+  componentRoles:
+    - aspect-ratio-selector
+    - tool-rail
+    - trim-control
+    - uploaded-media
+    - canvas-drag-positioning
+    - video-playback-timeline
+    - history-list
+    - history-card
+    - edit-history-tabs
+    - history-filter
+    - video-detail-dialog
+    - next-action
+    - error-recovery
+    - credit-control
+    - generate-action-with-credit
+  responsivePriority:
+    - Keep the pre-generation video canvas dominant before secondary inspector details.
+    - Preserve the uploaded-media Trim action, canvas playback timeline, and Generate action when the inspector stacks at tablet width, and keep the shared trim dialog within the viewport.
+    - Keep History cards and the video-information dialog usable without horizontal overflow.
+deviations:
+  - The primary video result is presented through YCO History and the shared video-information dialog rather than a standalone inline app result page.
+  - The borrowed photo-editing pack contributes the settings-inspector and tool-rail roles; its image-result role is not used.
+  - The Result Page header and tool rail are presentational RD ports in this prototype; account and cross-tool navigation behavior remain inert, while credit balance and cost are synthetic presentational values.
+  - Desktop composition follows Video Object Remover for the right-side video canvas and Image Extender for the left control-panel hierarchy.
+  - Empty and uploaded media states use the RD common UploadMediaBlock without feature-owned reconstruction; only the Trim action is injected by Video Expansion.
+  - Generate uses the RD ApplyButtonWithCoinCredit single-tool state treatment, and Edit/History uses the intrinsic RD BLACK_VIDEO_RESULT segmented-control width.
+  - Uploaded media, Video Results Surface, History cards, video-information dialog, panel action bar, credit controls, and Video Object Remover-derived timeline are RD-backed shared platform families; the Trim trigger and canvas dragging remain feature-owned.
+  - App launcher, intro, picker, purchase flow, and social-sharing surfaces are intentionally omitted, while the surrounding YCO header, synthetic credit display, and tool-family menu remain visible.
+  - The canvas viewport height stays fixed while ratio frames resize entirely within it; checkerboard transparency is scoped to the selected target-ratio frame, and the synchronized shared timeline is a separate sibling below the viewport rather than an overlay.
+  - The target frame renders only the current video element. Ten timeline previews are captured locally from evenly spaced points in the selected segment; the feature supplies those captures to the shared timeline without introducing a static canvas poster or a media-analysis service.
+decisionBasis:
+  - The workspace tool-video pack naturally supports upload, settings, processing, History feedback, and video playback.
+  - The PM explicitly requested the control panel to follow the Image Extender layout reference while retaining the Video Object Remover canvas and video-generation flow.
+  - The PM explicitly requested the header and left menu visible in the Video Object Remover reference to be included in the prototype.
+  - A hybrid strategy records that composition without forcing image-result behavior onto a video workflow.

@@ -1,0 +1,83 @@
+schemaVersion: 1
+id: upload-media-block
+displayName: Upload Media Block
+classification: composite
+status: pilot-approved
+rd:
+  sourcePackage: youcam-enhance-frontend
+  sourceVersion: 1.34.1
+  snapshot: yce-frontend-gm-260909
+  sourcePaths:
+    - src/components/common/upload-image-block/upload-image-block.js
+    - src/components/common/upload-image-block/upload-image-block.module.scss
+    - public/assets/images/txt2Img/settings/reference_photo/cancel_icon3.svg
+    - public/assets/images/interactionToolsBar/video_upload_icon.svg
+    - public/assets/images/txt2Img/settings/add_image_icon.svg
+  sourceHashes:
+    - path: src/components/common/upload-image-block/upload-image-block.js
+      sha256: becf42f657142d655af2419e543e44bb6ea8cde73037f8c68856151c63e14baa
+    - path: src/components/common/upload-image-block/upload-image-block.module.scss
+      sha256: d18e5f430d0b76c4cab96b9515602372459abd94cb1ee1a5bd8c71999dc2e647
+    - path: public/assets/images/txt2Img/settings/reference_photo/cancel_icon3.svg
+      sha256: 013e422fa489cfe3ee41de148300f64e13d23af60da14bf9a9ab81a90cd1781c
+    - path: public/assets/images/interactionToolsBar/video_upload_icon.svg
+      sha256: 4639e1e96823e2df24350cf60b96db5c8d3db2668bc962014845e397b2b0ca70
+    - path: public/assets/images/txt2Img/settings/add_image_icon.svg
+      sha256: 69042962bdda775258ebef5e73f424303eb4ae68c04182344af9f4b71842ba2c
+figma:
+  status: pending
+  fileKey: null
+  componentSetNodeId: null
+  variants: []
+implementation:
+  importPath: platform/ui/upload-media-block/index.js
+  storyId: ui-upload-media-block
+  framework: react
+  dependencies: [react]
+  removedDependencies: [redux, i18n, module-types, upload-timing, media-preview-modal, file-drop-hook, production-file-input]
+publicApi:
+  props:
+    - name: imageUrl
+      required: false
+    - name: videoUrl
+      required: false
+    - name: videoDuration
+      required: false
+    - name: uploadTitle
+      required: false
+    - name: uploadDescription
+      required: false
+    - name: onUpload
+      required: false
+    - name: onPreview
+      required: false
+    - name: onRemove
+      required: false
+    - name: onReplace
+      required: false
+    - name: actionSlot
+      required: false
+    - name: disabled
+      required: false
+  states: [empty, uploaded-video, duration, remove, replace, feature-action-slot, disabled]
+tokens:
+  lockPath: platform/tokens/tokens.lock.json
+  uses: [--background-base, --fill-weaker, --fill-overlay-strong, --stroke-weak, --stroke-strong, --text-strong, --text-weak]
+assets:
+  - path: assets/icon/yco-upload-media-block
+    usage: runtime
+  - path: assets/video/rd-component-fixtures
+    usage: storybook
+review:
+  pilotApprover:
+    actor: pm
+    id: collab-space-owner
+    date: 2026-09-02
+  canonicalReview:
+    designer: pending
+    rd: pending
+decisionBasis:
+  - RD already exposes upload-image-block as a common media surface used by video features.
+  - The pure-props port preserves the uploaded-video preview, duration badge, remove and replace actions while allowing a feature-owned action slot.
+  - The empty and loaded structures retain the RD common component geometry; feature code may supply an action slot but does not own either upload state.
+  - Production file handling, preview modals, state, translations and telemetry are deliberately excluded.

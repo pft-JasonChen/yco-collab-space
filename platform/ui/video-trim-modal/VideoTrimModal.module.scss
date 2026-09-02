@@ -1,0 +1,346 @@
+.backdrop {
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: var(--spacing-24);
+  background: var(--fill-overlay-weak);
+}
+
+.modal {
+  position: relative;
+  width: min(700px, 100%);
+  max-height: calc(100vh - var(--spacing-48));
+  padding: var(--spacing-32);
+  overflow: auto;
+  color: var(--text-strong);
+  background: var(--background-base);
+  border-radius: var(--corner-radius-16);
+  box-shadow: 0 var(--spacing-8) var(--spacing-12) var(--background-overlay);
+}
+
+.closeButton {
+  position: absolute;
+  z-index: 2;
+  top: var(--spacing-12);
+  right: var(--spacing-12);
+  display: grid;
+  width: var(--spacing-32);
+  height: var(--spacing-32);
+  place-items: center;
+  padding: 0;
+  color: var(--text-strong);
+  background: transparent;
+  border: none;
+  border-radius: var(--corner-radius-32);
+  cursor: pointer;
+  font-size: var(--font-size-heading-3);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-24);
+}
+
+.content h2 {
+  margin: 0;
+  font-size: var(--font-size-heading-3);
+  line-height: var(--line-height-heading-3);
+  font-weight: var(--font-weight-strong);
+}
+
+.preview {
+  position: relative;
+  width: 100%;
+  max-height: calc(var(--spacing-256) + var(--spacing-80));
+  margin: 0 auto;
+  overflow: hidden;
+  background: var(--background-inverse);
+  border-radius: var(--corner-radius-8);
+}
+
+.preview video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.previewPlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.previewPlay span {
+  display: grid;
+  width: var(--spacing-48);
+  height: var(--spacing-48);
+  place-items: center;
+  color: var(--icon-brand);
+  background: var(--fill-white);
+  border-radius: var(--corner-radius-32);
+}
+
+.previewPlay svg,
+.muteButton svg,
+.timelinePlay svg {
+  width: var(--spacing-24);
+  height: var(--spacing-24);
+  fill: currentColor;
+}
+
+.muteButton {
+  position: absolute;
+  right: var(--spacing-12);
+  bottom: var(--spacing-12);
+  display: grid;
+  width: var(--spacing-40);
+  height: var(--spacing-40);
+  place-items: center;
+  padding: 0;
+  color: var(--icon-inverse);
+  background: var(--fill-overlay-strong);
+  border: none;
+  border-radius: var(--corner-radius-32);
+  cursor: pointer;
+}
+
+.timelineSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.timelineMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--text-strong);
+  font-size: var(--font-size-micro);
+  line-height: var(--line-height-micro);
+}
+
+.timelineMeta strong {
+  color: var(--text-weaker);
+  font-weight: var(--font-weight-weak);
+}
+
+.errorLabel {
+  color: var(--text-error);
+}
+
+.timelineRow {
+  display: flex;
+  height: var(--spacing-64);
+  align-items: center;
+  gap: var(--spacing-20);
+  padding: var(--spacing-4) var(--spacing-12);
+  background: var(--fill-weak);
+  border-radius: var(--corner-radius-8);
+}
+
+.timelinePlay {
+  display: grid;
+  width: var(--spacing-24);
+  height: var(--spacing-24);
+  flex: 0 0 auto;
+  place-items: center;
+  padding: 0;
+  color: var(--icon-neutral);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.framesArea {
+  position: relative;
+  height: var(--spacing-56);
+  min-width: 0;
+  flex: 1;
+  cursor: pointer;
+  touch-action: none;
+  user-select: none;
+}
+
+.canvasRow {
+  position: absolute;
+  inset: 50% 0 auto;
+  display: flex;
+  height: var(--spacing-56);
+  gap: var(--spacing-4);
+  padding: 0 var(--spacing-16);
+  transform: translateY(-50%);
+}
+
+.canvasRow canvas,
+.canvasRow img {
+  display: block;
+  width: 0;
+  height: var(--spacing-56);
+  min-width: 0;
+  flex: 1;
+  object-fit: cover;
+}
+
+.rangeOverlay {
+  position: absolute;
+  top: 50%;
+  right: var(--spacing-16);
+  left: var(--spacing-16);
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.darkRange {
+  height: var(--spacing-56);
+  flex: 0 0 auto;
+  background: var(--fill-overlay-weak);
+}
+
+.rangeBox {
+  position: relative;
+  height: calc(var(--spacing-56) + var(--spacing-4) / 2);
+  flex: 0 0 auto;
+  border: 2px solid var(--stroke-brand-strong);
+  pointer-events: auto;
+}
+
+.handleLeft,
+.handleRight {
+  position: absolute;
+  top: 50%;
+  display: grid;
+  width: var(--spacing-16);
+  height: calc(var(--spacing-56) + var(--spacing-4) / 2);
+  place-items: center;
+  padding: 0;
+  background: var(--fill-brand-strong);
+  border: none;
+  cursor: ew-resize;
+  touch-action: none;
+  transform: translateY(-50%);
+}
+
+.handleLeft {
+  left: calc(var(--spacing-16) * -1);
+  border-radius: var(--corner-radius-4) 0 0 var(--corner-radius-4);
+}
+
+.handleRight {
+  right: calc(var(--spacing-16) * -1);
+  border-radius: 0 var(--corner-radius-4) var(--corner-radius-4) 0;
+}
+
+.handleLeft span,
+.handleRight span {
+  width: calc(var(--spacing-4) / 2);
+  height: var(--spacing-16);
+  background: var(--fill-white);
+  border-radius: var(--corner-radius-4);
+}
+
+.playhead {
+  position: absolute;
+  z-index: 4;
+  top: calc(var(--spacing-4) * -1);
+  left: 0;
+  width: var(--spacing-4);
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: ew-resize;
+  touch-action: none;
+}
+
+.playhead span {
+  display: block;
+  width: var(--spacing-4);
+  height: calc(var(--spacing-64) + var(--spacing-4));
+  background: var(--fill-brand-strong);
+  border-radius: var(--corner-radius-8);
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-8);
+}
+
+.actions button {
+  min-width: calc(var(--spacing-80) + var(--spacing-16));
+  height: calc(var(--spacing-40) + var(--spacing-4) / 2);
+  padding: 0 var(--spacing-16);
+  color: var(--text-strong);
+  background: transparent;
+  border: 1px solid var(--stroke-strong);
+  border-radius: var(--corner-radius-32);
+  cursor: pointer;
+  font-size: var(--font-size-heading-5);
+  line-height: var(--line-height-heading-5);
+  font-weight: var(--font-weight-strong);
+}
+
+.actions button:last-child {
+  color: var(--text-inverse-strong);
+  background: var(--fill-brand-strong);
+  border-color: var(--stroke-brand-strong);
+}
+
+.actions button:disabled {
+  color: var(--text-disabled);
+  background: var(--fill-disabled);
+  border-color: var(--stroke-disabled);
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .backdrop {
+    padding: var(--spacing-16);
+  }
+
+  .modal {
+    padding: var(--spacing-24) var(--spacing-16);
+  }
+
+  .content {
+    gap: var(--spacing-16);
+  }
+
+  .timelineRow {
+    height: calc(var(--spacing-40) + var(--spacing-8));
+    gap: var(--spacing-8);
+    background: var(--fill-weaker);
+  }
+
+  .framesArea,
+  .canvasRow,
+  .canvasRow canvas,
+  .canvasRow img,
+  .darkRange {
+    height: var(--spacing-40);
+  }
+
+  .rangeBox,
+  .handleLeft,
+  .handleRight {
+    height: calc(var(--spacing-40) + var(--spacing-4) / 2);
+  }
+
+  .playhead {
+    top: calc(var(--spacing-8) * -1);
+  }
+
+  .playhead span {
+    height: calc(var(--spacing-48) + var(--spacing-8));
+  }
+}

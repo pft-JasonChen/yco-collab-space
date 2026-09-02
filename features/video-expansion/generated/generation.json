@@ -1,0 +1,396 @@
+{
+  "schemaVersion": 3,
+  "feature": "video-expansion",
+  "inputHash": "0881dfef4be41a13cc51b726d05536bace98ae165626ede11336fb0017f5511f",
+  "generatorInstructionsVersion": "collab-contract-v1",
+  "adapter": "codex",
+  "model": "not-recorded",
+  "generatedAt": "2026-09-02T04:33:19.842Z",
+  "files": [
+    "README.md",
+    "extract-video-frames.js",
+    "feature.jsx",
+    "feature.module.scss"
+  ],
+  "collabContract": {
+    "schemaVersion": 1,
+    "workflow": "prototype-update"
+  },
+  "resources": {
+    "requestedCollections": [],
+    "selected": [
+      {
+        "repositoryPath": "features/video-expansion/product/mock-assets/sample image.jpg",
+        "source": "pm-mock",
+        "sha256": "dd9a35dc714a1dbf8de0b5be679f0d9bd37a2894a074b5aa79ffc1dfbc04582a",
+        "status": "temporary"
+      },
+      {
+        "repositoryPath": "features/video-expansion/product/mock-assets/sample-video.mp4",
+        "source": "pm-mock",
+        "sha256": "460779822c37a1e3965c0db8613418df59d4b8f056dc643865b2103975898c4a",
+        "status": "temporary"
+      }
+    ],
+    "warnings": []
+  },
+  "components": {
+    "catalogSchemaVersion": 1,
+    "selected": [
+      {
+        "id": "credit-controls",
+        "status": "pilot-approved",
+        "figmaStatus": "pending",
+        "contractPath": "design-library/components/credit-controls/component.yaml",
+        "contractSha256": "bb1fa0ebbb9f543438844d38ac30643b4ccf9818f81f2ce84e52fd0bfc91e352",
+        "implementationImport": "platform/ui/credit-controls/index.js",
+        "implementationSha256": "82667a4e35ab09cb3806eb61d1dc6a99e612eebf1af6ab0dea8f4fed828df033",
+        "runtimeAssets": [
+          {
+            "repositoryPath": "design-library/assets/icon/yco-credit-controls/add.svg",
+            "sha256": "2bb3284338e2893ec78d567ba65f511f11ca1b004d0948e6b737fe3417758457"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-credit-controls/credit.svg",
+            "sha256": "fe13827402ad85122458ba7de848cbf47e0cb4401d319a6ebc8bfd511245b1d1"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-credit-controls/loading.png",
+            "sha256": "4d7e85e273326aca344a9e3db9766661ea15398b626694508d1d6ca03d4b0ef0"
+          }
+        ]
+      },
+      {
+        "id": "ratio",
+        "status": "pilot-approved",
+        "figmaStatus": "pending",
+        "contractPath": "design-library/components/ratio/component.yaml",
+        "contractSha256": "90a1aa7c3d2d70f53979e047e90b60f63bdc30c454afbfab8351d7c5be0866e1",
+        "implementationImport": "platform/ui/ratio/index.js",
+        "implementationSha256": "e0670127571081ac223e5488444d16999b233afefc77ca657989a09482b2b0d3",
+        "runtimeAssets": []
+      },
+      {
+        "id": "result-page-shell",
+        "status": "pilot-approved",
+        "figmaStatus": "pending",
+        "contractPath": "design-library/components/result-page-shell/component.yaml",
+        "contractSha256": "991cbcd7ad38886584911e4218efa77e9549ebfe1ac3f7618317d580e91dab28",
+        "implementationImport": "platform/ui/result-page-shell/index.js",
+        "implementationSha256": "73fdf4fb696d1e2f73492349834346ac4aad1b31bf26a7a8e99dc6154b73b531",
+        "runtimeAssets": [
+          {
+            "repositoryPath": "design-library/assets/font/yco-interface-icons/icomoon.woff",
+            "sha256": "746d8b88009c7cf0c9b03a160361e1dc8de8406dc3ef893f65e2399e9054ebec"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-credit-controls/add.svg",
+            "sha256": "2bb3284338e2893ec78d567ba65f511f11ca1b004d0948e6b737fe3417758457"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-credit-controls/credit.svg",
+            "sha256": "fe13827402ad85122458ba7de848cbf47e0cb4401d319a6ebc8bfd511245b1d1"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-credit-controls/loading.png",
+            "sha256": "4d7e85e273326aca344a9e3db9766661ea15398b626694508d1d6ca03d4b0ef0"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-result-page-shell/ai-agent.svg",
+            "sha256": "eea1f8c5ac2fd20a880a512e0629afed3bf313dfacb9ff06df1419fe30215c14"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-result-page-shell/home.svg",
+            "sha256": "72246fa21d718fee15b74e58ae1bbd15890e3e2afb84ca4d0db720d1d866c726"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-result-page-shell/info.svg",
+            "sha256": "e86991187d89775a46a7d805bd445a510756709a8959d7cb420cfc9ad5d33035"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-result-page-shell/profile.svg",
+            "sha256": "302b3d1eeecd1d1307b0a0185ac65f0ff57a478732585c8438b9c7bc22a6f37c"
+          },
+          {
+            "repositoryPath": "design-library/assets/logo/yco-online-editor/logo-en-desktop.svg",
+            "sha256": "d0af397b427c61f93e5cc595f8ecc53ed157d499b4b4ab923b1841df4e3c66dc"
+          },
+          {
+            "repositoryPath": "design-library/assets/logo/yco-online-editor/logo-en-mobile.svg",
+            "sha256": "b6b9606792f9022ed3b237d5d4cc2439be9f500e050f60e39f6c14c91aecf35f"
+          },
+          {
+            "repositoryPath": "design-library/assets/logo/yco-online-editor/logo-symbol.svg",
+            "sha256": "7db00edf467cbb8c3102df17b2b75b8e476f908c2b078fa05c874893ea38f81a"
+          }
+        ]
+      },
+      {
+        "id": "tool-page-layout",
+        "status": "pilot-approved",
+        "figmaStatus": "pending",
+        "contractPath": "design-library/components/tool-page-layout/component.yaml",
+        "contractSha256": "1064649ec4a963e98d417fb61513941fa75eb62044d81f98e035f008f613f3a3",
+        "implementationImport": "platform/ui/tool-page-layout/index.js",
+        "implementationSha256": "2076d23d3c96e1efa3ace685d4e3a877d70f8f4f16eec46ff8167479bd5f8d30",
+        "runtimeAssets": []
+      },
+      {
+        "id": "upload-media-block",
+        "status": "pilot-approved",
+        "figmaStatus": "pending",
+        "contractPath": "design-library/components/upload-media-block/component.yaml",
+        "contractSha256": "868c9529817443f948c6281c3fce8f1912f23c86d6e6570633a1292e31e59211",
+        "implementationImport": "platform/ui/upload-media-block/index.js",
+        "implementationSha256": "a408ba0ca4f8833d3c6e17785865b2f79c545c74c59d9a1151e93e01e9055015",
+        "runtimeAssets": [
+          {
+            "repositoryPath": "design-library/assets/icon/yco-upload-media-block/add.svg",
+            "sha256": "69042962bdda775258ebef5e73f424303eb4ae68c04182344af9f4b71842ba2c"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-upload-media-block/remove.svg",
+            "sha256": "013e422fa489cfe3ee41de148300f64e13d23af60da14bf9a9ab81a90cd1781c"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-upload-media-block/replace.svg",
+            "sha256": "4639e1e96823e2df24350cf60b96db5c8d3db2668bc962014845e397b2b0ca70"
+          }
+        ]
+      },
+      {
+        "id": "video-history",
+        "status": "pilot-approved",
+        "figmaStatus": "pending",
+        "contractPath": "design-library/components/video-history/component.yaml",
+        "contractSha256": "8cbd8bf5b8bfa3afd20ffeef05491e5d4f618c9af7937afd22acc1b246bb4b5f",
+        "implementationImport": "platform/ui/video-history/index.js",
+        "implementationSha256": "17de73c6d870e536f1b4f4d945a5a015e780d6377506bfa8160096750b627f63",
+        "runtimeAssets": [
+          {
+            "repositoryPath": "design-library/assets/icon/yco-video-actions/character-motion-swap.svg",
+            "sha256": "a788966b6b65a98de0f00a551ac23d4f4d6b94c0f4f6ba54930714f288c80724"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-video-actions/dislike-default.svg",
+            "sha256": "702bf2b89b86e1d597b325d632fce264d79bf039885e4625b246982d1e2aa8b2"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-video-actions/download.svg",
+            "sha256": "d6ceeae58963faff01c6cee2c9cc29ce538f3dc8b860b0f1bce8a87f0b6a3d16"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-video-actions/edit.svg",
+            "sha256": "f914e3e78f3ce54b6aca49d70f787c999b59e131b9b8b76521c7186e168a2126"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-video-actions/face-swap.svg",
+            "sha256": "1bb962d9fd8ce06c0fbb9711fb4b7a191b28bdcbd5e0de2604c51f6dbd40f0f6"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-video-actions/like-default.svg",
+            "sha256": "b5b27e88987a0df81e947009f6fff81b2aa345d973c17fb7cb087209fb11fb9c"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-video-actions/object-removal.svg",
+            "sha256": "841af11f71a400e35c866054f5a47625fa9cd7e9fe52ca1be958ab3ef185e9d2"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-video-actions/style-transfer.svg",
+            "sha256": "82a2a4171450c071f364e7c704c0ebedaa04f2cd703fc1e6cccae94d81c28673"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-video-actions/video-editor.svg",
+            "sha256": "a5535b4f3c352c92fad512b67c077ca0cf7e1fd8847449a36c752938e9d35e32"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-video-actions/video-enhancer.svg",
+            "sha256": "3d2155f48519c756725109e88e6ff7a4b247b3b9788f2a294418afc2b0c18699"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-video-actions/video-expansion.svg",
+            "sha256": "ed22a5af79880bf9e3ea7e2ca4982ed8955640c73833aef33b04cf435212f87e"
+          }
+        ]
+      },
+      {
+        "id": "video-info-dialog",
+        "status": "pilot-approved",
+        "figmaStatus": "pending",
+        "contractPath": "design-library/components/video-info-dialog/component.yaml",
+        "contractSha256": "a041bfbc9df875356b452ba4de93c54fd209ec68f9ec2cb7fd3191ab470502a6",
+        "implementationImport": "platform/ui/video-info-dialog/index.js",
+        "implementationSha256": "9b1199b6b8782ca702272b87f7139104d734c3c7ce1887b6893c8c6fef1fa239",
+        "runtimeAssets": [
+          {
+            "repositoryPath": "design-library/assets/icon/yco-video-actions/character-motion-swap.svg",
+            "sha256": "a788966b6b65a98de0f00a551ac23d4f4d6b94c0f4f6ba54930714f288c80724"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-video-actions/dislike-default.svg",
+            "sha256": "702bf2b89b86e1d597b325d632fce264d79bf039885e4625b246982d1e2aa8b2"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-video-actions/download.svg",
+            "sha256": "d6ceeae58963faff01c6cee2c9cc29ce538f3dc8b860b0f1bce8a87f0b6a3d16"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-video-actions/edit.svg",
+            "sha256": "f914e3e78f3ce54b6aca49d70f787c999b59e131b9b8b76521c7186e168a2126"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-video-actions/face-swap.svg",
+            "sha256": "1bb962d9fd8ce06c0fbb9711fb4b7a191b28bdcbd5e0de2604c51f6dbd40f0f6"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-video-actions/like-default.svg",
+            "sha256": "b5b27e88987a0df81e947009f6fff81b2aa345d973c17fb7cb087209fb11fb9c"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-video-actions/object-removal.svg",
+            "sha256": "841af11f71a400e35c866054f5a47625fa9cd7e9fe52ca1be958ab3ef185e9d2"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-video-actions/style-transfer.svg",
+            "sha256": "82a2a4171450c071f364e7c704c0ebedaa04f2cd703fc1e6cccae94d81c28673"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-video-actions/video-editor.svg",
+            "sha256": "a5535b4f3c352c92fad512b67c077ca0cf7e1fd8847449a36c752938e9d35e32"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-video-actions/video-enhancer.svg",
+            "sha256": "3d2155f48519c756725109e88e6ff7a4b247b3b9788f2a294418afc2b0c18699"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-video-actions/video-expansion.svg",
+            "sha256": "ed22a5af79880bf9e3ea7e2ca4982ed8955640c73833aef33b04cf435212f87e"
+          }
+        ]
+      },
+      {
+        "id": "video-results-surface",
+        "status": "pilot-approved",
+        "figmaStatus": "pending",
+        "contractPath": "design-library/components/video-results-surface/component.yaml",
+        "contractSha256": "b1f2d2d7150ec6efa9a243ab1a86df131d2de8823e6bf2e7829855a3bab4c399",
+        "implementationImport": "platform/ui/video-results-surface/index.js",
+        "implementationSha256": "bc230f05dd524371ecf3d8eb52c2ddbc4f0b20075b8e446eb410b893d2022357",
+        "runtimeAssets": []
+      },
+      {
+        "id": "video-timeline",
+        "status": "pilot-approved",
+        "figmaStatus": "pending",
+        "contractPath": "design-library/components/video-timeline/component.yaml",
+        "contractSha256": "c1124905b13dad5e16017589050b39bbb790deffc14556d175d698e8e3756545",
+        "implementationImport": "platform/ui/video-timeline/index.js",
+        "implementationSha256": "b80fcf764ad74904457ff91168717fc6edc14ae9e3aaf06e137d501f51945666",
+        "runtimeAssets": [
+          {
+            "repositoryPath": "design-library/assets/icon/yco-video-timeline/pause.svg",
+            "sha256": "c1cf17b442fde98c21b493512c08cd8b46a864521fbe96747603602e46c5e4db"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-video-timeline/play.svg",
+            "sha256": "d9da5b483c641b4a9df8b0064ebb7f73cd61ea9dc449b934cec3410e3aea4f72"
+          }
+        ]
+      },
+      {
+        "id": "video-trim-modal",
+        "status": "pilot-approved",
+        "figmaStatus": "pending",
+        "contractPath": "design-library/components/video-trim-modal/component.yaml",
+        "contractSha256": "6990ae0ca19e6043d20c66e65a912648d63eb4db0f61c23a7953ccef0e0ca21c",
+        "implementationImport": "platform/ui/video-trim-modal/index.js",
+        "implementationSha256": "376b2339619e39d1230e9153623a7c0edff3bcc20133778200f3f967ce36dbba",
+        "runtimeAssets": []
+      }
+    ]
+  },
+  "tokens": {
+    "sourcePackage": {
+      "name": "youcam-enhance-frontend",
+      "version": "1.34.1"
+    },
+    "lockPath": "platform/tokens/tokens.lock.json",
+    "lockSha256": "6c6f374a2ea4045d740571e3d9d55e3399ce00db232a38692deb25ebf6e49ed8",
+    "activationStatus": "rd-compatible"
+  },
+  "surface": {
+    "strategy": "hybrid",
+    "temporary": true,
+    "primaryPack": {
+      "id": "workspace/tool-video",
+      "version": "2026-08",
+      "packHash": "9c69b9d788fdc4bfcd41b4ddaf6a506059e61f7e830ff3c4c56acd5867721fde"
+    },
+    "borrowedPacks": [
+      {
+        "id": "workspace/tool-photo-editing",
+        "version": "2026-08",
+        "roles": [
+          "settings-inspector",
+          "tool-rail"
+        ],
+        "packHash": "7005e1ccabf206002ee66f3e6b0aa47dd6b545c4938b4ffb1870747436225eab"
+      }
+    ],
+    "requiredZones": [
+      "canvas-playback-timeline",
+      "history-results",
+      "navigation",
+      "tool-navigation",
+      "video-detail-dialog",
+      "video-input",
+      "video-result",
+      "video-status"
+    ],
+    "requiredComponentRoles": [
+      "aspect-ratio-selector",
+      "canvas-drag-positioning",
+      "credit-control",
+      "edit-history-tabs",
+      "error-recovery",
+      "generate-action-with-credit",
+      "history-card",
+      "history-filter",
+      "history-list",
+      "media-upload",
+      "navigation-header",
+      "next-action",
+      "primary-action",
+      "processing-feedback",
+      "settings-inspector",
+      "tool-rail",
+      "trim-control",
+      "uploaded-media",
+      "video-detail-dialog",
+      "video-playback-timeline",
+      "video-player",
+      "video-settings"
+    ],
+    "responsivePriority": [
+      "Preserve playback and progress before secondary controls.",
+      "Keep the main action reachable without covering the video result.",
+      "Keep the pre-generation video canvas dominant before secondary inspector details.",
+      "Preserve the uploaded-media Trim action, canvas playback timeline, and Generate action when the inspector stacks at tablet width, and keep the shared trim dialog within the viewport.",
+      "Keep History cards and the video-information dialog usable without horizontal overflow."
+    ],
+    "visualReview": "human-required",
+    "contextHash": "4c204a95c7d633af8ed7037601d8ad0ea8f44c85258b2d7632d9b5c8d30aa3f2",
+    "sourceFiles": [
+      "platform/surfaces/workspace/tool-photo-editing/2026-08/component-slots.yaml",
+      "platform/surfaces/workspace/tool-photo-editing/2026-08/evaluation.yaml",
+      "platform/surfaces/workspace/tool-photo-editing/2026-08/layout-rules.md",
+      "platform/surfaces/workspace/tool-photo-editing/2026-08/provenance.json",
+      "platform/surfaces/workspace/tool-photo-editing/2026-08/surface.yaml",
+      "platform/surfaces/workspace/tool-video/2026-08/component-slots.yaml",
+      "platform/surfaces/workspace/tool-video/2026-08/evaluation.yaml",
+      "platform/surfaces/workspace/tool-video/2026-08/layout-rules.md",
+      "platform/surfaces/workspace/tool-video/2026-08/provenance.json",
+      "platform/surfaces/workspace/tool-video/2026-08/surface.yaml"
+    ]
+  }
+}

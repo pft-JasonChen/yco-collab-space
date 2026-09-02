@@ -1,0 +1,90 @@
+.control {
+  display: inline-flex;
+  min-height: var(--spacing-40);
+  align-items: center;
+  gap: var(--spacing-4);
+  padding: 0 var(--spacing-8);
+  color: var(--text-strong);
+  background: var(--fill-weaker);
+  border: 0;
+  border-radius: var(--corner-radius-32);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  font-weight: var(--font-weight-strong);
+}
+
+button.control {
+  cursor: pointer;
+}
+
+.control:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 var(--spacing-4) var(--stroke-focus);
+}
+
+.balanceIcon,
+.addIcon {
+  display: block;
+  width: 26px;
+  height: 26px;
+}
+
+.badge {
+  display: inline-flex;
+  min-height: var(--spacing-24);
+  align-items: center;
+  gap: var(--spacing-4);
+  padding: var(--spacing-4) var(--spacing-8) var(--spacing-4) 6px;
+  background: color-mix(in srgb, var(--fill-strong) 15%, transparent);
+  border-radius: var(--corner-radius-32);
+  white-space: nowrap;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  font-weight: var(--font-weight-strong);
+}
+
+.badge img {
+  display: block;
+  width: 18px;
+  height: 18px;
+}
+
+.actionBar {
+  flex: 0 0 auto;
+  width: 100%;
+  padding: var(--spacing-16);
+  background: var(--background-base);
+  box-shadow: 0 -4px 12px color-mix(in srgb, var(--fill-strong) 8%, transparent);
+}
+
+.generateButton {
+  width: 100%;
+  color: var(--text-strong);
+  background: var(--fill-brand-strong);
+}
+
+.generateButton:disabled {
+  color: var(--text-inverse-strong);
+  background: var(--fill-disabled);
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+.generateButton > span:first-child {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
+.loadingIcon {
+  width: var(--spacing-24);
+  height: var(--spacing-24);
+  object-fit: contain;
+}
+
+@media (max-width: 768px) {
+  .addIcon {
+    display: none;
+  }
+}

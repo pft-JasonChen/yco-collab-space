@@ -214,6 +214,32 @@ workflows:
       - features
       - platform
     enforcement: warning
+  - id: component-foundation-pilot
+    actors: [pm, designer, rd, agent]
+    readablePaths:
+      - collab-space.map.yaml
+      - design-library/**
+      - platform/ui/**
+      - platform/tokens/**
+      - features/{feature}/design/**
+      - features/{feature}/generated/**
+    writablePaths:
+      - design-library/components/**
+      - design-library/assets/**
+      - platform/ui/**
+      - .storybook/**
+      - tools/design-library/**
+      - docs/architecture/**
+      - docs/design-system/**
+      - package.json
+      - package-lock.json
+      - prototype.config.json
+    protectedPaths:
+      - features/{feature}/product
+      - features/{feature}/generated
+      - platform/tokens/rd
+      - .env
+    enforcement: error
 rules:
   - id: mock-only-prototypes
     status: active
@@ -245,3 +271,4 @@ decisionBasis:
   - The contract is the control plane for roles, stages, paths and external-system boundaries.
   - Shared design resources live once in the global Design Library; feature revisions pin exact selections.
   - Agent and validator rules are enforced now, while human Git enforcement remains proposed.
+  - The Product Owner authorised the component-foundation pilot so Designer, RD and Agent can iteratively adjust shared components and Storybook without changing feature product behaviour.

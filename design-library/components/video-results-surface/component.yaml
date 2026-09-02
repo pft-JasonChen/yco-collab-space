@@ -1,0 +1,51 @@
+schemaVersion: 1
+id: video-results-surface
+displayName: Video Results Surface
+classification: pattern
+status: pilot-approved
+rd:
+  sourcePackage: youcam-enhance-frontend
+  sourceVersion: 1.34.1
+  snapshot: yce-frontend-gm-260909
+  sourcePaths:
+    - src/components/result-page/video-object-remover/components/results/index.js
+    - src/components/result-page/video-object-remover/components/results/index.module.scss
+    - src/components/common/tab-control/segmented-control/index.js
+    - src/components/common/tab-control/segmented-control/index.module.scss
+    - src/components/result-page/common/video-feature/filter-dropdown/index.js
+    - src/components/result-page/common/video-feature/filter-dropdown/index.module.scss
+  sourceHashes:
+    - { path: src/components/result-page/video-object-remover/components/results/index.js, sha256: 8ecbf389fb2906f675fe07ad857192d0fac3591cc476567186bdac024b0260df }
+    - { path: src/components/result-page/video-object-remover/components/results/index.module.scss, sha256: c12d2c7e03fd42af0853541496ea3eb058de29d807f5d77c3aba86e9a335f781 }
+    - { path: src/components/common/tab-control/segmented-control/index.js, sha256: 98736264cd8b11cf5243139a24a8f4163be2b5bf999c0382d4a8ceef2a0362ab }
+    - { path: src/components/common/tab-control/segmented-control/index.module.scss, sha256: 883027830fba0bc5bc4145db3e7ce9111b5974ddc1371bf8d6dbe585f238d297 }
+    - { path: src/components/result-page/common/video-feature/filter-dropdown/index.js, sha256: 348f7a41add7fe21b4ba8894e5e654e83ee47fea209975800bf85de4bbdb22ee }
+    - { path: src/components/result-page/common/video-feature/filter-dropdown/index.module.scss, sha256: 605a82df5fd8bbec5e045c7d803589495405fce11a24c0b017a06eb09f0c2aca }
+figma: { status: pending, fileKey: null, componentSetNodeId: null, variants: [] }
+implementation:
+  importPath: platform/ui/video-results-surface/index.js
+  storyId: ui-video-results-surface
+  framework: react
+  dependencies: [react]
+  removedDependencies: [redux, i18n, lodash, device-detection, task-state, toast, scroll-persistence]
+publicApi:
+  props:
+    - { name: activeTab, required: true, values: [edit, history] }
+    - { name: onTabChange, required: false }
+    - { name: processing, required: false }
+    - { name: editContent, required: true }
+    - { name: historyContent, required: true }
+    - { name: filterValue, required: false }
+    - { name: filterOptions, required: false }
+    - { name: onFilterChange, required: false }
+  states: [edit, history, processing, filter-open, responsive]
+tokens:
+  lockPath: platform/tokens/tokens.lock.json
+  uses: [--background-alternate, --fill-strong, --fill-weaker, --stroke-focus, --stroke-weak, --text-inverse-strong, --text-strong]
+assets: []
+review:
+  pilotApprover: { actor: pm, id: collab-space-owner, date: 2026-09-02 }
+  canonicalReview: { designer: pending, rd: pending }
+decisionBasis:
+  - RD composes Edit and History tabs, FilterDropdown and HistoryVideos as one results surface; keeping those siblings in one shared component prevents feature-level geometry drift.
+  - Desktop tabs retain the intrinsic 368px two-tab BLACK_VIDEO_RESULT width instead of expanding to fill the result toolbar.

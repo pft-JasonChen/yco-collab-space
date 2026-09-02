@@ -7,6 +7,7 @@ async function walk(directory) {
   const files = [];
 
   for (const entry of entries) {
+    if (entry.name === '.DS_Store') continue;
     const absolutePath = path.join(directory, entry.name);
 
     if (entry.isDirectory()) {

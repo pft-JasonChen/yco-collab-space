@@ -1,0 +1,19 @@
+schemaVersion: 1
+feature: video-expansion
+gaps:
+  - id: DESIGN-001
+    status: accepted-temporary
+    description: Final Figma has not been provided; PM approved the temporary hybrid surface for prototype review.
+    resolutionOwner: Designer
+  - id: DESIGN-002
+    status: open
+    description: Designer must confirm the final Result Page header and tool-menu treatment, uploaded-media action treatment, direct-drag canvas and playback timeline, History/detail presentation, and responsive stacking.
+    resolutionOwner: Designer
+  - id: DESIGN-003
+    status: open
+    description: The PM-supplied sample video and thumbnail are temporary and must be replaced or explicitly approved before design-final.
+    resolutionOwner: Designer
+  - id: DESIGN-004
+    status: resolved
+    description: The standalone Position Control gap was closed by PM decision; positioning is now direct canvas dragging and remains feature behavior rather than a shared control.
+    resolutionOwner: Designer

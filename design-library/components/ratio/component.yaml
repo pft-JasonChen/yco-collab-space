@@ -1,0 +1,75 @@
+schemaVersion: 1
+id: ratio
+displayName: Aspect Ratio Selector
+classification: foundation
+status: pilot-approved
+rd:
+  sourcePackage: youcam-enhance-frontend
+  sourceVersion: 1.34.1
+  snapshot: yce-frontend-gm-260909
+  sourcePaths:
+    - src/components/common/ratio/index.js
+    - src/components/common/ratio/index.module.scss
+    - src/components/common/ratio/utils/ratioTypes.js
+    - src/components/common/ratio/utils/ratioUtils.js
+    - src/components/result-page/out-paint/components/settings/ratio/index.js
+    - src/components/result-page/out-paint/components/settings/ratio/index.module.scss
+  sourceHashes:
+    - path: src/components/common/ratio/index.js
+      sha256: 384922730b955be104261c59863bbc4fc71977dd49cabe1ac4fa68133e8a406c
+    - path: src/components/common/ratio/index.module.scss
+      sha256: e4c2693937fd618312bd54e20afdd44481338d90f2795f3a2e8c0473e4c603e4
+    - path: src/components/common/ratio/utils/ratioTypes.js
+      sha256: 319a37000e75223ac3432743967cb06b3e071a3ad2d248bd2352f0f72dca42f2
+    - path: src/components/common/ratio/utils/ratioUtils.js
+      sha256: 9239477809c1855170b4f8dbd45ee5768dca93096f955be3e58820df2a6857ce
+    - path: src/components/result-page/out-paint/components/settings/ratio/index.js
+      sha256: c8ba009b8094e9dcc2c7d0628d4281a7ccd7b2b76eed7be1ade3bbe33da071a2
+    - path: src/components/result-page/out-paint/components/settings/ratio/index.module.scss
+      sha256: a031caea1e7bbeb0dbe84969e3b3ba20af7ff32dbd6d546ef0e7056062dfa9e3
+figma:
+  status: pending
+  fileKey: null
+  componentSetNodeId: null
+  variants: []
+implementation:
+  importPath: platform/ui/ratio/index.js
+  storyId: ui-ratio
+  framework: react
+  dependencies: [react]
+  removedDependencies: [i18n, gtm, lodash]
+publicApi:
+  props:
+    - name: ratioList
+      required: true
+    - name: ratio
+      required: true
+    - name: setRatio
+      required: true
+    - name: title
+      required: false
+    - name: variant
+      required: false
+      values: [default, gery, gery_v2, image_extender]
+    - name: titleVariant
+      required: false
+      values: [default, gery]
+    - name: disabled
+      required: false
+  states: [default, selected, hover, focus, disabled]
+tokens:
+  lockPath: platform/tokens/tokens.lock.json
+  uses: [--text-strong, --text-brand, --stroke-strong, --fill-brand-weak]
+assets: []
+review:
+  pilotApprover:
+    actor: pm
+    id: collab-space-owner
+    date: 2026-09-01
+  canonicalReview:
+    designer: pending
+    rd: pending
+decisionBasis:
+  - The PM required the RD common Ratio component with i18n, GTM and Lodash removed.
+  - The public shape stays compatible with the existing Video Expansion integration.
+  - The PO approved an Image Extender-derived presentation variant while retaining the RD common Ratio API as the sole public component.

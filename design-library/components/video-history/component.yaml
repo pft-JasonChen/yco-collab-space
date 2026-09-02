@@ -1,0 +1,81 @@
+schemaVersion: 1
+id: video-history
+displayName: Video History
+classification: pattern
+status: pilot-approved
+rd:
+  sourcePackage: youcam-enhance-frontend
+  sourceVersion: 1.34.1
+  snapshot: yce-frontend-gm-260909
+  sourcePaths:
+    - src/components/result-page/common/video-feature/history-videos/index.js
+    - src/components/result-page/common/video-feature/history-videos/index.module.scss
+    - src/components/result-page/common/video-feature/history-videos/result-video/index.js
+    - src/components/result-page/common/video-feature/history-videos/result-video/index.module.scss
+    - src/components/result-page/common/video-feature/history-videos/result-video/video-player/index.js
+    - src/components/result-page/common/video-feature/history-videos/result-video/video-player/index.module.scss
+    - src/components/result-page/common/video-feature/filter-dropdown/index.js
+    - src/components/result-page/common/video-feature/filter-dropdown/index.module.scss
+  sourceHashes:
+    - path: src/components/result-page/common/video-feature/history-videos/index.js
+      sha256: ec7ae7db4613aaf6d0cc4b93f1f7c669f8ee9a3a1bedce83497fff9558d4b605
+    - path: src/components/result-page/common/video-feature/history-videos/index.module.scss
+      sha256: 57cebdeb1ca5053277d625255833d3e5ec412c78fd96cd2538151fb58969ddf9
+    - path: src/components/result-page/common/video-feature/history-videos/result-video/index.js
+      sha256: 632134711aa966467d787ba0609d5dbd3bcd5e4aa7ed1d568e5c19ee6a8d73b0
+    - path: src/components/result-page/common/video-feature/history-videos/result-video/index.module.scss
+      sha256: 7c8e1e6fcc38ac9b47d473df1a09a66b4145769edf958f4bdcb15da376cadd95
+    - path: src/components/result-page/common/video-feature/history-videos/result-video/video-player/index.js
+      sha256: 1ab368ca78d211e2703bdf216ff1b1c4738d4861152465fd07d0d7880469a501
+    - path: src/components/result-page/common/video-feature/history-videos/result-video/video-player/index.module.scss
+      sha256: 917c6764aa4e70e070dc176f38eb730cb167703f374e8841c4872feb59f3bcbd
+    - path: src/components/result-page/common/video-feature/filter-dropdown/index.js
+      sha256: 348f7a41add7fe21b4ba8894e5e654e83ee47fea209975800bf85de4bbdb22ee
+    - path: src/components/result-page/common/video-feature/filter-dropdown/index.module.scss
+      sha256: 605a82df5fd8bbec5e045c7d803589495405fce11a24c0b017a06eb09f0c2aca
+figma:
+  status: pending
+  fileKey: null
+  componentSetNodeId: null
+  variants: []
+implementation:
+  importPath: platform/ui/video-history/index.js
+  storyId: ui-video-history
+  framework: react
+  dependencies: [react]
+  removedDependencies: [redux, i18n, lodash, task-fetching, polling, routing, cms, analytics, download-service, device-detection]
+publicApi:
+  props:
+    - name: items
+      required: false
+    - name: filterLabel
+      required: false
+    - name: onFilter
+      required: false
+    - name: onOpen
+      required: false
+    - name: onRetry
+      required: false
+    - name: className
+      required: false
+  states: [empty, processing, completed, failed, retry, filtered, inert-actions]
+tokens:
+  lockPath: platform/tokens/tokens.lock.json
+  uses: [--background-base, --background-inverse, --fill-weaker, --stroke-weak, --text-strong, --text-weak]
+assets:
+  - path: assets/icon/yco-video-actions
+    usage: runtime
+  - path: assets/video/rd-component-fixtures
+    usage: storybook
+review:
+  pilotApprover:
+    actor: pm
+    id: collab-space-owner
+    date: 2026-09-02
+  canonicalReview:
+    designer: pending
+    rd: pending
+decisionBasis:
+  - RD video-feature provides shared filtering, History list, result-card and video-player surfaces across video-producing modules.
+  - The pilot exposes synthetic item data and callbacks instead of production task fetching, polling, download and routing behavior.
+  - Action buttons use the allowlisted RD img2Vid Next Action icons; the filter is composed by Video Results Surface instead of duplicated inside the list.

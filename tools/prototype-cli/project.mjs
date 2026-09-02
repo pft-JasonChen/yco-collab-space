@@ -98,7 +98,10 @@ export async function hashFeatureInputs(feature) {
   const hash = createHash('sha256');
 
   for (const inputRoot of inputRoots) {
-    const files = await walkFiles(inputRoot);
+    const files = await walkFiles(
+      inputRoot,
+      (file) => path.basename(file) !== '.DS_Store',
+    );
 
     for (const file of files) {
       const relativePath = path.relative(featureRoot, file).split(path.sep).join('/');

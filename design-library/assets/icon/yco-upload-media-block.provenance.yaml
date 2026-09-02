@@ -1,0 +1,14 @@
+schemaVersion: 1
+collection: assets/icon/yco-upload-media-block
+source:
+  snapshot: yce-frontend-gm-260909
+files:
+  - name: add.svg
+    path: public/assets/images/txt2Img/settings/add_image_icon.svg
+    sha256: 69042962bdda775258ebef5e73f424303eb4ae68c04182344af9f4b71842ba2c
+  - name: remove.svg
+    path: public/assets/images/txt2Img/settings/reference_photo/cancel_icon3.svg
+    sha256: 013e422fa489cfe3ee41de148300f64e13d23af60da14bf9a9ab81a90cd1781c
+  - name: replace.svg
+    path: public/assets/images/interactionToolsBar/video_upload_icon.svg
+    sha256: 4639e1e96823e2df24350cf60b96db5c8d3db2668bc962014845e397b2b0ca70

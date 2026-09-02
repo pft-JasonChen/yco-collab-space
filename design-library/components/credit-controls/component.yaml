@@ -1,0 +1,59 @@
+schemaVersion: 1
+id: credit-controls
+displayName: Credit Controls and Generate Action Bar
+classification: composite
+status: pilot-approved
+rd:
+  sourcePackage: youcam-enhance-frontend
+  sourceVersion: 1.34.1
+  snapshot: yce-frontend-gm-260909
+  sourcePaths:
+    - src/components/result-page/common/apply-button-with-coin-credit/index.js
+    - src/components/result-page/common/apply-button-with-coin-credit/index.module.scss
+    - src/components/result-page/common/apply-button-with-coin-credit/components/credit-badge/index.js
+    - src/components/result-page/common/apply-button-with-coin-credit/components/credit-badge/index.module.scss
+    - src/components/common/headers/components/credits-left/index.js
+    - src/components/common/headers/components/credits-left/index.module.scss
+    - public/assets/images/header/icon_credit.svg
+    - public/assets/images/header/icon_add.svg
+    - public/assets/images/loading.png
+    - src/components/result-page/video-object-remover/index.module.scss
+  sourceHashes:
+    - { path: src/components/result-page/common/apply-button-with-coin-credit/index.js, sha256: 611713ab5342a987aab96d57f93d2898137b5aae76cb7597a73ec4c35208cb40 }
+    - { path: src/components/result-page/common/apply-button-with-coin-credit/index.module.scss, sha256: fad4272e4cf334e1c04d1ec3a4a3b4c937096342ba1cdc35423e2196cea62fa1 }
+    - { path: src/components/result-page/common/apply-button-with-coin-credit/components/credit-badge/index.js, sha256: 522a03001c2eeb67cefeef99d1b480d7bbfac934701db22ebe0c7dcf2e0cad78 }
+    - { path: src/components/result-page/common/apply-button-with-coin-credit/components/credit-badge/index.module.scss, sha256: 82a20ff8ca70f9081d5c607c718611bc5451e59f77cdb9dde6cbd8b4ba787984 }
+    - { path: src/components/common/headers/components/credits-left/index.js, sha256: e4cea9a8210fb78271c2cd03569803f2592fc9e57cdb886073127d991f65d0f7 }
+    - { path: src/components/common/headers/components/credits-left/index.module.scss, sha256: 9a46e44a4f599e280563ddbc3bd1dbcb178c9b74f7ca66d7a4eaef938900c846 }
+    - { path: public/assets/images/header/icon_credit.svg, sha256: fe13827402ad85122458ba7de848cbf47e0cb4401d319a6ebc8bfd511245b1d1 }
+    - { path: public/assets/images/header/icon_add.svg, sha256: 2bb3284338e2893ec78d567ba65f511f11ca1b004d0948e6b737fe3417758457 }
+    - { path: public/assets/images/loading.png, sha256: 4d7e85e273326aca344a9e3db9766661ea15398b626694508d1d6ca03d4b0ef0 }
+    - { path: src/components/result-page/video-object-remover/index.module.scss, sha256: d5ba8af85582f520547c6863e878a115dedb39000673edfea13f83ce5184edb6 }
+figma: { status: pending, fileKey: null, componentSetNodeId: null, variants: [] }
+implementation:
+  importPath: platform/ui/credit-controls/index.js
+  storyId: ui-credit-controls
+  framework: react
+  dependencies: [react, platform-ui-button]
+  removedDependencies: [redux, authentication, credit-service, pricing-modal, local-storage, i18n, lodash, analytics]
+publicApi:
+  props:
+    - { name: balance, required: false }
+    - { name: cost, required: false }
+    - { name: label, required: false }
+    - { name: disabled, required: false }
+    - { name: isLoading, required: false }
+    - { name: onClick, required: false }
+  states: [header-balance, compact-badge, generate-enabled, generate-disabled, loading, inert]
+tokens:
+  lockPath: platform/tokens/tokens.lock.json
+  uses: [--background-base, --fill-strong, --fill-weaker, --stroke-focus, --text-strong]
+assets:
+  - { path: assets/icon/yco-credit-controls, usage: runtime }
+review:
+  pilotApprover: { actor: pm, id: collab-space-owner, date: 2026-09-02 }
+  canonicalReview: { designer: pending, rd: pending }
+decisionBasis:
+  - The header balance and Generate cost share the RD production credit asset but accept synthetic values through pure props.
+  - The PO approved balance 436 and Generate cost 10 without credit-service or purchase behavior.
+  - Generate preserves the RD single-tool brand, disabled, loading and credit-pill states rather than inheriting the generic neutral button treatment.

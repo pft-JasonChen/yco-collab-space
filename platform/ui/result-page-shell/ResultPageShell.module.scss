@@ -1,0 +1,302 @@
+@font-face {
+  font-family: 'YcoInterfaceIcons';
+  src: url('../../../design-library/assets/font/yco-interface-icons/icomoon.woff') format('woff');
+  font-display: block;
+  font-style: normal;
+  font-weight: normal;
+}
+
+.shell {
+  height: 100vh;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--background-base);
+}
+
+.productHeader {
+  position: relative;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) auto minmax(280px, 1fr);
+  align-items: center;
+  min-height: 72px;
+  padding: 8px 24px;
+  background: var(--background-base);
+  border-bottom: 1px solid var(--stroke-weak);
+}
+
+.brand,
+.account,
+.titleGroup button {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--text-strong);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  justify-self: start;
+  padding: 0;
+}
+
+.brand:disabled,
+.account:disabled,
+.titleGroup button:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+.logoSymbol {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.wordmark {
+  display: block;
+  width: 256px;
+  height: 25px;
+}
+
+.titleGroup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.titleGroup h1 {
+  margin: 0;
+  color: var(--text-strong);
+  font-size: var(--font-size-heading-4);
+  line-height: var(--line-height-heading-4);
+  font-weight: var(--font-weight-strong);
+}
+
+.titleGroup button {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  padding: 2px;
+}
+
+.titleGroup img {
+  width: 18px;
+  height: 18px;
+}
+
+.account {
+  width: 48px;
+  height: 48px;
+  padding: 0;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  justify-self: end;
+  gap: var(--spacing-16);
+}
+
+.account img {
+  width: 100%;
+  height: 100%;
+}
+
+.shellBody {
+  display: flex;
+  height: calc(100vh - 72px);
+  min-height: 0;
+}
+
+.toolMenu {
+  position: relative;
+  z-index: 10;
+  flex: 0 0 112px;
+  width: 112px;
+  background: var(--background-base);
+}
+
+.toolMenuScroller {
+  height: calc(100vh - 72px);
+  overflow: hidden auto;
+  overscroll-behavior: contain;
+  padding: 8px 0 16px;
+}
+
+.menuItem,
+.homeItem {
+  width: 100%;
+}
+
+.homeItem {
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--stroke-weak);
+}
+
+.menuButton,
+.menuButtonActive {
+  appearance: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80px;
+  margin: 4px 12px 4px 20px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--corner-radius-24);
+  background: transparent;
+  color: var(--text-strong);
+  font-size: var(--font-size-micro);
+  line-height: var(--line-height-micro);
+  font-weight: var(--font-weight-strong);
+  text-align: center;
+}
+
+.menuIcon {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 44px;
+  border-radius: var(--corner-radius-24);
+}
+
+.menuIcon img {
+  width: 22px;
+  height: 22px;
+}
+
+.glyph {
+  font-family: 'YcoInterfaceIcons', sans-serif;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  speak: never;
+  -webkit-font-smoothing: antialiased;
+}
+
+.menuButtonActive {
+  color: var(--text-information);
+}
+
+.menuButton:hover .menuIcon,
+.menuButton:focus-visible .menuIcon,
+.menuButtonActive .menuIcon {
+  background: var(--fill-brand-weak);
+}
+
+.menuButton:focus-visible,
+.menuButtonActive:focus-visible,
+.brand:focus-visible,
+.account:focus-visible,
+.titleGroup button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px var(--stroke-focus);
+}
+
+.shellContent {
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  flex: 1;
+  overflow: hidden;
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 1024px) {
+  .productHeader {
+    grid-template-columns: minmax(160px, 1fr) auto minmax(64px, 1fr);
+    padding-inline: 16px;
+  }
+
+  .wordmark {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .productHeader {
+    grid-template-columns: 48px minmax(0, 1fr) auto;
+    min-height: 64px;
+    padding: 8px 12px;
+  }
+
+  .logoSymbol {
+    width: 32px;
+    height: 32px;
+    margin: 0;
+  }
+
+  .titleGroup h1 {
+    font-size: var(--font-size-heading-5);
+    line-height: var(--line-height-heading-5);
+  }
+
+  .account {
+    width: 40px;
+    height: 40px;
+  }
+
+  .headerActions {
+    gap: var(--spacing-8);
+  }
+
+  .shellBody {
+    height: calc(100vh - 64px);
+    min-height: 0;
+    flex-direction: column;
+  }
+
+  .toolMenu {
+    flex-basis: auto;
+    width: 100%;
+    border-bottom: 1px solid var(--stroke-weak);
+  }
+
+  .toolMenuScroller {
+    display: flex;
+    height: auto;
+    overflow: auto hidden;
+    padding: 4px 8px;
+  }
+
+  .shellContent {
+    height: auto;
+    overflow: auto;
+  }
+
+  .menuItem,
+  .homeItem {
+    flex: 0 0 80px;
+    width: 80px;
+  }
+
+  .homeItem {
+    margin: 0 8px 0 0;
+    padding: 0 8px 0 0;
+    border-right: 1px solid var(--stroke-weak);
+    border-bottom: 0;
+  }
+
+  .menuButton,
+  .menuButtonActive {
+    width: 72px;
+    margin: 0 4px;
+  }
+}
