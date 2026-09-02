@@ -1,0 +1,110 @@
+{
+  "$id": "product-page-generation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "page", "inputHash", "inputs", "skills", "builder", "generatedAt", "artifacts", "review", "resources", "registryHash", "patternsHash", "tokens", "collabContract"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "page": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "inputHash": { "$ref": "#/$defs/sha" },
+    "inputs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["files"],
+      "properties": {
+        "files": { "type": "array", "items": { "$ref": "#/$defs/fileHash" } }
+      }
+    },
+    "skills": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/$defs/fileHash" }
+    },
+    "builder": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["adapter", "model"],
+      "properties": {
+        "adapter": { "type": "string", "minLength": 1 },
+        "model": { "type": "string", "minLength": 1 }
+      }
+    },
+    "generatedAt": { "type": "string", "minLength": 1 },
+    "artifacts": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/$defs/sha" }
+    },
+    "review": {
+      "anyOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["path", "sha256", "verdict", "reviewerModel"],
+          "properties": {
+            "path": { "type": "string" },
+            "sha256": { "$ref": "#/$defs/sha" },
+            "verdict": { "type": "string" },
+            "reviewerModel": { "type": "string" }
+          }
+        }
+      ]
+    },
+    "resources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["selected", "warnings"],
+      "properties": {
+        "selected": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["assetRef", "kind", "status"],
+            "properties": {
+              "assetRef": { "type": "string" },
+              "kind": { "enum": ["strapi", "design-library", "mock"] },
+              "repositoryPath": { "anyOf": [{ "type": "null" }, { "type": "string" }] },
+              "sha256": { "anyOf": [{ "type": "null" }, { "$ref": "#/$defs/sha" }] },
+              "strapiMediaId": { "anyOf": [{ "type": "null" }, { "type": "integer" }] },
+              "status": { "enum": ["shared", "candidate", "temporary"] }
+            }
+          }
+        },
+        "warnings": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "registryHash": { "$ref": "#/$defs/sha" },
+    "patternsHash": { "$ref": "#/$defs/sha" },
+    "tokens": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["lockPath", "lockSha256"],
+      "properties": {
+        "lockPath": { "type": "string" },
+        "lockSha256": { "$ref": "#/$defs/sha" }
+      }
+    },
+    "collabContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schemaVersion", "workflow", "track"],
+      "properties": {
+        "schemaVersion": { "const": 1 },
+        "workflow": { "const": "product-page-generate" },
+        "track": { "const": "product-page" }
+      }
+    }
+  },
+  "$defs": {
+    "sha": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "fileHash": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": { "type": "string", "minLength": 1 },
+        "sha256": { "$ref": "#/$defs/sha" }
+      }
+    }
+  }
+}

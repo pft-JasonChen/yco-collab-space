@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "uid": "shared.section-image",
+  "uidStatus": "inferred",
+  "displayName": "Section image",
+  "category": "shared",
+  "dynamicZone": false,
+  "description": "Single image or video with alt text and optional link, used by rich-editor sections per breakpoint.",
+  "fields": {
+    "alt": { "type": "string", "required": false, "role": "meta" },
+    "link": { "type": "string", "required": false, "role": "cta" },
+    "image": { "type": "media", "required": false, "role": "media" },
+    "video": { "type": "media", "required": false, "role": "media" }
+  },
+  "layoutFields": [],
+  "example": { "alt": null, "link": null, "image": null, "video": null }
+}

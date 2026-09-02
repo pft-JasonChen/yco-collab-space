@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto';
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { fromRoot, hashFeatureInputs, pathExists, readJson, readYaml, sha256File } from '../prototype-cli/project.mjs';
-import { loadCollabMap } from './policy.mjs';
+import { loadCollabMap, stagesForTrack } from './policy.mjs';
 
 function stable(value) {
   if (Array.isArray(value)) return value.map(stable);
@@ -78,7 +78,7 @@ export async function validateReleaseSemantics(feature, release) {
   const map = await loadCollabMap();
   const errors = [];
   if (release.feature !== feature) errors.push('releases.json feature does not match folder: ' + feature);
-  if (!map.stages.some((stage) => stage.id === release.currentStage && stage.kind === 'lifecycle')) {
+  if (!stagesForTrack(map, 'prototype').some((stage) => stage.id === release.currentStage && stage.kind === 'lifecycle')) {
     errors.push('Unknown lifecycle currentStage: ' + release.currentStage);
   }
   for (const record of [...release.transitions, ...release.downstreamOutputs]) {

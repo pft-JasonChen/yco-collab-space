@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 2,
+  "feature": "ai-motion-transfer",
+  "currentStage": "intake",
+  "pendingTransition": null,
+  "transitions": [],
+  "downstreamOutputs": []
+}

@@ -1,0 +1,48 @@
+{
+  "$id": "strapi-component",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "uid", "uidStatus", "displayName", "category", "dynamicZone", "description", "fields", "layoutFields"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "uid": { "type": "string", "pattern": "^[a-z0-9-]+\\.[a-z0-9-]+$" },
+    "uidStatus": { "enum": ["confirmed", "inferred"] },
+    "displayName": { "type": "string", "minLength": 1 },
+    "category": { "enum": ["banner", "section", "shared"] },
+    "dynamicZone": { "type": "boolean" },
+    "description": { "type": "string", "minLength": 1 },
+    "fields": { "$ref": "#/$defs/fields" },
+    "layoutFields": { "type": "array", "items": { "type": "string" } },
+    "example": { "type": "object" }
+  },
+  "$defs": {
+    "fields": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/$defs/field" }
+    },
+    "field": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": { "enum": ["string", "text", "richtext", "enumeration", "boolean", "integer", "decimal", "json", "datetime", "media", "component", "dynamiczone"] },
+        "required": { "type": "boolean" },
+        "html": { "type": "boolean" },
+        "values": { "type": "array" },
+        "pattern": { "type": "string" },
+        "maxLength": { "type": "integer" },
+        "default": {},
+        "role": { "type": "string" },
+        "notes": { "type": "string" },
+        "spec": { "type": "object" },
+        "repeatable": { "type": "boolean" },
+        "min": { "type": "integer" },
+        "max": { "type": "integer" },
+        "component": { "type": "string" },
+        "components": { "type": "array", "items": { "type": "string" } },
+        "fields": { "$ref": "#/$defs/fields" },
+        "forbidden": { "type": "boolean" }
+      }
+    }
+  }
+}

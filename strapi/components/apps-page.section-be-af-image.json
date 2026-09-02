@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "uid": "apps-page.section-be-af-image",
+  "uidStatus": "confirmed",
+  "displayName": "Text + media section (before/after capable)",
+  "category": "section",
+  "dynamicZone": true,
+  "description": "Two-column section with text on one side and image/video on the other. Supports before/after image pairs per breakpoint, up to two CTAs, and numbered ordering labels for alternating use-case lists.",
+  "fields": {
+    "textPosition": { "type": "enumeration", "required": true, "values": ["left", "right"], "role": "layout" },
+    "sectionOrderLeft": { "type": "string", "required": false, "role": "layout", "pattern": "^[0-9]{2}$", "notes": "Current step label, e.g. 01." },
+    "sectionOrderRight": { "type": "string", "required": false, "role": "layout", "pattern": "^[0-9]{2}$", "notes": "Total steps label, e.g. 03." },
+    "layout": { "type": "string", "required": false, "role": "layout", "notes": "Observed null; RD to confirm allowed values." },
+    "sectionId": { "type": "string", "required": false, "role": "meta" },
+    "beforeImageAlt": { "type": "string", "required": false, "role": "meta" },
+    "afterImageAlt": { "type": "string", "required": false, "role": "meta" },
+    "orderTab": { "type": "string", "required": false, "role": "layout" },
+    "tabText": { "type": "string", "required": false, "role": "text" },
+    "tabColor": { "type": "string", "required": false, "role": "layout" },
+    "sectionBackground": { "type": "component", "component": "shared.section-background", "required": false, "role": "background" },
+    "sectionText": { "type": "component", "component": "shared.section-text", "required": true, "role": "text" },
+    "sectionBeAfMedia": { "type": "component", "component": "shared.be-af-media", "required": true, "role": "media" },
+    "cta": { "type": "component", "component": "shared.cta", "repeatable": true, "required": false, "max": 2, "role": "cta" }
+  },
+  "layoutFields": ["textPosition", "sectionOrderLeft", "sectionOrderRight", "layout"],
+  "example": {
+    "__component": "apps-page.section-be-af-image",
+    "textPosition": "left",
+    "sectionOrderLeft": "01",
+    "sectionOrderRight": "03",
+    "layout": null,
+    "sectionId": null,
+    "beforeImageAlt": null,
+    "afterImageAlt": null,
+    "orderTab": null,
+    "tabText": null,
+    "tabColor": null,
+    "sectionBackground": { "backgroundColor": "white", "backgroundCss": null, "backgroundImageDesktop": null, "backgroundImageMobile": null },
+    "sectionText": { "title": "<p>Make Any Photo Move</p>", "description": "<p>Upload a reference video.</p>", "superscriptTitle": null, "titleIcon": null },
+    "sectionBeAfMedia": { "functionText": null, "imageBeforeDesktop": { "$assetRef": "strapi:yco-placeholder-2880x1254" }, "imageAfterDesktop": null, "imageBeforeMobile": null, "imageAfterMobile": null, "imageBeforePad": null, "imageAfterPad": null, "imageBefore150": null, "imageAfter150": null, "imageBefore175": null, "imageAfter175": null, "functionIconInactive": null, "functionIconActive": null, "video": null },
+    "cta": [{ "ctaText": "Try With Your Photo", "ctaLink": "/products/example/result-photo", "newTab": true, "ctaActivate": true, "nofollow": false, "buttonType": null, "image": null }]
+  }
+}

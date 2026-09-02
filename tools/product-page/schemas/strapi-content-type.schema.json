@@ -1,0 +1,16 @@
+{
+  "$id": "strapi-content-type",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "uid", "uidStatus", "apiPath", "displayName", "description", "attributes", "decisionBasis"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "uid": { "type": "string", "pattern": "^api::[a-z0-9-]+\\.[a-z0-9-]+$" },
+    "uidStatus": { "enum": ["confirmed", "inferred"] },
+    "apiPath": { "type": "string", "minLength": 1 },
+    "displayName": { "type": "string", "minLength": 1 },
+    "description": { "type": "string", "minLength": 1 },
+    "attributes": { "type": "object", "minProperties": 1 },
+    "decisionBasis": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+  }
+}

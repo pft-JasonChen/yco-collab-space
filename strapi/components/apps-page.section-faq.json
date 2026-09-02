@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "uid": "apps-page.section-faq",
+  "uidStatus": "confirmed",
+  "displayName": "FAQ accordion",
+  "category": "section",
+  "dynamicZone": true,
+  "description": "Accordion list of question/answer pairs with a section title.",
+  "fields": {
+    "title": { "type": "string", "required": true, "role": "heading", "maxLength": 80 },
+    "type": { "type": "string", "required": false, "role": "layout", "notes": "Observed null; RD to confirm." },
+    "faqList": {
+      "type": "component",
+      "component": "inline",
+      "repeatable": true,
+      "required": true,
+      "min": 3,
+      "max": 12,
+      "role": "text",
+      "fields": {
+        "question": { "type": "string", "required": true, "maxLength": 140 },
+        "answer": { "type": "richtext", "html": true, "required": true }
+      }
+    },
+    "expandIcon": { "type": "media", "required": false, "role": "media" },
+    "collapseIcon": { "type": "media", "required": false, "role": "media" }
+  },
+  "layoutFields": ["type"],
+  "example": {
+    "__component": "apps-page.section-faq",
+    "title": "FAQs",
+    "type": null,
+    "faqList": [{ "question": "Is it free?", "answer": "<p>Yes.</p>" }],
+    "expandIcon": null,
+    "collapseIcon": null
+  }
+}

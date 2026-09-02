@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "uid": "shared.be-af-media",
+  "uidStatus": "inferred",
+  "displayName": "Before/after media set",
+  "category": "shared",
+  "dynamicZone": false,
+  "description": "Media slots per breakpoint and DPI. A plain image section fills only imageBeforeDesktop (and optionally Mobile/Pad); a real before/after comparison also fills the After slots. video overrides images when present.",
+  "fields": {
+    "functionText": { "type": "string", "required": false, "role": "text" },
+    "imageBeforeDesktop": { "type": "media", "required": false, "role": "media", "spec": { "aspectRatio": "4:3", "minWidth": 1200 } },
+    "imageAfterDesktop": { "type": "media", "required": false, "role": "media" },
+    "imageBeforeMobile": { "type": "media", "required": false, "role": "media", "spec": { "minWidth": 750 } },
+    "imageAfterMobile": { "type": "media", "required": false, "role": "media" },
+    "imageBeforePad": { "type": "media", "required": false, "role": "media" },
+    "imageAfterPad": { "type": "media", "required": false, "role": "media" },
+    "imageBefore150": { "type": "media", "required": false, "role": "media" },
+    "imageAfter150": { "type": "media", "required": false, "role": "media" },
+    "imageBefore175": { "type": "media", "required": false, "role": "media" },
+    "imageAfter175": { "type": "media", "required": false, "role": "media" },
+    "functionIconInactive": { "type": "media", "required": false, "role": "media" },
+    "functionIconActive": { "type": "media", "required": false, "role": "media" },
+    "video": { "type": "media", "required": false, "role": "media", "spec": { "formats": ["mp4"] } }
+  },
+  "layoutFields": [],
+  "example": { "functionText": null, "imageBeforeDesktop": { "$assetRef": "strapi:yco-placeholder-2880x1254" }, "imageAfterDesktop": null, "imageBeforeMobile": null, "imageAfterMobile": null, "imageBeforePad": null, "imageAfterPad": null, "imageBefore150": null, "imageAfter150": null, "imageBefore175": null, "imageAfter175": null, "functionIconInactive": null, "functionIconActive": null, "video": null }
+}

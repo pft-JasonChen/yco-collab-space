@@ -55,6 +55,14 @@ The repository now also implements:
 Still deferred are automatic Figma API ingestion, human CODEOWNERS enforcement,
 protected preview authentication, calibrated automated visual judgment, and the YCO-spec adapter.
 
+## Product-page track extension
+
+Since 2026-09-02 the repository also carries a product-page track: role-owned
+`product-library/`, `design-library/patterns/product-page/` and `strapi/` feed one
+generate workflow that produces sourced content, a pattern-bound layout and a Strapi v4
+draft payload, gated by an independent spec-compliance reviewer. See
+`docs/architecture/2026-09-02-product-page-generator-plan.md`.
+
 ## Decision basis
 
 - Intake must precede Surface selection because a new feature may not match any current

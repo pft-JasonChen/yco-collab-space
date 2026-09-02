@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "status": "provisional",
+  "environment": "admin.perfectcorp.com/strapi (production CMS; ids differ per environment)",
+  "assets": [
+    {
+      "ref": "app-store-badge-ios",
+      "strapiMediaId": 3896,
+      "purpose": "iOS App Store badge for topBanner.imageCTA (os: iOS)",
+      "observedIn": "ai-motion-transfer ENU draft, 2026-09-01"
+    },
+    {
+      "ref": "google-play-badge",
+      "strapiMediaId": 5257,
+      "purpose": "Google Play badge for topBanner.imageCTA (os: Android)",
+      "observedIn": "ai-motion-transfer ENU draft, 2026-09-01"
+    },
+    {
+      "ref": "yco-placeholder-2880x1254",
+      "strapiMediaId": 19242,
+      "purpose": "Generic YCO placeholder image (2880x1254) for hero/section slots until Designer supplies final media",
+      "observedIn": "ai-motion-transfer ENU draft, 2026-09-01"
+    }
+  ],
+  "decisionBasis": [
+    "Reusing existing media ids avoids re-uploading shared badges and placeholders on every generated draft.",
+    "Placeholder media is allowed in a Strapi draft but the page must not leave page-strapi-draft while a placeholder is still selected."
+  ]
+}

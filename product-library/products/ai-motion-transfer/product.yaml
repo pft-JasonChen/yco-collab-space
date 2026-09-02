@@ -1,0 +1,54 @@
+schemaVersion: 1
+slug: ai-motion-transfer
+name: AI Character Motion Transfer
+status: fixture
+category: video
+audience: B2C
+site:
+  functionKey: /products/ai-motion-transfer
+  liveUrl: null
+  strapiEntryId: 404
+positioning:
+  oneLiner: Turn any still photo into motion, or swap your character into any video scene, without filming, rigging or animation skills.
+  differentiators:
+    - Works from one photo plus one reference video; no 3D model or frame-by-frame work.
+    - Three models cover motion control, character replacement and applying video motion to a photo.
+    - Faces, proportions and art style stay consistent across frames.
+features:
+  - id: motion-control
+    name: Character Motion Control
+    summary: Apply the movement from a reference video to a still photo.
+  - id: character-replace
+    name: Replace the Character in a Video
+    summary: Swap the performer in a clip with the character from your photo while keeping the motion and camera movement.
+  - id: video-motion-to-photo
+    name: Apply Video Motion to Photo
+    summary: Animate an illustrated or AI-generated character with the motion of a reference clip.
+useCases:
+  - id: social-motion
+    name: Make any photo move
+    summary: Pair a dance, walking or gesture clip with a photo for TikTok, Reels and Shorts.
+  - id: animate-character
+    name: Give any character real motion
+    summary: Animate illustrated or AI-generated characters for storytelling and avatars.
+  - id: swap-into-scene
+    name: Swap yourself into any scene
+    summary: Replace the performer in an action clip for memes and reaction videos.
+ctaLinks:
+  tryNow: /products/ai-motion-transfer/result-photo
+  appIos: https://youcamapps.com/surl/PFwebsite_ycv_ios
+  appAndroid: https://youcamapps.com/surl/PFwebsite_ycv_android
+  appGeneric: https://youcamapps.com/surl/LZY
+ratings:
+  value: 4.9
+  count: 129294
+  source: Existing ENU product page SEO component, observed 2026-09-01
+relatedFeatures:
+  - ai-motion-transfer
+pages:
+  - file: pages/enu-product-page-2026-09-01.md
+    locale: ENU
+    capturedFrom: Strapi draft entry 404 (yce-product-pages), observed through the localisation webhook on 2026-09-01
+decisionBasis:
+  - This entry is a fixture built from the current ENU draft so the generator can be exercised end to end.
+  - Ratings are copied from the existing page and must be refreshed by PM before any new draft reuses them.

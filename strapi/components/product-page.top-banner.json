@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "uid": "product-page.top-banner",
+  "uidStatus": "inferred",
+  "displayName": "Top banner (hero)",
+  "category": "banner",
+  "dynamicZone": false,
+  "description": "Full-width hero at the top of a product page: headline, description, primary button, optional before/after media or multi-DPI video, app store badges and background.",
+  "fields": {
+    "title": { "type": "richtext", "html": true, "required": true, "role": "heading", "notes": "Wrapped in <p>. Existing pages add an inline white colour span for dark backgrounds." },
+    "description": { "type": "richtext", "html": true, "required": true, "role": "body" },
+    "layout": { "type": "string", "required": false, "role": "layout", "notes": "Observed null on current pages; RD to confirm allowed values." },
+    "appLogo": { "type": "media", "required": false, "role": "media" },
+    "imageBeAf": { "type": "component", "component": "shared.be-af-media", "repeatable": true, "required": false, "role": "media" },
+    "imageCTA": {
+      "type": "component",
+      "component": "inline",
+      "repeatable": true,
+      "required": false,
+      "role": "cta",
+      "fields": {
+        "ctaLink": { "type": "string", "required": true },
+        "newTab": { "type": "boolean", "required": false, "default": false },
+        "nofollow": { "type": "boolean", "required": false, "default": false },
+        "instruction": { "type": "string", "required": false },
+        "os": { "type": "enumeration", "required": true, "values": ["iOS", "Android"] },
+        "Image": { "type": "media", "required": true, "notes": "App store badge; use strapi:app-store-badge-ios or strapi:google-play-badge shared assets." }
+      }
+    },
+    "carouselSection": { "type": "component", "component": "inline", "repeatable": true, "required": false, "role": "media", "fields": {} },
+    "buttonText": {
+      "type": "component",
+      "component": "inline",
+      "repeatable": true,
+      "required": false,
+      "role": "cta",
+      "fields": {
+        "text": { "type": "string", "required": true, "maxLength": 28 },
+        "link": { "type": "string", "required": false },
+        "buttonType": { "type": "enumeration", "required": false, "values": ["Plain Blue Button"] },
+        "isAppDownload": { "type": "boolean", "required": false },
+        "directLink": { "type": "string", "required": false }
+      }
+    },
+    "multiDpiVideoBanner": {
+      "type": "component",
+      "component": "inline",
+      "repeatable": true,
+      "required": false,
+      "role": "media",
+      "fields": {
+        "dpi": { "type": "integer", "required": true, "values": [100, 150, 175] },
+        "bannerVideo": { "type": "media", "required": false },
+        "bannerImage": { "type": "media", "required": false }
+      }
+    },
+    "sectionForeground": { "type": "component", "component": "inline", "repeatable": true, "required": false, "role": "media", "fields": {} },
+    "sectionBackground": { "type": "component", "component": "shared.section-background", "required": false, "role": "background" },
+    "samplePhoto": { "type": "component", "component": "inline", "repeatable": true, "required": false, "role": "media", "fields": {} }
+  },
+  "layoutFields": ["layout"],
+  "example": {
+    "title": "<p>AI Character Motion Swap</p>",
+    "description": "<p>Turn any still photo into motion.</p>",
+    "layout": null,
+    "appLogo": null,
+    "imageBeAf": [],
+    "imageCTA": [
+      { "ctaLink": "https://example.com/ios", "newTab": false, "nofollow": false, "instruction": null, "os": "iOS", "Image": { "$assetRef": "strapi:app-store-badge-ios" } }
+    ],
+    "carouselSection": [],
+    "buttonText": [{ "text": "Animate Your Photo", "link": null, "buttonType": "Plain Blue Button", "isAppDownload": null, "directLink": null }],
+    "multiDpiVideoBanner": [],
+    "sectionForeground": [],
+    "sectionBackground": { "backgroundColor": "white", "backgroundCss": null, "backgroundImageDesktop": null, "backgroundImageMobile": null },
+    "samplePhoto": []
+  }
+}

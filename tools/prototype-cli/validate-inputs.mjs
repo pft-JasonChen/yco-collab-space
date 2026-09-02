@@ -215,7 +215,16 @@ async function validateFeature(feature) {
     errors.push('design-gaps.yaml must identify the feature and contain gaps.');
   }
 
-  if (!intakeOnly) {
+  // A feature that is still at the `intake` stage may exist as PM spec only (for
+  // example as the upstream spec of a product page). Generated-code checks apply once
+  // the feature leaves intake or once generated code exists.
+  const releasePath = fromRoot('features', feature, 'releases.json');
+  const release = (await pathExists(releasePath)) ? await readJson('features/' + feature + '/releases.json') : null;
+  const specOnlyFeature =
+    release?.currentStage === 'intake' &&
+    !(await pathExists(fromRoot('features', feature, 'generated', 'feature.jsx')));
+
+  if (!intakeOnly && !specOnlyFeature) {
     const generatedFeature = fromRoot(
       'features',
       feature,

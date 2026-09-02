@@ -11,6 +11,21 @@
     "independentFinalReview": {
       "mustDifferFromBuilder": true,
       "crossProviderPreferred": true
+    },
+    "specComplianceReview": {
+      "mustDifferFromBuilder": true,
+      "crossProviderPreferred": true,
+      "readsOnly": [
+        "product-library/review/spec-compliance-rubric.md",
+        "product-library/messaging/**",
+        "product-pages/{page}/source/**",
+        "features/{feature}/product/**",
+        "product-library/products/{slug}/**",
+        "product-pages/{page}/generated/content.json"
+      ],
+      "writesOnly": [
+        "product-pages/{page}/generated/review/spec-compliance.json"
+      ]
     }
   }
 }

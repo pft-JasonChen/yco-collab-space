@@ -1,0 +1,35 @@
+schemaVersion: 1
+page: __PAGE_SLUG__
+title: __PAGE_TITLE__
+status: draft
+locale: ENU
+audience: B2C
+pageKey: __PAGE_SLUG__
+functionKey: /products/__PAGE_SLUG__
+goal: Describe the decision or action this page should drive.
+targetUser: Describe who lands on this page and what they already know.
+upstream:
+  features: []
+  products: []
+  competitors: []
+requiredSections:
+  - intro
+  - benefits
+  - how-to
+  - use-case
+  - faq
+appLinks:
+  ios: null
+  android: null
+  generic: null
+media:
+  requestedCollections: []
+  allowMockAssets: true
+layoutPreferences:
+  order: null
+  excludePatterns: []
+review:
+  builderModelHint: null
+  reviewerModelHint: null
+decisionBasis:
+  - PM has not confirmed the page brief yet.

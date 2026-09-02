@@ -1,0 +1,15 @@
+schemaVersion: 1
+slug: __COMPETITOR_SLUG__
+name: __COMPETITOR_NAME__
+status: draft
+website: null
+category: video
+comparableProducts: []
+observed:
+  positioning: null
+  pricing: null
+  keyFeatures: []
+ourDifferentiators: []
+pages: []
+decisionBasis:
+  - Record only what is publicly observable and date every capture.

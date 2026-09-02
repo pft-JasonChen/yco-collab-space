@@ -48,9 +48,15 @@ export function collabMapSemanticErrors(map) {
     }
   }
 
+  const stageTrack = new Map(map.stages.map((stage) => [stage.id, trackOf(stage)]));
   for (const transition of map.transitions) {
     if (!stageSet.has(transition.from) || !stageSet.has(transition.to)) {
       errors.push('Transition ' + transition.id + ' references an unknown stage.');
+    } else if (
+      stageTrack.get(transition.from) !== trackOf(transition) ||
+      stageTrack.get(transition.to) !== trackOf(transition)
+    ) {
+      errors.push('Transition ' + transition.id + ' crosses tracks; stages and transition must share one track.');
     }
     for (const actor of transition.approvals) {
       if (!actorSet.has(actor)) errors.push('Transition ' + transition.id + ' references unknown actor: ' + actor);
@@ -81,7 +87,23 @@ export function collabMapSemanticErrors(map) {
 }
 
 export function expandPathTemplate(value, context = {}) {
-  return value.replaceAll('{feature}', context.feature ?? '{feature}');
+  return value
+    .replaceAll('{feature}', context.feature ?? '{feature}')
+    .replaceAll('{page}', context.page ?? '{page}');
+}
+
+export const defaultTrack = 'prototype';
+
+export function trackOf(item) {
+  return item?.track ?? defaultTrack;
+}
+
+export function stagesForTrack(map, track = defaultTrack) {
+  return map.stages.filter((stage) => trackOf(stage) === track);
+}
+
+export function transitionsForTrack(map, track = defaultTrack) {
+  return map.transitions.filter((transition) => trackOf(transition) === track);
 }
 
 export function pathPatternMatches(pattern, candidate) {

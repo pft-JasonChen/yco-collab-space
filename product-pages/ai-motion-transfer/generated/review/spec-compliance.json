@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "page": "ai-motion-transfer",
+  "contentHash": "812fbef6bd6be4c8dab5785448745cc6e92d50f19a82d133cca07d1ea98e545a",
+  "reviewedAt": "2026-09-02T05:30:07Z",
+  "reviewer": {
+    "model": "claude-opus-5",
+    "adapter": "claude-code-subagent",
+    "independentOfBuilder": true,
+    "rubricSha256": "1b57f733ca227655dc35e1c8aebf3f18606d805db380eb98d7af53b8f684a921"
+  },
+  "builder": {
+    "model": "claude-fable-5-1",
+    "adapter": "claude"
+  },
+  "verdict": "pass-with-notes",
+  "findings": [
+    {
+      "severity": "major",
+      "type": "weak-source",
+      "path": "/seo/ratings",
+      "evidence": "The rating 4.9 and count 129294 cite `product-library/products/ai-motion-transfer/product.yaml#ratings`, but that same file's decisionBasis states: \"Ratings are copied from the existing page and must be refreshed by PM before any new draft reuses them.\" The cited source therefore carries the number but explicitly withholds permission to reuse it in a new draft, so the sourceRef does not support publishing it. `ratings.source` is also only \"Existing ENU product page SEO component, observed 2026-09-01\" — a CMS observation, not a PM-confirmed measurement.",
+      "suggestion": "Drop `seo.ratings` from the generated draft, or have PM refresh the value and count in product.yaml and re-run generation so the number carries a confirmed source line."
+    },
+    {
+      "severity": "minor",
+      "type": "voice",
+      "path": "/seo/metaTitle",
+      "evidence": "The meta title reads \"Apply Video Motion to Any Character – AI Motion Transfer\". \"AI Motion Transfer\" is neither the official name in `product.yaml.name` (\"AI Character Motion Transfer\") nor the approved alias in `prd.md#product-names` (\"AI Character Motion Swap\"). brand-voice.md: \"Product name exactly as in `product.yaml.name`; a shorter display name ... only if the PM spec lists it as an approved alias.\" `brief.md#must-say` also requires: \"Lead with the marketing alias 'AI Character Motion Swap' in the hero; use the official name in SEO\" — the official name appears nowhere in `/seo`. The string is inherited verbatim from the cited ENU snapshot, which keeps this at minor rather than a naming contradiction.",
+      "suggestion": "Use the official name in the SEO block, e.g. \"Apply Video Motion to Any Character – AI Character Motion Transfer\", and keep the alias for the hero and section headings."
+    }
+  ],
+  "coverage": {
+    "sectionsReviewed": 10,
+    "claimsChecked": 44
+  },
+  "decisionBasis": [
+    "Every hero, SEO, section, bullet, step and FAQ sentence was matched against the cited sourceRefs and against prd.md, decisions.md, prototype.contract.yaml, product.yaml and the ENU page snapshot; paraphrase of a spec statement was accepted, while any capability, limit, platform, format or number absent from a cited source was treated as a finding.",
+    "The four how-to steps follow the tool order in prd.md#tool-flow and prototype.contract.yaml actions (model, reference video, photo, generate), the three models and three use cases match the spec exactly, all five requiredSections are present and non-empty, TikTok/Reels/Shorts are explicitly permitted by decisions.md, and no clip-length, resolution, credit, 4K, voice-sync or competitor claim was introduced.",
+    "No blocker was found, so the verdict is pass-with-notes: the reused 4.9/129,294 rating is the one claim whose cited source withholds reuse, and the SEO meta title carries an unapproved short product name."
+  ]
+}

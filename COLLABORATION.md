@@ -205,6 +205,20 @@ evaluation case 已統一使用 `yco-collab-space`／`YCO Collab Space`。
 
 這次改名保留「prototype factory」作為架構模式的描述；它不再是 repo 或產品名稱。
 
+## 產品頁生成（product-page track）
+
+| 角色 | 在產品頁 track 擁有什麼 | 怎麼觸發 |
+|---|---|---|
+| PM | `features/<feature>/product/**`（與 prototype 共用）、`product-library/**`（現有產品、競品、messaging、reviewer rubric、`spec-to-content` skill）、`product-pages/<page>/source/**` | `/product-page-brief`、`/product-page-generate` |
+| Designer | `design-library/patterns/product-page/**`（section pattern ↔ Strapi component ↔ token 綁定）、`design-library/skills/page-layout` | 更新 pattern 後執行 `/product-page-generate` |
+| RD | `strapi/**`（component registry、content-type、共用素材 id、mapping rules、`content-to-strapi` skill、push client） | 更新 registry 後執行 `/product-page-generate`；`/product-page-publish` 建 draft |
+| Agent | `product-pages/<page>/generated/**`、`evidence/**` | 同一套流程，任何角色觸發結果相同 |
+
+生成後會由另一個 model 的 reviewer subagent 逐句對照 PM spec；`npm run page:validate`
+會檢查每句話的來源、pattern／component／token 綁定、payload 欄位與所有輸入 hash。
+Strapi 只建 draft，正式 publish 留在 Strapi 後台。完整說明見
+[`docs/architecture/2026-09-02-product-page-generator-plan.md`](docs/architecture/2026-09-02-product-page-generator-plan.md)。
+
 ## 決策判斷依據
 
 - PM 與 Designer 各自維護來源，AI 只重建 prototype，可避免「直接改 code 後，需求或

@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "uid": "product-page.section-steps",
+  "uidStatus": "confirmed",
+  "displayName": "How-to steps",
+  "category": "section",
+  "dynamicZone": true,
+  "description": "Numbered step cards (typically 3 to 4) with a subtitle, description and one image each. Used for the 'How to use' section.",
+  "fields": {
+    "title": { "type": "richtext", "html": true, "required": true, "role": "heading" },
+    "description": { "type": "richtext", "html": true, "required": false, "role": "body" },
+    "isSteps": { "type": "boolean", "required": true, "role": "layout", "default": true },
+    "stepText": { "type": "string", "required": false, "role": "text", "default": "STEP" },
+    "stepNumPosition": { "type": "enumeration", "required": false, "values": ["left", "right"], "role": "layout" },
+    "orientationOnMobile": { "type": "enumeration", "required": false, "values": ["vertical", "horizontal"], "role": "layout" },
+    "sectionId": { "type": "string", "required": false, "role": "meta" },
+    "cta": { "type": "component", "component": "shared.cta", "required": false, "role": "cta" },
+    "background": { "type": "component", "component": "shared.section-background", "required": false, "role": "background" },
+    "blocks": {
+      "type": "component",
+      "component": "inline",
+      "repeatable": true,
+      "required": true,
+      "min": 2,
+      "max": 6,
+      "role": "text",
+      "fields": {
+        "subtitle": { "type": "richtext", "html": true, "required": true, "maxLength": 80 },
+        "description": { "type": "richtext", "html": true, "required": true },
+        "backgroundColor": { "type": "string", "required": false, "default": "#fff", "notes": "Raw colour accepted by Strapi; Designer pattern decides the value." },
+        "outlineColor": { "type": "string", "required": false },
+        "Image": { "type": "media", "required": false }
+      }
+    }
+  },
+  "layoutFields": ["isSteps", "stepNumPosition", "orientationOnMobile"],
+  "example": {
+    "__component": "product-page.section-steps",
+    "title": "<p>How to Use</p>",
+    "description": "",
+    "isSteps": true,
+    "stepText": "STEP",
+    "stepNumPosition": "right",
+    "orientationOnMobile": "vertical",
+    "sectionId": null,
+    "cta": { "ctaText": null, "ctaLink": null, "newTab": true, "ctaActivate": true, "nofollow": false, "buttonType": null, "image": null },
+    "background": { "backgroundColor": "transparent", "backgroundCss": null, "backgroundImageDesktop": null, "backgroundImageMobile": null },
+    "blocks": [
+      { "subtitle": "<p>Choose a Model</p>", "description": "<p>Pick the model built for your goal.</p>", "backgroundColor": "#fff", "outlineColor": null, "Image": null }
+    ]
+  }
+}

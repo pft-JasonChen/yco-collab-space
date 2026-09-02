@@ -1,0 +1,145 @@
+{
+  "$id": "product-page-content",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "page", "locale", "skill", "meta", "seo", "hero", "sections", "decisionBasis"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "page": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "locale": { "enum": ["ENU"] },
+    "skill": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "owner", "version"],
+      "properties": {
+        "id": { "const": "spec-to-content" },
+        "owner": { "const": "pm" },
+        "version": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pageName", "shortDescription", "pageKey", "functionKey", "audience"],
+      "properties": {
+        "pageName": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "displayAlias": { "anyOf": [{ "type": "null" }, { "type": "string", "minLength": 1 }] },
+        "shortDescription": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "pageKey": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+        "functionKey": { "type": "string", "pattern": "^/products/[a-z0-9]+(?:-[a-z0-9]+)*$" },
+        "audience": { "enum": ["B2C", "B2B"] }
+      }
+    },
+    "seo": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["metaTitle", "metaDescription", "sourceRefs"],
+      "properties": {
+        "metaTitle": { "type": "string", "minLength": 1 },
+        "metaDescription": { "type": "string", "minLength": 1 },
+        "keywords": { "anyOf": [{ "type": "null" }, { "type": "string" }] },
+        "ratings": {
+          "anyOf": [
+            { "type": "null" },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["value", "count", "sourceRefs"],
+              "properties": {
+                "value": { "type": "number" },
+                "count": { "type": "integer" },
+                "sourceRefs": { "$ref": "#/$defs/sourceRefs" }
+              }
+            }
+          ]
+        },
+        "sourceRefs": { "$ref": "#/$defs/sourceRefs" }
+      }
+    },
+    "hero": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "description", "primaryCta", "appBadges", "media", "sourceRefs"],
+      "properties": {
+        "title": { "type": "string", "minLength": 1 },
+        "description": { "type": "string", "minLength": 1 },
+        "primaryCta": { "$ref": "#/$defs/cta" },
+        "appBadges": { "type": "boolean" },
+        "media": { "$ref": "#/$defs/mediaList" },
+        "sourceRefs": { "$ref": "#/$defs/sourceRefs" }
+      }
+    },
+    "sections": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "role", "sourceRefs"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+          "role": { "enum": ["intro", "benefits", "how-to", "use-case-group-heading", "use-case", "faq"] },
+          "title": { "anyOf": [{ "type": "null" }, { "type": "string" }] },
+          "body": { "anyOf": [{ "type": "null" }, { "type": "string" }] },
+          "bullets": { "type": "array", "items": { "$ref": "#/$defs/titledItem" } },
+          "steps": { "type": "array", "items": { "$ref": "#/$defs/titledItem" } },
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["question", "answer", "sourceRefs"],
+              "properties": {
+                "question": { "type": "string", "minLength": 1 },
+                "answer": { "type": "string", "minLength": 1 },
+                "sourceRefs": { "$ref": "#/$defs/sourceRefs" }
+              }
+            }
+          },
+          "cta": { "type": "array", "items": { "$ref": "#/$defs/cta" } },
+          "media": { "$ref": "#/$defs/mediaList" },
+          "sourceRefs": { "$ref": "#/$defs/sourceRefs" }
+        }
+      }
+    },
+    "decisionBasis": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+  },
+  "$defs": {
+    "sourceRefs": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+    "cta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["text", "link"],
+      "properties": {
+        "text": { "type": "string", "minLength": 1 },
+        "link": { "anyOf": [{ "type": "null" }, { "type": "string", "pattern": "^(https://|/)" }] },
+        "kind": { "enum": ["try", "app-download", "other"] }
+      }
+    },
+    "titledItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "body", "sourceRefs"],
+      "properties": {
+        "title": { "type": "string", "minLength": 1 },
+        "body": { "type": "string", "minLength": 1 },
+        "media": { "$ref": "#/$defs/mediaList" },
+        "sourceRefs": { "$ref": "#/$defs/sourceRefs" }
+      }
+    },
+    "mediaList": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["slot", "assetRef", "alt", "purpose"],
+        "properties": {
+          "slot": { "type": "string", "minLength": 1 },
+          "assetRef": { "type": "string", "pattern": "^(strapi|design-library|mock):" },
+          "alt": { "anyOf": [{ "type": "null" }, { "type": "string" }] },
+          "purpose": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

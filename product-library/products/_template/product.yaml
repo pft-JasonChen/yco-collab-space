@@ -1,0 +1,24 @@
+schemaVersion: 1
+slug: __PRODUCT_SLUG__
+name: __PRODUCT_NAME__
+status: draft
+category: photo
+audience: B2C
+site:
+  functionKey: /products/__PRODUCT_SLUG__
+  liveUrl: null
+  strapiEntryId: null
+positioning:
+  oneLiner: One sentence that says what the product does and for whom.
+  differentiators: []
+features: []
+useCases: []
+ctaLinks:
+  tryNow: /products/__PRODUCT_SLUG__/result-photo
+  appIos: null
+  appAndroid: null
+ratings: null
+relatedFeatures: []
+pages: []
+decisionBasis:
+  - Fill in from the confirmed feature spec or the live page; do not invent capabilities.

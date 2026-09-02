@@ -1,0 +1,247 @@
+{
+  "schemaVersion": 1,
+  "page": "ai-motion-transfer",
+  "inputHash": "25a76318570c6e2fbaca451141636d707fb7e1078a0094d91faa37a3e6a5602e",
+  "inputs": {
+    "files": [
+      {
+        "path": "design-library/patterns/product-page/README.md",
+        "sha256": "6ba3d1d49adfac0be162f1f19478f2bce194bb4d29377010564772b6f2b73823"
+      },
+      {
+        "path": "design-library/patterns/product-page/faq.yaml",
+        "sha256": "f76071c8a5cd99260934171ce8f646ff4cf2a161e6deac88f1093dd41fe9c135"
+      },
+      {
+        "path": "design-library/patterns/product-page/feature-highlight.yaml",
+        "sha256": "c0b840d48fcf7154212c63165d4e514bdb6cb680abbd5b2d1032bd53c8f2b2d8"
+      },
+      {
+        "path": "design-library/patterns/product-page/hero-banner.yaml",
+        "sha256": "4f628fa15a71cf739b65b8b46d115c14b64cb9b2a3f349b4fa269657b1920f8a"
+      },
+      {
+        "path": "design-library/patterns/product-page/how-to-steps.yaml",
+        "sha256": "f6eaf01cbbb8ed16460c51e4485b66d33ee432810618183f74f12cf05f9b05ef"
+      },
+      {
+        "path": "design-library/patterns/product-page/intro-rich-text.yaml",
+        "sha256": "4eb82e0b7152debb20491bb1f223ee4b4180928700d091f82ff69f09df0d824f"
+      },
+      {
+        "path": "design-library/patterns/product-page/section-heading.yaml",
+        "sha256": "6e25e89deee8a407fb76ab6437f00804cfcd066b918040fea71bd685a0ec7eac"
+      },
+      {
+        "path": "design-library/patterns/product-page/use-case-alternating.yaml",
+        "sha256": "29b49b63e637ea9152539c728830d1389bc46210ce601e8f500707e660bcbed6"
+      },
+      {
+        "path": "design-library/skills/page-layout/SKILL.md",
+        "sha256": "fb1ef87026e5f103e02388f09204bd4ffae4996697067301ce28b13d576a9fbc"
+      },
+      {
+        "path": "features/ai-motion-transfer/product/decisions.md",
+        "sha256": "6982b55d28456f7e24ee93665e9978acb8cad5398b544e1607047fdc022b08ae"
+      },
+      {
+        "path": "features/ai-motion-transfer/product/intake.md",
+        "sha256": "5702e7d629073895abbb3cc967ef9b22931dba84db4956816c0c566b8b98575a"
+      },
+      {
+        "path": "features/ai-motion-transfer/product/media-intent.yaml",
+        "sha256": "c37979930f7f3952cf92d1bcd69a8adfac225aac17684df9f636ba0df20bc99b"
+      },
+      {
+        "path": "features/ai-motion-transfer/product/mock-assets/README.md",
+        "sha256": "514d04b704d0c899c176d5aa3d1622f02f3af20a8a01b9051a74d466eddf024a"
+      },
+      {
+        "path": "features/ai-motion-transfer/product/mocks/example.json",
+        "sha256": "812dba59d347e22aa703873ef8100e3e768ca3b8e99472065ae19543f66c4df9"
+      },
+      {
+        "path": "features/ai-motion-transfer/product/prd.md",
+        "sha256": "00634b9884170b3bab7aa0731def9f9199eb18b75993dc99bba54fcc66418c61"
+      },
+      {
+        "path": "features/ai-motion-transfer/product/prototype.contract.yaml",
+        "sha256": "32ea32bcb769a79d925387f980b4b570831cbf85fffc5f13ad4d26642e97dafb"
+      },
+      {
+        "path": "features/ai-motion-transfer/product/surface-intent.yaml",
+        "sha256": "80edeeb40d8c7a881afc8ccc77cfe2f53048cd52077856d006c9ed7bc53f10b0"
+      },
+      {
+        "path": "features/ai-motion-transfer/product/validation.yaml",
+        "sha256": "d8248226f439281ab8ee58137fcc40fbdd3fe4c50c9c4405b73c37eee0e7c1bc"
+      },
+      {
+        "path": "platform/tokens/tokens.lock.json",
+        "sha256": "6c6f374a2ea4045d740571e3d9d55e3399ce00db232a38692deb25ebf6e49ed8"
+      },
+      {
+        "path": "product-library/messaging/brand-voice.md",
+        "sha256": "bd2730edec75acab0479ed2e2d5d72ff869186ba0d4e04a640c8af997cb5e207"
+      },
+      {
+        "path": "product-library/messaging/claim-rules.md",
+        "sha256": "dd34195d5188bc42132c9ec6d131810ef48425d7c023871caeb6f2942c2470db"
+      },
+      {
+        "path": "product-library/products/ai-motion-transfer/pages/enu-product-page-2026-09-01.md",
+        "sha256": "05430049550967c591215851729e3f15625a82e35475622fca7d3eeb677bce00"
+      },
+      {
+        "path": "product-library/products/ai-motion-transfer/product.yaml",
+        "sha256": "d15ff2fc6384a8218dc661f7ef4220d4a4422ec229ae3997d9130fb0b4c61b03"
+      },
+      {
+        "path": "product-library/review/spec-compliance-rubric.md",
+        "sha256": "1b57f733ca227655dc35e1c8aebf3f18606d805db380eb98d7af53b8f684a921"
+      },
+      {
+        "path": "product-library/skills/spec-to-content/SKILL.md",
+        "sha256": "a14eef34a4c6313e43a89293902e5a8b15d2fbde1f2c631681d38550c8456511"
+      },
+      {
+        "path": "product-pages/ai-motion-transfer/source/brief.md",
+        "sha256": "95cbdf2835eea78ca52539443636318baa3620f24687dcb91b01e98dd95077ba"
+      },
+      {
+        "path": "product-pages/ai-motion-transfer/source/mock-assets/README.md",
+        "sha256": "e73fcd6484bd78d63c7ce3d70863b21fe18a12c528e4acec5e2d3fb6222a25ff"
+      },
+      {
+        "path": "product-pages/ai-motion-transfer/source/page.source.yaml",
+        "sha256": "a90e92337eb44a3fcac1c22b3c358e86c89db2a6997650192e03660415e69f11"
+      },
+      {
+        "path": "strapi/README.md",
+        "sha256": "611a96e20a9af13a370ab7ab8f81b844292865923a900ab5c63a4050a2375882"
+      },
+      {
+        "path": "strapi/client/README.md",
+        "sha256": "388b8bddb71a02878a8ae365aec0de35ab909d85b003ed30170aec34f5f63a45"
+      },
+      {
+        "path": "strapi/components/apps-page.section-be-af-image.json",
+        "sha256": "bd19c7fa580ab0bc32c936e8fa4bf5b6fe02ad7ca9b925d097b38bcb20b61fd7"
+      },
+      {
+        "path": "strapi/components/apps-page.section-faq.json",
+        "sha256": "84424e20f8918fa91c7f7681b6d3c28790e448bb3af36948d4dcaf6ff47ba553"
+      },
+      {
+        "path": "strapi/components/product-page.rich-editor.json",
+        "sha256": "078ccdba151e356495206ff05d0d36a58c2ac2433742269717381aef38dd5d34"
+      },
+      {
+        "path": "strapi/components/product-page.section-steps.json",
+        "sha256": "55524969b226bacb643b03e43635623ddc83c290732d2ec01a388b33086fb0d3"
+      },
+      {
+        "path": "strapi/components/product-page.top-banner.json",
+        "sha256": "ffca309b2c4588f702a2ad9f5d042089c3779f8b943c4d1f6e7952861fc1718e"
+      },
+      {
+        "path": "strapi/components/shared.be-af-media.json",
+        "sha256": "71808be1148e79e7a01b36b84dde13d60436648ded048b76b5b64a1756348357"
+      },
+      {
+        "path": "strapi/components/shared.cta.json",
+        "sha256": "f0b0a00866033332b2898b89b08470f8759f85defee6712438becf32c60edfdb"
+      },
+      {
+        "path": "strapi/components/shared.section-background.json",
+        "sha256": "b8663c33297949f2563a9363ff0298f657470a288f499ff09599e3b380de7b65"
+      },
+      {
+        "path": "strapi/components/shared.section-image.json",
+        "sha256": "d634cfc0107eb47c1dfa2f95cf58da39419e3906cbab03cc8f46d6aac13d5d81"
+      },
+      {
+        "path": "strapi/components/shared.section-text.json",
+        "sha256": "b9f8c2981a8fc59b0765cfb8148d576871aa32fffd65f684e069f98c67f72bb5"
+      },
+      {
+        "path": "strapi/components/shared.seo.json",
+        "sha256": "c9499eee6fbd437271b58567feeb8573933d7a13839d1e9938082638aba114e6"
+      },
+      {
+        "path": "strapi/content-types/yce-product-page.json",
+        "sha256": "9d84a562422f6717b8f0f04d7063b50e15c56c448cce62d0e3835af55221d985"
+      },
+      {
+        "path": "strapi/mapping/rules.md",
+        "sha256": "9f6088208684e32a81a491e7c8951f99b9135512a5ea608e041bfc23943491ed"
+      },
+      {
+        "path": "strapi/media/shared-assets.json",
+        "sha256": "9f00261dfb03e581a887c37199eb39366d5a8da1f806255f7421e0b9f0ef5160"
+      },
+      {
+        "path": "strapi/registry.yaml",
+        "sha256": "4a3b3cb46da4398338674c22a6269f0ccb82383bed1b52ef55c3efea12a68ab2"
+      },
+      {
+        "path": "strapi/skills/content-to-strapi/SKILL.md",
+        "sha256": "30c0e1acede8aa82f7451196eec4149b53efa38ac1ff431d34b1c44c51046b50"
+      }
+    ]
+  },
+  "skills": {
+    "spec-to-content": {
+      "path": "product-library/skills/spec-to-content/SKILL.md",
+      "sha256": "a14eef34a4c6313e43a89293902e5a8b15d2fbde1f2c631681d38550c8456511"
+    },
+    "page-layout": {
+      "path": "design-library/skills/page-layout/SKILL.md",
+      "sha256": "fb1ef87026e5f103e02388f09204bd4ffae4996697067301ce28b13d576a9fbc"
+    },
+    "content-to-strapi": {
+      "path": "strapi/skills/content-to-strapi/SKILL.md",
+      "sha256": "30c0e1acede8aa82f7451196eec4149b53efa38ac1ff431d34b1c44c51046b50"
+    }
+  },
+  "builder": {
+    "adapter": "claude",
+    "model": "claude-fable-5-1"
+  },
+  "generatedAt": "2026-09-02T05:31:58.503Z",
+  "artifacts": {
+    "content.json": "812fbef6bd6be4c8dab5785448745cc6e92d50f19a82d133cca07d1ea98e545a",
+    "layout.json": "56854e55c1ccc5f90090c6a3c2b768a6e041a1513ec0be7300b6951d0b37e356",
+    "strapi-payload.json": "4b6fa4054ddac674767b56a1480e13138342c29d73110460424402e3f52687a1"
+  },
+  "review": {
+    "path": "review/spec-compliance.json",
+    "sha256": "fb0cffb31c7a9963ba54ea626f125435a0fe28b98dcbc652ade17742623d36b9",
+    "verdict": "pass-with-notes",
+    "reviewerModel": "claude-opus-5"
+  },
+  "resources": {
+    "selected": [
+      {
+        "assetRef": "strapi:yco-placeholder-2880x1254",
+        "kind": "strapi",
+        "repositoryPath": null,
+        "sha256": null,
+        "strapiMediaId": 19242,
+        "status": "shared"
+      }
+    ],
+    "warnings": []
+  },
+  "registryHash": "27684fe6982b5016e531bda91e9c9c0ac1f49f35f1d52188443c5c924179ebf6",
+  "patternsHash": "02b2d835fd39571df47cbefb897a147df3735d940607f3b775e715ff11aedec6",
+  "tokens": {
+    "lockPath": "platform/tokens/tokens.lock.json",
+    "lockSha256": "6c6f374a2ea4045d740571e3d9d55e3399ce00db232a38692deb25ebf6e49ed8"
+  },
+  "collabContract": {
+    "schemaVersion": 1,
+    "workflow": "product-page-generate",
+    "track": "product-page"
+  }
+}

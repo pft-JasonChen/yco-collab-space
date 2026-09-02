@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "uid": "shared.section-text",
+  "uidStatus": "inferred",
+  "displayName": "Section text",
+  "category": "shared",
+  "dynamicZone": false,
+  "description": "Title and description pair used by most sections. Both fields carry HTML from the Strapi rich editor.",
+  "fields": {
+    "title": { "type": "richtext", "html": true, "required": false, "role": "heading" },
+    "description": { "type": "richtext", "html": true, "required": false, "role": "body", "notes": "May contain <ul><li><strong>…</strong>…</li></ul> bullet lists." },
+    "superscriptTitle": { "type": "string", "required": false, "role": "text" },
+    "titleIcon": { "type": "media", "required": false, "role": "media" }
+  },
+  "layoutFields": [],
+  "example": { "title": "<p>Title</p>", "description": "<p>Body</p>", "superscriptTitle": null, "titleIcon": null }
+}

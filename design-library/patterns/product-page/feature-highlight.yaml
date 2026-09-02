@@ -1,0 +1,58 @@
+schemaVersion: 1
+id: feature-highlight
+status: provisional
+displayName: Feature highlight (bullets + media)
+strapiComponent: apps-page.section-be-af-image
+surfaceZone: use-cases
+contentRole: benefits
+description: >
+  Bullet list of 3 to 4 benefits on one side, a demo image or video on the other,
+  with one CTA. Title is optional because the bullets carry the message.
+layoutOptions:
+  textPosition:
+    values: [left, right]
+    default: right
+fieldDefaults:
+  sectionBackground.backgroundColor: white
+  cta[].newTab: true
+  cta[].ctaActivate: true
+  cta[].nofollow: false
+tokens:
+  bulletTitle:
+    fontFamily: --font-family-body
+    fontSize: --font-size-heading-5
+    weight: --font-weight-strong
+    color: --text-strong
+  bulletBody:
+    fontFamily: --font-family-body
+    fontSize: --font-size-small
+    lineHeight: --line-height-small
+    color: --text-weak
+  primaryButton:
+    background: --fill-brand-strong
+    hover: --fill-brand-hover
+    text: --text-inverse-strong
+    radius: --corner-radius-12
+  background: --background-base
+  spacing:
+    blockY: --spacing-96
+    gap: --spacing-40
+copy:
+  title: { maxChars: 60 }
+  description: { maxChars: 600 }
+  bullets: { min: 3, max: 4, titleMaxChars: 30, bodyMaxChars: 140 }
+  cta: { min: 1, max: 1, textMaxChars: 24 }
+media:
+  sectionBeAfMedia.imageBeforeDesktop:
+    required: true
+    aspectRatio: "4:3"
+    minWidth: 1200
+    formats: [jpg, png, webp]
+  sectionBeAfMedia.imageBeforeMobile:
+    required: false
+    minWidth: 750
+  sectionBeAfMedia.video:
+    required: false
+    formats: [mp4]
+decisionBasis:
+  - Bullets with bold lead-ins are how the current site presents feature benefits.

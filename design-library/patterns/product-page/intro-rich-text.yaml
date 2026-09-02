@@ -1,0 +1,34 @@
+schemaVersion: 1
+id: intro-rich-text
+status: provisional
+displayName: Intro paragraph
+strapiComponent: product-page.rich-editor
+surfaceZone: use-cases
+contentRole: intro
+description: Centered title and one short paragraph directly below the hero, no media.
+layoutOptions:
+  Layout:
+    values: [Standard]
+    default: Standard
+fieldDefaults:
+  sectionBackground.backgroundColor: white
+tokens:
+  title:
+    fontFamily: --font-family-heading
+    fontSize: --font-size-heading-1
+    lineHeight: --line-height-heading-1
+    color: --text-strong
+  description:
+    fontFamily: --font-family-body
+    fontSize: --font-size-heading-5
+    lineHeight: --line-height-heading-5
+    color: --text-weak
+  background: --background-base
+  spacing:
+    blockY: --spacing-80
+copy:
+  title: { maxChars: 70 }
+  description: { maxChars: 220 }
+media: {}
+decisionBasis:
+  - The intro restates the value proposition in one sentence before the proof sections.

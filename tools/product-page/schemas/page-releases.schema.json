@@ -1,0 +1,54 @@
+{
+  "$id": "product-page-releases",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "page", "currentStage", "pendingTransition", "transitions", "downstreamOutputs"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "page": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "currentStage": { "type": "string", "minLength": 1 },
+    "pendingTransition": { "anyOf": [{ "type": "null" }, { "$ref": "#/$defs/evidence" }] },
+    "transitions": { "type": "array", "items": { "$ref": "#/$defs/completedEvidence" } },
+    "downstreamOutputs": { "type": "array", "items": { "$ref": "#/$defs/completedEvidence" } }
+  },
+  "$defs": {
+    "approval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["actor", "confirmedAt"],
+      "properties": {
+        "actor": { "type": "string", "minLength": 1 },
+        "confirmedAt": { "type": "string", "minLength": 1 }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "from", "to", "evidenceHash", "inputHash", "generationHash", "approvals"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "from": { "type": "string", "minLength": 1 },
+        "to": { "type": "string", "minLength": 1 },
+        "evidenceHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "inputHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "generationHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "approvals": { "type": "array", "items": { "$ref": "#/$defs/approval" } }
+      }
+    },
+    "completedEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "from", "to", "evidenceHash", "inputHash", "generationHash", "approvals", "confirmedAt"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "from": { "type": "string", "minLength": 1 },
+        "to": { "type": "string", "minLength": 1 },
+        "evidenceHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "inputHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "generationHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "approvals": { "type": "array", "items": { "$ref": "#/$defs/approval" } },
+        "confirmedAt": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

@@ -1,0 +1,286 @@
+{
+  "shortDescription": "AI Character Motion Transfer product page (generated fixture)",
+  "pageName": "AI Character Motion Transfer",
+  "pageKey": "ai-motion-transfer",
+  "functionKey": "/products/ai-motion-transfer",
+  "isVisibleInListView": true,
+  "languages": { "languages": "ENU" },
+  "b2BorB2C": { "b2BorB2C": "B2C" },
+  "topBanner": {
+    "title": "<p><span style=\"color:hsl(0,0%,100%);\">AI Character Motion Swap</span></p>",
+    "description": "<p><span style=\"color:hsl(0,0%,100%);\">Turn any still photo into motion, or swap your character into any video scene. No filming, rigging or animation skills required.</span></p>",
+    "layout": null,
+    "appLogo": null,
+    "imageBeAf": [
+      {
+        "functionText": null,
+        "imageBeforeDesktop": { "$assetRef": "strapi:yco-placeholder-2880x1254" },
+        "imageAfterDesktop": null,
+        "imageBeforeMobile": null,
+        "imageAfterMobile": null,
+        "imageBeforePad": null,
+        "imageAfterPad": null,
+        "imageBefore150": null,
+        "imageAfter150": null,
+        "imageBefore175": null,
+        "imageAfter175": null,
+        "functionIconInactive": null,
+        "functionIconActive": null,
+        "video": null
+      }
+    ],
+    "imageCTA": [
+      { "ctaLink": "https://youcamapps.com/surl/PFwebsite_ycv_ios", "newTab": false, "nofollow": false, "instruction": null, "os": "iOS", "Image": { "$assetRef": "strapi:app-store-badge-ios" } },
+      { "ctaLink": "https://youcamapps.com/surl/PFwebsite_ycv_android", "newTab": false, "nofollow": false, "instruction": null, "os": "Android", "Image": { "$assetRef": "strapi:google-play-badge" } }
+    ],
+    "carouselSection": [],
+    "buttonText": [
+      { "text": "Animate Your Photo", "link": "/products/ai-motion-transfer/result-photo", "buttonType": "Plain Blue Button", "isAppDownload": null, "directLink": null }
+    ],
+    "multiDpiVideoBanner": [],
+    "sectionForeground": [],
+    "sectionBackground": { "backgroundColor": "white", "backgroundCss": null, "backgroundImageDesktop": null, "backgroundImageMobile": null },
+    "samplePhoto": []
+  },
+  "sections": [
+    {
+      "__component": "product-page.rich-editor",
+      "Layout": "Standard",
+      "sectionId": null,
+      "sectionBackground": { "backgroundColor": "white", "backgroundCss": null, "backgroundImageDesktop": null, "backgroundImageMobile": null },
+      "sectionText": {
+        "title": "<p>From Photo to Motion: AI Character Motion Swap</p>",
+        "description": "<p>Upload a photo and a reference video, and your character starts moving just like the clip you picked. No filming, no animation skills needed.</p>",
+        "superscriptTitle": null,
+        "titleIcon": null
+      },
+      "sectionImageDesktop": { "alt": null, "link": null, "image": null, "video": null },
+      "sectionImageMobile": { "alt": null, "link": null, "image": null, "video": null }
+    },
+    {
+      "__component": "apps-page.section-be-af-image",
+      "textPosition": "right",
+      "sectionOrderLeft": null,
+      "sectionOrderRight": null,
+      "layout": null,
+      "sectionId": null,
+      "beforeImageAlt": "Before and after: a still photo and its animated result",
+      "afterImageAlt": null,
+      "orderTab": null,
+      "tabText": null,
+      "tabColor": null,
+      "sectionBackground": { "backgroundColor": "white", "backgroundCss": null, "backgroundImageDesktop": null, "backgroundImageMobile": null },
+      "sectionText": {
+        "title": "",
+        "description": "<ul><li><strong>Natural Motion: </strong>Your character moves smoothly and realistically, matching the reference video.</li><li><strong>Still Looks Like You: </strong>Faces, proportions and style carry through, so the result still looks like your original photo or character.</li><li><strong>Multiple AI Models: </strong>Choose from three models, each tuned for a different result.</li></ul>",
+        "superscriptTitle": null,
+        "titleIcon": null
+      },
+      "sectionBeAfMedia": {
+        "functionText": null,
+        "imageBeforeDesktop": { "$assetRef": "strapi:yco-placeholder-2880x1254" },
+        "imageAfterDesktop": null,
+        "imageBeforeMobile": null,
+        "imageAfterMobile": null,
+        "imageBeforePad": null,
+        "imageAfterPad": null,
+        "imageBefore150": null,
+        "imageAfter150": null,
+        "imageBefore175": null,
+        "imageAfter175": null,
+        "functionIconInactive": null,
+        "functionIconActive": null,
+        "video": null
+      },
+      "cta": [
+        { "ctaText": "Try Motion Transfer", "ctaLink": "/products/ai-motion-transfer/result-photo", "newTab": true, "ctaActivate": true, "nofollow": false, "buttonType": null, "image": null }
+      ]
+    },
+    {
+      "__component": "product-page.section-steps",
+      "title": "<p>How to Use AI Character Motion Swap</p>",
+      "description": "",
+      "isSteps": true,
+      "stepText": "STEP",
+      "stepNumPosition": "right",
+      "orientationOnMobile": "vertical",
+      "sectionId": null,
+      "cta": { "ctaText": null, "ctaLink": null, "newTab": true, "ctaActivate": true, "nofollow": false, "buttonType": null, "image": null },
+      "background": { "backgroundColor": "transparent", "backgroundCss": null, "backgroundImageDesktop": null, "backgroundImageMobile": null },
+      "blocks": [
+        { "subtitle": "<p>Choose a Model</p>", "description": "<p>Pick the model built for your goal: Character Motion Control, Replace the Character in a Video, or Apply Video Motion to Photo.</p>", "backgroundColor": "#fff", "outlineColor": null, "Image": null },
+        { "subtitle": "<p>Upload a Motion Reference Video</p>", "description": "<p>Add a source video with the movement you want to apply: a gesture, a performance or a dance.</p>", "backgroundColor": "#fff", "outlineColor": null, "Image": null },
+        { "subtitle": "<p>Upload Your Photo</p>", "description": "<p>Upload the photo you want to animate: a portrait, a character illustration or any image with a clear subject.</p>", "backgroundColor": "#fff", "outlineColor": null, "Image": null },
+        { "subtitle": "<p>Generate and Save</p>", "description": "<p>Click Generate, preview your result and download it in HD, or find it saved in My Gallery.</p>", "backgroundColor": "#fff", "outlineColor": null, "Image": null }
+      ]
+    },
+    {
+      "__component": "product-page.rich-editor",
+      "Layout": "Standard",
+      "sectionId": null,
+      "sectionBackground": { "backgroundColor": "white", "backgroundCss": null, "backgroundImageDesktop": null, "backgroundImageMobile": null },
+      "sectionText": {
+        "title": "<p>Turn Any Photo Into Motion: 3 Ways to Use AI Character Motion Swap</p>",
+        "description": "",
+        "superscriptTitle": null,
+        "titleIcon": null
+      },
+      "sectionImageDesktop": { "alt": null, "link": null, "image": null, "video": null },
+      "sectionImageMobile": { "alt": null, "link": null, "image": null, "video": null }
+    },
+    {
+      "__component": "apps-page.section-be-af-image",
+      "textPosition": "left",
+      "sectionOrderLeft": "01",
+      "sectionOrderRight": "03",
+      "layout": null,
+      "sectionId": null,
+      "beforeImageAlt": "A portrait photo moving like a dance clip",
+      "afterImageAlt": null,
+      "orderTab": null,
+      "tabText": null,
+      "tabColor": null,
+      "sectionBackground": { "backgroundColor": "white", "backgroundCss": null, "backgroundImageDesktop": null, "backgroundImageMobile": null },
+      "sectionText": {
+        "title": "<p>Make Any Photo Move</p>",
+        "description": "<p>Upload a reference video, such as a dance clip, a walking shot or a simple gesture, and pair it with your photo. AI Character Motion Swap applies that motion to your image and builds a video from it. A strong fit for TikTok, Reels and Shorts, where dynamic motion holds attention.</p>",
+        "superscriptTitle": null,
+        "titleIcon": null
+      },
+      "sectionBeAfMedia": {
+        "functionText": null,
+        "imageBeforeDesktop": { "$assetRef": "strapi:yco-placeholder-2880x1254" },
+        "imageAfterDesktop": null,
+        "imageBeforeMobile": null,
+        "imageAfterMobile": null,
+        "imageBeforePad": null,
+        "imageAfterPad": null,
+        "imageBefore150": null,
+        "imageAfter150": null,
+        "imageBefore175": null,
+        "imageAfter175": null,
+        "functionIconInactive": null,
+        "functionIconActive": null,
+        "video": null
+      },
+      "cta": [
+        { "ctaText": "Try With Your Photo", "ctaLink": "/products/ai-motion-transfer/result-photo", "newTab": true, "ctaActivate": true, "nofollow": false, "buttonType": null, "image": null },
+        { "ctaText": "Download App", "ctaLink": "https://youcamapps.com/surl/LZY", "newTab": true, "ctaActivate": true, "nofollow": false, "buttonType": null, "image": null }
+      ]
+    },
+    {
+      "__component": "apps-page.section-be-af-image",
+      "textPosition": "right",
+      "sectionOrderLeft": "02",
+      "sectionOrderRight": "03",
+      "layout": null,
+      "sectionId": null,
+      "beforeImageAlt": "An illustrated character animated with a reference clip",
+      "afterImageAlt": null,
+      "orderTab": null,
+      "tabText": null,
+      "tabColor": null,
+      "sectionBackground": { "backgroundColor": "white", "backgroundCss": null, "backgroundImageDesktop": null, "backgroundImageMobile": null },
+      "sectionText": {
+        "title": "<p>Give Any Character Real Motion</p>",
+        "description": "<p>Animate illustrated or AI-generated characters without 3D modeling or frame-by-frame drawing. Upload your character image and a reference video, and get smooth motion that mirrors every move while faces, proportions and art style stay consistent from first frame to last. Useful for storytelling, avatars and character content.</p>",
+        "superscriptTitle": null,
+        "titleIcon": null
+      },
+      "sectionBeAfMedia": {
+        "functionText": null,
+        "imageBeforeDesktop": { "$assetRef": "strapi:yco-placeholder-2880x1254" },
+        "imageAfterDesktop": null,
+        "imageBeforeMobile": null,
+        "imageAfterMobile": null,
+        "imageBeforePad": null,
+        "imageAfterPad": null,
+        "imageBefore150": null,
+        "imageAfter150": null,
+        "imageBefore175": null,
+        "imageAfter175": null,
+        "functionIconInactive": null,
+        "functionIconActive": null,
+        "video": null
+      },
+      "cta": [
+        { "ctaText": "Try With Your Character", "ctaLink": "/products/ai-motion-transfer/result-photo", "newTab": true, "ctaActivate": true, "nofollow": false, "buttonType": null, "image": null },
+        { "ctaText": "Download App", "ctaLink": "https://youcamapps.com/surl/LZY", "newTab": true, "ctaActivate": true, "nofollow": false, "buttonType": null, "image": null }
+      ]
+    },
+    {
+      "__component": "apps-page.section-be-af-image",
+      "textPosition": "left",
+      "sectionOrderLeft": "03",
+      "sectionOrderRight": "03",
+      "layout": null,
+      "sectionId": null,
+      "beforeImageAlt": "A person swapped into an action clip",
+      "afterImageAlt": null,
+      "orderTab": null,
+      "tabText": null,
+      "tabColor": null,
+      "sectionBackground": { "backgroundColor": "white", "backgroundCss": null, "backgroundImageDesktop": null, "backgroundImageMobile": null },
+      "sectionText": {
+        "title": "<p>Swap Yourself Into Any Scene</p>",
+        "description": "<p>Skip the filming and the manual masking. Upload your photo alongside any action clip, and your character replaces the original performer while keeping the clip's motion, gestures and camera movement intact. Built for memes, reaction videos and social content where believable motion is the whole point.</p>",
+        "superscriptTitle": null,
+        "titleIcon": null
+      },
+      "sectionBeAfMedia": {
+        "functionText": null,
+        "imageBeforeDesktop": { "$assetRef": "strapi:yco-placeholder-2880x1254" },
+        "imageAfterDesktop": null,
+        "imageBeforeMobile": null,
+        "imageAfterMobile": null,
+        "imageBeforePad": null,
+        "imageAfterPad": null,
+        "imageBefore150": null,
+        "imageAfter150": null,
+        "imageBefore175": null,
+        "imageAfter175": null,
+        "functionIconInactive": null,
+        "functionIconActive": null,
+        "video": null
+      },
+      "cta": [
+        { "ctaText": "Create Your Video", "ctaLink": "/products/ai-motion-transfer/result-photo", "newTab": true, "ctaActivate": true, "nofollow": false, "buttonType": null, "image": null },
+        { "ctaText": "Download App", "ctaLink": "https://youcamapps.com/surl/LZY", "newTab": true, "ctaActivate": true, "nofollow": false, "buttonType": null, "image": null }
+      ]
+    },
+    {
+      "__component": "apps-page.section-faq",
+      "title": "AI Character Motion Swap FAQs",
+      "type": null,
+      "faqList": [
+        { "question": "What do I need to start?", "answer": "<p>One photo with a clear subject and one reference video with the motion you want.</p>" },
+        { "question": "Which model should I pick?", "answer": "<p>Character Motion Control moves a photo. Replace the Character in a Video swaps you into a clip. Apply Video Motion to Photo animates illustrated or AI-generated characters.</p>" },
+        { "question": "Does the result keep my face and style?", "answer": "<p>Yes. Faces, proportions and art style carry through from the original image.</p>" },
+        { "question": "What kind of reference video works best?", "answer": "<p>A clip with one clear subject and visible full-body or upper-body motion, such as a gesture, performance or dance.</p>" },
+        { "question": "Can I animate an illustration or AI-generated character?", "answer": "<p>Yes. Use Apply Video Motion to Photo.</p>" },
+        { "question": "Where is my result saved?", "answer": "<p>You can download it in HD, and it is saved in My Gallery.</p>" },
+        { "question": "Do I need animation or 3D skills?", "answer": "<p>No. The tool needs only a photo and a reference video.</p>" },
+        { "question": "Can I use it for social videos?", "answer": "<p>Yes. Results fit TikTok, Reels, Shorts, memes and reaction videos.</p>" }
+      ],
+      "expandIcon": null,
+      "collapseIcon": null
+    }
+  ],
+  "status": "draft",
+  "seo": {
+    "metaTitle": "Apply Video Motion to Any Character – AI Motion Transfer",
+    "metaDescription": "Transfer real motion from a video onto any photo with AI. Your photo moves like the reference clip, with no filming or animation skills needed.",
+    "keywords": null,
+    "metaRobots": null,
+    "structuredData": null,
+    "metaViewport": null,
+    "canonicalURL": null,
+    "schemaProduct": true,
+    "schemaSoftware": true,
+    "ratingValue": 4.9,
+    "ratingCount": 129294,
+    "metaImage": null,
+    "metaSocial": [],
+    "additionalInfo": []
+  }
+}

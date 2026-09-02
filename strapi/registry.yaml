@@ -1,0 +1,55 @@
+schemaVersion: 1
+owner: rd
+status: provisional
+strapi:
+  majorVersion: 4
+  adminApi:
+    baseUrlEnv: STRAPI_ADMIN_URL
+    loginPath: /admin/login
+    tokenEnv: STRAPI_ADMIN_TOKEN
+    emailEnv: STRAPI_ADMIN_EMAIL
+    passwordEnv: STRAPI_ADMIN_PASSWORD
+    contentManagerPath: /content-manager/collection-types
+    uploadPath: /upload
+  adminUiEntryPath: /admin/content-manager/collectionType/{uid}/{id}
+contentType:
+  apiPath: yce-product-pages
+  uid: api::yce-product-page.yce-product-page
+  file: content-types/yce-product-page.json
+components:
+  - uid: product-page.top-banner
+    file: components/product-page.top-banner.json
+  - uid: product-page.rich-editor
+    file: components/product-page.rich-editor.json
+  - uid: apps-page.section-be-af-image
+    file: components/apps-page.section-be-af-image.json
+  - uid: product-page.section-steps
+    file: components/product-page.section-steps.json
+  - uid: apps-page.section-faq
+    file: components/apps-page.section-faq.json
+  - uid: shared.section-text
+    file: components/shared.section-text.json
+  - uid: shared.section-background
+    file: components/shared.section-background.json
+  - uid: shared.cta
+    file: components/shared.cta.json
+  - uid: shared.be-af-media
+    file: components/shared.be-af-media.json
+  - uid: shared.section-image
+    file: components/shared.section-image.json
+  - uid: shared.seo
+    file: components/shared.seo.json
+sharedAssets: media/shared-assets.json
+mappingRules: mapping/rules.md
+systemFields:
+  - id
+  - createdAt
+  - updatedAt
+  - vuid
+  - versions
+forbiddenFields:
+  - publishedAt
+decisionBasis:
+  - The registry mirrors what the live YCO website can render today; the generator must not invent components or fields.
+  - Strapi v4 admin API is used because the existing n8n localisation flow already writes product pages through it.
+  - Automation only creates draft entries; publishedAt is forbidden in any generated payload.

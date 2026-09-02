@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "uid": "shared.section-background",
+  "uidStatus": "inferred",
+  "displayName": "Section background",
+  "category": "shared",
+  "dynamicZone": false,
+  "description": "Background colour, optional raw CSS and optional background images per breakpoint.",
+  "fields": {
+    "backgroundColor": { "type": "string", "required": false, "role": "background", "values": ["white", "transparent"], "notes": "Observed values; Designer pattern may map a token to one of these names. RD to confirm the full list." },
+    "backgroundCss": { "type": "text", "required": false, "role": "background" },
+    "backgroundImageDesktop": { "type": "media", "required": false, "role": "media" },
+    "backgroundImageMobile": { "type": "media", "required": false, "role": "media" }
+  },
+  "layoutFields": ["backgroundColor"],
+  "example": { "backgroundColor": "white", "backgroundCss": null, "backgroundImageDesktop": null, "backgroundImageMobile": null }
+}

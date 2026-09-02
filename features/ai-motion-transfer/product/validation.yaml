@@ -1,0 +1,34 @@
+schemaVersion: 1
+feature: ai-motion-transfer
+route: /features/ai-motion-transfer/
+checks:
+  - id: models-listed
+    criterion: AMT-001
+    assertions:
+      - type: count
+        selector: "[data-testid='model-option']"
+        value: 3
+  - id: result-actions
+    criterion: AMT-002
+    steps:
+      - action: click
+        selector: "[data-testid='model-option']"
+      - action: click
+        selector: "[data-testid='upload-reference-video']"
+      - action: click
+        selector: "[data-testid='upload-photo']"
+    assertions:
+      - type: visible
+        selector: "[data-testid='download-hd']"
+      - type: visible
+        selector: "[data-testid='my-gallery']"
+  - id: retry-returns-to-photo
+    criterion: AMT-003
+    steps:
+      - action: click
+        selector: "[data-testid='simulate-error']"
+      - action: click
+        selector: "[data-testid='retry']"
+    assertions:
+      - type: visible
+        selector: "[data-testid='upload-photo']"

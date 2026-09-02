@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "uid": "product-page.rich-editor",
+  "uidStatus": "confirmed",
+  "displayName": "Rich text section",
+  "category": "section",
+  "dynamicZone": true,
+  "description": "Centered title + description block, optionally with one desktop and one mobile image or video. Used for page intro paragraphs and section headings that introduce a group of use cases.",
+  "fields": {
+    "Layout": { "type": "enumeration", "required": true, "values": ["Standard"], "role": "layout", "notes": "Only Standard has been observed; RD to confirm other values." },
+    "sectionId": { "type": "string", "required": false, "role": "meta", "notes": "Optional anchor id for in-page links." },
+    "sectionBackground": { "type": "component", "component": "shared.section-background", "required": false, "role": "background" },
+    "sectionText": { "type": "component", "component": "shared.section-text", "required": true, "role": "text" },
+    "sectionImageDesktop": { "type": "component", "component": "shared.section-image", "required": false, "role": "media" },
+    "sectionImageMobile": { "type": "component", "component": "shared.section-image", "required": false, "role": "media" }
+  },
+  "layoutFields": ["Layout"],
+  "example": {
+    "__component": "product-page.rich-editor",
+    "Layout": "Standard",
+    "sectionId": null,
+    "sectionBackground": { "backgroundColor": "white", "backgroundCss": null, "backgroundImageDesktop": null, "backgroundImageMobile": null },
+    "sectionText": { "title": "<p>From Photo to Motion</p>", "description": "<p>Upload a photo and a video.</p>", "superscriptTitle": null, "titleIcon": null },
+    "sectionImageDesktop": { "alt": null, "link": null, "image": null, "video": null },
+    "sectionImageMobile": { "alt": null, "link": null, "image": null, "video": null }
+  }
+}

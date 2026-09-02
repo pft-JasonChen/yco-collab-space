@@ -1,0 +1,132 @@
+{
+  "schemaVersion": 1,
+  "page": "ai-motion-transfer",
+  "contentHash": "812fbef6bd6be4c8dab5785448745cc6e92d50f19a82d133cca07d1ea98e545a",
+  "skill": {
+    "id": "page-layout",
+    "owner": "designer",
+    "version": 1
+  },
+  "surfacePack": {
+    "id": "marketing/product-page",
+    "version": "2026-08"
+  },
+  "shellZones": [
+    "navigation",
+    "footer"
+  ],
+  "hero": {
+    "pattern": "hero-banner",
+    "options": {}
+  },
+  "sections": [
+    {
+      "contentId": "intro",
+      "pattern": "intro-rich-text",
+      "options": {
+        "Layout": "Standard"
+      }
+    },
+    {
+      "contentId": "benefits",
+      "pattern": "feature-highlight",
+      "options": {
+        "textPosition": "right"
+      }
+    },
+    {
+      "contentId": "how-to",
+      "pattern": "how-to-steps",
+      "options": {
+        "isSteps": true,
+        "stepNumPosition": "right",
+        "orientationOnMobile": "vertical"
+      }
+    },
+    {
+      "contentId": "use-cases-heading",
+      "pattern": "section-heading",
+      "options": {
+        "Layout": "Standard"
+      }
+    },
+    {
+      "contentId": "use-case-photo",
+      "pattern": "use-case-alternating",
+      "options": {
+        "textPosition": "left",
+        "sectionOrderLeft": "01",
+        "sectionOrderRight": "03"
+      }
+    },
+    {
+      "contentId": "use-case-character",
+      "pattern": "use-case-alternating",
+      "options": {
+        "textPosition": "right",
+        "sectionOrderLeft": "02",
+        "sectionOrderRight": "03"
+      }
+    },
+    {
+      "contentId": "use-case-scene",
+      "pattern": "use-case-alternating",
+      "options": {
+        "textPosition": "left",
+        "sectionOrderLeft": "03",
+        "sectionOrderRight": "03"
+      }
+    },
+    {
+      "contentId": "faq",
+      "pattern": "faq",
+      "options": {}
+    }
+  ],
+  "tokensUsed": [
+    "--background-alternate",
+    "--background-base",
+    "--background-brand",
+    "--background-raised",
+    "--corner-radius-12",
+    "--corner-radius-16",
+    "--fill-brand-hover",
+    "--fill-brand-strong",
+    "--fill-weak",
+    "--font-family-body",
+    "--font-family-heading",
+    "--font-size-display",
+    "--font-size-heading-1",
+    "--font-size-heading-2",
+    "--font-size-heading-4",
+    "--font-size-heading-5",
+    "--font-size-small",
+    "--font-size-uppercase",
+    "--font-weight-strong",
+    "--icon-neutral",
+    "--line-height-display",
+    "--line-height-heading-1",
+    "--line-height-heading-2",
+    "--line-height-heading-4",
+    "--line-height-heading-5",
+    "--line-height-small",
+    "--line-height-uppercase",
+    "--spacing-24",
+    "--spacing-40",
+    "--spacing-64",
+    "--spacing-80",
+    "--spacing-96",
+    "--stroke-strong",
+    "--stroke-weak",
+    "--text-brand",
+    "--text-inverse-strong",
+    "--text-inverse-weak",
+    "--text-strong",
+    "--text-weak"
+  ],
+  "warnings": [],
+  "decisionBasis": [
+    "Section order follows the PM content order; the three use cases alternate sides starting left and carry 01/02/03 of 03 labels.",
+    "Every pattern is provisional; Designer confirms tokens and media specs before design approval."
+  ]
+}

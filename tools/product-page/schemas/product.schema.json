@@ -1,0 +1,78 @@
+{
+  "$id": "product-library-product",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "slug", "name", "status", "category", "audience", "site", "positioning", "features", "useCases", "ctaLinks", "ratings", "relatedFeatures", "pages", "decisionBasis"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "slug": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "name": { "type": "string", "minLength": 1 },
+    "status": { "enum": ["draft", "active", "fixture", "retired"] },
+    "category": { "type": "string", "minLength": 1 },
+    "audience": { "enum": ["B2C", "B2B"] },
+    "site": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["functionKey", "liveUrl", "strapiEntryId"],
+      "properties": {
+        "functionKey": { "type": "string" },
+        "liveUrl": { "anyOf": [{ "type": "null" }, { "type": "string" }] },
+        "strapiEntryId": { "anyOf": [{ "type": "null" }, { "type": "integer" }] }
+      }
+    },
+    "positioning": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["oneLiner", "differentiators"],
+      "properties": {
+        "oneLiner": { "type": "string", "minLength": 1 },
+        "differentiators": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "features": { "type": "array", "items": { "$ref": "#/$defs/namedItem" } },
+    "useCases": { "type": "array", "items": { "$ref": "#/$defs/namedItem" } },
+    "ctaLinks": { "type": "object", "additionalProperties": { "anyOf": [{ "type": "null" }, { "type": "string" }] } },
+    "ratings": {
+      "anyOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["value", "count", "source"],
+          "properties": {
+            "value": { "type": "number" },
+            "count": { "type": "integer" },
+            "source": { "type": "string", "minLength": 1 }
+          }
+        }
+      ]
+    },
+    "relatedFeatures": { "type": "array", "items": { "type": "string" } },
+    "pages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["file", "locale", "capturedFrom"],
+        "properties": {
+          "file": { "type": "string" },
+          "locale": { "type": "string" },
+          "capturedFrom": { "type": "string" }
+        }
+      }
+    },
+    "decisionBasis": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+  },
+  "$defs": {
+    "namedItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "summary"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+        "name": { "type": "string", "minLength": 1 },
+        "summary": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+schemaVersion: 1
+feature: ai-motion-transfer
+strategy: reuse
+temporary: true
+primaryPack:
+  id: workspace/tool-video
+  version: 2026-08
+borrowedPacks: []
+layoutIntent:
+  zones: []
+  componentRoles: []
+  responsivePriority: []
+deviations: []
+decisionBasis:
+  - The web tool is a video workspace; the product page is generated separately through the product-page track.

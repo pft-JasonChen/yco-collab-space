@@ -14,3 +14,5 @@ features/*/evidence/*.md
 evals/runs/
 .prototype-state/
 .collab-cache/
+refs/
+product-pages/*/evidence/

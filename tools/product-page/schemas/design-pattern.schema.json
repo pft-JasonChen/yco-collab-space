@@ -1,0 +1,34 @@
+{
+  "$id": "product-page-design-pattern",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "id", "status", "displayName", "strapiComponent", "surfaceZone", "contentRole", "description", "layoutOptions", "fieldDefaults", "tokens", "copy", "media", "decisionBasis"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "status": { "enum": ["provisional", "approved", "deprecated"] },
+    "displayName": { "type": "string", "minLength": 1 },
+    "strapiComponent": { "type": "string", "pattern": "^[a-z0-9-]+\\.[a-z0-9-]+$" },
+    "surfaceZone": { "type": "string", "minLength": 1 },
+    "contentRole": { "enum": ["hero", "intro", "benefits", "how-to", "use-case-group-heading", "use-case", "faq"] },
+    "description": { "type": "string", "minLength": 1 },
+    "layoutOptions": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "values": { "type": "array" },
+          "pattern": { "type": "string" },
+          "default": {}
+        }
+      }
+    },
+    "fieldDefaults": { "type": "object" },
+    "tokens": { "type": "object" },
+    "copy": { "type": "object" },
+    "media": { "type": "object" },
+    "decisionBasis": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+    "file": { "type": "string" }
+  }
+}

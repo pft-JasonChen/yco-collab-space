@@ -1,0 +1,30 @@
+schemaVersion: 1
+id: section-heading
+status: provisional
+displayName: Group heading
+strapiComponent: product-page.rich-editor
+surfaceZone: use-cases
+contentRole: use-case-group-heading
+description: Title-only rich-editor block that introduces a group of alternating use-case sections.
+layoutOptions:
+  Layout:
+    values: [Standard]
+    default: Standard
+fieldDefaults:
+  sectionBackground.backgroundColor: white
+  sectionText.description: ""
+tokens:
+  title:
+    fontFamily: --font-family-heading
+    fontSize: --font-size-heading-1
+    lineHeight: --line-height-heading-1
+    color: --text-strong
+  background: --background-base
+  spacing:
+    blockY: --spacing-64
+copy:
+  title: { maxChars: 80 }
+  description: { maxChars: 0 }
+media: {}
+decisionBasis:
+  - Keeps use-case groups scannable without adding a new Strapi component.

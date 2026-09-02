@@ -1,0 +1,40 @@
+schemaVersion: 1
+id: faq
+status: provisional
+displayName: FAQ accordion
+strapiComponent: apps-page.section-faq
+surfaceZone: conversion-action
+contentRole: faq
+description: Accordion of 5 to 10 questions; the last section before the site footer.
+layoutOptions:
+  type:
+    values: [null]
+    default: null
+fieldDefaults: {}
+tokens:
+  title:
+    fontFamily: --font-family-heading
+    fontSize: --font-size-heading-1
+    lineHeight: --line-height-heading-1
+    color: --text-strong
+  question:
+    fontSize: --font-size-heading-5
+    lineHeight: --line-height-heading-5
+    weight: --font-weight-strong
+    color: --text-strong
+  answer:
+    fontSize: --font-size-small
+    lineHeight: --line-height-small
+    color: --text-weak
+  divider: --stroke-weak
+  icon: --icon-neutral
+  background: --background-base
+  spacing:
+    blockY: --spacing-96
+    rowY: --spacing-24
+copy:
+  title: { maxChars: 60 }
+  faq: { min: 5, max: 10, questionMaxChars: 120, answerMaxChars: 400 }
+media: {}
+decisionBasis:
+  - FAQ doubles as the closing conversion zone because the site shell adds the footer CTA.

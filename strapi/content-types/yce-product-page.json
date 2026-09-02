@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "uid": "api::yce-product-page.yce-product-page",
+  "uidStatus": "confirmed",
+  "apiPath": "yce-product-pages",
+  "displayName": "YCO product page",
+  "description": "One YouCam Online (YCO) product page per language. The page shell (navigation, footer) is rendered by the site, not by this entry.",
+  "attributes": {
+    "shortDescription": { "type": "string", "required": true, "role": "meta", "maxLength": 120 },
+    "pageName": { "type": "string", "required": true, "role": "meta", "maxLength": 80 },
+    "pageKey": { "type": "string", "required": true, "role": "meta", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "functionKey": { "type": "string", "required": true, "role": "meta", "pattern": "^/products/[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "isVisibleInListView": { "type": "boolean", "required": false, "role": "meta", "default": true },
+    "languages": {
+      "type": "component",
+      "component": "inline",
+      "required": true,
+      "role": "meta",
+      "fields": {
+        "languages": { "type": "enumeration", "required": true, "values": ["ENU", "JPN", "CHT", "CHS", "FRA", "DEU", "ESP", "ITA", "PTB", "KOR", "IND", "TUR", "RUS", "THA", "NLD", "POL", "VIE"] }
+      }
+    },
+    "b2BorB2C": {
+      "type": "component",
+      "component": "inline",
+      "required": true,
+      "role": "meta",
+      "fields": {
+        "b2BorB2C": { "type": "enumeration", "required": true, "values": ["B2C", "B2B"] }
+      }
+    },
+    "topBanner": { "type": "component", "component": "product-page.top-banner", "required": true, "role": "hero" },
+    "sections": {
+      "type": "dynamiczone",
+      "required": true,
+      "role": "body",
+      "components": [
+        "product-page.rich-editor",
+        "apps-page.section-be-af-image",
+        "product-page.section-steps",
+        "apps-page.section-faq"
+      ]
+    },
+    "status": { "type": "enumeration", "required": true, "values": ["draft"], "role": "meta", "notes": "Automation must always send draft." },
+    "seo": { "type": "component", "component": "shared.seo", "required": true, "role": "seo" },
+    "versionNumber": { "type": "integer", "required": false, "role": "system" },
+    "versionComment": { "type": "string", "required": false, "role": "system" }
+  },
+  "decisionBasis": [
+    "Field list mirrors the ENU draft of the AI Character Motion Transfer page observed on 2026-09-01 through the existing localisation webhook.",
+    "System fields (id, createdAt, updatedAt, vuid, versions) are stripped before create; RD should confirm whether nested component ids may be reused on update."
+  ]
+}

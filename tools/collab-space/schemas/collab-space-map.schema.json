@@ -40,7 +40,8 @@
           "kind": { "enum": ["lifecycle", "downstream"] },
           "allowedActors": { "$ref": "#/$defs/idList" },
           "requiredArtifacts": { "$ref": "#/$defs/idList" },
-          "exitApprovals": { "$ref": "#/$defs/idList" }
+          "exitApprovals": { "$ref": "#/$defs/idList" },
+          "track": { "$ref": "#/$defs/track" }
         }
       }
     },
@@ -55,7 +56,8 @@
           "from": { "$ref": "#/$defs/id" },
           "to": { "$ref": "#/$defs/id" },
           "approvals": { "$ref": "#/$defs/idList" },
-          "parallelOutput": { "type": "boolean" }
+          "parallelOutput": { "type": "boolean" },
+          "track": { "$ref": "#/$defs/track" }
         }
       }
     },
@@ -71,7 +73,8 @@
           "owner": { "$ref": "#/$defs/id" },
           "path": { "type": "string", "minLength": 1 },
           "nature": { "enum": ["source", "derived", "record"] },
-          "status": { "enum": ["proposed", "active", "deprecated"] }
+          "status": { "enum": ["proposed", "active", "deprecated"] },
+          "track": { "$ref": "#/$defs/track" }
         }
       }
     },
@@ -97,7 +100,9 @@
       "required": ["features", "designLibrary"],
       "properties": {
         "features": { "type": "string", "pattern": "^\\.collab-cache/" },
-        "designLibrary": { "type": "string", "pattern": "^\\.collab-cache/" }
+        "designLibrary": { "type": "string", "pattern": "^\\.collab-cache/" },
+        "productLibrary": { "type": "string", "pattern": "^\\.collab-cache/" },
+        "strapiRegistry": { "type": "string", "pattern": "^\\.collab-cache/" }
       }
     },
     "workflows": {
@@ -113,7 +118,8 @@
           "readablePaths": { "$ref": "#/$defs/pathList" },
           "writablePaths": { "$ref": "#/$defs/pathList" },
           "protectedPaths": { "$ref": "#/$defs/pathList" },
-          "enforcement": { "$ref": "#/$defs/enforcement" }
+          "enforcement": { "$ref": "#/$defs/enforcement" },
+          "track": { "$ref": "#/$defs/track" }
         }
       }
     },
@@ -129,7 +135,8 @@
           "enforcement": { "$ref": "#/$defs/enforcement" },
           "actors": { "$ref": "#/$defs/idList" },
           "stages": { "$ref": "#/$defs/idList" },
-          "decisionBasis": { "$ref": "#/$defs/nonEmptyStrings" }
+          "decisionBasis": { "$ref": "#/$defs/nonEmptyStrings" },
+          "track": { "$ref": "#/$defs/track" }
         }
       }
     },
@@ -138,6 +145,7 @@
   "$defs": {
     "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
     "enforcement": { "enum": ["info", "warning", "error"] },
+    "track": { "enum": ["prototype", "product-page"] },
     "idList": {
       "type": "array",
       "uniqueItems": true,

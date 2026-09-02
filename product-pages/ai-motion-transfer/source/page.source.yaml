@@ -1,0 +1,40 @@
+schemaVersion: 1
+page: ai-motion-transfer
+title: AI Character Motion Transfer
+status: confirmed
+locale: ENU
+audience: B2C
+pageKey: ai-motion-transfer
+functionKey: /products/ai-motion-transfer
+goal: Get a visitor to try the web tool with their own photo, or download the app.
+targetUser: Social creators and hobbyists who have a photo or character image and a short reference clip.
+upstream:
+  features:
+    - ai-motion-transfer
+  products:
+    - ai-motion-transfer
+  competitors: []
+requiredSections:
+  - intro
+  - benefits
+  - how-to
+  - use-case
+  - faq
+appLinks:
+  ios: https://youcamapps.com/surl/PFwebsite_ycv_ios
+  android: https://youcamapps.com/surl/PFwebsite_ycv_android
+  generic: https://youcamapps.com/surl/LZY
+media:
+  requestedCollections:
+    - path: assets/video/ai-motion-transfer
+      purpose: Hero loop and use-case demo media
+      requiredForGeneration: false
+  allowMockAssets: true
+layoutPreferences:
+  order: null
+  excludePatterns: []
+review:
+  builderModelHint: null
+  reviewerModelHint: must differ from builder
+decisionBasis:
+  - Fixture page rebuilt from the confirmed feature spec so every sentence can be traced to a PM source.

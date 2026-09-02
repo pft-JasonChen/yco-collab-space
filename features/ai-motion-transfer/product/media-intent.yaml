@@ -1,0 +1,9 @@
+schemaVersion: 1
+feature: ai-motion-transfer
+requestedCollections:
+  - path: assets/video/ai-motion-transfer
+    purpose: Demo clips showing a photo animated by a reference video, for the product page hero and use-case sections.
+    selectionGuidance: Prefer short loops with one clear subject; desktop 4:3 stills for section media.
+    requiredForGeneration: false
+decisionBasis:
+  - The collection does not exist yet; Designer uploads it later and the product page uses placeholders until then.

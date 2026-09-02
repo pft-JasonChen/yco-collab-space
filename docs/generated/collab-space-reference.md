@@ -3,6 +3,8 @@
 
 本頁由 `collab-space.map.yaml` 自動產生。它是角色、階段、資料位置與外部系統邊界的速查表；若本頁與契約不同，`npm run docs:check` 會失敗。
 
+## Prototype track
+
 ```mermaid
 flowchart LR
   intake[intake] --> pm_prototype_working[pm-prototype-working]
@@ -16,7 +18,7 @@ flowchart LR
   design_final[design-final] -->|parallel output| qa_spec[qa-spec]
 ```
 
-## 階段與核准
+### 階段與核准
 
 | 階段 | 類型 | 可參與角色 | 必要產物 | 離開階段需要 |
 |---|---|---|---|---|
@@ -31,23 +33,56 @@ flowchart LR
 
 `rd-handoff` 與 `qa-spec` 是從同一個 `design-final` 版本產生的平行輸出，不會互相等待或改變目前 lifecycle stage。
 
+## Product page track
+
+```mermaid
+flowchart LR
+  page_brief[page-brief] --> page_generated[page-generated]
+  page_generated[page-generated] --> page_pm_review[page-pm-review]
+  page_pm_review[page-pm-review] --> page_brief[page-brief]
+  page_pm_review[page-pm-review] --> page_strapi_draft[page-strapi-draft]
+  page_strapi_draft[page-strapi-draft] --> page_brief[page-brief]
+  page_strapi_draft[page-strapi-draft] -->|parallel output| page_published[page-published]
+```
+
+### 階段與核准
+
+| 階段 | 類型 | 可參與角色 | 必要產物 | 離開階段需要 |
+|---|---|---|---|---|
+| `page-brief` | lifecycle | Product manager、AI agent | `page-source` | Product manager |
+| `page-generated` | lifecycle | Product manager、Designer、Research and development、AI agent | `page-source`、`page-generated`、`page-spec-review` | Product manager |
+| `page-pm-review` | lifecycle | Product manager、Manager reviewer、AI agent | `page-frozen-revision` | Product manager |
+| `page-strapi-draft` | lifecycle | Product manager、Research and development、AI agent | `page-frozen-revision`、`strapi-publish-evidence` | Product manager |
+| `page-published` | downstream | Product manager、Research and development | `page-frozen-revision`、`strapi-publish-evidence` | Product manager |
+
+`page-published` 是 `page-strapi-draft` 的平行輸出：自動化只建立 Strapi draft，正式 publish 由人在 Strapi 後台完成。
+
 ## 資料位置與 Owner
 
-| Artifact | Owner | 位置 | 性質 | 狀態 |
-|---|---|---|---|---|
-| `pm-product-source` | Product manager | `features/{feature}/product/**` | source | active |
-| `design-library` | Designer | `design-library/**` | source | active |
-| `feature-design-record` | Designer | `features/{feature}/design/**` | source | proposed |
-| `generated-prototype` | AI agent | `features/{feature}/generated/**` | derived | active |
-| `validation-evidence` | AI agent | `features/{feature}/evidence/**` | derived | active |
-| `frozen-revision` | Product manager | `features/{feature}/releases.json` | record | active |
-| `approved-design-selection` | Designer | `features/{feature}/generated/generation.json` | record | proposed |
-| `qa-human-spec` | Quality assurance | `features/{feature}/specs/**` | derived | proposed |
+| Artifact | Owner | 位置 | 性質 | 狀態 | Track |
+|---|---|---|---|---|---|
+| `pm-product-source` | Product manager | `features/{feature}/product/**` | source | active | prototype |
+| `design-library` | Designer | `design-library/**` | source | active | prototype |
+| `feature-design-record` | Designer | `features/{feature}/design/**` | source | proposed | prototype |
+| `generated-prototype` | AI agent | `features/{feature}/generated/**` | derived | active | prototype |
+| `validation-evidence` | AI agent | `features/{feature}/evidence/**` | derived | active | prototype |
+| `frozen-revision` | Product manager | `features/{feature}/releases.json` | record | active | prototype |
+| `approved-design-selection` | Designer | `features/{feature}/generated/generation.json` | record | proposed | prototype |
+| `qa-human-spec` | Quality assurance | `features/{feature}/specs/**` | derived | proposed | prototype |
+| `product-library` | Product manager | `product-library/**` | source | active | product-page |
+| `design-pattern-library` | Designer | `design-library/patterns/product-page/**` | source | active | product-page |
+| `strapi-registry` | Research and development | `strapi/**` | source | active | product-page |
+| `page-source` | Product manager | `product-pages/{page}/source/**` | source | active | product-page |
+| `page-generated` | AI agent | `product-pages/{page}/generated/**` | derived | active | product-page |
+| `page-spec-review` | AI agent | `product-pages/{page}/generated/review/**` | derived | active | product-page |
+| `strapi-publish-evidence` | AI agent | `product-pages/{page}/evidence/publish/**` | derived | active | product-page |
+| `page-frozen-revision` | Product manager | `product-pages/{page}/releases.json` | record | active | product-page |
 
 ## Workflow 寫入邊界
 
 ### `prototype-intake`
 
+- Track: `prototype`
 - Actors: Product manager、AI agent
 - 可寫入：`features/{feature}/product/**`、`features/{feature}/design/design-gaps.yaml`、`features/{feature}/releases.json`
 - 保護區：`platform`、`design-library`
@@ -55,6 +90,7 @@ flowchart LR
 
 ### `prototype-update`
 
+- Track: `prototype`
 - Actors: AI agent
 - 可寫入：`features/{feature}/generated/**`、`features/{feature}/evidence/**`、`.prototype-state/**`、`.collab-cache/**`
 - 保護區：`collab-space.map.yaml`、`features/{feature}/product`、`features/{feature}/design`、`design-library`、`platform`
@@ -62,6 +98,7 @@ flowchart LR
 
 ### `design-library-upload`
 
+- Track: `prototype`
 - Actors: Designer
 - 可寫入：`design-library/assets/**`、`design-library/tokens/**`、`design-library/components/**`、`design-library/patterns/**`
 - 保護區：`features`、`platform`
@@ -69,10 +106,59 @@ flowchart LR
 
 ### `component-foundation-pilot`
 
+- Track: `prototype`
 - Actors: Product manager、Designer、Research and development、AI agent
 - 可寫入：`design-library/components/**`、`design-library/assets/**`、`platform/ui/**`、`.storybook/**`、`tools/design-library/**`、`docs/architecture/**`、`docs/design-system/**`、`package.json`、`package-lock.json`、`prototype.config.json`
 - 保護區：`features/{feature}/product`、`features/{feature}/generated`、`platform/tokens/rd`、`.env`
 - Enforcement: `error`
+
+### `product-page-brief`
+
+- Track: `product-page`
+- Actors: Product manager、AI agent
+- 可寫入：`product-pages/{page}/source/**`、`product-pages/{page}/releases.json`
+- 保護區：`features`、`product-library`、`design-library`、`strapi`、`platform`、`product-pages/{page}/generated`
+- Enforcement: `error`
+
+### `product-page-generate`
+
+- Track: `product-page`
+- Actors: AI agent
+- 可寫入：`product-pages/{page}/generated/**`、`product-pages/{page}/evidence/**`、`.prototype-state/**`、`.collab-cache/**`
+- 保護區：`collab-space.map.yaml`、`features`、`product-library`、`design-library`、`strapi`、`platform`、`product-pages/{page}/source`、`product-pages/{page}/releases.json`
+- Enforcement: `error`
+
+### `product-page-publish`
+
+- Track: `product-page`
+- Actors: AI agent、Product manager、Research and development
+- 可寫入：`product-pages/{page}/evidence/**`
+- 保護區：`features`、`product-library`、`design-library`、`strapi`、`platform`、`product-pages/{page}/source`、`product-pages/{page}/generated`
+- Enforcement: `error`
+
+### `product-library-update`
+
+- Track: `product-page`
+- Actors: Product manager
+- 可寫入：`product-library/**`
+- 保護區：`design-library`、`strapi`、`platform`、`product-pages`
+- Enforcement: `warning`
+
+### `design-pattern-update`
+
+- Track: `product-page`
+- Actors: Designer
+- 可寫入：`design-library/patterns/product-page/**`、`design-library/skills/**`
+- 保護區：`features`、`product-library`、`strapi`、`platform`、`product-pages`
+- Enforcement: `warning`
+
+### `strapi-registry-update`
+
+- Track: `product-page`
+- Actors: Research and development
+- 可寫入：`strapi/**`
+- 保護區：`features`、`product-library`、`design-library`、`platform`、`product-pages`
+- Enforcement: `warning`
 
 ## 外部系統邊界
 
@@ -84,6 +170,7 @@ flowchart LR
 | `public-preview` | Product manager | output | public-selected-assets-only | 不可 |
 | `rd-repository` | Research and development | output | private | 可（僅該外部正式系統） |
 | `yco-spec` | Quality assurance | output | private | 不可 |
+| `strapi-admin` | Research and development | output | private | 可（僅該外部正式系統） |
 
 ## 判斷依據
 
@@ -91,3 +178,4 @@ flowchart LR
 - Shared design resources live once in the global Design Library; feature revisions pin exact selections.
 - Agent and validator rules are enforced now, while human Git enforcement remains proposed.
 - The Product Owner authorised the component-foundation pilot so Designer, RD and Agent can iteratively adjust shared components and Storybook without changing feature product behaviour.
+- The product-page track reuses the same actors and path-ownership model; PM, Designer and RD each own one library folder and the agent only writes derived page output.

@@ -1,0 +1,62 @@
+{
+  "$id": "strapi-registry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "owner", "status", "strapi", "contentType", "components", "sharedAssets", "mappingRules", "systemFields", "forbiddenFields", "decisionBasis"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "owner": { "const": "rd" },
+    "status": { "enum": ["provisional", "confirmed"] },
+    "strapi": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["majorVersion", "adminApi"],
+      "properties": {
+        "majorVersion": { "enum": [4, 5] },
+        "adminApi": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["baseUrlEnv", "loginPath", "tokenEnv", "emailEnv", "passwordEnv", "contentManagerPath", "uploadPath"],
+          "properties": {
+            "baseUrlEnv": { "type": "string" },
+            "loginPath": { "type": "string" },
+            "tokenEnv": { "type": "string" },
+            "emailEnv": { "type": "string" },
+            "passwordEnv": { "type": "string" },
+            "contentManagerPath": { "type": "string" },
+            "uploadPath": { "type": "string" }
+          }
+        },
+        "adminUiEntryPath": { "type": "string" }
+      }
+    },
+    "contentType": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["apiPath", "uid", "file"],
+      "properties": {
+        "apiPath": { "type": "string" },
+        "uid": { "type": "string" },
+        "file": { "type": "string" }
+      }
+    },
+    "components": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["uid", "file"],
+        "properties": {
+          "uid": { "type": "string" },
+          "file": { "type": "string" }
+        }
+      }
+    },
+    "sharedAssets": { "type": "string" },
+    "mappingRules": { "type": "string" },
+    "systemFields": { "type": "array", "items": { "type": "string" } },
+    "forbiddenFields": { "type": "array", "items": { "type": "string" } },
+    "decisionBasis": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+  }
+}

@@ -57,6 +57,37 @@ stages:
     allowedActors: [pm, qa, agent]
     requiredArtifacts: [frozen-revision, qa-human-spec]
     exitApprovals: [pm]
+  # --- product-page track (added 2026-09-02) ---
+  - id: page-brief
+    kind: lifecycle
+    track: product-page
+    allowedActors: [pm, agent]
+    requiredArtifacts: [page-source]
+    exitApprovals: [pm]
+  - id: page-generated
+    kind: lifecycle
+    track: product-page
+    allowedActors: [pm, designer, rd, agent]
+    requiredArtifacts: [page-source, page-generated, page-spec-review]
+    exitApprovals: [pm]
+  - id: page-pm-review
+    kind: lifecycle
+    track: product-page
+    allowedActors: [pm, manager, agent]
+    requiredArtifacts: [page-frozen-revision]
+    exitApprovals: [pm]
+  - id: page-strapi-draft
+    kind: lifecycle
+    track: product-page
+    allowedActors: [pm, rd, agent]
+    requiredArtifacts: [page-frozen-revision, strapi-publish-evidence]
+    exitApprovals: [pm]
+  - id: page-published
+    kind: downstream
+    track: product-page
+    allowedActors: [pm, rd]
+    requiredArtifacts: [page-frozen-revision, strapi-publish-evidence]
+    exitApprovals: [pm]
 transitions:
   - id: intake-to-working
     from: intake
@@ -96,6 +127,38 @@ transitions:
     to: qa-spec
     approvals: [pm]
     parallelOutput: true
+  # --- product-page track ---
+  - id: page-brief-to-generated
+    track: product-page
+    from: page-brief
+    to: page-generated
+    approvals: [pm]
+  - id: page-generated-to-pm-review
+    track: product-page
+    from: page-generated
+    to: page-pm-review
+    approvals: [pm]
+  - id: page-pm-review-revision
+    track: product-page
+    from: page-pm-review
+    to: page-brief
+    approvals: [pm]
+  - id: page-pm-review-to-strapi-draft
+    track: product-page
+    from: page-pm-review
+    to: page-strapi-draft
+    approvals: [pm]
+  - id: page-strapi-draft-revision
+    track: product-page
+    from: page-strapi-draft
+    to: page-brief
+    approvals: [pm]
+  - id: page-strapi-draft-to-published
+    track: product-page
+    from: page-strapi-draft
+    to: page-published
+    approvals: [pm, rd]
+    parallelOutput: true
 artifacts:
   - id: pm-product-source
     owner: pm
@@ -132,6 +195,47 @@ artifacts:
     path: features/{feature}/specs/**
     nature: derived
     status: proposed
+  # --- product-page track ---
+  - id: product-library
+    owner: pm
+    track: product-page
+    path: product-library/**
+    nature: source
+  - id: design-pattern-library
+    owner: designer
+    track: product-page
+    path: design-library/patterns/product-page/**
+    nature: source
+  - id: strapi-registry
+    owner: rd
+    track: product-page
+    path: strapi/**
+    nature: source
+  - id: page-source
+    owner: pm
+    track: product-page
+    path: product-pages/{page}/source/**
+    nature: source
+  - id: page-generated
+    owner: agent
+    track: product-page
+    path: product-pages/{page}/generated/**
+    nature: derived
+  - id: page-spec-review
+    owner: agent
+    track: product-page
+    path: product-pages/{page}/generated/review/**
+    nature: derived
+  - id: strapi-publish-evidence
+    owner: agent
+    track: product-page
+    path: product-pages/{page}/evidence/publish/**
+    nature: derived
+  - id: page-frozen-revision
+    owner: pm
+    track: product-page
+    path: product-pages/{page}/releases.json
+    nature: record
 systems:
   - id: figma
     owner: designer
@@ -163,9 +267,16 @@ systems:
     direction: output
     visibility: private
     productionDataAllowed: false
+  - id: strapi-admin
+    owner: rd
+    direction: output
+    visibility: private
+    productionDataAllowed: true
 indexes:
   features: .collab-cache/features-index.json
   designLibrary: .collab-cache/design-library-index.json
+  productLibrary: .collab-cache/product-library-index.json
+  strapiRegistry: .collab-cache/strapi-registry-index.json
 workflows:
   - id: prototype-intake
     actors: [pm, agent]
@@ -240,6 +351,121 @@ workflows:
       - platform/tokens/rd
       - .env
     enforcement: error
+  # --- product-page track ---
+  - id: product-page-brief
+    track: product-page
+    actors: [pm, agent]
+    readablePaths:
+      - collab-space.map.yaml
+      - features/**
+      - product-library/**
+      - design-library/patterns/product-page/**
+      - strapi/**
+      - product-pages/{page}/**
+    writablePaths:
+      - product-pages/{page}/source/**
+      - product-pages/{page}/releases.json
+    protectedPaths:
+      - features
+      - product-library
+      - design-library
+      - strapi
+      - platform
+      - product-pages/{page}/generated
+    enforcement: error
+  - id: product-page-generate
+    track: product-page
+    actors: [agent]
+    readablePaths:
+      - collab-space.map.yaml
+      - features/**
+      - product-library/**
+      - design-library/**
+      - strapi/**
+      - platform/tokens/**
+      - platform/surfaces/**
+      - product-pages/{page}/source/**
+      - product-pages/{page}/releases.json
+    writablePaths:
+      - product-pages/{page}/generated/**
+      - product-pages/{page}/evidence/**
+      - .prototype-state/**
+      - .collab-cache/**
+    protectedPaths:
+      - collab-space.map.yaml
+      - features
+      - product-library
+      - design-library
+      - strapi
+      - platform
+      - product-pages/{page}/source
+      - product-pages/{page}/releases.json
+    enforcement: error
+  - id: product-page-publish
+    track: product-page
+    actors: [agent, pm, rd]
+    readablePaths:
+      - collab-space.map.yaml
+      - strapi/**
+      - product-pages/{page}/generated/**
+      - product-pages/{page}/releases.json
+    writablePaths:
+      - product-pages/{page}/evidence/**
+    protectedPaths:
+      - features
+      - product-library
+      - design-library
+      - strapi
+      - platform
+      - product-pages/{page}/source
+      - product-pages/{page}/generated
+    enforcement: error
+  - id: product-library-update
+    track: product-page
+    actors: [pm]
+    readablePaths:
+      - product-library/**
+      - features/**
+    writablePaths:
+      - product-library/**
+    protectedPaths:
+      - design-library
+      - strapi
+      - platform
+      - product-pages
+    enforcement: warning
+  - id: design-pattern-update
+    track: product-page
+    actors: [designer]
+    readablePaths:
+      - design-library/**
+      - strapi/components/**
+      - platform/tokens/**
+    writablePaths:
+      - design-library/patterns/product-page/**
+      - design-library/skills/**
+    protectedPaths:
+      - features
+      - product-library
+      - strapi
+      - platform
+      - product-pages
+    enforcement: warning
+  - id: strapi-registry-update
+    track: product-page
+    actors: [rd]
+    readablePaths:
+      - strapi/**
+      - design-library/patterns/product-page/**
+    writablePaths:
+      - strapi/**
+    protectedPaths:
+      - features
+      - product-library
+      - design-library
+      - platform
+      - product-pages
+    enforcement: warning
 rules:
   - id: mock-only-prototypes
     status: active
@@ -267,8 +493,42 @@ rules:
       - design-final
     decisionBasis:
       - Human CODEOWNERS and protected paths require team review before enforcement.
+  # --- product-page track ---
+  - id: claim-provenance
+    track: product-page
+    status: active
+    enforcement: error
+    actors: [agent]
+    stages:
+      - page-generated
+      - page-pm-review
+      - page-strapi-draft
+    decisionBasis:
+      - Every generated claim, benefit or step must cite a PM spec or product-library source so reviewers can prove nothing exceeds the PM spec.
+  - id: independent-spec-review
+    track: product-page
+    status: active
+    enforcement: error
+    actors: [agent]
+    stages:
+      - page-generated
+      - page-pm-review
+      - page-strapi-draft
+    decisionBasis:
+      - The subagent that reviews content against the PM spec must not be the builder that wrote it, and its verdict is bound to the content hash it reviewed.
+  - id: strapi-draft-only
+    track: product-page
+    status: active
+    enforcement: error
+    actors: [agent, pm, rd]
+    stages:
+      - page-strapi-draft
+      - page-published
+    decisionBasis:
+      - Automation may only create or update Strapi draft entries; publishing to the live site stays a human action inside Strapi.
 decisionBasis:
   - The contract is the control plane for roles, stages, paths and external-system boundaries.
   - Shared design resources live once in the global Design Library; feature revisions pin exact selections.
   - Agent and validator rules are enforced now, while human Git enforcement remains proposed.
   - The Product Owner authorised the component-foundation pilot so Designer, RD and Agent can iteratively adjust shared components and Storybook without changing feature product behaviour.
+  - The product-page track reuses the same actors and path-ownership model; PM, Designer and RD each own one library folder and the agent only writes derived page output.

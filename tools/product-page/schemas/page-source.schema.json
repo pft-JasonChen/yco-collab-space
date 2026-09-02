@@ -1,0 +1,80 @@
+{
+  "$id": "product-page-source",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "page", "title", "status", "locale", "audience", "pageKey", "functionKey", "goal", "targetUser", "upstream", "requiredSections", "appLinks", "media", "layoutPreferences", "review", "decisionBasis"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "page": { "$ref": "#/$defs/slug" },
+    "title": { "type": "string", "minLength": 1 },
+    "status": { "enum": ["draft", "confirmed"] },
+    "locale": { "enum": ["ENU"] },
+    "audience": { "enum": ["B2C", "B2B"] },
+    "pageKey": { "$ref": "#/$defs/slug" },
+    "functionKey": { "type": "string", "pattern": "^/products/[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "goal": { "type": "string", "minLength": 1 },
+    "targetUser": { "type": "string", "minLength": 1 },
+    "upstream": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["features", "products", "competitors"],
+      "properties": {
+        "features": { "type": "array", "items": { "$ref": "#/$defs/slug" }, "uniqueItems": true },
+        "products": { "type": "array", "items": { "$ref": "#/$defs/slug" }, "uniqueItems": true },
+        "competitors": { "type": "array", "items": { "$ref": "#/$defs/slug" }, "uniqueItems": true }
+      }
+    },
+    "requiredSections": { "type": "array", "items": { "enum": ["intro", "benefits", "how-to", "use-case-group-heading", "use-case", "faq"] }, "uniqueItems": true },
+    "appLinks": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ios": { "$ref": "#/$defs/nullableUrl" },
+        "android": { "$ref": "#/$defs/nullableUrl" },
+        "generic": { "$ref": "#/$defs/nullableUrl" }
+      }
+    },
+    "media": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["requestedCollections", "allowMockAssets"],
+      "properties": {
+        "requestedCollections": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["path", "purpose", "requiredForGeneration"],
+            "properties": {
+              "path": { "type": "string", "pattern": "^assets/(image|video|icon|illustration|logo)/[a-z0-9][a-z0-9-]*$" },
+              "purpose": { "type": "string", "minLength": 1 },
+              "requiredForGeneration": { "type": "boolean" }
+            }
+          }
+        },
+        "allowMockAssets": { "type": "boolean" }
+      }
+    },
+    "layoutPreferences": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "order": { "anyOf": [{ "type": "null" }, { "type": "array", "items": { "type": "string" } }] },
+        "excludePatterns": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "builderModelHint": { "anyOf": [{ "type": "null" }, { "type": "string" }] },
+        "reviewerModelHint": { "anyOf": [{ "type": "null" }, { "type": "string" }] }
+      }
+    },
+    "decisionBasis": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+  },
+  "$defs": {
+    "slug": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "nullableUrl": { "anyOf": [{ "type": "null" }, { "type": "string", "pattern": "^https://" }] }
+  }
+}

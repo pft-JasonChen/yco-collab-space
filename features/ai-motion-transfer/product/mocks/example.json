@@ -1,0 +1,11 @@
+{
+  "models": [
+    { "id": "motion-control", "name": "Character Motion Control" },
+    { "id": "character-replace", "name": "Replace the Character in a Video" },
+    { "id": "video-motion-to-photo", "name": "Apply Video Motion to Photo" }
+  ],
+  "result": {
+    "downloadLabel": "Download HD",
+    "galleryLabel": "My Gallery"
+  }
+}

@@ -1,0 +1,73 @@
+schemaVersion: 1
+id: use-case-alternating
+status: provisional
+displayName: Alternating use case
+strapiComponent: apps-page.section-be-af-image
+surfaceZone: use-cases
+contentRole: use-case
+description: >
+  One use case per section: title, one paragraph, up to two CTAs and a demo image or video.
+  Consecutive use cases alternate text position and show 01/03 style order labels.
+layoutOptions:
+  textPosition:
+    values: [left, right]
+    default: alternate
+  sectionOrderLeft:
+    pattern: "^[0-9]{2}$"
+    default: sequence
+  sectionOrderRight:
+    pattern: "^[0-9]{2}$"
+    default: total
+fieldDefaults:
+  sectionBackground.backgroundColor: white
+  cta[].newTab: true
+  cta[].ctaActivate: true
+  cta[].nofollow: false
+tokens:
+  orderLabel:
+    fontSize: --font-size-uppercase
+    lineHeight: --line-height-uppercase
+    color: --text-brand
+  title:
+    fontFamily: --font-family-heading
+    fontSize: --font-size-heading-2
+    lineHeight: --line-height-heading-2
+    color: --text-strong
+  description:
+    fontFamily: --font-family-body
+    fontSize: --font-size-small
+    lineHeight: --line-height-small
+    color: --text-weak
+  primaryButton:
+    background: --fill-brand-strong
+    hover: --fill-brand-hover
+    text: --text-inverse-strong
+    radius: --corner-radius-12
+  secondaryButton:
+    background: --fill-weak
+    stroke: --stroke-strong
+    text: --text-strong
+    radius: --corner-radius-12
+  background: --background-base
+  spacing:
+    blockY: --spacing-96
+    gap: --spacing-40
+copy:
+  title: { maxChars: 60 }
+  description: { maxChars: 420 }
+  cta: { min: 1, max: 2, textMaxChars: 24 }
+media:
+  sectionBeAfMedia.imageBeforeDesktop:
+    required: true
+    aspectRatio: "4:3"
+    minWidth: 1200
+    formats: [jpg, png, webp]
+  sectionBeAfMedia.imageBeforeMobile:
+    required: false
+    minWidth: 750
+  sectionBeAfMedia.video:
+    required: false
+    formats: [mp4]
+decisionBasis:
+  - Alternating sides keep long use-case lists readable and match the live site.
+  - The second CTA is reserved for the app download link when page.source.yaml provides one.

@@ -1,0 +1,260 @@
+{
+  "schemaVersion": 1,
+  "page": "ai-motion-transfer",
+  "locale": "ENU",
+  "skill": { "id": "spec-to-content", "owner": "pm", "version": 1 },
+  "meta": {
+    "pageName": "AI Character Motion Transfer",
+    "displayAlias": "AI Character Motion Swap",
+    "shortDescription": "AI Character Motion Transfer product page (generated fixture)",
+    "pageKey": "ai-motion-transfer",
+    "functionKey": "/products/ai-motion-transfer",
+    "audience": "B2C"
+  },
+  "seo": {
+    "metaTitle": "Apply Video Motion to Any Character – AI Motion Transfer",
+    "metaDescription": "Transfer real motion from a video onto any photo with AI. Your photo moves like the reference clip, with no filming or animation skills needed.",
+    "keywords": null,
+    "ratings": {
+      "value": 4.9,
+      "count": 129294,
+      "sourceRefs": ["product-library/products/ai-motion-transfer/product.yaml#ratings"]
+    },
+    "sourceRefs": [
+      "features/ai-motion-transfer/product/prd.md#goal",
+      "product-library/products/ai-motion-transfer/pages/enu-product-page-2026-09-01.md#seo"
+    ]
+  },
+  "hero": {
+    "title": "AI Character Motion Swap",
+    "description": "Turn any still photo into motion, or swap your character into any video scene. No filming, rigging or animation skills required.",
+    "primaryCta": { "text": "Animate Your Photo", "link": "/products/ai-motion-transfer/result-photo", "kind": "try" },
+    "appBadges": true,
+    "media": [
+      {
+        "slot": "imageBeAf[].imageBeforeDesktop",
+        "assetRef": "strapi:yco-placeholder-2880x1254",
+        "alt": "A still photo animated with the motion of a reference video",
+        "purpose": "Hero visual until Designer uploads assets/video/ai-motion-transfer"
+      }
+    ],
+    "sourceRefs": [
+      "features/ai-motion-transfer/product/prd.md#product-names",
+      "features/ai-motion-transfer/product/prd.md#goal",
+      "product-library/products/ai-motion-transfer/product.yaml#positioning.oneLiner",
+      "product-pages/ai-motion-transfer/source/brief.md#must-say"
+    ]
+  },
+  "sections": [
+    {
+      "id": "intro",
+      "role": "intro",
+      "title": "From Photo to Motion: AI Character Motion Swap",
+      "body": "Upload a photo and a reference video, and your character starts moving just like the clip you picked. No filming, no animation skills needed.",
+      "sourceRefs": [
+        "features/ai-motion-transfer/product/prd.md#goal",
+        "features/ai-motion-transfer/product/prd.md#tool-flow"
+      ]
+    },
+    {
+      "id": "benefits",
+      "role": "benefits",
+      "title": null,
+      "body": null,
+      "bullets": [
+        {
+          "title": "Natural Motion",
+          "body": "Your character moves smoothly and realistically, matching the reference video.",
+          "sourceRefs": ["features/ai-motion-transfer/product/prd.md#benefits"]
+        },
+        {
+          "title": "Still Looks Like You",
+          "body": "Faces, proportions and style carry through, so the result still looks like your original photo or character.",
+          "sourceRefs": ["features/ai-motion-transfer/product/prd.md#benefits"]
+        },
+        {
+          "title": "Multiple AI Models",
+          "body": "Choose from three models, each tuned for a different result.",
+          "sourceRefs": ["features/ai-motion-transfer/product/prd.md#benefits", "features/ai-motion-transfer/product/prd.md#models"]
+        }
+      ],
+      "cta": [{ "text": "Try Motion Transfer", "link": "/products/ai-motion-transfer/result-photo", "kind": "try" }],
+      "media": [
+        {
+          "slot": "sectionBeAfMedia.imageBeforeDesktop",
+          "assetRef": "strapi:yco-placeholder-2880x1254",
+          "alt": "Before and after: a still photo and its animated result",
+          "purpose": "Benefit demo until Designer supplies final media"
+        }
+      ],
+      "sourceRefs": [
+        "features/ai-motion-transfer/product/prd.md#benefits",
+        "product-library/products/ai-motion-transfer/product.yaml#ctaLinks.tryNow"
+      ]
+    },
+    {
+      "id": "how-to",
+      "role": "how-to",
+      "title": "How to Use AI Character Motion Swap",
+      "body": null,
+      "steps": [
+        {
+          "title": "Choose a Model",
+          "body": "Pick the model built for your goal: Character Motion Control, Replace the Character in a Video, or Apply Video Motion to Photo.",
+          "sourceRefs": ["features/ai-motion-transfer/product/prd.md#models", "features/ai-motion-transfer/product/prototype.contract.yaml#actions[0]"]
+        },
+        {
+          "title": "Upload a Motion Reference Video",
+          "body": "Add a source video with the movement you want to apply: a gesture, a performance or a dance.",
+          "sourceRefs": ["features/ai-motion-transfer/product/prd.md#tool-flow", "features/ai-motion-transfer/product/prototype.contract.yaml#actions[1]"]
+        },
+        {
+          "title": "Upload Your Photo",
+          "body": "Upload the photo you want to animate: a portrait, a character illustration or any image with a clear subject.",
+          "sourceRefs": ["features/ai-motion-transfer/product/prd.md#tool-flow", "features/ai-motion-transfer/product/prototype.contract.yaml#actions[2]"]
+        },
+        {
+          "title": "Generate and Save",
+          "body": "Click Generate, preview your result and download it in HD, or find it saved in My Gallery.",
+          "sourceRefs": ["features/ai-motion-transfer/product/prd.md#tool-flow", "features/ai-motion-transfer/product/prototype.contract.yaml#actions[3]"]
+        }
+      ],
+      "sourceRefs": [
+        "features/ai-motion-transfer/product/prd.md#tool-flow",
+        "features/ai-motion-transfer/product/decisions.md#decisions"
+      ]
+    },
+    {
+      "id": "use-cases-heading",
+      "role": "use-case-group-heading",
+      "title": "Turn Any Photo Into Motion: 3 Ways to Use AI Character Motion Swap",
+      "body": null,
+      "sourceRefs": [
+        "features/ai-motion-transfer/product/prd.md#use-cases",
+        "product-pages/ai-motion-transfer/source/brief.md#must-say"
+      ]
+    },
+    {
+      "id": "use-case-photo",
+      "role": "use-case",
+      "title": "Make Any Photo Move",
+      "body": "Upload a reference video, such as a dance clip, a walking shot or a simple gesture, and pair it with your photo. AI Character Motion Swap applies that motion to your image and builds a video from it. A strong fit for TikTok, Reels and Shorts, where dynamic motion holds attention.",
+      "cta": [
+        { "text": "Try With Your Photo", "link": "/products/ai-motion-transfer/result-photo", "kind": "try" },
+        { "text": "Download App", "link": "https://youcamapps.com/surl/LZY", "kind": "app-download" }
+      ],
+      "media": [
+        {
+          "slot": "sectionBeAfMedia.imageBeforeDesktop",
+          "assetRef": "strapi:yco-placeholder-2880x1254",
+          "alt": "A portrait photo moving like a dance clip",
+          "purpose": "Use-case demo until Designer supplies final media"
+        }
+      ],
+      "sourceRefs": [
+        "features/ai-motion-transfer/product/prd.md#use-cases",
+        "product-library/products/ai-motion-transfer/product.yaml#useCases[0]",
+        "product-library/products/ai-motion-transfer/product.yaml#ctaLinks.appGeneric"
+      ]
+    },
+    {
+      "id": "use-case-character",
+      "role": "use-case",
+      "title": "Give Any Character Real Motion",
+      "body": "Animate illustrated or AI-generated characters without 3D modeling or frame-by-frame drawing. Upload your character image and a reference video, and get smooth motion that mirrors every move while faces, proportions and art style stay consistent from first frame to last. Useful for storytelling, avatars and character content.",
+      "cta": [
+        { "text": "Try With Your Character", "link": "/products/ai-motion-transfer/result-photo", "kind": "try" },
+        { "text": "Download App", "link": "https://youcamapps.com/surl/LZY", "kind": "app-download" }
+      ],
+      "media": [
+        {
+          "slot": "sectionBeAfMedia.imageBeforeDesktop",
+          "assetRef": "strapi:yco-placeholder-2880x1254",
+          "alt": "An illustrated character animated with a reference clip",
+          "purpose": "Use-case demo until Designer supplies final media"
+        }
+      ],
+      "sourceRefs": [
+        "features/ai-motion-transfer/product/prd.md#use-cases",
+        "features/ai-motion-transfer/product/prd.md#benefits",
+        "product-library/products/ai-motion-transfer/product.yaml#useCases[1]"
+      ]
+    },
+    {
+      "id": "use-case-scene",
+      "role": "use-case",
+      "title": "Swap Yourself Into Any Scene",
+      "body": "Skip the filming and the manual masking. Upload your photo alongside any action clip, and your character replaces the original performer while keeping the clip's motion, gestures and camera movement intact. Built for memes, reaction videos and social content where believable motion is the whole point.",
+      "cta": [
+        { "text": "Create Your Video", "link": "/products/ai-motion-transfer/result-photo", "kind": "try" },
+        { "text": "Download App", "link": "https://youcamapps.com/surl/LZY", "kind": "app-download" }
+      ],
+      "media": [
+        {
+          "slot": "sectionBeAfMedia.imageBeforeDesktop",
+          "assetRef": "strapi:yco-placeholder-2880x1254",
+          "alt": "A person swapped into an action clip",
+          "purpose": "Use-case demo until Designer supplies final media"
+        }
+      ],
+      "sourceRefs": [
+        "features/ai-motion-transfer/product/prd.md#use-cases",
+        "features/ai-motion-transfer/product/prd.md#models",
+        "product-library/products/ai-motion-transfer/product.yaml#useCases[2]"
+      ]
+    },
+    {
+      "id": "faq",
+      "role": "faq",
+      "title": "AI Character Motion Swap FAQs",
+      "body": null,
+      "items": [
+        {
+          "question": "What do I need to start?",
+          "answer": "One photo with a clear subject and one reference video with the motion you want.",
+          "sourceRefs": ["features/ai-motion-transfer/product/prd.md#faq"]
+        },
+        {
+          "question": "Which model should I pick?",
+          "answer": "Character Motion Control moves a photo. Replace the Character in a Video swaps you into a clip. Apply Video Motion to Photo animates illustrated or AI-generated characters.",
+          "sourceRefs": ["features/ai-motion-transfer/product/prd.md#faq", "features/ai-motion-transfer/product/prd.md#models"]
+        },
+        {
+          "question": "Does the result keep my face and style?",
+          "answer": "Yes. Faces, proportions and art style carry through from the original image.",
+          "sourceRefs": ["features/ai-motion-transfer/product/prd.md#faq"]
+        },
+        {
+          "question": "What kind of reference video works best?",
+          "answer": "A clip with one clear subject and visible full-body or upper-body motion, such as a gesture, performance or dance.",
+          "sourceRefs": ["features/ai-motion-transfer/product/prd.md#faq"]
+        },
+        {
+          "question": "Can I animate an illustration or AI-generated character?",
+          "answer": "Yes. Use Apply Video Motion to Photo.",
+          "sourceRefs": ["features/ai-motion-transfer/product/prd.md#faq"]
+        },
+        {
+          "question": "Where is my result saved?",
+          "answer": "You can download it in HD, and it is saved in My Gallery.",
+          "sourceRefs": ["features/ai-motion-transfer/product/prd.md#faq"]
+        },
+        {
+          "question": "Do I need animation or 3D skills?",
+          "answer": "No. The tool needs only a photo and a reference video.",
+          "sourceRefs": ["features/ai-motion-transfer/product/prd.md#faq"]
+        },
+        {
+          "question": "Can I use it for social videos?",
+          "answer": "Yes. Results fit TikTok, Reels, Shorts, memes and reaction videos.",
+          "sourceRefs": ["features/ai-motion-transfer/product/prd.md#faq", "features/ai-motion-transfer/product/decisions.md#decisions"]
+        }
+      ],
+      "sourceRefs": ["features/ai-motion-transfer/product/prd.md#faq"]
+    }
+  ],
+  "decisionBasis": [
+    "Every sentence is traceable to the confirmed feature spec or the product-library entry; no limits, formats or platforms were added beyond them.",
+    "Placeholder media uses the shared Strapi placeholder so the draft can be created before Designer assets exist."
+  ]
+}

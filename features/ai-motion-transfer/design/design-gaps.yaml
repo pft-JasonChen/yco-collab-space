@@ -1,0 +1,11 @@
+schemaVersion: 1
+feature: ai-motion-transfer
+gaps:
+  - id: DESIGN-001
+    status: open
+    description: Final Figma for the web tool has not been provided.
+    resolutionOwner: Designer
+  - id: DESIGN-002
+    status: open
+    description: Design Library collection assets/video/ai-motion-transfer does not exist yet; product page uses placeholders.
+    resolutionOwner: Designer

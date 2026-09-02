@@ -132,6 +132,21 @@ preview `noindex`. The repository contains no backend function or runtime secret
 Vercel project linking is intentionally not automated until the repository owner logs
 in and approves the destination project.
 
+## Product page generator（product-page track）
+
+同一個 repo 另有一條產品頁 track：PM 的功能 spec（`features/<feature>/product/**`）與
+`product-library/`、Designer 的 `design-library/patterns/product-page/`、RD 的 `strapi/`
+一起餵給同一套 agent 流程，產出內容、layout、Strapi payload，經獨立 reviewer 審核後建立
+Strapi draft。入口：
+
+```text
+/product-page-brief <page>      /product-page-generate <page>
+/product-page-review <page>     /product-page-publish <page>     /product-page-promote <page> <stage>
+```
+
+說明見 [`product-pages/README.md`](product-pages/README.md) 與
+[`docs/architecture/2026-09-02-product-page-generator-plan.md`](docs/architecture/2026-09-02-product-page-generator-plan.md)。
+
 ## Current limits
 
 目前已包含 Intake、flexible Surface resolution、shared Design Library、素材／token

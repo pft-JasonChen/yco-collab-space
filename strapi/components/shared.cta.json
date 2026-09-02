@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "uid": "shared.cta",
+  "uidStatus": "inferred",
+  "displayName": "Call to action",
+  "category": "shared",
+  "dynamicZone": false,
+  "description": "Button or link inside a section.",
+  "fields": {
+    "ctaText": { "type": "string", "required": false, "role": "cta", "maxLength": 28 },
+    "ctaLink": { "type": "string", "required": false, "role": "cta", "notes": "Relative site path (/products/<key>/result-photo) or absolute https URL." },
+    "newTab": { "type": "boolean", "required": false, "default": true },
+    "ctaActivate": { "type": "boolean", "required": false, "default": true },
+    "nofollow": { "type": "boolean", "required": false, "default": false },
+    "buttonType": { "type": "string", "required": false, "role": "layout", "notes": "Observed null; RD to confirm allowed values." },
+    "image": { "type": "media", "required": false, "role": "media" }
+  },
+  "layoutFields": ["buttonType"],
+  "example": { "ctaText": "Try it", "ctaLink": "/products/example/result-photo", "newTab": true, "ctaActivate": true, "nofollow": false, "buttonType": null, "image": null }
+}

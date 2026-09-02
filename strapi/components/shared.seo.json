@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "uid": "shared.seo",
+  "uidStatus": "inferred",
+  "displayName": "SEO",
+  "category": "shared",
+  "dynamicZone": false,
+  "description": "Meta title/description plus schema.org flags. ratingValue/ratingCount feed structured data and must come from a PM-provided source, never be invented.",
+  "fields": {
+    "metaTitle": { "type": "string", "required": true, "role": "seo", "maxLength": 70 },
+    "metaDescription": { "type": "string", "required": true, "role": "seo", "maxLength": 160 },
+    "keywords": { "type": "string", "required": false, "role": "seo" },
+    "metaRobots": { "type": "string", "required": false, "role": "seo" },
+    "structuredData": { "type": "json", "required": false, "role": "seo" },
+    "metaViewport": { "type": "string", "required": false, "role": "seo" },
+    "canonicalURL": { "type": "string", "required": false, "role": "seo" },
+    "schemaProduct": { "type": "boolean", "required": false, "role": "seo", "default": true },
+    "schemaSoftware": { "type": "boolean", "required": false, "role": "seo", "default": true },
+    "ratingValue": { "type": "decimal", "required": false, "role": "seo", "notes": "Only from product-library product.yaml ratings; do not invent." },
+    "ratingCount": { "type": "integer", "required": false, "role": "seo" },
+    "metaImage": { "type": "media", "required": false, "role": "media" },
+    "metaSocial": { "type": "component", "component": "inline", "repeatable": true, "required": false, "role": "seo", "fields": {} },
+    "additionalInfo": { "type": "component", "component": "inline", "repeatable": true, "required": false, "role": "seo", "fields": {} }
+  },
+  "layoutFields": [],
+  "example": { "metaTitle": "Title", "metaDescription": "Description", "keywords": null, "metaRobots": null, "structuredData": null, "metaViewport": null, "canonicalURL": null, "schemaProduct": true, "schemaSoftware": true, "ratingValue": null, "ratingCount": null, "metaImage": null, "metaSocial": [], "additionalInfo": [] }
+}

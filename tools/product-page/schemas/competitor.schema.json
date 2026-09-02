@@ -1,0 +1,40 @@
+{
+  "$id": "product-library-competitor",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "slug", "name", "status", "website", "category", "comparableProducts", "observed", "ourDifferentiators", "pages", "decisionBasis"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "slug": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "name": { "type": "string", "minLength": 1 },
+    "status": { "enum": ["draft", "active", "retired"] },
+    "website": { "anyOf": [{ "type": "null" }, { "type": "string" }] },
+    "category": { "type": "string" },
+    "comparableProducts": { "type": "array", "items": { "type": "string" } },
+    "observed": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["positioning", "pricing", "keyFeatures"],
+      "properties": {
+        "positioning": { "anyOf": [{ "type": "null" }, { "type": "string" }] },
+        "pricing": { "anyOf": [{ "type": "null" }, { "type": "string" }] },
+        "keyFeatures": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "ourDifferentiators": { "type": "array", "items": { "type": "string" } },
+    "pages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["file", "url", "capturedAt"],
+        "properties": {
+          "file": { "type": "string" },
+          "url": { "type": "string" },
+          "capturedAt": { "type": "string" }
+        }
+      }
+    },
+    "decisionBasis": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+  }
+}

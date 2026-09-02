@@ -46,6 +46,21 @@ Phase 0 documents these boundaries but does not enforce CODEOWNERS yet.
 - Stage approvals must use `stage:transition`; never infer approval from prose or edit
   `releases.json` by hand.
 
+## Product-page track
+
+`collab-space.map.yaml` entries with `track: product-page` govern product pages under
+`product-pages/<page>/`. Read `product-pages/README.md` and the workflow in
+`agent-adapters/workflows/product-page-generate.md` before touching them.
+
+- PM owns `product-library/**` and `product-pages/<page>/source/**`; Designer owns
+  `design-library/patterns/product-page/**`; RD owns `strapi/**`. The agent writes only
+  `product-pages/<page>/generated/**` and `evidence/**`.
+- Every generated claim needs `sourceRefs`; an independent reviewer subagent on a different
+  model must pass before layout and payload are accepted.
+- Only registered Strapi components, Designer patterns and locked RD tokens may be used.
+- Strapi automation creates drafts only; `publishedAt` is forbidden and credentials never
+  enter the repository.
+
 ## Commands
 
 ```bash
@@ -59,8 +74,14 @@ npm run prototype:create -- <feature> "<Feature title>"
 npm run stage:transition -- --feature <feature> --to <stage> --actor <actor> --confirm
 npm run eval:workflow -- --case collab-space-readiness-regression
 npm run eval:mutations
+npm run page:validate -- --page <page>
+npm run page:record -- --page <page> --adapter <adapter> --model <model>
+npm run page:publish -- --page <page> [--confirm]
+npm run page:stage:transition -- --page <page> --to <stage> --actor <actor> --confirm
 ```
 
 The user-facing AI workflows are `/prototype-intake <feature>` and
 `/prototype-update <feature>`. Phase 0 reserves
-`/prototype-promote` but does not automate promotion.
+`/prototype-promote` but does not automate promotion. Product pages use
+`/product-page-brief`, `/product-page-generate`, `/product-page-review`,
+`/product-page-publish` and `/product-page-promote`.

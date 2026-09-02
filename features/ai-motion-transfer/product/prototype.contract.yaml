@@ -1,0 +1,63 @@
+schemaVersion: 1
+feature:
+  slug: ai-motion-transfer
+  title: AI Character Motion Transfer
+  stage: pm-draft
+  entryRoute: /features/ai-motion-transfer/
+  intakeStatus: confirmed
+design:
+  status: temporary
+  reference: null
+states:
+  - id: choose-model
+    description: The user sees the three models and has not picked one.
+  - id: upload-reference-video
+    description: A model is selected and the tool asks for the motion reference video.
+  - id: upload-photo
+    description: The reference video is accepted and the tool asks for the photo to animate.
+  - id: generating
+    description: The tool is producing the video.
+  - id: result
+    description: The result is previewed with Download HD and My Gallery actions.
+  - id: error
+    description: Generation failed and the user can retry from the photo step.
+actions:
+  - id: select-model
+    from: choose-model
+    event: User selects Character Motion Control, Replace the Character in a Video or Apply Video Motion to Photo
+    to: upload-reference-video
+  - id: add-reference-video
+    from: upload-reference-video
+    event: User uploads a reference video
+    to: upload-photo
+  - id: add-photo
+    from: upload-photo
+    event: User uploads the photo to animate
+    to: generating
+  - id: generation-complete
+    from: generating
+    event: Generation finishes
+    to: result
+  - id: generation-failed
+    from: generating
+    event: Generation fails
+    to: error
+  - id: retry
+    from: error
+    event: User selects Retry
+    to: upload-photo
+mocks:
+  - mocks/example.json
+acceptance:
+  - id: AMT-001
+    given: The tool is open
+    when: No model is selected
+    then: Three models are listed and the user cannot upload yet
+  - id: AMT-002
+    given: A model is selected and a reference video is uploaded
+    when: The user uploads a photo
+    then: Generation starts and the result shows Download HD and My Gallery actions
+  - id: AMT-003
+    given: Generation failed
+    when: The user selects Retry
+    then: The tool returns to the photo upload step

@@ -1,0 +1,55 @@
+schemaVersion: 1
+id: hero-banner
+status: provisional
+displayName: Hero banner
+strapiComponent: product-page.top-banner
+surfaceZone: feature-hero
+contentRole: hero
+description: >
+  Full-width hero with headline, one-sentence description, one primary button,
+  optional app store badges and a background video or image.
+layoutOptions:
+  layout:
+    values: [null]
+    default: null
+fieldDefaults:
+  sectionBackground.backgroundColor: white
+  buttonText[].buttonType: Plain Blue Button
+  imageCTA[].newTab: false
+  imageCTA[].nofollow: false
+tokens:
+  title:
+    fontFamily: --font-family-heading
+    fontSize: --font-size-display
+    lineHeight: --line-height-display
+    color: --text-inverse-strong
+  description:
+    fontFamily: --font-family-body
+    fontSize: --font-size-heading-5
+    lineHeight: --line-height-heading-5
+    color: --text-inverse-weak
+  primaryButton:
+    background: --fill-brand-strong
+    hover: --fill-brand-hover
+    text: --text-inverse-strong
+    radius: --corner-radius-12
+  background: --background-brand
+  spacing:
+    blockY: --spacing-96
+    gap: --spacing-24
+copy:
+  title: { maxChars: 40 }
+  description: { maxChars: 160 }
+  primaryCta: { maxChars: 24 }
+media:
+  multiDpiVideoBanner[].bannerVideo:
+    required: false
+    formats: [mp4]
+    notes: One entry per dpi 100/150/175 when a video hero is used.
+  imageBeAf[].imageBeforeDesktop:
+    required: false
+    aspectRatio: "2880:1254"
+    minWidth: 2880
+decisionBasis:
+  - Mirrors the current YCO product page hero so generated drafts look like existing pages.
+  - Inverse text tokens assume a dark brand background; Designer to confirm against Figma.

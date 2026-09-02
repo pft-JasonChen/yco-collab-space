@@ -1,0 +1,63 @@
+schemaVersion: 1
+id: how-to-steps
+status: provisional
+displayName: How-to steps
+strapiComponent: product-page.section-steps
+surfaceZone: use-cases
+contentRole: how-to
+description: Numbered step cards (3 to 4) with one screenshot each, stacked vertically on mobile.
+layoutOptions:
+  isSteps:
+    values: [true]
+    default: true
+  stepNumPosition:
+    values: [left, right]
+    default: right
+  orientationOnMobile:
+    values: [vertical, horizontal]
+    default: vertical
+fieldDefaults:
+  stepText: STEP
+  background.backgroundColor: transparent
+  blocks[].backgroundColor: "#fff"
+  cta.newTab: true
+  cta.ctaActivate: true
+  cta.nofollow: false
+tokens:
+  title:
+    fontFamily: --font-family-heading
+    fontSize: --font-size-heading-1
+    lineHeight: --line-height-heading-1
+    color: --text-strong
+  stepLabel:
+    fontSize: --font-size-uppercase
+    lineHeight: --line-height-uppercase
+    color: --text-brand
+  stepTitle:
+    fontSize: --font-size-heading-4
+    lineHeight: --line-height-heading-4
+    color: --text-strong
+  stepBody:
+    fontSize: --font-size-small
+    lineHeight: --line-height-small
+    color: --text-weak
+  card:
+    background: --background-raised
+    radius: --corner-radius-16
+    stroke: --stroke-weak
+  background: --background-alternate
+  spacing:
+    blockY: --spacing-96
+    gap: --spacing-24
+copy:
+  title: { maxChars: 60 }
+  description: { maxChars: 200 }
+  steps: { min: 3, max: 4, titleMaxChars: 40, bodyMaxChars: 200 }
+media:
+  blocks[].Image:
+    required: false
+    aspectRatio: "16:9"
+    minWidth: 900
+    formats: [jpg, png, webp]
+decisionBasis:
+  - blocks[].backgroundColor is a raw colour because the Strapi field expects one; the pattern owns that value so the agent never invents it.
