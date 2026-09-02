@@ -42,7 +42,7 @@ implementation:
   importPath: platform/ui/video-history/index.js
   storyId: ui-video-history
   framework: react
-  dependencies: [react]
+  dependencies: [react, icon-action-buttons]
   removedDependencies: [redux, i18n, lodash, task-fetching, polling, routing, cms, analytics, download-service, device-detection]
 publicApi:
   props:
@@ -56,9 +56,19 @@ publicApi:
       required: false
     - name: onRetry
       required: false
+    - name: actions
+      required: false
+    - name: onLike
+      required: false
+    - name: onDislike
+      required: false
+    - name: onEdit
+      required: false
+    - name: onDownload
+      required: false
     - name: className
       required: false
-  states: [empty, processing, completed, failed, retry, filtered, inert-actions]
+  states: [empty, processing, completed, failed, retry, filtered, reacted]
 tokens:
   lockPath: platform/tokens/tokens.lock.json
   uses: [--background-base, --background-inverse, --fill-weaker, --stroke-weak, --text-strong, --text-weak]
@@ -79,3 +89,4 @@ decisionBasis:
   - RD video-feature provides shared filtering, History list, result-card and video-player surfaces across video-producing modules.
   - The pilot exposes synthetic item data and callbacks instead of production task fetching, polling, download and routing behavior.
   - Action buttons use the allowlisted RD img2Vid Next Action icons; the filter is composed by Video Results Surface instead of duplicated inside the list.
+  - Like, dislike, edit and download are delegated to the shared Icon Action Buttons family, mirroring how RD's result-video card composes `video-feature/icon-action-buttons` rather than owning its own action row.

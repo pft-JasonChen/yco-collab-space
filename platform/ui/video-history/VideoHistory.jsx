@@ -1,17 +1,12 @@
 import styles from './VideoHistory.module.scss';
-import dislikeIcon from '../../../design-library/assets/icon/yco-video-actions/dislike-default.svg';
-import downloadIcon from '../../../design-library/assets/icon/yco-video-actions/download.svg';
-import editIcon from '../../../design-library/assets/icon/yco-video-actions/edit.svg';
-import likeIcon from '../../../design-library/assets/icon/yco-video-actions/like-default.svg';
-import videoEnhancerIcon from '../../../design-library/assets/icon/yco-video-actions/video-enhancer.svg';
+import IconActionButtons, { ActionIcon, defaultResultActions } from '../icon-action-buttons/index.js';
 
-function ActionIcon({ name }) {
-  const icons = { like: likeIcon, dislike: dislikeIcon, edit: editIcon, download: downloadIcon, enhancer: videoEnhancerIcon };
+function CardIcon({ name }) {
   if (name === 'warning') return <span className={styles.warningIcon} aria-hidden="true">!</span>;
-  return icons[name] ? <img className={styles.actionIcon} src={icons[name]} alt="" aria-hidden="true" /> : null;
+  return <ActionIcon className={styles.actionIcon} name={name} />;
 }
 
-export function VideoHistoryCard({ item, onOpen, onRetry }) {
+export function VideoHistoryCard({ item, actions = defaultResultActions, onOpen, onRetry, onLike, onDislike, onEdit, onDownload }) {
   const status = item.status ?? 'success';
   const processing = status === 'processing';
   const failed = status === 'failed';
@@ -34,7 +29,7 @@ export function VideoHistoryCard({ item, onOpen, onRetry }) {
           </div>
         ) : failed ? (
           <div className={styles.failed}>
-            <ActionIcon name="warning" />
+            <CardIcon name="warning" />
             <strong>{item.failureLabel ?? 'Video generation failed'}</strong>
             <small>{item.failureDescription}</small>
             <button data-testid={item.retryTestId} type="button" onClick={() => onRetry?.(item)}>Retry</button>
@@ -55,15 +50,21 @@ export function VideoHistoryCard({ item, onOpen, onRetry }) {
       </div>
       {!processing && !failed ? (
         <div className={styles.actions}>
-          <div>
-            <button type="button" onClick={() => item.onLike?.(item)} aria-label="Like"><ActionIcon name="like" /></button>
-            <button type="button" onClick={() => item.onDislike?.(item)} aria-label="Dislike"><ActionIcon name="dislike" /></button>
-            <button type="button" onClick={() => item.onEdit?.(item)} aria-label="Edit"><ActionIcon name="edit" /></button>
-            <button type="button" onClick={() => item.onDownload?.(item)} aria-label="Download"><ActionIcon name="download" /></button>
-          </div>
+          <IconActionButtons
+            videoId={item.id}
+            actions={actions}
+            handlers={{
+              like: () => (item.onLike ?? onLike)?.(item),
+              dislike: () => (item.onDislike ?? onDislike)?.(item),
+              edit: () => (item.onEdit ?? onEdit)?.(item),
+              ...((item.onDownload ?? onDownload) ? { download: () => (item.onDownload ?? onDownload)(item) } : {}),
+            }}
+            downloadUrl={item.downloadUrl ?? item.videoUrl}
+            downloadFileName={item.downloadFileName}
+          />
           {item.primaryActionLabel ? (
             <button className={styles.primaryAction} type="button" onClick={() => item.onPrimaryAction?.(item)}>
-              <ActionIcon name="enhancer" />{item.primaryActionLabel}
+              <CardIcon name={item.primaryActionIcon ?? 'video-enhancer'} />{item.primaryActionLabel}
             </button>
           ) : null}
         </div>
@@ -74,10 +75,15 @@ export function VideoHistoryCard({ item, onOpen, onRetry }) {
 
 export default function VideoHistory({
   items = [],
+  actions = defaultResultActions,
   filterLabel = 'All',
   onFilter,
   onOpen,
   onRetry,
+  onLike,
+  onDislike,
+  onEdit,
+  onDownload,
   className = '',
   showFilter = false,
 }) {
@@ -90,7 +96,17 @@ export default function VideoHistory({
       </div> : null}
       <div className={styles.list}>
         {items.map((item) => (
-          <VideoHistoryCard key={item.id} item={item} onOpen={onOpen} onRetry={onRetry} />
+          <VideoHistoryCard
+            key={item.id}
+            item={item}
+            actions={actions}
+            onOpen={onOpen}
+            onRetry={onRetry}
+            onLike={onLike}
+            onDislike={onDislike}
+            onEdit={onEdit}
+            onDownload={onDownload}
+          />
         ))}
       </div>
     </section>

@@ -55,6 +55,7 @@ function TrimTimeline({
   const { framesAreaRef, startDrag, startTrackSeek } = useTrimDrag({
     duration,
     minimumSeconds,
+    maximumSeconds,
     trimRange,
     setTrimRange,
     setCurrentTime,

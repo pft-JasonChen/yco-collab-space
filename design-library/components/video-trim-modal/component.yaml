@@ -72,7 +72,7 @@ publicApi:
       required: false
     - name: onConfirm
       required: false
-  states: [closed, loading, ready, playing, muted, invalid-range, confirming]
+  states: [closed, loading, ready, playing, muted, maximum-window-reached, invalid-range, confirming]
 tokens:
   lockPath: platform/tokens/tokens.lock.json
   uses: [--background-base, --fill-brand-strong, --stroke-focus, --text-strong]
@@ -90,3 +90,4 @@ review:
 decisionBasis:
   - AI Agent supplies the closest existing trim behavior and presentation in the RD snapshot.
   - The port keeps local media processing only and does not import production task or account behavior.
+  - The maximum trim window is enforced during handle dragging rather than only at confirm time, so a segment longer than the feature limit can never be selected.

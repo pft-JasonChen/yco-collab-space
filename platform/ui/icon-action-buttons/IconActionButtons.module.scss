@@ -1,0 +1,81 @@
+.actionButtons {
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing-8);
+}
+
+.actionButtons.centered {
+  justify-content: center;
+}
+
+.iconButton {
+  position: relative;
+  display: flex;
+  width: calc(var(--spacing-24) + var(--spacing-4));
+  height: calc(var(--spacing-24) + var(--spacing-4));
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: var(--corner-radius-8);
+  cursor: pointer;
+  transition: transform 100ms ease;
+}
+
+.iconButton:active {
+  transform: scale(0.95);
+}
+
+.iconButton:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 var(--spacing-4) var(--stroke-focus);
+}
+
+.icon {
+  display: block;
+  width: var(--spacing-16);
+  height: var(--spacing-16);
+}
+
+.tooltip {
+  position: absolute;
+  bottom: calc(var(--spacing-32) * -1);
+  left: 50%;
+  z-index: 10;
+  display: flex;
+  height: calc(var(--spacing-24) + var(--spacing-4));
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-4) var(--spacing-12);
+  color: var(--text-inverse-strong);
+  background: var(--background-inverse);
+  border-radius: var(--corner-radius-4);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%);
+  transition: opacity 200ms ease;
+  white-space: nowrap;
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+  font-weight: var(--font-weight-strong);
+}
+
+.tooltip::before {
+  content: "";
+  position: absolute;
+  top: calc(var(--spacing-4) * -1);
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-right: var(--spacing-4) solid transparent;
+  border-bottom: var(--spacing-4) solid var(--background-inverse);
+  border-left: var(--spacing-4) solid transparent;
+  transform: translateX(-50%);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .iconButton:hover .tooltip {
+    opacity: 1;
+  }
+}

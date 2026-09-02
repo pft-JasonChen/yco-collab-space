@@ -23,6 +23,9 @@ from the RD snapshot at `/Users/jasonchen/Downloads/yce-frontend-gm-260909`.
   thumbnail fallback for deterministic prototype assets.
 - Parameterized minimum and maximum trim durations. The RD defaults remain 5 and
   60 seconds; Video Expansion passes 1 and 30 seconds.
+- `maximumSeconds` is enforced while dragging: each handle stops at the maximum
+  window relative to the opposite handle, so a longer segment cannot be selected.
+  The `invalid-range` confirm guard stays as a defensive check for supplied ranges.
 - Uses only the repository's existing RD CSS variables.
 
 The component selects a range; it does not encode, upload or call a backend.

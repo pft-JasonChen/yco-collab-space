@@ -1,0 +1,82 @@
+schemaVersion: 1
+id: icon-action-buttons
+displayName: Icon Action Buttons
+classification: composite
+status: pilot-approved
+rd:
+  sourcePackage: youcam-enhance-frontend
+  sourceVersion: 1.34.1
+  snapshot: yce-frontend-gm-260909
+  sourcePaths:
+    - src/components/result-page/common/video-feature/icon-action-buttons/index.js
+    - src/components/result-page/common/video-feature/icon-action-buttons/icon.js
+    - src/components/result-page/common/video-feature/icon-action-buttons/index.module.scss
+  sourceHashes:
+    - path: src/components/result-page/common/video-feature/icon-action-buttons/index.js
+      sha256: e2d8c7610c9bcb2df3098b694febf4754788017e5c69b0c7ae5401f807605e97
+    - path: src/components/result-page/common/video-feature/icon-action-buttons/icon.js
+      sha256: c57cb61b6392aac3324b01f8593b2a5f3f16d23e1dd5d5e6fe5775a7bc82146f
+    - path: src/components/result-page/common/video-feature/icon-action-buttons/index.module.scss
+      sha256: f138a0adad1fe02ae76da86f46e2d4c14ce8faac81bcb5ac2e802113bd6f0f9e
+figma:
+  status: pending
+  fileKey: null
+  componentSetNodeId: null
+  variants: []
+implementation:
+  importPath: platform/ui/icon-action-buttons/index.js
+  storyId: ui-icon-action-buttons
+  framework: react
+  dependencies: [react]
+  removedDependencies: [redux, i18n, countly-analytics, routing, download-service, task-fetching]
+publicApi:
+  props:
+    - name: videoId
+      required: false
+    - name: actions
+      required: false
+    - name: handlers
+      required: false
+    - name: downloadUrl
+      required: false
+    - name: downloadFileName
+      required: false
+    - name: centered
+      required: false
+    - name: className
+      required: false
+  states: [default, hover-tooltip, like-active, dislike-active, centered]
+tokens:
+  lockPath: platform/tokens/tokens.lock.json
+  uses:
+    - --background-inverse
+    - --corner-radius-4
+    - --corner-radius-8
+    - --font-size-tiny
+    - --font-weight-strong
+    - --line-height-tiny
+    - --spacing-4
+    - --spacing-8
+    - --spacing-12
+    - --spacing-16
+    - --spacing-24
+    - --spacing-32
+    - --stroke-focus
+    - --text-inverse-strong
+assets:
+  - path: assets/icon/yco-video-actions
+    usage: runtime
+review:
+  pilotApprover:
+    actor: pm
+    id: collab-space-owner
+    date: 2026-09-02
+  canonicalReview:
+    designer: pending
+    rd: pending
+decisionBasis:
+  - RD owns like, dislike, edit and download once in `video-feature/icon-action-buttons`, and consumes it from both the History result card and the Next Action footer of the detail dialog; Video History and Video Info Dialog now compose the same shared family instead of each rebuilding the row.
+  - The like/dislike pair stays mutually exclusive and re-clicking clears it, matching the RD `toggleVideoHistoryReaction` reducer, and the `-active`/`-default` icon variants are driven by that state.
+  - RD keeps the reaction in a central store keyed by result id so the History card and the detail dialog agree; Redux is outside the platform-UI boundary, so the component owns an equivalent module-level store with the same keying. It is prototype-only state that is never persisted or transmitted.
+  - The default download keeps RD's anchor step against the already-loaded local asset and drops the production fetch, auth and analytics services; a consumer-supplied `download` handler always wins.
+  - Edit stays delegated to the consumer because RD implements it as cross-module routing plus history rehydration, which the prototype boundary excludes.

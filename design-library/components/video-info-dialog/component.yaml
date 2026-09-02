@@ -36,7 +36,7 @@ implementation:
   importPath: platform/ui/video-info-dialog/index.js
   storyId: ui-video-info-dialog
   framework: react
-  dependencies: [react, react-dom]
+  dependencies: [react, react-dom, icon-action-buttons]
   removedDependencies: [redux, i18n, lodash, routing, scroll-hooks, cms, analytics, authentication, download-service, media-preview-modal]
 publicApi:
   props:
@@ -68,7 +68,13 @@ publicApi:
       required: false
     - name: onDownload
       required: false
-  states: [closed, open, backdrop, responsive, source-media, metadata, optional-prompt, next-actions, inert-actions]
+    - name: videoId
+      required: false
+    - name: actions
+      required: false
+    - name: downloadFileName
+      required: false
+  states: [closed, open, backdrop, responsive, source-media, metadata, optional-prompt, next-actions, reacted]
 tokens:
   lockPath: platform/tokens/tokens.lock.json
   uses: [--background-base, --fill-strong, --fill-weak, --stroke-strong, --text-strong, --text-weak]
@@ -89,3 +95,4 @@ decisionBasis:
   - RD common Modal supplies the dark backdrop and focus boundary while video-detail-modal supplies the split media, metadata and Next Action composition.
   - The pure-props pilot does not expose production routing, account, analytics, task or download services.
   - Next Action and reaction affordances use the allowlisted RD img2Vid icon assets; Video Expansion reuses the RD AI Extend glyph pending canonical icon design.
+  - The Next Action footer composes the shared Icon Action Buttons family, matching how RD's next-action block reuses `video-feature/icon-action-buttons` instead of owning its own like/dislike/download row.

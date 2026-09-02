@@ -2,6 +2,17 @@ export { default as Button, buttonSizes, buttonTones, buttonVariants } from './b
 export { default as Ratio, ratioTitleTypes, ratioTypes } from './ratio/index.js';
 export { default as VideoTrimModal } from './video-trim-modal/index.js';
 export { default as UploadMediaBlock, formatMediaDuration } from './upload-media-block/index.js';
+export {
+  default as IconActionButtons,
+  ActionIcon,
+  actionIcons,
+  defaultDetailActions,
+  defaultResultActions,
+  getVideoReaction,
+  resetVideoReactions,
+  toggleVideoReaction,
+  useVideoReaction,
+} from './icon-action-buttons/index.js';
 export { default as VideoHistory, VideoHistoryCard } from './video-history/index.js';
 export { default as VideoInfoDialog } from './video-info-dialog/index.js';
 export { default as ToolPageLayout } from './tool-page-layout/index.js';

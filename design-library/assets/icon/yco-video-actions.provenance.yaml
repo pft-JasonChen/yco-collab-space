@@ -5,6 +5,8 @@ source:
 files:
   - { name: like-default.svg, path: public/assets/images/img2Vid/next-action/like-default.svg, sha256: b5b27e88987a0df81e947009f6fff81b2aa345d973c17fb7cb087209fb11fb9c }
   - { name: dislike-default.svg, path: public/assets/images/img2Vid/next-action/dislike-default.svg, sha256: 702bf2b89b86e1d597b325d632fce264d79bf039885e4625b246982d1e2aa8b2 }
+  - { name: like-active.svg, path: public/assets/images/img2Vid/next-action/like-active.svg, sha256: 657d6b8dbf636562acaf9b6487e47828ae4d99df2e9ce4f0887bfa537cd15215 }
+  - { name: dislike-active.svg, path: public/assets/images/img2Vid/next-action/dislike-active.svg, sha256: 1d6fd16e3196c525d332a0e9a7ab91a0556d37a87e8af841edc8c0a477ae4fbc }
   - { name: download.svg, path: public/assets/images/img2Vid/next-action/download.svg, sha256: d6ceeae58963faff01c6cee2c9cc29ce538f3dc8b860b0f1bce8a87f0b6a3d16 }
   - { name: edit.svg, path: public/assets/images/img2Vid/next-action/edit.svg, sha256: f914e3e78f3ce54b6aca49d70f787c999b59e131b9b8b76521c7186e168a2126 }
   - { name: video-enhancer.svg, path: public/assets/images/img2Vid/next-action/video-enhancer.svg, sha256: 3d2155f48519c756725109e88e6ff7a4b247b3b9788f2a294418afc2b0c18699 }

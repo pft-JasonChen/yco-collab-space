@@ -17,3 +17,7 @@ gaps:
     status: resolved
     description: The standalone Position Control gap was closed by PM decision; positioning is now direct canvas dragging and remains feature behavior rather than a shared control.
     resolutionOwner: Designer
+  - id: DESIGN-005
+    status: open
+    description: The production brand button pairing (white label on --fill-brand-strong) measures 2.59:1 and fails WCAG AA contrast. The prototype now matches production verbatim instead of substituting a foreground token; Designer and RD must decide whether production changes the pairing or accepts the exception.
+    resolutionOwner: Designer

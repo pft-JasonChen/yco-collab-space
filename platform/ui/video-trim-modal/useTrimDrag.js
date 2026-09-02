@@ -4,6 +4,7 @@ import { FRAME_INSET, clamp, getPxPerSecond } from './constants.js';
 export default function useTrimDrag({
   duration,
   minimumSeconds,
+  maximumSeconds,
   trimRange,
   setTrimRange,
   setCurrentTime,
@@ -57,17 +58,22 @@ export default function useTrimDrag({
       return;
     }
 
+    // A handle stops at the maximum window instead of letting the selection grow
+    // past it, so an over-long segment can never be produced in the first place.
+    const window = Number.isFinite(maximumSeconds) && maximumSeconds > 0 ? maximumSeconds : Infinity;
     const deltaSeconds = (event.clientX - startX) / pixelsPerSecond;
     if (type === 'left') {
+      const minimumStart = Math.max(0, startRange.end - window);
       const maximumStart = startRange.end - minimumSeconds;
-      const start = clamp(startRange.start + deltaSeconds, 0, maximumStart);
+      const start = clamp(startRange.start + deltaSeconds, minimumStart, Math.max(minimumStart, maximumStart));
       setTrimRange((current) => ({ ...current, start }));
     } else {
       const minimumEnd = startRange.start + minimumSeconds;
-      const end = clamp(startRange.end + deltaSeconds, minimumEnd, durationRef.current);
+      const maximumEnd = Math.min(durationRef.current, startRange.start + window);
+      const end = clamp(startRange.end + deltaSeconds, Math.min(minimumEnd, maximumEnd), maximumEnd);
       setTrimRange((current) => ({ ...current, end }));
     }
-  }, [minimumSeconds, seekTo, setTrimRange]);
+  }, [maximumSeconds, minimumSeconds, seekTo, setTrimRange]);
 
   const handlePointerUp = useCallback((event) => {
     const drag = dragStateRef.current;

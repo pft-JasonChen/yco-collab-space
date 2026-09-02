@@ -206,33 +206,24 @@
   margin-top: var(--spacing-8);
 }
 
-.footer > div {
-  display: flex;
-  gap: var(--spacing-4);
-}
-
-.footer button {
+/* Like/dislike/download presentation comes from the shared Icon Action Buttons
+   component; only the dialog's own Retry action is styled here. */
+.footer .retry {
   display: grid;
-  min-width: var(--spacing-32);
+  min-width: calc(var(--spacing-128) + var(--spacing-24));
   height: var(--spacing-32);
   place-items: center;
-  color: var(--icon-neutral);
-  background: transparent;
-  border: none;
-  border-radius: var(--corner-radius-32);
-}
-
-.footer .retry {
-  min-width: calc(var(--spacing-128) + var(--spacing-24));
   padding: 0 var(--spacing-20);
   color: var(--text-inverse-strong);
   background: var(--fill-strong);
+  border: none;
+  border-radius: var(--corner-radius-32);
   font-weight: var(--font-weight-strong);
 }
 
 .close:focus-visible,
 .nextGrid button:focus-visible,
-.footer button:focus-visible {
+.footer .retry:focus-visible {
   outline: none;
   box-shadow: 0 0 0 var(--spacing-4) var(--stroke-focus);
 }

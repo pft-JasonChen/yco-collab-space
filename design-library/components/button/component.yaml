@@ -52,7 +52,7 @@ publicApi:
   states: [default, hover, focus, active, disabled, loading]
 tokens:
   lockPath: platform/tokens/tokens.lock.json
-  uses: [--fill-brand-strong, --stroke-focus, --text-information, --text-strong, --corner-radius-32]
+  uses: [--fill-brand-strong, --stroke-focus, --text-brand, --text-inverse-strong, --text-strong, --corner-radius-32]
 assets: []
 review:
   pilotApprover:
@@ -64,5 +64,6 @@ review:
     rd: pending
 decisionBasis:
   - The RD variant API is portable once browser detection, locale links and production tracking hooks are removed.
-  - The pilot maps brand labels to existing accessible foreground tokens because the exact RD cyan/white pairing measures 2.59:1 in axe; Designer and RD canonical review remains pending.
+  - button.module.css is held VERBATIM against the RD copy at src/components/common/button-wrapper/button.module.css; the file itself declares that the two repositories stay identical, so no Collab Space-only edit may live in it.
+  - An earlier pilot revision substituted --text-strong for --text-inverse-strong and --text-information for --text-brand to clear an axe colour-contrast finding. That silently diverged the prototype's brand buttons from production, so the substitution was reverted on 2026-09-02 at PM request; the 2.59:1 brand pairing is now carried as recorded a11y debt for Designer and RD canonical review rather than hidden by a token swap.
   - Pilot approval permits Collab Space prototype use but does not claim production package compatibility.

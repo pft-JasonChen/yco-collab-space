@@ -99,7 +99,7 @@
 /* ----- Brand × variants ----- */
 .tone_brand.variant_primary {
   background: var(--fill-brand-strong);
-  color: var(--text-strong);
+  color: var(--text-inverse-strong);
 }
 
 .tone_brand.variant_primary:hover::before {
@@ -113,7 +113,7 @@
 .tone_brand.variant_secondary {
   border-color: var(--stroke-brand-strong);
   background: transparent;
-  color: var(--text-information);
+  color: var(--text-brand);
 }
 
 .tone_brand.variant_secondary:hover::before {
@@ -126,7 +126,7 @@
 
 .tone_brand.variant_tertiary {
   background: transparent;
-  color: var(--text-information);
+  color: var(--text-brand);
 }
 
 .tone_brand.variant_tertiary:hover::before {

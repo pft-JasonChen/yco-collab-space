@@ -1,11 +1,11 @@
 {
   "schemaVersion": 3,
   "feature": "video-expansion",
-  "inputHash": "0881dfef4be41a13cc51b726d05536bace98ae165626ede11336fb0017f5511f",
+  "inputHash": "17043f58cc1f9737d050d19d2ca3a191e55b301fef1189a75ad20bbf18e6d960",
   "generatorInstructionsVersion": "collab-contract-v1",
-  "adapter": "codex",
+  "adapter": "claude",
   "model": "not-recorded",
-  "generatedAt": "2026-09-02T04:33:19.842Z",
+  "generatedAt": "2026-09-02T06:12:07.329Z",
   "files": [
     "README.md",
     "extract-video-frames.js",
@@ -44,7 +44,7 @@
         "contractPath": "design-library/components/credit-controls/component.yaml",
         "contractSha256": "bb1fa0ebbb9f543438844d38ac30643b4ccf9818f81f2ce84e52fd0bfc91e352",
         "implementationImport": "platform/ui/credit-controls/index.js",
-        "implementationSha256": "82667a4e35ab09cb3806eb61d1dc6a99e612eebf1af6ab0dea8f4fed828df033",
+        "implementationSha256": "4b3b79cbbdcfaeb7a5ffd74419190b6a663f2167fbdfc386f00e6ecaaf52467b",
         "runtimeAssets": [
           {
             "repositoryPath": "design-library/assets/icon/yco-credit-controls/add.svg",
@@ -163,13 +163,17 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/video-history/component.yaml",
-        "contractSha256": "8cbd8bf5b8bfa3afd20ffeef05491e5d4f618c9af7937afd22acc1b246bb4b5f",
+        "contractSha256": "d80a8c72d39d609f3512845200724b83499e8f86fc7a4201855ee1b2d3034038",
         "implementationImport": "platform/ui/video-history/index.js",
-        "implementationSha256": "17de73c6d870e536f1b4f4d945a5a015e780d6377506bfa8160096750b627f63",
+        "implementationSha256": "5eaccd0bfe5d53772f3177b88c9d45ad9a399c91be96da7b97b04c6757f5292b",
         "runtimeAssets": [
           {
             "repositoryPath": "design-library/assets/icon/yco-video-actions/character-motion-swap.svg",
             "sha256": "a788966b6b65a98de0f00a551ac23d4f4d6b94c0f4f6ba54930714f288c80724"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-video-actions/dislike-active.svg",
+            "sha256": "1d6fd16e3196c525d332a0e9a7ab91a0556d37a87e8af841edc8c0a477ae4fbc"
           },
           {
             "repositoryPath": "design-library/assets/icon/yco-video-actions/dislike-default.svg",
@@ -186,6 +190,10 @@
           {
             "repositoryPath": "design-library/assets/icon/yco-video-actions/face-swap.svg",
             "sha256": "1bb962d9fd8ce06c0fbb9711fb4b7a191b28bdcbd5e0de2604c51f6dbd40f0f6"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-video-actions/like-active.svg",
+            "sha256": "657d6b8dbf636562acaf9b6487e47828ae4d99df2e9ce4f0887bfa537cd15215"
           },
           {
             "repositoryPath": "design-library/assets/icon/yco-video-actions/like-default.svg",
@@ -218,13 +226,17 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/video-info-dialog/component.yaml",
-        "contractSha256": "a041bfbc9df875356b452ba4de93c54fd209ec68f9ec2cb7fd3191ab470502a6",
+        "contractSha256": "809905927478e78f0560902c3b0663e378b2fd8dc7324522f96d411bd87f3e0f",
         "implementationImport": "platform/ui/video-info-dialog/index.js",
-        "implementationSha256": "9b1199b6b8782ca702272b87f7139104d734c3c7ce1887b6893c8c6fef1fa239",
+        "implementationSha256": "eb3e8c805f789ef66d4af523cf14e3c52772409880c64dda4bd3d67a2476b6f7",
         "runtimeAssets": [
           {
             "repositoryPath": "design-library/assets/icon/yco-video-actions/character-motion-swap.svg",
             "sha256": "a788966b6b65a98de0f00a551ac23d4f4d6b94c0f4f6ba54930714f288c80724"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-video-actions/dislike-active.svg",
+            "sha256": "1d6fd16e3196c525d332a0e9a7ab91a0556d37a87e8af841edc8c0a477ae4fbc"
           },
           {
             "repositoryPath": "design-library/assets/icon/yco-video-actions/dislike-default.svg",
@@ -241,6 +253,10 @@
           {
             "repositoryPath": "design-library/assets/icon/yco-video-actions/face-swap.svg",
             "sha256": "1bb962d9fd8ce06c0fbb9711fb4b7a191b28bdcbd5e0de2604c51f6dbd40f0f6"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-video-actions/like-active.svg",
+            "sha256": "657d6b8dbf636562acaf9b6487e47828ae4d99df2e9ce4f0887bfa537cd15215"
           },
           {
             "repositoryPath": "design-library/assets/icon/yco-video-actions/like-default.svg",
@@ -302,9 +318,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/video-trim-modal/component.yaml",
-        "contractSha256": "6990ae0ca19e6043d20c66e65a912648d63eb4db0f61c23a7953ccef0e0ca21c",
+        "contractSha256": "d42ed1e4aa36ab004c1b96f15020f661fe7f603e62c74e16d01d351f82bea2fe",
         "implementationImport": "platform/ui/video-trim-modal/index.js",
-        "implementationSha256": "376b2339619e39d1230e9153623a7c0edff3bcc20133778200f3f967ce36dbba",
+        "implementationSha256": "5186da354699b9f803f6c97df45ebf3baa09d84afa5741d1bd3fe291dc03304c",
         "runtimeAssets": []
       }
     ]

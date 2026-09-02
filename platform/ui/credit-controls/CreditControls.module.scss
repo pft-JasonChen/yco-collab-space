@@ -58,10 +58,10 @@ button.control {
   box-shadow: 0 -4px 12px color-mix(in srgb, var(--fill-strong) 8%, transparent);
 }
 
+/* Fill and label colour come from the shared Button `tone_brand`/`variant_primary`
+   pair; only the action-bar-specific full-bleed width belongs here. */
 .generateButton {
   width: 100%;
-  color: var(--text-strong);
-  background: var(--fill-brand-strong);
 }
 
 .generateButton:disabled {

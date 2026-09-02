@@ -198,30 +198,21 @@
   margin-top: var(--spacing-4);
 }
 
-.actions > div {
-  display: flex;
-  gap: var(--spacing-4);
-}
-
-.actions button {
-  display: grid;
-  min-width: var(--spacing-32);
-  height: var(--spacing-32);
-  place-items: center;
-  color: var(--icon-neutral);
-  background: var(--background-base);
-  border: none;
-  border-radius: var(--corner-radius-32);
-  cursor: pointer;
-}
-
+/* Like/dislike/edit/download presentation lives in the shared Icon Action Buttons
+   component; only the card's own primary cross-tool action is styled here. */
 .actions .primaryAction {
   display: flex;
   width: auto;
+  min-width: var(--spacing-32);
+  height: var(--spacing-32);
   align-items: center;
   gap: var(--spacing-4);
   padding: 0 var(--spacing-16);
+  color: var(--icon-neutral);
+  background: var(--background-base);
   border: 1px solid var(--stroke-strong);
+  border-radius: var(--corner-radius-32);
+  cursor: pointer;
   font-size: var(--font-size-tiny);
   line-height: var(--line-height-tiny);
   font-weight: var(--font-weight-strong);

@@ -1,49 +1,25 @@
 import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import characterMotionIcon from '../../../design-library/assets/icon/yco-video-actions/character-motion-swap.svg';
-import dislikeIcon from '../../../design-library/assets/icon/yco-video-actions/dislike-default.svg';
-import downloadIcon from '../../../design-library/assets/icon/yco-video-actions/download.svg';
-import faceSwapIcon from '../../../design-library/assets/icon/yco-video-actions/face-swap.svg';
-import likeIcon from '../../../design-library/assets/icon/yco-video-actions/like-default.svg';
-import objectRemovalIcon from '../../../design-library/assets/icon/yco-video-actions/object-removal.svg';
-import styleTransferIcon from '../../../design-library/assets/icon/yco-video-actions/style-transfer.svg';
-import videoEditorIcon from '../../../design-library/assets/icon/yco-video-actions/video-editor.svg';
-import videoEnhancerIcon from '../../../design-library/assets/icon/yco-video-actions/video-enhancer.svg';
-import videoExpansionIcon from '../../../design-library/assets/icon/yco-video-actions/video-expansion.svg';
+import IconActionButtons, { ActionIcon, actionIcons, defaultDetailActions } from '../icon-action-buttons/index.js';
 import styles from './VideoInfoDialog.module.scss';
 
-const actionIcons = {
-  'video-enhancer': videoEnhancerIcon,
-  enhancer: videoEnhancerIcon,
-  'face-swap': faceSwapIcon,
-  'style-transfer': styleTransferIcon,
-  'object-removal': objectRemovalIcon,
-  'video-editor': videoEditorIcon,
-  'character-motion-swap': characterMotionIcon,
-  'video-expansion': videoExpansionIcon,
-  expansion: videoExpansionIcon,
-};
-
 function DialogIcon({ name }) {
-  const assetIcons = { like: likeIcon, dislike: dislikeIcon, download: downloadIcon };
-  if (assetIcons[name]) return <img className={styles.iconAsset} src={assetIcons[name]} alt="" aria-hidden="true" />;
   const paths = {
     close: <path d="m4 4 8 8M12 4l-8 8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />,
-    like: <path d="M6.5 13H4a1 1 0 0 1-1-1V7.5a1 1 0 0 1 1-1h2.5L8 3c.4-.9 1.8-.6 1.8.4v3.1H12a1 1 0 0 1 1 1l-.8 4.5a1.2 1.2 0 0 1-1.2 1H6.5Z" stroke="currentColor" strokeWidth="1.3" strokeLinejoin="round" />,
-    dislike: <path d="M6.5 3H4a1 1 0 0 0-1 1v4.5a1 1 0 0 0 1 1h2.5L8 13c.4.9 1.8.6 1.8-.4V9.5H12a1 1 0 0 0 1-1L12.2 4A1.2 1.2 0 0 0 11 3H6.5Z" stroke="currentColor" strokeWidth="1.3" strokeLinejoin="round" />,
-    download: <><path d="M8 2.8v7m0 0 2.7-2.7M8 9.8 5.3 7.1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /><path d="M3 12.5h10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></>,
     video: <><rect x="2.5" y="4" width="8" height="8" rx="1.5" stroke="currentColor" strokeWidth="1.4" /><path d="m10.5 7 3-1.5v5l-3-1.5" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" /></>,
   };
   return <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">{paths[name] ?? paths.video}</svg>;
 }
 
 function NextActionIcon({ action }) {
-  const src = action.iconUrl ?? actionIcons[action.icon ?? action.id];
-  return src ? <img className={styles.iconAsset} src={src} alt="" aria-hidden="true" /> : null;
+  if (action.iconUrl) return <img className={styles.iconAsset} src={action.iconUrl} alt="" aria-hidden="true" />;
+  const name = action.icon ?? action.id;
+  return actionIcons[name] ? <ActionIcon className={styles.iconAsset} name={name} /> : null;
 }
 
 export default function VideoInfoDialog({
   opened,
+  videoId = 'video-detail',
   title,
   date,
   videoUrl,
@@ -52,6 +28,8 @@ export default function VideoInfoDialog({
   metadata = [],
   prompt,
   nextActions = [],
+  actions = defaultDetailActions,
+  downloadFileName = null,
   onClose,
   onRetry,
   onLike,
@@ -144,11 +122,17 @@ export default function VideoInfoDialog({
                 ))}
               </div>
               <div className={styles.footer}>
-                <div>
-                  <button type="button" onClick={onLike} disabled={!onLike} aria-label="Like"><DialogIcon name="like" /></button>
-                  <button type="button" onClick={onDislike} disabled={!onDislike} aria-label="Dislike"><DialogIcon name="dislike" /></button>
-                  <button type="button" onClick={onDownload} disabled={!onDownload} aria-label="Download"><DialogIcon name="download" /></button>
-                </div>
+                <IconActionButtons
+                  videoId={videoId}
+                  actions={actions}
+                  handlers={{
+                    like: onLike,
+                    dislike: onDislike,
+                    ...(onDownload ? { download: onDownload } : {}),
+                  }}
+                  downloadUrl={videoUrl}
+                  downloadFileName={downloadFileName}
+                />
                 {onRetry ? <button className={styles.retry} type="button" onClick={onRetry}>Retry</button> : null}
               </div>
             </section>
