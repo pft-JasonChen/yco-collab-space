@@ -1,0 +1,59 @@
+schemaVersion: 1
+pack: pattern/video-results
+version: 2026-09
+snapshot: yce-frontend-gm-260909
+# A `declared` fact is a number RD writes in its own stylesheet; validate:geometry
+# resolves our tokens back to pixels and compares. A `measured` fact is an intrinsic
+# layout result nothing declares, so it is asserted in the browser instead.
+facts:
+  - id: segmented-control-container-radius
+    kind: declared
+    rd: { file: src/components/common/tab-control/segmented-control/index.module.scss, selector: .tabContainer, property: border-radius }
+    port: { file: platform/ui/video-results-surface/VideoResultsSurface.module.scss, selector: .tabs, property: border-radius }
+
+  - id: segmented-control-container-padding
+    kind: declared
+    rd: { file: src/components/common/tab-control/segmented-control/index.module.scss, selector: .tabContainer, property: padding }
+    port: { file: platform/ui/video-results-surface/VideoResultsSurface.module.scss, selector: .tabs, property: padding }
+
+  - id: segmented-control-tab-radius
+    kind: declared
+    rd: { file: src/components/common/tab-control/segmented-control/index.module.scss, selector: .tab, property: border-radius }
+    port: { file: platform/ui/video-results-surface/VideoResultsSurface.module.scss, selector: .tab, property: border-radius }
+
+  - id: segmented-control-tab-padding
+    kind: declared
+    rd: { file: src/components/common/tab-control/segmented-control/index.module.scss, selector: .tab, property: padding }
+    port: { file: platform/ui/video-results-surface/VideoResultsSurface.module.scss, selector: .tab, property: padding }
+
+  - id: segmented-control-tab-height
+    kind: declared
+    rd: { file: src/components/common/tab-control/segmented-control/index.module.scss, selector: .tab, property: height }
+    port: { file: platform/ui/video-results-surface/VideoResultsSurface.module.scss, selector: .tab, property: min-height }
+
+  - id: segmented-control-tab-font-size
+    kind: declared
+    rd: { file: src/components/common/tab-control/segmented-control/index.module.scss, selector: .tab, property: font-size }
+    port: { file: platform/ui/video-results-surface/VideoResultsSurface.module.scss, selector: .tab, property: font-size }
+    acceptedDeviation:
+      reason: >-
+        RD writes a raw 21px here, which is not a value the token system carries. The port
+        uses --font-size-heading-5 (18px) because a ported component may not invent token
+        values, and 18px with --line-height-heading-5 lands on the same 42px tab height.
+        Designer and RD should decide whether 21px earns a token.
+      ruledBy: pm
+      date: 2026-09-03
+
+  - id: segmented-control-intrinsic-width
+    kind: measured
+    value: 368
+    unit: px
+    tolerance: 1
+    viewport: desktop
+    selector: "[role='tablist']"
+    dimension: width
+    assertedBy: test:rendered and test:storybook (ui-video-results-surface--default)
+    note: >-
+      No stylesheet declares this. RD sizes the two-tab row from tab padding and label
+      width; the port reproduces the same result through min-width on each tab. Recorded
+      as measured so nobody mistakes it for something RD wrote down.

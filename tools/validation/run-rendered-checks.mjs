@@ -5,10 +5,12 @@ import { chromium } from 'playwright';
 import {
   fromRoot,
   normaliseFeatureSlug,
+  pathExists,
   readJson,
   readYaml,
 } from '../prototype-cli/project.mjs';
 import { resolveSurfaceContext } from '../prototype-cli/surface-policy.mjs';
+import { measuredFacts } from '../design-library/geometry.mjs';
 
 function cliFeature() {
   const index = process.argv.indexOf('--feature');
@@ -203,6 +205,25 @@ async function assertNoHorizontalOverflow(page, viewport) {
   }
 }
 
+/**
+ * Measured geometry: values no stylesheet declares, so only a rendered page can
+ * produce them. Facts are matched to the viewport they were measured at.
+ */
+async function assertGeometry(page, viewport, facts) {
+  for (const fact of facts) {
+    if (fact.viewport !== viewport.name) continue;
+    const box = await page.locator(fact.selector).first().boundingBox();
+    if (!box) throw new Error('Geometry target is not rendered: ' + fact.id + ' (' + fact.selector + ')');
+    const actual = fact.dimension === 'height' ? box.height : box.width;
+    if (Math.abs(actual - fact.value) > fact.tolerance) {
+      throw new Error(
+        'Geometry drifted: ' + fact.id + ' expected ' + fact.value + 'px but measured ' +
+          Math.round(actual) + 'px (tolerance ' + fact.tolerance + 'px)',
+      );
+    }
+  }
+}
+
 async function assertSurfaceStructure(page, surface) {
   for (const zone of surface.requiredZones) {
     const selector = '[data-surface-zone="' + zone + '"]';
@@ -265,6 +286,17 @@ if (surfaceResult.errors.length > 0 || !surfaceResult.context) {
 }
 
 const surface = surfaceResult.context;
+// Patterns the feature's pinned pack composes; a novel surface composes none.
+const composedPacks = new Set();
+for (const reference of [surface.primaryPack, ...(surface.borrowedPacks ?? [])].filter(Boolean)) {
+  const slotsPath = path.join(
+    'platform', 'surfaces', ...reference.id.split('/'), reference.version, 'component-slots.yaml',
+  );
+  if (!(await pathExists(fromRoot(slotsPath)))) continue;
+  const slots = await readYaml(slotsPath);
+  for (const composed of slots.composes ?? []) composedPacks.add(composed.split('@')[0]);
+}
+const geometry = await measuredFacts({ packs: composedPacks });
 const host = config.server.host;
 const port = config.server.previewPort;
 const baseUrl = 'http://' + host + ':' + port;
@@ -340,6 +372,7 @@ try {
       }
 
       await assertSurfaceStructure(page, surface);
+      await assertGeometry(page, viewport, geometry);
       await assertNoHorizontalOverflow(page, viewport);
 
       if (consoleErrors.length > 0) {

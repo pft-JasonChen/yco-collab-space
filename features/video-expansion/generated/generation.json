@@ -5,7 +5,7 @@
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "claude",
   "model": "claude-opus-5",
-  "generatedAt": "2026-09-03T18:43:04.409Z",
+  "generatedAt": "2026-09-03T18:54:58.242Z",
   "files": [
     "README.md",
     "contract/integration.yaml",
@@ -301,7 +301,7 @@
         "contractPath": "design-library/components/video-results-surface/component.yaml",
         "contractSha256": "272519eb485a6f13999cf4f6cff69d6cc4690d0d11dc1b87b55445eaea7ce95e",
         "implementationImport": "platform/ui/video-results-surface/index.js",
-        "implementationSha256": "4e9d71145d5ce4e917d9e77c63b009a6296f43c55a73b399034f0d76cc2ece85",
+        "implementationSha256": "a035deded58bf09d44620bfdf678467922448e4ff26f579ce2345b85b7f11a8d",
         "runtimeAssets": []
       },
       {
