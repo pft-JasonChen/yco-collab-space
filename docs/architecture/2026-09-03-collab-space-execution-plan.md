@@ -181,7 +181,7 @@
 | # | 項目 | 狀態 |
 |---|---|---|
 | 8.1 | i18n：`product/i18n.json` + `platform/runtime/i18n.js` shim | ✅ |
-| 8.1a | video-expansion 硬字串抽 key | ✅ 30 個 key，其中 **16 個 `rd-existing`**（RD 已有同名同值）、14 個 `new` |
+| 8.1a | video-expansion 硬字串抽 key | ✅ 30 個 key，其中 **15 個 `rd-existing`**（RD 已有同名同值）、15 個 `new` |
 | 8.1b | `platform/ui` 硬字串改 props | ✅ 7 個元件、含 4 個獨立 export 的 sub-component |
 | 8.1c | i18n 驗證：flat key 格式、origin、未宣告 key、死 key、重複 placeholder | ✅ 串進 `validate:inputs` |
 | 8.2 | `contract/task-contract.yaml` schema 與產出 | ✅ 4 inputs／1 output／4 open questions；port 必須對應 contract 的 state 或 action |

@@ -179,7 +179,7 @@ import { buildRatioOptions, parseRatio } from '../data/canvas-geometry.js';
 "video.expansion.trim.title":    { "value": "Trim video", "origin": "new" }
 ```
 
-目前 30 個 key，其中 **16 個是 `rd-existing`** —— 我們比對過 `src/i18n/json/en.json`，同名同值。RD 只需要處理 `origin: new` 的 14 個。
+目前 30 個 key，其中 **15 個是 `rd-existing`** —— 我們比對過 `src/i18n/json/en.json`，同名同值。RD 只需要處理 `origin: new` 的 15 個。
 
 `platform/ui` 的共用元件**不呼叫 `t()`**，所有文案走 props（預設值是英文）。這樣元件保持純粹，RD 端接自己的 `getTranslationFunction()` 更直接。
 
@@ -259,7 +259,7 @@ Prototype 的 `product/validation.yaml` 用 `data-testid` 寫了 selector 級的
 | L3 模組編排 | 依 `index.jsx` 當規格重寫 | **重寫**，但不需重新設計 |
 | L4 task strategy | 依 `task-contract.yaml`（＋選用 payload sample）實作 | **實作**，但不需要猜 |
 | 註冊面 | 依 `integration.yaml` 逐項執行 | 有清單 |
-| i18n | 匯入 `origin: new` 的 14 個 key | 有 key |
+| i18n | 匯入 `origin: new` 的 15 個 key | 有 key |
 
 **UI 程式碼估計 60–70% 可搬。這不是「複製貼上就上線」。**
 
