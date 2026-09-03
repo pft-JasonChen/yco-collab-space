@@ -55,7 +55,7 @@ for (const entry of claimed) {
 }
 
 // Drop anything nothing claims any more, so the baseline cannot accumulate.
-const snapshotName = claimed[0]?.snapshot ?? manifest.source?.snapshot;
+const snapshotName = manifest.source.snapshot;
 const keep = new Set([
   ...claimed.map((entry) => baselinePath(entry.snapshot, entry.source)),
   ...(manifest.siteMapSource?.files ?? []).map((file) => baselinePath(snapshotName, file.source)),
@@ -69,7 +69,7 @@ for (const file of await listVendoredFiles(workspace)) {
 }
 
 manifest.vendoredBaseline = {
-  root: ['platform/rd-baseline', claimed[0]?.snapshot ?? manifest.source.snapshot].filter(Boolean).join('/'),
+  root: ['platform/rd-baseline', manifest.source.snapshot].join('/'),
   purpose:
     'Read-only RD reference. Holds exactly the files component contracts claim under rd.sourcePaths, ' +
     'so validate:rd-parity and validate:snapshot can run on any clone without the external snapshot.',

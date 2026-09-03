@@ -1,6 +1,7 @@
 {
   "schemaVersion": 1,
   "source": {
+    "snapshot": "yce-frontend-gm-260909",
     "path": "/Users/jasonchen/Downloads/yce-frontend-gm-260909",
     "packageName": "youcam-enhance-frontend",
     "packageVersion": "1.34.1",

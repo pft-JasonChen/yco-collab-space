@@ -13,7 +13,7 @@ import { readTaxonomy } from './extract-taxonomy.mjs';
  */
 const workspace = fromRoot();
 const manifest = await readJson('migration/rd-snapshot-manifest.json', workspace);
-const snapshot = manifest.source?.snapshot ?? 'yce-frontend-gm-260909';
+const snapshot = manifest.source.snapshot;
 const { moduleTypes, crossPromoteTypes, productUrls, categoryGroups, categories } = await readTaxonomy({ workspace, snapshot });
 
 // crossPromoteTypes maps a module to its cross-promote *identity* ("photo.enhance"),
@@ -37,7 +37,7 @@ push(0, 'schemaVersion: 1');
 push(0, 'status: derived');
 push(0, 'derivedFrom:');
 push(1, `snapshot: ${snapshot}`);
-push(1, `sourceVersion: ${manifest.source?.packageVersion ?? 'unknown'}`);
+push(1, `sourceVersion: ${manifest.source.packageVersion}`);
 push(1, 'sources:');
 for (const file of manifest.siteMapSource?.files ?? []) push(2, `- ${file.source}`);
 push(1, 'generator: tools/migration/generate-site-map.mjs');

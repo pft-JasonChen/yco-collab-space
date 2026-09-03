@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "pack": "pattern/tool-page",
+  "version": "2026-09",
+  "sourceCatalog": "rd-vendored-baseline",
+  "evidenceStatus": "vendored-source-verified",
+  "capturedAt": "2026-09-03",
+  "figma": null,
+  "rd": {
+    "snapshot": "yce-frontend-gm-260909",
+    "sourceVersion": "1.34.1",
+    "primarySurface": "feature-layout",
+    "familyAdoption": "31/34",
+    "components": [
+      "tool-page-layout",
+      "result-page-shell"
+    ],
+    "evidence": [
+      {
+        "path": "public/assets/fonts/icomoon.woff",
+        "sha256": "746d8b88009c7cf0c9b03a160361e1dc8de8406dc3ef893f65e2399e9054ebec",
+        "component": "result-page-shell"
+      },
+      {
+        "path": "public/assets/images/aiAgent/icon_agent.svg",
+        "sha256": "eea1f8c5ac2fd20a880a512e0629afed3bf313dfacb9ff06df1419fe30215c14",
+        "component": "result-page-shell"
+      },
+      {
+        "path": "public/assets/images/header/icon_add.svg",
+        "sha256": "2bb3284338e2893ec78d567ba65f511f11ca1b004d0948e6b737fe3417758457",
+        "component": "result-page-shell"
+      },
+      {
+        "path": "public/assets/images/header/icon_credit.svg",
+        "sha256": "fe13827402ad85122458ba7de848cbf47e0cb4401d319a6ebc8bfd511245b1d1",
+        "component": "result-page-shell"
+      },
+      {
+        "path": "public/assets/images/header/icon_home.svg",
+        "sha256": "72246fa21d718fee15b74e58ae1bbd15890e3e2afb84ca4d0db720d1d866c726",
+        "component": "result-page-shell"
+      },
+      {
+        "path": "public/assets/images/header/icon_profile.svg",
+        "sha256": "302b3d1eeecd1d1307b0a0185ac65f0ff57a478732585c8438b9c7bc22a6f37c",
+        "component": "result-page-shell"
+      },
+      {
+        "path": "public/assets/images/header/info icon.svg",
+        "sha256": "e86991187d89775a46a7d805bd445a510756709a8959d7cb420cfc9ad5d33035",
+        "component": "result-page-shell"
+      },
+      {
+        "path": "public/assets/images/logo/logo_symbol.svg",
+        "sha256": "7db00edf467cbb8c3102df17b2b75b8e476f908c2b078fa05c874893ea38f81a",
+        "component": "result-page-shell"
+      },
+      {
+        "path": "public/assets/images/logo/logo_YC_OnlineEditor_d_ENU_dt.svg",
+        "sha256": "d0af397b427c61f93e5cc595f8ecc53ed157d499b4b4ab923b1841df4e3c66dc",
+        "component": "result-page-shell"
+      },
+      {
+        "path": "public/assets/images/logo/logo_YC_OnlineEditor_d_ENU_mb.svg",
+        "sha256": "b6b9606792f9022ed3b237d5d4cc2439be9f500e050f60e39f6c14c91aecf35f",
+        "component": "result-page-shell"
+      },
+      {
+        "path": "src/components/common/headers/components/credits-left/index.js",
+        "sha256": "e4cea9a8210fb78271c2cd03569803f2592fc9e57cdb886073127d991f65d0f7",
+        "component": "result-page-shell"
+      },
+      {
+        "path": "src/components/common/headers/components/credits-left/index.module.scss",
+        "sha256": "9a46e44a4f599e280563ddbc3bd1dbcb178c9b74f7ca66d7a4eaef938900c846",
+        "component": "result-page-shell"
+      },
+      {
+        "path": "src/components/common/headers/components/logo/logo.js",
+        "sha256": "b4253262bbe9c039d55c3dd3dfed57276280b0d1d7bd7180ea6ccacb392c2709",
+        "component": "result-page-shell"
+      },
+      {
+        "path": "src/components/common/headers/components/logo/logo.module.scss",
+        "sha256": "a8b16700377873b468dfae0f7ebb193738d004e3efec1ff4f59254ad86fcc5b4",
+        "component": "result-page-shell"
+      },
+      {
+        "path": "src/components/common/headers/components/module-name/module-name.js",
+        "sha256": "99cf2631007de48242d55203fe6171ddbe27a396e8e39141cf4267f4b0da9b64",
+        "component": "result-page-shell"
+      },
+      {
+        "path": "src/components/common/headers/components/module-name/module-name.module.scss",
+        "sha256": "e9f2b6b1f95597ea2c2d26614f41a6617b871e4f229ef41a951d31621e3b8523",
+        "component": "result-page-shell"
+      },
+      {
+        "path": "src/components/result-page/common/feature-layout/index.js",
+        "sha256": "cb690ae1ca0baade3413de367b602896b9790798a35f611b00dbce786dcf2945",
+        "component": "tool-page-layout"
+      },
+      {
+        "path": "src/components/result-page/common/feature-layout/index.module.scss",
+        "sha256": "81e20a3ac1f1bcc5a6bbfd6bcf20d3bbbfc36260ee552f0c35acfc46ff7b847d",
+        "component": "tool-page-layout"
+      },
+      {
+        "path": "src/components/result-page/common/features-panel/components/sideBarMenu/index.js",
+        "sha256": "6a6cf2d1f55f9adc4ee0f429a08fee52751e79c34fe1891eed8ecf23bf8eb46f",
+        "component": "result-page-shell"
+      },
+      {
+        "path": "src/components/result-page/common/features-panel/components/sideBarMenu/index.module.scss",
+        "sha256": "d89265892f470fea2c314fc43969350c411856bb30c0e1c940ad73049a906147",
+        "component": "result-page-shell"
+      },
+      {
+        "path": "src/components/result-page/common/features-panel/utils/sideBarMenuUtils.js",
+        "sha256": "b802342dfadc495f08f8523b3f9f860102bff276f958b04942e21a7147c4bffa",
+        "component": "result-page-shell"
+      },
+      {
+        "path": "src/styles/home-icon-styles.css",
+        "sha256": "6cd44d764ed017f1c3d263f1cfaebcdc54e4f77103a21ab77f9da004a693d7b5",
+        "component": "result-page-shell"
+      }
+    ]
+  },
+  "decisionBasis": [
+    "Evidence is the vendored RD source every catalogued component in this pattern was ported from, with the hash each file carries in platform/rd-baseline. It is verifiable on any clone by validate:snapshot.",
+    "familyAdoption is how many of the 34 result-page families import the RD surface this pattern models, measured in docs/surfaces/rd-composition-deviations.md. It is context, not approval.",
+    "Visual and geometry parity against a running production page is a separate concern; this status only claims that the structural source is pinned and checkable."
+  ]
+}

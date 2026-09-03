@@ -1,0 +1,10 @@
+schemaVersion: 1
+pack: pattern/uploaded-media
+version: 2026-09
+slots:
+  - id: media-upload
+    required: true
+    description: Shared empty state with accepted formats and limits.
+  - id: uploaded-media
+    required: true
+    description: "Shared loaded state: remove, replace, and one feature action slot."

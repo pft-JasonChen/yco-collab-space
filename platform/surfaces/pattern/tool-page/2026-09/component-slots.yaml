@@ -1,0 +1,16 @@
+schemaVersion: 1
+pack: pattern/tool-page
+version: 2026-09
+slots:
+  - id: navigation-header
+    required: true
+    description: Shared shell. A feature decides the active tool id and the title only.
+  - id: settings-inspector
+    required: true
+    description: Feature-owned content inside a shared container.
+  - id: primary-action
+    required: true
+    description: Footer action; see pattern/action-footer.
+  - id: result-column
+    required: true
+    description: Feature-owned content inside a shared container.

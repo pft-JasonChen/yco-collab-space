@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "pack": "pattern/uploaded-media",
+  "version": "2026-09",
+  "sourceCatalog": "rd-vendored-baseline",
+  "evidenceStatus": "vendored-source-verified",
+  "capturedAt": "2026-09-03",
+  "figma": null,
+  "rd": {
+    "snapshot": "yce-frontend-gm-260909",
+    "sourceVersion": "1.34.1",
+    "primarySurface": "upload-image-block",
+    "familyAdoption": "not-measured",
+    "components": [
+      "upload-media-block"
+    ],
+    "evidence": [
+      {
+        "path": "public/assets/images/interactionToolsBar/video_upload_icon.svg",
+        "sha256": "4639e1e96823e2df24350cf60b96db5c8d3db2668bc962014845e397b2b0ca70",
+        "component": "upload-media-block"
+      },
+      {
+        "path": "public/assets/images/txt2Img/settings/add_image_icon.svg",
+        "sha256": "69042962bdda775258ebef5e73f424303eb4ae68c04182344af9f4b71842ba2c",
+        "component": "upload-media-block"
+      },
+      {
+        "path": "public/assets/images/txt2Img/settings/reference_photo/cancel_icon3.svg",
+        "sha256": "013e422fa489cfe3ee41de148300f64e13d23af60da14bf9a9ab81a90cd1781c",
+        "component": "upload-media-block"
+      },
+      {
+        "path": "src/components/common/upload-image-block/upload-image-block.js",
+        "sha256": "becf42f657142d655af2419e543e44bb6ea8cde73037f8c68856151c63e14baa",
+        "component": "upload-media-block"
+      },
+      {
+        "path": "src/components/common/upload-image-block/upload-image-block.module.scss",
+        "sha256": "d18e5f430d0b76c4cab96b9515602372459abd94cb1ee1a5bd8c71999dc2e647",
+        "component": "upload-media-block"
+      }
+    ]
+  },
+  "decisionBasis": [
+    "Evidence is the vendored RD source every catalogued component in this pattern was ported from, with the hash each file carries in platform/rd-baseline. It is verifiable on any clone by validate:snapshot.",
+    "familyAdoption is how many of the 34 result-page families import the RD surface this pattern models, measured in docs/surfaces/rd-composition-deviations.md. It is context, not approval.",
+    "Visual and geometry parity against a running production page is a separate concern; this status only claims that the structural source is pinned and checkable."
+  ]
+}

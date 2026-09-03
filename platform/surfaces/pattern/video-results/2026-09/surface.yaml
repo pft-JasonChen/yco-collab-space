@@ -1,0 +1,22 @@
+schemaVersion: 1
+id: pattern/video-results
+version: 2026-09
+kind: module
+status: provisional
+shell: result-tabs
+zones:
+  - id: result-tabs
+    required: true
+    description: Segmented control switching between the working view and History.
+  - id: result-filter
+    required: false
+    description: Filter over History content.
+  - id: result-body
+    required: true
+    description: Whichever tab is active.
+responsivePriority:
+  - The tab control keeps its intrinsic width rather than stretching to the column.
+  - A running task is signalled on the History tab even while the working tab is active.
+decisionBasis:
+  - A pattern is a region reused across page types, not a page type. It is catalogued as a module so a Surface Pack can compose it instead of restating it.
+  - Every slot resolves to a catalogued component in design-library/components, so reuse evidence in surface-intent can name the same ids.

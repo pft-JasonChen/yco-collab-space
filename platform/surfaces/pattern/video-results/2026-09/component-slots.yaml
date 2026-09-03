@@ -1,0 +1,13 @@
+schemaVersion: 1
+pack: pattern/video-results
+version: 2026-09
+slots:
+  - id: edit-history-tabs
+    required: true
+    description: Shared segmented control; a feature supplies the labels only.
+  - id: history-filter
+    required: false
+    description: Shared filter; a feature supplies the options.
+  - id: processing-feedback
+    required: true
+    description: Activity indicator on the History tab while a task runs.

@@ -1,0 +1,22 @@
+schemaVersion: 1
+id: pattern/detail-modal
+version: 2026-09
+kind: module
+status: provisional
+shell: detail-modal
+zones:
+  - id: detail-media
+    required: true
+    description: The result at full size.
+  - id: detail-metadata
+    required: true
+    description: Source media, resolution, duration, prompt.
+  - id: next-action
+    required: true
+    description: Cross-tool actions available on this result.
+responsivePriority:
+  - Media keeps its aspect ratio; metadata wraps rather than truncating.
+  - Below the split breakpoint media stacks above metadata and Next Action stays last.
+decisionBasis:
+  - A pattern is a region reused across page types, not a page type. It is catalogued as a module so a Surface Pack can compose it instead of restating it.
+  - Every slot resolves to a catalogued component in design-library/components, so reuse evidence in surface-intent can name the same ids.

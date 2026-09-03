@@ -26,6 +26,7 @@
     "validate:snapshot": "node tools/migration/validate-snapshot.mjs",
     "snapshot:vendor": "node tools/migration/vendor-snapshot.mjs",
     "snapshot:site-map": "node tools/migration/generate-site-map.mjs",
+    "snapshot:patterns": "node tools/migration/generate-surface-patterns.mjs",
     "validate:public-build": "node tools/design-library/validate-public-build.mjs",
     "validate:inputs": "node tools/prototype-cli/validate-inputs.mjs",
     "validate:intake": "node tools/prototype-cli/validate-inputs.mjs --intake-only",

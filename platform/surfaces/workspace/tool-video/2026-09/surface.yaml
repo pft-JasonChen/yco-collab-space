@@ -1,0 +1,41 @@
+schemaVersion: 1
+id: workspace/tool-video
+version: 2026-09
+kind: surface
+status: provisional
+shell: video-workspace
+zones:
+  - id: tool-navigation
+    required: true
+    description: Global chrome, from pattern/tool-page.
+  - id: settings-inspector
+    required: true
+    description: Left column, from pattern/tool-page.
+  - id: video-input
+    required: true
+    description: Source media entry, from pattern/uploaded-media.
+  - id: primary-action
+    required: true
+    description: Pinned action with credit cost, from pattern/action-footer.
+  - id: video-result
+    required: true
+    description: The working view - playback, canvas, or whatever the feature edits.
+  - id: video-status
+    required: true
+    description: Processing feedback and recovery.
+  - id: history-results
+    required: true
+    description: Past results, from pattern/history-list.
+  - id: video-detail-dialog
+    required: true
+    description: Full-size result and cross-tool actions, from pattern/detail-modal.
+responsivePriority:
+  - Keep the working view dominant; the inspector yields width first.
+  - Preserve playback and progress before secondary controls.
+  - Keep the primary action reachable without covering the result.
+  - Below the settings breakpoint the inspector stacks above the result and History stays reachable.
+decisionBasis:
+  - This version composes the six reusable patterns instead of restating their rules, so a feature that follows them records no deviation for doing so.
+  - 2026-08 stays available and pinned by existing features; it is not edited in place because a feature's recorded approvals are bound to the pack hash it was reviewed against.
+  - Zones are named after what the surface holds, not after the component that fills it, so a pattern can be re-implemented without renaming the zone.
+  - 2026-08 declared both settings-inspector and video-settings for the same region. This version keeps only settings-inspector as a zone; video-settings survives as a component-slot role, which is what it actually describes.

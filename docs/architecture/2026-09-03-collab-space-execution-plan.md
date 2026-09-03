@@ -56,7 +56,7 @@
 | # | 落差 | 證據 | 狀態 |
 |---|---|---|---|
 | **A** | 沒有可稽核的 production 事實來源 | RD snapshot 以絕對路徑被 12 份 `component.yaml`、5 份 provenance、manifest 與多份文件引用，卻不在 repo 裡 | **部分解決**（verbatim 子集已 vendor） |
-| **B** | Surface 層沒有 production 證據 | `tool-video/2026-08/provenance.json`：`evidenceStatus: requires-current-production-capture`、`capturedAt: null` | 未解決（WS-2／3／4） |
+| **B** | Surface 層沒有 production 證據 | `tool-video/2026-08/provenance.json`：`evidenceStatus: requires-current-production-capture`、`capturedAt: null` | **已解決**（WS-4：6 個 pattern 帶 vendored 證據，`tool-video@2026-09` 組合它們） |
 | **C** | 流程不強制「先查有沒有現成的」 | `prototype-update` 12 步中無任何查表步驟 | **已解決**（WS-5） |
 | **D** | 沒有反向 drift 偵測 | `Button.module.css` 宣告 verbatim 卻差 3 行，`validate` 全綠 | **已解決**（WS-0） |
 | **E** | 需要新共用元件時沒有正式 workflow | `prototype-update` 要求「propose a Platform Owner change」，但 map 裡沒有這個 workflow | 未解決（WS-1.4） |
@@ -143,11 +143,16 @@
 
 3.1 定義 `surface-composition.schema.json` · 3.2 盤點 page entry → surface → layout → shared components → assets → feature adapter，寫入各 pack 的 `composition.yaml` · 3.3 以已完成的 result-action chain（`result-video` / `next-action` → `icon-action-buttons`）當範本
 
-### WS-4 — Surface contract 補證據 ⬜
+### WS-4 — Surface contract 補證據 ✅ 完成
 
-4.1 建／補 6 個 surface contract（Tool Page、Video Results、History、Detail Modal、uploaded media、action-footer）· 4.2 `evidenceStatus` 推進到有實際 capture · 4.3 發新版 pack，舊 feature 仍 pin 舊版 · 4.4 回歸驗證
+| # | 項目 | 狀態 |
+|---|---|---|
+| 4.1 | 6 個 pattern pack（tool-page、video-results、history-list、detail-modal、uploaded-media、action-footer） | ✅ `platform/surfaces/pattern/*/2026-09/`，catalog 以 `kind: module` 登錄 |
+| 4.2 | `evidenceStatus` 推進 | ✅ `requires-current-production-capture` → `vendored-source-verified`，63 筆 RD 檔案證據附 hash |
+| 4.3 | 發新版 pack，舊 feature 仍 pin 舊版 | ✅ `tool-video@2026-09` 組合 6 個 pattern；`2026-08` 保留並標 `supersededBy` |
+| 4.4 | 回歸驗證 | ✅ video-expansion `deviations` **11 → 6** |
 
-> **成效指標：** `video-expansion` 的 `deviations` 目前 **11 條**，目標降到個位數。
+> **成效指標達成。** 消失的 5 條全是「組合了標準 shell／uploaded-media／action footer／results tabs／History／detail dialog」—— 新 pack 直接組合這些 pattern，遵循它們不再算偏離。剩下的 6 條是真正 feature-specific 的：canvas 拖曳、timeline 抽格、固定 viewport、刻意省略的 surface、PM 指定的版型參考、inert 導覽。
 
 ### WS-5 — Intake 強制元件查表 ✅ 完成
 

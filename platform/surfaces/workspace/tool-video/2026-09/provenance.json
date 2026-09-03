@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "pack": "workspace/tool-video",
+  "version": "2026-09",
+  "sourceCatalog": "rd-vendored-baseline",
+  "evidenceStatus": "composed-from-verified-patterns",
+  "capturedAt": "2026-09-04",
+  "figma": null,
+  "composes": [
+    "pattern/tool-page@2026-09",
+    "pattern/uploaded-media@2026-09",
+    "pattern/action-footer@2026-09",
+    "pattern/video-results@2026-09",
+    "pattern/history-list@2026-09",
+    "pattern/detail-modal@2026-09"
+  ],
+  "supersedes": "2026-08",
+  "decisionBasis": [
+    "Every composed pattern carries evidenceStatus vendored-source-verified: its RD source is pinned in platform/rd-baseline and re-checked by validate:snapshot on every run. This pack inherits that rather than claiming capture of its own.",
+    "The working view - canvas, playback, timeline - is deliberately left to the feature. It is the one region video tools genuinely differ in, so pinning it here would produce false deviations.",
+    "Superseding rather than editing 2026-08 keeps existing approvals valid: a stage transition is bound to the pack hash it was reviewed against."
+  ]
+}

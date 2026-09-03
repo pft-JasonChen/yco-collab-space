@@ -113,7 +113,7 @@ export async function verifySnapshot({ workspace = fromRoot() } = {}) {
   // The site map is derived from RD's taxonomy declarations, so those files are
   // vendored for the same reason the ported sources are: a derivation nobody can
   // re-run is not auditable.
-  const snapshotName = claimed[0]?.snapshot ?? manifest.source?.snapshot;
+  const snapshotName = manifest.source.snapshot;
   for (const file of [...(manifest.siteMapSource?.files ?? []), ...(manifest.pageEntryReference?.files ?? [])]) {
     const repositoryPath = baselinePath(snapshotName, file.source);
     if (!vendored.has(repositoryPath)) {

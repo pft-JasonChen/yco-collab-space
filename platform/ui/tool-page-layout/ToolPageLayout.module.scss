@@ -69,3 +69,12 @@
     min-height: 620px;
   }
 }
+
+/* Zone wrapper around the footer. It takes the same flex behaviour the action bar had
+   as a direct child, so naming the zone costs no layout change. `display: contents`
+   would be simpler but leaves the element without a box, and a zone with no box cannot
+   be asserted as visible. */
+.footer {
+  flex: 0 0 auto;
+  width: 100%;
+}

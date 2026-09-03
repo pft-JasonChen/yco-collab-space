@@ -1,0 +1,19 @@
+schemaVersion: 1
+id: pattern/uploaded-media
+version: 2026-09
+kind: module
+status: provisional
+shell: uploaded-media
+zones:
+  - id: media-upload
+    required: true
+    description: Entry point when nothing is loaded.
+  - id: uploaded-media
+    required: true
+    description: Thumbnail, duration and the actions on the loaded media.
+responsivePriority:
+  - The block keeps one footprint across empty and loaded so the panel does not reflow.
+  - Remove and replace stay reachable at every width.
+decisionBasis:
+  - A pattern is a region reused across page types, not a page type. It is catalogued as a module so a Surface Pack can compose it instead of restating it.
+  - Every slot resolves to a catalogued component in design-library/components, so reuse evidence in surface-intent can name the same ids.

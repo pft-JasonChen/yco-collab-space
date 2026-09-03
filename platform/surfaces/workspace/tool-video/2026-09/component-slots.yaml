@@ -1,0 +1,65 @@
+schemaVersion: 1
+pack: workspace/tool-video
+version: 2026-09
+composes:
+  - pattern/tool-page@2026-09
+  - pattern/uploaded-media@2026-09
+  - pattern/action-footer@2026-09
+  - pattern/video-results@2026-09
+  - pattern/history-list@2026-09
+  - pattern/detail-modal@2026-09
+slots:
+  - id: navigation-header
+    required: true
+    description: From pattern/tool-page.
+  - id: settings-inspector
+    required: true
+    description: From pattern/tool-page.
+  - id: media-upload
+    required: true
+    description: From pattern/uploaded-media.
+  - id: uploaded-media
+    required: true
+    description: From pattern/uploaded-media.
+  - id: video-settings
+    required: true
+    description: Feature-owned controls.
+  - id: primary-action
+    required: true
+    description: From pattern/action-footer.
+  - id: generate-action-with-credit
+    required: true
+    description: From pattern/action-footer.
+  - id: credit-control
+    required: false
+    description: From pattern/action-footer.
+  - id: edit-history-tabs
+    required: true
+    description: From pattern/video-results.
+  - id: history-filter
+    required: false
+    description: From pattern/video-results.
+  - id: processing-feedback
+    required: true
+    description: From pattern/video-results.
+  - id: video-player
+    required: true
+    description: Working-view playback.
+  - id: history-list
+    required: true
+    description: From pattern/history-list.
+  - id: history-card
+    required: true
+    description: From pattern/history-list.
+  - id: result-actions
+    required: false
+    description: >-
+      From pattern/history-list. Required within that pattern, but state-dependent at
+      page level: the action row exists only once History holds a completed result, and
+      surface structure is asserted against the initial state.
+  - id: video-detail-dialog
+    required: true
+    description: From pattern/detail-modal.
+  - id: next-action
+    required: true
+    description: From pattern/detail-modal.

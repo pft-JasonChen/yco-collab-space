@@ -1,11 +1,11 @@
 {
   "schemaVersion": 3,
   "feature": "video-expansion",
-  "inputHash": "c5d3825b1c3d88cac7b63df32cf3a5c6e43ac79cd630c5538a1ddaa6c9b4ad8c",
+  "inputHash": "63cdb5d96d2fc77577f84e2760e9188e108297bc300ac1a959b1bbf25cf6c18e",
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "claude",
   "model": "claude-opus-5",
-  "generatedAt": "2026-09-02T17:51:23.247Z",
+  "generatedAt": "2026-09-03T18:43:04.409Z",
   "files": [
     "README.md",
     "contract/integration.yaml",
@@ -142,7 +142,7 @@
         "contractPath": "design-library/components/tool-page-layout/component.yaml",
         "contractSha256": "a31cd9d9a8ac29c101e81b1b49a9281cd2004f0463d9396e9d1f261482dc7c60",
         "implementationImport": "platform/ui/tool-page-layout/index.js",
-        "implementationSha256": "2076d23d3c96e1efa3ace685d4e3a877d70f8f4f16eec46ff8167479bd5f8d30",
+        "implementationSha256": "3345ec62defe563baa7f2d0555ffe490af77f5102e7cf1923f08367e76099805",
         "runtimeAssets": []
       },
       {
@@ -349,8 +349,8 @@
     "temporary": true,
     "primaryPack": {
       "id": "workspace/tool-video",
-      "version": "2026-08",
-      "packHash": "9c69b9d788fdc4bfcd41b4ddaf6a506059e61f7e830ff3c4c56acd5867721fde"
+      "version": "2026-09",
+      "packHash": "33169248892f25f9dd72e4719c2d3aadf9838c5ccb28f34f1435b44c7781d30e"
     },
     "borrowedPacks": [
       {
@@ -366,7 +366,8 @@
     "requiredZones": [
       "canvas-playback-timeline",
       "history-results",
-      "navigation",
+      "primary-action",
+      "settings-inspector",
       "tool-navigation",
       "video-detail-dialog",
       "video-input",
@@ -398,25 +399,27 @@
       "video-settings"
     ],
     "responsivePriority": [
+      "Keep the working view dominant; the inspector yields width first.",
       "Preserve playback and progress before secondary controls.",
-      "Keep the main action reachable without covering the video result.",
+      "Keep the primary action reachable without covering the result.",
+      "Below the settings breakpoint the inspector stacks above the result and History stays reachable.",
       "Keep the pre-generation video canvas dominant before secondary inspector details.",
       "Preserve the uploaded-media Trim action, canvas playback timeline, and Generate action when the inspector stacks at tablet width, and keep the shared trim dialog within the viewport.",
       "Keep History cards and the video-information dialog usable without horizontal overflow."
     ],
     "visualReview": "human-required",
-    "contextHash": "4c204a95c7d633af8ed7037601d8ad0ea8f44c85258b2d7632d9b5c8d30aa3f2",
+    "contextHash": "5682bc9c9d586a189991ff477a4933c00b98a15f224235c8886e3b5b56518b42",
     "sourceFiles": [
       "platform/surfaces/workspace/tool-photo-editing/2026-08/component-slots.yaml",
       "platform/surfaces/workspace/tool-photo-editing/2026-08/evaluation.yaml",
       "platform/surfaces/workspace/tool-photo-editing/2026-08/layout-rules.md",
       "platform/surfaces/workspace/tool-photo-editing/2026-08/provenance.json",
       "platform/surfaces/workspace/tool-photo-editing/2026-08/surface.yaml",
-      "platform/surfaces/workspace/tool-video/2026-08/component-slots.yaml",
-      "platform/surfaces/workspace/tool-video/2026-08/evaluation.yaml",
-      "platform/surfaces/workspace/tool-video/2026-08/layout-rules.md",
-      "platform/surfaces/workspace/tool-video/2026-08/provenance.json",
-      "platform/surfaces/workspace/tool-video/2026-08/surface.yaml"
+      "platform/surfaces/workspace/tool-video/2026-09/component-slots.yaml",
+      "platform/surfaces/workspace/tool-video/2026-09/evaluation.yaml",
+      "platform/surfaces/workspace/tool-video/2026-09/layout-rules.md",
+      "platform/surfaces/workspace/tool-video/2026-09/provenance.json",
+      "platform/surfaces/workspace/tool-video/2026-09/surface.yaml"
     ]
   }
 }
