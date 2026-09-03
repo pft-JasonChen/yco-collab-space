@@ -1,0 +1,210 @@
+schemaVersion: 1
+status: derived
+derivedFrom:
+  snapshot: yce-frontend-gm-260909
+  sourceVersion: 1.34.1
+  sources:
+    - src/types/moduleTypes.js
+    - src/types/moduleConfigTypes.js
+    - src/components/result-page/common/features-panel/utils/sideBarMenuUtils.js
+  generator: tools/migration/generate-site-map.mjs
+counts:
+  moduleTypes: 162
+  categorisedModules: 110
+  canonicalRoutes: 49
+  sidebarCategories: 7
+# The sidebar renders these categories in this order. `crossPromoteCategoryGroups`
+# also declares aiGenerator, which no category entry references, so it never shows.
+sidebarCategories:
+  - id: photoEditing
+    displayOrder: 1
+    labelKey: side.bar.menu.category.ai.photo.editing
+  - id: basicEditing
+    displayOrder: 2
+    labelKey: side.bar.menu.category.basic.editing
+  - id: videoEditing
+    displayOrder: 3
+    labelKey: side.bar.menu.category.ai.video.editing
+  - id: aiImage
+    displayOrder: 4
+    labelKey: side.bar.menu.category.ai.image
+  - id: aiPortrait
+    displayOrder: 5
+    labelKey: header.items.product.group.ai.portrait
+  - id: batchEditing
+    displayOrder: 6
+    labelKey: side.bar.menu.category.subcategory.batch.editing
+  - id: template
+    displayOrder: 7
+    labelKey: side.bar.menu.category.template
+declaredButUnrendered:
+  - aiGenerator
+# A canonical route is one result page. Several moduleTypes routinely share
+# one route: /photo-enhance serves enhance, enhanceBatch, dehazePhoto and
+# shaprenImage. The route is the surface; the module is the behaviour on it.
+canonicalRoutes:
+  - route: /add-hair-to-photo-with-ai
+    scope: result-page
+    modules: [hairVol]
+  - route: /adjust-light-n-color
+    scope: result-page
+    modules: [adjustLightColor]
+  - route: /ai-agent
+    scope: result-page
+    modules: [aiAgent]
+  - route: /ai-art-generator
+    scope: result-page
+    modules: [txt2Img]
+  - route: /ai-clothes
+    scope: result-page
+    modules: [clothV3]
+  - route: /ai-fabric
+    scope: result-page
+    modules: [fabric]
+  - route: /ai-hairstyle-generator
+    scope: result-page
+    modules: [hairStyle, hairTransfer]
+  - route: /ai-headshot-generator
+    scope: result-page
+    modules: [headshot]
+  - route: /ai-image-extender
+    scope: result-page
+    modules: [outPaint]
+  - route: /ai-lighting
+    scope: result-page
+    modules: [lighting]
+  - route: /ai-makeup
+    scope: result-page
+    modules: [makeup]
+  - route: /ai-portrait
+    scope: result-page
+    modules: [aiPortrait]
+  - route: /ai-portrait-generator
+    scope: result-page
+    modules: [avtV3Img]
+  - route: /ai-replace
+    scope: result-page
+    modules: [objReplace]
+  - route: /ai-skin-analysis
+    scope: result-page
+    modules: [skinAnalysis]
+  - route: /ai-video-filters
+    scope: result-page
+    modules: [videoTrans]
+  - route: /ai-video-generator
+    scope: result-page
+    modules: [img2Vid, img2VidPro, img2VidStd, viduVidTmpl]
+  - route: /avatar
+    scope: result-page
+    modules: [avatar, avatarPet, avtV3Art]
+  - route: /bangs-filter
+    scope: result-page
+    modules: [hairBang]
+  - route: /before-and-after-hair-extensions
+    scope: result-page
+    modules: [hairExt]
+  - route: /color-correction
+    scope: result-page
+    modules: [colorCorrection]
+  - route: /colorize
+    scope: result-page
+    modules: [colorize, oldPhotoRestoration]
+  - route: /crop-photo
+    scope: result-page
+    modules: [cropPhoto]
+  - route: /edit
+    scope: result-page
+    modules: [edit]
+  - route: /face-reshape
+    scope: result-page
+    modules: [faceReshape]
+  - route: /face-shape-detector
+    scope: result-page
+    modules: [faceShapeDetector]
+  - route: /face-swap
+    scope: result-page
+    modules: [faceSwap]
+  - route: /facial-makeup-transfer-filter
+    scope: result-page
+    modules: [muTransfer]
+  - route: /flip-and-rotate-image
+    scope: result-page
+    modules: [flipAndRotateImage]
+  - route: /hair-wavy
+    scope: result-page
+    modules: [hairCurl]
+  - route: /image-converter
+    scope: result-page
+    modules: [imageConverter, imageConverterBatch]
+  - route: /object-removal
+    scope: result-page
+    modules: [genFill, objRemoval, watermarkRemover]
+  - route: /photo-enhance
+    scope: result-page
+    modules: [dehazePhoto, enhance, enhanceBatch, shaprenImage, unblurImage]
+  - route: /products/ai-agent-connector
+    scope: result-page
+    modules: [aiAgentConnector]
+  - route: /products/ai-motion-transfer
+    scope: result-page
+    modules: [motionTransfer]
+  - route: /products/ai-photo-combiner
+    scope: result-page
+    modules: [imageTemplate]
+  - route: /products/ai-photo-repair
+    scope: result-page
+    modules: [aiPhotoRepair]
+  - route: /products/ai-text-to-video-generator
+    scope: result-page
+    modules: [txt2Vid]
+  - route: /products/ai-video-editor
+    scope: result-page
+    modules: [kliVidEdt]
+  - route: /products/beard-filter
+    scope: result-page
+    modules: [beardStyle]
+  - route: /products/body-reshape
+    scope: result-page
+    modules: [bodyReshape]
+  - route: /products/face-retouch
+    scope: result-page
+    modules: [retouch]
+  - route: /products/hair-color-changer
+    scope: result-page
+    modules: [hairColorChanger]
+  - route: /products/photo-filter-effect
+    scope: result-page
+    modules: [photoFilterEffect]
+  - route: /products/video-object-remover
+    scope: result-page
+    modules: [objRemVidV2]
+  - route: /products/video-template
+    scope: result-page
+    modules: [videoTemplate]
+  - route: /resize-image
+    scope: result-page
+    modules: [resizeImage]
+  - route: /video-enhancer-ai
+    scope: result-page
+    modules: [videoSr]
+  - route: /video-face-swap
+    scope: result-page
+    modules: [faceSwapVid]
+openQuestions:
+  - id: SM-001
+    question: >-
+      SEO landing routes that carry no moduleType (for example bangs-filter or
+      add-hair-to-photo-with-ai) cannot be enumerated offline because src/pages is
+      not vendored. Vendor it, or record the alias list by hand?
+    owner: pm
+  - id: SM-003
+    question: >-
+      Which sidebar category a module renders under is resolved at runtime from
+      CMS-supplied menu items, not from a static table in the snapshot. Confirm the
+      module-to-category mapping from the CMS export, or record it by hand?
+    owner: pm
+  - id: SM-002
+    question: >-
+      52 moduleTypes carry no crossPromoteTypes category, so they belong to no tool
+      family. Are they retired, internal, or simply missing from the sidebar?
+    owner: pm

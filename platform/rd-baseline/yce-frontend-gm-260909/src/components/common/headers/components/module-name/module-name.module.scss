@@ -1,0 +1,64 @@
+@import "@/styles/variables.scss";
+
+.container {
+  flex: 1 1 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #212529;
+  font-size: 18px;
+  line-height: 23px;
+  font-weight: 600;
+
+  @include rwd-custom($width-lg) {
+    flex: unset;
+    padding: 3px 10px;
+  }
+
+  @include rwd-custom($width-iphone-xr) {
+    font-size: 14px;
+    line-height: 2;
+    padding: 7px 10px 6px;
+  }
+}
+
+.padding {
+  padding: 16px 10px 8px;
+
+  @include rwd-custom($width-iphone-xr) {
+    padding: 14px 10px 8px;
+  }
+}
+
+.batch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 8px;
+  right: 0;
+  height: 37px;
+  cursor: pointer;
+  padding: 7px 17px;
+  margin: 0 10px 0 0;
+  font-size: 16px;
+  line-height: 21px;
+  font-weight: 500;
+  background-color: #fff;
+  border: 1px solid #dcdcdc;
+  color: #15171f;
+  border-radius: 100px;
+  max-height: 49px;
+  box-shadow: 0 0 5px 0 rgb(0 0 0 / 10%);
+
+  @include rwd-custom($width-iphone-xr) {
+    font-size: 14px;
+    line-height: 16px;
+    top: 2px;
+    margin: 5px 10px 5px 0;
+  }
+}
+
+.deBatch {
+  padding: 7px 5px;
+}

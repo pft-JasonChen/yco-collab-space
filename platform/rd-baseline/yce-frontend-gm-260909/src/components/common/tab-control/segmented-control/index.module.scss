@@ -1,0 +1,322 @@
+@import "@/styles/variables.scss";
+
+// ════════════════════════════════════════════════
+// SegmentedControl
+// variant class 只掛在 .container，用 descendant selector 覆蓋內層
+// Base styles 在前（低 specificity），variant overrides 在後（高 specificity）
+// ════════════════════════════════════════════════
+
+// ── Base styles ────────────────────────────────
+
+.tabContainer {
+  border-radius: 12px;
+  padding: 4px;
+  display: flex;
+
+  @include rwd-custom($width-sm) {
+    width: unset;
+  }
+}
+
+.tab {
+  height: 42px;
+  border-radius: 8px;
+  padding: 8px 12px;
+  color: rgb(0 0 0 / 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 21px;
+
+  @include rwd-custom($width-sm) {
+    flex: 1;
+    white-space: nowrap;
+  }
+
+  // pricing page data-key overrides
+  &[data-key="monthly"] {
+    padding: 8px 27px;
+  }
+
+  &[data-key="yearly"] {
+    padding: 8px 12px;
+  }
+}
+
+.activeTab {
+  background: rgb(255 255 255 / 100%);
+  box-shadow: 2px 2px 4px 0 rgb(124 124 124 / 25%);
+  color: rgb(21 23 31 / 100%);
+}
+
+// ── Container + Variants ───────────────────────
+
+.container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+
+  @include rwd-custom($width-sm) {
+    margin-top: 20px;
+  }
+
+  // ── default ──────────────────────────────────
+  &.default {
+    .tabContainer {
+      background: rgb(230 230 230 / 100%);
+    }
+
+    .activeTab {
+      border: 2px solid #ddd;
+    }
+  }
+
+  // ── template ─────────────────────────────────
+  &.template {
+    .tabContainer {
+      background: rgb(240 240 240 / 100%);
+    }
+
+    .tab {
+      font-size: var(--font-size-heading-5);
+      line-height: var(--line-height-heading-5);
+
+      @include rwd-custom($width-sm) {
+        font-size: var(--font-size-tiny);
+        line-height: var(--line-height-tiny);
+      }
+    }
+
+    .activeTab {
+      background: #fefefe;
+      color: #333;
+    }
+  }
+
+  // ── black / black_responsive (shared) ────────
+  &.black,
+  &.black_responsive {
+    .tabContainer {
+      background-color: rgb(17 24 26 / 4%);
+    }
+
+    .tab {
+      font-size: var(--font-size-small);
+      line-height: var(--line-height-small);
+      padding: 7px 38px;
+      flex: 1;
+      white-space: nowrap;
+
+      @include rwd-custom($width-992) {
+        padding: 7px 10.25px;
+      }
+
+      @include rwd-custom($width-sm) {
+        padding: 7px 19.75px;
+      }
+    }
+
+    .activeTab {
+      color: var(--text-inverse-strong);
+      background-color: var(--fill-strong);
+    }
+  }
+
+  // ── black_responsive (additional md overrides)
+  &.black_responsive {
+    @include rwd-custom($width-md) {
+      width: 100%;
+    }
+
+    .tabContainer {
+      flex: 1;
+    }
+
+    .tab {
+      @include rwd-custom($width-md) {
+        // white-space: normal;
+        height: auto;
+        text-align: center;
+        padding: 8px 12px;
+      }
+    }
+  }
+
+  // ── blue_separated ───────────────────────────
+  &.blue_separated {
+    .tabContainer {
+      flex: 1;
+      gap: 8px;
+    }
+
+    .tab {
+      font-size: var(--font-size-small);
+      line-height: var(--line-height-small);
+      border: 1px solid var(--stroke-weak);
+      color: var(--text-strong);
+      border-radius: var(--corner-radius-4);
+      white-space: nowrap;
+      flex: 1;
+      height: 38px;
+    }
+
+    .activeTab {
+      color: var(--text-inverse-strong);
+      background-color: var(--fill-brand-strong);
+    }
+  }
+
+  // ── blue_rounded ─────────────────────────────
+  &.blue_rounded {
+    .tabContainer {
+      flex: 1;
+      padding: 0;
+      gap: 8px;
+    }
+
+    .tab {
+      font-size: var(--font-size-small);
+      line-height: var(--line-height-small);
+      border: 2px solid var(--stroke-weak);
+      color: var(--text-strong);
+      border-radius: var(--corner-radius-4);
+      white-space: nowrap;
+      flex: 1;
+    }
+
+    .activeTab {
+      border: 2px solid var(--stroke-selected);
+    }
+  }
+
+  // ── blue_rounded_fixed_width ─────────────────
+  &.blue_rounded_fixed_width {
+    .tabContainer {
+      flex: 1;
+      padding: 0;
+      display: grid;
+      flex-wrap: wrap;
+      gap: 8px;
+
+      &.moreThanTwo {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      &.twoOrLess {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .tab {
+      // Containing block for corner badges rendered via renderCustomLabel
+      // (photo enhancer's PRO pill on 4x). No-op where none is rendered.
+      position: relative;
+      font-size: var(--font-size-small);
+      line-height: var(--line-height-small);
+      height: auto;
+      border: 2px solid var(--stroke-weak);
+      color: var(--text-strong);
+      border-radius: var(--corner-radius-4);
+      white-space: nowrap;
+
+      @include rwd-custom($width-lg) {
+        padding: 8px;
+      }
+    }
+
+    .activeTab {
+      border: 2px solid var(--stroke-selected);
+    }
+  }
+
+  // ── blue_underline ───────────────────────────
+  &.blue_underline {
+    .tabContainer {
+      flex: 1;
+      padding: 0;
+      border-radius: 0;
+    }
+
+    .tab {
+      font-size: var(--font-size-small);
+      line-height: var(--line-height-small);
+      text-align: center;
+      color: var(--text-strong);
+      padding: 9px 4px;
+      white-space: nowrap;
+      flex: 1;
+      border-radius: 0;
+      border-bottom: 4px solid var(--stroke-weak);
+
+      @include rwd-dpi-min-custom-with-size($width-lg, 125dpi) {
+        white-space: normal;
+        line-height: 18px;
+      }
+    }
+
+    .activeTab {
+      color: var(--text-brand);
+      border-bottom: 4px solid var(--text-brand);
+      box-shadow: none;
+    }
+  }
+
+  // ── seasonal (background only) ───────────────
+  &.halloween {
+    .tabContainer {
+      background: #ffe2be;
+    }
+  }
+
+  &.blackfriday {
+    .tabContainer {
+      background: #e4c684;
+    }
+  }
+
+  &.christmas {
+    .tabContainer {
+      background: #deffdb;
+    }
+  }
+
+  &.endyear {
+    .tabContainer {
+      background: rgb(38 176 255 / 15%);
+    }
+  }
+
+  // ── black_video_result ────────────────────────
+  // For video result page tabs (Demo / History).
+  // Each tab has a fixed min-width of 180px with 8px 12px padding,
+  // so the two-tab layout stays visually balanced across breakpoints.
+  // On mobile (<= 768px) the container stretches full-width.
+  &.black_video_result {
+    .tabContainer {
+      background-color: rgb(17 24 26 / 4%);
+      flex: 1;
+    }
+
+    .tab {
+      font-size: var(--font-size-small);
+      line-height: var(--line-height-small);
+      height: 38px;
+      min-width: 180px;
+      padding: 8px 12px;
+      flex: 1;
+      white-space: nowrap;
+    }
+
+    .activeTab {
+      color: var(--text-inverse-strong);
+      background-color: var(--fill-strong);
+    }
+
+    @include rwd-custom($width-md) {
+      width: 100%;
+    }
+  }
+}

@@ -1,0 +1,265 @@
+@import "@/styles/variables.scss";
+
+.canvasArea {
+  flex: 1;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+  background-color: var(--fill-weak);
+  border-radius: var(--corner-radius-20);
+}
+
+.canvasWrapper {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+}
+
+.canvasHidden {
+  position: absolute;
+  inset: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.hint {
+  display: flex;
+  width: 90%;
+  position: absolute;
+  flex-direction: column;
+  align-items: center;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  transform-origin: center;
+  z-index: -1;
+  opacity: 0;
+  pointer-events: none;
+  text-align: center;
+  letter-spacing: 0.5px;
+
+  @include rwd-custom($width-sm) {
+    letter-spacing: 1px;
+  }
+}
+
+.showHint {
+  z-index: 0;
+  opacity: 1;
+}
+
+.hintText {
+  font-size: 16px;
+  line-height: 19px;
+  font-weight: 400;
+  color: #fff;
+  background-color: rgb(0 0 0 / 65%);
+  border-radius: 19px;
+  margin-top: 6px;
+  padding: 3px 10px;
+
+  @include rwd-custom($width-sm) {
+    font-size: 14px;
+    line-height: 17px;
+    border-radius: 10px;
+  }
+}
+
+.settingsToolbar {
+  position: relative;
+  height: 100%;
+}
+
+.settingsPadding {
+  height: 100%;
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  background-color: var(--background-base);
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  @include rwd-custom($width-lg) {
+    overflow: unset;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.section {
+  padding: 12px 0;
+
+  @include rwd-custom($width-lg) {
+    padding: 8px 0;
+  }
+}
+
+.sectionTitle {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  font-weight: 600;
+  color: var(--text-strong);
+
+  @include rwd-custom($width-lg) {
+    font-size: var(--font-size-caption);
+    line-height: var(--line-height-caption);
+    margin-bottom: 8px;
+  }
+}
+
+.sectionDesc {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+
+.tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Mobile: 工具圖示 + 筆刷 slider 並排在同一行 */
+.toolsAndSliderRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  > :last-child {
+    flex: 1;
+  }
+}
+
+.tool {
+  width: 68px;
+  height: 68px;
+  border-radius: 8px;
+  box-shadow: 0 0 4px 0 rgb(0 0 0 / 10%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  gap: 4px;
+  transition: background-color 0.15s;
+
+  @include rwd-custom($width-lg) {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.toolActive {
+  background-color: #212529;
+}
+
+.toolIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.toolLabel {
+  font-size: 11px;
+  color: #212529;
+}
+
+.toolLabelActive {
+  color: #fff;
+}
+
+.addRectBtn {
+  font-size: var(--font-size-heading-5);
+  line-height: var(--line-height-heading-5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 100%;
+  padding: 8px;
+  border-radius: var(--corner-radius-32);
+  border: 1px solid var(--stroke-strong);
+  background-color: transparent;
+  color: var(--text-strong);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s;
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  &:hover:not(:disabled) {
+    background-color: var(--fill-weak);
+    border-color: var(--stroke-brand-strong);
+  }
+}
+
+.addRectCount {
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+.footerButtons {
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 16px;
+  margin-bottom: 0;
+  background: var(--fill-white);
+  box-shadow: 0 -2px 4px -2px rgb(0 0 0 / 8%);
+
+  @include rwd-custom($width-lg) {
+    position: relative;
+    padding: 12px 16px;
+    margin: 0;
+    background: none;
+    background-color: var(--background-alternate);
+    box-shadow: 0 -4px 12px rgb(0 0 0 / 8%);
+  }
+}
+
+.generateButton {
+  padding: 10px 16px;
+  width: 100%;
+  color: var(--text-inverse-strong);
+  border-radius: var(--corner-radius-32);
+  background-color: var(--fill-brand-strong);
+  cursor: pointer;
+}
+
+.buttonSkeleton {
+  width: 100%;
+  height: 48px;
+  border-radius: var(--corner-radius-32);
+  background-color: var(--fill-weak);
+}
+
+.loadingIcon {
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}

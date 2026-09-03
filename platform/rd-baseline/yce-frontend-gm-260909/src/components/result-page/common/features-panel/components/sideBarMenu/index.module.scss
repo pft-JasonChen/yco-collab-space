@@ -1,0 +1,149 @@
+@import "@/styles/variables.scss";
+
+.leftCategoryContainer {
+  // position: fixed;
+  height: 100%;
+  width: 112px;
+  background-color: #fff;
+  overflow: hidden auto;
+  overscroll-behavior: contain;
+}
+
+.leftCategoryIconContainer {
+  height: 44px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--corner-radius-24);
+  transition: background-color 0.2s ease;
+
+  &[data-key="sbm-contest"] {
+    background:
+      linear-gradient(
+        90deg,
+        rgb(101 112 250 / 10%) -5.83%,
+        rgb(161 83 251 / 10%) 51.56%,
+        rgb(123 225 255 / 10%) 108.96%
+      );
+    border-radius: 24px;
+  }
+}
+
+.leftCategoryIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.leftCategoryIconFont {
+  font-size: 20px;
+  margin: 0 12px;
+  transition: color 0.2s ease;
+}
+
+.leftCategoryLabelText {
+  width: 80px;
+  white-space: break-spaces;
+  transition: color 0.2s ease;
+
+  &[data-key="sbm-contest"] {
+    background:
+      linear-gradient(
+        90deg,
+        #6570fa -2.17%,
+        #a153fb 33.02%,
+        #21cdff 68.21%
+      );
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+.leftCategoryLabel {
+  appearance: none;
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80px;
+  color: #333;
+  font-size: var(--font-size-micro);
+  font-weight: 600;
+  line-height: var(--line-height-micro);
+  margin: 8px 12px 8px 20px;
+  border-radius: var(--corner-radius-24);
+  transition: background-color 0.2s ease;
+
+  &:hover,
+  &:focus-visible,
+  &:focus:hover,
+  &:focus:active,
+  &[data-selected="true"]:hover,
+  &[data-selected="true"]:active {
+    background-color: transparent;
+    color: inherit;
+  }
+
+  &:hover .leftCategoryIconContainer {
+    background-color: rgb(0 0 0 / 2%);
+    transition: background-color 0.1s ease;
+    border-radius: var(--corner-radius-24);
+  }
+
+  &:active .leftCategoryIconContainer {
+    background-color: rgb(0 0 0 / 4%);
+  }
+
+  &:active .leftCategoryIconFont,
+  &:active .leftCategoryLabelText {
+    color: var(--text-brand);
+  }
+
+  &:focus-visible .leftCategoryIconContainer {
+    background-color: rgb(3 173 226 / 5%);
+  }
+
+  &[data-selected="true"] .leftCategoryIconContainer {
+    background-color: rgb(3 173 226 / 5%);
+  }
+
+  &[data-selected="true"]:hover .leftCategoryIconContainer {
+    background-color: rgb(126 192 229 / 20%);
+  }
+
+  &[data-selected="true"] .leftCategoryIconFont,
+  &[data-selected="true"] .leftCategoryLabelText {
+    color: var(--text-brand);
+  }
+
+  &[disabled] {
+    background-color: #fff;
+    cursor: not-allowed;
+    opacity: 0.3;
+    pointer-events: none;
+  }
+}
+
+.dividerContainer {
+  width: 80px;
+  margin: 8px 12px 8px 20px;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid rgb(17 24 26 / 10%);
+  width: 72px;
+}
+
+.item {
+  &:last-child {
+    padding-bottom: 16px;
+  }
+}
+
+.textFitLabelText {
+  max-height: 32px;
+  line-height: 16px;
+}

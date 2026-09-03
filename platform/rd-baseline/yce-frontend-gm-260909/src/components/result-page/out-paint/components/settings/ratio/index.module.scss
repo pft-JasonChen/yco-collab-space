@@ -1,0 +1,116 @@
+@import "@/styles/variables.scss";
+
+.settings {
+  height: 100%;
+  overflow: hidden auto;
+
+  @include rwd-custom($width-lg) {
+    overflow: unset;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+  }
+}
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  margin: 0 -5px;
+
+  @include rwd-custom($width-lg) {
+    margin: 0;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow: auto hidden;
+    padding: 0 15px 8px;
+  }
+}
+
+.outerWrapper {
+  width: 33%;
+  padding: 5px;
+
+  @include rwd-custom($width-lg) {
+    width: auto;
+    padding: 0 12px;
+  }
+}
+
+.option {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 4px;
+  border: 1px solid #e9e9e9;
+  padding: 8px;
+  cursor: pointer;
+  color: #15171f;
+
+  @include rwd-custom($width-lg) {
+    border: none;
+    padding: 0;
+  }
+}
+
+.optionActive {
+  background-color: var(--fill-brand-strong);
+  border: 1px solid var(--fill-brand-strong);
+  color: #fff;
+
+  @include rwd-custom($width-lg) {
+    background-color: rgb(0 0 0 / 0%);
+    border: none;
+    color: var(--text-brand);
+  }
+}
+
+.imageWrapper {
+  width: 40px;
+  height: 40px;
+}
+
+.text {
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+
+  @include rwd-custom($width-lg) {
+    font-size: 12px;
+  }
+}
+
+.cropImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.padding {
+  width: 100%;
+  height: 100%;
+}
+
+.rectangle {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #15171f;
+  border-radius: 3px;
+  padding: 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rectangleActive {
+  border: 2px solid #fff;
+  padding: 0;
+
+  @include rwd-custom($width-lg) {
+    border: 2px solid var(--fill-brand-strong);
+  }
+}

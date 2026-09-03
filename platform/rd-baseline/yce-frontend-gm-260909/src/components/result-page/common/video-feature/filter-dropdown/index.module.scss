@@ -1,0 +1,132 @@
+@import "@/styles/variables.scss";
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+
+  @include rwd-custom($width-md) {
+    padding-right: 0;
+  }
+}
+
+.dropdownNeedRightPadding {
+  padding-right: 24px;
+}
+
+.dropdownNeedbottomMargin {
+  margin-bottom: 16px;
+}
+
+.selected {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 16px;
+  border: 1px solid rgb(17 24 26 / 20%);
+  border-radius: 8px;
+  background-color: #ffffff03;
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+  font-weight: 600;
+  color: rgb(9 22 26 / 95%);
+  white-space: nowrap;
+  transition: border-color 0.2s ease;
+}
+
+.isOpen {
+  border-color: rgb(17 24 26 / 40%);
+}
+
+.label {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  font-weight: 400;
+  color: rgb(9 22 26 / 95%);
+}
+
+.arrow {
+  display: inline-block;
+  border: 1px solid rgb(9 22 26 / 95%);
+  border-width: 0 2px 2px 0;
+  padding: 3px;
+  transform: rotate(45deg) translateY(-2px);
+
+  .isOpen & {
+    transform: rotate(-135deg) translateX(-2px);
+  }
+}
+
+.options {
+  position: absolute;
+  min-width: 160px;
+  right: 0;
+  padding: 4px 0;
+  margin: 8px 0;
+  list-style: none;
+  border: 1px solid rgb(17 24 26 / 20%);
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
+  z-index: 2;
+  white-space: nowrap;
+
+  @include rwd-custom($width-md) {
+    width: calc(100vw - 48px);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+  }
+}
+
+.optionsNeedCentered {
+  left: 50vw;
+  right: auto;
+  transform: translateX(calc(-50% - var(--dropdown-offset-x, 0px)));
+}
+
+.optionsNeedRightAligned {
+  right: 24px;
+
+  @include rwd-custom($width-md) {
+    right: 0;
+  }
+}
+
+.option {
+  padding: 8px 16px;
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  font-weight: 400;
+  color: rgb(9 22 26 / 95%);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: rgb(17 24 26 / 4%);
+  }
+
+  @include rwd-custom($width-md) {
+    padding: 12px 16px;
+    width: 100%;
+    text-align: left;
+  }
+}
+
+.selectedOption {
+  background-color: rgb(17 24 26 / 8%);
+}
+
+.divider {
+  height: 1px;
+  margin: 8px 0;
+  background-color: rgb(17 24 26 / 10%);
+}
+
+.groupLabel {
+  padding: 16px 16px 4px;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600;
+  color: rgb(17 24 26 / 65%);
+}

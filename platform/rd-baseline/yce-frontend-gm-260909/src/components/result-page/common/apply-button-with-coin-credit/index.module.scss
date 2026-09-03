@@ -1,0 +1,35 @@
+@import "@/styles/variables.scss";
+
+.buttonWithCoinCredit.buttonWithCoinCredit {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  overflow: visible;
+}
+
+.desc {
+  font-size: var(--apply-button-desc-font-size, 18px);
+  font-weight: 500;
+}
+
+.inline {
+  display: flex;
+  flex-direction: column;
+  max-width: 240px;
+  width: 100%;
+}
+
+.desc2 {
+  font-size: var(--font-size-heading-4);
+  line-height: var(--line-height-heading-4);
+  font-weight: 600;
+}
+
+.smallDesc {
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-micro);
+  font-weight: 400;
+}

@@ -1,0 +1,50 @@
+@import "@/styles/variables.scss";
+
+.videoWrapper {
+  width: 100%;
+  height: 100%;
+  flex: 1 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-color: #000;
+  border-radius: 8px;
+  margin: 0;
+  position: relative;
+}
+
+.video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  image-rendering: optimizequality;
+  image-rendering: crisp-edges;
+  image-rendering: optimize-contrast;
+}
+
+.modalWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 55px);
+  z-index: 1;
+  cursor: pointer;
+
+  &[data-ios="true"] {
+    height: 100%;
+  }
+}
+
+.fullScreenIcon {
+  width: 42px;
+  height: 42px;
+  padding: 10px;
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  transition: all 400ms ease;
+  cursor: pointer;
+}

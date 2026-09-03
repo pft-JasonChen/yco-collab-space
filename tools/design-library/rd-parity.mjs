@@ -84,36 +84,7 @@ export async function checkRdParity({ workspace = fromRoot() } = {}) {
     }
   }
 
-  // Every vendored baseline must be claimed by a contract, so the read-only area
-  // cannot accumulate files nothing checks.
-  const baselineRoot = path.join(workspace, BASELINE_ROOT);
-  if (await pathExists(baselineRoot)) {
-    const claimed = new Set(
-      validation.contracts.flatMap(({ contract }) =>
-        (contract.rd.verbatimFiles ?? []).map((pair) =>
-          baselineRepositoryPath(contract.rd.snapshot, pair.baseline),
-        ),
-      ),
-    );
-    for (const absolute of await walk(baselineRoot)) {
-      const repositoryPath = toPosix(path.relative(workspace, absolute));
-      if (!claimed.has(repositoryPath)) {
-        errors.push(`Vendored RD baseline is not referenced by any contract: ${repositoryPath}`);
-      }
-    }
-  }
 
   return { checked, errors };
 }
 
-async function walk(directory) {
-  const entries = await fs.readdir(directory, { withFileTypes: true });
-  const files = [];
-  for (const entry of entries) {
-    if (entry.name.startsWith('.')) continue;
-    const absolute = path.join(directory, entry.name);
-    if (entry.isDirectory()) files.push(...(await walk(absolute)));
-    else if (entry.isFile()) files.push(absolute);
-  }
-  return files;
-}

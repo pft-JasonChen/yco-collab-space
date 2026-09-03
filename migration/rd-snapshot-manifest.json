@@ -43,27 +43,655 @@
   "notes": [
     "variables-custom.css is supplied by RD but explicitly says it is not from the Designer export.",
     "No RD application, environment, deployment or backend code is a runtime dependency.",
-    "2026-09-03: the Product Owner chose vendoring an allowlisted subset (D1). This round vendors only the files declared rd.verbatimFiles; extending the manifest to every ported source path and asset stays Phase B."
+    "2026-09-03: the Product Owner chose vendoring an allowlisted subset (D1). This round vendors only the files declared rd.verbatimFiles; extending the manifest to every ported source path and asset stays Phase B.",
+    "2026-09-03: siteMapSource extends the vendored baseline by two taxonomy files (~25 KB) so the site map is derivable offline. It is a narrow addition to the contract-claimed scope the Product Owner approved, made for the same reason: a derivation nobody can re-run is not auditable."
   ],
   "vendoredBaseline": {
     "root": "platform/rd-baseline/yce-frontend-gm-260909",
-    "purpose": "Read-only RD reference for validate:rd-parity. Only files that a component contract declares under rd.verbatimFiles may live here; the gate rejects unclaimed files.",
-    "scope": "verbatim-only",
+    "purpose": "Read-only RD reference. Holds exactly the files component contracts claim under rd.sourcePaths, so validate:rd-parity and validate:snapshot can run on any clone without the external snapshot.",
+    "scope": "contract-claimed",
+    "fileCount": 77,
     "files": [
       {
-        "source": "src/components/common/button-wrapper/button.module.css",
-        "sha256": "e4b2cb3af9f71ec03933aaf6fa610458f005ab8b2f08e087c59dc2499c1640ca",
-        "claimedBy": "button"
+        "source": "public/assets/fonts/icomoon.woff",
+        "sha256": "746d8b88009c7cf0c9b03a160361e1dc8de8406dc3ef893f65e2399e9054ebec",
+        "claimedBy": [
+          "result-page-shell"
+        ],
+        "verbatim": false
       },
       {
-        "source": "src/components/common/ratio/utils/ratioTypes.js",
-        "sha256": "319a37000e75223ac3432743967cb06b3e071a3ad2d248bd2352f0f72dca42f2",
-        "claimedBy": "ratio"
+        "source": "public/assets/images/aiAgent/icon_agent.svg",
+        "sha256": "eea1f8c5ac2fd20a880a512e0629afed3bf313dfacb9ff06df1419fe30215c14",
+        "claimedBy": [
+          "result-page-shell"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "public/assets/images/header/icon_add.svg",
+        "sha256": "2bb3284338e2893ec78d567ba65f511f11ca1b004d0948e6b737fe3417758457",
+        "claimedBy": [
+          "credit-controls",
+          "result-page-shell"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "public/assets/images/header/icon_credit.svg",
+        "sha256": "fe13827402ad85122458ba7de848cbf47e0cb4401d319a6ebc8bfd511245b1d1",
+        "claimedBy": [
+          "credit-controls",
+          "result-page-shell"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "public/assets/images/header/icon_home.svg",
+        "sha256": "72246fa21d718fee15b74e58ae1bbd15890e3e2afb84ca4d0db720d1d866c726",
+        "claimedBy": [
+          "result-page-shell"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "public/assets/images/header/icon_profile.svg",
+        "sha256": "302b3d1eeecd1d1307b0a0185ac65f0ff57a478732585c8438b9c7bc22a6f37c",
+        "claimedBy": [
+          "result-page-shell"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "public/assets/images/header/info icon.svg",
+        "sha256": "e86991187d89775a46a7d805bd445a510756709a8959d7cb420cfc9ad5d33035",
+        "claimedBy": [
+          "result-page-shell"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "public/assets/images/interactionToolsBar/video_upload_icon.svg",
+        "sha256": "4639e1e96823e2df24350cf60b96db5c8d3db2668bc962014845e397b2b0ca70",
+        "claimedBy": [
+          "upload-media-block"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "public/assets/images/loading.png",
+        "sha256": "4d7e85e273326aca344a9e3db9766661ea15398b626694508d1d6ca03d4b0ef0",
+        "claimedBy": [
+          "credit-controls"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "public/assets/images/logo/logo_symbol.svg",
+        "sha256": "7db00edf467cbb8c3102df17b2b75b8e476f908c2b078fa05c874893ea38f81a",
+        "claimedBy": [
+          "result-page-shell"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "public/assets/images/logo/logo_YC_OnlineEditor_d_ENU_dt.svg",
+        "sha256": "d0af397b427c61f93e5cc595f8ecc53ed157d499b4b4ab923b1841df4e3c66dc",
+        "claimedBy": [
+          "result-page-shell"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "public/assets/images/logo/logo_YC_OnlineEditor_d_ENU_mb.svg",
+        "sha256": "b6b9606792f9022ed3b237d5d4cc2439be9f500e050f60e39f6c14c91aecf35f",
+        "claimedBy": [
+          "result-page-shell"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "public/assets/images/objRemVidV2/models/YCE_default_model_before-1.mp4",
+        "sha256": "eded2028375909de25a4ba2a1a7e31912ce9b8e2313cdf886e6f51d2eaf437e8",
+        "claimedBy": [
+          "video-trim-modal"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "public/assets/images/objRemVidV2/models/YCE_default_model_thumb-1.jpg",
+        "sha256": "49ba37be8715be940d42bf9a719940dbf7527c35ded1f2b5bdf9eb0628034f83",
+        "claimedBy": [
+          "video-trim-modal"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "public/assets/images/txt2Img/settings/add_image_icon.svg",
+        "sha256": "69042962bdda775258ebef5e73f424303eb4ae68c04182344af9f4b71842ba2c",
+        "claimedBy": [
+          "upload-media-block"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "public/assets/images/txt2Img/settings/reference_photo/cancel_icon3.svg",
+        "sha256": "013e422fa489cfe3ee41de148300f64e13d23af60da14bf9a9ab81a90cd1781c",
+        "claimedBy": [
+          "upload-media-block"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "public/assets/images/videoObjectRemover/pause.svg",
+        "sha256": "c1cf17b442fde98c21b493512c08cd8b46a864521fbe96747603602e46c5e4db",
+        "claimedBy": [
+          "video-timeline"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "public/assets/images/videoObjectRemover/play2.svg",
+        "sha256": "d9da5b483c641b4a9df8b0064ebb7f73cd61ea9dc449b934cec3410e3aea4f72",
+        "claimedBy": [
+          "video-timeline"
+        ],
+        "verbatim": false
       },
       {
         "source": "src/components/ai-agent-page/components/video-trim-modal/constants.js",
         "sha256": "bfee24bb2833d8de467f0a14b2d9711a0764abfbf032a72a26ab65d677c0387c",
-        "claimedBy": "video-trim-modal"
+        "claimedBy": [
+          "video-trim-modal"
+        ],
+        "verbatim": true
+      },
+      {
+        "source": "src/components/ai-agent-page/components/video-trim-modal/index.js",
+        "sha256": "0f81dcdae8a0df7419144776f9ddc2de55fadc258b75b8acbf9e8c342818d8e9",
+        "claimedBy": [
+          "video-trim-modal"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/ai-agent-page/components/video-trim-modal/index.module.scss",
+        "sha256": "bfc688c6081afb0014d64cf6429a81b8f316e74f4a7d493b750ba5c55de94764",
+        "claimedBy": [
+          "video-trim-modal"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/ai-agent-page/components/video-trim-modal/trim-timeline.js",
+        "sha256": "1b1db17f30478edac40d71e7c833821c3894d788e8cb7614337ecdf402721f50",
+        "claimedBy": [
+          "video-trim-modal"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/ai-agent-page/components/video-trim-modal/trim-video-preview.js",
+        "sha256": "ce071fdebb26ba356c17bdebaea25e5b5ab26dea1fd0802b3b3dd951c05a9c74",
+        "claimedBy": [
+          "video-trim-modal"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/ai-agent-page/components/video-trim-modal/use-frame-thumbnails.js",
+        "sha256": "c6b4c8ff4977e6f7c9e232b484ecdda552e26066c4aa5dedb5a59e5fda7e5cca",
+        "claimedBy": [
+          "video-trim-modal"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/ai-agent-page/components/video-trim-modal/use-trim-drag.js",
+        "sha256": "1b00974a078cdc989eb9ce9cf9e69e9180c315962cd0313ef4d8ee74b7225efc",
+        "claimedBy": [
+          "video-trim-modal"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/ai-agent-page/components/video-trim-modal/use-video-trim.js",
+        "sha256": "e3558fc382504aa1f3688f9c890b132948b8085c01c6daa00ffe31e2a20f8ad6",
+        "claimedBy": [
+          "video-trim-modal"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/common/button-wrapper/button.module.css",
+        "sha256": "e4b2cb3af9f71ec03933aaf6fa610458f005ab8b2f08e087c59dc2499c1640ca",
+        "claimedBy": [
+          "button"
+        ],
+        "verbatim": true
+      },
+      {
+        "source": "src/components/common/button-wrapper/index.js",
+        "sha256": "665fc38dc350168489d537eed78e79d5d17b0f709c26f6bc87fa22a0a9c6498a",
+        "claimedBy": [
+          "button"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/common/button-wrapper/types/variants.js",
+        "sha256": "10d6639763b4d842fe0cd2e66baaa8a4bb9bc668ed055fff643fb70281b899cb",
+        "claimedBy": [
+          "button"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/common/headers/components/credits-left/index.js",
+        "sha256": "e4cea9a8210fb78271c2cd03569803f2592fc9e57cdb886073127d991f65d0f7",
+        "claimedBy": [
+          "credit-controls",
+          "result-page-shell"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/common/headers/components/credits-left/index.module.scss",
+        "sha256": "9a46e44a4f599e280563ddbc3bd1dbcb178c9b74f7ca66d7a4eaef938900c846",
+        "claimedBy": [
+          "credit-controls",
+          "result-page-shell"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/common/headers/components/logo/logo.js",
+        "sha256": "b4253262bbe9c039d55c3dd3dfed57276280b0d1d7bd7180ea6ccacb392c2709",
+        "claimedBy": [
+          "result-page-shell"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/common/headers/components/logo/logo.module.scss",
+        "sha256": "a8b16700377873b468dfae0f7ebb193738d004e3efec1ff4f59254ad86fcc5b4",
+        "claimedBy": [
+          "result-page-shell"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/common/headers/components/module-name/module-name.js",
+        "sha256": "99cf2631007de48242d55203fe6171ddbe27a396e8e39141cf4267f4b0da9b64",
+        "claimedBy": [
+          "result-page-shell"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/common/headers/components/module-name/module-name.module.scss",
+        "sha256": "e9f2b6b1f95597ea2c2d26614f41a6617b871e4f229ef41a951d31621e3b8523",
+        "claimedBy": [
+          "result-page-shell"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/common/modal/index.js",
+        "sha256": "57750d3170a0da5aa89349a909083438462d161484fb9750de5ce25f85860cd1",
+        "claimedBy": [
+          "video-info-dialog"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/common/modal/index.module.scss",
+        "sha256": "905742acb0bccca4f4b75a55362f4a854990d72b983296877d940b07142b6ab8",
+        "claimedBy": [
+          "video-info-dialog"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/common/ratio/index.js",
+        "sha256": "384922730b955be104261c59863bbc4fc71977dd49cabe1ac4fa68133e8a406c",
+        "claimedBy": [
+          "ratio"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/common/ratio/index.module.scss",
+        "sha256": "e4c2693937fd618312bd54e20afdd44481338d90f2795f3a2e8c0473e4c603e4",
+        "claimedBy": [
+          "ratio"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/common/ratio/utils/ratioTypes.js",
+        "sha256": "319a37000e75223ac3432743967cb06b3e071a3ad2d248bd2352f0f72dca42f2",
+        "claimedBy": [
+          "ratio"
+        ],
+        "verbatim": true
+      },
+      {
+        "source": "src/components/common/ratio/utils/ratioUtils.js",
+        "sha256": "9239477809c1855170b4f8dbd45ee5768dca93096f955be3e58820df2a6857ce",
+        "claimedBy": [
+          "ratio"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/common/tab-control/segmented-control/index.js",
+        "sha256": "98736264cd8b11cf5243139a24a8f4163be2b5bf999c0382d4a8ceef2a0362ab",
+        "claimedBy": [
+          "video-results-surface"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/common/tab-control/segmented-control/index.module.scss",
+        "sha256": "883027830fba0bc5bc4145db3e7ce9111b5974ddc1371bf8d6dbe585f238d297",
+        "claimedBy": [
+          "video-results-surface"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/common/upload-image-block/upload-image-block.js",
+        "sha256": "becf42f657142d655af2419e543e44bb6ea8cde73037f8c68856151c63e14baa",
+        "claimedBy": [
+          "upload-media-block"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/common/upload-image-block/upload-image-block.module.scss",
+        "sha256": "d18e5f430d0b76c4cab96b9515602372459abd94cb1ee1a5bd8c71999dc2e647",
+        "claimedBy": [
+          "upload-media-block"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/result-page/common/apply-button-with-coin-credit/components/credit-badge/index.js",
+        "sha256": "522a03001c2eeb67cefeef99d1b480d7bbfac934701db22ebe0c7dcf2e0cad78",
+        "claimedBy": [
+          "credit-controls"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/result-page/common/apply-button-with-coin-credit/components/credit-badge/index.module.scss",
+        "sha256": "82a20ff8ca70f9081d5c607c718611bc5451e59f77cdb9dde6cbd8b4ba787984",
+        "claimedBy": [
+          "credit-controls"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/result-page/common/apply-button-with-coin-credit/index.js",
+        "sha256": "611713ab5342a987aab96d57f93d2898137b5aae76cb7597a73ec4c35208cb40",
+        "claimedBy": [
+          "credit-controls"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/result-page/common/apply-button-with-coin-credit/index.module.scss",
+        "sha256": "fad4272e4cf334e1c04d1ec3a4a3b4c937096342ba1cdc35423e2196cea62fa1",
+        "claimedBy": [
+          "credit-controls"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/result-page/common/feature-layout/index.js",
+        "sha256": "cb690ae1ca0baade3413de367b602896b9790798a35f611b00dbce786dcf2945",
+        "claimedBy": [
+          "tool-page-layout"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/result-page/common/feature-layout/index.module.scss",
+        "sha256": "81e20a3ac1f1bcc5a6bbfd6bcf20d3bbbfc36260ee552f0c35acfc46ff7b847d",
+        "claimedBy": [
+          "tool-page-layout"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/result-page/common/features-panel/components/sideBarMenu/index.js",
+        "sha256": "6a6cf2d1f55f9adc4ee0f429a08fee52751e79c34fe1891eed8ecf23bf8eb46f",
+        "claimedBy": [
+          "result-page-shell"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/result-page/common/features-panel/components/sideBarMenu/index.module.scss",
+        "sha256": "d89265892f470fea2c314fc43969350c411856bb30c0e1c940ad73049a906147",
+        "claimedBy": [
+          "result-page-shell"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/result-page/common/features-panel/utils/sideBarMenuUtils.js",
+        "sha256": "b802342dfadc495f08f8523b3f9f860102bff276f958b04942e21a7147c4bffa",
+        "claimedBy": [
+          "result-page-shell"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/result-page/common/video-feature/filter-dropdown/index.js",
+        "sha256": "348f7a41add7fe21b4ba8894e5e654e83ee47fea209975800bf85de4bbdb22ee",
+        "claimedBy": [
+          "video-history",
+          "video-results-surface"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/result-page/common/video-feature/filter-dropdown/index.module.scss",
+        "sha256": "605a82df5fd8bbec5e045c7d803589495405fce11a24c0b017a06eb09f0c2aca",
+        "claimedBy": [
+          "video-history",
+          "video-results-surface"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/result-page/common/video-feature/history-videos/index.js",
+        "sha256": "ec7ae7db4613aaf6d0cc4b93f1f7c669f8ee9a3a1bedce83497fff9558d4b605",
+        "claimedBy": [
+          "video-history"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/result-page/common/video-feature/history-videos/index.module.scss",
+        "sha256": "57cebdeb1ca5053277d625255833d3e5ec412c78fd96cd2538151fb58969ddf9",
+        "claimedBy": [
+          "video-history"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/result-page/common/video-feature/history-videos/result-video/index.js",
+        "sha256": "632134711aa966467d787ba0609d5dbd3bcd5e4aa7ed1d568e5c19ee6a8d73b0",
+        "claimedBy": [
+          "video-history"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/result-page/common/video-feature/history-videos/result-video/index.module.scss",
+        "sha256": "7c8e1e6fcc38ac9b47d473df1a09a66b4145769edf958f4bdcb15da376cadd95",
+        "claimedBy": [
+          "video-history"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/result-page/common/video-feature/history-videos/result-video/video-player/index.js",
+        "sha256": "1ab368ca78d211e2703bdf216ff1b1c4738d4861152465fd07d0d7880469a501",
+        "claimedBy": [
+          "video-history"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/result-page/common/video-feature/history-videos/result-video/video-player/index.module.scss",
+        "sha256": "917c6764aa4e70e070dc176f38eb730cb167703f374e8841c4872feb59f3bcbd",
+        "claimedBy": [
+          "video-history"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/result-page/common/video-feature/icon-action-buttons/icon.js",
+        "sha256": "c57cb61b6392aac3324b01f8593b2a5f3f16d23e1dd5d5e6fe5775a7bc82146f",
+        "claimedBy": [
+          "icon-action-buttons"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/result-page/common/video-feature/icon-action-buttons/index.js",
+        "sha256": "e2d8c7610c9bcb2df3098b694febf4754788017e5c69b0c7ae5401f807605e97",
+        "claimedBy": [
+          "icon-action-buttons"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/result-page/common/video-feature/icon-action-buttons/index.module.scss",
+        "sha256": "f138a0adad1fe02ae76da86f46e2d4c14ce8faac81bcb5ac2e802113bd6f0f9e",
+        "claimedBy": [
+          "icon-action-buttons"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/result-page/common/video-feature/next-action/index.js",
+        "sha256": "8cf0b6200e4e06c6ca57ed21b55824a2843d485f9ce42cd4b645c6cc691890a2",
+        "claimedBy": [
+          "video-info-dialog"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/result-page/common/video-feature/next-action/index.module.scss",
+        "sha256": "5dd9d13a12f301728930cc1d96fd9d5692f77b322b17e1a79bb7f5b5d09b3a24",
+        "claimedBy": [
+          "video-info-dialog"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/result-page/common/video-feature/video-detail-modal/index.js",
+        "sha256": "2f2bbbbce49d6854058e4b8fb5c5ef16f9e8a0d147d76f886486531192d63ef3",
+        "claimedBy": [
+          "video-info-dialog"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/result-page/common/video-feature/video-detail-modal/index.module.scss",
+        "sha256": "0875645618e482faafd6c5cd5795e3abdc667cb3fc61ebeb2ae0566338771581",
+        "claimedBy": [
+          "video-info-dialog"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/result-page/out-paint/components/settings/ratio/index.js",
+        "sha256": "c8ba009b8094e9dcc2c7d0628d4281a7ccd7b2b76eed7be1ade3bbe33da071a2",
+        "claimedBy": [
+          "ratio"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/result-page/out-paint/components/settings/ratio/index.module.scss",
+        "sha256": "a031caea1e7bbeb0dbe84969e3b3ba20af7ff32dbd6d546ef0e7056062dfa9e3",
+        "claimedBy": [
+          "ratio"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/result-page/video-object-remover/components/results/index.js",
+        "sha256": "8ecbf389fb2906f675fe07ad857192d0fac3591cc476567186bdac024b0260df",
+        "claimedBy": [
+          "video-results-surface"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/result-page/video-object-remover/components/results/index.module.scss",
+        "sha256": "c12d2c7e03fd42af0853541496ea3eb058de29d807f5d77c3aba86e9a335f781",
+        "claimedBy": [
+          "video-results-surface"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/result-page/video-object-remover/components/timeline/index.js",
+        "sha256": "9d7ab03c90e92dfb98c87b69f4cacacb71babcca4eed96fd0dabffa5b855026a",
+        "claimedBy": [
+          "video-timeline"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/result-page/video-object-remover/components/timeline/index.module.scss",
+        "sha256": "1b3734a189db1dcfa99a72bc9668e35ba34b57740d814d23f4563f8847d5aff5",
+        "claimedBy": [
+          "video-timeline"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/result-page/video-object-remover/index.module.scss",
+        "sha256": "d5ba8af85582f520547c6863e878a115dedb39000673edfea13f83ce5184edb6",
+        "claimedBy": [
+          "credit-controls"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/styles/home-icon-styles.css",
+        "sha256": "6cd44d764ed017f1c3d263f1cfaebcdc54e4f77103a21ab77f9da004a693d7b5",
+        "claimedBy": [
+          "result-page-shell"
+        ],
+        "verbatim": false
+      }
+    ]
+  },
+  "siteMapSource": {
+    "root": "platform/rd-baseline/yce-frontend-gm-260909",
+    "purpose": "RD's own module taxonomy. platform/surfaces/site-map.yaml is derived from these declarations rather than transcribed, so the derivation can be re-run and audited on any clone.",
+    "scope": "taxonomy-only",
+    "files": [
+      {
+        "source": "src/types/moduleTypes.js",
+        "sha256": "db08f0e8791c37a1d10ce414a552aa069815a7cc4cc78ce3f45307ca8ded3248"
+      },
+      {
+        "source": "src/types/moduleConfigTypes.js",
+        "sha256": "55e2b33e377df7d8497f0fbf5e88274e69e42c5accaafd68ce1c4ac0b09694ab"
+      },
+      {
+        "source": "src/components/result-page/common/features-panel/utils/sideBarMenuUtils.js",
+        "sha256": "b802342dfadc495f08f8523b3f9f860102bff276f958b04942e21a7147c4bffa"
       }
     ]
   }

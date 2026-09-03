@@ -1,0 +1,164 @@
+@import "@/styles/variables.scss";
+
+.container {
+  flex: 1 1 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 24px;
+  overflow: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  gap: 16px;
+  position: relative;
+  z-index: 0;
+
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+
+  &.centered {
+    justify-content: center;
+  }
+
+  // Opted into by ResultsLayout, whose tab control sits at the same gutter —
+  // white cards flush with the control above them (YCO260824P0015). Consumers
+  // that wire up their own tab control keep the base 24px.
+  // No media query on purpose: --video-result-gutter already switches at
+  // $width-md, and the longhands need to outrank the `padding` shorthand above.
+  &.gutterAligned {
+    padding-left: var(--video-result-gutter);
+    padding-right: var(--video-result-gutter);
+  }
+
+  /* use gap */
+
+  /*
+  & > *:not(:first-child) {
+    margin-top: 16px;
+  }
+*/
+  @include rwd-custom($width-md) {
+    margin-bottom: 180px;
+  }
+
+  &[data-module="objRemVidV2"],
+  &[data-module="img2Vid"],
+  &[data-module="kliVidEdt"],
+  &[data-module="motionTransfer"],
+  &[data-module="txt2Vid"],
+  &[data-module="imageTemplate"],
+  &[data-module="videoTemplate"] {
+    @include rwd-custom($width-md) {
+      margin-bottom: 0;
+    }
+  }
+
+  &[data-module="img2Vid"],
+  &[data-module="kliVidEdt"],
+  &[data-module="motionTransfer"],
+  &[data-module="txt2Vid"],
+  &[data-module="imageTemplate"],
+  &[data-module="videoTemplate"] {
+    @include rwd-custom($width-md) {
+      padding-bottom: 100px;
+
+      // Both modules nest the history container inside an outer scroll
+      // (RESULT_PAGE_CONTAINER). Leaving `overflow: auto` on the inner
+      // container created a nested-scroll handoff that locked direction
+      // switches on mobile (Samsung S23 Ultra / iPhone 16+) after the
+      // scroll fully stopped — YCO260521P0010. Letting the inner
+      // container be `overflow: visible` collapses the scroll into the
+      // outer one and removes the handoff hazard.
+      // imageTemplate/videoTemplate nest the same way (FeatureLayout
+      // breakpointVariant="md" + COLUMN mobile layout, same as img2Vid) but
+      // were missing from this list, which regressed the exact same mobile
+      // scroll lock these entries were added to fix.
+      overflow: visible;
+    }
+  }
+}
+
+.titleWrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 24px;
+  z-index: 1;
+}
+
+.titleContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 8px;
+}
+
+.title {
+  font-size: var(--font-size-heading-3);
+  line-height: var(--line-height-heading-3);
+  font-weight: 600;
+  color: rgb(9 22 26 / 95%);
+  flex: 1;
+}
+
+.emptyResult {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin: auto;
+  padding: 16px 0;
+
+  &.center {
+    justify-content: center;
+    margin: 0 16px;
+  }
+
+  &.top {
+    justify-content: flex-start;
+  }
+
+  @include rwd-custom($width-md) {
+    height: auto;
+    padding: 40px 0;
+  }
+}
+
+.emptyImage {
+  width: auto;
+  height: 150px;
+  object-fit: contain;
+  object-position: center;
+}
+
+.emptyTitle {
+  font-size: var(--font-size-heading-3);
+  line-height: var(--line-height-heading-3);
+  font-weight: 600;
+  margin-top: 8px;
+  margin-bottom: 4px;
+  text-align: center;
+
+  @include rwd-custom($width-md) {
+    margin-top: 16px;
+    font-size: var(--font-size-heading-4);
+    line-height: var(--line-height-heading-4);
+  }
+}
+
+.emptyDesc {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  color: var(--text-weak);
+  text-align: center;
+
+  @include rwd-custom($width-md) {
+    font-size: var(--font-size-tiny);
+    line-height: var(--line-height-tiny);
+  }
+}
