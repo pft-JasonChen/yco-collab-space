@@ -22,6 +22,7 @@ inputs:
     constraints:
       min: 1
       max: 30
+      maxOrigin: engine-limit
       relativeTo: source-start
       wholeSeconds: true
     description: >-
@@ -83,13 +84,9 @@ openQuestions:
     question: >-
       Is the output resolution derived from the source, from the target ratio, or chosen by
       the user? The detail dialog currently shows a fixed synthetic 1920 x 1080.
-  - id: TC-004
-    owner: pm
-    question: >-
-      Is 30 seconds a product decision or an engine limit? If it is an engine limit, the
-      constraint belongs in the MSR model config rather than hard-coded in the feature.
 decisionBasis:
   - This file records what the feature needs from a backend, not how to call one. AGENTS.md forbids inferring a production API from mock data, and a guessed endpoint or payload shape would be exactly that.
   - Every input names the contract state or action it is observable through, so RD can trace a parameter back to the behaviour that produces it and to the rendered check that covers it.
   - Open questions are recorded rather than answered. An unanswered question costs one RD conversation; a guessed answer costs a wrong implementation plus the conversation.
+  - The 30-second ceiling was confirmed as an engine limit that the frontend hard-codes. It stays in data/defaults.js as MAX_SELECTED_SECONDS so the trim dialog, the empty-state copy and the Generate gate all read one value.
   - A real engine request shape, once known, goes into product/payload-samples/ and is referenced from payloadSamples here. That file is PM-owned external fact, which is why it lives under product/ and is scanned for de-identification.

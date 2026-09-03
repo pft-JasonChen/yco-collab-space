@@ -143,7 +143,7 @@ import { buildRatioOptions, parseRatio } from '../data/canvas-geometry.js';
 | TC-001 | `source-offset` 要正規化成 -1..1 比例，還是換算成輸出像素座標？ | RD |
 | TC-002 | trim 要 client 端先切好再上傳，還是傳完整檔 + trim 參數？ | RD |
 | TC-003 | 輸出解析度從來源推、從目標比例推、還是使用者選？ | RD |
-| TC-004 | 30 秒是產品決定還是 engine 限制？若是後者應該進 MSR model config | PM |
+| ~~TC-004~~ | **已答（PM, 2026-09-03）：** 30 秒是 engine 限制，但由前端寫死在 feature。MSR 是雲控機制，不適用這裡 | — |
 
 > **提案：** 如果 RD 那邊已經知道 engine 的實際 payload 形狀，可以放一份**去識別化**的 sample 到 `features/<f>/product/payload-samples/`，我們的 gate 會擋掉 token／credential／真實 URL／email。RD 之後拿那份 sample 直接串 API 即可，不必從 prototype 反推。
 
@@ -306,10 +306,9 @@ npm run storybook    # 共用元件目錄
 | 4 | §7 verbatim 要不要正式化成雙向同步承諾？ | RD + PM |
 | 5 | §8 `data-testid` 保留、移除、還是改成 RD 慣例？ | RD |
 | 6 | `task-contract.yaml` 的 TC-001 ~ TC-003 | RD |
-| 7 | TC-004 —— 30 秒是產品限制還是 engine 限制？ | PM + RD |
-| 8 | RD 端有沒有已知的 engine payload 可以放進 `payload-samples/`？ | RD |
-| 9 | 這個分層要不要成為之後所有 feature 的標準輸出格式？ | RD + PM |
-| 10 | `data/` vs `utils/` 命名，以及其他 RD 慣例上的偏好 | RD |
+| 7 | RD 端有沒有已知的 engine payload 可以放進 `payload-samples/`？ | RD |
+| 8 | 這個分層要不要成為之後所有 feature 的標準輸出格式？ | RD + PM |
+| 9 | `data/` vs `utils/` 命名，以及其他 RD 慣例上的偏好 | RD |
 
 ---
 

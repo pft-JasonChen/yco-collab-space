@@ -95,13 +95,14 @@
 | **S3** | `integration.yaml` 由誰維護 | **Agent 每次從 snapshot 重新生成**，不由人工維護清單；準確度隨 snapshot 完整度提升 |
 | — | 分層 pilot | **先拆 video-expansion 當 pilot 並標明是單一樣本**，讓 RD 有實物可評估 |
 | — | RD 討論文件 | 中文提案討論稿，明確標出「我們的假設」與「需 RD 確認」|
+| **D3** | production 截圖能否進 private repo | **可以**（2026-09-03） |
+| **D4** | `platform-component-change` 核准者 | **Platform Owner 單簽**（2026-09-03） |
+| **TC-004** | 30 秒是產品還是 engine 限制 | **engine 限制，但前端寫死在 feature**。MSR 是雲控機制，不適用這裡 |
 
 ### 待決
 
 | ID | 決策 | 卡住 |
 |---|---|---|
-| **D3** | production 截圖能否進 private repo（可以／只存幾何數值／存 repo 外） | WS-6 |
-| **D4** | `platform-component-change` 核准者（Platform Owner 單簽／+ RD 雙簽） | WS-1.4 |
 | **D5** | CI 平台與觸發條件 | WS-7.4 |
 | **S2** | L3 `index.jsx` 是否模仿 RD hooks 結構 | WS-9 |
 
@@ -130,7 +131,7 @@
 | 1.1 | 六步 SOP + 三堆分類 + 停止條件 + 反面教材 | ✅ [`rd-component-intake-sop.md`](./rd-component-intake-sop.md) |
 | 1.2 | `npm run rd:inspect -- <rd-path>` | ⬜ |
 | 1.3 | `npm run component:scaffold -- <id>` | ⬜ |
-| 1.4 | `platform-component-change` workflow（補落差 E） | ⬜ 需 D4 |
+| 1.4 | `platform-component-change` workflow（補落差 E） | ⬜ D4 已決：Platform Owner 單簽 |
 
 ### WS-2 — Product Owner 訪談與 YCO site map ⬜
 
@@ -159,7 +160,7 @@
 | 5.5 | `prototype-update` workflow 新增「生成前先讀 componentReuse」 | ✅ |
 | 5.6 | 兩個 feature 回填 componentReuse | ✅ video-expansion 15 個 role、readiness 3 個 |
 
-### WS-6 — 視覺與幾何 parity fixtures ⬜ 需 D3
+### WS-6 — 視覺與幾何 parity fixtures ⬜
 
 6.1 決定 capture 方式 · 6.2 先做**幾何**斷言（間距、尺寸、斷點、容器寬度）· 6.3 建 fixture · 6.4 串進 `test:rendered`
 
@@ -173,7 +174,7 @@
 | 7.2 | COLLABORATION.md 寫明可重現性保證範圍 | ✅ 新增「交給 RD 的東西保證到什麼程度」 |
 | 7.3 | 寫明 `validation.yaml` 的雙重身分 | ✅ |
 | 7.4 | 建立 CI | ⬜ 需 D5 |
-| 7.5 | video-expansion stage transition | ⬜ 依裁示延後 |
+| 7.5 | video-expansion stage transition | ✅ `intake` → `pm-prototype-working`（2026-09-03） |
 | 7.6 | `.claude/launch.json` 納入版控 | ✅ |
 
 ### WS-8 — 交付契約 ✅ 部分完成
