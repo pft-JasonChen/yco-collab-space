@@ -190,19 +190,19 @@ canonicalRoutes:
   - route: /video-face-swap
     scope: result-page
     modules: [faceSwapVid]
-openQuestions:
+# Resolved by the Product Owner on 2026-09-03.
+resolved:
   - id: SM-001
-    question: >-
-      SEO landing routes that carry no moduleType (for example bangs-filter or
-      add-hair-to-photo-with-ai) cannot be enumerated offline because src/pages is
-      not vendored. Vendor it, or record the alias list by hand?
-    owner: pm
+    ruling: >-
+      SEO landing routes stay out of scope: prototypes never target them. Only two
+      representative page entries are vendored so the shape integration.yaml
+      prescribes stays checkable. See manifest.pageEntryReference.
   - id: SM-003
-    question: >-
-      Which sidebar category a module renders under is resolved at runtime from
-      CMS-supplied menu items, not from a static table in the snapshot. Confirm the
-      module-to-category mapping from the CMS export, or record it by hand?
-    owner: pm
+    ruling: >-
+      The module-to-category mapping is recorded by hand rather than derived, because
+      the sidebar resolves it at runtime from CMS-supplied items. It is not in this
+      generated file; put it in a hand-maintained record when the CMS export arrives.
+openQuestions:
   - id: SM-002
     question: >-
       52 moduleTypes carry no crossPromoteTypes category, so they belong to no tool

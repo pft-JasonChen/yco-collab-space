@@ -44,7 +44,8 @@
     "variables-custom.css is supplied by RD but explicitly says it is not from the Designer export.",
     "No RD application, environment, deployment or backend code is a runtime dependency.",
     "2026-09-03: the Product Owner chose vendoring an allowlisted subset (D1). This round vendors only the files declared rd.verbatimFiles; extending the manifest to every ported source path and asset stays Phase B.",
-    "2026-09-03: siteMapSource extends the vendored baseline by two taxonomy files (~25 KB) so the site map is derivable offline. It is a narrow addition to the contract-claimed scope the Product Owner approved, made for the same reason: a derivation nobody can re-run is not auditable."
+    "2026-09-03: siteMapSource extends the vendored baseline by two taxonomy files (~25 KB) so the site map is derivable offline. It is a narrow addition to the contract-claimed scope the Product Owner approved, made for the same reason: a derivation nobody can re-run is not auditable.",
+    "2026-09-03: SM-001 resolved. SEO alias routes stay out of scope because prototypes never target them; only two representative page entries are vendored so the shape integration.yaml prescribes can be verified."
   ],
   "vendoredBaseline": {
     "root": "platform/rd-baseline/yce-frontend-gm-260909",
@@ -692,6 +693,22 @@
       {
         "source": "src/components/result-page/common/features-panel/utils/sideBarMenuUtils.js",
         "sha256": "b802342dfadc495f08f8523b3f9f860102bff276f958b04942e21a7147c4bffa"
+      }
+    ]
+  },
+  "pageEntryReference": {
+    "root": "platform/rd-baseline/yce-frontend-gm-260909",
+    "purpose": "Shape reference for the two page-entry files integration.yaml tells RD to create. Two representative entries (~3 KB) instead of all of src/pages (1.4 MB): the Product Owner ruled that SEO landing routes are out of scope, but the entry shape still has to be checkable.",
+    "scope": "representative-only",
+    "representativeRoute": "/ai-image-extender",
+    "files": [
+      {
+        "source": "src/pages/ai-image-extender/index.js",
+        "sha256": "cc5fd2ece47e6e371e79e0b0e237c3d51b33bffa99b8d2409150fcecdcb1fdf1"
+      },
+      {
+        "source": "src/pages/[locale]/ai-image-extender/index.js",
+        "sha256": "95ae622beb6f9a800dab313e5d578c572ea5e177fe214fd2eaf427cc82f5706b"
       }
     ]
   }

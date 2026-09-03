@@ -71,19 +71,19 @@ for (const entry of [...routes.values()].sort((a, b) => a.route.localeCompare(b.
   push(2, `modules: [${entry.modules.sort().map(quote).join(', ')}]`);
 }
 
-push(0, 'openQuestions:');
+push(0, '# Resolved by the Product Owner on 2026-09-03.');
+push(0, 'resolved:');
 push(1, '- id: SM-001');
-push(2, 'question: >-');
-push(3, 'SEO landing routes that carry no moduleType (for example bangs-filter or');
-push(3, 'add-hair-to-photo-with-ai) cannot be enumerated offline because src/pages is');
-push(3, 'not vendored. Vendor it, or record the alias list by hand?');
-push(2, 'owner: pm');
+push(2, 'ruling: >-');
+push(3, 'SEO landing routes stay out of scope: prototypes never target them. Only two');
+push(3, 'representative page entries are vendored so the shape integration.yaml');
+push(3, 'prescribes stays checkable. See manifest.pageEntryReference.');
 push(1, '- id: SM-003');
-push(2, 'question: >-');
-push(3, 'Which sidebar category a module renders under is resolved at runtime from');
-push(3, 'CMS-supplied menu items, not from a static table in the snapshot. Confirm the');
-push(3, 'module-to-category mapping from the CMS export, or record it by hand?');
-push(2, 'owner: pm');
+push(2, 'ruling: >-');
+push(3, 'The module-to-category mapping is recorded by hand rather than derived, because');
+push(3, 'the sidebar resolves it at runtime from CMS-supplied items. It is not in this');
+push(3, 'generated file; put it in a hand-maintained record when the CMS export arrives.');
+push(0, 'openQuestions:');
 push(1, '- id: SM-002');
 push(2, 'question: >-');
 push(3, `${Object.keys(moduleTypes).length - Object.keys(crossPromoteTypes).length} moduleTypes carry no crossPromoteTypes category, so they belong to no tool`);

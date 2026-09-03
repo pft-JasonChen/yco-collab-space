@@ -59,6 +59,7 @@ const snapshotName = claimed[0]?.snapshot ?? manifest.source?.snapshot;
 const keep = new Set([
   ...claimed.map((entry) => baselinePath(entry.snapshot, entry.source)),
   ...(manifest.siteMapSource?.files ?? []).map((file) => baselinePath(snapshotName, file.source)),
+  ...(manifest.pageEntryReference?.files ?? []).map((file) => baselinePath(snapshotName, file.source)),
 ]);
 for (const file of await listVendoredFiles(workspace)) {
   if (!keep.has(file)) {

@@ -1,0 +1,121 @@
+schemaVersion: 1
+status: owner-ruled
+# Not derived. The Product Owner ruled on 2026-09-03 which surfaces a single feature
+# may not redefine. Adoption rates are measured from the RD snapshot for context, but
+# a low rate does not unlock a surface — several are locked precisely because their
+# adoption is uneven and should converge.
+ruledBy:
+  actor: pm
+  id: collab-space-owner
+  date: 2026-09-03
+measuredFrom:
+  snapshot: yce-frontend-gm-260909
+  scope: src/components/result-page/<family>/**
+  familyCount: 34
+  method: >-
+    Import edges into result-page/common/<surface>, counting both the @/ alias form and
+    the relative ../common/ form. Counted once per family, not once per file.
+
+lockedSurfaces:
+  - id: feature-layout
+    adoption: 31/34
+    owns: Two-column tool page skeleton — settings column plus results column.
+    featureMayDecide: [which components fill each column, responsive stacking order]
+
+  - id: features-panel
+    adoption: 1/34
+    owns: Header, logo, tool-family sidebar, credit display, account entry.
+    note: >-
+      Low adoption because most families receive the shell from the page entry rather
+      than importing it. It is still global chrome and is locked.
+    featureMayDecide: [active tool id, page title]
+
+  - id: video-feature
+    adoption: 10/34
+    owns: History list, result card, detail modal, Next Action, result actions row.
+    featureMayDecide: [item data, primary cross-tool action]
+
+  - id: empty-result
+    adoption: 24/34
+    owns: Empty state before any source is loaded.
+    featureMayDecide: [copy, sample media, upload entry]
+
+  - id: interaction-tools-bar
+    adoption: 21/34
+    owns: Zoom, compare and fullscreen controls over a result.
+    featureMayDecide: [which controls apply]
+
+  - id: not-enough-credit
+    adoption: 14/34
+    owns: Insufficient-credit dialog and its purchase entry.
+    featureMayDecide: []
+
+  - id: apply-button
+    adoption: 6/34
+    owns: Primary action button in the panel footer.
+    supersededBy: apply-button-with-coin-credit
+    note: Two variants coexist in production; see the deviation report.
+
+  - id: apply-button-with-coin-credit
+    adoption: 7/34
+    owns: Primary action with credit cost badge and discount display.
+    featureMayDecide: [label, cost, disabled state]
+
+  - id: process-status-v2
+    adoption: 9/34
+    owns: Generation progress presentation.
+    supersedes: process-status
+    featureMayDecide: [status copy]
+
+  - id: message-dialogs
+    adoption: 4/34
+    owns: Per-module error dialogs.
+    featureMayDecide: [which errors apply]
+
+  - id: prompt
+    adoption: 6/34
+    owns: Prompt input with tag support and character limit.
+    featureMayDecide: [placeholder, limit, tag set]
+
+  - id: image-transform-wrapper
+    adoption: 8/34
+    owns: Pan and zoom around a result image.
+    featureMayDecide: []
+
+  - id: preview-left
+    adoption: 3/34
+    owns: Remaining free-preview counter.
+    featureMayDecide: []
+
+  - id: watermark
+    adoption: 6/34
+    owns: Watermark overlay and its removal entry.
+    featureMayDecide: []
+
+  - id: scroll-to-top-button
+    adoption: 7/34
+    owns: Scroll-to-top affordance on long result columns.
+    featureMayDecide: []
+
+  - id: cross-promote-icon
+    adoption: 5/34
+    owns: Cross-promotion glyph used by Next Action and the tool menu.
+    featureMayDecide: []
+
+# Judged infrastructure rather than surface, so not locked. Raise it if you disagree.
+notSurfaces:
+  - id: hidden-file-input
+    adoption: 19/34
+    reason: A file-picker input element, not a user-visible surface.
+  - id: react-scene
+    adoption: 6/34
+    reason: Canvas rendering infrastructure.
+  - id: update-recent-files
+    reason: Storage side effect, no rendering.
+  - id: wcm
+    reason: Consent management, outside the product surface.
+
+decisionBasis:
+  - A locked surface is one a single feature may not redefine. Which components fill it and what data flows through it stay the feature's decision.
+  - Adoption is recorded for context, not as the criterion. process-status-v2 at 9/34 is locked because it is the direction of travel, not because it is already common.
+  - Where two variants coexist, both are listed with supersedes/supersededBy so a new feature knows which one to reach for.

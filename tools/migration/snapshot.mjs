@@ -114,19 +114,20 @@ export async function verifySnapshot({ workspace = fromRoot() } = {}) {
   // vendored for the same reason the ported sources are: a derivation nobody can
   // re-run is not auditable.
   const snapshotName = claimed[0]?.snapshot ?? manifest.source?.snapshot;
-  for (const file of manifest.siteMapSource?.files ?? []) {
+  for (const file of [...(manifest.siteMapSource?.files ?? []), ...(manifest.pageEntryReference?.files ?? [])]) {
     const repositoryPath = baselinePath(snapshotName, file.source);
     if (!vendored.has(repositoryPath)) {
-      errors.push('Site-map source is not vendored: ' + repositoryPath);
+      errors.push('Derivation source is not vendored: ' + repositoryPath);
       continue;
     }
     const actual = await sha256File(path.join(workspace, ...repositoryPath.split('/')));
-    if (actual !== file.sha256) errors.push('Site-map source does not match its recorded hash: ' + repositoryPath);
+    if (actual !== file.sha256) errors.push('Derivation source does not match its recorded hash: ' + repositoryPath);
   }
 
   const claimedRepositoryPaths = new Set([
     ...claimed.map((entry) => baselinePath(entry.snapshot, entry.source)),
     ...(manifest.siteMapSource?.files ?? []).map((file) => baselinePath(snapshotName, file.source)),
+    ...(manifest.pageEntryReference?.files ?? []).map((file) => baselinePath(snapshotName, file.source)),
   ]);
   for (const file of vendored) {
     if (!claimedRepositoryPaths.has(file)) {
