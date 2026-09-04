@@ -228,6 +228,42 @@ Step 1 不必等 Step 2。**先讓大家看到清單，比等到有圖再一起�
 
 ## 7. 給執行者的注意事項
 
+### 7.1 從 RD 資料夾拿東西：只有一條路
+
+Step 3 需要示範內容，這是最容易出事的地方 —— 有人為了讓畫面好看，直接從 RD 快照資料夾複製一張圖或一支影片進來。**不可以。**
+
+**規則：任何來自 RD 的檔案，一律走 `npm run snapshot:vendor`，不手動複製。**
+
+好消息是驗證機制已經存在而且已經在 `npm run validate` 裡（第 8 個 gate），不用另外做。
+`tools/migration/snapshot.mjs` 的 `verifySnapshot()` 目前驗這些，**每一條都是雙向的**：
+
+| 驗什麼 | 為什麼重要 |
+|---|---|
+| 磁碟上的檔案**重新算 sha256**，跟 manifest 記的比對 | 記錄下來的雜湊值不等於檔案沒被改。這條是真的重算 |
+| manifest 的雜湊 vs 元件 contract 的雜湊 | 兩份記錄互相對帳 |
+| 每個 contract 宣稱的來源，檔案必須真的被 vendored | 防「宣稱有但沒搬」 |
+| **每個 vendored 檔案必須被某個 contract 認領** | 防「搬了但沒人用」的孤兒檔案偷渡進來 |
+| 來源路徑不得命中 `rejectedPatterns` | **安全邊界**，不是方便性過濾。擋 `.env*`、憑證、金鑰、`node_modules`、build 產物 |
+| vendored 檔案本身再檢查一次 `rejectedPatterns` | 就算 contract 沒攔到，檔案本身也擋 |
+| site map 推導來源同樣要 vendored 且雜湊相符 | 沒人能重跑的推導不算可稽核 |
+
+現況：`[snapshot] PASS 83 vendored RD files match their contracts`。
+
+隨時可重驗：
+
+```bash
+npm run validate:snapshot
+```
+
+**所以執行時的實際做法是：**
+
+1. 示範內容**優先用合成資料**，不要碰 RD 快照
+2. 真的需要 RD 的檔案 → `npm run snapshot:vendor`，讓它進 manifest 並拿到雜湊
+3. commit 前跑 `npm run validate`，snapshot gate 會擋下任何沒登記的檔案
+4. **絕不** `cp` 或拖拉檔案進 `platform/rd-baseline/`
+
+### 7.2 其他
+
 - **合成資料**　story 的示範內容全部是合成的，不打任何後端／正式 API／測試 API。
 - **token**　示範內容只用既有 CSS 變數，不新增 token 名稱，不寫死顏色。
 - **`platform/tokens/rd/**` 唯讀**　這是 upstream 輸入，不動。
@@ -238,10 +274,21 @@ Step 1 不必等 Step 2。**先讓大家看到清單，比等到有圖再一起�
 
 ## 8. 待決事項
 
+**已送 RD** —— 全文見 [給 RD：surface 定義要接上真實元件](./2026-09-04-rd-surface-binding-questions.md)。
+編號用 `SB-` 而非 `TC-`，因為 repo 裡已有兩套獨立的 TC-001~003。
+
+| # | 問題 | 誰決定 | 擋住什麼 |
+|---|---|---|---|
+| **SB-001** | binding 放哪裡？A（pack 層 `bindings.yaml`）／B（從 feature 反推）／C（寫進 `surface.yaml`，已否決）。<br>關鍵事實：`componentReuse` 已在 feature 層做同樣的事，缺的是 pack 自己提供的那層 | RD + PM | **Step 2、3** |
+| **SB-002** | binding 掛在 zone 還是 slot？3 個 id 兩邊都有（`primary-action`、`settings-inspector`、`video-detail-dialog`） | RD | **Step 2 的 schema** |
+| **SB-003** | `shell:` 刪掉還是修好？我們傾向刪 | RD | Step 2（小） |
+
+**其餘**
+
 | # | 問題 | 誰決定 |
 |---|---|---|
-| 1 | `shell:` 刪掉還是修好？ | RD |
-| 2 | `bindings.yaml` 的 schema 長相 —— 這是整件事唯一有設計難度的地方，建議動工前先讓 RD 看過 | RD + PM |
-| 3 | 三個無實作 surface（tool-photo-editing、tool-image-generator、marketing/product-page）留著還是刪？ | Designer + PM，Step 4 決定 |
-| 4 | 16 個 `planned` 有幾個是真的要做的？ | PM，Step 1 之後 |
-| 5 | Step 3 的截圖要不要進 repo？（現在 `.gitignore:10-13` 排除全部 `evidence/`） | 跟 CI 平台問題（D5）一起決定 |
+| 4 | 三個無實作 surface（tool-photo-editing、tool-image-generator、marketing/product-page）留著還是刪？ | Designer + PM，Step 4 決定 |
+| 5 | 16 個 `planned` 有幾個是真的要做的？ | PM，Step 1 之後 |
+| 6 | Step 3 的截圖要不要進 repo？（現在 `.gitignore:10-13` 排除全部 `evidence/`） | 跟 CI 平台問題（D5）一起決定 |
+
+**Step 1 不被上面任何一題擋住**，可以立刻開始。
