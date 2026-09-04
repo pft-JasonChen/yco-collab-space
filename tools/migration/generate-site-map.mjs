@@ -14,7 +14,7 @@ import { readTaxonomy } from './extract-taxonomy.mjs';
 const workspace = fromRoot();
 const manifest = await readJson('migration/rd-snapshot-manifest.json', workspace);
 const snapshot = manifest.source.snapshot;
-const { moduleTypes, crossPromoteTypes, productUrls, categoryGroups, categories } = await readTaxonomy({ workspace, snapshot });
+const { moduleTypes, crossPromoteTypes, productUrls, headerProducts, categoryGroups, categories } = await readTaxonomy({ workspace, snapshot });
 
 // crossPromoteTypes maps a module to its cross-promote *identity* ("photo.enhance"),
 // not to a sidebar category. Which category a module renders under is resolved at
@@ -84,11 +84,28 @@ push(3, 'The module-to-category mapping is recorded by hand rather than derived,
 push(3, 'the sidebar resolves it at runtime from CMS-supplied items. It is not in this');
 push(3, 'generated file; put it in a hand-maintained record when the CMS export arrives.');
 push(0, 'openQuestions:');
+const uncategorised = Object.keys(moduleTypes)
+  .filter((moduleKey) => !(moduleKey in crossPromoteTypes))
+  .sort();
 push(1, '- id: SM-002');
 push(2, 'question: >-');
-push(3, `${Object.keys(moduleTypes).length - Object.keys(crossPromoteTypes).length} moduleTypes carry no crossPromoteTypes category, so they belong to no tool`);
-push(3, 'family. Are they retired, internal, or simply missing from the sidebar?');
+push(3, `${uncategorised.length} moduleTypes carry no crossPromoteTypes category, so they belong to no`);
+push(3, 'tool family. Are they retired, internal, or simply missing from the sidebar?');
 push(2, 'owner: pm');
+push(2, '# Reachability narrows the question. productUrls and headerProducts are separate');
+push(2, '# route sources, so both are checked: a module in neither is the one worth asking');
+push(2, '# about, and there are far fewer of those than the headline count suggests.');
+push(2, 'modules:');
+for (const moduleKey of uncategorised) {
+  const url = productUrls[moduleKey];
+  const productRoute = typeof url === 'string' && url.startsWith('/') ? url : null;
+  const headerRoute = typeof headerProducts[moduleKey] === 'string' ? headerProducts[moduleKey] : null;
+  push(3, `- id: ${quote(moduleKey)}`);
+  push(4, `effect: ${quote(String(moduleTypes[moduleKey]))}`);
+  push(4, productRoute ? `productUrl: ${quote(productRoute)}` : 'productUrl: null');
+  push(4, headerRoute ? `headerProduct: ${quote(headerRoute)}` : 'headerProduct: null');
+  push(4, `reachable: ${productRoute || headerRoute ? 'true' : 'false'}`);
+}
 
 const out = path.join(workspace, 'platform', 'surfaces', 'site-map.yaml');
 await fs.writeFile(out, lines.join('\n') + '\n');

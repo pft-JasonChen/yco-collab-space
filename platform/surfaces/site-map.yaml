@@ -205,6 +205,320 @@ resolved:
 openQuestions:
   - id: SM-002
     question: >-
-      52 moduleTypes carry no crossPromoteTypes category, so they belong to no tool
-      family. Are they retired, internal, or simply missing from the sidebar?
+      62 moduleTypes carry no crossPromoteTypes category, so they belong to no
+      tool family. Are they retired, internal, or simply missing from the sidebar?
     owner: pm
+    # Reachability narrows the question. productUrls and headerProducts are separate
+    # route sources, so both are checked: a module in neither is the one worth asking
+    # about, and there are far fewer of those than the headline count suggests.
+    modules:
+      - id: affiliateEventGift
+        effect: affiliateEventGift
+        productUrl: null
+        headerProduct: null
+        reachable: false
+      - id: affiliateEventGiftv2
+        effect: affiliateEventGiftv2
+        productUrl: null
+        headerProduct: null
+        reachable: false
+      - id: affiliates
+        effect: affiliates
+        productUrl: null
+        headerProduct: affiliates
+        reachable: true
+      - id: aiArtWorkGenerator
+        effect: aiArtWorkGenerator
+        productUrl: null
+        headerProduct: ai-artwork-generator
+        reachable: true
+      - id: aiCharacterGenerator
+        effect: aiCharacterGenerator
+        productUrl: null
+        headerProduct: ai-character-generator
+        reachable: true
+      - id: aiClothes
+        effect: clothV3
+        productUrl: null
+        headerProduct: null
+        reachable: false
+      - id: aiFabric
+        effect: fabric
+        productUrl: null
+        headerProduct: null
+        reachable: false
+      - id: aiFaceGenerator
+        effect: aiFaceGenerator
+        productUrl: null
+        headerProduct: ai-face-generator
+        reachable: true
+      - id: aiGirlGenerator
+        effect: aiGirlGenerator
+        productUrl: null
+        headerProduct: ai-girl-generator
+        reachable: true
+      - id: aiSelfieGenerator
+        effect: aiSelfieGenerator
+        productUrl: null
+        headerProduct: null
+        reachable: false
+      - id: aiVideoEditor
+        effect: kliVidEdt
+        productUrl: null
+        headerProduct: null
+        reachable: false
+      - id: aiVideoFilters
+        effect: videoTrans
+        productUrl: null
+        headerProduct: null
+        reachable: false
+      - id: animeAiArtGenerator
+        effect: animeAiArtGenerator
+        productUrl: null
+        headerProduct: anime-ai-art-generator
+        reachable: true
+      - id: avatarPet
+        effect: avatarPet
+        productUrl: /avatar
+        headerProduct: null
+        reachable: true
+      - id: avatarV3
+        effect: avatarV3
+        productUrl: null
+        headerProduct: null
+        reachable: false
+      - id: banner
+        effect: banner
+        productUrl: null
+        headerProduct: null
+        reachable: false
+      - id: beardFilter
+        effect: beardStyle
+        productUrl: null
+        headerProduct: null
+        reachable: false
+      - id: categoryAiPortrait
+        effect: categoryAiPortrait
+        productUrl: null
+        headerProduct: null
+        reachable: false
+      - id: categoryAiVidEditing
+        effect: categoryAiVidEditing
+        productUrl: null
+        headerProduct: null
+        reachable: false
+      - id: categoryEditing
+        effect: categoryEditing
+        productUrl: null
+        headerProduct: null
+        reachable: false
+      - id: categoryFaceAi
+        effect: categoryFaceAi
+        productUrl: null
+        headerProduct: null
+        reachable: false
+      - id: categoryGenAi
+        effect: categoryGenAi
+        productUrl: null
+        headerProduct: null
+        reachable: false
+      - id: categoryPageForCMS
+        effect: categoryPageForCMS
+        productUrl: null
+        headerProduct: null
+        reachable: false
+      - id: characterMotionSwap
+        effect: motionTransfer
+        productUrl: null
+        headerProduct: null
+        reachable: false
+      - id: combo
+        effect: combo
+        productUrl: null
+        headerProduct: null
+        reachable: false
+      - id: contest
+        effect: contest
+        productUrl: null
+        headerProduct: contest
+        reachable: true
+      - id: dehazePhoto
+        effect: dehazePhoto
+        productUrl: /photo-enhance
+        headerProduct: dehaze-photo
+        reachable: true
+      - id: faceAnalyzerPreview
+        effect: faceShapeDetectorPreview
+        productUrl: null
+        headerProduct: null
+        reachable: false
+      - id: faceRetouch
+        effect: retouch
+        productUrl: null
+        headerProduct: null
+        reachable: false
+      - id: fashion
+        effect: fashion
+        productUrl: null
+        headerProduct: null
+        reachable: false
+      - id: fashionV2
+        effect: fashionV2
+        productUrl: null
+        headerProduct: null
+        reachable: false
+      - id: flipPhoto
+        effect: flipPhoto
+        productUrl: null
+        headerProduct: flip-photo
+        reachable: true
+      - id: gridModule
+        effect: gridModule
+        productUrl: null
+        headerProduct: null
+        reachable: false
+      - id: hairTransfer
+        effect: hairTransfer
+        productUrl: /ai-hairstyle-generator
+        headerProduct: null
+        reachable: true
+      - id: hairWavy
+        effect: hairCurl
+        productUrl: null
+        headerProduct: null
+        reachable: false
+      - id: home
+        effect: home
+        productUrl: null
+        headerProduct: null
+        reachable: false
+      - id: img2VidV2
+        effect: img2VidV2
+        productUrl: null
+        headerProduct: null
+        reachable: false
+      - id: kliVidEff
+        effect: kliVidEff
+        productUrl: null
+        headerProduct: null
+        reachable: false
+      - id: livePort
+        effect: livePort
+        productUrl: null
+        headerProduct: null
+        reachable: false
+      - id: livePortVid
+        effect: livePortVid
+        productUrl: null
+        headerProduct: null
+        reachable: false
+      - id: mixV2
+        effect: mixV2
+        productUrl: null
+        headerProduct: null
+        reachable: false
+      - id: oldPhotoRestoration
+        effect: oldPhotoRestoration
+        productUrl: /colorize
+        headerProduct: old-photo-restoration
+        reachable: true
+      - id: passportPhotoMaker
+        effect: passportPhotoMaker
+        productUrl: null
+        headerProduct: passport-photo-maker
+        reachable: true
+      - id: photoToCartoon
+        effect: photoToCartoon
+        productUrl: null
+        headerProduct: photo-to-cartoon
+        reachable: true
+      - id: productPageForNewCMS
+        effect: productPageForNewCMS
+        productUrl: null
+        headerProduct: null
+        reachable: false
+      - id: profilePictureMaker
+        effect: profilePictureMaker
+        productUrl: null
+        headerProduct: profile-pic-maker
+        reachable: true
+      - id: pvImg2Vid
+        effect: pvImg2Vid
+        productUrl: null
+        headerProduct: null
+        reachable: false
+      - id: pvVidTmpl
+        effect: pvVidTmpl
+        productUrl: null
+        headerProduct: null
+        reachable: false
+      - id: rotatePhoto
+        effect: rotatePhoto
+        productUrl: null
+        headerProduct: rotate-photo
+        reachable: true
+      - id: shaprenImage
+        effect: shaprenImage
+        productUrl: /photo-enhance
+        headerProduct: sharpen-image
+        reachable: true
+      - id: sod
+        effect: sod
+        productUrl: null
+        headerProduct: null
+        reachable: false
+      - id: supportChatbot
+        effect: supportChatbot
+        productUrl: null
+        headerProduct: null
+        reachable: false
+      - id: textToVideo
+        effect: txt2Vid
+        productUrl: null
+        headerProduct: null
+        reachable: false
+      - id: transparentBackground
+        effect: transparentBackground
+        productUrl: null
+        headerProduct: null
+        reachable: false
+      - id: unblurImage
+        effect: unblurImage
+        productUrl: /photo-enhance
+        headerProduct: unblur-image
+        reachable: true
+      - id: useCaseMenu
+        effect: useCaseMenu
+        productUrl: null
+        headerProduct: null
+        reachable: false
+      - id: useCaseProductPageForNewCMS
+        effect: useCaseProductPageForNewCMS
+        productUrl: null
+        headerProduct: null
+        reachable: false
+      - id: videoObjRemover
+        effect: objRemVidV2
+        productUrl: null
+        headerProduct: null
+        reachable: false
+      - id: viduImg2Vid
+        effect: viduImg2Vid
+        productUrl: null
+        headerProduct: null
+        reachable: false
+      - id: viduRef2Vid
+        effect: viduRef2Vid
+        productUrl: null
+        headerProduct: null
+        reachable: false
+      - id: watermarkRemover
+        effect: watermarkRemover
+        productUrl: /object-removal
+        headerProduct: watermark-remover
+        reachable: true
+      - id: wig
+        effect: wig
+        productUrl: null
+        headerProduct: null
+        reachable: false
