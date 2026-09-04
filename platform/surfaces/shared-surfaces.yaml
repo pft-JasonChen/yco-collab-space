@@ -50,16 +50,24 @@ lockedSurfaces:
     owns: Insufficient-credit dialog and its purchase entry.
     featureMayDecide: []
 
+  # The two apply buttons are not old and new. The Product Owner ruled on 2026-09-04
+  # that the split is a product rule: the operation either spends credits or it does
+  # not. Pick by that, never by which existing page a new feature happens to resemble.
   - id: apply-button
     adoption: 6/34
     owns: Primary action button in the panel footer.
-    supersededBy: apply-button-with-coin-credit
-    note: Two variants coexist in production; see the deviation report.
+    selectionRule: The operation is free to the user.
+    featureMayDecide: [label, disabled state]
+    note: >-
+      Not deprecated. It serves free operations and remains correct for them.
+      Six of the seven adopters are photo editing families, which are free.
 
   - id: apply-button-with-coin-credit
     adoption: 7/34
     owns: Primary action with credit cost badge and discount display.
+    selectionRule: The operation spends credits.
     featureMayDecide: [label, cost, disabled state]
+    note: Adopters are generative families, which all charge.
 
   - id: process-status-v2
     adoption: 9/34

@@ -1,5 +1,6 @@
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
+import { parse as parseYaml } from 'yaml';
 import { fromRoot, readJson } from '../prototype-cli/project.mjs';
 import { readTaxonomy } from './extract-taxonomy.mjs';
 
@@ -21,11 +22,27 @@ const { moduleTypes, crossPromoteTypes, productUrls, headerProducts, categoryGro
 // runtime from CMS-supplied items, so it cannot be derived here — see SM-003.
 const OUT_OF_SCOPE_PREFIXES = ['account', 'my-', 'pricing', 'affiliate', 'contact', 'faq', 'blog', 'terms', 'privacy'];
 
+// productUrls and headerProducts are written as `[moduleTypes.x]: '/route'`, so their
+// keys are the *effect* the module resolves to, not the module id. Several modules can
+// share one effect, so the reverse index is one-to-many. Looking these tables up by
+// module id silently returns undefined for every module whose effect differs from its
+// id, which reads as "no route" when the route is simply filed under another name.
+const modulesByEffect = new Map();
+for (const [moduleKey, effect] of Object.entries(moduleTypes)) {
+  const list = modulesByEffect.get(effect) ?? [];
+  list.push(moduleKey);
+  modulesByEffect.set(effect, list);
+}
+const routeFor = (table, moduleKey) => {
+  const value = table[moduleTypes[moduleKey]];
+  return typeof value === 'string' ? value : null;
+};
+
 const routes = new Map();
-for (const [moduleKey, url] of Object.entries(productUrls)) {
+for (const [effect, url] of Object.entries(productUrls)) {
   if (typeof url !== 'string' || !url.startsWith('/')) continue;
   const entry = routes.get(url) ?? { route: url, modules: [] };
-  entry.modules.push(moduleKey);
+  entry.modules.push(...(modulesByEffect.get(effect) ?? [effect]));
   routes.set(url, entry);
 }
 
@@ -78,33 +95,93 @@ push(2, 'ruling: >-');
 push(3, 'SEO landing routes stay out of scope: prototypes never target them. Only two');
 push(3, 'representative page entries are vendored so the shape integration.yaml');
 push(3, 'prescribes stays checkable. See manifest.pageEntryReference.');
+push(1, '- id: SM-002');
+push(2, 'ruling: >-');
+push(3, 'Answered on 2026-09-04. The generator classifies each uncategorised module and');
+push(3, 'the Product Owner ruled the rest in module-dispositions.yaml. It also uncovered a');
+push(3, 'defect: productUrls and headerProducts are keyed by effect, not module id, so ten');
+push(3, 'live tools had been reported as having no route at all.');
 push(1, '- id: SM-003');
 push(2, 'ruling: >-');
 push(3, 'The module-to-category mapping is recorded by hand rather than derived, because');
 push(3, 'the sidebar resolves it at runtime from CMS-supplied items. It is not in this');
 push(3, 'generated file; put it in a hand-maintained record when the CMS export arrives.');
-push(0, 'openQuestions:');
 const uncategorised = Object.keys(moduleTypes)
   .filter((moduleKey) => !(moduleKey in crossPromoteTypes))
   .sort();
-push(1, '- id: SM-002');
-push(2, 'question: >-');
-push(3, `${uncategorised.length} moduleTypes carry no crossPromoteTypes category, so they belong to no`);
-push(3, 'tool family. Are they retired, internal, or simply missing from the sidebar?');
-push(2, 'owner: pm');
-push(2, '# Reachability narrows the question. productUrls and headerProducts are separate');
-push(2, '# route sources, so both are checked: a module in neither is the one worth asking');
-push(2, '# about, and there are far fewer of those than the headline count suggests.');
-push(2, 'modules:');
-for (const moduleKey of uncategorised) {
-  const url = productUrls[moduleKey];
-  const productRoute = typeof url === 'string' && url.startsWith('/') ? url : null;
-  const headerRoute = typeof headerProducts[moduleKey] === 'string' ? headerProducts[moduleKey] : null;
-  push(3, `- id: ${quote(moduleKey)}`);
-  push(4, `effect: ${quote(String(moduleTypes[moduleKey]))}`);
-  push(4, productRoute ? `productUrl: ${quote(productRoute)}` : 'productUrl: null');
-  push(4, headerRoute ? `headerProduct: ${quote(headerRoute)}` : 'headerProduct: null');
-  push(4, `reachable: ${productRoute || headerRoute ? 'true' : 'false'}`);
+
+// SM-002 asked what 62 uncategorised moduleTypes are. Most of the answer is derivable:
+// a `category*` module has no category because it *is* one, and a module sharing another
+// module's route is a variant of an existing page rather than a missing one. Only what
+// needs product knowledge is ruled by hand, in module-dispositions.yaml.
+const dispositionsFile = path.join(workspace, 'platform', 'surfaces', 'module-dispositions.yaml');
+const dispositionsDoc = parseYaml(await fs.readFile(dispositionsFile, 'utf8'));
+const ruled = new Map();
+for (const group of dispositionsDoc.dispositions ?? []) {
+  for (const entry of group.modules ?? []) ruled.set(entry.id, group.disposition);
+}
+
+const routeOwners = new Map();
+for (const entry of routes.values()) {
+  for (const moduleKey of entry.modules) routeOwners.set(moduleKey, entry.modules.length);
+}
+
+const MARKETING = /^(affiliate|banner$|contest$)/;
+const classify = (moduleKey, productRoute, headerRoute) => {
+  const ruling = ruled.get(moduleKey);
+  if (ruling) return { disposition: ruling, by: 'pm-ruling' };
+  if (moduleKey.startsWith('category')) return { disposition: 'taxonomy-node', by: 'derived' };
+  if (MARKETING.test(moduleKey)) return { disposition: 'marketing-widget', by: 'derived' };
+  // SM-001 put SEO landing routes out of scope, and headerProducts is the landing table.
+  if (!productRoute && headerRoute) return { disposition: 'seo-landing', by: 'derived' };
+  if (productRoute && (routeOwners.get(moduleKey) ?? 1) > 1) {
+    return { disposition: 'page-variant', by: 'derived' };
+  }
+  // A module holding a canonical route on its own is a page, whatever the sidebar does
+  // with it. Absent contrary evidence that is a live feature; a PM ruling overrides.
+  if (productRoute) return { disposition: 'live-feature', by: 'derived' };
+  return { disposition: 'unresolved', by: null };
+};
+
+const classified = uncategorised.map((moduleKey) => {
+  const url = routeFor(productUrls, moduleKey);
+  const productRoute = url && url.startsWith('/') ? url : null;
+  const headerRoute = routeFor(headerProducts, moduleKey);
+  return { moduleKey, productRoute, headerRoute, ...classify(moduleKey, productRoute, headerRoute) };
+});
+const tally = new Map();
+for (const entry of classified) tally.set(entry.disposition, (tally.get(entry.disposition) ?? 0) + 1);
+const unresolved = classified.filter((entry) => entry.disposition === 'unresolved');
+
+push(0, '# SM-002, resolved on 2026-09-04. Nothing here is guessed: a disposition is either');
+push(0, '# derived from the taxonomy or ruled by the Product Owner in module-dispositions.yaml.');
+push(0, 'uncategorisedModules:');
+push(1, `total: ${classified.length}`);
+push(1, 'byDisposition:');
+for (const [disposition, count] of [...tally].sort((a, b) => b[1] - a[1])) {
+  push(2, `${disposition}: ${count}`);
+}
+push(1, 'rulingSource: platform/surfaces/module-dispositions.yaml');
+push(1, 'modules:');
+for (const entry of classified) {
+  push(2, `- id: ${quote(entry.moduleKey)}`);
+  push(3, `effect: ${quote(String(moduleTypes[entry.moduleKey]))}`);
+  push(3, `disposition: ${entry.disposition}`);
+  if (entry.by) push(3, `ruledBy: ${entry.by}`);
+  push(3, entry.productRoute ? `productUrl: ${quote(entry.productRoute)}` : 'productUrl: null');
+  push(3, entry.headerRoute ? `headerProduct: ${quote(entry.headerRoute)}` : 'headerProduct: null');
+  push(3, `reachable: ${entry.productRoute || entry.headerRoute ? 'true' : 'false'}`);
+}
+
+push(0, 'openQuestions:');
+if (unresolved.length === 0) {
+  push(1, '[]');
+} else {
+  push(1, '- id: SM-002');
+  push(2, 'question: >-');
+  push(3, `${unresolved.length} moduleTypes still carry no category and match no disposition rule.`);
+  push(2, 'owner: pm');
+  push(2, `modules: [${unresolved.map((entry) => quote(entry.moduleKey)).join(', ')}]`);
 }
 
 const out = path.join(workspace, 'platform', 'surfaces', 'site-map.yaml');

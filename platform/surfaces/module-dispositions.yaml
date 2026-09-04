@@ -1,0 +1,72 @@
+schemaVersion: 1
+status: hand-maintained
+# Answers to SM-002: what a moduleType is, when it belongs to no tool family.
+#
+# Most of the answer is derivable and lives in the generator's rules — a `category*`
+# module has no category because it *is* one, and a module that shares another's route
+# is a variant of an existing page, not a missing one. What is left needs product
+# knowledge, so it is recorded here by hand and the generator reads it.
+#
+# Ruled by: Jason Chen (Product Owner) · 2026-09-04
+# Evidence for each ruling is in the `note` line; anything unruled stays an open
+# question rather than being guessed.
+ruledBy: pm
+ruledOn: '2026-09-04'
+
+dispositions:
+  # Live product pages. Every one of these was wrongly reported as unreachable until
+  # 2026-09-04, when the generator was fixed: productUrls is keyed by the module's
+  # *effect*, not its id, so every module whose effect differs from its id looked
+  # routeless. The PM's product knowledge is what surfaced the defect.
+  - disposition: live-feature
+    note: An existing shipped tool with its own route. Uncategorised in the sidebar only.
+    modules:
+      - id: textToVideo
+        route: /products/ai-text-to-video-generator
+      - id: characterMotionSwap
+        route: /products/ai-motion-transfer
+      - id: videoObjRemover
+        route: /products/video-object-remover
+      - id: aiVideoEditor
+        route: /products/ai-video-editor
+      - id: aiVideoFilters
+        route: /ai-video-filters
+        note: >-
+          Initially ruled removable. Reversed on evidence: result-page/ai-video-filters
+          is 27 files and 3852 lines, above the 3036-line median, and it is the only
+          family besides video-enhance still on process-status v1.
+
+  # Not features. These name a model or an engine version the product calls; the user
+  # reaches them through a tool page, never directly. vidu, pv and kli are third-party
+  # video model vendors.
+  - disposition: engine-effect
+    note: A model or engine variant invoked from an existing tool page. Never its own page.
+    modules:
+      - id: img2VidV2
+        via: /ai-video-generator
+        note: The page is served by img2Vid, img2VidPro, img2VidStd and viduVidTmpl.
+      - id: viduImg2Vid
+      - id: viduRef2Vid
+      - id: pvImg2Vid
+      - id: pvVidTmpl
+      - id: kliVidEff
+      - id: livePort
+        via: /image-to-video
+        note: Listed in image-to-video/data/default-settings.js faceDetectorFeatures.
+      - id: livePortVid
+        via: /image-to-video
+
+  # Page scaffolding and CMS page types. They are moduleTypes because the renderer keys
+  # off moduleType, not because they are tools.
+  - disposition: page-infrastructure
+    note: Layout, navigation or CMS machinery. Not a tool, so no tool family.
+    modules:
+      - id: home
+      - id: gridModule
+      - id: useCaseMenu
+      - id: combo
+      - id: supportChatbot
+      - id: sod
+      - id: productPageForNewCMS
+      - id: useCaseProductPageForNewCMS
+      - id: categoryPageForCMS
