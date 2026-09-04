@@ -112,6 +112,24 @@ export async function auditModules({ workspace: root = workspace } = {}) {
     for (const entry of group.modules ?? []) ruled.set(entry.id, group.disposition);
   }
 
+  // A route ruling that names a route RD does not serve, or an alias pointing at a
+  // route that does not exist, is a stale ruling — the kind that survives a snapshot
+  // refresh unnoticed and quietly misdirects a prototype.
+  const servedRoutes = new Set(Object.values(productUrls).filter((url) => typeof url === 'string'));
+  for (const group of dispositions.routeDispositions ?? []) {
+    if (group.aliasOf && !servedRoutes.has(group.aliasOf)) {
+      errors.push(`Route ruling aliases ${group.aliasOf}, which no module serves`);
+    }
+    for (const entry of group.routes ?? []) {
+      if (!servedRoutes.has(entry.route)) {
+        errors.push(`Route ruling names ${entry.route}, which no module serves`);
+      }
+      if (entry.module && !(entry.module in moduleTypes)) {
+        errors.push(`Route ruling names module ${entry.module}, which does not exist`);
+      }
+    }
+  }
+
   const rows = Object.keys(moduleTypes).sort().map(evidenceFor);
 
   for (const evidence of rows) {

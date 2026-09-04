@@ -47,6 +47,18 @@ for (const [effect, url] of Object.entries(productUrls)) {
   routes.set(url, entry);
 }
 
+const dispositionsFile = path.join(workspace, 'platform', 'surfaces', 'module-dispositions.yaml');
+const dispositionsDoc = parseYaml(await fs.readFile(dispositionsFile, 'utf8'));
+
+// Route-level rulings: which of RD's routes a prototype may target, and which are the
+// same surface reached by another name.
+const routeRulings = new Map();
+for (const group of dispositionsDoc.routeDispositions ?? []) {
+  for (const entry of group.routes ?? []) {
+    routeRulings.set(entry.route, { ...group, ...entry, routes: undefined });
+  }
+}
+
 const quote = (value) => (/^[A-Za-z0-9_./:-]+$/.test(value) ? value : JSON.stringify(value));
 const lines = [];
 const push = (indent, text) => lines.push('  '.repeat(indent) + text);
@@ -104,9 +116,17 @@ push(0, '# one route: /photo-enhance serves enhance, enhanceBatch, dehazePhoto a
 push(0, '# shaprenImage. The route is the surface; the module is the behaviour on it.');
 push(0, 'canonicalRoutes:');
 for (const entry of [...routes.values()].sort((a, b) => a.route.localeCompare(b.route))) {
+  const ruling = routeRulings.get(entry.route);
   const outOfScope = OUT_OF_SCOPE_PREFIXES.some((prefix) => entry.route.slice(1).startsWith(prefix));
   push(1, `- route: ${quote(entry.route)}`);
-  push(2, `scope: ${outOfScope ? 'out-of-scope' : 'result-page'}`);
+  if (ruling) {
+    push(2, `scope: ${ruling.disposition}`);
+    push(2, 'ruledBy: pm');
+    if (ruling.aliasOf) push(2, `aliasOf: ${quote(ruling.aliasOf)}`);
+    if (ruling.linksTo) push(2, `linksTo: ${quote(ruling.linksTo)}`);
+  } else {
+    push(2, `scope: ${outOfScope ? 'out-of-scope' : 'result-page'}`);
+  }
   push(2, `modules: [${entry.modules.sort().map(quote).join(', ')}]`);
 }
 
@@ -141,8 +161,6 @@ const uncategorised = Object.keys(moduleTypes)
 // a `category*` module has no category because it *is* one, and a module sharing another
 // module's route is a variant of an existing page rather than a missing one. Only what
 // needs product knowledge is ruled by hand, in module-dispositions.yaml.
-const dispositionsFile = path.join(workspace, 'platform', 'surfaces', 'module-dispositions.yaml');
-const dispositionsDoc = parseYaml(await fs.readFile(dispositionsFile, 'utf8'));
 const ruled = new Map();
 for (const group of dispositionsDoc.dispositions ?? []) {
   for (const entry of group.modules ?? []) ruled.set(entry.id, group.disposition);

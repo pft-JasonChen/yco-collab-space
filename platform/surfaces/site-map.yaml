@@ -223,13 +223,16 @@ sidebarSubCategories:
 # shaprenImage. The route is the surface; the module is the behaviour on it.
 canonicalRoutes:
   - route: /add-hair-to-photo-with-ai
-    scope: result-page
+    scope: alias
+    ruledBy: pm
+    aliasOf: /ai-hairstyle-generator
     modules: [hairVol]
   - route: /adjust-light-n-color
     scope: result-page
     modules: [adjustLightColor]
   - route: /ai-agent
-    scope: result-page
+    scope: canonical
+    ruledBy: pm
     modules: [aiAgent]
   - route: /ai-art-generator
     scope: result-page
@@ -256,7 +259,9 @@ canonicalRoutes:
     scope: result-page
     modules: [makeup]
   - route: /ai-portrait
-    scope: result-page
+    scope: product-page
+    ruledBy: pm
+    linksTo: /ai-art-generator
     modules: [aiPortrait]
   - route: /ai-portrait-generator
     scope: result-page
@@ -265,7 +270,8 @@ canonicalRoutes:
     scope: result-page
     modules: [objReplace]
   - route: /ai-skin-analysis
-    scope: result-page
+    scope: out-of-scope
+    ruledBy: pm
     modules: [skinAnalysis]
   - route: /ai-video-filters
     scope: result-page
@@ -277,10 +283,14 @@ canonicalRoutes:
     scope: result-page
     modules: [avatar, avatarPet, avtV3Art]
   - route: /bangs-filter
-    scope: result-page
+    scope: alias
+    ruledBy: pm
+    aliasOf: /ai-hairstyle-generator
     modules: [hairBang]
   - route: /before-and-after-hair-extensions
-    scope: result-page
+    scope: alias
+    ruledBy: pm
+    aliasOf: /ai-hairstyle-generator
     modules: [hairExt]
   - route: /color-correction
     scope: result-page
@@ -292,7 +302,8 @@ canonicalRoutes:
     scope: result-page
     modules: [cropPhoto]
   - route: /edit
-    scope: result-page
+    scope: out-of-scope
+    ruledBy: pm
     modules: [edit]
   - route: /face-reshape
     scope: result-page
@@ -310,7 +321,9 @@ canonicalRoutes:
     scope: result-page
     modules: [flipAndRotateImage]
   - route: /hair-wavy
-    scope: result-page
+    scope: alias
+    ruledBy: pm
+    aliasOf: /ai-hairstyle-generator
     modules: [hairWavy]
   - route: /image-converter
     scope: result-page
@@ -322,7 +335,8 @@ canonicalRoutes:
     scope: result-page
     modules: [dehazePhoto, enhance, enhanceBatch, shaprenImage, unblurImage]
   - route: /products/ai-agent-connector
-    scope: result-page
+    scope: out-of-scope
+    ruledBy: pm
     modules: [aiAgentConnector]
   - route: /products/ai-motion-transfer
     scope: result-page

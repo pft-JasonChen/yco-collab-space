@@ -116,3 +116,47 @@ withdrawn:
     reason: Already categorised; the generator was reading crossPromoteTypes by the wrong key.
   - modules: [livePort, livePortVid]
     reason: Ruled on invalid evidence. Awaiting a fresh ruling.
+
+# Route-level rulings. Distinct from the module dispositions above: these four hair
+# routes carry their own crossPromoteType, so they were never uncategorised — the
+# question was not what they are but whether a prototype should ever target them.
+#
+# Ruled by: Jason Chen (Product Owner) · 2026-09-04, reviewing the derived sidebar tree.
+routeDispositions:
+  - disposition: alias
+    aliasOf: /ai-hairstyle-generator
+    note: >-
+      The same page as the AI Hairstyle Generator. Each route exists for search, not
+      because the surface differs. A prototype targets the canonical route only.
+    routes:
+      - route: /add-hair-to-photo-with-ai
+        module: hairVol
+      - route: /bangs-filter
+        module: hairBang
+      - route: /before-and-after-hair-extensions
+        module: hairExt
+      - route: /hair-wavy
+        module: hairWavy
+
+  - disposition: product-page
+    note: A marketing page, not a tool page. It links onward to the tool.
+    routes:
+      - route: /ai-portrait
+        module: aiPortrait
+        linksTo: /ai-art-generator
+
+  - disposition: out-of-scope
+    note: Not a prototype target.
+    routes:
+      - route: /ai-skin-analysis
+        module: skinAnalysis
+      - route: /products/ai-agent-connector
+        module: aiAgentConnector
+      - route: /edit
+        module: edit
+
+  - disposition: canonical
+    note: A feature in its own right, absent from the curated sidebar menu.
+    routes:
+      - route: /ai-agent
+        module: aiAgent
