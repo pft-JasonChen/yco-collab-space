@@ -130,8 +130,11 @@ push(3, 'was resolved at runtime from CMS items and had to be recorded by hand o
 push(3, 'export arrived. That was wrong: crossPromoteMenuMapping in sideBarMenuUtils.js');
 push(3, 'declares it statically, naming the moduleType and target URL of every product.');
 push(3, 'It is now derived, in sidebarMenu above. No CMS export is needed.');
+// crossPromoteTypes is keyed by effect, like productUrls and headerProducts. Ten
+// modules whose effect differs from their id looked uncategorised for that reason
+// alone; they carry a cross-promote identity and always did.
 const uncategorised = Object.keys(moduleTypes)
-  .filter((moduleKey) => !(moduleKey in crossPromoteTypes))
+  .filter((moduleKey) => !(moduleTypes[moduleKey] in crossPromoteTypes))
   .sort();
 
 // SM-002 asked what 62 uncategorised moduleTypes are. Most of the answer is derivable:

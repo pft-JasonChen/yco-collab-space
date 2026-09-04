@@ -14,47 +14,41 @@ ruledBy: pm
 ruledOn: '2026-09-04'
 
 dispositions:
-  # Live product pages. Every one of these was wrongly reported as unreachable until
-  # 2026-09-04, when the generator was fixed: productUrls is keyed by the module's
-  # *effect*, not its id, so every module whose effect differs from its id looked
-  # routeless. The PM's product knowledge is what surfaced the defect.
-  - disposition: live-feature
-    note: An existing shipped tool with its own route. Uncategorised in the sidebar only.
+  # CMS landing pages, not tools. Both render through components/home/<slug>-page with
+  # useCMSContent, Strapi, ModuleBanner and Footer — the same shape as the other 72 pages
+  # in that directory. SM-001 already put landing routes out of scope.
+  #
+  # The Product Owner identified them from the product side before the implementation was
+  # checked: neither is a tool page, and the nearest real tools are ai-headshot-generator
+  # and remove-background.
+  - disposition: seo-landing
+    note: A Strapi-driven landing page under components/home, not a tool.
     modules:
-      - id: textToVideo
-        route: /products/ai-text-to-video-generator
-      - id: characterMotionSwap
-        route: /products/ai-motion-transfer
-      - id: videoObjRemover
-        route: /products/video-object-remover
-      - id: aiVideoEditor
-        route: /products/ai-video-editor
-      - id: aiVideoFilters
-        route: /ai-video-filters
-        note: >-
-          Initially ruled removable. Reversed on evidence: result-page/ai-video-filters
-          is 27 files and 3852 lines, above the 3036-line median, and it is the only
-          family besides video-enhance still on process-status v1.
+      - id: aiSelfieGenerator
+        page: components/home/ai-selfie-generator-page/index.js
+        nearestTool: /ai-headshot-generator
+      - id: transparentBackground
+        page: components/home/transparent-background-page/index.js
+        nearestTool: /remove-background
 
-  # Not features. These name a model or an engine version the product calls; the user
-  # reaches them through a tool page, never directly. vidu, pv and kli are third-party
-  # video model vendors.
+  # Not features. These name a model, an engine version or an alias the product calls;
+  # the user reaches them through a tool page, never directly.
   - disposition: engine-effect
     note: A model or engine variant invoked from an existing tool page. Never its own page.
     modules:
       - id: img2VidV2
         via: /ai-video-generator
         note: The page is served by img2Vid, img2VidPro, img2VidStd and viduVidTmpl.
+      - id: mixV2
+        via: /ai-video-generator
+        note: >-
+          utils/videoUtils.js states it aliases mixV2 to combo, and Countly reports it
+          as image_to_video.
       - id: viduImg2Vid
       - id: viduRef2Vid
       - id: pvImg2Vid
       - id: pvVidTmpl
       - id: kliVidEff
-      - id: livePort
-        via: /image-to-video
-        note: Listed in image-to-video/data/default-settings.js faceDetectorFeatures.
-      - id: livePortVid
-        via: /image-to-video
 
   # Page scaffolding and CMS page types. They are moduleTypes because the renderer keys
   # off moduleType, not because they are tools.
@@ -70,3 +64,22 @@ dispositions:
       - id: productPageForNewCMS
       - id: useCaseProductPageForNewCMS
       - id: categoryPageForCMS
+      - id: faceAnalyzerPreview
+        note: Reached only through preprocess/index.js via cmsTypes. A CMS preview type.
+
+# Withdrawn rulings, kept so the reasoning is not repeated.
+#
+# textToVideo, characterMotionSwap, videoObjRemover, aiVideoEditor and aiVideoFilters
+# were ruled live-feature on 2026-09-04. The ruling was unnecessary: crossPromoteTypes is
+# keyed by effect, so all five carried a tool-family identity the generator had failed to
+# read. They are categorised modules and never belonged in this file.
+#
+# livePort and livePortVid were ruled engine-effect partly because they appear in
+# image-to-video's faceDetectorFeatures list. That reasoning was wrong — the Product
+# Owner identified the list as a face-detection capability flag, and eight of its
+# fourteen members are routed, categorised products. They are back under review.
+withdrawn:
+  - modules: [textToVideo, characterMotionSwap, videoObjRemover, aiVideoEditor, aiVideoFilters]
+    reason: Already categorised; the generator was reading crossPromoteTypes by the wrong key.
+  - modules: [livePort, livePortVid]
+    reason: Ruled on invalid evidence. Awaiting a fresh ruling.

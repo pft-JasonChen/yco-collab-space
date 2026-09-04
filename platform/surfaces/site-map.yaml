@@ -390,14 +390,13 @@ resolved:
 # SM-002, resolved on 2026-09-04. Nothing here is guessed: a disposition is either
 # derived from the taxonomy or ruled by the Product Owner in module-dispositions.yaml.
 uncategorisedModules:
-  total: 62
+  total: 52
   byDisposition:
-    seo-landing: 10
-    live-feature: 10
-    page-infrastructure: 9
-    unresolved: 8
-    engine-effect: 8
+    seo-landing: 12
+    page-infrastructure: 10
     page-variant: 7
+    engine-effect: 7
+    unresolved: 6
     marketing-widget: 5
     taxonomy-node: 5
   rulingSource: platform/surfaces/module-dispositions.yaml
@@ -437,20 +436,6 @@ uncategorisedModules:
       productUrl: null
       headerProduct: ai-character-generator
       reachable: true
-    - id: aiClothes
-      effect: clothV3
-      disposition: live-feature
-      ruledBy: derived
-      productUrl: /ai-clothes
-      headerProduct: ai-clothes
-      reachable: true
-    - id: aiFabric
-      effect: fabric
-      disposition: live-feature
-      ruledBy: derived
-      productUrl: /ai-fabric
-      headerProduct: ai-fabric
-      reachable: true
     - id: aiFaceGenerator
       effect: aiFaceGenerator
       disposition: seo-landing
@@ -467,24 +452,11 @@ uncategorisedModules:
       reachable: true
     - id: aiSelfieGenerator
       effect: aiSelfieGenerator
-      disposition: unresolved
+      disposition: seo-landing
+      ruledBy: pm-ruling
       productUrl: null
       headerProduct: null
       reachable: false
-    - id: aiVideoEditor
-      effect: kliVidEdt
-      disposition: live-feature
-      ruledBy: pm-ruling
-      productUrl: /products/ai-video-editor
-      headerProduct: ai-video-editor
-      reachable: true
-    - id: aiVideoFilters
-      effect: videoTrans
-      disposition: live-feature
-      ruledBy: pm-ruling
-      productUrl: /ai-video-filters
-      headerProduct: ai-video-filters
-      reachable: true
     - id: animeAiArtGenerator
       effect: animeAiArtGenerator
       disposition: seo-landing
@@ -512,13 +484,6 @@ uncategorisedModules:
       productUrl: null
       headerProduct: null
       reachable: false
-    - id: beardFilter
-      effect: beardStyle
-      disposition: live-feature
-      ruledBy: derived
-      productUrl: /products/beard-filter
-      headerProduct: beard-filter
-      reachable: true
     - id: categoryAiPortrait
       effect: categoryAiPortrait
       disposition: taxonomy-node
@@ -561,13 +526,6 @@ uncategorisedModules:
       productUrl: null
       headerProduct: null
       reachable: false
-    - id: characterMotionSwap
-      effect: motionTransfer
-      disposition: live-feature
-      ruledBy: pm-ruling
-      productUrl: /products/ai-motion-transfer
-      headerProduct: ai-motion-transfer
-      reachable: true
     - id: combo
       effect: combo
       disposition: page-infrastructure
@@ -591,17 +549,11 @@ uncategorisedModules:
       reachable: true
     - id: faceAnalyzerPreview
       effect: faceShapeDetectorPreview
-      disposition: unresolved
+      disposition: page-infrastructure
+      ruledBy: pm-ruling
       productUrl: null
       headerProduct: null
       reachable: false
-    - id: faceRetouch
-      effect: retouch
-      disposition: live-feature
-      ruledBy: derived
-      productUrl: /products/face-retouch
-      headerProduct: face-retouch
-      reachable: true
     - id: fashion
       effect: fashion
       disposition: unresolved
@@ -635,13 +587,6 @@ uncategorisedModules:
       productUrl: /ai-hairstyle-generator
       headerProduct: null
       reachable: true
-    - id: hairWavy
-      effect: hairCurl
-      disposition: live-feature
-      ruledBy: derived
-      productUrl: /hair-wavy
-      headerProduct: hair-wavy
-      reachable: true
     - id: home
       effect: home
       disposition: page-infrastructure
@@ -665,21 +610,20 @@ uncategorisedModules:
       reachable: false
     - id: livePort
       effect: livePort
-      disposition: engine-effect
-      ruledBy: pm-ruling
+      disposition: unresolved
       productUrl: null
       headerProduct: null
       reachable: false
     - id: livePortVid
       effect: livePortVid
-      disposition: engine-effect
-      ruledBy: pm-ruling
+      disposition: unresolved
       productUrl: null
       headerProduct: null
       reachable: false
     - id: mixV2
       effect: mixV2
-      disposition: unresolved
+      disposition: engine-effect
+      ruledBy: pm-ruling
       productUrl: null
       headerProduct: null
       reachable: false
@@ -760,16 +704,10 @@ uncategorisedModules:
       productUrl: null
       headerProduct: null
       reachable: false
-    - id: textToVideo
-      effect: txt2Vid
-      disposition: live-feature
-      ruledBy: pm-ruling
-      productUrl: /products/ai-text-to-video-generator
-      headerProduct: ai-text-to-video-generator
-      reachable: true
     - id: transparentBackground
       effect: transparentBackground
-      disposition: unresolved
+      disposition: seo-landing
+      ruledBy: pm-ruling
       productUrl: null
       headerProduct: null
       reachable: false
@@ -794,13 +732,6 @@ uncategorisedModules:
       productUrl: null
       headerProduct: null
       reachable: false
-    - id: videoObjRemover
-      effect: objRemVidV2
-      disposition: live-feature
-      ruledBy: pm-ruling
-      productUrl: /products/video-object-remover
-      headerProduct: video-object-remover
-      reachable: true
     - id: viduImg2Vid
       effect: viduImg2Vid
       disposition: engine-effect
@@ -831,6 +762,6 @@ uncategorisedModules:
 openQuestions:
   - id: SM-002
     question: >-
-      8 moduleTypes still carry no category and match no disposition rule.
+      6 moduleTypes still carry no category and match no disposition rule.
     owner: pm
-    modules: [aiSelfieGenerator, avatarV3, faceAnalyzerPreview, fashion, fashionV2, mixV2, transparentBackground, wig]
+    modules: [avatarV3, fashion, fashionV2, livePort, livePortVid, wig]
