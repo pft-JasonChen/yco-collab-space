@@ -684,16 +684,24 @@
     "scope": "taxonomy-only",
     "files": [
       {
-        "source": "src/types/moduleTypes.js",
-        "sha256": "db08f0e8791c37a1d10ce414a552aa069815a7cc4cc78ce3f45307ca8ded3248"
+        "source": "src/components/result-page/common/features-panel/utils/sideBarMenuUtils.js",
+        "sha256": "b802342dfadc495f08f8523b3f9f860102bff276f958b04942e21a7147c4bffa"
+      },
+      {
+        "source": "src/components/result-page/components/moduleRenderer/moduleRenderer.js",
+        "sha256": "318c905154a4b3451a04b4775d91ddc5164177880e75aaadf46f905d87ffe3ed"
+      },
+      {
+        "source": "src/types/acmsTypes.js",
+        "sha256": "5a5c6f7b43f9f4552c7e8eb0f4a860d7113bee430d93ba2c6e50865710340a4b"
       },
       {
         "source": "src/types/moduleConfigTypes.js",
         "sha256": "55e2b33e377df7d8497f0fbf5e88274e69e42c5accaafd68ce1c4ac0b09694ab"
       },
       {
-        "source": "src/components/result-page/common/features-panel/utils/sideBarMenuUtils.js",
-        "sha256": "b802342dfadc495f08f8523b3f9f860102bff276f958b04942e21a7147c4bffa"
+        "source": "src/types/moduleTypes.js",
+        "sha256": "db08f0e8791c37a1d10ce414a552aa069815a7cc4cc78ce3f45307ca8ded3248"
       }
     ]
   },

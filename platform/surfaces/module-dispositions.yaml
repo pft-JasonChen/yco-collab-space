@@ -14,6 +14,20 @@ ruledBy: pm
 ruledOn: '2026-09-04'
 
 dispositions:
+  # Renders a page, so it is a feature, whatever its lack of a product identity suggests.
+  - disposition: live-feature
+    note: A shipped page whose product identity is carried by a different module.
+    modules:
+      - id: sod
+        renders: components/result-page/background-removal
+        identityHeldBy: removeBackground
+        note: >-
+          Ruled page-infrastructure on 2026-09-04 and corrected the same day. SOD is
+          salient object detection, the engine behind background removal, and
+          moduleRenderer maps it to BackgroundRemoval. It carries no productUrl,
+          headerProduct or crossPromoteType because removeBackground holds those; it is
+          the only module in the snapshot that renders a page without a product identity.
+
   # CMS landing pages, not tools. Both render through components/home/<slug>-page with
   # useCMSContent, Strapi, ModuleBanner and Footer — the same shape as the other 72 pages
   # in that directory. SM-001 already put landing routes out of scope.
@@ -49,6 +63,26 @@ dispositions:
       - id: pvImg2Vid
       - id: pvVidTmpl
       - id: kliVidEff
+      # PerfectCorp engine single effects, listed in acmsTypes as
+      # supportPFengineSingleEffects. That list alone proves nothing — hairStyle,
+      # headshot and enhance are in it too — so the ruling rests on the absence of a
+      # surface: none of these renders a page, holds a route, carries a cross-promote
+      # identity or appears in the sidebar menu, while every routed member of the same
+      # list does all four.
+      - id: fashion
+        note: >-
+          Superseded by clothV3, which ships as AI Clothes at /ai-clothes and is what the
+          sidebar's AI Fashion subcategory lists. ACMS records clothV3 as AI_ClothesV2.
+      - id: fashionV2
+      - id: wig
+        note: Its siblings hairStyle, hairExt, hairBang and hairVol are all routed.
+      - id: avatarV3
+        note: Its siblings avtV3Art (/avatar) and avtV3Img (/ai-portrait-generator) are routed.
+      - id: livePort
+      - id: livePortVid
+        note: >-
+          Weaker evidence than the others: it is absent from supportPFengineSingleEffects,
+          so the ruling rests only on having no surface and pairing with livePort.
 
   # Page scaffolding and CMS page types. They are moduleTypes because the renderer keys
   # off moduleType, not because they are tools.
@@ -60,7 +94,6 @@ dispositions:
       - id: useCaseMenu
       - id: combo
       - id: supportChatbot
-      - id: sod
       - id: productPageForNewCMS
       - id: useCaseProductPageForNewCMS
       - id: categoryPageForCMS

@@ -4,9 +4,11 @@ derivedFrom:
   snapshot: yce-frontend-gm-260909
   sourceVersion: 1.34.1
   sources:
-    - src/types/moduleTypes.js
-    - src/types/moduleConfigTypes.js
     - src/components/result-page/common/features-panel/utils/sideBarMenuUtils.js
+    - src/components/result-page/components/moduleRenderer/moduleRenderer.js
+    - src/types/acmsTypes.js
+    - src/types/moduleConfigTypes.js
+    - src/types/moduleTypes.js
   generator: tools/migration/generate-site-map.mjs
 counts:
   moduleTypes: 162
@@ -392,13 +394,13 @@ resolved:
 uncategorisedModules:
   total: 52
   byDisposition:
+    engine-effect: 13
     seo-landing: 12
-    page-infrastructure: 10
+    page-infrastructure: 9
     page-variant: 7
-    engine-effect: 7
-    unresolved: 6
     marketing-widget: 5
     taxonomy-node: 5
+    live-feature: 1
   rulingSource: platform/surfaces/module-dispositions.yaml
   modules:
     - id: affiliateEventGift
@@ -473,7 +475,8 @@ uncategorisedModules:
       reachable: true
     - id: avatarV3
       effect: avatarV3
-      disposition: unresolved
+      disposition: engine-effect
+      ruledBy: pm-ruling
       productUrl: null
       headerProduct: null
       reachable: false
@@ -556,13 +559,15 @@ uncategorisedModules:
       reachable: false
     - id: fashion
       effect: fashion
-      disposition: unresolved
+      disposition: engine-effect
+      ruledBy: pm-ruling
       productUrl: null
       headerProduct: null
       reachable: false
     - id: fashionV2
       effect: fashionV2
-      disposition: unresolved
+      disposition: engine-effect
+      ruledBy: pm-ruling
       productUrl: null
       headerProduct: null
       reachable: false
@@ -610,13 +615,15 @@ uncategorisedModules:
       reachable: false
     - id: livePort
       effect: livePort
-      disposition: unresolved
+      disposition: engine-effect
+      ruledBy: pm-ruling
       productUrl: null
       headerProduct: null
       reachable: false
     - id: livePortVid
       effect: livePortVid
-      disposition: unresolved
+      disposition: engine-effect
+      ruledBy: pm-ruling
       productUrl: null
       headerProduct: null
       reachable: false
@@ -692,7 +699,7 @@ uncategorisedModules:
       reachable: true
     - id: sod
       effect: sod
-      disposition: page-infrastructure
+      disposition: live-feature
       ruledBy: pm-ruling
       productUrl: null
       headerProduct: null
@@ -755,13 +762,10 @@ uncategorisedModules:
       reachable: true
     - id: wig
       effect: wig
-      disposition: unresolved
+      disposition: engine-effect
+      ruledBy: pm-ruling
       productUrl: null
       headerProduct: null
       reachable: false
 openQuestions:
-  - id: SM-002
-    question: >-
-      6 moduleTypes still carry no category and match no disposition rule.
-    owner: pm
-    modules: [avatarV3, fashion, fashionV2, livePort, livePortVid, wig]
+  []
