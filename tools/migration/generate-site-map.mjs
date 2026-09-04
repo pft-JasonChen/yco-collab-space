@@ -15,11 +15,12 @@ import { readTaxonomy } from './extract-taxonomy.mjs';
 const workspace = fromRoot();
 const manifest = await readJson('migration/rd-snapshot-manifest.json', workspace);
 const snapshot = manifest.source.snapshot;
-const { moduleTypes, crossPromoteTypes, productUrls, headerProducts, categoryGroups, categories } = await readTaxonomy({ workspace, snapshot });
+const { moduleTypes, crossPromoteTypes, productUrls, headerProducts, categoryGroups, categories, subCategoryGroups, subCategories, menuMapping } = await readTaxonomy({ workspace, snapshot });
 
 // crossPromoteTypes maps a module to its cross-promote *identity* ("photo.enhance"),
-// not to a sidebar category. Which category a module renders under is resolved at
-// runtime from CMS-supplied items, so it cannot be derived here — see SM-003.
+// not to a sidebar category. The category a module renders under comes from
+// crossPromoteMenuMapping, which is declared statically in sideBarMenuUtils.js — see
+// SM-003, which had assumed it was fetched from a CMS and therefore underivable.
 const OUT_OF_SCOPE_PREFIXES = ['account', 'my-', 'pricing', 'affiliate', 'contact', 'faq', 'blog', 'terms', 'privacy'];
 
 // productUrls and headerProducts are written as `[moduleTypes.x]: '/route'`, so their
@@ -63,6 +64,8 @@ push(1, `moduleTypes: ${Object.keys(moduleTypes).length}`);
 push(1, `categorisedModules: ${Object.keys(crossPromoteTypes).length}`);
 push(1, `canonicalRoutes: ${routes.size}`);
 push(1, `sidebarCategories: ${categories.length}`);
+push(1, `sidebarSubCategories: ${subCategories.length}`);
+push(1, `menuMappedModules: ${menuMapping.reduce((total, group) => total + (group.products?.length ?? 0), 0)}`);
 
 push(0, '# The sidebar renders these categories in this order. `crossPromoteCategoryGroups`');
 push(0, '# also declares aiGenerator, which no category entry references, so it never shows.');
@@ -75,6 +78,25 @@ for (const category of [...categories].sort((a, b) => a.displayOrder - b.display
 push(0, 'declaredButUnrendered:');
 for (const group of Object.keys(categoryGroups).sort()) {
   if (!categories.some((category) => category.categoryGroup === group)) push(1, `- ${quote(group)}`);
+}
+
+push(0, '# Which tool family a module belongs to, and where the sidebar files it. Read');
+push(0, '# straight out of crossPromoteMenuMapping; nothing here is transcribed by hand.');
+push(0, 'sidebarMenu:');
+for (const group of menuMapping) {
+  push(1, `- category: ${quote(String(group.category))}`);
+  push(2, `subCategory: ${quote(String(group.subCategory))}`);
+  push(2, 'products:');
+  for (const product of group.products ?? []) {
+    push(3, `- moduleType: ${quote(String(product.moduleType))}`);
+    push(4, `crossPromoteType: ${quote(String(product.crossPromoteType ?? 'null'))}`);
+    push(4, product.targetUrl ? `targetUrl: ${quote(String(product.targetUrl))}` : 'targetUrl: null');
+  }
+}
+push(0, 'sidebarSubCategories:');
+for (const entry of subCategories) {
+  push(1, `- id: ${quote(String(entry.subCategoryGroup ?? entry.subCategory ?? ''))}`);
+  push(2, `parent: ${quote(String(entry.categoryGroup ?? entry.category ?? ''))}`);
 }
 
 push(0, '# A canonical route is one result page. Several moduleTypes routinely share');
@@ -103,9 +125,11 @@ push(3, 'defect: productUrls and headerProducts are keyed by effect, not module 
 push(3, 'live tools had been reported as having no route at all.');
 push(1, '- id: SM-003');
 push(2, 'ruling: >-');
-push(3, 'The module-to-category mapping is recorded by hand rather than derived, because');
-push(3, 'the sidebar resolves it at runtime from CMS-supplied items. It is not in this');
-push(3, 'generated file; put it in a hand-maintained record when the CMS export arrives.');
+push(3, 'Corrected on 2026-09-04. The earlier ruling said the module-to-category mapping');
+push(3, 'was resolved at runtime from CMS items and had to be recorded by hand once a CMS');
+push(3, 'export arrived. That was wrong: crossPromoteMenuMapping in sideBarMenuUtils.js');
+push(3, 'declares it statically, naming the moduleType and target URL of every product.');
+push(3, 'It is now derived, in sidebarMenu above. No CMS export is needed.');
 const uncategorised = Object.keys(moduleTypes)
   .filter((moduleKey) => !(moduleKey in crossPromoteTypes))
   .sort();

@@ -13,6 +13,8 @@ counts:
   categorisedModules: 110
   canonicalRoutes: 49
   sidebarCategories: 7
+  sidebarSubCategories: 6
+  menuMappedModules: 43
 # The sidebar renders these categories in this order. `crossPromoteCategoryGroups`
 # also declares aiGenerator, which no category entry references, so it never shows.
 sidebarCategories:
@@ -39,6 +41,181 @@ sidebarCategories:
     labelKey: side.bar.menu.category.template
 declaredButUnrendered:
   - aiGenerator
+# Which tool family a module belongs to, and where the sidebar files it. Read
+# straight out of crossPromoteMenuMapping; nothing here is transcribed by hand.
+sidebarMenu:
+  - category: photoEditing
+    subCategory: aiPhotoRestoration
+    products:
+      - moduleType: enhance
+        crossPromoteType: photo.enhance
+        targetUrl: /photo-enhance
+      - moduleType: aiPhotoRepair
+        crossPromoteType: ai.photo.repair
+        targetUrl: /products/ai-photo-repair
+      - moduleType: colorize
+        crossPromoteType: colorize
+        targetUrl: /colorize
+      - moduleType: lighting
+        crossPromoteType: lighting
+        targetUrl: /ai-lighting
+      - moduleType: colorCorrection
+        crossPromoteType: color.correction
+        targetUrl: /color-correction
+  - category: photoEditing
+    subCategory: aiEdit
+    products:
+      - moduleType: objRemoval
+        crossPromoteType: object.removal
+        targetUrl: /object-removal
+      - moduleType: outPaint
+        crossPromoteType: out.paint
+        targetUrl: /ai-image-extender
+      - moduleType: objReplace
+        crossPromoteType: obj.replace
+        targetUrl: /ai-replace
+  - category: photoEditing
+    subCategory: backgroundTools
+    products:
+      - moduleType: removeBackground
+        crossPromoteType: remove.background
+        targetUrl: /remove-background
+      - moduleType: changeBackground
+        crossPromoteType: change.background
+        targetUrl: /change-background
+  - category: basicEditing
+    subCategory: null
+    products:
+      - moduleType: photoFilterEffect
+        crossPromoteType: photo.filter.effect
+        targetUrl: /products/photo-filter-effect
+      - moduleType: adjustLightColor
+        crossPromoteType: adjust.light.n.color
+        targetUrl: /adjust-light-n-color
+      - moduleType: cropPhoto
+        crossPromoteType: crop.photo
+        targetUrl: /crop-photo
+      - moduleType: resizeImage
+        crossPromoteType: resize.photo
+        targetUrl: /resize-image
+      - moduleType: flipAndRotateImage
+        crossPromoteType: flip.and.rotate.photo
+        targetUrl: /flip-and-rotate-image
+      - moduleType: imageConverter
+        crossPromoteType: image.converter
+        targetUrl: /image-converter
+  - category: videoEditing
+    subCategory: null
+    products:
+      - moduleType: videoSr
+        crossPromoteType: video.enhancer
+        targetUrl: /video-enhancer-ai
+      - moduleType: img2Vid
+        crossPromoteType: img.to.video
+        targetUrl: /ai-video-generator
+      - moduleType: faceSwapVid
+        crossPromoteType: video.face.swap
+        targetUrl: /video-face-swap
+      - moduleType: txt2Vid
+        crossPromoteType: text.to.video
+        targetUrl: /products/ai-text-to-video-generator
+      - moduleType: videoTrans
+        crossPromoteType: ai.video.filters
+        targetUrl: /ai-video-filters
+      - moduleType: objRemVidV2
+        crossPromoteType: video.object.remover
+        targetUrl: /products/video-object-remover
+      - moduleType: kliVidEdt
+        crossPromoteType: ai.video.editor
+        targetUrl: /products/ai-video-editor
+      - moduleType: motionTransfer
+        crossPromoteType: ai.motion.transfer
+        targetUrl: /products/ai-motion-transfer
+  - category: aiPortrait
+    subCategory: aiFashion
+    products:
+      - moduleType: hairStyle
+        crossPromoteType: ai.hairstyle.generator
+        targetUrl: /ai-hairstyle-generator
+      - moduleType: hairColorChanger
+        crossPromoteType: hair.color.changer
+        targetUrl: /products/hair-color-changer
+      - moduleType: beardStyle
+        crossPromoteType: beard.filter
+        targetUrl: /products/beard-filter
+      - moduleType: clothV3
+        crossPromoteType: ai.clothes
+        targetUrl: /ai-clothes
+  - category: aiPortrait
+    subCategory: aiBeauty
+    products:
+      - moduleType: bodyReshape
+        crossPromoteType: body.reshape
+        targetUrl: /products/body-reshape
+      - moduleType: faceSwap
+        crossPromoteType: face.swap
+        targetUrl: /face-swap
+      - moduleType: faceReshape
+        crossPromoteType: face.reshape
+        targetUrl: /face-reshape
+      - moduleType: faceShapeDetector
+        crossPromoteType: face.shape.detector
+        targetUrl: /face-shape-detector
+      - moduleType: retouch
+        crossPromoteType: face.retouch
+        targetUrl: /products/face-retouch
+      - moduleType: makeup
+        crossPromoteType: ai.makeup
+        targetUrl: /ai-makeup
+      - moduleType: muTransfer
+        crossPromoteType: makeup.transfer
+        targetUrl: /facial-makeup-transfer-filter
+  - category: batchEditing
+    subCategory: null
+    products:
+      - moduleType: enhanceBatch
+        crossPromoteType: photo.enhance.batch
+        targetUrl: /photo-enhance/batch
+      - moduleType: imageConverterBatch
+        crossPromoteType: image.converter.batch
+        targetUrl: /image-converter/batch
+  - category: aiImage
+    subCategory: null
+    products:
+      - moduleType: txt2Img
+        crossPromoteType: ai.art.generator
+        targetUrl: /ai-art-generator
+      - moduleType: headshot
+        crossPromoteType: ai.headshot.generator
+        targetUrl: /ai-headshot-generator
+      - moduleType: avatar
+        crossPromoteType: avatar
+        targetUrl: /avatar
+      - moduleType: avtV3Img
+        crossPromoteType: ai.portrait.generator
+        targetUrl: /ai-portrait-generator
+  - category: template
+    subCategory: null
+    products:
+      - moduleType: imageTemplate
+        crossPromoteType: image.template
+        targetUrl: /products/ai-photo-combiner
+      - moduleType: videoTemplate
+        crossPromoteType: video.template
+        targetUrl: /products/video-template
+sidebarSubCategories:
+  - id: aiPhotoRestoration
+    parent: ""
+  - id: aiEdit
+    parent: ""
+  - id: backgroundTools
+    parent: ""
+  - id: aiFashion
+    parent: ""
+  - id: aiBeauty
+    parent: ""
+  - id: aiGenerator
+    parent: ""
 # A canonical route is one result page. Several moduleTypes routinely share
 # one route: /photo-enhance serves enhance, enhanceBatch, dehazePhoto and
 # shaprenImage. The route is the surface; the module is the behaviour on it.
@@ -205,9 +382,11 @@ resolved:
       live tools had been reported as having no route at all.
   - id: SM-003
     ruling: >-
-      The module-to-category mapping is recorded by hand rather than derived, because
-      the sidebar resolves it at runtime from CMS-supplied items. It is not in this
-      generated file; put it in a hand-maintained record when the CMS export arrives.
+      Corrected on 2026-09-04. The earlier ruling said the module-to-category mapping
+      was resolved at runtime from CMS items and had to be recorded by hand once a CMS
+      export arrived. That was wrong: crossPromoteMenuMapping in sideBarMenuUtils.js
+      declares it statically, naming the moduleType and target URL of every product.
+      It is now derived, in sidebarMenu above. No CMS export is needed.
 # SM-002, resolved on 2026-09-04. Nothing here is guessed: a disposition is either
 # derived from the taxonomy or ruled by the Product Owner in module-dispositions.yaml.
 uncategorisedModules:

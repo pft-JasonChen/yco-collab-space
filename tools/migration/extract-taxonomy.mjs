@@ -60,7 +60,38 @@ export async function readTaxonomy({ workspace = fromRoot(), snapshot } = {}) {
     ? evaluate(categoriesLiteral[1].replace(/;$/, ''), { crossPromoteCategoryGroups: categoryGroups })
     : [];
 
-  return { moduleTypes, crossPromoteTypes, productUrls, headerProducts, categoryGroups, categories };
+  // The sidebar's category -> subcategory -> product table. It is declared statically
+  // here, not fetched: every product entry names its moduleType and target URL. SM-003
+  // assumed this was resolved at runtime from CMS items and recorded it as underivable.
+  // It is derivable, and this is where it comes from.
+  const subCategoryGroups = evaluate(objectLiteral(sidebar, 'crossPromoteSubCategoryGroups'), {}) ?? {};
+  const arrayLiteral = (name) => {
+    const match = new RegExp(`const ${name}\\s*=\\s*(\\[[\\s\\S]*?\\n\\];)`).exec(sidebar);
+    return match ? match[1].replace(/;$/, '') : null;
+  };
+  const menuScope = {
+    crossPromoteCategoryGroups: categoryGroups,
+    crossPromoteSubCategoryGroups: subCategoryGroups,
+    moduleTypes,
+    crossPromoteTypes,
+    productUrls,
+  };
+  const subCategoriesSource = arrayLiteral('crossPromoteSubCategories');
+  const subCategories = subCategoriesSource ? evaluate(subCategoriesSource, menuScope) ?? [] : [];
+  const menuSource = arrayLiteral('crossPromoteMenuMapping');
+  const menuMapping = menuSource ? evaluate(menuSource, menuScope) ?? [] : [];
+
+  return {
+    moduleTypes,
+    crossPromoteTypes,
+    productUrls,
+    headerProducts,
+    categoryGroups,
+    categories,
+    subCategoryGroups,
+    subCategories,
+    menuMapping,
+  };
 }
 
 /** Reverse the moduleTypes map so a raw effect string resolves back to its key. */
