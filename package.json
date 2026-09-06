@@ -47,7 +47,8 @@
     "prototype:check": "npm run build && npm run test:rendered",
     "eval:workflow": "node tools/evaluation/run-workflow-eval.mjs",
     "eval:mutations": "node tools/evaluation/run-mutation-suite.mjs",
-    "eval:visual:packet": "node tools/evaluation/create-visual-review-packet.mjs"
+    "eval:visual:packet": "node tools/evaluation/create-visual-review-packet.mjs",
+    "surfaces:browser": "node tools/design-library/surface-browser.mjs"
   },
   "dependencies": {
     "mediabunny": "^1.50.8",

@@ -4,9 +4,22 @@
     {
       "name": "collab-space",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
+      "runtimeArgs": [
+        "run",
+        "dev"
+      ],
       "port": 5177,
       "url": "http://127.0.0.1:5177"
+    },
+    {
+      "name": "surface-browser",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "surfaces:browser"
+      ],
+      "port": 5179,
+      "url": "http://127.0.0.1:5179"
     }
   ]
 }

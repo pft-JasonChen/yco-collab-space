@@ -68,8 +68,18 @@ componentReuse:
 
 **SB-002：binding 掛在 zone 還是 slot？**
 
-`surface.yaml` 有 zones，`component-slots.yaml` 有 slots，而且**有 3 個 id 兩邊都出現**：
-`primary-action`、`settings-inspector`、`video-detail-dialog`。
+`surface.yaml` 有 zones，`component-slots.yaml` 有 slots，而且**有一大批 id 兩邊都出現**。
+這不是 tool-video 的特例 —— **10 個有定義的 pack 裡有 7 個中招，共 14 個 id**：
+
+| pack | 同時是 zone 也是 slot 的 id |
+|---|---|
+| `workspace/tool-video` | `primary-action`、`settings-inspector`、`video-detail-dialog` |
+| `pattern/tool-page` | `primary-action`、`result-column`、`settings-inspector` |
+| `pattern/uploaded-media` | `media-upload`、`uploaded-media` |
+| `pattern/history-list` | `history-card`、`history-list` |
+| `pattern/detail-modal` | `next-action` |
+| `marketing/product-page` | `feature-hero` |
+| `workspace/tool-image-generator` | `result-gallery` |
 
 「這個區域由哪個元件填」掛在哪一邊，會直接決定 schema 長相。
 想請教：當初分成兩個檔案，zone 和 slot 的分界意圖是什麼？
@@ -92,6 +102,16 @@ componentReuse:
 
 刪掉的話功能由 binding 承接；保留的話要納入驗證，但得先修那 10 個值。
 **我們傾向刪。**
+
+---
+
+**補充：一個我們自己踩到的坑**
+
+我們做了一個索引頁把 26 個 surface 列出來（`npm run surfaces:browser`），第一版就把 `pattern/video-results` 顯示成「沒人用」。
+
+原因是 `tool-video` 組合的 6 個 pattern 裡，**5 個寫在 `surface.yaml` 的 zone 描述，第 6 個只寫在 `component-slots.yaml` 的 slot 描述**。我們只掃了 zone。
+
+差一點就得出「這個 pattern 沒人用，可以刪」的結論。這就是 SB-001 為什麼值得花時間 —— 目前「誰組合了誰」只能靠 regex 掃英文句子，還得掃兩個檔案才掃得全。
 
 ---
 

@@ -2,7 +2,8 @@
 
 > **要解決的問題：** 現在 surface 只有文字。沒有人看過它們長什麼樣，所以沒有人知道它們對不對。
 > **讀者：** 執行這件事的人（RD／PM），以及要來審查的 Designer。
-> **狀態：** 計畫，尚未實作。預計開新 branch 執行。
+> **狀態：** Step 1 已完成（2026-09-06，branch `feat/surface-visibility`）。Step 2 等 RD 回覆 SB-001／002。
+> **修正紀錄：** §1.5 記錄 Step 1 推翻的三個原始數字。
 
 ---
 
@@ -34,7 +35,12 @@
 | 有 pin pack 的 feature | **1**（video-expansion → tool-video，`hybrid`） |
 
 `collab-space-readiness` 和 `_template` 都是 `novel`、`primaryPack: null`。
-換句話說：**10 個 provisional surface 裡，只有 1 個曾經被任何 feature 用過。**
+
+> **2026-09-06 修正：** 上面「只有 1 個被用過」是錯的，Step 1 的 browser 做出來後查出真實數字。
+> 正確的是 **10 個裡有 8 個在用，只有 2 個真的沒人用**（`marketing/product-page`、`workspace/tool-image-generator`）。
+> 錯在兩件事：`workspace/tool-photo-editing` 被 video-expansion **borrowed**（借了 `settings-inspector`、`tool-rail` 兩個 role），
+> 我只看了 `primaryPack`；6 個 `pattern/*` 則是被 `tool-video` **組合**，而組合關係寫在散文裡，不看散文就會全部誤判成沒人用。
+> 這正是 SB-001 要解決的問題本身 —— 詳見 §1.5。
 
 ### 1.2 三個缺失的連結
 
@@ -73,6 +79,26 @@ shell: marketing        →  （不存在）
 | `tools/design-library/browser-server.mjs` | 84 | **Surface Browser 的現成範本。** 同樣是 scan → 產 HTML → 本機 serve，`renderLibraryHtml(index)` 已經抽成純函式所以可測。照抄結構即可。 |
 | `tools/prototype-cli/validate-surfaces.mjs` | 142 | **binding 檢查的現成落點。** 已經在驗 catalog／manifest 一致性、slot id 重複、evaluation metadata。新規則加在這裡，不用新開 gate。 |
 
+### 1.5 Step 1 做完之後查到的（2026-09-06）
+
+Surface Browser 一做出來就推翻了這份文件原本的三個數字。**這是這份計畫預期的結果**（§0：渲染是驗證），只是比預期早發生 —— 連畫面都還沒有，光是把資料排出來就夠了。
+
+| 原本寫的 | 實際 | 為什麼會錯 |
+|---|---|---|
+| 10 個 provisional「9 個零採用」 | **只有 2 個真的沒人用** | 只看了 `primaryPack`，漏掉 borrowed 與「被組合」 |
+| `tool-photo-editing` 沒人用 | **video-expansion borrowed 它**（`settings-inspector`、`tool-rail`） | 同上 |
+| 6 個 pattern 沒人用 | **全部被 `tool-video` 組合** | 組合關係只存在於散文 |
+| tool-video 有 3 個 id 同時是 zone 與 slot | **7 個 pack、14 個 id** —— 是系統性的，不是特例 | 只查了一個 pack |
+
+**還有一個給執行者的陷阱**，我自己就踩了：`pattern/video-results` 一度顯示成沒人用。原因是 `tool-video` 的 6 個 pattern 裡，**5 個寫在 `surface.yaml` 的 zone 描述，第 6 個只寫在 `component-slots.yaml` 的 slot 描述**。只掃 zone 就會漏掉它 —— 然後有人會提議刪掉一個天天在用的 pattern。
+
+這件事本身就是 SB-001 最好的論據：**「誰組合了誰」只能靠 regex 掃英文句子才知道，而且要掃兩個檔案才掃得全。**
+
+真正沒人用的只有這兩個，Step 4 要問的就是它們：
+
+- `marketing/product-page`
+- `workspace/tool-image-generator`
+
 ---
 
 ## 2. 一個修正：不要新增狀態
@@ -107,7 +133,7 @@ deprecated   不再使用
 | **B** | 每個 surface 裡面有什麼（zone、slot、規則）？ | **可以。** YAML 都在 |
 | **C** | 它長什麼樣？ | **不行。** 資料根本不存在 |
 
-A 和 B 便宜，C 貴。**先把 A、B 做出來給大家看**，因為光是 A 就會引發你要的對話（「16 個 planned 是什麼？」「10 個裡只有 1 個被用過？」）。不要等到 C 做完才給人看。
+A 和 B 便宜，C 貴。**先把 A、B 做出來給大家看**，因為光是 A 就會引發你要的對話（「16 個 planned 是什麼？」「這 2 個沒人用的還要嗎？」）。不要等到 C 做完才給人看。
 
 ---
 
@@ -135,12 +161,23 @@ A 和 B 便宜，C 貴。**先把 A、B 做出來給大家看**，因為光是 A
 
 **要刻意讓它顯眼的事實**（這是這一步真正的產出）：
 - 16 個 `planned` 只有名字 —— 標成「尚未定義」
-- 10 個 `provisional` 沒人看過 —— 標成「未經審查」
-- **採用數 0 的 surface** —— 10 個裡有 9 個
+- 10 個 `provisional` 沒人看過（`approved` 目前 0 個）—— 標成「未經審查」
+- **真正沒人用的 surface** —— 2 個（見 §1.5；原本以為 9 個）
+- `shell:` 對不上實作 —— 10/10
+
+**狀態：已完成（2026-09-06）**
+
+```bash
+npm run surfaces:browser     # http://127.0.0.1:5179
+```
+
+- `tools/design-library/surfaces.mjs` —— 掃描器，`scanSurfaces()` 為純函式
+- `tools/design-library/surface-browser.mjs` —— `renderSurfaceHtml()` + 本機 server，另有 `/api/index` 吐 JSON
+- 8 個測試在 `tools/design-library/surfaces.test.mjs`，已進 `npm test`
 
 **驗收**　Designer／PM／RD 各自看過並且**至少提出一個「這個不需要」或「缺這個」**。沒有人提出任何意見 = 這一步沒達成目的，要去問為什麼。
 
-**成本**　低。資料全部現成，範本現成。
+**成本**　低。資料全部現成，範本現成。實際花費符合預期。
 
 ---
 
@@ -182,16 +219,17 @@ A 和 B 便宜，C 貴。**先把 A、B 做出來給大家看**，因為光是 A
 
 **不要用灰方塊。** Designer 要判斷的是「這個版型對不對」—— 灰方塊只看得出結構，看不出對錯。用真元件配示範內容（示範內容一律合成資料，遵守既有的 no-backend 規則）。
 
-**一個要先講清楚的取捨** —— 這 11 個 surface 分成兩種：
+**一個要先講清楚的取捨** —— 這 10 個 pack 分成三種（§1.5 修正後）：
 
 | | 能不能渲染 |
 |---|---|
 | 6 個 `pattern/*` + `workspace/tool-video` | **可以。** 元件都在，video-expansion 已經證明它們組得起來 |
-| `workspace/tool-photo-editing`、`workspace/tool-image-generator`、`marketing/product-page` | **不行。沒有任何實作，也沒有任何 feature 在用。** |
+| `workspace/tool-photo-editing` | **部分可以。** video-expansion 借用了它的 `settings-inspector` 和 `tool-rail`，這兩個 role 已經有對應元件（`result-page-shell`）。其餘沒有 |
+| `workspace/tool-image-generator`、`marketing/product-page` | **不行。沒有任何實作，也沒有任何 feature 用它、沒有任何 pack 組合它。** |
 
 **建議：不要為了看而寫實作。**
 
-後面三個要渲染，等於得先為它們從零寫出實作 —— 那是真正的開發工作，而且是為了三個**目前零採用**的 surface 做的。本末倒置。
+最後兩個要渲染，等於得先為它們從零寫出實作 —— 那是真正的開發工作，而且是為了兩個**真正零採用**的 surface 做的。本末倒置。
 
 讓 Step 1 的 browser 誠實標示它們「**已宣告、無實作、無採用**」。這個標示本身就是對齊資訊：大家會問「那我們還需要它嗎？」—— 那正是要的討論。可能的結論是刪掉，也可能是「下一個 feature 就要用」，兩種都比現在的沉默好。
 
@@ -287,7 +325,7 @@ npm run validate:snapshot
 
 | # | 問題 | 誰決定 |
 |---|---|---|
-| 4 | 三個無實作 surface（tool-photo-editing、tool-image-generator、marketing/product-page）留著還是刪？ | Designer + PM，Step 4 決定 |
+| 4 | 兩個真正零採用的 surface（`marketing/product-page`、`workspace/tool-image-generator`）留著還是刪？<br>（原本列三個，`tool-photo-editing` 其實有人借用，見 §1.5） | Designer + PM，Step 4 決定 |
 | 5 | 16 個 `planned` 有幾個是真的要做的？ | PM，Step 1 之後 |
 | 6 | Step 3 的截圖要不要進 repo？（現在 `.gitignore:10-13` 排除全部 `evidence/`） | 跟 CI 平台問題（D5）一起決定 |
 
