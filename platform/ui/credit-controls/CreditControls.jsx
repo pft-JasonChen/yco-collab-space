@@ -1,6 +1,5 @@
 import creditIcon from '../../../design-library/assets/icon/yco-credit-controls/credit.svg';
 import addIcon from '../../../design-library/assets/icon/yco-credit-controls/add.svg';
-import loadingIcon from '../../../design-library/assets/icon/yco-credit-controls/loading.png';
 import Button, { buttonTones } from '../button/index.js';
 import styles from './CreditControls.module.scss';
 
@@ -36,26 +35,39 @@ export function CreditControl({ balance = 436, onClick, showAdd = true, classNam
 
 export function GenerateActionBar({
   label = 'Generate',
+  subtitle,
   cost = 10,
   disabled = false,
   isLoading = false,
   onClick,
   className = '',
 }) {
+  // Figma handoff spec (Footer Button, 2026-09): Text Only = 42px, Text with
+  // credits = 48px, Two-line text = 56px, regardless of whether the two-line
+  // version also carries a credit badge — subtitle presence alone decides the
+  // height, not the badge. See CreditControls.module.scss's .generateButton.
   return (
     <div className={`${styles.actionBar} ${className}`} data-component-role="primary-action generate-action-with-credit">
-      <Button
-        className={styles.generateButton}
-        data-testid="generate-video"
-        tone={buttonTones.BRAND}
-        disabled={disabled}
-        isLoading={isLoading}
-        onClick={onClick}
-      >
-        <span>{isLoading ? 'Generating…' : label}</span>
-        {!isLoading ? <CreditBadge value={cost} testId="generate-credit-cost" /> : null}
-        {isLoading ? <img className={styles.loadingIcon} src={loadingIcon} alt="" aria-hidden="true" /> : null}
-      </Button>
+      {/* .actionBar establishes the size-query container; .actionBarInner is the
+          element the @container rule actually styles. An element can't query its
+          own containment context (tested empirically — padding didn't react when
+          both lived on the same node), so the padding has to live one level in. */}
+      <div className={styles.actionBarInner}>
+        <Button
+          className={`${styles.generateButton} ${subtitle ? styles.generateButtonTwoLine : ''}`}
+          data-testid="generate-video"
+          tone={buttonTones.BRAND}
+          disabled={disabled}
+          isLoading={isLoading}
+          onClick={onClick}
+        >
+          <span className={styles.generateButtonText}>
+            <span>{isLoading ? 'Generating…' : label}</span>
+            {subtitle && !isLoading ? <span className={styles.generateButtonSubtitle}>{subtitle}</span> : null}
+          </span>
+          {!isLoading ? <CreditBadge value={cost} testId="generate-credit-cost" /> : null}
+        </Button>
+      </div>
     </div>
   );
 }

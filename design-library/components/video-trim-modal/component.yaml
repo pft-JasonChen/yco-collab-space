@@ -50,6 +50,26 @@ implementation:
   framework: react
   dependencies: [react, react-dom, mediabunny]
   removedDependencies: [shared-modal, i18n, production-scroll-lock, production-object-url]
+  localFiles:
+    - path: platform/ui/video-trim-modal/README.md
+      sha256: cf884e35c4fde5b3956dff32e291c9b2eab74590b673b054aaf97f78f0ba957d
+    - path: platform/ui/video-trim-modal/VideoTrimModal.jsx
+      sha256: 9a005508f16f597fc384bfd83fbb7b7e46029bf8124ef158726c87a1d8fefbce
+    - path: platform/ui/video-trim-modal/VideoTrimModal.module.scss
+      sha256: e4e09154b078b5f78a02bf5ccfae332362778c6ec01be8d13b01ab05bf798e78
+    - path: platform/ui/video-trim-modal/VideoTrimModal.stories.jsx
+      sha256: 2e5ae65e462439f7125206c4e2f04456bfbdaa8126c1b56bfb63d6af424723e6
+    - path: platform/ui/video-trim-modal/constants.js
+      sha256: f1a475981b72358ec3f0d9dd14a219a173cac15f16e93ebf331f57f0eb170402
+    - path: platform/ui/video-trim-modal/index.js
+      sha256: e490cd163d56f0f4f2125b13df7651dfb5ca7495bdfa1ad4a2cdb275ea03323b
+    - path: platform/ui/video-trim-modal/useFrameThumbnails.js
+      sha256: 09f45ad7d3ca9c7aa968e87b97e49157cd350bbcfcf318856c48482ac6b76914
+    - path: platform/ui/video-trim-modal/useTrimDrag.js
+      sha256: a7f0574173007aa10f7cbb21a226bfd950772f1a3aa8761d087621ab83ad3305
+    - path: platform/ui/video-trim-modal/useVideoTrim.js
+      sha256: 90ac3b08187dd335ceb16d7174196e390f2da139889ffafd94acb19a916cbfff
+  localFilesUpdated: 2026-09-05
 publicApi:
   props:
     - name: opened

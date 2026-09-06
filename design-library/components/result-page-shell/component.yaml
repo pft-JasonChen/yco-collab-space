@@ -80,6 +80,16 @@ implementation:
   framework: react
   dependencies: [react]
   removedDependencies: [next-router, redux, i18n, authentication, credit-service, pricing-modal, cms, analytics, textfit, lodash]
+  localFiles:
+    - path: platform/ui/result-page-shell/ResultPageShell.jsx
+      sha256: 4f6264fb58a5bf245ff91edad8e89fe291426cc498af545f9657b98050bb2537
+    - path: platform/ui/result-page-shell/ResultPageShell.module.scss
+      sha256: 74df19af567682f201c81e5eb050dbe95299fc8bf6bad697a125f0784bd1ac80
+    - path: platform/ui/result-page-shell/ResultPageShell.stories.jsx
+      sha256: b6e01cf2bac53afb61e4f69843a3283095c353bd78a71fd0c0804ecc86a3d22c
+    - path: platform/ui/result-page-shell/index.js
+      sha256: 241609445f73a9112a6eb14dada264acf596ddb5d9fa20182b87e4bee27b6daa
+  localFilesUpdated: 2026-09-05
 publicApi:
   props:
     - name: title

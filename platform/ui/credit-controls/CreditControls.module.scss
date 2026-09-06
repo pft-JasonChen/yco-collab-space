@@ -51,17 +51,44 @@ button.control {
 }
 
 .actionBar {
+  /* Establishes a size query context so .actionBarInner's padding can react to
+     this panel's own rendered width, not the browser viewport — the Figma
+     handoff spec's "W400 & mobile" vs "W300" split is about how wide the panel
+     this action bar sits in actually is (it can be embedded at either width
+     regardless of device), which is what a container query measures. An
+     element can't query its own containment context, so the container lives
+     here and the padding lives on .actionBarInner, one level in. */
+  container-type: inline-size;
   flex: 0 0 auto;
   width: 100%;
-  padding: var(--spacing-16);
   background: var(--background-base);
   box-shadow: 0 -4px 12px color-mix(in srgb, var(--fill-strong) 8%, transparent);
 }
 
+.actionBarInner {
+  padding: var(--spacing-16) var(--spacing-24);
+}
+
+/* Figma handoff spec: W300 gets 16px side padding, W400 (and mobile) gets 24px.
+   350px is the midpoint between the two named widths — there wasn't a more
+   exact cutoff in the spec, so flag this with Designer/RD if the real threshold
+   should be somewhere else. */
+@container (max-width: 350px) {
+  .actionBarInner {
+    padding-left: var(--spacing-16);
+    padding-right: var(--spacing-16);
+  }
+}
+
 /* Fill and label colour come from the shared Button `tone_brand`/`variant_primary`
-   pair; only the action-bar-specific full-bleed width belongs here. */
+   pair; only the action-bar-specific full-bleed width belongs here. Height is
+   overridden here rather than in Button.module.css because the Figma spec for
+   this specific composition (label + credit badge riding inside a Medium button)
+   is 48px, not Button's own plain Medium height of 42px — the badge needs the
+   extra 6px, a Button on its own doesn't. */
 .generateButton {
   width: 100%;
+  min-height: 48px;
 }
 
 .generateButton:disabled {
@@ -77,10 +104,25 @@ button.control {
   gap: var(--spacing-4);
 }
 
-.loadingIcon {
-  width: var(--spacing-24);
-  height: var(--spacing-24);
-  object-fit: contain;
+/* Figma handoff spec: "Two-line text" composition is 56px regardless of whether
+   a credit badge rides alongside it — subtitle presence alone triggers this,
+   see GenerateActionBar in CreditControls.jsx. */
+.generateButtonTwoLine {
+  min-height: 56px;
+}
+
+.generateButtonText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: var(--line-height-small);
+}
+
+.generateButtonSubtitle {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-tiny);
+  font-weight: var(--font-weight-regular, normal);
+  opacity: 0.85;
 }
 
 @media (max-width: 768px) {

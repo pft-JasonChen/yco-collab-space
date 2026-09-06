@@ -28,6 +28,16 @@ implementation:
   framework: react
   dependencies: [react]
   removedDependencies: [redux, i18n, lodash, device-detection, task-state, toast, scroll-persistence]
+  localFiles:
+    - path: platform/ui/video-results-surface/VideoResultsSurface.jsx
+      sha256: e05cebe3d7d370901c5e51127c3ff1e5b0e2f57641b4212f4a61d7c8dd1c0883
+    - path: platform/ui/video-results-surface/VideoResultsSurface.module.scss
+      sha256: c101adcdf3b06639625f24bc81aadacdbc1d5c17c2b20cb95de1767ba13dd8fa
+    - path: platform/ui/video-results-surface/VideoResultsSurface.stories.jsx
+      sha256: 3a45f5cf175d75cea0f77f2c72c1b7d13dad3a558b3a2879ebcfd8b5f1a86968
+    - path: platform/ui/video-results-surface/index.js
+      sha256: a5c4964e876fb65b31092450339a011549c9f778821f9eb7b439ceec53e79678
+  localFilesUpdated: 2026-09-05
 publicApi:
   props:
     - { name: activeTab, required: true, values: [edit, history] }

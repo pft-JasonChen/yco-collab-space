@@ -38,6 +38,18 @@ implementation:
   framework: react
   dependencies: [react]
   removedDependencies: [i18n, gtm, lodash]
+  localFiles:
+    - path: platform/ui/ratio/README.md
+      sha256: 0c39953f53ccea467f03d3bcf279660f1553e80b8c91953aa3b276c2249f9ef0
+    - path: platform/ui/ratio/Ratio.jsx
+      sha256: 163587d11f357a3a88aaca8b8f569f7f1041ff8642c6df9d4be85a3affe500dc
+    - path: platform/ui/ratio/Ratio.module.scss
+      sha256: 9b03ba4791f86de6c2aaa2662a464f8c5619e4dc00c05e5158608806c7e36d83
+    - path: platform/ui/ratio/Ratio.stories.jsx
+      sha256: 7fa714fd27e66ab225434766fefb9add677182cfcc053256d5d28fcb89734c3d
+    - path: platform/ui/ratio/index.js
+      sha256: 8cca893e3cb2c7b9580971668499fb5e9e3e229d923d6e2d63c030df58e980f4
+  localFilesUpdated: 2026-09-05
 publicApi:
   props:
     - name: ratioList
@@ -67,9 +79,15 @@ review:
     id: collab-space-owner
     date: 2026-09-01
   canonicalReview:
-    designer: pending
+    designer: approved
     rd: pending
 decisionBasis:
   - The PM required the RD common Ratio component with i18n, GTM and Lodash removed.
   - The public shape stays compatible with the existing Video Expansion integration.
   - The PO approved an Image Extender-derived presentation variant while retaining the RD common Ratio API as the sole public component.
+  - "Option icon shape (2026-09-06): each option's icon used to be sized via a per-ratio `padding` string supplied by the consuming feature (e.g. `'11.375px 7px'` for 16:9) — hand-picked values that didn't reliably reproduce the real w:h proportions and had to be re-derived by hand for every new ratio. Per Figma's Aspect Ratio reference (node 14572:211035, file jb5SgyshmuPse0L7IFm0QO), the icon should read as the option's actual aspect ratio. Replaced with a `shapeStyle(item)` helper computed directly from the `w`/`h` already on each ratio-list item (contain-fit within the icon box, centered) — removes the need for any hand-authored per-ratio constant, in Storybook's own mock data or in a consuming feature's generated code. Verified in Storybook (rendered icon width:height matches each option's real ratio to 2 decimal places) and confirmed this auto-propagates to Video Expansion with no changes to that feature's generated code, since it imports this component live rather than a copy."
+  - "Icon corner radius and Image Extender wrapper size (2026-09-06): the option icon's corner radius used the same --corner-radius-4 token as the outer card, but Figma's reference (node 14572:211035) uses a smaller 2px radius on the icon shape specifically — no matching token exists below 4px, so hardcoded per Designer instruction. Separately, the Image Extender variant's icon wrapper was sized larger (--spacing-40 box / --spacing-4 padding) than the default gery/gery_v2 wrapper for no functional reason; Designer asked for one shared size, so the Image Extender-specific wrapper override was removed."
+  - "Disabled state (2026-09-06): unlike Button, Ratio is a composite (container + icon block + label) rather than a single text/fill/border triplet, so per Designer convention it doesn't get its own disabled colour tokens the way Button does — disabled composite components uniformly fade via `opacity: 0.3` on the whole option instead of re-deriving a disabled colour for every sub-part. Confirmed against Figma's own Aspect Ratio disabled state (Opacity 30% on the group). `.ratioContainer:disabled` is now `opacity: 0.3` (plus `cursor: not-allowed`), with no per-variant colour overrides underneath it."
+  - "Current local hashes after the 2026-09-06 changes above: `Ratio.jsx` → 163587d11f357a3a88aaca8b8f569f7f1041ff8642c6df9d4be85a3affe500dc; `Ratio.module.scss` → 9b03ba4791f86de6c2aaa2662a464f8c5619e4dc00c05e5158608806c7e36d83. Same deliberate-divergence status as button's and credit-controls' own component.yaml — pending Designer/RD canonical review, not silently claimed as already approved."
+  - "Auto-sync (2026-09-05): `README.md` hash updated — no documented public prop or decisionBasis-quoted value appears to have changed, so this synced automatically. Review if this doesn't look right."
+  - "Designer canonical review approved 2026-09-06: current implementation reviewed and signed off. RD canonical review still pending."
