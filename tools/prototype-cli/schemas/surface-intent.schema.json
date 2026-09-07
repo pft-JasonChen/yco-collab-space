@@ -11,7 +11,8 @@
     "borrowedPacks",
     "layoutIntent",
     "deviations",
-    "decisionBasis"
+    "decisionBasis",
+    "componentReuse"
   ],
   "properties": {
     "schemaVersion": {
@@ -22,7 +23,11 @@
       "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
     },
     "strategy": {
-      "enum": ["reuse", "hybrid", "novel"]
+      "enum": [
+        "reuse",
+        "hybrid",
+        "novel"
+      ]
     },
     "temporary": {
       "type": "boolean"
@@ -46,7 +51,11 @@
     "layoutIntent": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["zones", "componentRoles", "responsivePriority"],
+      "required": [
+        "zones",
+        "componentRoles",
+        "responsivePriority"
+      ],
       "properties": {
         "zones": {
           "type": "array",
@@ -87,13 +96,23 @@
         "type": "string",
         "minLength": 1
       }
+    },
+    "componentReuse": {
+      "description": "Reuse evidence for every declared component role. Intake must resolve each role against `npm run library:components` before any feature UI is generated, so an existing shared component is never rebuilt by accident.",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/componentReuseEntry"
+      }
     }
   },
   "$defs": {
     "packReference": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["id", "version"],
+      "required": [
+        "id",
+        "version"
+      ],
       "properties": {
         "id": {
           "type": "string",
@@ -108,7 +127,11 @@
     "borrowedPackReference": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["id", "version", "roles"],
+      "required": [
+        "id",
+        "version",
+        "roles"
+      ],
       "properties": {
         "id": {
           "type": "string",
@@ -126,6 +149,38 @@
             "type": "string",
             "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
           }
+        }
+      }
+    },
+    "componentReuseEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "role",
+        "resolution",
+        "evidence"
+      ],
+      "properties": {
+        "role": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "resolution": {
+          "description": "existing-component: a catalogued shared component covers this role. new-shared: nothing covers it and it belongs in platform/ui. feature-only: it is specific to this feature and stays in generated/.",
+          "enum": [
+            "existing-component",
+            "new-shared",
+            "feature-only"
+          ]
+        },
+        "component": {
+          "description": "Catalogued component id. Required when resolution is existing-component or new-shared.",
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "evidence": {
+          "type": "string",
+          "minLength": 1
         }
       }
     }
@@ -203,4 +258,3 @@
     }
   ]
 }
-

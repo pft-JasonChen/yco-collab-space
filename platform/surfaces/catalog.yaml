@@ -30,7 +30,7 @@ entries:
   - id: workspace/tool-video
     kind: surface
     status: provisional
-    defaultVersion: 2026-08
+    defaultVersion: 2026-09
   - id: workspace/tool-ai-agent
     kind: surface
     status: planned
@@ -52,6 +52,30 @@ entries:
   - id: account/auth
     kind: surface
     status: planned
+  - id: pattern/tool-page
+    kind: module
+    status: provisional
+    defaultVersion: 2026-09
+  - id: pattern/video-results
+    kind: module
+    status: provisional
+    defaultVersion: 2026-09
+  - id: pattern/history-list
+    kind: module
+    status: provisional
+    defaultVersion: 2026-09
+  - id: pattern/detail-modal
+    kind: module
+    status: provisional
+    defaultVersion: 2026-09
+  - id: pattern/uploaded-media
+    kind: module
+    status: provisional
+    defaultVersion: 2026-09
+  - id: pattern/action-footer
+    kind: module
+    status: provisional
+    defaultVersion: 2026-09
   - id: content/whats-new
     kind: module
     status: planned

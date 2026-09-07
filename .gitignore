@@ -14,3 +14,6 @@ features/*/evidence/*.md
 evals/runs/
 .prototype-state/
 .collab-cache/
+
+# .claude/launch.json is intentionally tracked: it pins the same dev port as
+# prototype.config.json so every reviewer can reproduce the browser check.

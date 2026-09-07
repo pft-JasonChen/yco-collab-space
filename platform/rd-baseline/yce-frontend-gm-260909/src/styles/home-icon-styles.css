@@ -1,0 +1,162 @@
+@font-face {
+  font-family: icomoon;
+  src:
+    url("../../public/assets/fonts/icomoon.ttf") format("truetype"),
+    url("../../public/assets/fonts/icomoon.woff") format("woff"),
+    url("../../public/assets/fonts/icomoon.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+.homeCategory [class^="icon-"],
+.homeCategory [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: icomoon, sans-serif !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Enable Ligatures ================ */
+  letter-spacing: 0;
+  font-feature-settings: "liga=1";
+  font-feature-settings: "liga";
+  font-feature-settings: "liga" 1;
+  font-feature-settings: "liga";
+  font-variant-ligatures: discretionary-ligatures;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-ic-arrow-right::before {
+  content: "\e93f";
+}
+
+.icon-ic-api-b::before {
+  content: "\e91d";
+}
+
+.icon-ic-api-r::before {
+  content: "\e91e";
+}
+
+.icon-ic-user-sparkle::before {
+  content: "\e91c";
+}
+
+.icon-ic-ai-colorize-3-3::before {
+  content: "\e919";
+}
+
+.icon-ic-ai-colorize-3-2::before {
+  content: "\e91a";
+}
+
+.icon-ic-ai-colorize-3-1::before {
+  content: "\e91b";
+}
+
+.icon-ic-ai-image::before {
+  content: "\e917";
+}
+
+.icon-ic-ai-video::before {
+  content: "\e918";
+}
+
+.icon-ic-thumbs-up::before {
+  content: "\e90e";
+}
+
+.icon-ic-thumbs-down::before {
+  content: "\e90f";
+}
+
+.icon-ic-upload::before {
+  content: "\e910";
+}
+
+.icon-ic-reuse::before {
+  content: "\e911";
+}
+
+.icon-ic-new-chat::before {
+  content: "\e912";
+}
+
+.icon-ic-download::before {
+  content: "\e913";
+}
+
+.icon-ic-history::before {
+  content: "\e914";
+}
+
+.icon-ic-copy::before {
+  content: "\e915";
+}
+
+.icon-ic-ai-agent::before {
+  content: "\e916";
+}
+
+.icon-ic-filter::before {
+  content: "\e922";
+}
+
+.icon-ic-retouch::before {
+  content: "\e90b";
+}
+
+.icon-ic-hair::before {
+  content: "\e90c";
+}
+
+.icon-ic-chevron-r::before {
+  content: "\e906";
+}
+
+.icon-ic-start-editing::before {
+  content: "\e907";
+}
+
+.icon-ic-chevron-u::before {
+  content: "\e908";
+}
+
+.icon-ic-chevron-l::before {
+  content: "\e909";
+}
+
+.icon-ic-chevron-d::before {
+  content: "\e90a";
+}
+
+.icon-ic-layers::before {
+  content: "\e900";
+}
+
+.icon-ic-image::before {
+  content: "\e901";
+}
+
+.icon-ic-home::before {
+  content: "\e902";
+}
+
+.icon-ic-video::before {
+  content: "\e903";
+}
+
+.icon-ic-photo-editing::before {
+  content: "\e904";
+}
+
+.icon-ic-portrait::before {
+  content: "\e905";
+}

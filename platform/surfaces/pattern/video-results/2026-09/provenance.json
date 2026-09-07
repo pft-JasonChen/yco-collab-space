@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "pack": "pattern/video-results",
+  "version": "2026-09",
+  "sourceCatalog": "rd-vendored-baseline",
+  "evidenceStatus": "vendored-source-verified",
+  "capturedAt": "2026-09-03",
+  "figma": null,
+  "rd": {
+    "snapshot": "yce-frontend-gm-260909",
+    "sourceVersion": "1.34.1",
+    "primarySurface": "video-feature",
+    "familyAdoption": "10/34",
+    "components": [
+      "video-results-surface"
+    ],
+    "evidence": [
+      {
+        "path": "src/components/common/tab-control/segmented-control/index.js",
+        "sha256": "98736264cd8b11cf5243139a24a8f4163be2b5bf999c0382d4a8ceef2a0362ab",
+        "component": "video-results-surface"
+      },
+      {
+        "path": "src/components/common/tab-control/segmented-control/index.module.scss",
+        "sha256": "883027830fba0bc5bc4145db3e7ce9111b5974ddc1371bf8d6dbe585f238d297",
+        "component": "video-results-surface"
+      },
+      {
+        "path": "src/components/result-page/common/video-feature/filter-dropdown/index.js",
+        "sha256": "348f7a41add7fe21b4ba8894e5e654e83ee47fea209975800bf85de4bbdb22ee",
+        "component": "video-results-surface"
+      },
+      {
+        "path": "src/components/result-page/common/video-feature/filter-dropdown/index.module.scss",
+        "sha256": "605a82df5fd8bbec5e045c7d803589495405fce11a24c0b017a06eb09f0c2aca",
+        "component": "video-results-surface"
+      },
+      {
+        "path": "src/components/result-page/video-object-remover/components/results/index.js",
+        "sha256": "8ecbf389fb2906f675fe07ad857192d0fac3591cc476567186bdac024b0260df",
+        "component": "video-results-surface"
+      },
+      {
+        "path": "src/components/result-page/video-object-remover/components/results/index.module.scss",
+        "sha256": "c12d2c7e03fd42af0853541496ea3eb058de29d807f5d77c3aba86e9a335f781",
+        "component": "video-results-surface"
+      }
+    ]
+  },
+  "decisionBasis": [
+    "Evidence is the vendored RD source every catalogued component in this pattern was ported from, with the hash each file carries in platform/rd-baseline. It is verifiable on any clone by validate:snapshot.",
+    "familyAdoption is how many of the 34 result-page families import the RD surface this pattern models, measured in docs/surfaces/rd-composition-deviations.md. It is context, not approval.",
+    "Visual and geometry parity against a running production page is a separate concern; this status only claims that the structural source is pinned and checkable."
+  ]
+}

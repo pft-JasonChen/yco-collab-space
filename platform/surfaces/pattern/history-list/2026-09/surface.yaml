@@ -1,0 +1,19 @@
+schemaVersion: 1
+id: pattern/history-list
+version: 2026-09
+kind: module
+status: provisional
+shell: history-list
+zones:
+  - id: history-list
+    required: true
+    description: Vertical list of past results, newest first.
+  - id: history-card
+    required: true
+    description: "One result: tags, date, media, actions."
+responsivePriority:
+  - A card never scrolls horizontally; media letterboxes instead.
+  - Processing and failed cards keep the same footprint as a completed one so the list does not jump.
+decisionBasis:
+  - A pattern is a region reused across page types, not a page type. It is catalogued as a module so a Surface Pack can compose it instead of restating it.
+  - Every slot resolves to a catalogued component in design-library/components, so reuse evidence in surface-intent can name the same ids.

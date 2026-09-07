@@ -1,0 +1,11 @@
+schemaVersion: 1
+pack: pattern/action-footer
+version: 2026-09
+visualReview:
+  status: human-required
+  dimensions:
+    - action-prominence
+    - cost-legibility
+    - disabled-clarity
+structuralAnchors:
+  - primary-action

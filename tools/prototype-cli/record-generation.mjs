@@ -15,6 +15,13 @@ const feature = normaliseFeatureSlug(process.argv[2]);
 const adapterIndex = process.argv.indexOf('--adapter');
 const adapter =
   adapterIndex >= 0 ? process.argv[adapterIndex + 1] : 'not-recorded';
+const modelIndex = process.argv.indexOf('--model');
+// The generating model is part of the provenance: two runs of the same inputs on
+// different models are not the same generation.
+const model =
+  modelIndex >= 0
+    ? process.argv[modelIndex + 1]
+    : process.env.PROTOTYPE_MODEL || 'not-recorded';
 const generatedRoot = fromRoot('features', feature, 'generated');
 const featureModule = path.join(generatedRoot, 'feature.jsx');
 
@@ -39,7 +46,7 @@ const metadata = {
   inputHash: await hashFeatureInputs(feature),
   generatorInstructionsVersion: 'collab-contract-v1',
   adapter,
-  model: process.env.PROTOTYPE_MODEL || 'not-recorded',
+  model,
   generatedAt: new Date().toISOString(),
   files,
   collabContract: {

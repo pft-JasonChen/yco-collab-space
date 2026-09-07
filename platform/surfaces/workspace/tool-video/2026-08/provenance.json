@@ -7,7 +7,8 @@
   "capturedAt": null,
   "figma": null,
   "decisionBasis": [
-    "This provisional pack captures stable video workflow roles without claiming final visual parity."
-  ]
+    "This provisional pack captures stable video workflow roles without claiming final visual parity.",
+    "Superseded by 2026-09, which composes the reusable patterns. This version stays available so features pinned to it keep their reviewed basis."
+  ],
+  "supersededBy": "2026-09"
 }
-

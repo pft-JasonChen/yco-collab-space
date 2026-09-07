@@ -7,6 +7,7 @@ rd:
   sourcePackage: youcam-enhance-frontend
   sourceVersion: 1.34.1
   snapshot: yce-frontend-gm-260909
+  portability: verbatim
   sourcePaths:
     - src/components/common/ratio/index.js
     - src/components/common/ratio/index.module.scss
@@ -27,6 +28,9 @@ rd:
       sha256: c8ba009b8094e9dcc2c7d0628d4281a7ccd7b2b76eed7be1ade3bbe33da071a2
     - path: src/components/result-page/out-paint/components/settings/ratio/index.module.scss
       sha256: a031caea1e7bbeb0dbe84969e3b3ba20af7ff32dbd6d546ef0e7056062dfa9e3
+  verbatimFiles:
+    - implementation: platform/ui/ratio/ratioTypes.js
+      baseline: src/components/common/ratio/utils/ratioTypes.js
 figma:
   status: pending
   fileKey: null

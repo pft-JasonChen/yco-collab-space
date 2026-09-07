@@ -7,6 +7,7 @@ rd:
   sourcePackage: youcam-enhance-frontend
   sourceVersion: 1.34.1
   snapshot: yce-frontend-gm-260909
+  portability: drop-in
   sourcePaths:
     - src/components/result-page/common/apply-button-with-coin-credit/index.js
     - src/components/result-page/common/apply-button-with-coin-credit/index.module.scss

@@ -2,6 +2,11 @@
 
 Status: queued after the Video Expansion manager-review prototype.
 
+> This file states the goal and the six follow-up items. The sequenced execution plan —
+> merged with the RD-handoff workstreams, with the recorded Product Owner decisions and
+> the Phase A results — lives in
+> [`2026-09-03-collab-space-execution-plan.md`](./2026-09-03-collab-space-execution-plan.md).
+
 ## Goal
 
 Make production surface rules, conventions, architecture, and existing RD public/shared

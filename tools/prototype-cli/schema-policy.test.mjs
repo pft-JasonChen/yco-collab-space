@@ -26,6 +26,16 @@ function baseIntent() {
       componentRoles: ['primary-action'],
       responsivePriority: ['Preserve the primary action.'],
     },
+    temporary: true,
+    primaryPack: null,
+    borrowedPacks: [],
+    componentReuse: [
+      {
+        role: 'primary-action',
+        resolution: 'feature-only',
+        evidence: 'Nothing in the catalogue covers this role.',
+      },
+    ],
     deviations: [],
     decisionBasis: ['No existing pack fits.'],
   };

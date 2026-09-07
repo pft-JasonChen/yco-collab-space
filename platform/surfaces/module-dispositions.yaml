@@ -1,0 +1,162 @@
+schemaVersion: 1
+status: hand-maintained
+# Answers to SM-002: what a moduleType is, when it belongs to no tool family.
+#
+# Most of the answer is derivable and lives in the generator's rules — a `category*`
+# module has no category because it *is* one, and a module that shares another's route
+# is a variant of an existing page, not a missing one. What is left needs product
+# knowledge, so it is recorded here by hand and the generator reads it.
+#
+# Ruled by: Jason Chen (Product Owner) · 2026-09-04
+# Evidence for each ruling is in the `note` line; anything unruled stays an open
+# question rather than being guessed.
+ruledBy: pm
+ruledOn: '2026-09-04'
+
+dispositions:
+  # Renders a page, so it is a feature, whatever its lack of a product identity suggests.
+  - disposition: live-feature
+    note: A shipped page whose product identity is carried by a different module.
+    modules:
+      - id: sod
+        renders: components/result-page/background-removal
+        identityHeldBy: removeBackground
+        note: >-
+          Ruled page-infrastructure on 2026-09-04 and corrected the same day. SOD is
+          salient object detection, the engine behind background removal, and
+          moduleRenderer maps it to BackgroundRemoval. It carries no productUrl,
+          headerProduct or crossPromoteType because removeBackground holds those; it is
+          the only module in the snapshot that renders a page without a product identity.
+
+  # CMS landing pages, not tools. Both render through components/home/<slug>-page with
+  # useCMSContent, Strapi, ModuleBanner and Footer — the same shape as the other 72 pages
+  # in that directory. SM-001 already put landing routes out of scope.
+  #
+  # The Product Owner identified them from the product side before the implementation was
+  # checked: neither is a tool page, and the nearest real tools are ai-headshot-generator
+  # and remove-background.
+  - disposition: seo-landing
+    note: A Strapi-driven landing page under components/home, not a tool.
+    modules:
+      - id: aiSelfieGenerator
+        page: components/home/ai-selfie-generator-page/index.js
+        nearestTool: /ai-headshot-generator
+      - id: transparentBackground
+        page: components/home/transparent-background-page/index.js
+        nearestTool: /remove-background
+
+  # Not features. These name a model, an engine version or an alias the product calls;
+  # the user reaches them through a tool page, never directly.
+  - disposition: engine-effect
+    note: A model or engine variant invoked from an existing tool page. Never its own page.
+    modules:
+      - id: img2VidV2
+        via: /ai-video-generator
+        note: The page is served by img2Vid, img2VidPro, img2VidStd and viduVidTmpl.
+      - id: mixV2
+        via: /ai-video-generator
+        note: >-
+          utils/videoUtils.js states it aliases mixV2 to combo, and Countly reports it
+          as image_to_video.
+      - id: viduImg2Vid
+      - id: viduRef2Vid
+      - id: pvImg2Vid
+      - id: pvVidTmpl
+      - id: kliVidEff
+      # PerfectCorp engine single effects, listed in acmsTypes as
+      # supportPFengineSingleEffects. That list alone proves nothing — hairStyle,
+      # headshot and enhance are in it too — so the ruling rests on the absence of a
+      # surface: none of these renders a page, holds a route, carries a cross-promote
+      # identity or appears in the sidebar menu, while every routed member of the same
+      # list does all four.
+      - id: fashion
+        note: >-
+          Superseded by clothV3, which ships as AI Clothes at /ai-clothes and is what the
+          sidebar's AI Fashion subcategory lists. ACMS records clothV3 as AI_ClothesV2.
+      - id: fashionV2
+      - id: wig
+        note: Its siblings hairStyle, hairExt, hairBang and hairVol are all routed.
+      - id: avatarV3
+        note: Its siblings avtV3Art (/avatar) and avtV3Img (/ai-portrait-generator) are routed.
+      - id: livePort
+      - id: livePortVid
+        note: >-
+          Weaker evidence than the others: it is absent from supportPFengineSingleEffects,
+          so the ruling rests only on having no surface and pairing with livePort.
+
+  # Page scaffolding and CMS page types. They are moduleTypes because the renderer keys
+  # off moduleType, not because they are tools.
+  - disposition: page-infrastructure
+    note: Layout, navigation or CMS machinery. Not a tool, so no tool family.
+    modules:
+      - id: home
+      - id: gridModule
+      - id: useCaseMenu
+      - id: combo
+      - id: supportChatbot
+      - id: productPageForNewCMS
+      - id: useCaseProductPageForNewCMS
+      - id: categoryPageForCMS
+      - id: faceAnalyzerPreview
+        note: Reached only through preprocess/index.js via cmsTypes. A CMS preview type.
+
+# Withdrawn rulings, kept so the reasoning is not repeated.
+#
+# textToVideo, characterMotionSwap, videoObjRemover, aiVideoEditor and aiVideoFilters
+# were ruled live-feature on 2026-09-04. The ruling was unnecessary: crossPromoteTypes is
+# keyed by effect, so all five carried a tool-family identity the generator had failed to
+# read. They are categorised modules and never belonged in this file.
+#
+# livePort and livePortVid were ruled engine-effect partly because they appear in
+# image-to-video's faceDetectorFeatures list. That reasoning was wrong — the Product
+# Owner identified the list as a face-detection capability flag, and eight of its
+# fourteen members are routed, categorised products. They are back under review.
+withdrawn:
+  - modules: [textToVideo, characterMotionSwap, videoObjRemover, aiVideoEditor, aiVideoFilters]
+    reason: Already categorised; the generator was reading crossPromoteTypes by the wrong key.
+  - modules: [livePort, livePortVid]
+    reason: Ruled on invalid evidence. Awaiting a fresh ruling.
+
+# Route-level rulings. Distinct from the module dispositions above: these four hair
+# routes carry their own crossPromoteType, so they were never uncategorised — the
+# question was not what they are but whether a prototype should ever target them.
+#
+# Ruled by: Jason Chen (Product Owner) · 2026-09-04, reviewing the derived sidebar tree.
+routeDispositions:
+  - disposition: alias
+    aliasOf: /ai-hairstyle-generator
+    note: >-
+      The same page as the AI Hairstyle Generator. Each route exists for search, not
+      because the surface differs. A prototype targets the canonical route only.
+    routes:
+      - route: /add-hair-to-photo-with-ai
+        module: hairVol
+      - route: /bangs-filter
+        module: hairBang
+      - route: /before-and-after-hair-extensions
+        module: hairExt
+      - route: /hair-wavy
+        module: hairWavy
+
+  - disposition: product-page
+    note: A marketing page, not a tool page. It links onward to the tool.
+    routes:
+      - route: /ai-portrait
+        module: aiPortrait
+        linksTo: /ai-art-generator
+
+  - disposition: out-of-scope
+    note: Not a prototype target.
+    routes:
+      - route: /ai-skin-analysis
+        module: skinAnalysis
+      - route: /products/ai-agent-connector
+        module: aiAgentConnector
+      - route: /edit
+        module: edit
+
+  - disposition: canonical
+    note: A feature in its own right, absent from the curated sidebar menu.
+    routes:
+      - route: /ai-agent
+        module: aiAgent

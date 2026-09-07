@@ -4,7 +4,7 @@ strategy: hybrid
 temporary: true
 primaryPack:
   id: workspace/tool-video
-  version: 2026-08
+  version: 2026-09
 borrowedPacks:
   - id: workspace/tool-photo-editing
     version: 2026-08
@@ -38,18 +38,74 @@ layoutIntent:
     - Keep the pre-generation video canvas dominant before secondary inspector details.
     - Preserve the uploaded-media Trim action, canvas playback timeline, and Generate action when the inspector stacks at tablet width, and keep the shared trim dialog within the viewport.
     - Keep History cards and the video-information dialog usable without horizontal overflow.
+componentReuse:
+  - role: aspect-ratio-selector
+    resolution: existing-component
+    component: ratio
+    evidence: RD common/ratio ported as platform/ui/ratio; Video Expansion passes the IMAGE_EXTENDER variant with no new UI.
+  - role: tool-rail
+    resolution: existing-component
+    component: result-page-shell
+    evidence: ToolFamilyMenu inside the shared shell already renders the production tool rail.
+  - role: trim-control
+    resolution: existing-component
+    component: video-trim-modal
+    evidence: Shared trim modal covers the segment selection; only the trigger button is feature-owned.
+  - role: uploaded-media
+    resolution: existing-component
+    component: upload-media-block
+    evidence: RD common upload block covers empty, uploaded, remove and replace; the Trim action is injected through actionSlot.
+  - role: canvas-drag-positioning
+    resolution: feature-only
+    evidence: No RD component owns direct source dragging inside a target ratio frame; PM closed DESIGN-004 keeping it feature behaviour.
+  - role: video-playback-timeline
+    resolution: existing-component
+    component: video-timeline
+    evidence: Video Object Remover derived timeline ported as platform/ui/video-timeline; the feature only supplies captured frames.
+  - role: history-list
+    resolution: existing-component
+    component: video-history
+    evidence: RD video-feature history list ported as platform/ui/video-history.
+  - role: history-card
+    resolution: existing-component
+    component: video-history
+    evidence: VideoHistoryCard is exported by the same shared family.
+  - role: edit-history-tabs
+    resolution: existing-component
+    component: video-results-surface
+    evidence: ResultTabs inside the shared results surface reproduces the RD BLACK_VIDEO_RESULT segmented control.
+  - role: history-filter
+    resolution: existing-component
+    component: video-results-surface
+    evidence: HistoryFilter is composed by the shared results surface rather than duplicated in the list.
+  - role: video-detail-dialog
+    resolution: existing-component
+    component: video-info-dialog
+    evidence: RD common Modal plus video-detail-modal ported as platform/ui/video-info-dialog.
+  - role: next-action
+    resolution: existing-component
+    component: video-info-dialog
+    evidence: The Next Action grid is part of the same shared dialog family.
+  - role: error-recovery
+    resolution: feature-only
+    evidence: The empty and upload-error states use feature copy and the feature's own upload entry; no RD component covers this pairing.
+  - role: credit-control
+    resolution: existing-component
+    component: credit-controls
+    evidence: Header balance uses the shared CreditControl with an inert synthetic value.
+  - role: generate-action-with-credit
+    resolution: existing-component
+    component: credit-controls
+    evidence: GenerateActionBar reproduces the RD ApplyButtonWithCoinCredit single-tool treatment on the shared Button.
 deviations:
-  - The primary video result is presented through YCO History and the shared video-information dialog rather than a standalone inline app result page.
-  - The borrowed photo-editing pack contributes the settings-inspector and tool-rail roles; its image-result role is not used.
-  - The Result Page header and tool rail are presentational RD ports in this prototype; account and cross-tool navigation behavior remain inert, while credit balance and cost are synthetic presentational values.
-  - Desktop composition follows Video Object Remover for the right-side video canvas and Image Extender for the left control-panel hierarchy.
-  - Empty and uploaded media states use the RD common UploadMediaBlock without feature-owned reconstruction; only the Trim action is injected by Video Expansion.
-  - Generate uses the RD ApplyButtonWithCoinCredit single-tool state treatment, and Edit/History uses the intrinsic RD BLACK_VIDEO_RESULT segmented-control width.
-  - Uploaded media, Video Results Surface, History cards, video-information dialog, panel action bar, credit controls, and Video Object Remover-derived timeline are RD-backed shared platform families; the Trim trigger and canvas dragging remain feature-owned.
-  - App launcher, intro, picker, purchase flow, and social-sharing surfaces are intentionally omitted, while the surrounding YCO header, synthetic credit display, and tool-family menu remain visible.
-  - The canvas viewport height stays fixed while ratio frames resize entirely within it; checkerboard transparency is scoped to the selected target-ratio frame, and the synchronized shared timeline is a separate sibling below the viewport rather than an overlay.
-  - The target frame renders only the current video element. Ten timeline previews are captured locally from evenly spaced points in the selected segment; the feature supplies those captures to the shared timeline without introducing a static canvas poster or a media-analysis service.
+  - The canvas viewport height stays fixed while ratio frames resize entirely within it; checkerboard transparency is scoped to the selected target-ratio frame, and the synchronized timeline is a sibling below the viewport rather than an overlay.
+  - The target frame renders only the current video element. Ten timeline previews are captured locally from evenly spaced points in the selected segment, so no static poster and no media-analysis service is introduced.
+  - Direct four-direction canvas dragging positions the source inside the target frame. No RD component owns this, and DESIGN-004 kept it feature behaviour.
+  - App launcher, intro, picker, purchase flow and social-sharing surfaces are intentionally omitted, while the surrounding chrome, synthetic credit display and tool-family menu remain visible.
+  - Desktop composition follows Video Object Remover for the working view and Image Extender for the inspector hierarchy, at the PM's explicit request.
+  - Account and cross-tool navigation behaviour in the shell is inert; credit balance and cost are synthetic presentational values.
 decisionBasis:
+  - Migrated to tool-video 2026-09 on 2026-09-03. Six of the eleven deviations described composing the standard shell, uploaded-media block, action footer, results tabs, History and detail dialog - all of which the 2026-09 pack now composes from patterns, so following them is no longer a departure.
   - The workspace tool-video pack naturally supports upload, settings, processing, History feedback, and video playback.
   - The PM explicitly requested the control panel to follow the Image Extender layout reference while retaining the Video Object Remover canvas and video-generation flow.
   - The PM explicitly requested the header and left menu visible in the Video Object Remover reference to be included in the prototype.

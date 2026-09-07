@@ -1,0 +1,438 @@
+@import "@/styles/variables.scss";
+@import "@/styles/variables-for-settings.module.scss";
+
+.result {
+  flex-grow: 1;
+  overflow: hidden;
+  position: relative;
+  transition: opacity 500ms linear;
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  display: flex;
+  background: var(--background-alternate);
+
+  @include rwd-custom($use-data-attribute: true) {
+    display: block;
+    height: auto;
+    max-height: unset;
+    overflow: unset;
+  }
+
+  &.height-100 {
+    @include rwd-custom($use-data-attribute: true) {
+      height: 100%;
+    }
+  }
+
+  &.overflow-x-hidden {
+    @include rwd-custom($use-data-attribute: true) {
+      overflow-x: hidden;
+    }
+  }
+
+  &.right {
+    @include rwd-custom($use-data-attribute: true) {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  &.left {
+    @include rwd-custom($use-data-attribute: true) {
+      display: flex;
+      flex-direction: column-reverse;
+    }
+  }
+
+  &.column {
+    @include rwd-custom($use-data-attribute: true) {
+      flex-direction: column;
+    }
+  }
+
+  &.column-reverse {
+    @include rwd-custom($use-data-attribute: true) {
+      flex-direction: column-reverse;
+    }
+  }
+}
+
+// edit-lobby result column: on mobile #featureLayoutContainer (.result) is a
+// flex child with the default min-height:auto, so a tall body-reshape result
+// (JS-sized canvas) can't shrink — it balloons past the viewport and pushes
+// FeaturesPanelMB below the scrollable fold. min-height:0 lets it fit. (YCO260703P0019)
+.editFitViewport {
+  @include rwd-custom($use-data-attribute: true) {
+    min-height: 0;
+  }
+}
+
+.resultsBlock {
+  position: relative;
+  flex: 1 1;
+  width: calc(100% - 300px);
+  display: flex;
+  flex-direction: column;
+
+  @include rwd-custom($use-data-attribute: true) {
+    width: unset;
+    min-height: 50vh;
+  }
+
+  &.photo-repair {
+    width: calc(100% - 400px);
+
+    @include rwd-custom($use-data-attribute: true) {
+      width: unset;
+      min-height: unset;
+    }
+  }
+
+  &.image-to-video {
+    height: 100%;
+    overflow: auto;
+
+    @include rwd-custom($use-data-attribute: true) {
+      flex: unset;
+      min-height: unset;
+    }
+  }
+
+  // This block still grows to fill whatever the settings leave (which is what
+  // centres the empty-state prompt), but flex-start parked all of it under the
+  // preview band. Centring only redistributes the free space — nothing changes
+  // size.
+  &.photo-enhance {
+    // The panel is 400px from 1200 up (300 below) — the base calc still assumes
+    // 300, which leaves this block's width claiming 100px the panel occupies.
+    width: calc(100% - 400px);
+
+    @include rwd-custom($width-1200) {
+      width: calc(100% - 300px);
+    }
+
+    @include rwd-custom($use-data-attribute: true) {
+      width: unset;
+      justify-content: center;
+    }
+  }
+
+  &.edit {
+    @include rwd-custom($use-data-attribute: true) {
+      height: 100%;
+      min-height: unset;
+      overflow: initial;
+    }
+  }
+
+  &.video-layout {
+    height: 100%;
+    overflow: auto;
+    width: calc(100% - 400px);
+    min-width: calc(100% - 400px);
+
+    @include rwd-custom($use-data-attribute: true) {
+      flex: unset;
+      min-height: unset;
+      min-width: unset;
+      width: unset;
+    }
+  }
+}
+
+.minHeightUnset {
+  @include rwd-custom($use-data-attribute: true) {
+    min-height: unset;
+  }
+}
+
+.settingsBlockTitleContainer {
+  margin-bottom: 8px;
+
+  @include rwd-custom($use-data-attribute: true) {
+    text-align: center;
+  }
+
+  &[data-disabled="true"] {
+    pointer-events: none;
+    opacity: 0.3;
+  }
+}
+
+.settingsBlockTitle {
+  font-weight: 700;
+  font-size: 18px;
+  color: rgb(3 173 226 / 100%);
+}
+
+.settingsBlockDescription {
+  font-size: 14px;
+  color: rgb(17 24 26 / 65%);
+  margin-top: 8px;
+}
+
+.settingsBlock {
+  position: relative;
+  z-index: 1;
+  background-color: #fff;
+  padding: 24px 16px;
+  height: 100%;
+
+  @include rwd-custom($use-data-attribute: true) {
+    height: auto;
+  }
+
+  &.default,
+  &.lighting,
+  &.photo-filter-effect,
+  &.hair-color-changer,
+  &.object-replace,
+  &.face-reshape,
+  &.ai-makeup {
+    min-width: 300px;
+    max-width: 300px;
+
+    @include rwd-custom($use-data-attribute: true) {
+      width: 100%;
+      min-width: unset;
+      max-width: unset;
+    }
+  }
+
+  &.v2,
+  &.photo-repair,
+  &.face-swap-vid,
+  &.text-to-image {
+    min-width: 400px;
+    max-width: 400px;
+
+    @include rwd-custom($use-data-attribute: true) {
+      width: 100%;
+      min-width: unset;
+      max-width: unset;
+    }
+  }
+
+  &.v3,
+  &.video-enhance,
+  &.image-to-video,
+  &.text-to-video,
+  &.video-object-remover {
+    min-width: 400px;
+    max-width: 400px;
+
+    @include rwd-custom($width-1200) {
+      min-width: 300px;
+      max-width: 300px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch; /* Enable momentum scrolling on iOS */
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE and Edge */
+
+      &::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera */
+      }
+    }
+
+    @include rwd-custom($use-data-attribute: true) {
+      width: 100%;
+      min-width: unset;
+      max-width: unset;
+      padding: 24px 16px 0;
+      overflow: visible;
+    }
+  }
+
+  // i2v: desktop padding override (mobile padding-top is set dynamically via JS)
+  &.image-to-video {
+    padding: 19px 16px 0;
+
+    @include rwd-custom($use-data-attribute: true) {
+      z-index: 2;
+    }
+  }
+
+  &.ai-video-filters {
+    min-width: 400px;
+    max-width: 400px;
+
+    @include rwd-custom($width-1200) {
+      min-width: 300px;
+      max-width: 300px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch; /* Enable momentum scrolling on iOS */
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE and Edge */
+
+      &::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera */
+      }
+    }
+
+    @include rwd-custom($use-data-attribute: true) {
+      width: 100%;
+      min-width: unset;
+      max-width: unset;
+      padding: 24px 16px 0;
+      overflow: visible;
+    }
+
+    @include rwd-custom($width-lg) {
+      padding: 0 16px;
+    }
+
+    @include rwd-custom-for-settings-dpi-150 {
+      padding: 0 16px 75px;
+    }
+  }
+
+  &.video-enhance,
+  &.face-swap-vid,
+  &.ai-video-filters,
+  &.video-object-remover {
+    @include rwd-custom($width-lg) {
+      background-color: var(--background-alternate);
+    }
+  }
+
+  &.text-to-video {
+    @include rwd-custom($width-md) {
+      z-index: 2;
+    }
+  }
+
+  &.text-to-image {
+    @include rwd-custom($width-sm) {
+      background-color: var(--background-alternate);
+    }
+  }
+
+  &.photo-filter-effect {
+    padding: 0;
+
+    @include rwd-custom($use-data-attribute: true) {
+      padding: 24px 0 0;
+      background-color: var(--grey-solid-50);
+    }
+
+    .settingsBlockTitleContainer {
+      padding: 0 16px;
+    }
+  }
+
+  &.object-replace {
+    padding: 24px 0;
+
+    @include rwd-custom($use-data-attribute: true) {
+      padding: 0;
+    }
+
+    .settingsBlockTitleContainer {
+      padding: 0 16px;
+    }
+  }
+
+  // Panel is 400px in the design; under 1200 it keeps the legacy 300px so
+  // narrow desktops are unchanged. Results column absorbs the extra 100px via
+  // flex, same as the other 400px panels (v2 / text-to-image / face-swap-vid).
+  &.photo-enhance {
+    min-width: 400px;
+    max-width: 400px;
+
+    @include rwd-custom($width-1200) {
+      min-width: 300px;
+      max-width: 300px;
+    }
+
+    @include rwd-custom($use-data-attribute: true) {
+      width: 100%;
+      min-width: unset;
+      max-width: unset;
+    }
+
+    @include rwd-custom($width-lg) {
+      z-index: 2;
+    }
+  }
+
+  &.hair-color-changer,
+  &.face-reshape,
+  &.ai-makeup {
+    display: flex;
+    flex-direction: column;
+  }
+
+  // ── 子元素樣式：由父層 variant 統一控制，不再散在各個子元素 class 上 ──
+
+  &.face-swap-vid {
+    .settingsBlockTitleContainer {
+      margin-bottom: 0;
+      margin-top: 20px;
+
+      @include rwd-custom($width-lg) {
+        margin-top: 0;
+      }
+    }
+
+    .settingsBlockTitle {
+      font-weight: 600;
+      font-size: var(--font-size-small);
+      line-height: var(--line-height-small);
+      color: rgb(9 22 26 / 95%);
+    }
+
+    .settingsBlockDescription {
+      font-size: var(--font-size-tiny);
+      line-height: var(--line-height-tiny);
+      font-weight: 400;
+      color: rgb(17 24 26 / 65%);
+      margin-top: 0;
+    }
+  }
+
+  &.lighting,
+  &.photo-repair {
+    .settingsBlockTitleContainer {
+      margin-bottom: 0;
+    }
+  }
+
+  &.video-object-remover {
+    padding: 0;
+
+    @include rwd-custom($use-data-attribute: true) {
+      padding: 0;
+    }
+  }
+}
+
+.padding0 {
+  padding: 0;
+}
+
+.settingsBlockStylesTitle {
+  color: #15171f;
+  font-size: 18px;
+  font-weight: 500;
+  margin: 12px 0 0;
+
+  @include rwd-custom($use-data-attribute: true) {
+    display: none;
+  }
+}
+
+.mobileHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 16px;
+  height: 48px;
+  background-color: #fff;
+
+  &.video-layout {
+    background-color: var(--background-alternate);
+  }
+}

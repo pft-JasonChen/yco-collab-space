@@ -1,0 +1,11 @@
+schemaVersion: 1
+pack: pattern/video-results
+version: 2026-09
+visualReview:
+  status: human-required
+  dimensions:
+    - tab-width-fidelity
+    - processing-visibility
+structuralAnchors:
+  - result-tabs
+  - result-body

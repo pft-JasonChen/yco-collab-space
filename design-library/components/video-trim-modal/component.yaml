@@ -7,6 +7,7 @@ rd:
   sourcePackage: youcam-enhance-frontend
   sourceVersion: 1.34.1
   snapshot: yce-frontend-gm-260909
+  portability: verbatim
   sourcePaths:
     - src/components/ai-agent-page/components/video-trim-modal/index.js
     - src/components/ai-agent-page/components/video-trim-modal/index.module.scss
@@ -39,6 +40,9 @@ rd:
       sha256: eded2028375909de25a4ba2a1a7e31912ce9b8e2313cdf886e6f51d2eaf437e8
     - path: public/assets/images/objRemVidV2/models/YCE_default_model_thumb-1.jpg
       sha256: 49ba37be8715be940d42bf9a719940dbf7527c35ded1f2b5bdf9eb0628034f83
+  verbatimFiles:
+    - implementation: platform/ui/video-trim-modal/constants.js
+      baseline: src/components/ai-agent-page/components/video-trim-modal/constants.js
 figma:
   status: pending
   fileKey: null

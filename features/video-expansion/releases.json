@@ -1,8 +1,24 @@
 {
   "schemaVersion": 2,
   "feature": "video-expansion",
-  "currentStage": "intake",
+  "currentStage": "pm-prototype-working",
   "pendingTransition": null,
-  "transitions": [],
+  "transitions": [
+    {
+      "id": "intake-to-working",
+      "from": "intake",
+      "to": "pm-prototype-working",
+      "evidenceHash": "6bdac319b04fc2c661575ae313fe14e08ec26eea0833fb2f53718ac65d6fe718",
+      "inputHash": "c5d3825b1c3d88cac7b63df32cf3a5c6e43ac79cd630c5538a1ddaa6c9b4ad8c",
+      "generationHash": "22d10cb0e2c3954276d356b1abe21c35dc62f78a47026cd1d23b324ce6e58250",
+      "approvals": [
+        {
+          "actor": "pm",
+          "confirmedAt": "2026-09-03T17:56:54.749Z"
+        }
+      ],
+      "confirmedAt": "2026-09-03T17:56:54.749Z"
+    }
+  ],
   "downstreamOutputs": []
 }

@@ -15,6 +15,17 @@ layoutIntent:
     - primary-action
   responsivePriority:
     - Keep the readiness status and primary action visible before supporting details.
+componentReuse:
+  - role: status-summary
+    resolution: feature-only
+    evidence: Internal readiness fixture; no product surface or shared component covers it.
+  - role: readiness-list
+    resolution: feature-only
+    evidence: Internal readiness fixture; no product surface or shared component covers it.
+  - role: primary-action
+    resolution: existing-component
+    component: button
+    evidence: The fixture imports the shared Button through the platform/ui/Button.jsx compatibility path.
 deviations: []
 decisionBasis:
   - This internal fixture has no matching product surface and should remain feature-specific.

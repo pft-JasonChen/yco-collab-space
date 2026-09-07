@@ -17,7 +17,18 @@ function NextActionIcon({ action }) {
   return actionIcons[name] ? <ActionIcon className={styles.iconAsset} name={name} /> : null;
 }
 
+/** Every user-facing string is a prop so RD can hand them straight to its own t(). */
+const defaultLabels = {
+  close: 'Close video details',
+  originalSource: 'Original Source',
+  prompt: 'Prompt',
+  nextAction: 'Next Action',
+  retry: 'Retry',
+  sourceAlt: 'Source {{index}}',
+};
+
 export default function VideoInfoDialog({
+  labels: labelOverrides = {},
   opened,
   videoId = 'video-detail',
   title,
@@ -36,6 +47,7 @@ export default function VideoInfoDialog({
   onDislike,
   onDownload,
 }) {
+  const labels = { ...defaultLabels, ...labelOverrides };
   const closeRef = useRef(null);
 
   useEffect(() => {
@@ -69,7 +81,7 @@ export default function VideoInfoDialog({
         aria-modal="true"
         aria-labelledby="video-info-title"
       >
-        <button ref={closeRef} className={styles.close} type="button" onClick={onClose} aria-label="Close video details">
+        <button ref={closeRef} className={styles.close} type="button" onClick={onClose} aria-label={labels.close}>
           <DialogIcon name="close" />
         </button>
         <div className={styles.content}>
@@ -86,10 +98,10 @@ export default function VideoInfoDialog({
               </header>
               {sources.length > 0 ? (
                 <section className={styles.sources}>
-                  <h3>Original Source</h3>
+                  <h3>{labels.originalSource}</h3>
                   <div>
                     {sources.map((source, index) => (
-                      <img key={source.id ?? source.url ?? index} src={source.url} alt={source.alt ?? `Source ${index + 1}`} />
+                      <img key={source.id ?? source.url ?? index} src={source.url} alt={source.alt ?? labels.sourceAlt.replace('{{index}}', String(index + 1))} />
                     ))}
                   </div>
                 </section>
@@ -101,13 +113,13 @@ export default function VideoInfoDialog({
               ) : null}
               {prompt ? (
                 <section className={styles.prompt}>
-                  <h3>Prompt</h3>
+                  <h3>{labels.prompt}</h3>
                   <p>{prompt}</p>
                 </section>
               ) : null}
             </div>
             <section className={styles.nextAction} data-component-role="next-action">
-              <h3>Next Action</h3>
+              <h3>{labels.nextAction}</h3>
               <div className={styles.nextGrid}>
                 {nextActions.map((action) => (
                   <button
@@ -133,7 +145,7 @@ export default function VideoInfoDialog({
                   downloadUrl={videoUrl}
                   downloadFileName={downloadFileName}
                 />
-                {onRetry ? <button className={styles.retry} type="button" onClick={onRetry}>Retry</button> : null}
+                {onRetry ? <button className={styles.retry} type="button" onClick={onRetry}>{labels.retry}</button> : null}
               </div>
             </section>
           </div>

@@ -1,0 +1,56 @@
+@import "@/styles/variables.scss";
+
+.logoContainer {
+  align-items: center;
+  display: flex;
+  font-weight: bold;
+}
+
+.symbol {
+  margin-right: 10px;
+  height: 40px;
+
+  @include rwd-custom($width-1200) {
+    margin-right: 24px;
+  }
+
+  @include rwd-custom($width-md) {
+    margin-right: 12px;
+    height: 32px;
+    pointer-events: none;
+  }
+}
+
+.logo {
+  background-color: transparent;
+  width: 256px;
+  height: 25px;
+  margin-right: 24px;
+
+  @extend %image-common-style;
+
+  @include rwd-custom($width-1200) {
+    display: none;
+  }
+}
+
+.logoMobile {
+  background-color: transparent;
+  width: 89px;
+  height: 37px;
+
+  @extend %image-common-style;
+}
+
+.logoTW {
+  background-color: transparent;
+  height: 28px;
+  margin-right: 40px;
+
+  @extend %image-common-style;
+
+  @include rwd-custom($width-md) {
+    height: 24px;
+    margin-right: 14px;
+  }
+}

@@ -70,7 +70,7 @@ flowchart LR
 ### `component-foundation-pilot`
 
 - Actors: Product manager、Designer、Research and development、AI agent
-- 可寫入：`design-library/components/**`、`design-library/assets/**`、`platform/ui/**`、`.storybook/**`、`tools/design-library/**`、`docs/architecture/**`、`docs/design-system/**`、`package.json`、`package-lock.json`、`prototype.config.json`
+- 可寫入：`design-library/components/**`、`design-library/assets/**`、`platform/ui/**`、`platform/rd-baseline/**`、`platform/runtime/**`、`migration/**`、`.storybook/**`、`tools/design-library/**`、`docs/architecture/**`、`docs/design-system/**`、`package.json`、`package-lock.json`、`prototype.config.json`
 - 保護區：`features/{feature}/product`、`features/{feature}/generated`、`platform/tokens/rd`、`.env`
 - Enforcement: `error`
 

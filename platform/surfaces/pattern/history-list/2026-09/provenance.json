@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "pack": "pattern/history-list",
+  "version": "2026-09",
+  "sourceCatalog": "rd-vendored-baseline",
+  "evidenceStatus": "vendored-source-verified",
+  "capturedAt": "2026-09-03",
+  "figma": null,
+  "rd": {
+    "snapshot": "yce-frontend-gm-260909",
+    "sourceVersion": "1.34.1",
+    "primarySurface": "video-feature",
+    "familyAdoption": "10/34",
+    "components": [
+      "video-history",
+      "icon-action-buttons"
+    ],
+    "evidence": [
+      {
+        "path": "src/components/result-page/common/video-feature/filter-dropdown/index.js",
+        "sha256": "348f7a41add7fe21b4ba8894e5e654e83ee47fea209975800bf85de4bbdb22ee",
+        "component": "video-history"
+      },
+      {
+        "path": "src/components/result-page/common/video-feature/filter-dropdown/index.module.scss",
+        "sha256": "605a82df5fd8bbec5e045c7d803589495405fce11a24c0b017a06eb09f0c2aca",
+        "component": "video-history"
+      },
+      {
+        "path": "src/components/result-page/common/video-feature/history-videos/index.js",
+        "sha256": "ec7ae7db4613aaf6d0cc4b93f1f7c669f8ee9a3a1bedce83497fff9558d4b605",
+        "component": "video-history"
+      },
+      {
+        "path": "src/components/result-page/common/video-feature/history-videos/index.module.scss",
+        "sha256": "57cebdeb1ca5053277d625255833d3e5ec412c78fd96cd2538151fb58969ddf9",
+        "component": "video-history"
+      },
+      {
+        "path": "src/components/result-page/common/video-feature/history-videos/result-video/index.js",
+        "sha256": "632134711aa966467d787ba0609d5dbd3bcd5e4aa7ed1d568e5c19ee6a8d73b0",
+        "component": "video-history"
+      },
+      {
+        "path": "src/components/result-page/common/video-feature/history-videos/result-video/index.module.scss",
+        "sha256": "7c8e1e6fcc38ac9b47d473df1a09a66b4145769edf958f4bdcb15da376cadd95",
+        "component": "video-history"
+      },
+      {
+        "path": "src/components/result-page/common/video-feature/history-videos/result-video/video-player/index.js",
+        "sha256": "1ab368ca78d211e2703bdf216ff1b1c4738d4861152465fd07d0d7880469a501",
+        "component": "video-history"
+      },
+      {
+        "path": "src/components/result-page/common/video-feature/history-videos/result-video/video-player/index.module.scss",
+        "sha256": "917c6764aa4e70e070dc176f38eb730cb167703f374e8841c4872feb59f3bcbd",
+        "component": "video-history"
+      },
+      {
+        "path": "src/components/result-page/common/video-feature/icon-action-buttons/icon.js",
+        "sha256": "c57cb61b6392aac3324b01f8593b2a5f3f16d23e1dd5d5e6fe5775a7bc82146f",
+        "component": "icon-action-buttons"
+      },
+      {
+        "path": "src/components/result-page/common/video-feature/icon-action-buttons/index.js",
+        "sha256": "e2d8c7610c9bcb2df3098b694febf4754788017e5c69b0c7ae5401f807605e97",
+        "component": "icon-action-buttons"
+      },
+      {
+        "path": "src/components/result-page/common/video-feature/icon-action-buttons/index.module.scss",
+        "sha256": "f138a0adad1fe02ae76da86f46e2d4c14ce8faac81bcb5ac2e802113bd6f0f9e",
+        "component": "icon-action-buttons"
+      }
+    ]
+  },
+  "decisionBasis": [
+    "Evidence is the vendored RD source every catalogued component in this pattern was ported from, with the hash each file carries in platform/rd-baseline. It is verifiable on any clone by validate:snapshot.",
+    "familyAdoption is how many of the 34 result-page families import the RD surface this pattern models, measured in docs/surfaces/rd-composition-deviations.md. It is context, not approval.",
+    "Visual and geometry parity against a running production page is a separate concern; this status only claims that the structural source is pinned and checkable."
+  ]
+}

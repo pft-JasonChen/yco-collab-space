@@ -1,0 +1,13 @@
+schemaVersion: 1
+pack: pattern/detail-modal
+version: 2026-09
+slots:
+  - id: video-detail-dialog
+    required: true
+    description: Shared dialog over a dark backdrop.
+  - id: next-action
+    required: true
+    description: Shared grid; a feature supplies which actions apply.
+  - id: result-actions
+    required: true
+    description: Same shared row as the History card, minus edit.

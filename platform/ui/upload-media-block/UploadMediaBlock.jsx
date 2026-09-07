@@ -10,7 +10,15 @@ export function formatMediaDuration(seconds) {
   return `${minutes}:${remainder}`;
 }
 
+/** Every user-facing string is a prop so RD can hand them straight to its own t(). */
+const defaultLabels = {
+  preview: 'Preview uploaded video',
+  remove: 'Remove video',
+  replace: 'Replace video',
+};
+
 export default function UploadMediaBlock({
+  labels: labelOverrides = {},
   imageUrl,
   videoUrl,
   videoDuration,
@@ -23,6 +31,7 @@ export default function UploadMediaBlock({
   actionSlot,
   disabled = false,
 }) {
+  const labels = { ...defaultLabels, ...labelOverrides };
   const loaded = Boolean(imageUrl || videoUrl);
 
   if (!loaded) {
@@ -51,7 +60,7 @@ export default function UploadMediaBlock({
         type="button"
         onClick={onPreview}
         aria-disabled={!onPreview || undefined}
-        aria-label="Preview uploaded video"
+        aria-label={labels.preview}
       >
         {videoUrl ? (
           <video src={videoUrl} poster={imageUrl} muted playsInline preload="metadata" />
@@ -66,12 +75,12 @@ export default function UploadMediaBlock({
       </button>
       <div className={styles.actions}>
         {onRemove ? (
-          <button type="button" onClick={onRemove} aria-label="Remove video">
+          <button type="button" onClick={onRemove} aria-label={labels.remove}>
             <img src={removeIcon} alt="" aria-hidden="true" />
           </button>
         ) : null}
         {onReplace ? (
-          <button type="button" onClick={onReplace} aria-label="Replace video">
+          <button type="button" onClick={onReplace} aria-label={labels.replace}>
             <img src={replaceIcon} alt="" aria-hidden="true" />
           </button>
         ) : null}

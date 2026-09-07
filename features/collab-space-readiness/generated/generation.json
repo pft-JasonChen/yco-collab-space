@@ -1,11 +1,11 @@
 {
   "schemaVersion": 3,
   "feature": "collab-space-readiness",
-  "inputHash": "4335a084742b19493296dae0111da501775269bd9a610186a31de1ed6e48081d",
+  "inputHash": "dcdb5fea055e45f26372767e56dce19bde84f0f707abfa7f2ec19ea7b1a54d9e",
   "generatorInstructionsVersion": "collab-contract-v1",
-  "adapter": "contract-shared-library-migration",
-  "model": "not-recorded",
-  "generatedAt": "2026-08-31T13:24:29.329Z",
+  "adapter": "claude",
+  "model": "claude-opus-5",
+  "generatedAt": "2026-09-02T17:17:03.922Z",
   "files": [
     "feature.jsx",
     "feature.module.scss"
@@ -18,6 +18,21 @@
     "requestedCollections": [],
     "selected": [],
     "warnings": []
+  },
+  "components": {
+    "catalogSchemaVersion": 1,
+    "selected": [
+      {
+        "id": "button",
+        "status": "pilot-approved",
+        "figmaStatus": "pending",
+        "contractPath": "design-library/components/button/component.yaml",
+        "contractSha256": "87dc546ef0fd0e7ef6be31b5fd3dbdb1c3f726a97253cce275acba84f3ee5507",
+        "implementationImport": "platform/ui/button/index.js",
+        "implementationSha256": "3a22ded5d192995cdfd69a03c662e61afc90d04cb38d559f879efbb4f5763b0c",
+        "runtimeAssets": []
+      }
+    ]
   },
   "tokens": {
     "sourcePackage": {

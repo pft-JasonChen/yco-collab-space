@@ -1,0 +1,29 @@
+schemaVersion: 1
+pack: pattern/history-list
+version: 2026-09
+snapshot: yce-frontend-gm-260909
+facts:
+  - id: action-row-gap
+    kind: declared
+    rd: { file: src/components/result-page/common/video-feature/icon-action-buttons/index.module.scss, selector: .actionButtons, property: gap }
+    port: { file: platform/ui/icon-action-buttons/IconActionButtons.module.scss, selector: .actionButtons, property: gap }
+
+  - id: action-button-width
+    kind: declared
+    rd: { file: src/components/result-page/common/video-feature/icon-action-buttons/index.module.scss, selector: .iconButton, property: width }
+    port: { file: platform/ui/icon-action-buttons/IconActionButtons.module.scss, selector: .iconButton, property: width }
+
+  - id: action-button-height
+    kind: declared
+    rd: { file: src/components/result-page/common/video-feature/icon-action-buttons/index.module.scss, selector: .iconButton, property: height }
+    port: { file: platform/ui/icon-action-buttons/IconActionButtons.module.scss, selector: .iconButton, property: height }
+
+  - id: action-button-radius
+    kind: declared
+    rd: { file: src/components/result-page/common/video-feature/icon-action-buttons/index.module.scss, selector: .iconButton, property: border-radius }
+    port: { file: platform/ui/icon-action-buttons/IconActionButtons.module.scss, selector: .iconButton, property: border-radius }
+
+  - id: action-button-padding
+    kind: declared
+    rd: { file: src/components/result-page/common/video-feature/icon-action-buttons/index.module.scss, selector: .iconButton, property: padding }
+    port: { file: platform/ui/icon-action-buttons/IconActionButtons.module.scss, selector: .iconButton, property: padding }

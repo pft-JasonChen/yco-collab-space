@@ -1,0 +1,76 @@
+{
+  "$id": "task-contract",
+  "title": "Handoff task contract",
+  "description": "What the feature needs from a backend, expressed as input semantics and bounds. It deliberately carries no endpoint, transport format or API name: the prototype never calls a backend, and inventing a request shape would be inventing a production API. A known real request shape belongs in product/payload-samples/ instead.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "feature", "moduleFamily", "inputs", "outputs", "cost", "asyncStates", "retryable", "decisionBasis"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "feature": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "moduleFamily": {
+      "description": "RD task-strategy family this feature would register under.",
+      "enum": ["ai-video", "ai-image", "ai-photo-editing", "ai-portrait", "batch-editing", "template-feature"]
+    },
+    "inputs": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/port" } },
+    "outputs": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/port" } },
+    "cost": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["credits", "basis"],
+      "properties": {
+        "credits": { "type": "integer", "minimum": 0 },
+        "basis": { "enum": ["per-generation", "per-second", "per-output"] }
+      }
+    },
+    "asyncStates": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "enum": ["queued", "processing", "success", "failed", "cancelled"] }
+    },
+    "retryable": { "type": "boolean" },
+    "payloadSamples": {
+      "description": "Optional de-identified engine request shapes under product/payload-samples/.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "pattern": "^payload-samples/[A-Za-z0-9._-]+\\.json$" }
+    },
+    "openQuestions": {
+      "description": "Things RD must resolve. Recording them here is the point: an unanswered question is cheaper than a guessed answer.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "question", "owner"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "question": { "type": "string", "minLength": 1 },
+          "owner": { "enum": ["rd", "pm", "designer"] }
+        }
+      }
+    },
+    "decisionBasis": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+  },
+  "$defs": {
+    "port": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "description"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+        "kind": { "enum": ["video", "image", "audio", "text", "enum", "number", "time-range", "point2d", "boolean"] },
+        "origin": { "enum": ["user-upload", "user-input", "derived", "history-result", "sample"] },
+        "required": { "type": "boolean" },
+        "values": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "unit": { "type": "string", "minLength": 1 },
+        "constraints": { "type": "object" },
+        "contract": {
+          "description": "State or action id in prototype.contract.yaml that this port is observable through.",
+          "type": "string", "minLength": 1
+        },
+        "description": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

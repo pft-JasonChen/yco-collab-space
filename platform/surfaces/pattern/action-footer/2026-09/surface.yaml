@@ -1,0 +1,16 @@
+schemaVersion: 1
+id: pattern/action-footer
+version: 2026-09
+kind: module
+status: provisional
+shell: action-footer
+zones:
+  - id: primary-action
+    required: true
+    description: The one action that starts the work, plus its cost.
+responsivePriority:
+  - The action spans the inspector width and stays pinned while the inspector scrolls.
+  - Cost stays visible next to the label; it never wraps to a second line.
+decisionBasis:
+  - A pattern is a region reused across page types, not a page type. It is catalogued as a module so a Surface Pack can compose it instead of restating it.
+  - Every slot resolves to a catalogued component in design-library/components, so reuse evidence in surface-intent can name the same ids.

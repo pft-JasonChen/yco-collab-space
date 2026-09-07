@@ -4,7 +4,16 @@ import { fromRoot, pathExists, walkFiles } from '../prototype-cli/project.mjs';
 
 const dist = fromRoot('dist');
 if (!(await pathExists(dist))) throw new Error('dist is missing. Run build:app before public-build validation.');
-const forbidden = ['design-library-index.json', '.collab-cache', 'media-intent.yaml', 'tokens.lock.json'];
+// payload-samples record real engine request shapes for RD; they are handoff
+// material and must never reach a publicly reachable preview.
+const forbidden = [
+  'design-library-index.json',
+  '.collab-cache',
+  'media-intent.yaml',
+  'tokens.lock.json',
+  'payload-samples',
+  'rd-baseline',
+];
 const failures = [];
 for (const file of await walkFiles(dist)) {
   const relative = path.relative(dist, file).split(path.sep).join('/');

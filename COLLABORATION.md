@@ -59,6 +59,8 @@ source-of-truth 後，再重新生成 prototype。
 | `product/validation.yaml` | 驗收條件 | PM | Source of truth |
 | `product/surface-intent.yaml` | `reuse`／`hybrid`／`novel` 的 Surface 決策 | PM | Source of truth |
 | `product/mocks/**` | 假資料；不得包含正式資料或後端連線 | PM | Source of truth |
+| `product/i18n.json` | 使用者可見文案，用 RD 全域扁平 key；`origin: rd-existing` 表示 RD 已有該 key，`new` 表示 RD 要新增 | PM | Source of truth |
+| `product/payload-samples/**` | 選用。已知的 engine payload 形狀，供 RD 直接串 API。必須去識別化 | PM | Source of truth |
 | `product/decisions.md` | 會影響產品或架構的決策與判斷依據 | PM | Source of truth |
 | `product/media-intent.yaml` | 本功能要查詢的全域素材 collection與用途 | PM | Source of truth |
 | `product/mock-assets/**` | PM第一版暫時素材；design-final禁止 | PM | Temporary source |
@@ -74,6 +76,7 @@ source-of-truth 後，再重新生成 prototype。
 | `design-library/assets/<type>/<collection>/**` | 全域共用或目前feature-specific的 Designer素材 | Designer上傳；不需 manifest |
 | `design-library/tokens/**`、`components/**`、`patterns/**` | 未來 Figma export與Designer/RD共同契約 | Designer／RD共同決定；目前可逐步補 |
 | `platform/tokens/rd/**` | RD 提供的 design token snapshot，現階段的 token 基準 | 視為唯讀；缺漏由 Designer／RD 討論後補充 |
+| `platform/rd-baseline/**` | 宣告 `verbatim` 的 RD 原始檔，供 `validate:rd-parity` 逐字比對 | 視為唯讀；只能由 `component-foundation-pilot` 增刪 |
 | `platform/surfaces/**` | 可重用的 Surface Pack | Collab Space Owner 管理 |
 | `platform/ui/**`、`platform/runtime/**` | 共用 UI 與 prototype runtime | 平台層變更，需比單一 feature 更嚴格 review |
 | `tools/**`、`evals/**` | 生成、驗證與 evaluation 系統 | Collab Space Owner／工具開發者 |
@@ -160,9 +163,30 @@ npm run test:rendered -- --feature <feature-slug>
 | RD 要開始正式開發 | PM 告知哪個 feature 已達 design-final | RD 取得整個 repo，自行搬到 RD repo 串後端 |
 | 新功能沒有可用 Surface | PM 選 `novel`，記錄理由 | 先做 provisional structure，不因 catalog 缺少頁型而卡住 |
 
+## 交給 RD 的東西保證到什麼程度
+
+這個空間的產物是**行為規格 + 已組好的 UI**，不是 production 程式碼。
+
+| 保證 | 說明 |
+|---|---|
+| **行為等價** | `prototype.contract.yaml` 的狀態機與 `validation.yaml` 的 selector 級斷言，是可執行的驗收條件 |
+| **hash 可稽核** | `generation.json` 鎖住輸入、素材、共用元件與 token 的 hash；任何一項變動都會讓舊核准失效 |
+| **共用元件可攜等級** | 每份 `component.yaml` 的 `rd.portability` 說明 RD 能怎麼用：`verbatim`（逐字相同，由 `validate:rd-parity` 保護）／`drop-in`（改 import alias、接回 i18n/redux）／`reference`（只是參考） |
+| **文案有 key** | `product/i18n.json` 用 RD 的全域扁平命名；`origin: new` 的子集就是 RD 要新增的部分 |
+
+**不保證的事：** 逐 byte 重現。`generation.json` 記錄 adapter 與 model，但 LLM 生成本身
+不是決定性的。同一份輸入重跑會得到「符合同一份 contract 與 rendered check」的 prototype，
+不是同一份檔案。要凍結某一版就用 `stage:transition`，不要期待重跑能複製它。
+
+**`validation.yaml` 的雙重身分：** 它同時是 PM 的驗收條件，也是實作契約 —— 裡面的
+`data-testid` selector 直接決定生成的 code 長什麼樣。PM 改一個 selector 等於改實作規格，
+所以 selector 的增刪要跟改需求一樣慎重。
+
 ## 所有人都要遵守的界線
 
 - Prototype 一律使用假資料，不串後端，不放正式個資、token 或 secret。
+- `generated/**` 不得出現寫死的使用者可見字串；文案一律走 `product/i18n.json`。
+- `payload-samples/**` 必須去識別化，且永遠不會進公開 build（`validate:public-build` 會擋）。
 - `generated/**` 是可重建成果，不是 source of truth；任何修改都應先回到 PM 或
   Designer 的來源檔。
 - RD tokens 是現階段基準；現有舊專案內的 local tokens 不作為新 repo 的依據。

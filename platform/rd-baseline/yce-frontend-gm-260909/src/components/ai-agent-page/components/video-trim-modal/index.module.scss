@@ -1,0 +1,61 @@
+@import "@/styles/variables.scss";
+
+.trimModal {
+  position: relative;
+}
+
+.trimContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-24);
+}
+
+.trimTitle {
+  font-size: var(--font-size-heading-3);
+  line-height: var(--line-height-heading-3);
+  font-weight: 600;
+  color: var(--text-strong);
+}
+
+.trimActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-8);
+}
+
+.btnCancel,
+.btnUse {
+  height: 42px;
+  padding: 0 var(--spacing-16);
+  border-radius: var(--corner-radius-32);
+  font-size: var(--font-size-heading-5);
+  line-height: var(--line-height-heading-5);
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+}
+
+.btnCancel {
+  background: rgb(255 255 255 / 1%);
+  color: var(--text-strong);
+  border: 1px solid var(--grey-light-200);
+
+  &:hover {
+    background: rgb(17 24 26 / 4%);
+  }
+}
+
+.btnUse {
+  background: var(--blue-light-1000);
+  color: #fff;
+
+  &:disabled {
+    background: var(--grey-light-200);
+    color: #fff;
+    cursor: not-allowed;
+  }
+
+  &:not(:disabled):hover {
+    background: #029cc9;
+  }
+}

@@ -1,0 +1,26 @@
+schemaVersion: 1
+id: pattern/tool-page
+version: 2026-09
+kind: module
+status: provisional
+shell: tool-page
+zones:
+  - id: tool-navigation
+    required: true
+    description: "Global chrome: logo, tool-family rail, credit display, account entry."
+  - id: settings-inspector
+    required: true
+    description: Left column. Feature controls, stacked in the order the product declares.
+  - id: primary-action
+    required: true
+    description: Pinned footer of the settings column. One action plus its cost.
+  - id: result-column
+    required: true
+    description: Right column. Whatever the feature produces or is editing.
+responsivePriority:
+  - Keep the result column dominant; the inspector yields width first.
+  - Below the settings breakpoint the inspector stacks above the result and the primary action stays reachable.
+  - Global chrome never scrolls away with the columns.
+decisionBasis:
+  - A pattern is a region reused across page types, not a page type. It is catalogued as a module so a Surface Pack can compose it instead of restating it.
+  - Every slot resolves to a catalogued component in design-library/components, so reuse evidence in surface-intent can name the same ids.

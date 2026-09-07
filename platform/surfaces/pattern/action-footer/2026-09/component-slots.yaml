@@ -1,0 +1,10 @@
+schemaVersion: 1
+pack: pattern/action-footer
+version: 2026-09
+slots:
+  - id: generate-action-with-credit
+    required: true
+    description: Shared button with a credit badge.
+  - id: credit-control
+    required: false
+    description: Balance display, when the surface shows one.

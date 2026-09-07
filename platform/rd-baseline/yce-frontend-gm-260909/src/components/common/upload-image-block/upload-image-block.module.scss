@@ -1,0 +1,192 @@
+@import "@/styles/variables.scss";
+
+.container,
+.containerDragging {
+  position: relative;
+  width: 100%;
+  max-height: $upload-block-height;
+  aspect-ratio: 368 / 136;
+  display: flex;
+  align-items: center;
+  padding: 24px;
+  cursor: pointer;
+  background-color: var(--fill-weaker);
+}
+
+.containerDragging {
+  background-color: #c7e8f2;
+}
+
+.icon {
+  margin-right: 16px;
+}
+
+.textWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.uploadTitle {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  font-weight: 400;
+  color: rgb(9 22 26 / 95%);
+}
+
+.uploadDesc {
+  font-size: var(--font-size-micro);
+  line-height: var(--line-height-micro);
+  font-weight: 400;
+  color: rgb(17 24 26 / 45%);
+}
+
+.descTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 2px;
+}
+
+.descTag {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 6px;
+  border: 1px solid #11181a1a;
+  border-radius: 4px;
+  font-size: var(--font-size-micro);
+  line-height: var(--line-height-micro);
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.mediaContainer {
+  position: relative;
+  width: 100%;
+  max-height: $upload-block-height;
+  aspect-ratio: 368 / 136;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border: 1px solid var(--stroke-weak);
+  border-radius: var(--corner-radius-8);
+  background-color: var(--fill-weaker);
+  gap: 16px;
+}
+
+// Both wrappers letterbox their media in a 16:9 box and shrink with the
+// container so the sibling button column always fits. max-height lives on
+// the wrapper (concrete px, not 100%) because iOS Safari 26 doesn't
+// propagate mediaContainer's aspect-ratio derived height through the
+// percentage chain — leaf elements end up unbounded. Wrapper also caps
+// <video>, which re-sizes from metadata and ignores CSS max-height set
+// directly on the element. overflow: hidden is a safety net so a
+// misbehaving leaf (e.g. <img> rendering at natural intrinsic size when
+// the percentage chain fails) gets clipped instead of escaping.
+.imageWrapper,
+.videoWrapper {
+  flex: 0 1 auto;
+  min-width: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  max-height: $upload-preview-height;
+  max-width: 100%;
+  aspect-ratio: 16 / 9;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: var(--corner-radius-4);
+}
+
+.videoWrapper {
+  background-color: var(--fill-weak);
+}
+
+.video {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: var(--corner-radius-4);
+}
+
+.image {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: var(--corner-radius-4);
+  cursor: pointer;
+}
+
+.videoOverlayBtn {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 50%;
+  background: var(--fill-overlay-strong);
+  cursor: pointer;
+  padding: 0;
+  z-index: 1;
+
+  &:hover {
+    background: rgb(0 0 0 / 80%);
+  }
+}
+
+.videoMuteBtn {
+  left: 4px;
+  bottom: 4px;
+}
+
+.videoPlayBtn {
+  left: 50%;
+  bottom: 4px;
+  transform: translateX(-50%);
+}
+
+.videoDurationText {
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  font-size: var(--font-size-micro);
+  line-height: var(--line-height-micro);
+  font-weight: 600;
+  color: white;
+  background: var(--fill-overlay-strong);
+  border-radius: var(--corner-radius-32);
+  padding: 4px 8px;
+  height: 24px;
+  z-index: 1;
+}
+
+.iconCancelWrapper {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border: 1px solid var(--stroke-strong);
+  border-radius: var(--corner-radius-32);
+  cursor: pointer;
+}
+
+.iconButtonGroup {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.uploadHint {
+  margin-top: 4px;
+  font-size: var(--font-size-micro);
+  line-height: var(--line-height-micro);
+  font-weight: 400;
+  letter-spacing: 0;
+  color: rgb(17 24 26 / 65%);
+}

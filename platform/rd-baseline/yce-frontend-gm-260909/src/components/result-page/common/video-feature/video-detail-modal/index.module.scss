@@ -1,0 +1,216 @@
+@import "@/styles/variables.scss";
+
+%common-title {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+%common-sub-title {
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+  color: var(--text-weak);
+}
+
+.header {
+  margin-bottom: 12px;
+}
+
+.title {
+  @extend %common-title;
+}
+
+.subTitle {
+  @extend %common-sub-title;
+}
+
+// Modal's base styles can be duplicated into lazy-loaded webpack chunks and
+// injected after this stylesheet. Raise specificity so these overrides do not
+// depend on runtime stylesheet order.
+.modalBackground.modalBackground {
+  padding: 40px;
+
+  @include rwd-custom($width-992) {
+    padding: 40px 16px;
+  }
+}
+
+.modalContainer.modalContainer {
+  padding: 32px;
+  width: 100%;
+  height: 100%;
+
+  @include rwd-custom($width-992) {
+    padding: 32px 16px;
+  }
+}
+
+.content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  gap: 16px;
+
+  @include rwd-custom($width-992) {
+    flex-direction: column;
+    overflow: hidden auto;
+
+    // 隱藏 scrollbar
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
+.left {
+  // 680px
+  flex: 17;
+
+  @include rwd-custom($width-992) {
+    // flex: 1;
+    flex: none;
+  }
+}
+
+.right {
+  // 320px
+  flex: 8;
+  max-width: 360px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 0 12px;
+
+  @include rwd-custom($width-992) {
+    // flex: 1;
+    flex: none;
+    max-width: none;
+  }
+}
+
+.videoWrapper {
+  width: 100%;
+  height: 100%;
+  flex: 1 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-color: var(--fill-weak);
+  border-radius: 8px;
+  margin: 0;
+  position: relative;
+}
+
+.video {
+  max-width: calc(100% + 1px);
+  max-height: calc(100% + 1px);
+
+  // width: calc(100% + 1px);
+  height: calc(100% + 1px);
+  display: block;
+  image-rendering: optimizequality;
+  image-rendering: crisp-edges;
+  image-rendering: optimize-contrast;
+  object-fit: contain;
+}
+
+.scrollArea {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow: hidden auto;
+
+  // padding-bottom: 16px;
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--stroke-weak);
+  }
+}
+
+.imageWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  // 垂直鎖死、只留水平捲；高度不設上限，水平 scrollbar 出現時容器自動長高
+  // longhand 而非兩值 shorthand：Safari 15 以下不支援 shorthand，會整條失效
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+// 每個 row 各自從左到右緊密排列；max-content 撐出完整捲動寬度
+.sourceRow {
+  display: flex;
+  gap: 4px;
+  width: max-content;
+}
+
+.videoThumbnail {
+  position: relative;
+  max-height: 100px;
+}
+
+.sourceImage,
+.sourceVideo {
+  width: auto;
+  max-height: 100px;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  border-radius: 4px;
+  background-color: var(--fill-weak);
+  flex-shrink: 0;
+}
+
+.playIcon {
+  position: absolute;
+  left: 4px;
+  bottom: 4px;
+}
+
+.detailRow {
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  & > * {
+    flex: 1;
+  }
+
+  &:not(:first-child) {
+    margin-top: 8px;
+  }
+}
+
+.modelName,
+.resolution,
+.duration {
+  font-size: var(--font-size-micro);
+  line-height: var(--line-height-micro);
+  font-weight: 600;
+}
+
+.nextActionContainer {
+  width: 100% !important;
+  margin-top: 16px;
+}
+
+.close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  object-position: center;
+  cursor: pointer;
+}
+
+.nextOptionButton {
+  @include rwd-custom($width-992) {
+    white-space: nowrap;
+  }
+}

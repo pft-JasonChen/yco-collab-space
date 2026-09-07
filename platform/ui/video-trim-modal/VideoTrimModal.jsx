@@ -9,7 +9,7 @@ import {
   formatDuration,
   getPxPerSecond,
   getThumbnailWidth,
-  snapRange,
+  snapTrimRangeToDisplayedDuration,
 } from './constants.js';
 import useFrameThumbnails from './useFrameThumbnails.js';
 import useTrimDrag from './useTrimDrag.js';
@@ -49,6 +49,7 @@ function TrimTimeline({
   resume,
   onReadyChange,
   maxLengthLabel,
+  labels,
 }) {
   const isCompact = typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches;
   const thumbnailHeight = isCompact ? THUMBNAIL_HEIGHT_MOBILE : THUMBNAIL_HEIGHT;
@@ -90,7 +91,7 @@ function TrimTimeline({
         <strong data-testid="trim-selection-duration">{formatDuration(selectedSeconds)}</strong>
       </div>
       <div className={styles.timelineRow}>
-        <button className={styles.timelinePlay} type="button" onClick={onTogglePlay} aria-label={isPlaying ? 'Pause video' : 'Play video'}>
+        <button className={styles.timelinePlay} type="button" onClick={onTogglePlay} aria-label={isPlaying ? labels.pause : labels.play}>
           <PlayIcon paused={isPlaying} />
         </button>
         <div className={styles.framesArea} ref={framesAreaRef} onPointerDown={startTrackSeek}>
@@ -106,12 +107,12 @@ function TrimTimeline({
           <div className={styles.rangeOverlay}>
             <span className={styles.darkRange} style={{ width: `${leftWidth}px` }} />
             <span className={styles.rangeBox} style={{ width: `${rangeWidth}px` }}>
-              <button className={styles.handleLeft} data-testid="trim-handle-start" type="button" onPointerDown={startDrag('left')} aria-label="Trim start"><span /></button>
-              <button className={styles.handleRight} data-testid="trim-handle-end" type="button" onPointerDown={startDrag('right')} aria-label="Trim end"><span /></button>
+              <button className={styles.handleLeft} data-testid="trim-handle-start" type="button" onPointerDown={startDrag('left')} aria-label={labels.trimStart}><span /></button>
+              <button className={styles.handleRight} data-testid="trim-handle-end" type="button" onPointerDown={startDrag('right')} aria-label={labels.trimEnd}><span /></button>
             </span>
             <span className={styles.darkRange} style={{ flex: 1 }} />
           </div>
-          <button className={styles.playhead} type="button" style={{ transform: `translateX(${playheadLeft}px)` }} onPointerDown={startDrag('playhead')} aria-label="Video playhead"><span /></button>
+          <button className={styles.playhead} type="button" style={{ transform: `translateX(${playheadLeft}px)` }} onPointerDown={startDrag('playhead')} aria-label={labels.playhead}><span /></button>
         </div>
       </div>
     </section>
@@ -126,7 +127,24 @@ function useObjectUrl(file) {
   return url;
 }
 
+/** Every user-facing string is a prop so RD can hand them straight to its own t(). */
+const defaultLabels = {
+  title: 'Trim video',
+  cancel: 'Cancel',
+  confirm: 'Use Video',
+  maxLength: 'Select up to the maximum length',
+  close: 'Close trim dialog',
+  trimStart: 'Trim start',
+  trimEnd: 'Trim end',
+  playhead: 'Video playhead',
+  play: 'Play video',
+  pause: 'Pause video',
+  mute: 'Mute video',
+  unmute: 'Unmute video',
+};
+
 export default function VideoTrimModal({
+  labels: labelOverrides = {},
   opened,
   videoFile = null,
   videoUrl = null,
@@ -136,8 +154,8 @@ export default function VideoTrimModal({
   maximumSeconds = 60,
   minimumSeconds = 5,
   durationOverride = null,
-  labels = {},
 }) {
+  const labels = { ...defaultLabels, ...labelOverrides };
   const objectUrl = useObjectUrl(videoFile);
   const activeUrl = objectUrl || videoUrl;
   const {
@@ -186,7 +204,7 @@ export default function VideoTrimModal({
   const handleConfirm = () => {
     if (tooLong || tooShort || !thumbnailsReady) return;
     stop();
-    onConfirm?.(snapRange(trimRange), snapshot());
+    onConfirm?.(snapTrimRangeToDisplayedDuration(trimRange), snapshot());
   };
 
   return createPortal(
@@ -200,13 +218,13 @@ export default function VideoTrimModal({
         aria-labelledby="platform-video-trim-title"
         onMouseDown={(event) => event.stopPropagation()}
       >
-        <button className={styles.closeButton} type="button" onClick={handleCancel} aria-label="Close trim dialog">×</button>
+        <button className={styles.closeButton} type="button" onClick={handleCancel} aria-label={labels.close}>×</button>
         <div className={styles.content}>
-          <h2 id="platform-video-trim-title">{labels.title || 'Trim video'}</h2>
+          <h2 id="platform-video-trim-title">{labels.title}</h2>
           <div className={styles.preview} style={{ aspectRatio }}>
             <video ref={videoRef} src={activeUrl} preload="auto" playsInline muted={isMuted} onLoadedMetadata={handleLoadedMetadata} />
-            <button className={styles.previewPlay} type="button" onClick={togglePlay} aria-label={isPlaying ? 'Pause video' : 'Play video'}><span><PlayIcon paused={isPlaying} /></span></button>
-            <button className={styles.muteButton} type="button" onClick={toggleMute} aria-label={isMuted ? 'Unmute video' : 'Mute video'}><MuteIcon muted={isMuted} /></button>
+            <button className={styles.previewPlay} type="button" onClick={togglePlay} aria-label={isPlaying ? labels.pause : labels.play}><span><PlayIcon paused={isPlaying} /></span></button>
+            <button className={styles.muteButton} type="button" onClick={toggleMute} aria-label={isMuted ? labels.unmute : labels.mute}><MuteIcon muted={isMuted} /></button>
           </div>
           <TrimTimeline
             videoRef={videoRef}
@@ -224,11 +242,12 @@ export default function VideoTrimModal({
             stop={stop}
             resume={resume}
             onReadyChange={setThumbnailsReady}
-            maxLengthLabel={labels.maxLength || `Select ${minimumSeconds}–${maximumSeconds} seconds`}
+            labels={labels}
+            maxLengthLabel={labels.maxLength}
           />
           <div className={styles.actions}>
-            <button data-testid="trim-cancel" type="button" onClick={handleCancel}>{labels.cancel || 'Cancel'}</button>
-            <button data-testid="trim-use-video" type="button" onClick={handleConfirm} disabled={tooLong || tooShort || !thumbnailsReady}>{labels.confirm || 'Use Video'}</button>
+            <button data-testid="trim-cancel" type="button" onClick={handleCancel}>{labels.cancel}</button>
+            <button data-testid="trim-use-video" type="button" onClick={handleConfirm} disabled={tooLong || tooShort || !thumbnailsReady}>{labels.confirm}</button>
           </div>
         </div>
       </section>

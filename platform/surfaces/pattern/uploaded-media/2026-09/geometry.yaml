@@ -1,0 +1,15 @@
+schemaVersion: 1
+pack: pattern/uploaded-media
+version: 2026-09
+snapshot: yce-frontend-gm-260909
+facts:
+  - id: upload-block-aspect-ratio
+    kind: declared
+    rd: { file: src/components/common/upload-image-block/upload-image-block.module.scss, selector: .container, property: aspect-ratio }
+    port: { file: platform/ui/upload-media-block/UploadMediaBlock.module.scss, selector: .uploadBlock, property: aspect-ratio }
+    note: Compared literally; a ratio is not a length.
+
+  - id: upload-block-padding
+    kind: declared
+    rd: { file: src/components/common/upload-image-block/upload-image-block.module.scss, selector: .container, property: padding }
+    port: { file: platform/ui/upload-media-block/UploadMediaBlock.module.scss, selector: .uploadBlock, property: padding }

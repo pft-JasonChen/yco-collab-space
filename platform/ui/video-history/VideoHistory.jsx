@@ -6,7 +6,19 @@ function CardIcon({ name }) {
   return <ActionIcon className={styles.actionIcon} name={name} />;
 }
 
-export function VideoHistoryCard({ item, actions = defaultResultActions, onOpen, onRetry, onLike, onDislike, onEdit, onDownload }) {
+/** Every user-facing string is a prop so RD can hand them straight to its own t(). */
+const defaultLabels = {
+  prompt: 'Prompt',
+  processingLabel: 'Generating video',
+  processingDescription: 'Preparing your result…',
+  failureLabel: 'Video generation failed',
+  retry: 'Retry',
+  openDetail: 'Open {{title}} details',
+  untitled: 'video',
+};
+
+export function VideoHistoryCard({ item, actions = defaultResultActions, labels: labelOverrides = {}, onOpen, onRetry, onLike, onDislike, onEdit, onDownload }) {
+  const labels = { ...defaultLabels, ...labelOverrides };
   const status = item.status ?? 'success';
   const processing = status === 'processing';
   const failed = status === 'failed';
@@ -18,21 +30,21 @@ export function VideoHistoryCard({ item, actions = defaultResultActions, onOpen,
         {item.date ? <time>{item.date}</time> : null}
       </div>
       {item.prompt ? (
-        <p className={styles.prompt}><strong>Prompt</strong><span>{item.prompt}</span></p>
+        <p className={styles.prompt}><strong>{labels.prompt}</strong><span>{item.prompt}</span></p>
       ) : null}
       <div className={styles.media}>
         {processing ? (
           <div className={styles.processing} data-testid={item.testId ?? 'generation-processing-card'}>
             <span className={styles.spinner} aria-hidden="true" />
-            <strong>{item.processingLabel ?? 'Generating video'}</strong>
-            <small>{item.processingDescription ?? 'Preparing your result…'}</small>
+            <strong>{item.processingLabel ?? labels.processingLabel}</strong>
+            <small>{item.processingDescription ?? labels.processingDescription}</small>
           </div>
         ) : failed ? (
           <div className={styles.failed}>
             <CardIcon name="warning" />
-            <strong>{item.failureLabel ?? 'Video generation failed'}</strong>
+            <strong>{item.failureLabel ?? labels.failureLabel}</strong>
             <small>{item.failureDescription}</small>
-            <button data-testid={item.retryTestId} type="button" onClick={() => onRetry?.(item)}>Retry</button>
+            <button data-testid={item.retryTestId} type="button" onClick={() => onRetry?.(item)}>{labels.retry}</button>
           </div>
         ) : (
           <video
@@ -44,7 +56,7 @@ export function VideoHistoryCard({ item, actions = defaultResultActions, onOpen,
             playsInline
             preload="metadata"
             onClick={() => onOpen?.(item)}
-            aria-label={`Open ${item.title ?? 'video'} details`}
+            aria-label={labels.openDetail.replace('{{title}}', item.title ?? labels.untitled)}
           />
         )}
       </div>
@@ -74,6 +86,7 @@ export function VideoHistoryCard({ item, actions = defaultResultActions, onOpen,
 }
 
 export default function VideoHistory({
+  labels: labelOverrides = {},
   items = [],
   actions = defaultResultActions,
   filterLabel = 'All',
@@ -87,6 +100,7 @@ export default function VideoHistory({
   className = '',
   showFilter = false,
 }) {
+  const labels = { ...defaultLabels, ...labelOverrides };
   return (
     <section className={`${styles.history} ${className}`} data-testid="shared-video-history" data-component-role="history-list">
       {showFilter ? <div className={styles.toolbar}>
@@ -100,6 +114,7 @@ export default function VideoHistory({
             key={item.id}
             item={item}
             actions={actions}
+            labels={labels}
             onOpen={onOpen}
             onRetry={onRetry}
             onLike={onLike}

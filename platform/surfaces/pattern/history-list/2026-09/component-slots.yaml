@@ -1,0 +1,13 @@
+schemaVersion: 1
+pack: pattern/history-list
+version: 2026-09
+slots:
+  - id: history-list
+    required: true
+    description: Shared list container.
+  - id: history-card
+    required: true
+    description: Shared card. A feature supplies data and one cross-tool action.
+  - id: result-actions
+    required: true
+    description: Like, dislike, edit, download. Shared; see design-library/components/icon-action-buttons.

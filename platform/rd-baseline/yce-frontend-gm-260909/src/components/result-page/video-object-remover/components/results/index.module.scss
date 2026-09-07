@@ -1,0 +1,95 @@
+@import "@/styles/variables.scss";
+
+.container {
+  position: relative;
+  flex: 1 1 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  @include rwd-custom($width-lg) {
+    height: auto;
+    background: var(--background-alternate);
+  }
+}
+
+.tabControlWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+
+  @include rwd-custom($width-lg) {
+    flex-direction: column;
+    position: fixed;
+    top: 64px;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    background: var(--background-alternate);
+  }
+}
+
+.tabControlSpacer {
+  display: none;
+
+  @include rwd-custom($width-lg) {
+    display: block;
+    min-height: 80px;
+    flex-shrink: 0;
+  }
+
+  &.withFilter {
+    @include rwd-custom($width-lg) {
+      min-height: 132px;
+    }
+  }
+}
+
+.overflowHidden {
+  overflow: hidden;
+  height: 100%;
+
+  @include rwd-custom($width-lg) {
+    overflow: visible;
+    height: auto;
+    flex: 1;
+    min-height: 0;
+  }
+}
+
+.slideBlock {
+  flex: 1 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  transition: transform 400ms ease;
+}
+
+.resultContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  padding: 0 24px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+
+  @include rwd-custom($width-lg) {
+    padding: 0 16px 16px;
+  }
+
+  &.hasVideo {
+    padding: 0 24px 8px;
+
+    @include rwd-custom($width-lg) {
+      padding: 0 16px 16px;
+    }
+  }
+}
