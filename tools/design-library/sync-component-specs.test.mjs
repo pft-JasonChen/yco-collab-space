@@ -17,6 +17,7 @@ function contract(overrides = {}) {
       sourcePackage: 'youcam-enhance-frontend',
       sourceVersion: '1.34.1',
       snapshot: 'yce-frontend-gm-260909',
+      portability: 'reference',
       sourcePaths: ['src/components/common/widget/index.js'],
       sourceHashes: [{ path: 'src/components/common/widget/index.js', sha256: 'a'.repeat(64) }],
     },
