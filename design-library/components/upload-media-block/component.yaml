@@ -36,6 +36,16 @@ implementation:
   framework: react
   dependencies: [react]
   removedDependencies: [redux, i18n, module-types, upload-timing, media-preview-modal, file-drop-hook, production-file-input]
+  localFiles:
+    - path: platform/ui/upload-media-block/UploadMediaBlock.jsx
+      sha256: c0c491ab21a9eedb7e0caedc2ebcdf1a0eeae36cdf05fbe857e9bf4e642b8166
+    - path: platform/ui/upload-media-block/UploadMediaBlock.module.scss
+      sha256: 9096ab9df0d0a6df39c07ea29d87eff8b576e7291512b777ab971dbe815e124e
+    - path: platform/ui/upload-media-block/UploadMediaBlock.stories.jsx
+      sha256: 38d6557a579e8bd3017af83c621d0a481659d1437c6a7a38b3c6d2309ebe8b5e
+    - path: platform/ui/upload-media-block/index.js
+      sha256: 9757155b48721ec8ee15072c84d89da4fe9576aee46d2ba7dd110c455368d0fb
+  localFilesUpdated: 2026-09-05
 publicApi:
   props:
     - name: imageUrl

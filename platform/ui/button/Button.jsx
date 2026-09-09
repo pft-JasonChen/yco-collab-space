@@ -23,15 +23,25 @@ const buttonSizes = {
 };
 
 export default function Button({
+  /** Button label content. */
   children,
+  /** Visual hierarchy (Figma "Type"). */
   variant = buttonVariants.PRIMARY,
+  /** Colour role. */
   tone = buttonTones.BRAND,
+  /** Height/padding/type-scale step. */
   size = buttonSizes.MEDIUM,
+  /** Icon rendered before the label. */
   leadingIcon = null,
+  /** Icon rendered after the label; replaced by the loading spinner while `isLoading` is true. */
   trailingIcon = null,
+  /** Shows a spinner in the trailing-icon slot and forces the button disabled/`aria-busy`. */
   isLoading = false,
+  /** Disables the button (also forced true while `isLoading`). */
   disabled = false,
+  /** Extra class name(s) appended for a consuming component's own layout tweaks (e.g. full width). */
   className = '',
+  /** Native HTML button behaviour inside a `<form>`; unrelated to `variant`. */
   type = 'button',
   ...buttonProps
 }) {
@@ -52,9 +62,15 @@ export default function Button({
       aria-busy={isLoading || undefined}
       {...buttonProps}
     >
-      {leadingIcon ? <span className={styles.buttonIcon}>{leadingIcon}</span> : null}
+      {leadingIcon && <span className={styles.buttonIcon}>{leadingIcon}</span>}
       <span className={styles.label}>{children}</span>
-      {trailingIcon ? <span className={styles.buttonIcon}>{trailingIcon}</span> : null}
+      {isLoading ? (
+        <span className={styles.buttonIcon}>
+          <span className={styles.spinner} aria-hidden="true" />
+        </span>
+      ) : (
+        trailingIcon && <span className={styles.buttonIcon}>{trailingIcon}</span>
+      )}
     </button>
   );
 }

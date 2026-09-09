@@ -30,6 +30,20 @@ implementation:
   framework: react
   dependencies: [react]
   removedDependencies: [redux, i18n, countly-analytics, routing, download-service, task-fetching]
+  localFiles:
+    - path: platform/ui/icon-action-buttons/ActionIcon.jsx
+      sha256: fad0d8963126ae2a29d26feaa6a0c74991783fc4b33eeb28f7b7c62d26897977
+    - path: platform/ui/icon-action-buttons/IconActionButtons.jsx
+      sha256: d81b6a4b756207bcbb79b700fd67c7d4e667d4cc6c3ee2c52df294628be5ed3b
+    - path: platform/ui/icon-action-buttons/IconActionButtons.module.scss
+      sha256: b255964c0e65e1a6606f14364bf2eb12f7627196eb575a5f81db14b53c8905cf
+    - path: platform/ui/icon-action-buttons/IconActionButtons.stories.jsx
+      sha256: 59b7f38f83c9997daebc856d5ff8fe89538145c7a85bc01d0bcca2cdc3a0aa60
+    - path: platform/ui/icon-action-buttons/index.js
+      sha256: 8e245c526f852cabc089a9cb35de391577f52ad2601b045c101d27dd2c2c59c7
+    - path: platform/ui/icon-action-buttons/reaction-store.js
+      sha256: efbb1cbf11b7011de8d0754683acf02201d13addbe79845ed37ecc667ee090b2
+  localFilesUpdated: 2026-09-05
 publicApi:
   props:
     - name: videoId

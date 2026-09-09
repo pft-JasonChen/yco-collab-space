@@ -28,20 +28,10 @@ const stories = [
       assert.equal(await button.isEnabled(), true);
     },
   },
-  {
-    id: 'ui-button--secondary',
-    axeRules: brandContrastException,
-    async interact(page) {
-      await page.getByRole('button', { name: 'Cancel' }).waitFor({ state: 'visible' });
-    },
-  },
-  {
-    id: 'ui-button--tertiary',
-    axeRules: brandContrastException,
-    async interact(page) {
-      await page.getByRole('button', { name: 'Learn more' }).waitFor({ state: 'visible' });
-    },
-  },
+  // Secondary/Tertiary no longer have dedicated stories — Type is Controls-only
+  // (see platform/ui/button/Button.stories.jsx). Their old checks only asserted
+  // label visibility with no variant-specific behaviour, so nothing here replaces
+  // them; Primary above already covers "the button renders and is visible".
   {
     id: 'ui-button--disabled',
     async interact(page) {
@@ -57,7 +47,7 @@ const stories = [
     },
   },
   {
-    id: 'ui-button--with-icon',
+    id: 'ui-button--trailing-icon',
     axeRules: brandContrastException,
     async interact(page) {
       await page.getByRole('button', { name: 'Next' }).waitFor({ state: 'visible' });

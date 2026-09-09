@@ -59,7 +59,6 @@
 
 .ycoButton:disabled {
   cursor: not-allowed;
-  opacity: 0.5;
 }
 
 /* ----- Sizes ----- */
@@ -73,7 +72,10 @@
 }
 
 .size_small {
-  min-height: var(--spacing-40);
+  /* Figma wants 36px; the RD spacing scale only has --spacing-40 (40px), not a
+     --spacing-36 token, so this is the literal Designer-specified value, not
+     rounded to the nearest existing token. See component.yaml decisionBasis. */
+  min-height: 36px;
   gap: var(--spacing-4);
   padding: 0 var(--spacing-16);
   font-size: var(--font-size-small);
@@ -81,7 +83,10 @@
 }
 
 .size_medium {
-  min-height: var(--spacing-48);
+  /* Figma wants 42px; the RD spacing scale only has --spacing-48 (48px), not a
+     --spacing-42 token, so this is the literal Designer-specified value, not
+     rounded to the nearest existing token. See component.yaml decisionBasis. */
+  min-height: 42px;
   gap: var(--spacing-4);
   padding: 0 var(--spacing-16);
   font-size: var(--font-size-heading-5, 1.125rem);
@@ -342,6 +347,13 @@
   background: var(--fill-press);
 }
 
+/* Figma wraps the label text in its own "Label container" with 4px padding each
+   side, nested inside the button's own padding — this box already plays that role,
+   it just needed the padding. */
+.label {
+  padding: 0 var(--spacing-4);
+}
+
 /* ----- Tertiary label gets underline ----- */
 .variant_tertiary .label {
   text-decoration: underline;
@@ -356,6 +368,39 @@
 
 .isLoading .label {
   opacity: 0.72;
+}
+
+/* Spinning loading indicator — CSS-only (a conic-gradient ring faded around its
+   circumference, masked hollow), so it inherits `currentColor` and needs no
+   separate icon asset per tone/variant. Matches credit-controls/assets/icon/
+   yco-credit-controls/loading.png's actual look (sampled via canvas pixel read:
+   a ring whose stroke opacity fades smoothly from ~87% to ~34% around the circle,
+   not a hard-edged gap) rather than the harder-edged `border-right-color:
+   transparent` ring this started as. Sized larger than the surrounding
+   .buttonIcon box (that reference icon is a fixed 24px regardless of button
+   size) via the negative-margin overscan below, rather than shrinking with it. */
+@keyframes ycoButtonSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, transparent 0%, currentcolor 100%);
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 2.5px));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 2.5px));
+  opacity: 0.85;
+  animation: ycoButtonSpin 0.75s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation-duration: 2.5s;
+  }
 }
 
 /* ----- Icon slots ----- */
@@ -377,6 +422,17 @@
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-width: 2.5;
+}
+
+/* Raster icons (e.g. an <img src="...png">, matching how
+   credit-controls/CreditControls.module.scss's own .loadingIcon sizes its PNG) —
+   no fill/stroke concept for these, just fit the slot. Colour comes from the asset
+   itself, not currentColor, since raster pixels can't recolour via CSS. */
+.buttonIcon img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .size_medium .buttonIcon,
@@ -434,4 +490,41 @@
 .tone_success.variant_secondary .buttonIcon,
 .tone_success.variant_tertiary .buttonIcon {
   color: var(--icon-success);
+}
+
+/* ----- Disabled: single shared state, independent of tone (Figma: Fill/Disabled) -----
+   Figma's disabled treatment is one flat grey shared by every tone/variant, not a
+   faded version of the button's own colour, so this overrides the tone rules above
+   instead of fading them like the old `opacity: 0.5` did. Declared last on purpose:
+   .variant_*:disabled and .ycoButton:disabled tie in specificity with the
+   .tone_*.variant_* rules above (same selector count), so source order is what makes
+   these win. */
+.ycoButton:disabled {
+  background: var(--fill-disabled);
+  border-color: transparent;
+  /* Primary keeps light text against its filled grey background — matches the
+     platform/ui/credit-controls override (.generateButton:disabled) that already
+     had to patch around this exact gap for its own Button usage. */
+  color: var(--text-inverse-strong);
+}
+
+.variant_secondary:disabled,
+.variant_tertiary:disabled {
+  background: transparent;
+  /* Secondary/Tertiary have no fill behind them, so inverse-strong text would be
+     invisible — they need the muted grey text instead. */
+  color: var(--text-disabled);
+}
+
+.variant_secondary:disabled {
+  border-color: var(--stroke-disabled);
+}
+
+.ycoButton:disabled .buttonIcon {
+  color: var(--icon-inverse-strong);
+}
+
+.variant_secondary:disabled .buttonIcon,
+.variant_tertiary:disabled .buttonIcon {
+  color: var(--icon-disabled);
 }

@@ -17,6 +17,16 @@ function isSameRatio(option, ratio) {
   return option.w === ratio.w && option.h === ratio.h;
 }
 
+// The icon inside each option is a plain rectangle sized to the option's own
+// w:h so it visually reads as that ratio, scaled to fill its box on whichever
+// axis is shorter (same idea as `object-fit: contain`) rather than a
+// per-ratio hand-picked padding value.
+function shapeStyle(item) {
+  const w = Number(item?.w) || 1;
+  const h = Number(item?.h) || 1;
+  return h > w ? { width: `${(w / h) * 100}%`, height: '100%' } : { width: '100%', height: `${(h / w) * 100}%` };
+}
+
 export default function Ratio({
   ratioList = emptyRatioList,
   ratio = defaultRatio,
@@ -62,8 +72,11 @@ export default function Ratio({
               onClick={() => handleClick(item)}
             >
               <span className={`${styles.ratioWrapper} ${styles[variant]}`} aria-hidden="true">
-                <span className={styles.ratioPadding} style={{ padding: item.padding }}>
-                  <span className={`${styles.ratioBorder} ${active ? styles.ratioBorderActive : ''} ${styles[variant]}`} />
+                <span className={styles.ratioShape}>
+                  <span
+                    className={`${styles.ratioBorder} ${active ? styles.ratioBorderActive : ''} ${styles[variant]}`}
+                    style={shapeStyle(item)}
+                  />
                 </span>
               </span>
               <span className={styles.ratioText} data-testid={optionLabelTestId}>{label}</span>

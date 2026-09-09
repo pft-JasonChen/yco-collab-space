@@ -37,15 +37,26 @@ implementation:
   framework: react
   dependencies: [react, platform-ui-button]
   removedDependencies: [redux, authentication, credit-service, pricing-modal, local-storage, i18n, lodash, analytics]
+  localFiles:
+    - path: platform/ui/credit-controls/CreditControls.jsx
+      sha256: 73e59eb7e99fd635295874e98806631ab43f40ecde6605faa9a59e7f1ddab049
+    - path: platform/ui/credit-controls/CreditControls.module.scss
+      sha256: bdb56f69c0748e6f3cfe7bda51d8737924cd3defcd26440315ecde3281aad854
+    - path: platform/ui/credit-controls/CreditControls.stories.jsx
+      sha256: 050d42c8164d821b9469c5e1a278d21cc11847de28943c4769d5846e26bd6213
+    - path: platform/ui/credit-controls/index.js
+      sha256: 5bcc58063e29497a2c720fb7c7c916230633f961b3645218193e31401d59e29b
+  localFilesUpdated: 2026-09-05
 publicApi:
   props:
     - { name: balance, required: false }
     - { name: cost, required: false }
     - { name: label, required: false }
+    - { name: subtitle, required: false }
     - { name: disabled, required: false }
     - { name: isLoading, required: false }
     - { name: onClick, required: false }
-  states: [header-balance, compact-badge, generate-enabled, generate-disabled, loading, inert]
+  states: [header-balance, compact-badge, generate-enabled, generate-disabled, loading, inert, generate-two-line, generate-two-line-with-credits]
 tokens:
   lockPath: platform/tokens/tokens.lock.json
   uses: [--background-base, --fill-strong, --fill-weaker, --stroke-focus, --text-strong]
@@ -53,8 +64,14 @@ assets:
   - { path: assets/icon/yco-credit-controls, usage: runtime }
 review:
   pilotApprover: { actor: pm, id: collab-space-owner, date: 2026-09-02 }
-  canonicalReview: { designer: pending, rd: pending }
+  canonicalReview: { designer: approved, rd: pending }
 decisionBasis:
   - The header balance and Generate cost share the RD production credit asset but accept synthetic values through pure props.
   - The PO approved balance 436 and Generate cost 10 without credit-service or purchase behavior.
   - Generate preserves the RD single-tool brand, disabled, loading and credit-pill states rather than inheriting the generic neutral button treatment.
+  - "Loading-spinner de-duplication (2026-09-06): `GenerateActionBar` used to thread its own static `design-library/assets/icon/yco-credit-controls/loading.png` through as Button `children` for `isLoading`. Once `platform/ui/button/Button.jsx` grew its own built-in loading spinner (see button's own component.yaml), this component showed two spinners at once. Removed the `loading.png` usage and its now-dead `.loadingIcon` CSS rule; Button's own spinner is used instead. The asset itself is left in `design-library/assets/` unused for now rather than deleted, in case something else still needs it."
+  - "Height per Figma's Footer Button handoff spec (2026-09): Text Only=42px (Button's own Medium, unmodified), Text with credits=48px, Two-line text=56px — the credit badge alone adds 6px over plain Medium, and having a subtitle line takes it to 56px regardless of whether a badge is also present. Implemented 2026-09-06: `.generateButton` overrides Button's Medium min-height to 48px (hardcoded per Designer instruction, not a new RD token — same rationale as button's own component.yaml height entry); `.generateButtonTwoLine` (applied whenever `subtitle` is set) overrides it further to 56px."
+  - "Two-line text + credit badge (2026-09-06): added a `subtitle` prop to `GenerateActionBar` for the Figma \"Two-line text\" composition (e.g. \"Generate / 3 seconds for 12 Credits\", or with a credit badge alongside, e.g. \"Enhance Video / Full HD without watermark\"+badge) — both are 56px per the handoff spec regardless of the badge. Story names are deliberately generic (`GenerateTwoLine`, `GenerateTwoLineWithCredits`), not tied to any one feature's copy (e.g. not \"EnhanceVideo...\"), since other Generate-style actions will reuse this composition with their own label/subtitle text."
+  - "Width-responsive side padding (2026-09-06): the same Figma handoff spec gives the action bar 24px side padding at \"W400 & mobile\" and 16px at \"W300\" — this reacts to how wide the panel this component is embedded in actually renders, not the browser viewport, so it's implemented as a CSS container query (`container-type: inline-size` on `.actionBar`) rather than a media query. An element cannot query its own containment context (verified empirically — the padding rule silently did nothing when both lived on `.actionBar` itself), so the query container is `.actionBar` and the padding lives one level in on a new `.actionBarInner` wrapper. 350px (the midpoint between the spec's named 300/400) is used as the breakpoint since the spec didn't give an exact cutoff — flag with Designer/RD if the real threshold differs. Verified in-browser: 24px padding at 400px+ container width, 16px at 350px and below."
+  - "Current local hashes after the 2026-09-06 changes above: `CreditControls.jsx` → 73e59eb7e99fd635295874e98806631ab43f40ecde6605faa9a59e7f1ddab049; `CreditControls.module.scss` → bdb56f69c0748e6f3cfe7bda51d8737924cd3defcd26440315ecde3281aad854. Same deliberate-divergence status as button's own component.yaml — pending Designer/RD canonical review, not silently claimed as already approved."
+  - "Designer canonical review approved 2026-09-06: current implementation reviewed and signed off. RD canonical review still pending."
