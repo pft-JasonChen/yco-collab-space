@@ -2,11 +2,11 @@ import { useState } from 'react';
 import Ratio, { ratioTypes } from './Ratio.jsx';
 
 const options = [
-  { id: '16-9', w: 16, h: 9, padding: '11.375px 7px' },
-  { id: '9-16', w: 9, h: 16, padding: '7px 11.375px' },
-  { id: '4-3', w: 4, h: 3, padding: '9.5px 7px' },
-  { id: '3-4', w: 3, h: 4, padding: '7px 9.5px' },
-  { id: '1-1', w: 1, h: 1, padding: '7px' },
+  { id: '16-9', w: 16, h: 9 },
+  { id: '9-16', w: 9, h: 16 },
+  { id: '4-3', w: 4, h: 3 },
+  { id: '3-4', w: 3, h: 4 },
+  { id: '1-1', w: 1, h: 1 },
 ];
 
 function ControlledRatio(args) {

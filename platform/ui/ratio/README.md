@@ -19,6 +19,8 @@ Approved platform extraction of the RD common Ratio component from
 - Replaced clickable `div` elements with semantic buttons and `aria-pressed`.
 - Replaced RD raw colors and global SCSS imports with existing RD CSS variables.
 - Added disabled state, deterministic test-ID callbacks, and tablet overflow handling.
+- Disabled state fades the whole option via `opacity: 0.3` rather than swapping
+  in per-part disabled colour tokens (that convention is reserved for Button).
 
 The component is presentational and performs no network, routing, analytics, or
 production-state work.

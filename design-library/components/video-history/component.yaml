@@ -45,6 +45,16 @@ implementation:
   framework: react
   dependencies: [react, icon-action-buttons]
   removedDependencies: [redux, i18n, lodash, task-fetching, polling, routing, cms, analytics, download-service, device-detection]
+  localFiles:
+    - path: platform/ui/video-history/VideoHistory.jsx
+      sha256: 94a2ba26c76cdcfa448662a60daa597349cf5ef35f1d583caf8bd3c62385eb51
+    - path: platform/ui/video-history/VideoHistory.module.scss
+      sha256: 6ad25110d7720092abac227bab7041d80e9b1ef90159463bc6ac6358892132f1
+    - path: platform/ui/video-history/VideoHistory.stories.jsx
+      sha256: 73ad2a86bb31f7d4c62bd6a7ea57a55d802c1d86de07efec0dd9ed2aab986187
+    - path: platform/ui/video-history/index.js
+      sha256: 0a6649d7dbec4529ae25c7541bc4eec3df4aa987e8ca32554f58ac4075221331
+  localFilesUpdated: 2026-09-05
 publicApi:
   props:
     - name: items

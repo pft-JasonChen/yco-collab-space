@@ -22,6 +22,8 @@
     "library:components": "node tools/design-library/list-components.mjs",
     "library:browser": "node tools/design-library/browser-server.mjs",
     "validate:components": "node tools/design-library/validate-components.mjs",
+    "sync:component-specs": "node tools/design-library/sync-component-specs.mjs",
+    "sync:component-specs:check": "node tools/design-library/sync-component-specs.mjs --check",
     "validate:rd-parity": "node tools/design-library/validate-rd-parity.mjs",
     "validate:geometry": "node tools/design-library/validate-geometry.mjs",
     "validate:snapshot": "node tools/migration/validate-snapshot.mjs",
@@ -66,6 +68,7 @@
     "playwright": "1.59.0",
     "sass": "1.103.1",
     "storybook": "^10.5.0",
+    "storybook-addon-pseudo-states": "^10.6.0",
     "vite": "8.2.2",
     "yaml": "2.9.0"
   }

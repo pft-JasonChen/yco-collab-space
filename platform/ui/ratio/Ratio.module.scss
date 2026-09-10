@@ -89,11 +89,15 @@
   border-color: var(--fill-brand-strong);
 }
 
+// Ratio is a composite (container + icon block + label, not a single
+// text/fill/border triplet like Button), so per Designer convention it doesn't
+// get its own set of disabled-specific colour tokens the way Button does —
+// disabled is just opacity 0.3 over whatever the option's normal (selected or
+// not) colours already are, uniformly, instead of re-deriving a disabled
+// colour for every sub-part.
 .ratioContainer:disabled {
-  color: var(--text-disabled);
-  background: var(--fill-disabled);
-  border-color: var(--stroke-disabled);
   cursor: not-allowed;
+  opacity: 0.3;
 }
 
 .ratioWrapper {
@@ -102,22 +106,22 @@
   padding: calc(var(--spacing-8) - 1px);
 }
 
-.ratioWrapper.image_extender {
-  width: var(--spacing-40);
-  height: var(--spacing-40);
-  padding: var(--spacing-4);
-}
-
-.ratioPadding,
-.ratioBorder {
-  display: block;
+.ratioShape {
+  display: flex;
   width: 100%;
   height: 100%;
+  align-items: center;
+  justify-content: center;
 }
 
 .ratioBorder {
+  display: block;
   border: 1px solid currentColor;
-  border-radius: var(--corner-radius-4);
+  // Figma's Aspect Ratio reference (node 14572:211035) uses a 2px corner
+  // radius on this icon shape specifically — smaller than the smallest
+  // available token (--corner-radius-4 = 4px), so hardcoded per Designer
+  // instruction rather than adding a new token.
+  border-radius: 2px;
 }
 
 .ratioBorder.gery,
@@ -139,10 +143,6 @@
 .ratioBorderActive.image_extender {
   border-width: 2px;
   background: transparent;
-}
-
-.ratioContainer:disabled .ratioBorderActive {
-  background: var(--fill-disabled);
 }
 
 .ratioText {

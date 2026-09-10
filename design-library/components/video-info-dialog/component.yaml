@@ -39,6 +39,16 @@ implementation:
   framework: react
   dependencies: [react, react-dom, icon-action-buttons]
   removedDependencies: [redux, i18n, lodash, routing, scroll-hooks, cms, analytics, authentication, download-service, media-preview-modal]
+  localFiles:
+    - path: platform/ui/video-info-dialog/VideoInfoDialog.jsx
+      sha256: 1fb67481175a65cc52e9f475913c0dd8c165be68351a0c7be17eeba4b0c2ad71
+    - path: platform/ui/video-info-dialog/VideoInfoDialog.module.scss
+      sha256: b2ce1f2766e568cedc20bbffcc263e93e9438ceb7db4aa5dceab909c7d8333a4
+    - path: platform/ui/video-info-dialog/VideoInfoDialog.stories.jsx
+      sha256: d9f8b80b5d4510ac38e1c7df98cec53fde219fcb08d6041b7a45f2215403ad78
+    - path: platform/ui/video-info-dialog/index.js
+      sha256: 418d905fa639c87314b56616fbafcda76a1cfffd352856e4533cf5af1cc00cd4
+  localFilesUpdated: 2026-09-05
 publicApi:
   props:
     - name: opened
