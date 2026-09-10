@@ -3,9 +3,9 @@
   "feature": "video-expansion",
   "inputHash": "63cdb5d96d2fc77577f84e2760e9188e108297bc300ac1a959b1bbf25cf6c18e",
   "generatorInstructionsVersion": "collab-contract-v1",
-  "adapter": "claude",
-  "model": "claude-opus-5",
-  "generatedAt": "2026-09-03T18:54:58.242Z",
+  "adapter": "codex",
+  "model": "gpt-6",
+  "generatedAt": "2026-09-10T07:26:01.663Z",
   "files": [
     "README.md",
     "contract/integration.yaml",
@@ -52,9 +52,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/credit-controls/component.yaml",
-        "contractSha256": "5f848f1998c13660981f7451859580e37cfe8e0e78707e2fb9d5466ff89a9ec5",
+        "contractSha256": "e547c9eaa47f4f7f5008a6e6671c59ff9f636b771b9844bc9eee688f54b4f652",
         "implementationImport": "platform/ui/credit-controls/index.js",
-        "implementationSha256": "4b3b79cbbdcfaeb7a5ffd74419190b6a663f2167fbdfc386f00e6ecaaf52467b",
+        "implementationSha256": "21a682f99925d7defd350677ad451375f396380c440c77f5c100a6fa34e06d9b",
         "runtimeAssets": [
           {
             "repositoryPath": "design-library/assets/icon/yco-credit-controls/add.svg",
@@ -75,9 +75,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/ratio/component.yaml",
-        "contractSha256": "3acc9408875fd7be8d99b44d9af693ca5b4a2ed2e7e1829a9d2cbbb52ca48d26",
+        "contractSha256": "c70547c5517fb14db77384d8579f06cc59f6f7cc4b1fc0553d6ee293649072aa",
         "implementationImport": "platform/ui/ratio/index.js",
-        "implementationSha256": "1c111553c535afa412e6885daec02c1a8142944e76b81d49ed0a9d6eae21175d",
+        "implementationSha256": "d44b587627c04e16e2abe7c28665439986b60de2ca30780be2643ec981894632",
         "runtimeAssets": []
       },
       {
@@ -85,13 +85,13 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/result-page-shell/component.yaml",
-        "contractSha256": "066abe92f173e8a17de9e2cbfe134fb14cb6039b8bdc70d95ab8f703348ca322",
+        "contractSha256": "37e0adbe0142727fd7480e81eb8d4410499859aeb703a362968ec8f330d6975d",
         "implementationImport": "platform/ui/result-page-shell/index.js",
         "implementationSha256": "195df12a7a6f8b6eeb8e3497a6ea840b830e06b8ac64ea89a3a2bff8db211b36",
         "runtimeAssets": [
           {
             "repositoryPath": "design-library/assets/font/yco-interface-icons/icomoon.woff",
-            "sha256": "746d8b88009c7cf0c9b03a160361e1dc8de8406dc3ef893f65e2399e9054ebec"
+            "sha256": "f0d37908c2be5fc100af22a08bc35516ff28440d48b1e69a8473e288453c169b"
           },
           {
             "repositoryPath": "design-library/assets/icon/yco-credit-controls/add.svg",
@@ -140,7 +140,7 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/tool-page-layout/component.yaml",
-        "contractSha256": "a31cd9d9a8ac29c101e81b1b49a9281cd2004f0463d9396e9d1f261482dc7c60",
+        "contractSha256": "707166a9a40741aa315fcd22737de5b8f0c6f64b39e946ceff2698e63c0660c9",
         "implementationImport": "platform/ui/tool-page-layout/index.js",
         "implementationSha256": "3345ec62defe563baa7f2d0555ffe490af77f5102e7cf1923f08367e76099805",
         "runtimeAssets": []
@@ -150,7 +150,7 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/upload-media-block/component.yaml",
-        "contractSha256": "af58b3cc68daeb1f0590ee0af7740617878423792ceec731f80788bf47695b79",
+        "contractSha256": "da439e49592237131558e992d649e3aa52d1d2635174062c46044c4e3c284ec6",
         "implementationImport": "platform/ui/upload-media-block/index.js",
         "implementationSha256": "f2d5aa83f7bd851f24e31b0cfc9bf45ee6857c860c4f6bf504d3e060d21206a4",
         "runtimeAssets": [
@@ -173,7 +173,7 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/video-history/component.yaml",
-        "contractSha256": "e901374d841b9dad26eb45ffc18e2a3ccfa5350d67cec9ebfdbb47c6cd37d911",
+        "contractSha256": "67976c6bfede3e29cbdbe434b370d0a4239b19a98e159a195dcbaad0df28bb62",
         "implementationImport": "platform/ui/video-history/index.js",
         "implementationSha256": "bd831ac8a00e6239abfb158c93ffa8b7e747c3ba49f048c60e86f3ccf85555cb",
         "runtimeAssets": [
@@ -236,7 +236,7 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/video-info-dialog/component.yaml",
-        "contractSha256": "562ce88616bf6e7e61404373b21d96c49ec392c9f7d1ceb06ef7c3f00fbef8ab",
+        "contractSha256": "b943dc3a8f53d733239aaee94a96e5d245c020811665e233a4a46775f3637aa6",
         "implementationImport": "platform/ui/video-info-dialog/index.js",
         "implementationSha256": "abfc3c89eaea7d82bac1ef2b0fc7a147f99481437a1c0eca82f3fba0face042f",
         "runtimeAssets": [
@@ -299,7 +299,7 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/video-results-surface/component.yaml",
-        "contractSha256": "272519eb485a6f13999cf4f6cff69d6cc4690d0d11dc1b87b55445eaea7ce95e",
+        "contractSha256": "9d794a9d5f1a825ab01ce9786ee261296350c3f7c6163ff6ff5ffb5ad5115a9d",
         "implementationImport": "platform/ui/video-results-surface/index.js",
         "implementationSha256": "a035deded58bf09d44620bfdf678467922448e4ff26f579ce2345b85b7f11a8d",
         "runtimeAssets": []
@@ -309,7 +309,7 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/video-timeline/component.yaml",
-        "contractSha256": "da8d8deac49477fdd68aebcc04d353a902f1a3f0ba3e6dcbb71e6ab48ef6c396",
+        "contractSha256": "80d6597d2c0a6e7299afc10bff98f0389d0ca3829931f9c0162a32a429954720",
         "implementationImport": "platform/ui/video-timeline/index.js",
         "implementationSha256": "a5068fbb428c30f43cc1b24585c276b0a39b7b987cbf7382abe506d938dcacfc",
         "runtimeAssets": [
@@ -328,7 +328,7 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/video-trim-modal/component.yaml",
-        "contractSha256": "6f55e5c6865906b60e716472c811907620f7eb0372bc74e2d82d45f4eea2bc36",
+        "contractSha256": "4ffff1d4aab8cb490e998be9bb76d78d10057d434ed0099d9e51e6ef17a6bfe1",
         "implementationImport": "platform/ui/video-trim-modal/index.js",
         "implementationSha256": "7cdc0778225c96afc1e402eb15eb52596792bf765ef2ee057a204a7214760d34",
         "runtimeAssets": []
@@ -350,7 +350,7 @@
     "primaryPack": {
       "id": "workspace/tool-video",
       "version": "2026-09",
-      "packHash": "33169248892f25f9dd72e4719c2d3aadf9838c5ccb28f34f1435b44c7781d30e"
+      "packHash": "d3465e22e0344f8e930683cef3130c148a88e7d4b2c7fcf4c54ba600f08a2636"
     },
     "borrowedPacks": [
       {
@@ -360,7 +360,7 @@
           "settings-inspector",
           "tool-rail"
         ],
-        "packHash": "7005e1ccabf206002ee66f3e6b0aa47dd6b545c4938b4ffb1870747436225eab"
+        "packHash": "1d768d6dae7365b5eb3c206662b17a736b53623f98ec549f1146c7e0bfcb064f"
       }
     ],
     "requiredZones": [
@@ -408,13 +408,15 @@
       "Keep History cards and the video-information dialog usable without horizontal overflow."
     ],
     "visualReview": "human-required",
-    "contextHash": "5682bc9c9d586a189991ff477a4933c00b98a15f224235c8886e3b5b56518b42",
+    "contextHash": "e92f010f55e1fd1af5f94c1cd1c4cfbf830fc9a5050c175d7b7638eeb6b505e2",
     "sourceFiles": [
+      "platform/surfaces/workspace/tool-photo-editing/2026-08/bindings.yaml",
       "platform/surfaces/workspace/tool-photo-editing/2026-08/component-slots.yaml",
       "platform/surfaces/workspace/tool-photo-editing/2026-08/evaluation.yaml",
       "platform/surfaces/workspace/tool-photo-editing/2026-08/layout-rules.md",
       "platform/surfaces/workspace/tool-photo-editing/2026-08/provenance.json",
       "platform/surfaces/workspace/tool-photo-editing/2026-08/surface.yaml",
+      "platform/surfaces/workspace/tool-video/2026-09/bindings.yaml",
       "platform/surfaces/workspace/tool-video/2026-09/component-slots.yaml",
       "platform/surfaces/workspace/tool-video/2026-09/evaluation.yaml",
       "platform/surfaces/workspace/tool-video/2026-09/layout-rules.md",

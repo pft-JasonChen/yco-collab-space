@@ -1,0 +1,34 @@
+# Current implementation mapping, not the zone/slot contract.
+# Composition is declared once in component-slots.yaml.composes.
+schemaVersion: 1
+pack: workspace/tool-photo-editing
+version: 2026-08
+zones:
+  navigation:
+    component: result-page-shell
+  tool-navigation:
+    component: result-page-shell
+  inspector:
+    component: tool-page-layout
+  image-canvas:
+    unimplemented: No version-specific reusable implementation has been verified.
+      Definition retained for review; no inferred preview.
+  canvas-controls:
+    unimplemented: No version-specific reusable implementation has been verified.
+      Definition retained for review; no inferred preview.
+slots:
+  navigation-header:
+    component: result-page-shell
+  tool-rail:
+    component: result-page-shell
+  settings-inspector:
+    component: tool-page-layout
+  media-upload:
+    unimplemented: No version-specific reusable implementation has been verified.
+      Definition retained for review; no inferred preview.
+  image-result:
+    unimplemented: No version-specific reusable implementation has been verified.
+      Definition retained for review; no inferred preview.
+  primary-action:
+    unimplemented: No version-specific reusable implementation has been verified.
+      Definition retained for review; no inferred preview.

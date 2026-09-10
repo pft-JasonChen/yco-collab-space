@@ -1,5 +1,7 @@
 # 讓 surface 看得見：計畫
 
+> 2026-09-10：Step 1–3 已接續實作；最新決議、入口、bindings 與驗證方式見 [implementation note](./2026-09-10-surface-visibility-implementation.md)。以下保留當時規劃背景，Step 4 人工審查尚待進行。
+
 > **要解決的問題：** 現在 surface 只有文字。沒有人看過它們長什麼樣，所以沒有人知道它們對不對。
 > **讀者：** 執行這件事的人（RD／PM），以及要來審查的 Designer。
 > **狀態：** Step 1 已完成（2026-09-06，branch `feat/surface-visibility`）。Step 2 等 RD 回覆 SB-001／002。

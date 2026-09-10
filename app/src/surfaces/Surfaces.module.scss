@@ -1,0 +1,213 @@
+.browser {
+  max-width: 1600px;
+  margin: auto;
+  padding: var(--spacing-32);
+  color: var(--text-strong);
+}
+.heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-24);
+  flex-wrap: wrap;
+  margin-bottom: var(--spacing-24);
+}
+.heading h1 {
+  margin: var(--spacing-8) 0;
+  font-size: 2.5rem;
+}
+.heading h2 {
+  overflow-wrap: anywhere;
+}
+.eyebrow {
+  color: var(--text-weak);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  margin-top: var(--spacing-24);
+}
+.badge {
+  border: 1px solid var(--stroke-weak);
+  border-radius: var(--corner-radius-16);
+  padding: var(--spacing-8) var(--spacing-16);
+}
+.stats {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--spacing-16);
+  margin-bottom: var(--spacing-32);
+}
+.stats div {
+  border-bottom: 2px solid var(--stroke-weak);
+  padding: var(--spacing-16);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+}
+.stats strong {
+  font-size: 2rem;
+}
+.stats span {
+  color: var(--text-weak);
+}
+.filters,
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-16);
+  align-items: center;
+}
+.filters label,
+.heading label {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+}
+.filters input,
+.filters select,
+.heading select,
+.toolbar select,
+.toolbar button,
+.control {
+  font: inherit;
+  padding: var(--spacing-8) var(--spacing-16);
+  border: 1px solid var(--stroke-weak);
+  border-radius: var(--corner-radius-8);
+  background: var(--background-raised);
+  color: var(--text-strong);
+}
+.control,
+.toolbar button {
+  cursor: pointer;
+}
+.control {
+  margin-top: auto;
+  align-self: flex-start;
+}
+.browser a {
+  color: var(--text-brand);
+}
+.browser :focus-visible,
+.preview :focus-visible {
+  outline: 2px solid var(--stroke-focus);
+  outline-offset: 2px;
+}
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--spacing-16);
+}
+.card {
+  background: var(--background-raised);
+  border: 1px solid var(--stroke-weak);
+  border-radius: var(--corner-radius-16);
+  padding: var(--spacing-24);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+  min-width: 0;
+}
+.card h2 {
+  font-size: 1.1rem;
+  overflow-wrap: anywhere;
+  margin: var(--spacing-8) 0;
+}
+.card p {
+  font-size: 0.875rem;
+  color: var(--text-weak);
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.cardTop {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--text-weak);
+}
+.detail {
+  margin-top: var(--spacing-32);
+  padding-top: var(--spacing-24);
+  border-top: 2px solid var(--stroke-weak);
+}
+.empty {
+  padding: var(--spacing-24);
+  background: var(--background-raised);
+  border-radius: var(--corner-radius-8);
+}
+.tableWrap {
+  overflow-x: auto;
+  margin-top: var(--spacing-24);
+}
+.tableWrap table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.875rem;
+}
+.tableWrap th,
+.tableWrap td {
+  padding: var(--spacing-12);
+  border-bottom: 1px solid var(--stroke-weak);
+  vertical-align: top;
+}
+.detail pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.detail details {
+  margin-top: var(--spacing-24);
+}
+.frameScroll {
+  overflow: auto;
+  border: 1px solid var(--stroke-weak);
+  border-radius: var(--corner-radius-8);
+}
+.frameScroll iframe {
+  display: block;
+  height: 850px;
+  border: 0;
+  min-width: 0;
+}
+.preview {
+  color: var(--text-strong);
+  background: var(--background-sunken);
+  min-height: 100vh;
+}
+.toolbar {
+  padding: var(--spacing-16);
+  background: var(--background-raised);
+}
+.toolbar span {
+  margin-right: auto;
+  font-size: 0.875rem;
+}
+.inspector {
+  max-width: 400px;
+  padding: var(--spacing-24);
+}
+.result {
+  height: 720px;
+}
+.video {
+  display: block;
+  width: 100%;
+  max-height: 620px;
+  object-fit: contain;
+}
+@media (max-width: 768px) {
+  .browser {
+    padding: var(--spacing-16);
+  }
+  .stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .cards {
+    grid-template-columns: 1fr;
+  }
+  .filters label {
+    flex: 1;
+    min-width: 140px;
+  }
+  .heading h1 {
+    font-size: 2rem;
+  }
+}

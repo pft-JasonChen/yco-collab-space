@@ -23,8 +23,10 @@ later, Designer-owned Figma and token inputs.
 - `features/*/design/**`: design references and explicitly recorded gaps.
 - `features/*/generated/**`: AI-generated derived code. Do not hand-edit it outside an
   explicit `prototype-update` run.
-- `platform/rd-baseline/**`: vendored read-only RD source for `validate:rd-parity`. Only
-  files a component contract declares under `rd.verbatimFiles` may live here.
+- `platform/rd-baseline/**`: vendored read-only RD source. Allowed files are the
+  component contracts' `rd.sourcePaths` and the migration manifest's explicit
+  site-map/page-entry derivation sources. `validate:snapshot` checks this inventory;
+  `validate:rd-parity` additionally checks local equivalence for `verbatimFiles`.
 - `platform/**` and `tools/**`: shared platform code. Changes require the Prototype
   Platform Owner's approval.
 - `.collab-cache/**`: generated local indexes. Never commit or publish them.
@@ -65,6 +67,7 @@ npm run validate:intake -- --feature <feature>
 npm run build
 npm run library:browser
 npm run library:components
+npm run test:surfaces # after npm run build; starts its own preview server
 npm run validate:rd-parity
 npm run test:rendered -- --feature <feature>
 npm run prototype:create -- <feature> "<Feature title>"

@@ -9,7 +9,7 @@ import {
 } from './project.mjs';
 
 export function surfacePackRelativeRoot(reference) {
-  return path.join('platform', 'surfaces', ...reference.id.split('/'), reference.version);
+  return path.posix.join('platform', 'surfaces', ...reference.id.split('/'), reference.version);
 }
 
 export function novelSurfaceContext(intent) {
@@ -253,4 +253,3 @@ export async function resolveSurfaceContext(feature) {
   );
   return resolveSurfaceContextFromIntent(intent);
 }
-

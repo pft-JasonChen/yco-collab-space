@@ -1,0 +1,24 @@
+# Current implementation mapping, not the zone/slot contract.
+# Composition is declared once in component-slots.yaml.composes.
+schemaVersion: 1
+pack: pattern/history-list
+version: 2026-09
+zones:
+  history-list:
+    component: video-history
+  history-card:
+    component: video-history
+slots:
+  history-list:
+    component: video-history
+  history-card:
+    component: video-history
+  result-actions:
+    component: icon-action-buttons
+preview:
+  recipe: history-list
+  components:
+    History:
+      component: video-history
+    Dialog:
+      component: video-info-dialog

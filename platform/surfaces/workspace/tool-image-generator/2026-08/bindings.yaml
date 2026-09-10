@@ -1,0 +1,37 @@
+# Current implementation mapping, not the zone/slot contract.
+# Composition is declared once in component-slots.yaml.composes.
+schemaVersion: 1
+pack: workspace/tool-image-generator
+version: 2026-08
+zones:
+  navigation:
+    unimplemented: No version-specific reusable implementation has been verified.
+      Definition retained for review; no inferred preview.
+  generation-input:
+    unimplemented: No version-specific reusable implementation has been verified.
+      Definition retained for review; no inferred preview.
+  generation-status:
+    unimplemented: No version-specific reusable implementation has been verified.
+      Definition retained for review; no inferred preview.
+  result-gallery:
+    unimplemented: No version-specific reusable implementation has been verified.
+      Definition retained for review; no inferred preview.
+slots:
+  navigation-header:
+    unimplemented: No version-specific reusable implementation has been verified.
+      Definition retained for review; no inferred preview.
+  prompt-input:
+    unimplemented: No version-specific reusable implementation has been verified.
+      Definition retained for review; no inferred preview.
+  generation-options:
+    unimplemented: No version-specific reusable implementation has been verified.
+      Definition retained for review; no inferred preview.
+  primary-action:
+    unimplemented: No version-specific reusable implementation has been verified.
+      Definition retained for review; no inferred preview.
+  processing-feedback:
+    unimplemented: No version-specific reusable implementation has been verified.
+      Definition retained for review; no inferred preview.
+  result-gallery:
+    unimplemented: No version-specific reusable implementation has been verified.
+      Definition retained for review; no inferred preview.

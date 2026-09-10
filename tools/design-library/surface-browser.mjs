@@ -37,7 +37,6 @@ function statRow(summary) {
     { value: summary.nameOnly, label: '只有名字', tone: summary.nameOnly ? 'warn' : '' },
     { value: summary.byStatus.approved ?? 0, label: '已審查', tone: (summary.byStatus.approved ?? 0) === 0 ? 'warn' : '' },
     { value: summary.unused, label: '沒人用', tone: summary.unused ? 'warn' : '' },
-    { value: summary.shellMismatches, label: 'shell 對不上', tone: summary.shellMismatches ? 'bad' : '' },
   ];
   return (
     '<div class="stats">' +
@@ -86,7 +85,6 @@ function definedCard(entry) {
   const pack = entry.pack;
   const flags = [chip(entry.kind), chip(STATUS_LABELS[entry.status] ?? entry.status, entry.status === 'provisional' ? 'warn' : '')];
   if (!entry.used) flags.push(chip('無採用', 'warn'));
-  if (pack.shell && !pack.shell.resolves) flags.push(chip('shell 對不上實作', 'bad'));
 
   const versions = entry.versions.length > 1
     ? '<p class="muted">版本：' + entry.versions.map((version) =>
@@ -95,14 +93,12 @@ function definedCard(entry) {
 
   const shell = pack.shell
     ? '<div class="block"><h4>shell</h4><p><code>' + escapeHtml(pack.shell.declared) + '</code> ' +
-      (pack.shell.resolves
-        ? chip('對得上 platform/ui', 'ok')
-        : chip('platform/ui 沒有這個目錄', 'bad')) +
+      chip('語意分類；元件對應見 bindings.yaml') +
       '</p></div>'
     : '';
 
   const composes = pack.composesPatterns.length
-    ? '<div class="block"><h4>組合了這些 pattern <em class="derived">推導自 zone 描述文字，非宣告</em></h4><p class="chips">' +
+    ? '<div class="block"><h4>組合了這些 pattern <em>來源：component-slots.yaml.composes</em></h4><p class="chips">' +
       pack.composesPatterns.map((id) => chip(id)).join('') + '</p></div>'
     : '';
 
@@ -196,15 +192,15 @@ export function renderSurfaceHtml(index) {
     '</style></head><body>' +
     '<h1>Surface Browser</h1>' +
     '<p class="lede">catalog 裡宣告的每一個 surface。這一頁的用途是<b>對齊</b>：看完之後請說出「這個不需要」或「缺這個」。' +
-    '沒有畫面 —— 版面長什麼樣要等 Step 3，因為今天沒有任何檔案記錄哪個元件填哪個 zone。</p>' +
+    '此頁為本機詳細索引；互動預覽與版本切換請由 prototype 首頁進入 Surface Browser。</p>' +
     statRow(index.summary) +
     '<section><h2>有定義檔案 <em>' + defined.length + '</em></h2>' +
-    '<p class="muted">這些可以現在就審查內容。狀態全是 <code>provisional</code>：寫下來了，但沒有人看過。</p>' +
+    '<p class="muted">這些可以現在就審查內容。各卡片顯示 catalog 的實際狀態。</p>' +
     defined.map(definedCard).join('') +
     '</section>' +
     nameOnlyList +
     '<section><h2>platform/ui 現有元件 <em>' + index.components.length + '</em></h2>' +
-    '<p class="muted">Step 3 能拿來組版面的零件。目前沒有任何檔案把它們對應到上面的 zone。</p>' +
+    '<p class="muted">各版本的 bindings.yaml 記錄目前元件對應；尚無實作的區域另附原因。</p>' +
     '<p class="chips">' + index.components.map((name) => chip(name)).join('') + '</p></section>' +
     '</body></html>'
   );

@@ -1,0 +1,79 @@
+# Current implementation mapping, not the zone/slot contract.
+# Composition is declared once in component-slots.yaml.composes.
+schemaVersion: 1
+pack: workspace/tool-video
+version: 2026-09
+zones:
+  tool-navigation:
+    component: result-page-shell
+  settings-inspector:
+    component: tool-page-layout
+  video-input:
+    component: upload-media-block
+  primary-action:
+    component: credit-controls
+  video-result:
+    unimplemented: Feature-owned content or state; the surface preview supplies
+      synthetic content, not a reusable production implementation.
+  video-status:
+    unimplemented: Feature-owned content or state; the surface preview supplies
+      synthetic content, not a reusable production implementation.
+  history-results:
+    component: video-history
+  video-detail-dialog:
+    component: video-info-dialog
+slots:
+  navigation-header:
+    component: result-page-shell
+  settings-inspector:
+    component: tool-page-layout
+  media-upload:
+    component: upload-media-block
+  uploaded-media:
+    component: upload-media-block
+  video-settings:
+    unimplemented: Feature-owned content or state; the surface preview supplies
+      synthetic content, not a reusable production implementation.
+  primary-action:
+    component: credit-controls
+  generate-action-with-credit:
+    component: credit-controls
+  credit-control:
+    component: credit-controls
+  edit-history-tabs:
+    component: video-results-surface
+  history-filter:
+    component: video-results-surface
+  processing-feedback:
+    component: video-results-surface
+  video-player:
+    unimplemented: Feature-owned content or state; the surface preview supplies
+      synthetic content, not a reusable production implementation.
+  history-list:
+    component: video-history
+  history-card:
+    component: video-history
+  result-actions:
+    component: icon-action-buttons
+  video-detail-dialog:
+    component: video-info-dialog
+  next-action:
+    component: video-info-dialog
+preview:
+  recipe: tool-video
+  components:
+    Shell:
+      component: result-page-shell
+    Layout:
+      component: tool-page-layout
+    Upload:
+      component: upload-media-block
+    Action:
+      component: credit-controls
+      export: GenerateActionBar
+    Results:
+      component: video-results-surface
+    History:
+      component: video-history
+    Dialog:
+      component: video-info-dialog

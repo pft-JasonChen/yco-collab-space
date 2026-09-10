@@ -9,7 +9,8 @@
     "surfacesPort": 5179
   },
   "routes": {
-    "featurePrefix": "/features"
+    "featurePrefix": "/features",
+    "surfacePrefix": "/surfaces"
   },
   "viewports": [
     {

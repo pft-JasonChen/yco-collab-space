@@ -7,7 +7,7 @@ rd:
   sourcePackage: youcam-enhance-frontend
   sourceVersion: 1.34.1
   snapshot: yce-frontend-gm-260909
-  portability: verbatim
+  portability: reference
   sourcePaths:
     - src/components/common/button-wrapper/index.js
     - src/components/common/button-wrapper/button.module.css
@@ -19,60 +19,39 @@ rd:
       sha256: e4b2cb3af9f71ec03933aaf6fa610458f005ab8b2f08e087c59dc2499c1640ca
     - path: src/components/common/button-wrapper/types/variants.js
       sha256: 10d6639763b4d842fe0cd2e66baaa8a4bb9bc668ed055fff643fb70281b899cb
-  verbatimFiles:
-    - implementation: platform/ui/button/Button.module.css
-      baseline: src/components/common/button-wrapper/button.module.css
 figma:
   status: mapped
   fileKey: JXNIQPJT9I9qFrgtiaCn4i
   componentSetNodeId: "3433:80097"
-  variants:
-    [
-      Type=Primary,
-      Type=Secondary,
-      Type=Tertiary,
-      Tone=Brand,
-      Tone=Neutral,
-      Tone=Inverse,
-      Tone=Destructive,
-      State=Default,
-      State=Hover,
-      State=Press,
-      State=Focus,
-      State=Disabled,
-      Size=Tiny,
-      Size=Small,
-      Size=Medium,
-      Size=Large,
-    ]
+  variants: [ Type=Primary, Type=Secondary, Type=Tertiary, Tone=Brand, Tone=Neutral, Tone=Inverse, Tone=Destructive, State=Default, State=Hover, State=Press, State=Focus, State=Disabled, Size=Tiny, Size=Small, Size=Medium, Size=Large ]
 implementation:
   importPath: platform/ui/button/index.js
-  compatibilityImportPaths: [platform/ui/Button.jsx]
+  compatibilityImportPaths: [ platform/ui/Button.jsx ]
   storyId: ui-button
   framework: react
-  dependencies: [react]
-  removedDependencies: [browser-utils, lodash, next-router, link-with-locale]
+  dependencies: [ react ]
+  removedDependencies: [ browser-utils, lodash, next-router, link-with-locale ]
   localFiles:
     - path: platform/ui/button/Button.jsx
       sha256: 45543080e0bc2ac6b2add9f8775bdf5baecf03b9ad0e7c520d687440ee2041aa
     - path: platform/ui/button/Button.module.css
-      sha256: b7117dd15b43e4cbbe5d8167f07f9b80822d70cb0d4199a95a542fb2bd9ece5e
+      sha256: a38284f4aa2fa4ab2c0a9e3e9ec5e9478a2e75d16d86855a46fde7457dd65855
     - path: platform/ui/button/Button.stories.jsx
       sha256: 2818fc204e915570c04805560a7d1789d483f89e0acb31dec89cd8c9e19bb1b7
     - path: platform/ui/button/index.js
       sha256: 329664305c2562bc07fa8e017c9edfad051781956beb27280afb52a10da8f5d7
-  localFilesUpdated: 2026-09-05
+  localFilesUpdated: 2026-09-10
 publicApi:
   props:
     - name: variant
       required: false
-      values: [primary, secondary, tertiary]
+      values: [ primary, secondary, tertiary ]
     - name: tone
       required: false
-      values: [brand, neutral, destructive, inverse]
+      values: [ brand, neutral, destructive, inverse ]
     - name: size
       required: false
-      values: [tiny, small, medium, large]
+      values: [ tiny, small, medium, large ]
     - name: leadingIcon
       required: false
     - name: trailingIcon
@@ -81,10 +60,10 @@ publicApi:
       required: false
     - name: disabled
       required: false
-  states: [default, hover, focus, active, disabled, loading]
+  states: [ default, hover, focus, active, disabled, loading ]
 tokens:
   lockPath: platform/tokens/tokens.lock.json
-  uses: [--fill-brand-strong, --stroke-focus, --text-brand, --text-inverse-strong, --text-strong, --corner-radius-32]
+  uses: [ --fill-brand-strong, --stroke-focus, --text-brand, --text-inverse-strong, --text-strong, --corner-radius-32 ]
 assets: []
 review:
   pilotApprover:
@@ -96,7 +75,7 @@ review:
     rd: pending
 decisionBasis:
   - The RD variant API is portable once browser detection, locale links and production tracking hooks are removed.
-  - button.module.css is held VERBATIM against the RD copy at src/components/common/button-wrapper/button.module.css; the file itself declares that the two repositories stay identical, so no Collab Space-only edit may live in it.
+  - "Historical policy (superseded 2026-09-10): button.module.css was held verbatim against the RD snapshot. The disabled, padding and spinner changes made during the foundation pilot deliberately diverge. RD portability is now reference, as reported by the project owner; RD keeps its own implementation. Snapshot source hashes remain immutable evidence, not a promise of local equivalence."
   - An earlier pilot revision substituted --text-strong for --text-inverse-strong and --text-information for --text-brand to clear an axe colour-contrast finding. That silently diverged the prototype's brand buttons from production, so the substitution was reverted on 2026-09-02 at PM request; the 2.59:1 brand pairing is now carried as recorded a11y debt for Designer and RD canonical review rather than hidden by a token swap.
   - Pilot approval permits Collab Space prototype use but does not claim production package compatibility.
   - "Figma component set (node 3433:80097, https://www.figma.com/design/JXNIQPJT9I9qFrgtiaCn4i/-Comp-YCO_web_components_2025?node-id=3433-80097) defines Tone=Brand/Neutral/Inverse/Destructive only; `Button.module.css` itself labels the other two tones \"Custom: warning/success (not in designer spec, used for legacy ffc700/0ea639)\". Designer confirmed on 2026-09-02 that `warning`/`success` are not used on Button anywhere in current design or product usage, and RD confirmed the same day that Collab Space does not need to expose either tone. `publicApi.tone.values` was narrowed to [brand, neutral, destructive, inverse] accordingly, and the Storybook `tone` control was narrowed to match. This is scoped to the Collab Space prototype only: `platform/ui/button/Button.jsx` and the verbatim `Button.module.css` still contain the underlying warning/success implementation (now unreachable through the contract) because both files are sourceHash-locked against the real `youcam-enhance-frontend` files and were not edited — removing the legacy CSS/JS from production, if desired, is a separate RD-repo decision with its own new snapshot and hashes."
@@ -107,3 +86,5 @@ decisionBasis:
   - "Height mismatch on 2 of 4 sizes: Figma's component set gives exact rendered heights of Tiny=32px, Small=36px, Medium=42px, Large=56px (read directly off the symbol frames, e.g. \"Type=Primary, Tone=Brand, State=Default, Size=Medium\" is 84×42). `Button.module.css`'s `.size_*` rules bind `min-height` to the closest available RD spacing token instead: Tiny→`--spacing-32` (32px, matches) and Large→`--spacing-56` (56px, matches) are correct by coincidence, but Small→`--spacing-40` (40px, Figma wants 36px) and Medium→`--spacing-48` (48px, Figma wants 42px) are both off — because the RD spacing scale has no `--spacing-36`/`--spacing-42` token to bind to at all (only 32/40/48/56 exist). Unlike the colour/padding/spinner fixes above, this one is NOT implemented: minting a new spacing token would mean writing into `platform/tokens/rd/**`, which `component-foundation-pilot`'s own `protectedPaths` explicitly excludes from this workflow's write access — Designer/Agent iteration on `platform/ui/**` does not extend to inventing RD token values. Flagged for RD canonical review to decide the real Small/Medium height (new tokens, or confirm 36/42 should round up to the existing 40/48 scale) before this gets touched in code."
   - "Current local hashes after the 2026-09-06 pilot fixes (colour, padding, spinner), for anyone diffing against the sourceHashes above: `Button.jsx` → 710b33a42c24501336039564ba9b9d33d952d1085fc4f28a5812ee677fd1e3e2; `Button.module.css` → 47910e83b81b46d4d130bcf9322b1caf01604977ad6fcbaf1d99fade2768a851. `platform/ui/credit-controls/CreditControls.jsx` and `.module.scss` also changed (spinner de-duplication above) — see that component's own component.yaml for its hashes."
   - "Designer canonical review approved 2026-09-06: current implementation reviewed and signed off. RD canonical review still pending."
+  - "2026-09-10: Implemented the owner-reported RD decision to classify Button as reference. Removed rd.verbatimFiles and refreshed implementation.localFiles after inspecting the changes. This restores an honest portability contract; Designer approval and pending RD canonical review remain separate. Other components retain their existing parity guarantees."
+  - "2026-09-10: Spinner alpha-mask uses currentColor instead of a raw black literal; ring geometry and alpha masking are unchanged."

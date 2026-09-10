@@ -1,0 +1,19 @@
+# Current implementation mapping, not the zone/slot contract.
+# Composition is declared once in component-slots.yaml.composes.
+schemaVersion: 1
+pack: pattern/action-footer
+version: 2026-09
+zones:
+  primary-action:
+    component: credit-controls
+slots:
+  generate-action-with-credit:
+    component: credit-controls
+  credit-control:
+    component: credit-controls
+preview:
+  recipe: action-footer
+  components:
+    Action:
+      component: credit-controls
+      export: GenerateActionBar

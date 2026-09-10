@@ -50,7 +50,8 @@
     "eval:workflow": "node tools/evaluation/run-workflow-eval.mjs",
     "eval:mutations": "node tools/evaluation/run-mutation-suite.mjs",
     "eval:visual:packet": "node tools/evaluation/create-visual-review-packet.mjs",
-    "surfaces:browser": "node tools/design-library/surface-browser.mjs"
+    "surfaces:browser": "node tools/design-library/surface-browser.mjs",
+    "test:surfaces": "node tools/validation/run-surface-checks.mjs"
   },
   "dependencies": {
     "mediabunny": "^1.50.8",

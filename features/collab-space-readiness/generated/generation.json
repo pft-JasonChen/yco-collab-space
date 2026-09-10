@@ -3,9 +3,9 @@
   "feature": "collab-space-readiness",
   "inputHash": "dcdb5fea055e45f26372767e56dce19bde84f0f707abfa7f2ec19ea7b1a54d9e",
   "generatorInstructionsVersion": "collab-contract-v1",
-  "adapter": "claude",
-  "model": "claude-opus-5",
-  "generatedAt": "2026-09-02T17:17:03.922Z",
+  "adapter": "codex",
+  "model": "gpt-6",
+  "generatedAt": "2026-09-10T07:15:25.705Z",
   "files": [
     "feature.jsx",
     "feature.module.scss"
@@ -25,11 +25,11 @@
       {
         "id": "button",
         "status": "pilot-approved",
-        "figmaStatus": "pending",
+        "figmaStatus": "mapped",
         "contractPath": "design-library/components/button/component.yaml",
-        "contractSha256": "87dc546ef0fd0e7ef6be31b5fd3dbdb1c3f726a97253cce275acba84f3ee5507",
+        "contractSha256": "dec56cc1c97e8960ba870822a75e6f2abb10b258db5a1ac9d5316981cbf17bec",
         "implementationImport": "platform/ui/button/index.js",
-        "implementationSha256": "3a22ded5d192995cdfd69a03c662e61afc90d04cb38d559f879efbb4f5763b0c",
+        "implementationSha256": "c77948b32650707f6c01f8c4653622635ee432c737fa36baaeed3a5d8f5526b5",
         "runtimeAssets": []
       }
     ]

@@ -21,7 +21,7 @@ import { surfacePackRelativeRoot } from '../prototype-cli/surface-policy.mjs';
 const SURFACES_ROOT = ['platform', 'surfaces'];
 const UI_ROOT = ['platform', 'ui'];
 
-/** Directory names under platform/ui, which is what a `shell:` value should name. */
+/** Registered implementation directory names; shell is a semantic category. */
 async function listUiComponents(workspace) {
   const root = path.join(workspace, ...UI_ROOT);
   if (!(await pathExists(root))) return new Set();
@@ -40,29 +40,6 @@ async function listVersions(workspace, id) {
     if (await pathExists(path.join(root, entry.name, 'surface.yaml'))) versions.push(entry.name);
   }
   return versions.sort();
-}
-
-/**
- * Which patterns a pack composes, read out of the prose in its zone and slot
- * descriptions ("Left column, from pattern/tool-page.").
- *
- * Both files have to be read. tool-video names five patterns in its zones and the
- * sixth only in its slots, so scanning zones alone reports pattern/video-results as
- * used by nobody — which is how a pattern in daily use gets proposed for deletion.
- *
- * This is a regex over English sentences, and it is labelled as derived wherever it
- * is displayed, because that is exactly the point: the composition is real, but no
- * field declares it, so the only way to show it is to read the prose. SB-001 asks RD
- * where the declared version should live.
- */
-export function composedPatterns(rows) {
-  const found = new Set();
-  for (const row of rows) {
-    for (const match of String(row.description ?? '').matchAll(/\bfrom (pattern\/[a-z0-9-]+)/gi)) {
-      found.add(match[1].toLowerCase());
-    }
-  }
-  return [...found].sort();
 }
 
 /** Every feature that pins a pack, as primary or borrowed. */
@@ -125,6 +102,7 @@ async function readPack(workspace, id, version, uiComponents) {
   }));
 
   const slotsPath = path.join(root, 'component-slots.yaml');
+  const slotDocument = (await pathExists(slotsPath)) ? parseYaml(await fs.readFile(slotsPath, 'utf8')) : {};
   const slots = (await pathExists(slotsPath))
     ? ((parseYaml(await fs.readFile(slotsPath, 'utf8')) ?? {}).slots ?? []).map((slot) => ({
         id: slot.id,
@@ -141,18 +119,13 @@ async function readPack(workspace, id, version, uiComponents) {
   return {
     version,
     relativeRoot,
-    // `shell` is meant to name the implementation. Today not one value matches a
-    // platform/ui directory, so the browser reports the mismatch rather than
-    // printing the field as though it resolved.
-    shell: declaredShell
-      ? { declared: declaredShell, resolves: uiComponents.has(declaredShell) }
-      : null,
+    shell: declaredShell ? { declared: declaredShell } : null,
     zones,
     slots,
     // An id can be both a zone and a component role, which is why SB-002 asks RD
     // which of the two a component binding should attach to.
     sharedIds: zones.map((zone) => zone.id).filter((id) => slots.some((slot) => slot.id === id)).sort(),
-    composesPatterns: composedPatterns([...zones, ...slots]),
+    composesPatterns: (slotDocument.composes ?? []).map((ref) => ref.split('@')[0]),
     responsivePriority: manifest.responsivePriority ?? [],
     decisionBasis: manifest.decisionBasis ?? [],
     layoutRules,
@@ -208,7 +181,6 @@ export async function scanSurfaces(workspace = fromRoot()) {
       defined: defined.length,
       nameOnly: entries.length - defined.length,
       unused: defined.filter((entry) => !entry.used).length,
-      shellMismatches: defined.filter((entry) => entry.pack.shell && !entry.pack.shell.resolves).length,
       // Ids that are both a zone and a component slot in the same pack. SB-002
       // asks RD which of the two a component binding attaches to, so how far the
       // overlap spreads is the measure of how much that answer decides.

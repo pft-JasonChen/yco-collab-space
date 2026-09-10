@@ -1,6 +1,9 @@
 import PrototypeFrame from '../../platform/runtime/PrototypeFrame.jsx';
 import { featureEntries, getFeatureFromLocation } from './feature-registry.js';
 import styles from './App.module.scss';
+import { lazy, Suspense } from 'react';
+import config from '../../prototype.config.json';
+const SurfaceRoute = lazy(() => import('./surfaces/SurfaceRoute.jsx'));
 
 function FeatureIndex() {
   return (
@@ -11,6 +14,7 @@ function FeatureIndex() {
         Every page is a static prototype that uses synthetic data only.
       </p>
       <ul className={styles.featureList}>
+        <li><a href={config.routes.surfacePrefix + '/'}><span className="text-heading-5 text-bold">Surface Browser</span><span>PM / Design · 結構與預覽</span></a></li>
         {featureEntries.map(({ slug, featureMeta }) => (
           <li key={slug}>
             <a href={'/features/' + slug + '/'}>
@@ -38,6 +42,9 @@ function UnknownFeature({ slug }) {
 }
 
 export default function App() {
+  if (window.location.pathname === config.routes.surfacePrefix || window.location.pathname.startsWith(config.routes.surfacePrefix + '/')) {
+    return <Suspense fallback={<p>Loading surfaces…</p>}><SurfaceRoute /></Suspense>;
+  }
   const selection = getFeatureFromLocation(window.location.pathname);
 
   if (!selection.requested) {

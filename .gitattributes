@@ -1,0 +1,4 @@
+* text=auto eol=lf
+# Snapshot hashes refer to committed bytes, including any upstream line endings.
+platform/rd-baseline/** -text
+platform/tokens/rd/** -text

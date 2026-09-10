@@ -1,0 +1,28 @@
+# Current implementation mapping, not the zone/slot contract.
+# Composition is declared once in component-slots.yaml.composes.
+schemaVersion: 1
+pack: pattern/video-results
+version: 2026-09
+zones:
+  result-tabs:
+    component: video-results-surface
+  result-filter:
+    component: video-results-surface
+  result-body:
+    component: video-results-surface
+slots:
+  edit-history-tabs:
+    component: video-results-surface
+  history-filter:
+    component: video-results-surface
+  processing-feedback:
+    component: video-results-surface
+preview:
+  recipe: video-results
+  components:
+    Results:
+      component: video-results-surface
+    History:
+      component: video-history
+    Dialog:
+      component: video-info-dialog

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { promises as fs } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { composedPatterns, scanSurfaces } from './surfaces.mjs';
+import { scanSurfaces } from './surfaces.mjs';
 import { renderSurfaceHtml, createSurfaceServer } from './surface-browser.mjs';
 
 /**
@@ -70,6 +70,7 @@ async function fixture() {
     [
       'schemaVersion: 1',
       'pack: workspace/tool-demo',
+      'composes: [pattern/demo-page@2026-09]',
       'version: 2026-09',
       'slots:',
       '  - id: settings-inspector',
@@ -128,25 +129,6 @@ async function fixture() {
   return workspace;
 }
 
-test('composed patterns are read out of the prose in zone and slot descriptions', () => {
-  const zones = [
-    { id: 'a', description: 'Left column, from pattern/tool-page.' },
-    { id: 'b', description: 'Source media, from pattern/uploaded-media.' },
-    { id: 'c', description: 'No pattern named here.' },
-    { id: 'd', description: 'Also from pattern/tool-page.' },
-  ];
-  // A slot-only mention counts. tool-video names pattern/video-results nowhere else,
-  // and reading zones alone would report that pattern as used by nobody.
-  const slots = [{ id: 'e', description: 'From pattern/video-results.' }];
-
-  assert.deepEqual(composedPatterns(zones), ['pattern/tool-page', 'pattern/uploaded-media']);
-  assert.deepEqual(composedPatterns([...zones, ...slots]), [
-    'pattern/tool-page',
-    'pattern/uploaded-media',
-    'pattern/video-results',
-  ]);
-});
-
 test('the index separates a defined pack from a name-only catalog entry', async () => {
   const workspace = await fixture();
   try {
@@ -196,18 +178,10 @@ test('the template is not counted as an adopter', async () => {
   }
 });
 
-test('a shell value is reported against the components that actually exist', async () => {
+test('shell is retained as a semantic category, not an import assertion', async () => {
   const workspace = await fixture();
-  try {
-    const index = await scanSurfaces(workspace);
-    const byId = new Map(index.entries.map((entry) => [entry.id, entry]));
-
-    assert.equal(byId.get('workspace/tool-demo').pack.shell.resolves, false);
-    assert.equal(byId.get('pattern/demo-page').pack.shell.resolves, true);
-    assert.equal(index.summary.shellMismatches, 1);
-  } finally {
-    await fs.rm(workspace, { recursive: true, force: true });
-  }
+  try { const index = await scanSurfaces(workspace); assert.deepEqual(index.entries[0].pack.shell, { declared: 'demo-workspace' }); }
+  finally { await fs.rm(workspace, { recursive: true, force: true }); }
 });
 
 test('an id declared as both a zone and a slot is reported', async () => {
@@ -230,9 +204,9 @@ test('the page states what is missing rather than only what exists', async () =>
 
     assert.match(html, /marketing\/never-built/);
     assert.match(html, /只有名字/);
-    assert.match(html, /platform\/ui 沒有這個目錄/);
-    // The composition is derived from prose, and the page has to say so.
-    assert.match(html, /推導自 zone 描述文字/);
+    assert.match(html, /語意分類/);
+    // Composition comes from the machine-readable declaration.
+    assert.match(html, /component-slots.yaml.composes/);
   } finally {
     await fs.rm(workspace, { recursive: true, force: true });
   }

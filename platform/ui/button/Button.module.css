@@ -391,8 +391,8 @@
   height: 100%;
   border-radius: 50%;
   background: conic-gradient(from 0deg, transparent 0%, currentcolor 100%);
-  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 2.5px));
-  mask: radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 2.5px));
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2.5px), currentColor calc(100% - 2.5px));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 2.5px), currentColor calc(100% - 2.5px));
   opacity: 0.85;
   animation: ycoButtonSpin 0.75s linear infinite;
 }
