@@ -24,7 +24,7 @@
   width: min(100%, 368px);
   flex: 0 1 368px;
   padding: var(--spacing-4);
-  background: var(--fill-weaker);
+  background: var(--fill-weak);
   border-radius: var(--corner-radius-12);
 }
 
@@ -137,7 +137,9 @@
 }
 
 .editContent {
-  padding: 0 var(--video-result-gutter) var(--spacing-8);
+  /* Bottom was --spacing-8, the only side not using the gutter — the canvas
+     card sat 24px from the left/right edges but only 8px from the bottom. */
+  padding: 0 var(--video-result-gutter) var(--video-result-gutter);
 }
 
 .historyContent {

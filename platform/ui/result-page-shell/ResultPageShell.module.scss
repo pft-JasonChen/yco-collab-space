@@ -6,9 +6,16 @@
   font-weight: normal;
 }
 
+/* Was `height: 100vh` — correct only when this component is the very root of
+   the page. Nested under any extra chrome (e.g. platform/runtime/PrototypeFrame's
+   banner) that raw viewport height overshoots the space actually available,
+   pushing this shell's own bottom content past the visible viewport. `height: 100%`
+   makes it fill whatever box its parent actually gives it instead. */
 .shell {
-  height: 100vh;
+  display: flex;
+  height: 100%;
   min-height: 0;
+  flex-direction: column;
   overflow: hidden;
   background: var(--background-base);
 }
@@ -108,7 +115,7 @@
 
 .shellBody {
   display: flex;
-  height: calc(100vh - 72px);
+  flex: 1;
   min-height: 0;
 }
 
@@ -120,22 +127,45 @@
   background: var(--background-base);
 }
 
+/* Figma's NavigationSide (node 13028:53081) puts the rail's 20/12px left/right
+   gutter here as the outer container's own padding (Padding: 20 top, 12 right,
+   20 bottom, 20 left) — the 80px-wide icon column below is centered inside it,
+   not offset per-button. Vertical spacing between the column's top-level blocks
+   (Home / Divider / group / Divider) is a flat 8px gap, not margin. */
 .toolMenuScroller {
-  height: calc(100vh - 72px);
+  height: 100%;
   overflow: hidden auto;
   overscroll-behavior: contain;
-  padding: 8px 0 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 20px 12px 20px 20px;
 }
 
-.menuItem,
-.homeItem {
+.menuItem {
+  width: 80px;
+}
+
+/* Figma's Templates group (node 16059:9362): the same 80px column, its own
+   buttons spaced with a flat gap — not margin, so it can't drift if a button's
+   own box model changes. PM-corrected 2026-09-11: 4px -> 8px. */
+.menuGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 80px;
+}
+
+/* Figma's Divider component (node 198:248): 1px --stroke-weak line, width:100%
+   of its 80px parent column — NOT the full 112px rail (that includes the
+   gutter padding above, which the divider doesn't span). */
+.divider {
+  flex: 0 0 auto;
   width: 100%;
-}
-
-.homeItem {
-  margin-bottom: 12px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--stroke-weak);
+  height: 1px;
+  background: var(--stroke-weak);
 }
 
 .menuButton,
@@ -145,7 +175,7 @@
   flex-direction: column;
   align-items: center;
   width: 80px;
-  margin: 4px 12px 4px 20px;
+  margin: 0;
   padding: 0;
   border: 0;
   border-radius: var(--corner-radius-24);
@@ -160,9 +190,13 @@
 .menuIcon {
   display: grid;
   place-items: center;
+  box-sizing: border-box;
   width: 100%;
   height: 44px;
   border-radius: var(--corner-radius-24);
+  /* Reserved so Active Hover/Active Press can turn this into a visible ring
+     (border-color below) without the icon pill resizing when the border appears. */
+  border: 2px solid transparent;
 }
 
 .menuIcon img {
@@ -181,13 +215,45 @@
 }
 
 .menuButtonActive {
-  color: var(--text-information);
+  /* Was --text-information (teal #1a74a8) — the only use of that token family in
+     platform/ui. Every other active/brand state (Button's tone_brand variants)
+     pairs --text-brand with brand fills, and this active icon's own pill background
+     is --fill-brand-weak (brand family) — so the label/icon color must be
+     --text-brand to match, not the mismatched teal. */
+  color: var(--text-brand);
 }
 
-.menuButton:hover .menuIcon,
-.menuButton:focus-visible .menuIcon,
+/* Interaction states follow Button's convention (Button.module.css): hover and
+   press are neutral overlays (--fill-hover / --fill-press), distinct from each
+   other; focus-visible is ring-only (see box-shadow rule below), it doesn't also
+   swap the fill. --fill-brand-weak is reserved for the persistent selected
+   indicator (.menuButtonActive), not for hover/press — previously hover AND
+   focus-visible both incorrectly reused the selected-state fill, and there was
+   no press state at all. */
+.menuButton:hover .menuIcon {
+  background: var(--fill-hover);
+}
+
+.menuButton:active .menuIcon {
+  background: var(--fill-press);
+}
+
 .menuButtonActive .menuIcon {
   background: var(--fill-brand-weak);
+}
+
+/* Figma MenuList (node 13026:43818) defines two more active sub-states that
+   weren't implemented at all: Active Hover and Active Press each add a
+   --stroke-selected ring on top of their own fill, distinct from the plain
+   Active pill. */
+.menuButtonActive:hover .menuIcon {
+  background: var(--teal-dark-50);
+  border-color: var(--stroke-selected);
+}
+
+.menuButtonActive:active .menuIcon {
+  background: var(--fill-brand-press);
+  border-color: var(--stroke-selected);
 }
 
 .menuButton:focus-visible,
@@ -258,8 +324,6 @@
   }
 
   .shellBody {
-    height: calc(100vh - 64px);
-    min-height: 0;
     flex-direction: column;
   }
 
@@ -270,10 +334,12 @@
   }
 
   .toolMenuScroller {
-    display: flex;
+    flex-direction: row;
+    align-items: center;
     height: auto;
     overflow: auto hidden;
     padding: 4px 8px;
+    gap: 4px;
   }
 
   .shellContent {
@@ -281,17 +347,23 @@
     overflow: auto;
   }
 
-  .menuItem,
-  .homeItem {
+  .menuItem {
     flex: 0 0 80px;
     width: 80px;
   }
 
-  .homeItem {
-    margin: 0 8px 0 0;
-    padding: 0 8px 0 0;
-    border-right: 1px solid var(--stroke-weak);
-    border-bottom: 0;
+  /* Rows become columns, so the group and its divider flip orientation too:
+     the divider goes from a horizontal 1px-tall line to a vertical 1px-wide one. */
+  .menuGroup {
+    flex-direction: row;
+    align-items: center;
+    width: auto;
+    gap: 8px;
+  }
+
+  .divider {
+    width: 1px;
+    height: 32px;
   }
 
   .menuButton,

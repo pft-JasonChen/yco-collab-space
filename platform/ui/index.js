@@ -1,4 +1,5 @@
 export { default as Button, buttonSizes, buttonTones, buttonVariants } from './button/index.js';
+export { default as EmptyImage } from './empty-image/index.js';
 export { default as Ratio, ratioTitleTypes, ratioTypes } from './ratio/index.js';
 export { default as VideoTrimModal } from './video-trim-modal/index.js';
 export { default as UploadMediaBlock, formatMediaDuration } from './upload-media-block/index.js';

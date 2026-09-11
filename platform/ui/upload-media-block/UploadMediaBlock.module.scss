@@ -157,10 +157,343 @@
   height: var(--spacing-16);
 }
 
+.actions > button [class^='icon-'],
+.featureAction > button [class^='icon-'] {
+  font-size: var(--spacing-16);
+}
+
 .actions > button:focus-visible,
 .featureAction > button:focus-visible,
 .preview:focus-visible,
 .uploadBlock:focus-visible {
   outline: none;
   box-shadow: 0 0 0 var(--spacing-4) var(--stroke-focus);
+}
+
+/* ----- Root wrapper (Figma node 4515:64125 "UploadArea") -----
+   The width-driven/fixed-aspect-ratio behaviour lives on the media area itself
+   (.uploadBlock/.mediaBlock/.startEndRow/.multiStrip etc, each still 368/136 or
+   their own ratio) same as before; .root just stacks that together with the
+   optional toggle row, error row and hint line above/below it. */
+.root {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  align-items: flex-start;
+}
+
+/* ----- Toggle row ("Start & End Frame" ON/OFF, node 7943:161635) ----- */
+.toggleRow {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--spacing-4);
+}
+
+.toggleLabel,
+.toggleState {
+  color: var(--text-strong);
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+  font-weight: var(--font-weight-strong);
+  white-space: nowrap;
+}
+
+/* Figma's toggle (node 7938:189135) is its own asset — a pill track with a
+   gradient-filled, drop-shadowed knob — rather than a flat color + CSS circle,
+   so it's used directly as an image instead of rebuilt in CSS. Sized to the
+   asset's own intrinsic 32x14.588 (the knob's shadow bleeds slightly outside
+   the nominal 12px-tall track, hence the non-round height). */
+.toggleTrack {
+  display: inline-flex;
+  width: 32px;
+  height: 14.588px;
+  flex: 0 0 auto;
+  padding: 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.toggleTrack:disabled {
+  cursor: not-allowed;
+}
+
+.toggleTrack img {
+  width: 100%;
+  height: 100%;
+}
+
+/* ----- Shared small icon buttons (remove/replace/crop pins) ----- */
+.miniButton {
+  position: absolute;
+  display: grid;
+  width: 20px;
+  height: 20px;
+  place-items: center;
+  padding: 0;
+  background: var(--background-base);
+  border: 1px solid var(--stroke-strong);
+  border-radius: var(--corner-radius-32);
+  cursor: pointer;
+}
+
+.miniButton img {
+  width: 12px;
+  height: 12px;
+}
+
+/* ----- type="startEnd" (nodes 7938:189409 / 7943:107377) ----- */
+.startEndRow {
+  display: flex;
+  width: 100%;
+  max-height: calc(var(--spacing-128) + var(--spacing-8));
+  aspect-ratio: 368 / 136;
+  align-items: center;
+  gap: var(--spacing-16);
+}
+
+.swapIcon {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 auto;
+}
+
+.frameSlotEmpty,
+.frameSlotFilled {
+  position: relative;
+  display: flex;
+  width: 0;
+  height: 100%;
+  flex: 1 0 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-4);
+  overflow: hidden;
+  background: var(--fill-weaker);
+  border-radius: var(--corner-radius-8);
+}
+
+.frameSlotEmpty {
+  padding: var(--spacing-24) 0;
+  color: inherit;
+  background: var(--fill-weaker);
+  border: 1px dashed var(--stroke-strong);
+  cursor: pointer;
+}
+
+.frameSlotEmpty:disabled {
+  cursor: not-allowed;
+}
+
+.frameSlotFilled {
+  border: 1px solid var(--stroke-strong);
+}
+
+.frameImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.frameAddButton {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  background: var(--background-inverse);
+  border-radius: 50%;
+}
+
+.frameAddButton img {
+  width: 22px;
+  height: 22px;
+}
+
+.frameEmptyText {
+  max-width: 100%;
+  padding: 0 var(--spacing-8);
+  color: var(--text-weaker);
+  text-align: center;
+  font-size: var(--font-size-micro);
+  line-height: var(--line-height-micro);
+}
+
+.frameInfo {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  width: 12px;
+  height: 12px;
+}
+
+.frameInfo img {
+  width: 100%;
+  height: 100%;
+}
+
+.frameTypeLabel {
+  position: absolute;
+  bottom: 3px;
+  left: 3px;
+  padding: var(--spacing-4) 9px;
+  color: var(--text-inverse-strong);
+  background: var(--fill-overlay-weak);
+  border-radius: var(--corner-radius-32);
+  font-size: var(--font-size-micro);
+  line-height: var(--line-height-micro);
+  font-weight: var(--font-weight-strong);
+}
+
+.frameButtonTopLeft {
+  top: 3px;
+  left: 3px;
+}
+
+.frameButtonTopRight {
+  top: 3px;
+  right: 3px;
+}
+
+.frameButtonBottomRight {
+  right: 3px;
+  bottom: 3px;
+}
+
+/* ----- type="multiple" (node 7943:109872) ----- */
+.multiStrip {
+  display: flex;
+  width: 100%;
+  max-height: calc(var(--spacing-128) + var(--spacing-8));
+  aspect-ratio: 368 / 136;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--spacing-8);
+  padding: var(--spacing-8);
+  overflow: hidden;
+  background: var(--fill-weaker);
+  border: 1px solid var(--stroke-weak);
+  border-radius: var(--corner-radius-8);
+}
+
+.multiStripItem {
+  position: relative;
+  height: 100%;
+  flex: 0 0 auto;
+  overflow: hidden;
+  border-radius: var(--corner-radius-4);
+}
+
+.multiStripImage {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.multiStripTag {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  padding: 2px 4px;
+  color: var(--text-inverse-strong);
+  white-space: nowrap;
+  background: rgba(0, 0, 0, 0.65);
+  border-radius: var(--corner-radius-4);
+  transform: translateX(-50%);
+  font-size: 10px;
+  font-weight: var(--font-weight-strong);
+}
+
+.multiStripRemove {
+  top: 2px;
+  right: 2px;
+  width: 20px;
+  height: 20px;
+}
+
+.multiStripAdd {
+  display: grid;
+  height: 100%;
+  aspect-ratio: 80 / 120;
+  flex: 0 0 auto;
+  place-items: center;
+  background: var(--fill-weak);
+  border: 0;
+  border-radius: var(--corner-radius-4);
+  cursor: pointer;
+}
+
+/* ----- type="template" (node 13631:167115) ----- */
+.templateRow {
+  display: flex;
+  width: 100%;
+  max-height: calc(var(--spacing-128) + var(--spacing-8));
+  aspect-ratio: 368 / 136;
+  align-items: center;
+  gap: var(--spacing-16);
+  padding: var(--spacing-8);
+  background: var(--fill-weaker);
+  border: 1px solid var(--stroke-weak);
+  border-radius: var(--corner-radius-8);
+}
+
+.templateThumb {
+  height: 100%;
+  aspect-ratio: 90 / 120;
+  flex: 0 0 auto;
+  object-fit: cover;
+  border-radius: var(--corner-radius-4);
+}
+
+.templateName {
+  flex: 1 0 0;
+  min-width: 0;
+  color: var(--text-strong);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  font-weight: var(--font-weight-strong);
+}
+
+.templateChangeButton {
+  flex: 0 0 auto;
+  padding: var(--spacing-8) 12px;
+  color: var(--text-inverse-strong);
+  background: var(--fill-strong);
+  border: 0;
+  border-radius: var(--corner-radius-32);
+  cursor: pointer;
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+  font-weight: var(--font-weight-strong);
+}
+
+/* ----- Error row (node 9920:113624) ----- */
+.errorRow {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: var(--spacing-4);
+  margin: 0;
+  color: var(--text-error);
+  font-size: var(--font-size-micro);
+  line-height: var(--line-height-micro);
+}
+
+.errorRow img {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+}
+
+/* ----- Hint line (e.g. node 7938:188061) ----- */
+.hint {
+  width: 100%;
+  margin: 0;
+  color: var(--text-weaker);
+  font-size: var(--font-size-micro);
+  line-height: var(--line-height-micro);
 }

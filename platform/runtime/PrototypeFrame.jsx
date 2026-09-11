@@ -19,7 +19,7 @@ export default function PrototypeFrame({ metadata, children }) {
           {isReviewReady ? 'Review-ready' : 'Working preview'}
         </span>
       </header>
-      {children}
+      <div className={styles.content}>{children}</div>
     </div>
   );
 }
