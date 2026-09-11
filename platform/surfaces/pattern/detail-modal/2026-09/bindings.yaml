@@ -1,0 +1,24 @@
+# Current implementation mapping, not the zone/slot contract.
+# Composition is declared once in component-slots.yaml.composes.
+schemaVersion: 1
+pack: pattern/detail-modal
+version: 2026-09
+zones:
+  detail-media:
+    component: video-info-dialog
+  detail-metadata:
+    component: video-info-dialog
+  next-action:
+    component: video-info-dialog
+slots:
+  video-detail-dialog:
+    component: video-info-dialog
+  next-action:
+    component: video-info-dialog
+  result-actions:
+    component: icon-action-buttons
+preview:
+  recipe: detail-modal
+  components:
+    Dialog:
+      component: video-info-dialog

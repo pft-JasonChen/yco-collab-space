@@ -1,0 +1,41 @@
+# Current implementation mapping, not the zone/slot contract.
+# Composition is declared once in component-slots.yaml.composes.
+schemaVersion: 1
+pack: pattern/tool-page
+version: 2026-09
+zones:
+  tool-navigation:
+    component: result-page-shell
+  settings-inspector:
+    component: tool-page-layout
+  primary-action:
+    component: credit-controls
+  result-column:
+    component: tool-page-layout
+slots:
+  navigation-header:
+    component: result-page-shell
+  settings-inspector:
+    component: tool-page-layout
+  primary-action:
+    component: credit-controls
+  result-column:
+    component: tool-page-layout
+preview:
+  recipe: tool-page
+  components:
+    Shell:
+      component: result-page-shell
+    Layout:
+      component: tool-page-layout
+    Upload:
+      component: upload-media-block
+    Action:
+      component: credit-controls
+      export: GenerateActionBar
+    Results:
+      component: video-results-surface
+    History:
+      component: video-history
+    Dialog:
+      component: video-info-dialog

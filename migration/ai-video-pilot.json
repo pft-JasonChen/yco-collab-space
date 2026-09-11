@@ -1,0 +1,78 @@
+{
+  "id": "ai-video",
+  "definitionStatus": "pending-human-definition",
+  "title": "AI Video 全流程",
+  "scope": "跨 Video 工具的共用流程盤點；先以既有 Video Expansion 合成資料流程驗證，再逐項抽離 RD 候選。各生成引擎尚未移植。",
+  "feature": "video-expansion",
+  "phases": [
+    {
+      "id": "entry",
+      "title": "入口與工具框架",
+      "pack": "workspace/tool-video@2026-09",
+      "components": ["result-page-shell", "tool-page-layout"],
+      "pm": "定義工具入口、返回與跨工具切換",
+      "designer": "確認 shell、zone 與窄版導覽",
+      "rdSource": "src/components/result-page"
+    },
+    {
+      "id": "input",
+      "title": "上傳、替換與錯誤",
+      "pack": "workspace/tool-video@2026-09",
+      "components": ["upload-media-block"],
+      "pm": "確認格式、大小、長度限制與錯誤恢復",
+      "designer": "定義 empty／loaded／invalid 的 slot 與文案",
+      "rdSource": "src/components/result-page/common/video-feature/upload-panel"
+    },
+    {
+      "id": "edit",
+      "title": "裁切、比例與設定",
+      "pack": "workspace/tool-video@2026-09",
+      "components": ["video-trim-modal", "video-timeline", "ratio"],
+      "pm": "分開共用操作與工具特有參數",
+      "designer": "確認 canvas、inspector 優先順序與焦點操作",
+      "rdSource": "src/components/ai-agent-page/components/video-trim-modal"
+    },
+    {
+      "id": "generate",
+      "title": "送出與處理中",
+      "pack": "workspace/tool-video@2026-09",
+      "components": ["credit-controls", "button"],
+      "pm": "定義重複送出、取消、重試與點數顯示規則",
+      "designer": "定義 disabled／loading／processing 及回饋位置",
+      "rdSource": "src/components/result-page/common/video-feature"
+    },
+    {
+      "id": "history",
+      "title": "History、成功與失敗",
+      "pack": "workspace/tool-video@2026-09",
+      "components": ["video-history", "video-results-surface"],
+      "pm": "定義任務狀態、排序、篩選與保留規則",
+      "designer": "確認卡片狀態、批次操作及空清單",
+      "rdSource": "src/components/result-page/common/video-feature/history-videos"
+    },
+    {
+      "id": "detail",
+      "title": "詳情與下一步",
+      "pack": "pattern/detail-modal@2026-09",
+      "components": ["video-info-dialog"],
+      "pm": "定義下載、刪除與 Next Action 的資料交接",
+      "designer": "確認 dialog、鍵盤關閉、焦點返回与窄版",
+      "rdSource": "src/components/result-page/common/video-feature/video-detail-modal"
+    }
+  ],
+  "decisions": {
+    "pm": { "reviewer": null, "status": "pending", "acceptance": null },
+    "designer": {
+      "reviewer": null,
+      "status": "pending",
+      "figma": null,
+      "responsiveRules": null
+    },
+    "rd": {
+      "reviewer": null,
+      "status": "pending",
+      "portability": null,
+      "removedDependencies": []
+    }
+  }
+}

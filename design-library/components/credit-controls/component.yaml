@@ -35,18 +35,18 @@ implementation:
   importPath: platform/ui/credit-controls/index.js
   storyId: ui-credit-controls
   framework: react
-  dependencies: [react, platform-ui-button]
-  removedDependencies: [redux, authentication, credit-service, pricing-modal, local-storage, i18n, lodash, analytics]
+  dependencies: [ react, platform-ui-button ]
+  removedDependencies: [ redux, authentication, credit-service, pricing-modal, local-storage, i18n, lodash, analytics ]
   localFiles:
     - path: platform/ui/credit-controls/CreditControls.jsx
       sha256: 73e59eb7e99fd635295874e98806631ab43f40ecde6605faa9a59e7f1ddab049
     - path: platform/ui/credit-controls/CreditControls.module.scss
-      sha256: bdb56f69c0748e6f3cfe7bda51d8737924cd3defcd26440315ecde3281aad854
+      sha256: 2d7bb3218e700688e81c392bfb44603ced61ddbea485e3d0a3ddc0f7a2b87efa
     - path: platform/ui/credit-controls/CreditControls.stories.jsx
       sha256: 050d42c8164d821b9469c5e1a278d21cc11847de28943c4769d5846e26bd6213
     - path: platform/ui/credit-controls/index.js
       sha256: 5bcc58063e29497a2c720fb7c7c916230633f961b3645218193e31401d59e29b
-  localFilesUpdated: 2026-09-05
+  localFilesUpdated: 2026-09-10
 publicApi:
   props:
     - { name: balance, required: false }
@@ -56,10 +56,10 @@ publicApi:
     - { name: disabled, required: false }
     - { name: isLoading, required: false }
     - { name: onClick, required: false }
-  states: [header-balance, compact-badge, generate-enabled, generate-disabled, loading, inert, generate-two-line, generate-two-line-with-credits]
+  states: [ header-balance, compact-badge, generate-enabled, generate-disabled, loading, inert, generate-two-line, generate-two-line-with-credits ]
 tokens:
   lockPath: platform/tokens/tokens.lock.json
-  uses: [--background-base, --fill-strong, --fill-weaker, --stroke-focus, --text-strong]
+  uses: [ --background-base, --fill-strong, --fill-weaker, --stroke-focus, --text-strong ]
 assets:
   - { path: assets/icon/yco-credit-controls, usage: runtime }
 review:
@@ -75,3 +75,4 @@ decisionBasis:
   - "Width-responsive side padding (2026-09-06): the same Figma handoff spec gives the action bar 24px side padding at \"W400 & mobile\" and 16px at \"W300\" — this reacts to how wide the panel this component is embedded in actually renders, not the browser viewport, so it's implemented as a CSS container query (`container-type: inline-size` on `.actionBar`) rather than a media query. An element cannot query its own containment context (verified empirically — the padding rule silently did nothing when both lived on `.actionBar` itself), so the query container is `.actionBar` and the padding lives one level in on a new `.actionBarInner` wrapper. 350px (the midpoint between the spec's named 300/400) is used as the breakpoint since the spec didn't give an exact cutoff — flag with Designer/RD if the real threshold differs. Verified in-browser: 24px padding at 400px+ container width, 16px at 350px and below."
   - "Current local hashes after the 2026-09-06 changes above: `CreditControls.jsx` → 73e59eb7e99fd635295874e98806631ab43f40ecde6605faa9a59e7f1ddab049; `CreditControls.module.scss` → bdb56f69c0748e6f3cfe7bda51d8737924cd3defcd26440315ecde3281aad854. Same deliberate-divergence status as button's own component.yaml — pending Designer/RD canonical review, not silently claimed as already approved."
   - "Designer canonical review approved 2026-09-06: current implementation reviewed and signed off. RD canonical review still pending."
+  - "2026-09-10: Replaced undefined --font-weight-regular with the existing RD --font-weight-weak (400), matching the previous normal fallback."

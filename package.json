@@ -31,6 +31,8 @@
     "snapshot:vendor": "node tools/migration/vendor-snapshot.mjs",
     "snapshot:site-map": "node tools/migration/generate-site-map.mjs",
     "snapshot:patterns": "node tools/migration/generate-surface-patterns.mjs",
+    "snapshot:intake": "node tools/migration/intake-inventory.mjs",
+    "eval:integrity": "node --test tools/prototype-cli/content-integrity.test.mjs",
     "validate:public-build": "node tools/design-library/validate-public-build.mjs",
     "validate:inputs": "node tools/prototype-cli/validate-inputs.mjs",
     "validate:intake": "node tools/prototype-cli/validate-inputs.mjs --intake-only",
@@ -49,7 +51,9 @@
     "prototype:check": "npm run build && npm run test:rendered",
     "eval:workflow": "node tools/evaluation/run-workflow-eval.mjs",
     "eval:mutations": "node tools/evaluation/run-mutation-suite.mjs",
-    "eval:visual:packet": "node tools/evaluation/create-visual-review-packet.mjs"
+    "eval:visual:packet": "node tools/evaluation/create-visual-review-packet.mjs",
+    "surfaces:browser": "node tools/design-library/surface-browser.mjs",
+    "test:surfaces": "node tools/validation/run-surface-checks.mjs"
   },
   "dependencies": {
     "mediabunny": "^1.50.8",
@@ -69,6 +73,7 @@
     "storybook": "^10.5.0",
     "storybook-addon-pseudo-states": "^10.6.0",
     "vite": "8.2.2",
-    "yaml": "2.9.0"
+    "yaml": "2.9.0",
+    "@babel/parser": "7.29.8"
   }
 }

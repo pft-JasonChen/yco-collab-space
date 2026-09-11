@@ -1,4 +1,5 @@
 import Ajv from 'ajv';
+import { collectSurfaceVersions } from '../design-library/surface-bindings.mjs';
 import {
   formatSchemaErrors,
   pathExists,
@@ -121,6 +122,8 @@ for (const entry of catalog.entries || []) {
   }
 }
 
+errors.push(...(await collectSurfaceVersions()).errors);
+
 if (errors.length > 0) {
   process.stderr.write('[surfaces] FAIL\n');
   for (const error of errors) {
@@ -139,4 +142,3 @@ if (errors.length > 0) {
       ' planned\n',
   );
 }
-

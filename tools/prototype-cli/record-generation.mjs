@@ -10,6 +10,7 @@ import {
 import { resolveSurfaceContext } from './surface-policy.mjs';
 import { buildResourceProvenance, buildTokenProvenance } from './resource-provenance.mjs';
 import { buildSharedComponentProvenance } from '../design-library/component-provenance.mjs';
+import { generationIntegrity } from './content-integrity.mjs';
 
 const feature = normaliseFeatureSlug(process.argv[2]);
 const adapterIndex = process.argv.indexOf('--adapter');
@@ -58,6 +59,7 @@ const metadata = {
   tokens: await buildTokenProvenance(),
   surface: surfaceResult.context,
 };
+metadata.integrity = await generationIntegrity(feature, { surface: surfaceResult.context, components: metadata.components });
 
 await fs.writeFile(
   path.join(generatedRoot, 'generation.json'),

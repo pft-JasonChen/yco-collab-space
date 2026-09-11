@@ -12,13 +12,13 @@ export function fromRoot(...parts) {
   return path.join(repositoryRoot, ...parts);
 }
 
-export async function readJson(relativePath) {
-  const source = await fs.readFile(fromRoot(relativePath), 'utf8');
+export async function readJson(relativePath, workspace = repositoryRoot) {
+  const source = await fs.readFile(path.join(workspace, relativePath), 'utf8');
   return JSON.parse(source);
 }
 
-export async function readYaml(relativePath) {
-  const source = await fs.readFile(fromRoot(relativePath), 'utf8');
+export async function readYaml(relativePath, workspace = repositoryRoot) {
+  const source = await fs.readFile(path.join(workspace, relativePath), 'utf8');
   return parseYaml(source);
 }
 
@@ -89,8 +89,8 @@ export async function sha256File(absolutePath) {
   return createHash('sha256').update(contents).digest('hex');
 }
 
-export async function hashFeatureInputs(feature) {
-  const featureRoot = fromRoot('features', feature);
+export async function hashFeatureInputs(feature, workspace = repositoryRoot) {
+  const featureRoot = path.join(workspace, 'features', feature);
   const inputRoots = [
     path.join(featureRoot, 'product'),
     path.join(featureRoot, 'design'),

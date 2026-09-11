@@ -1,0 +1,22 @@
+# Current implementation mapping, not the zone/slot contract.
+# Composition is declared once in component-slots.yaml.composes.
+schemaVersion: 1
+pack: pattern/uploaded-media
+version: 2026-09
+zones:
+  media-upload:
+    component: upload-media-block
+  uploaded-media:
+    component: upload-media-block
+slots:
+  media-upload:
+    component: upload-media-block
+  uploaded-media:
+    component: upload-media-block
+preview:
+  recipe: uploaded-media
+  components:
+    Upload:
+      component: upload-media-block
+    Dialog:
+      component: video-info-dialog

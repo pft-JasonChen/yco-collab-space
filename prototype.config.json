@@ -5,10 +5,12 @@
     "devPort": 5177,
     "previewPort": 4177,
     "libraryPort": 5178,
-    "storybookPort": 6006
+    "storybookPort": 6006,
+    "surfacesPort": 5179
   },
   "routes": {
-    "featurePrefix": "/features"
+    "featurePrefix": "/features",
+    "surfacePrefix": "/surfaces"
   },
   "viewports": [
     {

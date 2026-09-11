@@ -1,0 +1,37 @@
+# Current implementation mapping, not the zone/slot contract.
+# Composition is declared once in component-slots.yaml.composes.
+schemaVersion: 1
+pack: marketing/product-page
+version: 2026-08
+zones:
+  navigation:
+    unimplemented: No version-specific reusable implementation has been verified.
+      Definition retained for review; no inferred preview.
+  feature-hero:
+    unimplemented: No version-specific reusable implementation has been verified.
+      Definition retained for review; no inferred preview.
+  use-cases:
+    unimplemented: No version-specific reusable implementation has been verified.
+      Definition retained for review; no inferred preview.
+  conversion-action:
+    unimplemented: No version-specific reusable implementation has been verified.
+      Definition retained for review; no inferred preview.
+  footer:
+    unimplemented: No version-specific reusable implementation has been verified.
+      Definition retained for review; no inferred preview.
+slots:
+  navigation-header:
+    unimplemented: No version-specific reusable implementation has been verified.
+      Definition retained for review; no inferred preview.
+  feature-hero:
+    unimplemented: No version-specific reusable implementation has been verified.
+      Definition retained for review; no inferred preview.
+  use-case-list:
+    unimplemented: No version-specific reusable implementation has been verified.
+      Definition retained for review; no inferred preview.
+  primary-action:
+    unimplemented: No version-specific reusable implementation has been verified.
+      Definition retained for review; no inferred preview.
+  marketing-footer:
+    unimplemented: No version-specific reusable implementation has been verified.
+      Definition retained for review; no inferred preview.
