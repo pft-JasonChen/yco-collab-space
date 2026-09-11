@@ -1,0 +1,25 @@
+/* Canvas matches Figma node 13023:12548: every type variant is drawn on a fixed
+   120x120 square. Each layer is its own absolutely-positioned, flex-centered
+   "slot" sized to the layer's (possibly rotated) bounding box from Figma, with
+   the actual image sized/rotated inside it — see EmptyImage.jsx's VARIANTS table
+   for the per-type position data. */
+.emptyImage {
+  position: relative;
+  width: 120px;
+  height: 120px;
+}
+
+.slot {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slot img {
+  display: block;
+}
+
+.micPill {
+  border-radius: 7.843px;
+}

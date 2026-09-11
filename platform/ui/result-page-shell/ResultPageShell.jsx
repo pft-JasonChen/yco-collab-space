@@ -3,22 +3,9 @@ import mobileLogo from '../../../design-library/assets/logo/yco-online-editor/lo
 import logoSymbol from '../../../design-library/assets/logo/yco-online-editor/logo-symbol.svg';
 import profileIcon from '../../../design-library/assets/icon/yco-result-page-shell/profile.svg';
 import infoIcon from '../../../design-library/assets/icon/yco-result-page-shell/info.svg';
-import homeIcon from '../../../design-library/assets/icon/yco-result-page-shell/home.svg';
-import agentIcon from '../../../design-library/assets/icon/yco-result-page-shell/ai-agent.svg';
 import { CreditControl } from '../credit-controls/index.js';
+import { defaultToolFamilies } from './defaultToolFamilies.js';
 import styles from './ResultPageShell.module.scss';
-
-const defaultToolFamilies = [
-  { id: 'home', label: 'Home', image: homeIcon },
-  { id: 'ai-agent', label: 'AI Agent', image: agentIcon },
-  { id: 'ai-photo-editing', label: 'AI Photo Editing', glyph: '\ue904' },
-  { id: 'basic-editing', label: 'Basic Editing', glyph: '\ue922' },
-  { id: 'ai-video', label: 'AI Video', glyph: '\ue918' },
-  { id: 'ai-image', label: 'AI Image', glyph: '\ue917' },
-  { id: 'ai-portrait', label: 'AI Portrait', glyph: '\ue91c' },
-  { id: 'batch-editing', label: 'Batch Editing', glyph: '\ue900' },
-  { id: 'template', label: 'Template', glyph: '\ue907' },
-];
 
 /** Every user-facing string is a prop so RD can hand them straight to its own t(). */
 const defaultLabels = {
@@ -84,6 +71,14 @@ export function ProductHeader({
   );
 }
 
+/* Figma's own Divider component (node 198:248): a 1px --stroke-weak line that
+   fills its parent's width — here that parent is the 80px icon column, not the
+   112px rail (the rail's 20/12px left/right gutters come from .toolMenuScroller's
+   own padding, matching NavigationSide's Padding: 20/12/20/20 in Figma). */
+function Divider() {
+  return <div className={styles.divider} role="separator" aria-hidden="true" />;
+}
+
 export function ToolFamilyMenu({
   labels: labelOverrides = {},
   items = defaultToolFamilies,
@@ -91,6 +86,32 @@ export function ToolFamilyMenu({
   onSelect,
 }) {
   const labels = { ...defaultLabels, ...labelOverrides };
+  const homeItems = items.filter((item) => item.id === 'home');
+  const restItems = items.filter((item) => item.id !== 'home');
+  const hasDivider = homeItems.length > 0 && restItems.length > 0;
+
+  const renderItem = (item) => {
+    const active = item.id === activeId;
+    return (
+      <div className={styles.menuItem} key={item.id}>
+        <button
+          className={active ? styles.menuButtonActive : styles.menuButton}
+          data-testid={active ? `tool-family-${item.id}` : undefined}
+          type="button"
+          aria-current={active ? 'page' : undefined}
+          aria-disabled={!onSelect}
+          disabled={!onSelect}
+          onClick={onSelect ? () => onSelect(item.id) : undefined}
+        >
+          <span className={styles.menuIcon} aria-hidden="true">
+            {item.image ? <img src={item.image} alt="" /> : <span className={styles.glyph}>{item.glyph}</span>}
+          </span>
+          {item.id === 'home' ? <span className={styles.visuallyHidden}>{item.label}</span> : <span>{item.label}</span>}
+        </button>
+      </div>
+    );
+  };
+
   return (
     <aside
       className={styles.toolMenu}
@@ -100,27 +121,10 @@ export function ToolFamilyMenu({
       aria-label={labels.toolFamilies}
     >
       <nav className={styles.toolMenuScroller} aria-label={labels.toolList}>
-        {items.map((item) => {
-          const active = item.id === activeId;
-          return (
-            <div className={item.id === 'home' ? styles.homeItem : styles.menuItem} key={item.id}>
-              <button
-                className={active ? styles.menuButtonActive : styles.menuButton}
-                data-testid={active ? `tool-family-${item.id}` : undefined}
-                type="button"
-                aria-current={active ? 'page' : undefined}
-                aria-disabled={!onSelect}
-                disabled={!onSelect}
-                onClick={onSelect ? () => onSelect(item.id) : undefined}
-              >
-                <span className={styles.menuIcon} aria-hidden="true">
-                  {item.image ? <img src={item.image} alt="" /> : <span className={styles.glyph}>{item.glyph}</span>}
-                </span>
-                {item.id === 'home' ? <span className={styles.visuallyHidden}>{item.label}</span> : <span>{item.label}</span>}
-              </button>
-            </div>
-          );
-        })}
+        {homeItems.map(renderItem)}
+        {hasDivider ? <Divider /> : null}
+        {restItems.length > 0 ? <div className={styles.menuGroup}>{restItems.map(renderItem)}</div> : null}
+        {hasDivider ? <Divider /> : null}
       </nav>
     </aside>
   );
@@ -152,5 +156,3 @@ export default function ResultPageShell({
     </div>
   );
 }
-
-export { defaultToolFamilies };

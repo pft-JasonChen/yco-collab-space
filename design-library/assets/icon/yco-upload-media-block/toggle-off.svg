@@ -1,0 +1,19 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="32" height="14.5882" viewBox="0 0 32 14.5882" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="toggle-s-off">
+<path id="Shape" fill-rule="evenodd" clip-rule="evenodd" d="M4 6.41176C4 3.09806 6.68629 0.411765 10 0.411765H22C25.3137 0.411765 28 3.09806 28 6.41176C28 9.72547 25.3137 12.4118 22 12.4118H10C6.68629 12.4118 4 9.72547 4 6.41176Z" fill="#11181A" fill-opacity="0.2"/>
+<g id="Oval" filter="url(#filter0_d_0_off)">
+<circle cx="10" cy="6.41176" r="6" fill="white"/>
+</g>
+</g>
+<defs>
+<filter id="filter0_d_0_off" x="2.70588" y="0" width="14.5882" height="14.5882" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="0.882353"/>
+<feGaussianBlur stdDeviation="0.647059"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_0_off"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_0_off" result="shape"/>
+</filter>
+</defs>
+</svg>

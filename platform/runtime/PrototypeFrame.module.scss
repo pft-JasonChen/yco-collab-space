@@ -1,11 +1,25 @@
+/* This banner sits above every feature preview. Previously `.shell` was only
+   `min-height: 100vh` with `.banner` and `{children}` as plain stacked block
+   content, so the banner's own height added ON TOP of whatever height the
+   feature itself already assumed it had (ResultPageShell's own `.shell` used to
+   hardcode `height: 100vh`, oblivious to this banner sitting above it) — pushing
+   the total page past the viewport, so features had to be scrolled as a whole
+   just to reach their own footer/bottom content. Fixed on both sides: `.shell`
+   here is now a fixed-height (not min-height) flex column, so `.content` gets
+   exactly "100vh minus the banner's real height" instead of the full 100vh; and
+   ResultPageShell's own `.shell` now sizes itself to `height: 100%` of whatever
+   it's given (see its own module.scss) instead of assuming raw viewport. */
 .shell {
-  min-height: 100vh;
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
   color: var(--text-strong);
   background: var(--background-sunken);
 }
 
 .banner {
   display: flex;
+  flex: 0 0 auto;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
@@ -13,6 +27,12 @@
   padding: var(--spacing-12) var(--spacing-24);
   color: var(--text-inverse-strong);
   background: var(--background-inverse);
+}
+
+.content {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
 }
 
 .banner p {

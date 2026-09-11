@@ -1,6 +1,15 @@
+/* Divider removed (2026-09-11, PM-directed): every .settingsSection unconditionally
+   drew its own border-bottom, so two adjacent sections (Video, Aspect Ratio) each
+   contributed a line — one between them, one trailing after the last section with
+   nothing below it. Padding alone is enough separation; no divider is drawn.
+   Per-section padding also removed the same day: the panel's 16px edge padding and
+   8px inter-section gap now live once on ToolPageLayout's .panelContent override
+   (features/video-expansion/generated/index.module.scss), not per-section — so
+   they don't compound into the mismatched 20/24px spacing this used to produce.
+   Flag to RD: this file is features/*/generated/** (normally agent-regeneration-only) —
+   edited directly here on PM's explicit instruction rather than reverted; note for
+   prototype-update reconciliation. */
 .settingsSection {
-  padding: var(--spacing-20) var(--spacing-24);
-  border-bottom: 1px solid var(--stroke-weak);
 }
 
 .sectionTitle {

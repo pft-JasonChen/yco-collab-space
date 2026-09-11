@@ -2,5 +2,5 @@ export {
   default,
   ProductHeader,
   ToolFamilyMenu,
-  defaultToolFamilies,
 } from './ResultPageShell.jsx';
+export { defaultToolFamilies } from './defaultToolFamilies.js';

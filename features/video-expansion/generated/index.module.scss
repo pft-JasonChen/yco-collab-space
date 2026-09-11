@@ -7,8 +7,16 @@
   background: var(--background-alternate);
 }
 
-.page button,
-.page input {
+/* `:where()` around BOTH sides zeroes this whole selector's specificity to 0 —
+   lower than any single class, not just equal to one. Wrapping only
+   `button, input` (specificity (0,1,0), tying a plain `.tab`/`.activeTab` class)
+   still lost the tie by source order in practice, since VideoResultsSurface's
+   CSS module — being a dependency the feature imports — gets injected into the
+   page BEFORE the feature's own index.module.scss, so this rule (appearing later)
+   still won the tie and clobbered .tab/.activeTab's font-weight. Zero specificity
+   on both sides means this only ever sets the base/native-button font and never
+   outranks a shared component's own typography, regardless of injection order. */
+:where(.page) :where(button, input) {
   font: inherit;
 }
 
@@ -18,8 +26,14 @@
   box-shadow: 0 0 0 var(--spacing-4) var(--stroke-focus);
 }
 
+/* PM-directed spacing (2026-09-11): panel padding is 16px on all sides, with an
+   8px gap between config sections — replaces the old asymmetric per-section
+   padding (20px/24px) that also duplicated as the divider's spacing. */
 .panelContent {
-  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+  padding: var(--spacing-16);
 }
 
 .editResult {
@@ -107,21 +121,24 @@
   text-align: center;
 }
 
-.emptyVideoIcon,
+/* Non-error case (2026-09-11): now renders <EmptyImage type="video" /> — its own
+   120x120 layered illustration from Figma node 13023:12528 — instead of a single
+   Icon in a colored circle, so it no longer needs its own size/background/color;
+   just the bottom margin before the title. The error state is unrelated (still a
+   single warning Icon) and keeps its own colored-circle treatment below. */
+.emptyVideoIcon {
+  margin-bottom: var(--spacing-16);
+}
+
 .emptyVideoIconError {
   display: grid;
   width: var(--spacing-96);
   height: var(--spacing-96);
   margin-bottom: var(--spacing-16);
   place-items: center;
-  color: var(--icon-brand);
-  background: var(--fill-brand-weak);
-  border-radius: var(--corner-radius-20);
-}
-
-.emptyVideoIconError {
   color: var(--icon-error);
   background: var(--fill-error-weak);
+  border-radius: var(--corner-radius-20);
 }
 
 .emptyResult h1 {
@@ -138,23 +155,6 @@
   color: var(--text-weak);
   font-size: var(--font-size-tiny);
   line-height: var(--line-height-tiny);
-}
-
-.emptyUploadButton {
-  display: flex;
-  min-height: var(--spacing-48);
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-4);
-  padding: var(--spacing-8) var(--spacing-16);
-  color: var(--text-inverse-strong);
-  background: var(--fill-brand-strong);
-  border: none;
-  border-radius: var(--corner-radius-32);
-  cursor: pointer;
-  font-size: var(--font-size-heading-5);
-  line-height: var(--line-height-heading-5);
-  font-weight: var(--font-weight-strong);
 }
 
 .sampleArea {
@@ -183,10 +183,6 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-@media (max-width: 1200px) {
-  .settingsSection { padding: var(--spacing-16) var(--spacing-20); }
 }
 
 @media (max-width: 900px) {

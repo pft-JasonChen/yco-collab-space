@@ -14,6 +14,8 @@ import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import ResultPageShell from '../../../platform/ui/result-page-shell/index.js';
 import ToolPageLayout from '../../../platform/ui/tool-page-layout/index.js';
 import { GenerateActionBar } from '../../../platform/ui/credit-controls/index.js';
+import Button from '../../../platform/ui/button/index.js';
+import EmptyImage from '../../../platform/ui/empty-image/index.js';
 import VideoHistory from '../../../platform/ui/video-history/index.js';
 import VideoInfoDialog from '../../../platform/ui/video-info-dialog/index.js';
 import VideoResultsSurface from '../../../platform/ui/video-results-surface/index.js';
@@ -55,13 +57,22 @@ function EmptyResult({ error, onPick, onSample, onRecover }) {
   return (
     <div className={styles.emptyResult} data-component-role="error-recovery">
       <div className={error ? styles.emptyVideoIconError : styles.emptyVideoIcon}>
-        <Icon name={error ? 'warning' : 'video'} size={42} />
+        {/* PM-classified (2026-09-11): this panel counts as a "base" surface,
+            so EmptyImage renders its grey-fill artwork against it. */}
+        {error ? <Icon name="warning" size={42} /> : <EmptyImage type="video" background="base" />}
       </div>
       <h1>{error ? t('video.expansion.error.upload.title') : t('video.expansion.empty.title')}</h1>
       <p>{error ? mockData.errors.upload : t('video.expansion.empty.desc', { seconds: MAX_SELECTED_SECONDS })}</p>
-      <button className={styles.emptyUploadButton} data-testid={error ? 'choose-another-video' : undefined} type="button" onClick={error ? onRecover : onPick}>
-        <Icon name="upload" size={20} />{error ? t('video.expansion.error.upload.button') : t('ai.agent.dialog.upload.video')}
-      </button>
+      <Button
+        variant="primary"
+        tone="brand"
+        size="medium"
+        leadingIcon={<Icon name="upload" size={20} />}
+        data-testid={error ? 'choose-another-video' : undefined}
+        onClick={error ? onRecover : onPick}
+      >
+        {error ? t('video.expansion.error.upload.button') : t('ai.agent.dialog.upload.video')}
+      </Button>
       {!error ? (
         <div className={styles.sampleArea}>
           <span>{t('video.expansion.empty.sample')}</span>
