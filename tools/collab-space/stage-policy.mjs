@@ -3,6 +3,7 @@ import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { fromRoot, hashFeatureInputs, pathExists, readJson, readYaml, sha256File } from '../prototype-cli/project.mjs';
 import { loadCollabMap } from './policy.mjs';
+import { generationEvidenceErrors } from '../prototype-cli/generation-evidence.mjs';
 
 function stable(value) {
   if (Array.isArray(value)) return value.map(stable);
@@ -24,17 +25,20 @@ export function transitionFor(map, from, to) {
   return map.transitions.find((item) => item.from === from && item.to === to) ?? null;
 }
 
-export async function currentEvidence(feature) {
-  const generationPath = fromRoot('features', feature, 'generated', 'generation.json');
+export async function currentEvidence(feature, workspace = fromRoot()) {
+  const generationPath = path.join(workspace, 'features', feature, 'generated', 'generation.json');
   if (!(await pathExists(generationPath))) throw new Error('generation.json is missing. Generate and record the prototype first.');
   const generation = JSON.parse(await fs.readFile(generationPath, 'utf8'));
-  const inputHash = await hashFeatureInputs(feature);
+  const inputHash = await hashFeatureInputs(feature, workspace);
   if (generation.inputHash !== inputHash) throw new Error('Generated prototype is stale. Run prototype-update and prototype:record first.');
+  const errors = await generationEvidenceErrors(feature, generation, workspace);
+  if (errors.length) throw new Error('Cannot approve stale generation evidence:\n' + errors.join('\n'));
   const generationHash = await sha256File(generationPath);
   const facts = {
     feature,
     inputHash,
     generationHash,
+    revisionHash: generation.integrity.revisionHash,
     resources: generation.resources,
     surface: generation.surface,
     tokens: generation.tokens,

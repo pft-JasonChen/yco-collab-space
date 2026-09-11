@@ -126,12 +126,12 @@ export async function buildTokenProvenance() {
   };
 }
 
-export async function tokenProvenanceErrors(tokens) {
+export async function tokenProvenanceErrors(tokens, workspace = fromRoot()) {
   const errors = [];
   if (!tokens?.lockPath || !tokens?.lockSha256) {
     return ['Token provenance is missing from generation.json.'];
   }
-  const absolutePath = fromRoot(...tokens.lockPath.split('/'));
+  const absolutePath = path.join(workspace, ...tokens.lockPath.split('/'));
   if (!(await pathExists(absolutePath))) return ['Token lock is missing: ' + tokens.lockPath];
   if ((await sha256File(absolutePath)) !== tokens.lockSha256) {
     errors.push('Token baseline changed since generation: ' + tokens.lockPath);
@@ -139,16 +139,16 @@ export async function tokenProvenanceErrors(tokens) {
   return errors;
 }
 
-export async function resourceProvenanceErrors(resources) {
+export async function resourceProvenanceErrors(resources, workspace = fromRoot()) {
   const errors = [];
   for (const recorded of resources?.requestedCollections ?? []) {
-    const current = await scanCollection(recorded.path);
+    const current = await scanCollection(recorded.path, workspace);
     if (current.contextHash !== recorded.contextHash) {
       errors.push('Media collection changed since generation: ' + recorded.path);
     }
   }
   for (const selected of resources?.selected ?? []) {
-    const absolutePath = fromRoot(...selected.repositoryPath.split('/'));
+    const absolutePath = path.join(workspace, ...selected.repositoryPath.split('/'));
     if (!(await pathExists(absolutePath))) {
       errors.push('Selected media file is missing: ' + selected.repositoryPath);
       continue;

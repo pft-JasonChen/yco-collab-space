@@ -4,6 +4,7 @@ import path from 'node:path';
 import { fromRoot, pathExists, sha256File, walkFiles } from '../prototype-cli/project.mjs';
 import { scanCollection } from './library.mjs';
 import { validateComponentContracts } from './component-contracts.mjs';
+import { generatedOutputs, runtimeGraph } from '../prototype-cli/content-integrity.mjs';
 
 function toPosix(value) {
   return value.split(path.sep).join('/');
@@ -25,21 +26,19 @@ async function implementationHash(importPath, workspace = fromRoot()) {
 }
 
 export async function discoverGeneratedComponentImports(feature, workspace = fromRoot()) {
-  const generatedRoot = path.join(workspace, 'features', feature, 'generated');
+  const outputs = await generatedOutputs(feature, workspace);
+  const graph = await runtimeGraph(outputs.files.map((file) => file.path), workspace);
+  const validation = await validateComponentContracts({ workspace });
+  if (validation.errors.length) throw new Error(validation.errors.join('\n'));
   const imports = new Set();
-  const files = await walkFiles(generatedRoot);
-  const quotedModule = /(?:from\s+|import\s*)['"]([^'"]+)['"]/g;
-
-  for (const file of files.filter((candidate) => /\.(?:js|jsx)$/.test(candidate))) {
-    const source = await fs.readFile(file, 'utf8');
-    for (const match of source.matchAll(quotedModule)) {
-      if (!match[1].startsWith('.')) continue;
-      const absolute = path.resolve(path.dirname(file), match[1]);
-      const repositoryPath = toPosix(path.relative(workspace, absolute));
-      if (repositoryPath.startsWith('platform/ui/')) imports.add(repositoryPath);
-    }
+  for (const { path: file } of graph.files) {
+    if (!file.startsWith('platform/ui/')) continue;
+    const match = validation.contracts.find(({ contract }) =>
+      file.startsWith(path.posix.dirname(contract.implementation.importPath) + '/') ||
+      contract.implementation.compatibilityImportPaths?.includes(file));
+    if (match) imports.add(match.contract.implementation.importPath);
+    else if (file !== 'platform/ui/index.js') throw new Error('Uncatalogued transitive platform dependency: ' + file);
   }
-
   return [...imports].sort();
 }
 
@@ -94,14 +93,14 @@ export async function buildSharedComponentProvenance(feature, workspace = fromRo
   }
 
   return {
-    catalogSchemaVersion: 1,
+    catalogSchemaVersion: 2,
     selected: [...selected.values()].sort((a, b) => a.id.localeCompare(b.id)),
   };
 }
 
 export async function sharedComponentProvenanceErrors(feature, provenance, workspace = fromRoot()) {
   const errors = [];
-  if (!provenance || provenance.catalogSchemaVersion !== 1 || !Array.isArray(provenance.selected)) {
+  if (!provenance || provenance.catalogSchemaVersion !== 2 || !Array.isArray(provenance.selected)) {
     return ['Shared component provenance is missing or invalid.'];
   }
   const validation = await validateComponentContracts({ workspace });

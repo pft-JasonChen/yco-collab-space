@@ -81,6 +81,31 @@ try {
   await page.getByLabel("預覽", { exact: true }).selectOption("preview");
   assert.match(await page.locator("main").innerText(), /顯示 7 \/ 26/);
   await page.screenshot({ path: path.join(output, "surface-browser.png") });
+  await page
+    .getByRole("link", { name: "RD 待定義清單 · AI Video 試點" })
+    .click();
+  await page.getByRole("heading", { name: "RD 待人工定義" }).waitFor();
+  assert.equal(
+    await page
+      .getByRole("region", { name: "AI Video 試點" })
+      .locator("article")
+      .count(),
+    6,
+  );
+  await page
+    .getByRole("searchbox", { name: "搜尋候選" })
+    .fill("no-such-candidate");
+  assert.match(await page.getByRole("status").innerText(), /顯示 0/);
+  await page.getByRole("searchbox", { name: "搜尋候選" }).fill("");
+  await page.getByLabel("盤點範圍").selectOption("all");
+  await page.getByLabel("建議分類").selectOption("surface");
+  assert.ok(
+    (await page
+      .getByRole("region", { name: "來源候選" })
+      .locator("article")
+      .count()) > 0,
+  );
+  await page.screenshot({ path: path.join(output, "rd-intake.png") });
   await page.goto(
     base +
       config.routes.surfacePrefix +

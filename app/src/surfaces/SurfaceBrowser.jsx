@@ -58,6 +58,9 @@ export default function SurfaceBrowser() {
             YCO COLLAB SPACE · PM / DESIGN REVIEW
           </p>
           <h1>Surface Browser</h1>
+          <a href={config.routes.surfacePrefix + "/?view=rd-intake"}>
+            RD 待定義清單 · AI Video 試點
+          </a>
           <p>從全貌到真實元件，檢查每個 surface 的結構、採用與缺口。</p>
         </div>
         <span className={styles.badge}>Synthetic data only</span>
