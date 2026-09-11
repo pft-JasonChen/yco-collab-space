@@ -33,12 +33,12 @@ implementation:
     - path: platform/ui/video-results-surface/VideoResultsSurface.jsx
       sha256: e05cebe3d7d370901c5e51127c3ff1e5b0e2f57641b4212f4a61d7c8dd1c0883
     - path: platform/ui/video-results-surface/VideoResultsSurface.module.scss
-      sha256: c101adcdf3b06639625f24bc81aadacdbc1d5c17c2b20cb95de1767ba13dd8fa
+      sha256: c8788b342b367517c0f7e8bd84aee0d007dffc498bdf2aeab7de1547b09312e2
     - path: platform/ui/video-results-surface/VideoResultsSurface.stories.jsx
       sha256: 3a45f5cf175d75cea0f77f2c72c1b7d13dad3a558b3a2879ebcfd8b5f1a86968
     - path: platform/ui/video-results-surface/index.js
       sha256: a5c4964e876fb65b31092450339a011549c9f778821f9eb7b439ceec53e79678
-  localFilesUpdated: 2026-09-05
+  localFilesUpdated: 2026-09-11
 publicApi:
   props:
     - { name: activeTab, required: true, values: [edit, history] }
@@ -52,7 +52,7 @@ publicApi:
   states: [edit, history, processing, filter-open, responsive]
 tokens:
   lockPath: platform/tokens/tokens.lock.json
-  uses: [--background-alternate, --fill-strong, --fill-weaker, --stroke-focus, --stroke-weak, --text-inverse-strong, --text-strong]
+  uses: [--background-alternate, --fill-strong, --fill-weak, --fill-weaker, --stroke-focus, --stroke-weak, --text-inverse-strong, --text-strong]
 assets: []
 review:
   pilotApprover: { actor: pm, id: collab-space-owner, date: 2026-09-02 }
@@ -60,3 +60,4 @@ review:
 decisionBasis:
   - RD composes Edit and History tabs, FilterDropdown and HistoryVideos as one results surface; keeping those siblings in one shared component prevents feature-level geometry drift.
   - Desktop tabs retain the intrinsic 368px two-tab BLACK_VIDEO_RESULT width instead of expanding to fill the result toolbar.
+  - "Round 2 fix (2026-09-11): .tabs' background used --fill-weaker (a wrong token, PM-reported) instead of --fill-weak — corrected. Also fixed a real CSS specificity bug, not a token typo: the Video Expansion feature's own `.page button, .page input { font: inherit }` reset had accidentally been beating .tab/.activeTab's own font-weight (600) regardless of source order, because `.page button` ((0,1,1) specificity) outranks a plain class selector ((0,1,0)) — the tabs rendered visually regular instead of bold. Fixed on the feature's side (features/video-expansion/generated/index.module.scss now wraps that reset in `:where()` on both sides to zero its specificity), not here; noted here since this component's own rendered output was the visible symptom."

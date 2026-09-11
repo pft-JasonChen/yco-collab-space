@@ -1,0 +1,72 @@
+schemaVersion: 1
+id: empty-image
+displayName: Empty Image
+classification: foundation
+status: pilot-approved
+rd:
+  sourcePackage: youcam-enhance-frontend
+  sourceVersion: 1.34.1
+  snapshot: yce-frontend-gm-260909
+  portability: figma-only
+  sourcePaths: []
+  sourceHashes: []
+figma:
+  status: mapped
+  fileKey: JXNIQPJT9I9qFrgtiaCn4i
+  componentSetNodeId: "13023:12548"
+  variants:
+    - general
+    - video
+    - edt
+    - t2i
+    - i2v
+    - t2v
+    - face-swap-photo
+    - face-swap-video
+    - upload-drag
+    - voice-microphone
+implementation:
+  importPath: platform/ui/empty-image/index.js
+  storyId: ui-empty-image
+  framework: react
+  dependencies: [react]
+  removedDependencies: []
+  localFiles:
+    - path: platform/ui/empty-image/EmptyImage.jsx
+      sha256: 2babae69137d9275a4b06c13f53097e8455dc1dd826a58afc8ff08963abb847a
+    - path: platform/ui/empty-image/EmptyImage.module.scss
+      sha256: 20019e2cf4de0223a2eb3501825b4064ea200367d922b3e9b2699480dd24eded
+    - path: platform/ui/empty-image/EmptyImage.stories.jsx
+      sha256: 49ed7741f94b9159a73f3eaae1659f887923668946c5ad5d65e9891c3d1b3672
+    - path: platform/ui/empty-image/index.js
+      sha256: 9f8c39fb75e563255d72dca20a9c369f67efc44546914277dd0aebdc78f9d2a2
+  localFilesUpdated: 2026-09-11
+publicApi:
+  props:
+    - name: type
+      required: false
+      values: [general, video, edt, t2i, i2v, t2v, face-swap-photo, face-swap-video, upload-drag, voice-microphone]
+    - name: background
+      required: false
+      values: [base, sunken]
+    - name: className
+      required: false
+  states: [default]
+tokens:
+  lockPath: platform/tokens/tokens.lock.json
+  uses: []
+assets:
+  - path: assets/icon/yco-empty-state
+    usage: runtime
+review:
+  pilotApprover:
+    actor: pm
+    id: collab-space-owner
+    date: 2026-09-11
+  canonicalReview:
+    designer: pending
+    rd: pending
+decisionBasis:
+  - "New component (2026-09-11): Figma's 'Empty Image' illustration (node 13023:12548, file JXNIQPJT9I9qFrgtiaCn4i) is a full page x type matrix with no corresponding RD implementation in the vendored youcam-enhance-frontend@1.34.1 snapshot — Video Expansion's own empty state was hand-rolled (a single Icon in a colored box) rather than using a shared component. rd.portability is 'figma-only' for exactly this reason: there is nothing in RD's codebase to point sourcePaths/sourceHashes at, so both are left as empty arrays rather than filled with fabricated paths. This is the first component in this pilot to use that portability value; the schema itself (tools/design-library/schemas/component-contract.schema.json) was extended the same day to make sourcePaths/sourceHashes conditionally optional only when portability is figma-only — every other existing component still requires them."
+  - "Scope (2026-09-11): only type='video' is implemented against real per-type layout data transcribed from Figma's dev-mode output. The other 9 types (general, edt, t2i, i2v, t2v, face-swap-photo, face-swap-video, upload-drag, voice-microphone) are declared in the `type` values list and have their SVG assets already downloaded to design-library/assets/icon/yco-empty-state/, matching Figma's real specification for each, but the component returns null for those types until a feature actually needs one (per the 'don't build ahead of real consumers' convention established this pilot) — do not read the full values list as 'fully implemented'."
+  - "background prop naming (2026-09-11): 'base' renders the grey-fill artwork (for placement on a --background-base/white page) and 'sunken' renders the white-fill artwork (for a --background-sunken/alternate page) — the artwork's own fill is the OPPOSITE of what the prop name might suggest at a glance, because the prop names the page surface the component sits on, not the artwork's own color. Types with only one Figma-specified fill (t2v, face-swap-photo, face-swap-video, upload-drag) ignore this prop and always render their one asset."

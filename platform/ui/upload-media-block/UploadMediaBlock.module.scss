@@ -401,7 +401,10 @@
   padding: 2px 4px;
   color: var(--text-inverse-strong);
   white-space: nowrap;
-  background: rgba(0, 0, 0, 0.65);
+  /* Figma's literal is black at 65% opacity; nearest design token is
+     --fill-overlay-strong (black at 80%, the darker of the two overlay
+     tokens) — no exact match exists. */
+  background: var(--fill-overlay-strong);
   border-radius: var(--corner-radius-4);
   transform: translateX(-50%);
   font-size: 10px;

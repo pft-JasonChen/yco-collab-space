@@ -23,14 +23,14 @@ implementation:
   removedDependencies: [redux, i18n, auto-scroll, device-detection, interaction-tools]
   localFiles:
     - path: platform/ui/tool-page-layout/ToolPageLayout.jsx
-      sha256: f473950a0c96ec6276beea54c3a0331aca6a0952b1dd2a8087064d50374d302e
+      sha256: 115dbfbc5a0cd7a930e815078b2755058ad37057952f132dc556cc237662a456
     - path: platform/ui/tool-page-layout/ToolPageLayout.module.scss
-      sha256: 8e31c0e28d154b3703fbee41fc9c2653cc3d47fa718bc6d6502696619c9bf6a3
+      sha256: 3e600161c49663e4c5bc22b8f281cbb56b0fa53e3ae6b1dc35243de728b6ae2e
     - path: platform/ui/tool-page-layout/ToolPageLayout.stories.jsx
       sha256: e703dea809ba5a8151a88a0ab496016542165df88ca54b04ff242cbf4b4508dd
     - path: platform/ui/tool-page-layout/index.js
       sha256: 550af825a5f614a0507fbf3a88e2242041d7c099c66b94df0fb8f89191959f67
-  localFilesUpdated: 2026-09-05
+  localFilesUpdated: 2026-09-11
 publicApi:
   props:
     - { name: panel, required: true }
@@ -50,3 +50,4 @@ review:
 decisionBasis:
   - RD FeatureLayout is the production composition source for settings and results blocks, but its state and device dependencies are replaced with pure props and CSS breakpoints.
   - The PO approved production-surface-first composition for the Video Expansion manager-review prototype.
+  - "Auto-sync (2026-09-11): `ToolPageLayout.jsx`, `ToolPageLayout.module.scss` hashes updated — no documented public prop or decisionBasis-quoted value appears to have changed, so this synced automatically. Review if this doesn't look right."

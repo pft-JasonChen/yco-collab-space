@@ -83,14 +83,20 @@ implementation:
   removedDependencies: [next-router, redux, i18n, authentication, credit-service, pricing-modal, cms, analytics, textfit, lodash]
   localFiles:
     - path: platform/ui/result-page-shell/ResultPageShell.jsx
-      sha256: 4f6264fb58a5bf245ff91edad8e89fe291426cc498af545f9657b98050bb2537
+      sha256: e125a0572543a28909a078e5c9d712a65b08e2ae2188e99e758bd497b74e9669
     - path: platform/ui/result-page-shell/ResultPageShell.module.scss
-      sha256: 74df19af567682f201c81e5eb050dbe95299fc8bf6bad697a125f0784bd1ac80
+      sha256: 8f1a8c0f413f740fbfb949e4f9c29e6eb108f957a5ca114aa3110d9c8153787e
     - path: platform/ui/result-page-shell/ResultPageShell.stories.jsx
       sha256: b6e01cf2bac53afb61e4f69843a3283095c353bd78a71fd0c0804ecc86a3d22c
     - path: platform/ui/result-page-shell/index.js
-      sha256: 241609445f73a9112a6eb14dada264acf596ddb5d9fa20182b87e4bee27b6daa
-  localFilesUpdated: 2026-09-05
+      sha256: fce3def695e612a1128955543abddc07028aa4d8177ceb02b42350077c03c548
+    - path: platform/ui/result-page-shell/ProductHeader.stories.jsx
+      sha256: 32498417a0c513cf05debc343de7ff171504ecc0ede45545bb561cc6acdad18d
+    - path: platform/ui/result-page-shell/ToolFamilyMenu.stories.jsx
+      sha256: ffeb7a6524ab04cb8b35cc5af8c5a1043614a6c2dd5e835589b72f9808f3f388
+    - path: platform/ui/result-page-shell/defaultToolFamilies.js
+      sha256: 9900cb7d579f2ded55bde9f2ed1754834cda6742685d66a3e419bc75173ac4b9
+  localFilesUpdated: 2026-09-11
 publicApi:
   props:
     - name: title
@@ -120,7 +126,7 @@ publicApi:
   states: [desktop, compact-desktop, tablet, inert-navigation, active-tool, title-info-hidden, synthetic-credit]
 tokens:
   lockPath: platform/tokens/tokens.lock.json
-  uses: [--background-base, --fill-brand-weak, --stroke-weak, --text-information, --text-strong]
+  uses: [--background-base, --fill-brand-weak, --fill-brand-press, --fill-hover, --fill-press, --stroke-weak, --stroke-focus, --stroke-selected, --teal-dark-50, --text-brand, --text-strong]
 assets:
   - path: assets/logo/yco-online-editor
     usage: runtime
@@ -143,3 +149,4 @@ decisionBasis:
   - Active tool labels use an existing accessible information token because the RD cyan label measures 2.59:1 on white in axe; the icon and selected fill retain the brand treatment.
   - The PM approved a presentational Result Page shell with AI Video active and an inert synthetic credit balance of 436.
   - Feature titles may hide the optional information action when no information surface exists.
+  - "Round 2 sidebar fixes (2026-09-11): the active tool's text/icon color was --text-information (teal, #1a74a8) — the only use of that token family anywhere in platform/ui, and mismatched against its own selected-state fill (--fill-brand-weak, brand family). Every other active/brand state (Button's tone_brand variants) pairs --text-brand with brand fills, so this was a genuine one-off bug, not an intentional second color family; corrected to --text-brand. Separately, hover/press states were missing or wrong: hover incorrectly reused the selected-state fill (--fill-brand-weak) instead of a neutral wash, and there was no press state at all. Added --fill-hover (hover), --fill-press (press) matching Button's own hover/press convention, plus Active Hover (--teal-dark-50 + --stroke-selected ring) and Active Press (--fill-brand-press + --stroke-selected ring) per Figma's MenuList component (node 13026:43818, file JXNIQPJT9I9qFrgtiaCn4i) — a full state matrix that wasn't implemented at all before. Divider and inter-button spacing were also rebuilt to match Figma's NavigationSide (node 13028:53081) exactly: the 80px icon column's own edge-to-edge divider (was incorrectly spanning the full 112px rail including the rail's own gutter padding) and flat 8px flex gaps between buttons (was accumulated margin/padding that drifted from spec). Also split the pre-existing defaultToolFamilies data array out of ResultPageShell.jsx into its own file — it was tripping Vite's react-refresh 'consistent-components-exports' check every edit (a component file exporting a plain data array alongside its components can't Fast Refresh)."

@@ -55,9 +55,7 @@
         "sourcePackage",
         "sourceVersion",
         "snapshot",
-        "portability",
-        "sourcePaths",
-        "sourceHashes"
+        "portability"
       ],
       "properties": {
         "sourcePackage": {
@@ -73,16 +71,16 @@
           "minLength": 1
         },
         "portability": {
-          "description": "How RD can consume this component. verbatim: one or more files are byte-identical to the RD baseline and guarded by validate:rd-parity. drop-in: RD only needs to change the import alias and reconnect i18n/redux. reference: behaviour and visual reference only; RD keeps its own implementation.",
+          "description": "How RD can consume this component. verbatim: one or more files are byte-identical to the RD baseline and guarded by validate:rd-parity. drop-in: RD only needs to change the import alias and reconnect i18n/redux. reference: behaviour and visual reference only; RD keeps its own implementation. figma-only: the component has a Figma specification but no corresponding RD implementation exists in this snapshot yet — sourcePaths/sourceHashes are not required (there is nothing in RD's codebase to point at).",
           "enum": [
             "verbatim",
             "drop-in",
-            "reference"
+            "reference",
+            "figma-only"
           ]
         },
         "sourcePaths": {
           "type": "array",
-          "minItems": 1,
           "uniqueItems": true,
           "items": {
             "type": "string",
@@ -91,7 +89,6 @@
         },
         "sourceHashes": {
           "type": "array",
-          "minItems": 1,
           "items": {
             "type": "object",
             "additionalProperties": false,
@@ -135,7 +132,32 @@
             }
           }
         }
-      }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "portability": {
+                "const": "figma-only"
+              }
+            }
+          },
+          "else": {
+            "required": [
+              "sourcePaths",
+              "sourceHashes"
+            ],
+            "properties": {
+              "sourcePaths": {
+                "minItems": 1
+              },
+              "sourceHashes": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      ]
     },
     "figma": {
       "type": "object",

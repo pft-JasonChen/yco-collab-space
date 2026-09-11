@@ -38,16 +38,31 @@ implementation:
   removedDependencies: [redux, i18n, module-types, upload-timing, media-preview-modal, file-drop-hook, production-file-input]
   localFiles:
     - path: platform/ui/upload-media-block/UploadMediaBlock.jsx
-      sha256: c0c491ab21a9eedb7e0caedc2ebcdf1a0eeae36cdf05fbe857e9bf4e642b8166
+      sha256: fee43b762ddcd52a6bce45f37a3e84be5f0a4d563abf6f3febb1a0d0f3b53e7a
     - path: platform/ui/upload-media-block/UploadMediaBlock.module.scss
-      sha256: 9096ab9df0d0a6df39c07ea29d87eff8b576e7291512b777ab971dbe815e124e
+      sha256: d584f6b92f4df935dfc0913d6268233ba23b003287cf4b199394ebdd5fe3dde6
     - path: platform/ui/upload-media-block/UploadMediaBlock.stories.jsx
-      sha256: 38d6557a579e8bd3017af83c621d0a481659d1437c6a7a38b3c6d2309ebe8b5e
+      sha256: 3c3778670c510bce5a5c5a5fa74a6f745f40ef3adfd9615ac3cb720ed2a29dcc
     - path: platform/ui/upload-media-block/index.js
       sha256: 9757155b48721ec8ee15072c84d89da4fe9576aee46d2ba7dd110c455368d0fb
-  localFilesUpdated: 2026-09-05
+  localFilesUpdated: 2026-09-11
 publicApi:
   props:
+    - name: type
+      required: false
+      values: [single, startEnd, multiple, template]
+    - name: showToggle
+      required: false
+    - name: toggleOn
+      required: false
+    - name: onToggleChange
+      required: false
+    - name: showHint
+      required: false
+    - name: hintText
+      required: false
+    - name: errorMessage
+      required: false
     - name: imageUrl
       required: false
     - name: videoUrl
@@ -70,10 +85,44 @@ publicApi:
       required: false
     - name: disabled
       required: false
-  states: [empty, uploaded-video, duration, remove, replace, feature-action-slot, disabled]
+    - name: startFrame
+      required: false
+    - name: endFrame
+      required: false
+    - name: onStartFrameUpload
+      required: false
+    - name: onStartFrameReplace
+      required: false
+    - name: onStartFrameCrop
+      required: false
+    - name: onStartFrameRemove
+      required: false
+    - name: onEndFrameUpload
+      required: false
+    - name: onEndFrameReplace
+      required: false
+    - name: onEndFrameCrop
+      required: false
+    - name: onEndFrameRemove
+      required: false
+    - name: images
+      required: false
+    - name: onImageRemove
+      required: false
+    - name: onImageAdd
+      required: false
+    - name: maxImages
+      required: false
+    - name: templateImageUrl
+      required: false
+    - name: templateName
+      required: false
+    - name: onTemplateChange
+      required: false
+  states: [empty, uploaded-video, duration, remove, replace, feature-action-slot, disabled, start-end-empty, start-end-filled, multiple-images, template, toggle-on, toggle-off, error]
 tokens:
   lockPath: platform/tokens/tokens.lock.json
-  uses: [--background-base, --fill-weaker, --fill-overlay-strong, --stroke-weak, --stroke-strong, --text-strong, --text-weak]
+  uses: [--background-base, --background-inverse, --fill-weak, --fill-weaker, --fill-overlay-weak, --fill-overlay-strong, --fill-strong, --stroke-weak, --stroke-strong, --stroke-focus, --text-strong, --text-weak, --text-weaker, --text-disabled, --text-error, --text-inverse-strong, --icon-neutral]
 assets:
   - path: assets/icon/yco-upload-media-block
     usage: runtime
@@ -92,3 +141,5 @@ decisionBasis:
   - The pure-props port preserves the uploaded-video preview, duration badge, remove and replace actions while allowing a feature-owned action slot.
   - The empty and loaded structures retain the RD common component geometry; feature code may supply an action slot but does not own either upload state.
   - Production file handling, preview modals, state, translations and telemetry are deliberately excluded.
+  - "Round 2 extension (2026-09-11): added `type='startEnd'|'multiple'|'template'` (Figma's wider UploadArea family, nodes 4515:64126 / 10525:145816 in file jb5SgyshmuPse0L7IFm0QO — no RD counterpart for these three, same 'figma-only' situation as platform/ui/empty-image, but this component's own portability stays 'drop-in' since the original type='single' RD port is still the majority of its surface), plus an independent `showToggle`/`errorMessage`/`showHint` row set usable with any type. `type='single'` (the original port) is behaviourally unchanged — verified no regression against the pre-existing VideoUploaded/Empty stories and the live Video Expansion usage. New icons (crop, swap, info, error, toggle-on/off) added to design-library/assets/icon/yco-upload-media-block/, pulled directly from Figma."
+  - "sync-component-specs note (2026-09-11): this file's localFiles hashes were updated by hand, not by tools/design-library/sync-component-specs.mjs — that tool's prop-detection regex doesn't handle this component's now much longer multi-line destructured signature and flags every one of the pre-existing props (imageUrl, videoUrl, etc.) as 'no longer found' even though none were removed. The same false-positive already affected video-history, video-info-dialog, video-timeline and video-trim-modal before this round (pre-existing, unrelated to this change) — worth fixing the tool's prop scanner separately, out of scope here."

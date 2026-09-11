@@ -215,8 +215,8 @@
 }
 
 .menuButtonActive {
-  /* Was --text-information (teal #1a74a8) — the only use of that token family in
-     platform/ui. Every other active/brand state (Button's tone_brand variants)
+  /* Was --text-information (the teal token family) — the only use of that token
+     family in platform/ui. Every other active/brand state (Button's tone_brand variants)
      pairs --text-brand with brand fills, and this active icon's own pill background
      is --fill-brand-weak (brand family) — so the label/icon color must be
      --text-brand to match, not the mismatched teal. */

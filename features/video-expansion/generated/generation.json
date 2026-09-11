@@ -3,9 +3,9 @@
   "feature": "video-expansion",
   "inputHash": "63cdb5d96d2fc77577f84e2760e9188e108297bc300ac1a959b1bbf25cf6c18e",
   "generatorInstructionsVersion": "collab-contract-v1",
-  "adapter": "codex",
-  "model": "gpt-6",
-  "generatedAt": "2026-09-11T02:02:33.963Z",
+  "adapter": "claude-code",
+  "model": "claude-sonnet-5",
+  "generatedAt": "2026-09-11T10:33:05.714Z",
   "files": [
     "README.md",
     "contract/integration.yaml",
@@ -77,6 +77,101 @@
           {
             "repositoryPath": "design-library/assets/icon/yco-credit-controls/loading.png",
             "sha256": "4d7e85e273326aca344a9e3db9766661ea15398b626694508d1d6ca03d4b0ef0"
+          }
+        ]
+      },
+      {
+        "id": "empty-image",
+        "status": "pilot-approved",
+        "figmaStatus": "mapped",
+        "contractPath": "design-library/components/empty-image/component.yaml",
+        "contractSha256": "f30f4c41de1d868acdafe505b69c280124c6bbe19d2797add24b67a4b80cf91d",
+        "implementationImport": "platform/ui/empty-image/index.js",
+        "implementationSha256": "cd276fac367561c974beb89697ffb7e4736fcd368167e35b5a32c277d03466e7",
+        "runtimeAssets": [
+          {
+            "repositoryPath": "design-library/assets/icon/yco-empty-state/edt-gray.svg",
+            "sha256": "e21b83e4467277ddd60d3725b9b8c42a34c53f26d4eca7d358cc7dfebe76ad82"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-empty-state/edt-white.svg",
+            "sha256": "1ac99772ad778582fab9f6ed83651d56b07f76d99fdc51f16553a305467edc6e"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-empty-state/face-swap-photo.svg",
+            "sha256": "a1c7caba4695716a3e30b92b4a2e215368ad5782742a97ef2d1c7f89d66010e6"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-empty-state/face-swap-video.svg",
+            "sha256": "7ce2b9b1fffc5d3bb0822c9adb34147ed9a7c6b11969d9cf9c0906556498b7f3"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-empty-state/general-gray.svg",
+            "sha256": "a3161e2b0b1e29bac87312fff6d9917efe73f3f5d69db89aad06443b458bca75"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-empty-state/general-white.svg",
+            "sha256": "4b5d8e67bf93228f5d7f61c88d9861f762afdc6526662ad0b3b02cc7118b04fa"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-empty-state/i2v-gray.svg",
+            "sha256": "2992e5f0f1fce6959e59c7c095ec6cdcfc70ca1870cbcc2bc047b344ef93484f"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-empty-state/i2v-white.svg",
+            "sha256": "30e88c08c258b0433f318048bc32497ad41f080debdd9c86e440f6733942a400"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-empty-state/t2i-gray.svg",
+            "sha256": "8a4036e5d7ae8e5e7a51a8d6167ac5fe2c5a0bf718cf92df6ee80278dbc5d16b"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-empty-state/t2i-white.svg",
+            "sha256": "cf62301896484e332d2c487309695d6043b7db59d64c7f75eda6fa04fe8818f7"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-empty-state/t2v.svg",
+            "sha256": "3ac46b9b192a46892d3b82bf1640b7b5df9cc209b9cf254338b1773f83bd77ff"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-empty-state/upload-drag-hand.svg",
+            "sha256": "abc669e85ef34de6b12e29ddf34b04f94a02d149e4c6d17d3d203dcfc31e1af6"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-empty-state/upload-drag-photo.svg",
+            "sha256": "a4bc7cdd7217fc56a635fd828eadec53e3c61a59a1ac5af15361e9ab592aa4c8"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-empty-state/video-gray-back.svg",
+            "sha256": "8907cfa4172dbf18ecd34adff9426b9eaab6d6d1570b9685ef414e3bc4e1fb3e"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-empty-state/video-gray-front.svg",
+            "sha256": "247aceb223e3b568f0cfc74993a673b3947c834c02b491d3359e408dc6022e61"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-empty-state/video-white-back.svg",
+            "sha256": "8907cfa4172dbf18ecd34adff9426b9eaab6d6d1570b9685ef414e3bc4e1fb3e"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-empty-state/video-white-front.svg",
+            "sha256": "5374edc877c715953f0bac516bb29030f4ecb35d229058e6fd94a77524f1dcfa"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-empty-state/voice-mic-hand.svg",
+            "sha256": "7017145ed601c04a6ce0eeed5a87099aac554f030bfdd9d8a5e969dfc3925922"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-empty-state/voice-mic-square-1.svg",
+            "sha256": "5d1454940cc6885ac1ccea162fefa7fd6892be10bafae9faf053decb5f5cfadd"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-empty-state/voice-mic-square-2.svg",
+            "sha256": "6f14fb897fd5b389b61e7669aeb3d9fb030f3bbcf5a26811b3e4ab683071027f"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-empty-state/voice-mic-video.svg",
+            "sha256": "db7e4fafbd8221d99dd3529e743a75646ad80103e07d8d9098af3ef7344eebbf"
           }
         ]
       },
@@ -158,9 +253,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/result-page-shell/component.yaml",
-        "contractSha256": "37e0adbe0142727fd7480e81eb8d4410499859aeb703a362968ec8f330d6975d",
+        "contractSha256": "33981309d297e1e44c243361f30ef70e0abce980099739a7dd04cd6a9a5e8cf9",
         "implementationImport": "platform/ui/result-page-shell/index.js",
-        "implementationSha256": "195df12a7a6f8b6eeb8e3497a6ea840b830e06b8ac64ea89a3a2bff8db211b36",
+        "implementationSha256": "af190d9d6b8b03df69176e6a3f9fe40b9389f09e4fd17011db40f4c9b98e1c95",
         "runtimeAssets": [
           {
             "repositoryPath": "design-library/assets/font/yco-interface-icons/icomoon.woff",
@@ -180,7 +275,7 @@
           },
           {
             "repositoryPath": "design-library/assets/icon/yco-result-page-shell/ai-agent.svg",
-            "sha256": "eea1f8c5ac2fd20a880a512e0629afed3bf313dfacb9ff06df1419fe30215c14"
+            "sha256": "ad957b776eb9924c05367761467bb2f4cd2701a1b8b4912b7393abcf20672f74"
           },
           {
             "repositoryPath": "design-library/assets/icon/yco-result-page-shell/home.svg",
@@ -213,7 +308,7 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/tool-page-layout/component.yaml",
-        "contractSha256": "707166a9a40741aa315fcd22737de5b8f0c6f64b39e946ceff2698e63c0660c9",
+        "contractSha256": "35d34fc168615c84b6c1c31ac9d57357899ad22ff592c51f0e3e35c98a5628c5",
         "implementationImport": "platform/ui/tool-page-layout/index.js",
         "implementationSha256": "3345ec62defe563baa7f2d0555ffe490af77f5102e7cf1923f08367e76099805",
         "runtimeAssets": []
@@ -223,13 +318,25 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/upload-media-block/component.yaml",
-        "contractSha256": "da439e49592237131558e992d649e3aa52d1d2635174062c46044c4e3c284ec6",
+        "contractSha256": "9b19ba276fc6b6bf6efb9b14b8a07bf4688957e6a211b1476415c222d6cbacfb",
         "implementationImport": "platform/ui/upload-media-block/index.js",
-        "implementationSha256": "f2d5aa83f7bd851f24e31b0cfc9bf45ee6857c860c4f6bf504d3e060d21206a4",
+        "implementationSha256": "aa2235c821d3b93b9b05b58a4c09ea69f76253e590b884f1de4e8ade6685a5be",
         "runtimeAssets": [
           {
             "repositoryPath": "design-library/assets/icon/yco-upload-media-block/add.svg",
             "sha256": "69042962bdda775258ebef5e73f424303eb4ae68c04182344af9f4b71842ba2c"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-upload-media-block/crop.svg",
+            "sha256": "118f2897e9e2f74b707845137f7cf48abc724a0eeef5b7e9ec57793a83707cb4"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-upload-media-block/error.svg",
+            "sha256": "87c7ed5f723c6e780ecb84f62c5d73ee54f703fdd90d4763358feea5716b3336"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-upload-media-block/info.svg",
+            "sha256": "e0528f7ffd23c7af352afc2792045e24049a4bfa3554c1a194ad75118004a5cf"
           },
           {
             "repositoryPath": "design-library/assets/icon/yco-upload-media-block/remove.svg",
@@ -238,6 +345,18 @@
           {
             "repositoryPath": "design-library/assets/icon/yco-upload-media-block/replace.svg",
             "sha256": "4639e1e96823e2df24350cf60b96db5c8d3db2668bc962014845e397b2b0ca70"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-upload-media-block/swap.svg",
+            "sha256": "9bcffaa877bf43278f8b50f29fcb111d9733136fe80db0e3c1e3ee5b13ba282f"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-upload-media-block/toggle-off.svg",
+            "sha256": "1ab6fe173b4d528f2efec5c1122bbdfc378ed464c9c6a9935a9108fd0169450c"
+          },
+          {
+            "repositoryPath": "design-library/assets/icon/yco-upload-media-block/toggle-on.svg",
+            "sha256": "4a437d413fcb4009b62bdd87ced7fe18da2f42365368b1b9464566cb68a0cc4f"
           }
         ]
       },
@@ -372,9 +491,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/video-results-surface/component.yaml",
-        "contractSha256": "9d794a9d5f1a825ab01ce9786ee261296350c3f7c6163ff6ff5ffb5ad5115a9d",
+        "contractSha256": "609f243497fce46bc10ef2d3c5c198ecbd7d7b57687a0c2c556509ce77f2b13a",
         "implementationImport": "platform/ui/video-results-surface/index.js",
-        "implementationSha256": "a035deded58bf09d44620bfdf678467922448e4ff26f579ce2345b85b7f11a8d",
+        "implementationSha256": "f46df17cf8a4d263b1eeb912548c75a96a4994aece730571420927bf757dee25",
         "runtimeAssets": []
       },
       {
@@ -639,11 +758,11 @@
         },
         {
           "path": "features/video-expansion/generated/index.jsx",
-          "sha256": "eb54e0344ca27fa03372ab0597da4407f66cf4c9f270126a6c6d3be577fc9679"
+          "sha256": "71ca5870915a8fcfd33e6a42f721b81314f40481cf47d0d129bdadc111e496d5"
         },
         {
           "path": "features/video-expansion/generated/index.module.scss",
-          "sha256": "3a3ca342220032c0caf35903873d6d2e5f6bf8f4fe31c4b359984730189e09e0"
+          "sha256": "1c86bd40f7107dac2b980361f5f44568724092a9289f2ad1a302f91ff4aa6a14"
         },
         {
           "path": "features/video-expansion/generated/settings/index.jsx",
@@ -651,10 +770,10 @@
         },
         {
           "path": "features/video-expansion/generated/settings/index.module.scss",
-          "sha256": "4cd0cbfa24de948e84f5302b16694bc7bf04a935166dd06dd7a595896e0eff7a"
+          "sha256": "079e42b2b35548096dba01684133d3ba6cb46f86648eae166d64c204c608eaed"
         }
       ],
-      "hash": "ff7b93242d2cd78824757fdab01ac5922b3955e84fd15de07792a39b144d3ae4"
+      "hash": "fd473a043de7b84202b310c1c34f43c834b239e2fc3099229af235d0534f75f4"
     },
     "dependencies": {
       "files": [
@@ -779,8 +898,92 @@
           "sha256": "4d7e85e273326aca344a9e3db9766661ea15398b626694508d1d6ca03d4b0ef0"
         },
         {
+          "path": "design-library/assets/icon/yco-empty-state/edt-gray.svg",
+          "sha256": "e21b83e4467277ddd60d3725b9b8c42a34c53f26d4eca7d358cc7dfebe76ad82"
+        },
+        {
+          "path": "design-library/assets/icon/yco-empty-state/edt-white.svg",
+          "sha256": "1ac99772ad778582fab9f6ed83651d56b07f76d99fdc51f16553a305467edc6e"
+        },
+        {
+          "path": "design-library/assets/icon/yco-empty-state/face-swap-photo.svg",
+          "sha256": "a1c7caba4695716a3e30b92b4a2e215368ad5782742a97ef2d1c7f89d66010e6"
+        },
+        {
+          "path": "design-library/assets/icon/yco-empty-state/face-swap-video.svg",
+          "sha256": "7ce2b9b1fffc5d3bb0822c9adb34147ed9a7c6b11969d9cf9c0906556498b7f3"
+        },
+        {
+          "path": "design-library/assets/icon/yco-empty-state/general-gray.svg",
+          "sha256": "a3161e2b0b1e29bac87312fff6d9917efe73f3f5d69db89aad06443b458bca75"
+        },
+        {
+          "path": "design-library/assets/icon/yco-empty-state/general-white.svg",
+          "sha256": "4b5d8e67bf93228f5d7f61c88d9861f762afdc6526662ad0b3b02cc7118b04fa"
+        },
+        {
+          "path": "design-library/assets/icon/yco-empty-state/i2v-gray.svg",
+          "sha256": "2992e5f0f1fce6959e59c7c095ec6cdcfc70ca1870cbcc2bc047b344ef93484f"
+        },
+        {
+          "path": "design-library/assets/icon/yco-empty-state/i2v-white.svg",
+          "sha256": "30e88c08c258b0433f318048bc32497ad41f080debdd9c86e440f6733942a400"
+        },
+        {
+          "path": "design-library/assets/icon/yco-empty-state/t2i-gray.svg",
+          "sha256": "8a4036e5d7ae8e5e7a51a8d6167ac5fe2c5a0bf718cf92df6ee80278dbc5d16b"
+        },
+        {
+          "path": "design-library/assets/icon/yco-empty-state/t2i-white.svg",
+          "sha256": "cf62301896484e332d2c487309695d6043b7db59d64c7f75eda6fa04fe8818f7"
+        },
+        {
+          "path": "design-library/assets/icon/yco-empty-state/t2v.svg",
+          "sha256": "3ac46b9b192a46892d3b82bf1640b7b5df9cc209b9cf254338b1773f83bd77ff"
+        },
+        {
+          "path": "design-library/assets/icon/yco-empty-state/upload-drag-hand.svg",
+          "sha256": "abc669e85ef34de6b12e29ddf34b04f94a02d149e4c6d17d3d203dcfc31e1af6"
+        },
+        {
+          "path": "design-library/assets/icon/yco-empty-state/upload-drag-photo.svg",
+          "sha256": "a4bc7cdd7217fc56a635fd828eadec53e3c61a59a1ac5af15361e9ab592aa4c8"
+        },
+        {
+          "path": "design-library/assets/icon/yco-empty-state/video-gray-back.svg",
+          "sha256": "8907cfa4172dbf18ecd34adff9426b9eaab6d6d1570b9685ef414e3bc4e1fb3e"
+        },
+        {
+          "path": "design-library/assets/icon/yco-empty-state/video-gray-front.svg",
+          "sha256": "247aceb223e3b568f0cfc74993a673b3947c834c02b491d3359e408dc6022e61"
+        },
+        {
+          "path": "design-library/assets/icon/yco-empty-state/video-white-back.svg",
+          "sha256": "8907cfa4172dbf18ecd34adff9426b9eaab6d6d1570b9685ef414e3bc4e1fb3e"
+        },
+        {
+          "path": "design-library/assets/icon/yco-empty-state/video-white-front.svg",
+          "sha256": "5374edc877c715953f0bac516bb29030f4ecb35d229058e6fd94a77524f1dcfa"
+        },
+        {
+          "path": "design-library/assets/icon/yco-empty-state/voice-mic-hand.svg",
+          "sha256": "7017145ed601c04a6ce0eeed5a87099aac554f030bfdd9d8a5e969dfc3925922"
+        },
+        {
+          "path": "design-library/assets/icon/yco-empty-state/voice-mic-square-1.svg",
+          "sha256": "5d1454940cc6885ac1ccea162fefa7fd6892be10bafae9faf053decb5f5cfadd"
+        },
+        {
+          "path": "design-library/assets/icon/yco-empty-state/voice-mic-square-2.svg",
+          "sha256": "6f14fb897fd5b389b61e7669aeb3d9fb030f3bbcf5a26811b3e4ab683071027f"
+        },
+        {
+          "path": "design-library/assets/icon/yco-empty-state/voice-mic-video.svg",
+          "sha256": "db7e4fafbd8221d99dd3529e743a75646ad80103e07d8d9098af3ef7344eebbf"
+        },
+        {
           "path": "design-library/assets/icon/yco-result-page-shell/ai-agent.svg",
-          "sha256": "eea1f8c5ac2fd20a880a512e0629afed3bf313dfacb9ff06df1419fe30215c14"
+          "sha256": "ad957b776eb9924c05367761467bb2f4cd2701a1b8b4912b7393abcf20672f74"
         },
         {
           "path": "design-library/assets/icon/yco-result-page-shell/home.svg",
@@ -799,12 +1002,36 @@
           "sha256": "69042962bdda775258ebef5e73f424303eb4ae68c04182344af9f4b71842ba2c"
         },
         {
+          "path": "design-library/assets/icon/yco-upload-media-block/crop.svg",
+          "sha256": "118f2897e9e2f74b707845137f7cf48abc724a0eeef5b7e9ec57793a83707cb4"
+        },
+        {
+          "path": "design-library/assets/icon/yco-upload-media-block/error.svg",
+          "sha256": "87c7ed5f723c6e780ecb84f62c5d73ee54f703fdd90d4763358feea5716b3336"
+        },
+        {
+          "path": "design-library/assets/icon/yco-upload-media-block/info.svg",
+          "sha256": "e0528f7ffd23c7af352afc2792045e24049a4bfa3554c1a194ad75118004a5cf"
+        },
+        {
           "path": "design-library/assets/icon/yco-upload-media-block/remove.svg",
           "sha256": "013e422fa489cfe3ee41de148300f64e13d23af60da14bf9a9ab81a90cd1781c"
         },
         {
           "path": "design-library/assets/icon/yco-upload-media-block/replace.svg",
           "sha256": "4639e1e96823e2df24350cf60b96db5c8d3db2668bc962014845e397b2b0ca70"
+        },
+        {
+          "path": "design-library/assets/icon/yco-upload-media-block/swap.svg",
+          "sha256": "9bcffaa877bf43278f8b50f29fcb111d9733136fe80db0e3c1e3ee5b13ba282f"
+        },
+        {
+          "path": "design-library/assets/icon/yco-upload-media-block/toggle-off.svg",
+          "sha256": "1ab6fe173b4d528f2efec5c1122bbdfc378ed464c9c6a9935a9108fd0169450c"
+        },
+        {
+          "path": "design-library/assets/icon/yco-upload-media-block/toggle-on.svg",
+          "sha256": "4a437d413fcb4009b62bdd87ced7fe18da2f42365368b1b9464566cb68a0cc4f"
         },
         {
           "path": "design-library/assets/icon/yco-video-actions/character-motion-swap.svg",
@@ -891,6 +1118,10 @@
           "sha256": "e547c9eaa47f4f7f5008a6e6671c59ff9f636b771b9844bc9eee688f54b4f652"
         },
         {
+          "path": "design-library/components/empty-image/component.yaml",
+          "sha256": "f30f4c41de1d868acdafe505b69c280124c6bbe19d2797add24b67a4b80cf91d"
+        },
+        {
           "path": "design-library/components/icon-action-buttons/component.yaml",
           "sha256": "e3a753c78bb291ec391eb43f28c8dd78a367c53f69404975ea8d29c68c3196d9"
         },
@@ -900,15 +1131,15 @@
         },
         {
           "path": "design-library/components/result-page-shell/component.yaml",
-          "sha256": "37e0adbe0142727fd7480e81eb8d4410499859aeb703a362968ec8f330d6975d"
+          "sha256": "33981309d297e1e44c243361f30ef70e0abce980099739a7dd04cd6a9a5e8cf9"
         },
         {
           "path": "design-library/components/tool-page-layout/component.yaml",
-          "sha256": "707166a9a40741aa315fcd22737de5b8f0c6f64b39e946ceff2698e63c0660c9"
+          "sha256": "35d34fc168615c84b6c1c31ac9d57357899ad22ff592c51f0e3e35c98a5628c5"
         },
         {
           "path": "design-library/components/upload-media-block/component.yaml",
-          "sha256": "da439e49592237131558e992d649e3aa52d1d2635174062c46044c4e3c284ec6"
+          "sha256": "9b19ba276fc6b6bf6efb9b14b8a07bf4688957e6a211b1476415c222d6cbacfb"
         },
         {
           "path": "design-library/components/video-history/component.yaml",
@@ -920,7 +1151,7 @@
         },
         {
           "path": "design-library/components/video-results-surface/component.yaml",
-          "sha256": "9d794a9d5f1a825ab01ce9786ee261296350c3f7c6163ff6ff5ffb5ad5115a9d"
+          "sha256": "609f243497fce46bc10ef2d3c5c198ecbd7d7b57687a0c2c556509ce77f2b13a"
         },
         {
           "path": "design-library/components/video-timeline/component.yaml",
@@ -976,11 +1207,11 @@
         },
         {
           "path": "features/video-expansion/generated/index.jsx",
-          "sha256": "eb54e0344ca27fa03372ab0597da4407f66cf4c9f270126a6c6d3be577fc9679"
+          "sha256": "71ca5870915a8fcfd33e6a42f721b81314f40481cf47d0d129bdadc111e496d5"
         },
         {
           "path": "features/video-expansion/generated/index.module.scss",
-          "sha256": "3a3ca342220032c0caf35903873d6d2e5f6bf8f4fe31c4b359984730189e09e0"
+          "sha256": "1c86bd40f7107dac2b980361f5f44568724092a9289f2ad1a302f91ff4aa6a14"
         },
         {
           "path": "features/video-expansion/generated/settings/index.jsx",
@@ -988,7 +1219,7 @@
         },
         {
           "path": "features/video-expansion/generated/settings/index.module.scss",
-          "sha256": "4cd0cbfa24de948e84f5302b16694bc7bf04a935166dd06dd7a595896e0eff7a"
+          "sha256": "079e42b2b35548096dba01684133d3ba6cb46f86648eae166d64c204c608eaed"
         },
         {
           "path": "features/video-expansion/product/i18n.json",
@@ -1020,7 +1251,7 @@
         },
         {
           "path": "package-lock.json",
-          "sha256": "1e0abb46d5922e69121cb3deddb98009dc8b614c6949bf4d3f13e23c2c0e8444"
+          "sha256": "76f7927ecf86a4b2dce599bc495aaa9fce9910f9d9c9c26384c6ae5accef73bc"
         },
         {
           "path": "package.json",
@@ -1028,11 +1259,11 @@
         },
         {
           "path": "platform/runtime/PrototypeFrame.jsx",
-          "sha256": "b8f0a4f8f767cfd93f7d96c5d94bc79ba4649850c668d237c36365e76ed68c0b"
+          "sha256": "6620139f238d2bd8013c52439dda8f5a28ced98a35be5d7757772c5a2a80e55e"
         },
         {
           "path": "platform/runtime/PrototypeFrame.module.scss",
-          "sha256": "fffcf454011f12aa23cfa59a4c836e4278541b9944e9f5be843e4f52783f638e"
+          "sha256": "1b8c1184e3e0f606b1537f6beefaf8da4a9b166e54048b2aa4d62ffca30bd470"
         },
         {
           "path": "platform/runtime/i18n.js",
@@ -1379,6 +1610,22 @@
           "sha256": "5bcc58063e29497a2c720fb7c7c916230633f961b3645218193e31401d59e29b"
         },
         {
+          "path": "platform/ui/empty-image/EmptyImage.jsx",
+          "sha256": "2babae69137d9275a4b06c13f53097e8455dc1dd826a58afc8ff08963abb847a"
+        },
+        {
+          "path": "platform/ui/empty-image/EmptyImage.module.scss",
+          "sha256": "20019e2cf4de0223a2eb3501825b4064ea200367d922b3e9b2699480dd24eded"
+        },
+        {
+          "path": "platform/ui/empty-image/EmptyImage.stories.jsx",
+          "sha256": "49ed7741f94b9159a73f3eaae1659f887923668946c5ad5d65e9891c3d1b3672"
+        },
+        {
+          "path": "platform/ui/empty-image/index.js",
+          "sha256": "9f8c39fb75e563255d72dca20a9c369f67efc44546914277dd0aebdc78f9d2a2"
+        },
+        {
           "path": "platform/ui/icon-action-buttons/ActionIcon.jsx",
           "sha256": "fad0d8963126ae2a29d26feaa6a0c74991783fc4b33eeb28f7b7c62d26897977"
         },
@@ -1404,7 +1651,7 @@
         },
         {
           "path": "platform/ui/index.js",
-          "sha256": "698a3dc896773222796af1c659010d41867a95e24a6c4a5442c3784196eb56fc"
+          "sha256": "a0e97ab9af2a21e926e5e232ffb5bfdd488a1a86219a10848094864842c8dc8e"
         },
         {
           "path": "platform/ui/ratio/README.md",
@@ -1431,20 +1678,32 @@
           "sha256": "319a37000e75223ac3432743967cb06b3e071a3ad2d248bd2352f0f72dca42f2"
         },
         {
+          "path": "platform/ui/result-page-shell/ProductHeader.stories.jsx",
+          "sha256": "32498417a0c513cf05debc343de7ff171504ecc0ede45545bb561cc6acdad18d"
+        },
+        {
           "path": "platform/ui/result-page-shell/ResultPageShell.jsx",
-          "sha256": "ec292a96466430a61ddf91ae8cd4439bd5a22c61807f892d5f3800e05f2f5fb0"
+          "sha256": "e125a0572543a28909a078e5c9d712a65b08e2ae2188e99e758bd497b74e9669"
         },
         {
           "path": "platform/ui/result-page-shell/ResultPageShell.module.scss",
-          "sha256": "74df19af567682f201c81e5eb050dbe95299fc8bf6bad697a125f0784bd1ac80"
+          "sha256": "7bb9403714372222a2a497a2ef6f9145dfc7b755fd8ebe2e4195c9021a1b50f1"
         },
         {
           "path": "platform/ui/result-page-shell/ResultPageShell.stories.jsx",
           "sha256": "b6e01cf2bac53afb61e4f69843a3283095c353bd78a71fd0c0804ecc86a3d22c"
         },
         {
+          "path": "platform/ui/result-page-shell/ToolFamilyMenu.stories.jsx",
+          "sha256": "ffeb7a6524ab04cb8b35cc5af8c5a1043614a6c2dd5e835589b72f9808f3f388"
+        },
+        {
+          "path": "platform/ui/result-page-shell/defaultToolFamilies.js",
+          "sha256": "9900cb7d579f2ded55bde9f2ed1754834cda6742685d66a3e419bc75173ac4b9"
+        },
+        {
           "path": "platform/ui/result-page-shell/index.js",
-          "sha256": "241609445f73a9112a6eb14dada264acf596ddb5d9fa20182b87e4bee27b6daa"
+          "sha256": "fce3def695e612a1128955543abddc07028aa4d8177ceb02b42350077c03c548"
         },
         {
           "path": "platform/ui/tool-page-layout/ToolPageLayout.jsx",
@@ -1464,15 +1723,15 @@
         },
         {
           "path": "platform/ui/upload-media-block/UploadMediaBlock.jsx",
-          "sha256": "afdda27b6703cea69800f1dc55efa9cadf44f9aeeccc9a51b484744810a75337"
+          "sha256": "fee43b762ddcd52a6bce45f37a3e84be5f0a4d563abf6f3febb1a0d0f3b53e7a"
         },
         {
           "path": "platform/ui/upload-media-block/UploadMediaBlock.module.scss",
-          "sha256": "9096ab9df0d0a6df39c07ea29d87eff8b576e7291512b777ab971dbe815e124e"
+          "sha256": "7e1a69d125d38cf3b915557c1ecd0519524712ca0098d9078153ba09df2db928"
         },
         {
           "path": "platform/ui/upload-media-block/UploadMediaBlock.stories.jsx",
-          "sha256": "38d6557a579e8bd3017af83c621d0a481659d1437c6a7a38b3c6d2309ebe8b5e"
+          "sha256": "3c3778670c510bce5a5c5a5fa74a6f745f40ef3adfd9615ac3cb720ed2a29dcc"
         },
         {
           "path": "platform/ui/upload-media-block/index.js",
@@ -1516,7 +1775,7 @@
         },
         {
           "path": "platform/ui/video-results-surface/VideoResultsSurface.module.scss",
-          "sha256": "f4cf6303a9aefdc537f870d8024176e93a891a97ce8ed5df64f78fa7dd78f3ed"
+          "sha256": "c8788b342b367517c0f7e8bd84aee0d007dffc498bdf2aeab7de1547b09312e2"
         },
         {
           "path": "platform/ui/video-results-surface/VideoResultsSurface.stories.jsx",
@@ -1656,7 +1915,7 @@
         },
         {
           "path": "tools/design-library/schemas/component-contract.schema.json",
-          "sha256": "bd6408522e573c395636b1eb2f514a6bf216e00ba3a4f2dd77b0b7a0300674d6"
+          "sha256": "f50865c852014e3aee748a5280fddc62f9031653f427f4bb3e8b0db2be644488"
         },
         {
           "path": "tools/design-library/surface-bindings.mjs",
@@ -1831,7 +2090,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "11d89dddf8a1e4a3f7e7f08b76ce777a269b3dc6544f67326f62beaf78cdb00e",
+      "hash": "3d8debc55201a7c4398d4cd23c1d7f124459dac28f4690001ec9994d2dcbf2b4",
       "edges": [
         {
           "from": "design-library/assets/font/yco-interface-icons.style.css",
@@ -1865,8 +2124,18 @@
         },
         {
           "from": "features/video-expansion/generated/index.jsx",
+          "specifier": "../../../platform/ui/button/index.js",
+          "to": "platform/ui/button/index.js"
+        },
+        {
+          "from": "features/video-expansion/generated/index.jsx",
           "specifier": "../../../platform/ui/credit-controls/index.js",
           "to": "platform/ui/credit-controls/index.js"
+        },
+        {
+          "from": "features/video-expansion/generated/index.jsx",
+          "specifier": "../../../platform/ui/empty-image/index.js",
+          "to": "platform/ui/empty-image/index.js"
         },
         {
           "from": "features/video-expansion/generated/index.jsx",
@@ -2029,6 +2298,121 @@
           "to": "platform/ui/credit-controls/CreditControls.jsx"
         },
         {
+          "from": "platform/ui/empty-image/EmptyImage.jsx",
+          "specifier": "../../../design-library/assets/icon/yco-empty-state/edt-gray.svg",
+          "to": "design-library/assets/icon/yco-empty-state/edt-gray.svg"
+        },
+        {
+          "from": "platform/ui/empty-image/EmptyImage.jsx",
+          "specifier": "../../../design-library/assets/icon/yco-empty-state/edt-white.svg",
+          "to": "design-library/assets/icon/yco-empty-state/edt-white.svg"
+        },
+        {
+          "from": "platform/ui/empty-image/EmptyImage.jsx",
+          "specifier": "../../../design-library/assets/icon/yco-empty-state/face-swap-photo.svg",
+          "to": "design-library/assets/icon/yco-empty-state/face-swap-photo.svg"
+        },
+        {
+          "from": "platform/ui/empty-image/EmptyImage.jsx",
+          "specifier": "../../../design-library/assets/icon/yco-empty-state/face-swap-video.svg",
+          "to": "design-library/assets/icon/yco-empty-state/face-swap-video.svg"
+        },
+        {
+          "from": "platform/ui/empty-image/EmptyImage.jsx",
+          "specifier": "../../../design-library/assets/icon/yco-empty-state/general-gray.svg",
+          "to": "design-library/assets/icon/yco-empty-state/general-gray.svg"
+        },
+        {
+          "from": "platform/ui/empty-image/EmptyImage.jsx",
+          "specifier": "../../../design-library/assets/icon/yco-empty-state/general-white.svg",
+          "to": "design-library/assets/icon/yco-empty-state/general-white.svg"
+        },
+        {
+          "from": "platform/ui/empty-image/EmptyImage.jsx",
+          "specifier": "../../../design-library/assets/icon/yco-empty-state/i2v-gray.svg",
+          "to": "design-library/assets/icon/yco-empty-state/i2v-gray.svg"
+        },
+        {
+          "from": "platform/ui/empty-image/EmptyImage.jsx",
+          "specifier": "../../../design-library/assets/icon/yco-empty-state/i2v-white.svg",
+          "to": "design-library/assets/icon/yco-empty-state/i2v-white.svg"
+        },
+        {
+          "from": "platform/ui/empty-image/EmptyImage.jsx",
+          "specifier": "../../../design-library/assets/icon/yco-empty-state/t2i-gray.svg",
+          "to": "design-library/assets/icon/yco-empty-state/t2i-gray.svg"
+        },
+        {
+          "from": "platform/ui/empty-image/EmptyImage.jsx",
+          "specifier": "../../../design-library/assets/icon/yco-empty-state/t2i-white.svg",
+          "to": "design-library/assets/icon/yco-empty-state/t2i-white.svg"
+        },
+        {
+          "from": "platform/ui/empty-image/EmptyImage.jsx",
+          "specifier": "../../../design-library/assets/icon/yco-empty-state/t2v.svg",
+          "to": "design-library/assets/icon/yco-empty-state/t2v.svg"
+        },
+        {
+          "from": "platform/ui/empty-image/EmptyImage.jsx",
+          "specifier": "../../../design-library/assets/icon/yco-empty-state/upload-drag-hand.svg",
+          "to": "design-library/assets/icon/yco-empty-state/upload-drag-hand.svg"
+        },
+        {
+          "from": "platform/ui/empty-image/EmptyImage.jsx",
+          "specifier": "../../../design-library/assets/icon/yco-empty-state/upload-drag-photo.svg",
+          "to": "design-library/assets/icon/yco-empty-state/upload-drag-photo.svg"
+        },
+        {
+          "from": "platform/ui/empty-image/EmptyImage.jsx",
+          "specifier": "../../../design-library/assets/icon/yco-empty-state/video-gray-back.svg",
+          "to": "design-library/assets/icon/yco-empty-state/video-gray-back.svg"
+        },
+        {
+          "from": "platform/ui/empty-image/EmptyImage.jsx",
+          "specifier": "../../../design-library/assets/icon/yco-empty-state/video-gray-front.svg",
+          "to": "design-library/assets/icon/yco-empty-state/video-gray-front.svg"
+        },
+        {
+          "from": "platform/ui/empty-image/EmptyImage.jsx",
+          "specifier": "../../../design-library/assets/icon/yco-empty-state/video-white-back.svg",
+          "to": "design-library/assets/icon/yco-empty-state/video-white-back.svg"
+        },
+        {
+          "from": "platform/ui/empty-image/EmptyImage.jsx",
+          "specifier": "../../../design-library/assets/icon/yco-empty-state/video-white-front.svg",
+          "to": "design-library/assets/icon/yco-empty-state/video-white-front.svg"
+        },
+        {
+          "from": "platform/ui/empty-image/EmptyImage.jsx",
+          "specifier": "../../../design-library/assets/icon/yco-empty-state/voice-mic-hand.svg",
+          "to": "design-library/assets/icon/yco-empty-state/voice-mic-hand.svg"
+        },
+        {
+          "from": "platform/ui/empty-image/EmptyImage.jsx",
+          "specifier": "../../../design-library/assets/icon/yco-empty-state/voice-mic-square-1.svg",
+          "to": "design-library/assets/icon/yco-empty-state/voice-mic-square-1.svg"
+        },
+        {
+          "from": "platform/ui/empty-image/EmptyImage.jsx",
+          "specifier": "../../../design-library/assets/icon/yco-empty-state/voice-mic-square-2.svg",
+          "to": "design-library/assets/icon/yco-empty-state/voice-mic-square-2.svg"
+        },
+        {
+          "from": "platform/ui/empty-image/EmptyImage.jsx",
+          "specifier": "../../../design-library/assets/icon/yco-empty-state/voice-mic-video.svg",
+          "to": "design-library/assets/icon/yco-empty-state/voice-mic-video.svg"
+        },
+        {
+          "from": "platform/ui/empty-image/EmptyImage.jsx",
+          "specifier": "./EmptyImage.module.scss",
+          "to": "platform/ui/empty-image/EmptyImage.module.scss"
+        },
+        {
+          "from": "platform/ui/empty-image/index.js",
+          "specifier": "./EmptyImage.jsx",
+          "to": "platform/ui/empty-image/EmptyImage.jsx"
+        },
+        {
           "from": "platform/ui/icon-action-buttons/ActionIcon.jsx",
           "specifier": "../../../design-library/assets/icon/yco-video-actions/character-motion-swap.svg",
           "to": "design-library/assets/icon/yco-video-actions/character-motion-swap.svg"
@@ -2144,19 +2528,24 @@
           "to": "platform/ui/ratio/ratioTypes.js"
         },
         {
-          "from": "platform/ui/result-page-shell/index.js",
-          "specifier": "./ResultPageShell.jsx",
-          "to": "platform/ui/result-page-shell/ResultPageShell.jsx"
-        },
-        {
-          "from": "platform/ui/result-page-shell/ResultPageShell.jsx",
+          "from": "platform/ui/result-page-shell/defaultToolFamilies.js",
           "specifier": "../../../design-library/assets/icon/yco-result-page-shell/ai-agent.svg",
           "to": "design-library/assets/icon/yco-result-page-shell/ai-agent.svg"
         },
         {
-          "from": "platform/ui/result-page-shell/ResultPageShell.jsx",
+          "from": "platform/ui/result-page-shell/defaultToolFamilies.js",
           "specifier": "../../../design-library/assets/icon/yco-result-page-shell/home.svg",
           "to": "design-library/assets/icon/yco-result-page-shell/home.svg"
+        },
+        {
+          "from": "platform/ui/result-page-shell/index.js",
+          "specifier": "./defaultToolFamilies.js",
+          "to": "platform/ui/result-page-shell/defaultToolFamilies.js"
+        },
+        {
+          "from": "platform/ui/result-page-shell/index.js",
+          "specifier": "./ResultPageShell.jsx",
+          "to": "platform/ui/result-page-shell/ResultPageShell.jsx"
         },
         {
           "from": "platform/ui/result-page-shell/ResultPageShell.jsx",
@@ -2190,6 +2579,11 @@
         },
         {
           "from": "platform/ui/result-page-shell/ResultPageShell.jsx",
+          "specifier": "./defaultToolFamilies.js",
+          "to": "platform/ui/result-page-shell/defaultToolFamilies.js"
+        },
+        {
+          "from": "platform/ui/result-page-shell/ResultPageShell.jsx",
           "specifier": "./ResultPageShell.module.scss",
           "to": "platform/ui/result-page-shell/ResultPageShell.module.scss"
         },
@@ -2220,6 +2614,21 @@
         },
         {
           "from": "platform/ui/upload-media-block/UploadMediaBlock.jsx",
+          "specifier": "../../../design-library/assets/icon/yco-upload-media-block/crop.svg",
+          "to": "design-library/assets/icon/yco-upload-media-block/crop.svg"
+        },
+        {
+          "from": "platform/ui/upload-media-block/UploadMediaBlock.jsx",
+          "specifier": "../../../design-library/assets/icon/yco-upload-media-block/error.svg",
+          "to": "design-library/assets/icon/yco-upload-media-block/error.svg"
+        },
+        {
+          "from": "platform/ui/upload-media-block/UploadMediaBlock.jsx",
+          "specifier": "../../../design-library/assets/icon/yco-upload-media-block/info.svg",
+          "to": "design-library/assets/icon/yco-upload-media-block/info.svg"
+        },
+        {
+          "from": "platform/ui/upload-media-block/UploadMediaBlock.jsx",
           "specifier": "../../../design-library/assets/icon/yco-upload-media-block/remove.svg",
           "to": "design-library/assets/icon/yco-upload-media-block/remove.svg"
         },
@@ -2227,6 +2636,21 @@
           "from": "platform/ui/upload-media-block/UploadMediaBlock.jsx",
           "specifier": "../../../design-library/assets/icon/yco-upload-media-block/replace.svg",
           "to": "design-library/assets/icon/yco-upload-media-block/replace.svg"
+        },
+        {
+          "from": "platform/ui/upload-media-block/UploadMediaBlock.jsx",
+          "specifier": "../../../design-library/assets/icon/yco-upload-media-block/swap.svg",
+          "to": "design-library/assets/icon/yco-upload-media-block/swap.svg"
+        },
+        {
+          "from": "platform/ui/upload-media-block/UploadMediaBlock.jsx",
+          "specifier": "../../../design-library/assets/icon/yco-upload-media-block/toggle-off.svg",
+          "to": "design-library/assets/icon/yco-upload-media-block/toggle-off.svg"
+        },
+        {
+          "from": "platform/ui/upload-media-block/UploadMediaBlock.jsx",
+          "specifier": "../../../design-library/assets/icon/yco-upload-media-block/toggle-on.svg",
+          "to": "design-library/assets/icon/yco-upload-media-block/toggle-on.svg"
         },
         {
           "from": "platform/ui/upload-media-block/UploadMediaBlock.jsx",
@@ -2385,6 +2809,6 @@
         "react-dom"
       ]
     },
-    "revisionHash": "60be025293d12fac53cb49c821141d41f37f58a55bdddd32f25060a5eea60501"
+    "revisionHash": "18dd026a406b0d4eab5ff82faa11956fcdb3480168eda06f89c56a53df6a9910"
   }
 }
