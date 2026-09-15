@@ -15,6 +15,11 @@ function FeatureIndex() {
       </p>
       <ul className={styles.featureList}>
         <li><a href={config.routes.surfacePrefix + '/'}><span className="text-heading-5 text-bold">Surface Browser</span><span>PM / Design · 結構與預覽</span></a></li>
+        {/* Storybook is a static build (npm run build-storybook:embed) placed under
+            dist/storybook at deploy time (see vercel.json's rewrite for the bare
+            /storybook path) — not part of this Vite app's own routing, so this is a
+            plain external link rather than a client-side route like the ones below. */}
+        <li><a href="/storybook/"><span className="text-heading-5 text-bold">Storybook</span><span>RD / Design · 元件庫</span></a></li>
         {featureEntries.map(({ slug, featureMeta }) => (
           <li key={slug}>
             <a href={'/features/' + slug + '/'}>
