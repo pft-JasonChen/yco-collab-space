@@ -1,6 +1,4 @@
-import { useCallback, useRef } from 'react';
-import pauseIcon from '../../../design-library/assets/icon/yco-video-timeline/pause.svg';
-import playIcon from '../../../design-library/assets/icon/yco-video-timeline/play.svg';
+import { useCallback, useEffect, useRef } from 'react';
 import dragHandleIcon from '../../../design-library/assets/icon/yco-video-timeline/drag-handle.svg';
 import keyframeIcon from '../../../design-library/assets/icon/yco-video-timeline/keyframe.svg';
 import styles from './VideoTimeline.module.scss';
@@ -45,7 +43,6 @@ export default function VideoTimeline({
    * Only meaningful when showTrimHandles is true. */
   onTrimEndChange,
   minimumSeconds = 0,
-  maximumSeconds,
   frameStrategy,
   /** Figma's own "Show Keyframe" component property (node 7460:183805, file
    * jb5SgyshmuPse0L7IFm0QO) — corrected (2026-09-14, reported live): this is
@@ -79,6 +76,21 @@ export default function VideoTimeline({
   /** Right slot: the selected range's total duration, --text-weaker
    * (Figma's right slot is always a time value, never a hint). */
   showRightLabel = false,
+  /** Escape hatch (2026-09-15, reused for VideoTrimModal — "左邊的調好應該可以
+   * 直接當右邊那組的元件，所以兩邊應該長一樣的"): VideoTrimModal draws real
+   * decoded video frames onto a per-slot <canvas> via its own
+   * useFrameThumbnails hook, which frameUrls/posterUrl (static <img> sources)
+   * can't express. When given, called once per slot index
+   * (0..THUMBNAIL_COUNT-1) and its return value replaces the default
+   * frameUrls/posterUrl <img> for that slot; frameUrls/posterUrl are ignored
+   * for slots it covers. */
+  renderFrame,
+  /** Paired with renderFrame: fires with the frames row's own rendered pixel
+   * width whenever it changes, so a renderFrame consumer that needs to size
+   * per-slot content (e.g. canvas width/height, to avoid a blurry stretched
+   * bitmap) doesn't need a second ResizeObserver on a second ref duplicating
+   * this component's own internal geometry. */
+  onFrameAreaResize,
   className = '',
 }) {
   const labels = { ...defaultLabels, ...labelOverrides };
@@ -126,7 +138,16 @@ export default function VideoTimeline({
   const playheadHandleClearance = '5px';
 
   const trackRef = useRef(null);
+  const framesRef = useRef(null);
   const dragRef = useRef(null);
+
+  useEffect(() => {
+    const element = framesRef.current;
+    if (!element || !onFrameAreaResize) return undefined;
+    const observer = new ResizeObserver(([entry]) => onFrameAreaResize(entry?.contentRect.width || 0));
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [onFrameAreaResize]);
 
   const stopDrag = useCallback((handlerEvent) => {
     const drag = dragRef.current;
@@ -151,15 +172,24 @@ export default function VideoTimeline({
 
     const onMove = (moveEvent) => {
       const seconds = clamp((moveEvent.clientX - rect.left) / pxPerSecond, 0, trackDuration);
-      const window = Number.isFinite(maximumSeconds) && maximumSeconds > 0 ? maximumSeconds : Infinity;
+      // Reference (2026-09-15, corrected live — "handler應該要讓user隨意拉動，
+      // 而不是根據時間限制鎖死，如果影片是有限制時長的話，user調整範圍若超出
+      // hint就會變成紅色的字"): a handle is bounded only by the OTHER handle's
+      // position (via minimumSeconds, so the segment can't collapse to nothing)
+      // and the track's own [0, trackDuration] extent — never by maximumSeconds.
+      // This matches RD's own baseline drag math exactly (use-trim-drag.js:
+      // left clamps to [0, end-MIN_TRIM_SECONDS], right clamps to
+      // [start+MIN_TRIM_SECONDS, duration] — neither references a maximum at
+      // all). A maximum length is communicated by the consumer's own hint text
+      // turning to an error color once the selection exceeds it (VideoTrimModal's
+      // own tooLong/errorLabel, matching RD's isTrimRangeTooLong), and by
+      // disabling confirm — never by making the handle itself un-draggable.
       if (side === 'start') {
-        const min = Math.max(0, safeEnd - window);
         const max = safeEnd - minimumSeconds;
-        onTrimStartChange?.(clamp(seconds, min, Math.max(min, max)));
+        onTrimStartChange?.(clamp(seconds, 0, Math.max(0, max)));
       } else {
         const min = startTime + minimumSeconds;
-        const max = Math.min(trackDuration, startTime + window);
-        onTrimEndChange?.(clamp(seconds, Math.min(min, max), max));
+        onTrimEndChange?.(clamp(seconds, Math.min(min, trackDuration), trackDuration));
       }
     };
     const onUp = (upEvent) => stopDrag(upEvent);
@@ -170,7 +200,7 @@ export default function VideoTimeline({
     target.addEventListener('pointerup', onUp);
     target.addEventListener('pointercancel', onUp);
     dragRef.current = { target, onMove, onUp };
-  }, [maximumSeconds, minimumSeconds, onTrimEndChange, onTrimStartChange, safeEnd, startTime, stopDrag, trackDuration]);
+  }, [minimumSeconds, onTrimEndChange, onTrimStartChange, safeEnd, startTime, stopDrag, trackDuration]);
 
   return (
     <div
@@ -202,11 +232,21 @@ export default function VideoTimeline({
           disabled={isPlaying ? !onPause : !onPlay}
           aria-label={isPlaying ? 'Pause video' : 'Play video'}
         >
-          <img src={isPlaying ? pauseIcon : playIcon} alt="" aria-hidden="true" />
+          {/* Reference (2026-09-15, tried live — "1和2的icon有點問題，3我不確定，
+              但是都改成icon font看看", where "3" is this button): swapped from
+              the play.svg/pause.svg asset pair to the shared YcoInterfaceIcons
+              icon font (icon-ic-pause-bold = U+E97B, icon-ic-play-f = U+E97F),
+              matching the ResultPageShell/ToolFamilyMenu glyph convention
+              (embed the PUA character directly via a JS unicode escape,
+              styled through a local @font-face + glyph class) rather than a
+              design-library SVG asset. Tentative — flagged by the user as
+              unconfirmed for this specific button. */}
+          <span className={styles.playGlyph} aria-hidden="true">{isPlaying ? '' : ''}</span>
         </button>
         <div className={styles.track} ref={trackRef}>
-        <div className={styles.frames} aria-hidden="true">
+        <div className={styles.frames} ref={framesRef} aria-hidden="true">
           {Array.from({ length: THUMBNAIL_COUNT }, (_, index) => {
+            if (renderFrame) return renderFrame(index);
             const frameUrl = frameUrls[index] || (!hasCapturedFrames ? posterUrl : undefined);
             return frameUrl ? <img key={index} src={frameUrl} alt="" draggable={false} /> : <span key={index} />;
           })}
@@ -239,6 +279,7 @@ export default function VideoTimeline({
               <button
                 type="button"
                 className={`${styles.handle} ${styles.handleLeft}`}
+                data-testid="canvas-trim-handle-start"
                 onPointerDown={startHandleDrag('start')}
                 disabled={!onTrimStartChange}
                 aria-label={labels.trimStart}
@@ -248,6 +289,7 @@ export default function VideoTimeline({
               <button
                 type="button"
                 className={`${styles.handle} ${styles.handleRight}`}
+                data-testid="canvas-trim-handle-end"
                 onPointerDown={startHandleDrag('end')}
                 disabled={!onTrimEndChange}
                 aria-label={labels.trimEnd}

@@ -15,20 +15,28 @@ import '../../../design-library/assets/font/yco-interface-icons.style.css';
 const paths = {
   play: <path d="M5 3.5v9l7-4.5-7-4.5Z" fill="currentColor" />,
   pause: <><path d="M4 3h3v10H4z" fill="currentColor" /><path d="M9 3h3v10H9z" fill="currentColor" /></>,
-  trim: <><path d="m4 3 8 8M12 3 4 11" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" /><circle cx="3.5" cy="12" r="1.5" stroke="currentColor" strokeWidth="1.2" /><circle cx="12.5" cy="12" r="1.5" stroke="currentColor" strokeWidth="1.2" /></>,
   warning: <><path d="M8 2.5 14 13H2L8 2.5Z" stroke="currentColor" strokeWidth="1.4" /><path d="M8 6v3.2M8 11.2v.2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></>,
 };
 
 export default function Icon({ name, size = 16 }) {
-  // See the import comment above — upload/video render via the yco-interface-icons
-  // icon font instead of their old hand-drawn SVG path. `video` uses icon-ic-video-2
-  // (a camcorder glyph) rather than icon-ic-video (a clapperboard) — closer match
-  // to the original hand-drawn shape, per Designer's side-by-side comparison.
+  // See the import comment above — upload/video/trim render via the
+  // yco-interface-icons icon font instead of their old hand-drawn SVG paths.
+  // `video` uses icon-ic-video-2 (a camcorder glyph) rather than icon-ic-video
+  // (a clapperboard) — closer match to the original hand-drawn shape, per
+  // Designer's side-by-side comparison. `trim` swapped the same way
+  // (2026-09-15, requested live — "scissors icon 去找 icon fonts"): was a
+  // hand-drawn crossing-lines-plus-two-circles approximation of scissors;
+  // now icon-ic-scissors, matching the exact glyph UploadMediaBlock's own
+  // Storybook story (VideoUploadedWithFeatureAction) already demonstrates
+  // for this same actionSlot.
   if (name === 'upload') {
     return <i className="icon-ic-upload" aria-hidden="true" style={{ fontSize: size, lineHeight: 1, display: 'inline-block' }} />;
   }
   if (name === 'video') {
     return <i className="icon-ic-video-2" aria-hidden="true" style={{ fontSize: size, lineHeight: 1, display: 'inline-block' }} />;
+  }
+  if (name === 'trim') {
+    return <i className="icon-ic-scissors" aria-hidden="true" style={{ fontSize: size, lineHeight: 1, display: 'inline-block' }} />;
   }
   return (
     <svg className={styles.icon} width={size} height={size} viewBox="0 0 16 16" aria-hidden="true">

@@ -188,33 +188,43 @@ const stories = [
     axeRules: brandContrastException,
     async interact(page) {
       await page.getByTestId('video-trim-dialog').waitFor({ state: 'visible' });
-      await page.getByTestId('trim-handle-start').waitFor({ state: 'visible' });
-      await page.getByTestId('trim-handle-end').waitFor({ state: 'visible' });
+      await page.getByTestId('canvas-trim-handle-start').waitFor({ state: 'visible' });
+      await page.getByTestId('canvas-trim-handle-end').waitFor({ state: 'visible' });
       await page.getByTestId('trim-use-video').click();
       await page.getByText('Selected 0–30 seconds', { exact: true }).waitFor({ state: 'visible' });
     },
   },
   {
     id: 'ui-video-trim-modal--thirty-second-limit',
-    label: 'ui-video-trim-modal--maximum-window-clamp',
+    label: 'ui-video-trim-modal--free-drag-past-maximum-shows-error',
     axeRules: brandContrastException,
     async interact(page) {
-      // The 48s source starts with 0–30 selected; dragging the end handle past the
-      // right edge must not grow the selection beyond the 30s maximum.
+      // The 48s source starts with 0–30 selected. Reference (2026-09-15,
+      // corrected live — "handler應該要讓user隨意拉動，而不是根據時間限制鎖
+      // 死，如果影片是有限制時長的話，user調整範圍若超出hint就會變成紅色的
+      // 字"): dragging the end handle past the 30s maximum must NOT clamp the
+      // selection — RD's own baseline (use-trim-drag.js) only clamps to the
+      // minimum segment length and the track's own bounds, never to a
+      // maximum. Exceeding it instead surfaces as a longer duration reading
+      // and a disabled confirm button, not an un-draggable handle.
       const duration = page.getByTestId('trim-selection-duration');
       await duration.waitFor({ state: 'visible' });
       await page.waitForFunction(
         () => document.querySelector('[data-testid="trim-selection-duration"]')?.textContent === '00:30',
       );
-      const handle = page.getByTestId('trim-handle-end');
+      const confirm = page.getByTestId('trim-use-video');
+      assert.equal(await confirm.isDisabled(), false);
+      const handle = page.getByTestId('canvas-trim-handle-end');
       const box = await handle.boundingBox();
       await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
       await page.mouse.down();
       await page.mouse.move(box.x + 600, box.y + box.height / 2, { steps: 12 });
       await page.mouse.up();
-      assert.equal(await duration.textContent(), '00:30');
-      await page.getByTestId('trim-use-video').click();
-      await page.getByText('Selected 0–30 seconds', { exact: true }).waitFor({ state: 'visible' });
+      const durationText = await duration.textContent();
+      assert.notEqual(durationText, '00:30');
+      const match = durationText.match(/^(\d\d):(\d\d)$/);
+      assert.equal(Number(match[1]) * 60 + Number(match[2]) > 30, true);
+      assert.equal(await confirm.isDisabled(), true);
     },
   },
   {

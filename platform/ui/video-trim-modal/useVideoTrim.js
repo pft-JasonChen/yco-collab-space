@@ -83,9 +83,6 @@ export default function useVideoTrim(videoUrl, maxTrimSeconds, durationOverride 
     videoRef.current?.pause();
     setIsPlaying(false);
   }, []);
-  const resume = useCallback(() => {
-    videoRef.current?.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
-  }, []);
 
   const snapshot = useCallback(() => {
     const video = videoRef.current;
@@ -115,7 +112,6 @@ export default function useVideoTrim(videoUrl, maxTrimSeconds, durationOverride 
     togglePlay,
     toggleMute,
     stop,
-    resume,
     snapshot,
   };
 }

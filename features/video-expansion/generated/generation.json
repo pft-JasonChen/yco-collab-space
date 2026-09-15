@@ -5,7 +5,7 @@
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "claude-code",
   "model": "claude-sonnet-5",
-  "generatedAt": "2026-09-15T01:06:50.966Z",
+  "generatedAt": "2026-09-15T05:42:10.039Z",
   "files": [
     "README.md",
     "contract/integration.yaml",
@@ -52,9 +52,9 @@
         "status": "pilot-approved",
         "figmaStatus": "mapped",
         "contractPath": "design-library/components/button/component.yaml",
-        "contractSha256": "dec56cc1c97e8960ba870822a75e6f2abb10b258db5a1ac9d5316981cbf17bec",
+        "contractSha256": "4bf58d04b3a0cfe69ac58dbb4d9668475146bd804b8ddf0c03fdcde613cad550",
         "implementationImport": "platform/ui/button/index.js",
-        "implementationSha256": "c77948b32650707f6c01f8c4653622635ee432c737fa36baaeed3a5d8f5526b5",
+        "implementationSha256": "59d9dac0d9521349151cc11d579b726f148c5c71e2c0671b19238b6883b4ac75",
         "runtimeAssets": []
       },
       {
@@ -572,9 +572,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/video-timeline/component.yaml",
-        "contractSha256": "00b1797517463c1ff39687f2f7c9964a4f133f9fb7a44c8eff060ce88cee102e",
+        "contractSha256": "45a306d0c8cd957baf07a469b3b903eb70f92248ae981eaf9437d8734920a2f9",
         "implementationImport": "platform/ui/video-timeline/index.js",
-        "implementationSha256": "6e447b9663b993cd760a65a348c3ae067003bcf6d935a0c4b08c4aa5279c8a67",
+        "implementationSha256": "aca68f4e0bb075f896179ce121e5723a7ed70b07514db191c0e8958acd9716dc",
         "runtimeAssets": [
           {
             "repositoryPath": "design-library/assets/icon/yco-video-timeline/drag-handle.svg",
@@ -599,9 +599,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/video-trim-modal/component.yaml",
-        "contractSha256": "5191ccc6e1804939720d3aecfd39db8688d60e17c0ddfc8eebad38612eeefc22",
+        "contractSha256": "4e884e1b91e5e606be02c7ab0c06cd318055fbc3b78e6c376fc7185681fa5f24",
         "implementationImport": "platform/ui/video-trim-modal/index.js",
-        "implementationSha256": "fc6058cdaa37d654edb0126a095dc0916641cb78fc55b6f745257d9679332ee6",
+        "implementationSha256": "ac648fd0c3bd8f6a11359a19c78c27745f0dc0eda5447a0a07e73f85e53d2aa3",
         "runtimeAssets": []
       }
     ]
@@ -829,7 +829,7 @@
         },
         {
           "path": "features/video-expansion/generated/icons.jsx",
-          "sha256": "b5119a4fe6205dd403b2652fa88006bdfe0a89cf2e0c4756b7d7c40348fee01a"
+          "sha256": "903bc3c1363ae040385534b54a6ee7960b8335dfc6568c08610732f1dd07e27f"
         },
         {
           "path": "features/video-expansion/generated/icons.module.scss",
@@ -845,14 +845,14 @@
         },
         {
           "path": "features/video-expansion/generated/settings/index.jsx",
-          "sha256": "29dfc73bba9cac443331153a2842d49a6b002181e800b63e9485a625db9a89e6"
+          "sha256": "6b51c32fb80507744400b4f94f56123f502813dcafb05e1630230786c27ab569"
         },
         {
           "path": "features/video-expansion/generated/settings/index.module.scss",
           "sha256": "079e42b2b35548096dba01684133d3ba6cb46f86648eae166d64c204c608eaed"
         }
       ],
-      "hash": "30b04e18b8684db471312d4dcb3b229748a5ab215d029c560812b6aeef65457c"
+      "hash": "cb110658d4db8c38193c9795c8fb6a5f96a2993ff912fb2a7ba696c4cab3f76b"
     },
     "dependencies": {
       "files": [
@@ -1242,7 +1242,7 @@
         },
         {
           "path": "design-library/components/button/component.yaml",
-          "sha256": "dec56cc1c97e8960ba870822a75e6f2abb10b258db5a1ac9d5316981cbf17bec"
+          "sha256": "4bf58d04b3a0cfe69ac58dbb4d9668475146bd804b8ddf0c03fdcde613cad550"
         },
         {
           "path": "design-library/components/credit-controls/component.yaml",
@@ -1290,11 +1290,11 @@
         },
         {
           "path": "design-library/components/video-timeline/component.yaml",
-          "sha256": "00b1797517463c1ff39687f2f7c9964a4f133f9fb7a44c8eff060ce88cee102e"
+          "sha256": "45a306d0c8cd957baf07a469b3b903eb70f92248ae981eaf9437d8734920a2f9"
         },
         {
           "path": "design-library/components/video-trim-modal/component.yaml",
-          "sha256": "5191ccc6e1804939720d3aecfd39db8688d60e17c0ddfc8eebad38612eeefc22"
+          "sha256": "4e884e1b91e5e606be02c7ab0c06cd318055fbc3b78e6c376fc7185681fa5f24"
         },
         {
           "path": "features/collab-space-readiness/product/surface-intent.yaml",
@@ -1334,7 +1334,7 @@
         },
         {
           "path": "features/video-expansion/generated/icons.jsx",
-          "sha256": "b5119a4fe6205dd403b2652fa88006bdfe0a89cf2e0c4756b7d7c40348fee01a"
+          "sha256": "903bc3c1363ae040385534b54a6ee7960b8335dfc6568c08610732f1dd07e27f"
         },
         {
           "path": "features/video-expansion/generated/icons.module.scss",
@@ -1350,7 +1350,7 @@
         },
         {
           "path": "features/video-expansion/generated/settings/index.jsx",
-          "sha256": "29dfc73bba9cac443331153a2842d49a6b002181e800b63e9485a625db9a89e6"
+          "sha256": "6b51c32fb80507744400b4f94f56123f502813dcafb05e1630230786c27ab569"
         },
         {
           "path": "features/video-expansion/generated/settings/index.module.scss",
@@ -1718,7 +1718,7 @@
         },
         {
           "path": "platform/ui/button/Button.module.css",
-          "sha256": "a38284f4aa2fa4ab2c0a9e3e9ec5e9478a2e75d16d86855a46fde7457dd65855"
+          "sha256": "c874a2254ab75b6e707af11de66b19ff740d334e2c409957bbc838ec4ed5082b"
         },
         {
           "path": "platform/ui/button/Button.stories.jsx",
@@ -1934,11 +1934,11 @@
         },
         {
           "path": "platform/ui/video-timeline/VideoTimeline.jsx",
-          "sha256": "3f2326b8018c70f5e4910d26c59fd755686bc81a1092f1dc808d754563b8bf33"
+          "sha256": "61744483291a40772e223253a40771d03b3b17451b98a3de405dd070b4971995"
         },
         {
           "path": "platform/ui/video-timeline/VideoTimeline.module.scss",
-          "sha256": "6f8da905fda799fbe07e4e17f27befe0442b80d466cfaa42140959db0e1ed8c7"
+          "sha256": "34a47c91b5bc431b6aa76469a636daec8bdfdb87aef208a2d0ec8c2534b98e49"
         },
         {
           "path": "platform/ui/video-timeline/VideoTimeline.stories.jsx",
@@ -1954,11 +1954,11 @@
         },
         {
           "path": "platform/ui/video-trim-modal/VideoTrimModal.jsx",
-          "sha256": "5aabae7ac6b2bc0d1e7e8f763cfd7861db9e720e737359019634bbce97c237ca"
+          "sha256": "9a4fba4cb310a275da69208a4bd231ae922226994635d14dbe18f2d147c8a9a0"
         },
         {
           "path": "platform/ui/video-trim-modal/VideoTrimModal.module.scss",
-          "sha256": "c4adb739620eec0f73f2dace25af189766aeb3e10086508314316e0f97dcfbbc"
+          "sha256": "7a1ec0e10778a93336cb8cd946d368c8072a32ac85d3b6571e86640ee66ef3c4"
         },
         {
           "path": "platform/ui/video-trim-modal/VideoTrimModal.stories.jsx",
@@ -1966,7 +1966,7 @@
         },
         {
           "path": "platform/ui/video-trim-modal/constants.js",
-          "sha256": "bfee24bb2833d8de467f0a14b2d9711a0764abfbf032a72a26ab65d677c0387c"
+          "sha256": "555e647c7c69ebfaf2599a11324d0e384d738f0f6d074d7c590a0f2ff28e8cf8"
         },
         {
           "path": "platform/ui/video-trim-modal/index.js",
@@ -1977,12 +1977,8 @@
           "sha256": "09f45ad7d3ca9c7aa968e87b97e49157cd350bbcfcf318856c48482ac6b76914"
         },
         {
-          "path": "platform/ui/video-trim-modal/useTrimDrag.js",
-          "sha256": "a7f0574173007aa10f7cbb21a226bfd950772f1a3aa8761d087621ab83ad3305"
-        },
-        {
           "path": "platform/ui/video-trim-modal/useVideoTrim.js",
-          "sha256": "90ac3b08187dd335ceb16d7174196e390f2da139889ffafd94acb19a916cbfff"
+          "sha256": "af4962652b192754bafcbf8b85d738a70596d6f6176dbd398a93673e417d32cc"
         },
         {
           "path": "prototype.config.json",
@@ -2058,7 +2054,7 @@
         },
         {
           "path": "tools/design-library/run-storybook-checks.mjs",
-          "sha256": "4e3e6a5ebed0b59c5bf25762467ad7b514337dced9e0765c0d32f4a974e07c0f"
+          "sha256": "bb8ea35d4959ca67c6f05149c4664f0c7ecd07a1e251a22f225f7e5336b6e14b"
         },
         {
           "path": "tools/design-library/schemas/component-contract.schema.json",
@@ -2237,7 +2233,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "2be68fb120d49c68b8afc6d65f98416c92d9665d1db8380ae83fc783f001efa8",
+      "hash": "d7310e4c912153c2d9c741fbdd967988c44e0caf82859414cef106227fa5cc9f",
       "edges": [
         {
           "from": "design-library/assets/font/yco-interface-icons.style.css",
@@ -2936,16 +2932,6 @@
         },
         {
           "from": "platform/ui/video-timeline/VideoTimeline.jsx",
-          "specifier": "../../../design-library/assets/icon/yco-video-timeline/pause.svg",
-          "to": "design-library/assets/icon/yco-video-timeline/pause.svg"
-        },
-        {
-          "from": "platform/ui/video-timeline/VideoTimeline.jsx",
-          "specifier": "../../../design-library/assets/icon/yco-video-timeline/play.svg",
-          "to": "design-library/assets/icon/yco-video-timeline/play.svg"
-        },
-        {
-          "from": "platform/ui/video-timeline/VideoTimeline.jsx",
           "specifier": "./VideoTimeline.module.scss",
           "to": "platform/ui/video-timeline/VideoTimeline.module.scss"
         },
@@ -2953,6 +2939,11 @@
           "from": "platform/ui/video-timeline/VideoTimeline.jsx",
           "specifier": "react",
           "to": "package:react"
+        },
+        {
+          "from": "platform/ui/video-timeline/VideoTimeline.module.scss",
+          "specifier": "../../../design-library/assets/font/yco-interface-icons/icomoon.woff",
+          "to": "design-library/assets/font/yco-interface-icons/icomoon.woff"
         },
         {
           "from": "platform/ui/video-trim-modal/index.js",
@@ -2975,19 +2966,19 @@
           "to": "package:react"
         },
         {
-          "from": "platform/ui/video-trim-modal/useTrimDrag.js",
-          "specifier": "./constants.js",
-          "to": "platform/ui/video-trim-modal/constants.js"
-        },
-        {
-          "from": "platform/ui/video-trim-modal/useTrimDrag.js",
-          "specifier": "react",
-          "to": "package:react"
-        },
-        {
           "from": "platform/ui/video-trim-modal/useVideoTrim.js",
           "specifier": "react",
           "to": "package:react"
+        },
+        {
+          "from": "platform/ui/video-trim-modal/VideoTrimModal.jsx",
+          "specifier": "../button/index.js",
+          "to": "platform/ui/button/index.js"
+        },
+        {
+          "from": "platform/ui/video-trim-modal/VideoTrimModal.jsx",
+          "specifier": "../video-timeline/index.js",
+          "to": "platform/ui/video-timeline/index.js"
         },
         {
           "from": "platform/ui/video-trim-modal/VideoTrimModal.jsx",
@@ -2998,11 +2989,6 @@
           "from": "platform/ui/video-trim-modal/VideoTrimModal.jsx",
           "specifier": "./useFrameThumbnails.js",
           "to": "platform/ui/video-trim-modal/useFrameThumbnails.js"
-        },
-        {
-          "from": "platform/ui/video-trim-modal/VideoTrimModal.jsx",
-          "specifier": "./useTrimDrag.js",
-          "to": "platform/ui/video-trim-modal/useTrimDrag.js"
         },
         {
           "from": "platform/ui/video-trim-modal/VideoTrimModal.jsx",
@@ -3023,6 +3009,11 @@
           "from": "platform/ui/video-trim-modal/VideoTrimModal.jsx",
           "specifier": "react",
           "to": "package:react"
+        },
+        {
+          "from": "platform/ui/video-trim-modal/VideoTrimModal.module.scss",
+          "specifier": "../../../design-library/assets/font/yco-interface-icons/icomoon.woff",
+          "to": "design-library/assets/font/yco-interface-icons/icomoon.woff"
         }
       ],
       "packages": [
@@ -3031,6 +3022,6 @@
         "react-dom"
       ]
     },
-    "revisionHash": "877938541c96bd8ffb15537cc1b8283484d12d5b3db18ee47bac96c194f40846"
+    "revisionHash": "b7f1caef64cff88fd2b4efb70ced5a9f117e497dce6cf42c16f0ac1c71ed93af"
   }
 }

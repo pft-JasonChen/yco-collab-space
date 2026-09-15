@@ -1,3 +1,17 @@
+/* Reference (2026-09-15, tried live — "1和2的icon有點問題，3我不確定，但是都
+   改成icon font看看"): same icon-font setup ResultPageShell/ToolFamilyMenu
+   already use for their own glyphs (a local @font-face pointing at the same
+   design-library icomoon.woff, since this codebase declares it per-module
+   rather than sharing one global @font-face — browsers de-duplicate
+   identical @font-face declarations by src, so repeating it here is harmless). */
+@font-face {
+  font-family: 'YcoInterfaceIcons';
+  src: url('../../../design-library/assets/font/yco-interface-icons/icomoon.woff') format('woff');
+  font-display: block;
+  font-style: normal;
+  font-weight: normal;
+}
+
 .backdrop {
   position: fixed;
   z-index: 100;
@@ -10,13 +24,24 @@
 
 .modal {
   position: relative;
+  display: flex;
+  flex-direction: column;
   width: min(700px, 100%);
   max-height: calc(100vh - var(--spacing-48));
-  padding: var(--spacing-32);
-  overflow: auto;
   color: var(--text-strong);
   background: var(--background-base);
   border-radius: var(--corner-radius-16);
+  /* Reference (2026-09-15, requested live — "在做modal的時候，如果下面有CTA我
+     都會讓他 fix at the bottom", jb5SgyshmuPse0L7IFm0QO nodes
+     14602:212396/14630:282653/14774:349549/14777:355223): was `overflow:
+     auto` directly on .modal, so the Cancel/Use Video actions row scrolled
+     away with the preview/timeline whenever content overflowed max-height.
+     Now `.modal` itself doesn't scroll — `.body` below does — so its own
+     padding moved down onto `.body`/`.actions` individually (each needs
+     different edges of it, see below), and `.content` carries the flex:1;
+     min-height:0 chain that lets `.body`'s own flex:1 resolve to a real,
+     scrollable height instead of just growing `.modal` taller. */
+  overflow: hidden;
   /* Was var(--background-overlay), which resolves to --grey-solid-0 (solid
      white, same value as --background-base/--fill-white) — a white shadow is
      invisible against the page and reads as "no shadow color at all"
@@ -43,25 +68,76 @@
   border: none;
   border-radius: var(--corner-radius-32);
   cursor: pointer;
-  font-size: var(--font-size-heading-3);
+}
+
+.closeButton span {
+  /* Reference (2026-09-15, tried live — "1和2的icon有點問題...都改成icon font
+     看看"): was a literal "×" (U+00D7) character sized via .closeButton's own
+     font-size: var(--font-size-heading-3). Swapped to icon-ic-x-bold
+     (U+E945) from the same icon font ResultPageShell/ToolFamilyMenu already
+     use, at a size chosen to read similarly to the previous "×" glyph. */
+  font-family: 'YcoInterfaceIcons', sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  speak: never;
+  -webkit-font-smoothing: antialiased;
 }
 
 .content {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-24);
+  /* flex:1 + min-height:0 (not just `display:flex` — see the CSS-percentage-
+     -through-flex-chain note elsewhere in this codebase) so this fills
+     .modal's own flex-column height exactly, giving .body's own `flex: 1;
+     min-height: 0` below something real to resolve against instead of just
+     growing .modal past its max-height. */
+  flex: 1;
+  min-height: 0;
 }
 
-.content h2 {
+/* Reference (2026-09-15, corrected live — "你不能弄成現在這樣，你應該是中間要
+   可以scroll"): the title used to be the first child of .body, so it
+   scrolled away along with the preview/timeline instead of staying put like
+   a modal header normally does. Pulled out as .title, a fixed sibling of
+   .body — three zones now (fixed title, scrollable .body, fixed .actions
+   footer), not two. */
+.title {
+  flex: 0 0 auto;
   margin: 0;
+  padding: var(--spacing-32) var(--spacing-32) var(--spacing-24);
   font-size: var(--font-size-heading-3);
   line-height: var(--line-height-heading-3);
   font-weight: var(--font-weight-strong);
 }
 
+.body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  gap: var(--spacing-24);
+  padding: 0 var(--spacing-32);
+  overflow-y: auto;
+}
+
 .preview {
   position: relative;
   width: 100%;
+  /* Reference (2026-09-15, requested live — "video 縮小要有一個程度，不是無限
+     縮小", then confirmed — "我覺得還是可以根據銀幕縮小影片高度，但是就一個
+     程度就好"): .preview is a flex child of .body's column, so once .body
+     ran out of room (a short viewport, or a tall/portrait video whose
+     aspect-ratio wants more height than fits) it shrank with no floor —
+     flex's own default min-height:auto lets a flex item shrink past its
+     content's intrinsic size entirely. Left flex-shrink at its default (1)
+     deliberately — the video SHOULD keep shrinking as the screen does — and
+     added a concrete min-height as the actual floor: below --spacing-192
+     (192px — about half of the 336px max-height cap below, small enough to
+     fit a badly squeezed modal, still tall enough to actually see the
+     video), .body scrolls instead of the video shrinking further. */
+  min-height: var(--spacing-192);
   max-height: calc(var(--spacing-256) + var(--spacing-80));
   margin: 0 auto;
   overflow: hidden;
@@ -92,20 +168,37 @@
 
 .previewPlay span {
   display: grid;
-  width: var(--spacing-48);
-  height: var(--spacing-48);
+  width: var(--spacing-56);
+  height: var(--spacing-56);
   place-items: center;
+  /* Reference (2026-09-15, tried live — "1和2的icon有點問題...都改成icon font
+     看看"): was an inline <PlayIcon> SVG (own hand-drawn play-triangle/
+     pause-bars paths) sized via the `.previewPlay svg` rule below it; now the
+     glyph itself (icon-ic-pause-bold = U+E97B / icon-ic-play-f = U+E97F,
+     embedded directly as a JS unicode escape in VideoTrimModal.jsx) renders
+     as this span's own text, styled via the same local @font-face this
+     codebase's ResultPageShell/ToolFamilyMenu glyphs already use. Sized
+     56px, not the 48px it briefly had (2026-09-15 — "這顆是56px"). */
+  font-family: 'YcoInterfaceIcons', sans-serif;
+  /* 32px, not the 24px it briefly had (2026-09-15 — "font size幫我設32px好了"). */
+  font-size: 32px;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  speak: never;
+  -webkit-font-smoothing: antialiased;
   color: var(--icon-brand);
-  background: var(--fill-white);
+  /* Reference (2026-09-15, asked live — "有白色是有帶80%的透明度，如果沒有這個
+     顏色的token我有辦法用Fill/Inverse strong再去設定80%的透明度嗎"): yes —
+     same color-mix(in srgb, <token> X%, transparent) technique this
+     component already uses for its own .modal/.actionsElevated shadows,
+     applied here since no dedicated "white at 80%" token exists. Was solid
+     var(--fill-white); --fill-inverse-strong resolves to the same underlying
+     --grey-solid-0 value as --fill-white, but reads as the more semantically
+     correct token for a button surface floating over video content (an
+     "inverse" context) rather than a flat color name.  */
+  background: color-mix(in srgb, var(--fill-inverse-strong) 80%, transparent);
   border-radius: var(--corner-radius-32);
-}
-
-.previewPlay svg,
-.muteButton svg,
-.timelinePlay svg {
-  width: var(--spacing-24);
-  height: var(--spacing-24);
-  fill: currentColor;
 }
 
 .muteButton {
@@ -117,16 +210,49 @@
   height: var(--spacing-40);
   place-items: center;
   padding: 0;
-  color: var(--icon-inverse);
-  background: var(--fill-overlay-strong);
+  /* Reference (2026-09-15, tried live — "這顆也是錯的，請幫我找icon font"):
+     was an inline <MuteIcon> SVG (a hand-drawn speaker path plus either an X
+     or sound-wave path depending on `muted`), sized via the `.muteButton svg`
+     rule this replaced. Swapped to the same YcoInterfaceIcons icon font used
+     for this modal's other two icons — icon-ic-volume-x-f (U+E926, muted) /
+     icon-ic-volume-high-f (U+E924, unmuted) — embedded as a JS unicode
+     escape in a `<span>` rather than inline SVG. Color corrected (2026-09-15,
+     per a Figma Dev Mode inspect of this same icon — "color 應該是這個",
+     showing Fill: Icon/Inverse strong) from --icon-inverse to
+     --icon-inverse-strong, matching the design spec exactly rather than the
+     nearest-sounding token. Background corrected the same way (2026-09-15 —
+     "這底色是overlay不是overlay strong"): from --fill-overlay-strong to plain
+     --fill-overlay — three distinct tokens exist in this set
+     (--fill-overlay/-weak/-strong), and the plain one is the actual spec, not
+     the strong variant next to it alphabetically. */
+  font-family: 'YcoInterfaceIcons', sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  speak: never;
+  -webkit-font-smoothing: antialiased;
+  color: var(--icon-inverse-strong);
+  background: var(--fill-overlay);
   border: none;
   border-radius: var(--corner-radius-32);
   cursor: pointer;
 }
 
+/* Reference (2026-09-15, merged into the shared VideoTimeline component —
+   "左邊的調好應該可以直接當右邊那組的元件，所以兩邊應該長一樣的"): this used
+   to hold a from-scratch second copy of the whole filmstrip/handles/playhead
+   layout (.timelineRow/.timelinePlay/.framesArea/.canvasRow/.rangeOverlay/
+   .darkRange/.rangeBox/.handleLeft/.handleRight/.playhead, plus their own
+   @media 768px overrides below) — all of that is gone now that
+   VideoTrimModal.jsx renders <VideoTimeline> directly for that row instead
+   of re-implementing it. Only the hint/duration meta row above it (which
+   VideoTimeline doesn't have — see VideoTrimModal.jsx's own comment on why)
+   stays here. */
 .timelineSection {
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
   gap: var(--spacing-4);
 }
 
@@ -148,170 +274,35 @@
   color: var(--text-error);
 }
 
-.timelineRow {
-  display: flex;
-  height: var(--spacing-64);
-  align-items: center;
-  gap: var(--spacing-20);
-  padding: var(--spacing-4) var(--spacing-12);
-  background: var(--fill-weak);
-  border-radius: var(--corner-radius-8);
-}
-
-.timelinePlay {
-  display: grid;
-  width: var(--spacing-24);
-  height: var(--spacing-24);
-  flex: 0 0 auto;
-  place-items: center;
-  padding: 0;
-  color: var(--icon-neutral);
-  background: transparent;
-  border: none;
-  cursor: pointer;
-}
-
-.framesArea {
-  position: relative;
-  height: var(--spacing-56);
-  min-width: 0;
-  flex: 1;
-  cursor: pointer;
-  touch-action: none;
-  user-select: none;
-}
-
-.canvasRow {
-  position: absolute;
-  inset: 50% 0 auto;
-  display: flex;
-  height: var(--spacing-56);
-  gap: var(--spacing-4);
-  padding: 0 var(--spacing-16);
-  transform: translateY(-50%);
-}
-
-.canvasRow canvas,
-.canvasRow img {
-  display: block;
-  width: 0;
-  height: var(--spacing-56);
-  min-width: 0;
-  flex: 1;
-  object-fit: cover;
-}
-
-.rangeOverlay {
-  position: absolute;
-  top: 50%;
-  right: var(--spacing-16);
-  left: var(--spacing-16);
-  display: flex;
-  align-items: center;
-  pointer-events: none;
-  transform: translateY(-50%);
-}
-
-.darkRange {
-  height: var(--spacing-56);
-  flex: 0 0 auto;
-  background: var(--fill-overlay-weak);
-}
-
-.rangeBox {
-  position: relative;
-  height: calc(var(--spacing-56) + var(--spacing-4) / 2);
-  flex: 0 0 auto;
-  border: 2px solid var(--stroke-brand-strong);
-  pointer-events: auto;
-}
-
-.handleLeft,
-.handleRight {
-  position: absolute;
-  top: 50%;
-  display: grid;
-  width: var(--spacing-16);
-  height: calc(var(--spacing-56) + var(--spacing-4) / 2);
-  place-items: center;
-  padding: 0;
-  background: var(--fill-brand-strong);
-  border: none;
-  cursor: ew-resize;
-  touch-action: none;
-  transform: translateY(-50%);
-}
-
-.handleLeft {
-  left: calc(var(--spacing-16) * -1);
-  border-radius: var(--corner-radius-4) 0 0 var(--corner-radius-4);
-}
-
-.handleRight {
-  right: calc(var(--spacing-16) * -1);
-  border-radius: 0 var(--corner-radius-4) var(--corner-radius-4) 0;
-}
-
-.handleLeft span,
-.handleRight span {
-  width: calc(var(--spacing-4) / 2);
-  height: var(--spacing-16);
-  background: var(--fill-white);
-  border-radius: var(--corner-radius-4);
-}
-
-.playhead {
-  position: absolute;
-  z-index: 4;
-  top: calc(var(--spacing-4) * -1);
-  left: 0;
-  width: var(--spacing-4);
-  padding: 0;
-  background: transparent;
-  border: none;
-  cursor: ew-resize;
-  touch-action: none;
-}
-
-.playhead span {
-  display: block;
-  width: var(--spacing-4);
-  height: calc(var(--spacing-64) + var(--spacing-4));
-  background: var(--fill-brand-strong);
-  border-radius: var(--corner-radius-8);
-}
-
+/* Reference (2026-09-15, corrected live — "disable的buttons你不應該自己亂做，
+   你應該用我們做好的"): Cancel/Use Video are the shared platform/ui/button
+   Button component now, not plain <button> elements — this used to also
+   carry the pill sizing/coloring/disabled-state CSS for them (.actions
+   button, .actions button:last-child, .actions button:disabled below),
+   duplicating what Button's own ycoButton/tone/variant/disabled rules
+   already do. Only the flex-row layout is this component's own concern. */
 .actions {
   display: flex;
+  flex: 0 0 auto;
   justify-content: flex-end;
   gap: var(--spacing-8);
+  padding: var(--spacing-24) var(--spacing-32) var(--spacing-32);
+  transition: box-shadow 160ms ease;
 }
 
-.actions button {
-  min-width: calc(var(--spacing-80) + var(--spacing-16));
-  height: calc(var(--spacing-40) + var(--spacing-4) / 2);
-  padding: 0 var(--spacing-16);
-  color: var(--text-strong);
-  background: transparent;
-  border: 1px solid var(--stroke-strong);
-  border-radius: var(--corner-radius-32);
-  cursor: pointer;
-  font-size: var(--font-size-heading-5);
-  line-height: var(--line-height-heading-5);
-  font-weight: var(--font-weight-strong);
-}
-
-.actions button:last-child {
-  color: var(--text-inverse-strong);
-  background: var(--fill-brand-strong);
-  border-color: var(--stroke-brand-strong);
-}
-
-.actions button:disabled {
-  color: var(--text-disabled);
-  background: var(--fill-disabled);
-  border-color: var(--stroke-disabled);
-  cursor: not-allowed;
+/* Reference (2026-09-15, requested live — "等他滑到最底就沒有modal footer的
+   陰影", jb5SgyshmuPse0L7IFm0QO nodes 14774:349549/14777:355223): a footer
+   fixed at the bottom of a scrollable modal only needs to visually separate
+   itself from the content behind it while there's more of that content left
+   to see — once .body is scrolled all the way down, the footer sits flush
+   against the true end of the content and the shadow (indicating "more
+   below") no longer applies. Negative vertical offset casts the shadow
+   upward, into .body, rather than downward off the bottom of .modal. Same
+   color-mix(--fill-strong) convention as .modal's own box-shadow above,
+   lighter (10%) since this is a much smaller, closer surface than the whole
+   modal lifting off the page. */
+.actionsElevated {
+  box-shadow: 0 calc(var(--spacing-8) * -1) var(--spacing-12) color-mix(in srgb, var(--fill-strong) 10%, transparent);
 }
 
 @media (max-width: 768px) {
@@ -319,39 +310,16 @@
     padding: var(--spacing-16);
   }
 
-  .modal {
-    padding: var(--spacing-24) var(--spacing-16);
+  .title {
+    padding: var(--spacing-24) var(--spacing-16) var(--spacing-16);
   }
 
-  .content {
+  .body {
     gap: var(--spacing-16);
+    padding: 0 var(--spacing-16);
   }
 
-  .timelineRow {
-    height: calc(var(--spacing-40) + var(--spacing-8));
-    gap: var(--spacing-8);
-    background: var(--fill-weaker);
-  }
-
-  .framesArea,
-  .canvasRow,
-  .canvasRow canvas,
-  .canvasRow img,
-  .darkRange {
-    height: var(--spacing-40);
-  }
-
-  .rangeBox,
-  .handleLeft,
-  .handleRight {
-    height: calc(var(--spacing-40) + var(--spacing-4) / 2);
-  }
-
-  .playhead {
-    top: calc(var(--spacing-8) * -1);
-  }
-
-  .playhead span {
-    height: calc(var(--spacing-48) + var(--spacing-8));
+  .actions {
+    padding: var(--spacing-16) var(--spacing-16) var(--spacing-24);
   }
 }

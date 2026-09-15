@@ -33,13 +33,18 @@ export function VideoSection({
         data-component-role="uploaded-media media-upload"
         data-surface-zone="video-input"
       >
+        {/* Reference (2026-09-15, requested live — "如果是video只要保留 X 和
+            scissors icon"): this section is always a video (there's no image
+            variant of it), so UploadMediaBlock's own Replace action never
+            applies here — no onReplace prop is passed at all, rather than
+            passing it conditionally-undefined, since it's never meant to
+            appear on this particular upload block. */}
         <UploadMediaBlock
           imageUrl={loaded ? thumbnailUrl : undefined}
           videoUrl={loaded ? sourceUrl : undefined}
           videoDuration={loaded ? selectedDuration : undefined}
           onUpload={onPick}
           onRemove={loaded ? onRemove : undefined}
-          onReplace={loaded ? onPick : undefined}
           actionSlot={loaded ? (
             <button
               className={styles.trimMediaAction}

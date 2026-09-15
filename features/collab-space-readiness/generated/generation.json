@@ -5,7 +5,7 @@
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "claude-code",
   "model": "claude-sonnet-5",
-  "generatedAt": "2026-09-15T01:06:51.764Z",
+  "generatedAt": "2026-09-15T05:42:10.817Z",
   "files": [
     "feature.jsx",
     "feature.module.scss"
@@ -27,9 +27,9 @@
         "status": "pilot-approved",
         "figmaStatus": "mapped",
         "contractPath": "design-library/components/button/component.yaml",
-        "contractSha256": "dec56cc1c97e8960ba870822a75e6f2abb10b258db5a1ac9d5316981cbf17bec",
+        "contractSha256": "4bf58d04b3a0cfe69ac58dbb4d9668475146bd804b8ddf0c03fdcde613cad550",
         "implementationImport": "platform/ui/button/index.js",
-        "implementationSha256": "c77948b32650707f6c01f8c4653622635ee432c737fa36baaeed3a5d8f5526b5",
+        "implementationSha256": "59d9dac0d9521349151cc11d579b726f148c5c71e2c0671b19238b6883b4ac75",
         "runtimeAssets": []
       }
     ]
@@ -188,7 +188,7 @@
         },
         {
           "path": "design-library/components/button/component.yaml",
-          "sha256": "dec56cc1c97e8960ba870822a75e6f2abb10b258db5a1ac9d5316981cbf17bec"
+          "sha256": "4bf58d04b3a0cfe69ac58dbb4d9668475146bd804b8ddf0c03fdcde613cad550"
         },
         {
           "path": "design-library/components/credit-controls/component.yaml",
@@ -236,11 +236,11 @@
         },
         {
           "path": "design-library/components/video-timeline/component.yaml",
-          "sha256": "00b1797517463c1ff39687f2f7c9964a4f133f9fb7a44c8eff060ce88cee102e"
+          "sha256": "45a306d0c8cd957baf07a469b3b903eb70f92248ae981eaf9437d8734920a2f9"
         },
         {
           "path": "design-library/components/video-trim-modal/component.yaml",
-          "sha256": "5191ccc6e1804939720d3aecfd39db8688d60e17c0ddfc8eebad38612eeefc22"
+          "sha256": "4e884e1b91e5e606be02c7ab0c06cd318055fbc3b78e6c376fc7185681fa5f24"
         },
         {
           "path": "features/collab-space-readiness/generated/feature.jsx",
@@ -604,7 +604,7 @@
         },
         {
           "path": "platform/ui/button/Button.module.css",
-          "sha256": "a38284f4aa2fa4ab2c0a9e3e9ec5e9478a2e75d16d86855a46fde7457dd65855"
+          "sha256": "c874a2254ab75b6e707af11de66b19ff740d334e2c409957bbc838ec4ed5082b"
         },
         {
           "path": "platform/ui/button/Button.stories.jsx",
@@ -820,11 +820,11 @@
         },
         {
           "path": "platform/ui/video-timeline/VideoTimeline.jsx",
-          "sha256": "3f2326b8018c70f5e4910d26c59fd755686bc81a1092f1dc808d754563b8bf33"
+          "sha256": "61744483291a40772e223253a40771d03b3b17451b98a3de405dd070b4971995"
         },
         {
           "path": "platform/ui/video-timeline/VideoTimeline.module.scss",
-          "sha256": "6f8da905fda799fbe07e4e17f27befe0442b80d466cfaa42140959db0e1ed8c7"
+          "sha256": "34a47c91b5bc431b6aa76469a636daec8bdfdb87aef208a2d0ec8c2534b98e49"
         },
         {
           "path": "platform/ui/video-timeline/VideoTimeline.stories.jsx",
@@ -840,11 +840,11 @@
         },
         {
           "path": "platform/ui/video-trim-modal/VideoTrimModal.jsx",
-          "sha256": "5aabae7ac6b2bc0d1e7e8f763cfd7861db9e720e737359019634bbce97c237ca"
+          "sha256": "9a4fba4cb310a275da69208a4bd231ae922226994635d14dbe18f2d147c8a9a0"
         },
         {
           "path": "platform/ui/video-trim-modal/VideoTrimModal.module.scss",
-          "sha256": "c4adb739620eec0f73f2dace25af189766aeb3e10086508314316e0f97dcfbbc"
+          "sha256": "7a1ec0e10778a93336cb8cd946d368c8072a32ac85d3b6571e86640ee66ef3c4"
         },
         {
           "path": "platform/ui/video-trim-modal/VideoTrimModal.stories.jsx",
@@ -852,7 +852,7 @@
         },
         {
           "path": "platform/ui/video-trim-modal/constants.js",
-          "sha256": "bfee24bb2833d8de467f0a14b2d9711a0764abfbf032a72a26ab65d677c0387c"
+          "sha256": "555e647c7c69ebfaf2599a11324d0e384d738f0f6d074d7c590a0f2ff28e8cf8"
         },
         {
           "path": "platform/ui/video-trim-modal/index.js",
@@ -863,12 +863,8 @@
           "sha256": "09f45ad7d3ca9c7aa968e87b97e49157cd350bbcfcf318856c48482ac6b76914"
         },
         {
-          "path": "platform/ui/video-trim-modal/useTrimDrag.js",
-          "sha256": "a7f0574173007aa10f7cbb21a226bfd950772f1a3aa8761d087621ab83ad3305"
-        },
-        {
           "path": "platform/ui/video-trim-modal/useVideoTrim.js",
-          "sha256": "90ac3b08187dd335ceb16d7174196e390f2da139889ffafd94acb19a916cbfff"
+          "sha256": "af4962652b192754bafcbf8b85d738a70596d6f6176dbd398a93673e417d32cc"
         },
         {
           "path": "prototype.config.json",
@@ -944,7 +940,7 @@
         },
         {
           "path": "tools/design-library/run-storybook-checks.mjs",
-          "sha256": "4e3e6a5ebed0b59c5bf25762467ad7b514337dced9e0765c0d32f4a974e07c0f"
+          "sha256": "bb8ea35d4959ca67c6f05149c4664f0c7ecd07a1e251a22f225f7e5336b6e14b"
         },
         {
           "path": "tools/design-library/schemas/component-contract.schema.json",
@@ -1123,7 +1119,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "5e75f02bd36ab2df4f8a6ca4c8ef127ace4003392033111e34f40f536f9a7a21",
+      "hash": "3c1dc8b58927f1911b5054e16511476219e9392460c55c1cc2329abba07f5cc2",
       "edges": [
         {
           "from": "features/collab-space-readiness/generated/feature.jsx",
@@ -1165,6 +1161,6 @@
         "react"
       ]
     },
-    "revisionHash": "10eee4ae9baceca0c15992be140178f7199b61d224fde1d0987ce19e8cf3a43c"
+    "revisionHash": "0030119b7526d3fe5a6320c88ec49b4e24bf49173a2b7d1737d2ed74370aaa67"
   }
 }

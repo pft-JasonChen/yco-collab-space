@@ -528,3 +528,30 @@
 .variant_tertiary:disabled .buttonIcon {
   color: var(--icon-disabled);
 }
+
+/* ----- Disabled: no hover/press feedback (2026-09-15, corrected live —
+   "已經是disable的東西就不要再加上hover效果了，以免被誤會可以點擊") -----
+   Every tone/variant rule above defines its own :hover/:active feedback —
+   almost all of them swap the ::before overlay's background, but
+   tone_inverse's secondary/tertiary variants (and tone_neutral's
+   secondary/tertiary :active) paint straight onto the button itself instead
+   — and none of those rules excludes :disabled. A native `disabled` button
+   blocks click/focus but browsers still match :hover purely on cursor
+   position, so a disabled button visibly reacted to being hovered before
+   this fix — reading as clickable when it isn't. Same specificity-ties-
+   broken-by-source-order technique the .ycoButton:disabled block above
+   already relies on (see its own comment) — this must stay declared after
+   every tone/variant rule above to win the tie. */
+.ycoButton:disabled:hover::before,
+.ycoButton:disabled:active::before {
+  background: transparent;
+}
+
+.tone_neutral.variant_secondary:disabled:active,
+.tone_neutral.variant_tertiary:disabled:active,
+.tone_inverse.variant_secondary:disabled:hover,
+.tone_inverse.variant_secondary:disabled:active,
+.tone_inverse.variant_tertiary:disabled:hover,
+.tone_inverse.variant_tertiary:disabled:active {
+  background: transparent;
+}

@@ -1,120 +1,103 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import styles from './VideoTrimModal.module.scss';
-import {
-  FRAME_COUNT,
-  FRAME_INSET,
-  THUMBNAIL_HEIGHT,
-  THUMBNAIL_HEIGHT_MOBILE,
-  formatDuration,
-  getPxPerSecond,
-  getThumbnailWidth,
-  snapTrimRangeToDisplayedDuration,
-} from './constants.js';
+import VideoTimeline from '../video-timeline/index.js';
+import Button, { buttonTones, buttonVariants } from '../button/index.js';
+import { THUMBNAIL_HEIGHT, formatDuration, getThumbnailWidth, snapTrimRangeToDisplayedDuration } from './constants.js';
 import useFrameThumbnails from './useFrameThumbnails.js';
-import useTrimDrag from './useTrimDrag.js';
 import useVideoTrim from './useVideoTrim.js';
 
-function PlayIcon({ paused = false }) {
-  return paused ? (
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zm6 0h4v14h-4z" /></svg>
-  ) : (
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 5 11 7-11 7z" /></svg>
-  );
-}
-
-function MuteIcon({ muted }) {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M4 9v6h4l5 4V5L8 9H4z" />
-      {muted ? <path d="m16 9 5 5m0-5-5 5" fill="none" stroke="currentColor" strokeWidth="2" /> : <path d="M16 8c2 2 2 6 0 8" fill="none" stroke="currentColor" strokeWidth="2" />}
-    </svg>
-  );
-}
-
+/** Reference (2026-09-15, requested live — "左邊的調好應該可以直接當右邊那組的
+ * 元件，所以兩邊應該長一樣的"): this used to be its own from-scratch
+ * filmstrip/handles/playhead implementation, kept as a verbatim port of RD's
+ * own trim-timeline.js. It now renders the shared VideoTimeline component
+ * directly instead of duplicating that geometry a second time — the two
+ * consumers only differ in how they source frame images: VideoTimeline's
+ * usual video-expansion caller passes static frameUrls/posterUrl, while this
+ * one draws real decoded video frames onto per-slot <canvas> elements via
+ * useFrameThumbnails (VideoTimeline's `renderFrame` escape hatch exists
+ * specifically for this). Its own hint/duration meta row stays outside
+ * VideoTimeline (labels.maxLength / trim-selection-duration below) since
+ * VideoTimeline's own showLeftLabel/showRightLabel format minutes without a
+ * leading zero ("0:30"), while a pre-existing check here asserts the
+ * two-digit "00:30" — keeping this row local avoids relitigating that
+ * format. What's genuinely shared now: the track, dimmed overlay, trim-range
+ * box, draggable handles (with the same maximum-window clamp math), and the
+ * playhead — one implementation instead of two. */
 function TrimTimeline({
-  videoRef,
   videoFile,
   fallbackThumbnailUrl,
   duration,
   currentTime,
-  setCurrentTime,
+  onSeek,
   trimRange,
   setTrimRange,
   minimumSeconds,
   maximumSeconds,
   isPlaying,
   onTogglePlay,
-  stop,
-  resume,
   onReadyChange,
   maxLengthLabel,
   labels,
 }) {
-  const isCompact = typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches;
-  const thumbnailHeight = isCompact ? THUMBNAIL_HEIGHT_MOBILE : THUMBNAIL_HEIGHT;
-  const { framesAreaRef, startDrag, startTrackSeek } = useTrimDrag({
-    duration,
-    minimumSeconds,
-    maximumSeconds,
-    trimRange,
-    setTrimRange,
-    setCurrentTime,
-    videoRef,
-    isPlaying,
-    stop,
-    resume,
-  });
   const [framesAreaWidth, setFramesAreaWidth] = useState(0);
-  useEffect(() => {
-    const element = framesAreaRef.current;
-    if (!element) return undefined;
-    const observer = new ResizeObserver(([entry]) => setFramesAreaWidth(entry?.contentRect.width || 0));
-    observer.observe(element);
-    return () => observer.disconnect();
-  }, [framesAreaRef]);
-
   const thumbnailWidth = getThumbnailWidth(framesAreaWidth);
-  const { canvasRefs, isReady } = useFrameThumbnails(videoFile, duration, thumbnailWidth, thumbnailHeight);
+  const { canvasRefs, isReady } = useFrameThumbnails(videoFile, duration, thumbnailWidth, THUMBNAIL_HEIGHT);
   useEffect(() => onReadyChange(isReady), [isReady, onReadyChange]);
-  const pixelsPerSecond = getPxPerSecond(framesAreaWidth, duration);
-  const leftWidth = trimRange.start * pixelsPerSecond;
-  const rangeWidth = (trimRange.end - trimRange.start) * pixelsPerSecond;
-  const playheadLeft = FRAME_INSET + currentTime * pixelsPerSecond;
   const selectedSeconds = trimRange.end - trimRange.start;
-  const tooLong = Math.floor(selectedSeconds) > maximumSeconds;
+  // Reference (2026-09-15, asked live — "但有一種是沒有時間限制的trimer這時候
+  // hint要變成00:00"): a consumer opts out of a maximum entirely by passing a
+  // non-finite/non-positive maximumSeconds (e.g. Infinity) — same guard
+  // VideoTimeline's own (now-removed) drag clamp used to gate on. Without a
+  // real maximum there's nothing for the selection to exceed, so tooLong is
+  // forced false rather than naively comparing against Infinity/0/NaN, and
+  // the left slot falls back to a plain elapsed-time-in-selection reading
+  // (starting at "00:00") instead of the maxLength hint — mirroring
+  // VideoTimeline's own no-hintText fallback (formatTimelineTime), just in
+  // this component's own two-digit format for consistency with
+  // trim-selection-duration alongside it.
+  const hasMaximum = Number.isFinite(maximumSeconds) && maximumSeconds > 0;
+  const tooLong = hasMaximum && Math.floor(selectedSeconds) > maximumSeconds;
+  const handleTrimStartChange = useCallback(
+    (start) => setTrimRange((current) => ({ ...current, start })),
+    [setTrimRange],
+  );
+  const handleTrimEndChange = useCallback(
+    (end) => setTrimRange((current) => ({ ...current, end })),
+    [setTrimRange],
+  );
 
   return (
     <section className={styles.timelineSection} data-surface-zone="trim-timeline" data-component-role="trim-control">
       <div className={styles.timelineMeta}>
-        <span className={tooLong ? styles.errorLabel : undefined}>{maxLengthLabel}</span>
+        <span className={tooLong ? styles.errorLabel : undefined}>
+          {hasMaximum ? maxLengthLabel : formatDuration(Math.max(0, currentTime - trimRange.start))}
+        </span>
         <strong data-testid="trim-selection-duration">{formatDuration(selectedSeconds)}</strong>
       </div>
-      <div className={styles.timelineRow}>
-        <button className={styles.timelinePlay} type="button" onClick={onTogglePlay} aria-label={isPlaying ? labels.pause : labels.play}>
-          <PlayIcon paused={isPlaying} />
-        </button>
-        <div className={styles.framesArea} ref={framesAreaRef} onPointerDown={startTrackSeek}>
-          <div className={styles.canvasRow}>
-            {Array.from({ length: FRAME_COUNT }, (_, index) => (
-              videoFile ? (
-                <canvas key={index} width={thumbnailWidth} height={thumbnailHeight} ref={(element) => { canvasRefs.current[index] = element; }} />
-              ) : (
-                <img key={index} src={fallbackThumbnailUrl} alt="" aria-hidden="true" />
-              )
-            ))}
-          </div>
-          <div className={styles.rangeOverlay}>
-            <span className={styles.darkRange} style={{ width: `${leftWidth}px` }} />
-            <span className={styles.rangeBox} style={{ width: `${rangeWidth}px` }}>
-              <button className={styles.handleLeft} data-testid="trim-handle-start" type="button" onPointerDown={startDrag('left')} aria-label={labels.trimStart}><span /></button>
-              <button className={styles.handleRight} data-testid="trim-handle-end" type="button" onPointerDown={startDrag('right')} aria-label={labels.trimEnd}><span /></button>
-            </span>
-            <span className={styles.darkRange} style={{ flex: 1 }} />
-          </div>
-          <button className={styles.playhead} type="button" style={{ transform: `translateX(${playheadLeft}px)` }} onPointerDown={startDrag('playhead')} aria-label={labels.playhead}><span /></button>
-        </div>
-      </div>
+      <VideoTimeline
+        labels={{ trimStart: labels.trimStart, trimEnd: labels.trimEnd, position: labels.playhead }}
+        duration={duration}
+        currentTime={currentTime}
+        startTime={trimRange.start}
+        endTime={trimRange.end}
+        isPlaying={isPlaying}
+        onSeek={onSeek}
+        onPlay={onTogglePlay}
+        onPause={onTogglePlay}
+        onTrimStartChange={handleTrimStartChange}
+        onTrimEndChange={handleTrimEndChange}
+        minimumSeconds={minimumSeconds}
+        showKeyframe={false}
+        onFrameAreaResize={setFramesAreaWidth}
+        renderFrame={(index) => (
+          videoFile ? (
+            <canvas key={index} width={thumbnailWidth} height={THUMBNAIL_HEIGHT} ref={(element) => { canvasRefs.current[index] = element; }} />
+          ) : (
+            <img key={index} src={fallbackThumbnailUrl} alt="" draggable={false} />
+          )
+        )}
+      />
     </section>
   );
 }
@@ -172,12 +155,50 @@ export default function VideoTrimModal({
     togglePlay,
     toggleMute,
     stop,
-    resume,
     snapshot,
   } = useVideoTrim(activeUrl, maximumSeconds, durationOverride);
   const [thumbnailsReady, setThumbnailsReady] = useState(!videoFile);
-  const tooLong = Math.floor(trimRange.end - trimRange.start) > maximumSeconds;
+  const bodyRef = useRef(null);
+  const [footerElevated, setFooterElevated] = useState(false);
+  // Reference (2026-09-15, requested live — "在做modal的時候，如果下面有CTA我
+  // 都會讓他 fix at the bottom...等他滑到最底就沒有modal footer的陰影",
+  // matching the Auto-Edit modal convention at jb5SgyshmuPse0L7IFm0QO nodes
+  // 14602:212396/14630:282653 (not scrolled — footer floats over content with
+  // a shadow) vs 14774:349549/14777:355223 (scrolled to the end — no separate
+  // floating footer/shadow, the CTA just sits at the true end of the
+  // content). Cancel/Use Video now live in a fixed footer outside the
+  // scrollable .body (see JSX below) rather than scrolling away with the
+  // preview/timeline; the footer's shadow (.actionsElevated) is toggled based
+  // on whether .body has more content below the fold, not shown
+  // unconditionally.
+  const updateFooterElevation = useCallback(() => {
+    const el = bodyRef.current;
+    if (!el) return;
+    setFooterElevated(el.scrollHeight - el.scrollTop - el.clientHeight > 1);
+  }, []);
+  useEffect(() => {
+    updateFooterElevation();
+  }, [updateFooterElevation, opened, duration, thumbnailsReady]);
+  useEffect(() => {
+    const el = bodyRef.current;
+    if (!el) return undefined;
+    const observer = new ResizeObserver(updateFooterElevation);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [updateFooterElevation]);
+  // Same "no real maximum" guard as TrimTimeline's own hasMaximum (see its
+  // comment) — gates the confirm-button disable here too, not just the hint
+  // color, so a maximumSeconds={Infinity} caller never gets silently blocked
+  // by a naive `X > Infinity` comparison happening to still read as false
+  // only by coincidence of the value chosen.
+  const hasMaximum = Number.isFinite(maximumSeconds) && maximumSeconds > 0;
+  const tooLong = hasMaximum && Math.floor(trimRange.end - trimRange.start) > maximumSeconds;
   const tooShort = trimRange.end - trimRange.start < minimumSeconds;
+
+  const handleSeek = useCallback((time) => {
+    setCurrentTime(time);
+    if (videoRef.current) videoRef.current.currentTime = time;
+  }, [setCurrentTime, videoRef]);
 
   useEffect(() => {
     if (!opened) return undefined;
@@ -218,36 +239,50 @@ export default function VideoTrimModal({
         aria-labelledby="platform-video-trim-title"
         onMouseDown={(event) => event.stopPropagation()}
       >
-        <button className={styles.closeButton} type="button" onClick={handleCancel} aria-label={labels.close}>×</button>
+        <button className={styles.closeButton} type="button" onClick={handleCancel} aria-label={labels.close}><span aria-hidden="true"></span></button>
         <div className={styles.content}>
-          <h2 id="platform-video-trim-title">{labels.title}</h2>
-          <div className={styles.preview} style={{ aspectRatio }}>
-            <video ref={videoRef} src={activeUrl} preload="auto" playsInline muted={isMuted} onLoadedMetadata={handleLoadedMetadata} />
-            <button className={styles.previewPlay} type="button" onClick={togglePlay} aria-label={isPlaying ? labels.pause : labels.play}><span><PlayIcon paused={isPlaying} /></span></button>
-            <button className={styles.muteButton} type="button" onClick={toggleMute} aria-label={isMuted ? labels.unmute : labels.mute}><MuteIcon muted={isMuted} /></button>
+          <h2 id="platform-video-trim-title" className={styles.title}>{labels.title}</h2>
+          <div className={styles.body} ref={bodyRef} onScroll={updateFooterElevation}>
+            <div className={styles.preview} style={{ aspectRatio }}>
+              <video ref={videoRef} src={activeUrl} preload="auto" playsInline muted={isMuted} onLoadedMetadata={handleLoadedMetadata} />
+              <button className={styles.previewPlay} type="button" onClick={togglePlay} aria-label={isPlaying ? labels.pause : labels.play}><span aria-hidden="true">{isPlaying ? '\ue97b' : '\ue97f'}</span></button>
+              <button className={styles.muteButton} type="button" onClick={toggleMute} aria-label={isMuted ? labels.unmute : labels.mute}><span aria-hidden="true">{isMuted ? '\ue926' : '\ue924'}</span></button>
+            </div>
+            <TrimTimeline
+              videoFile={videoFile}
+              fallbackThumbnailUrl={fallbackThumbnailUrl}
+              duration={duration}
+              currentTime={currentTime}
+              onSeek={handleSeek}
+              trimRange={trimRange}
+              setTrimRange={setTrimRange}
+              minimumSeconds={minimumSeconds}
+              maximumSeconds={maximumSeconds}
+              isPlaying={isPlaying}
+              onTogglePlay={togglePlay}
+              onReadyChange={setThumbnailsReady}
+              labels={labels}
+              maxLengthLabel={labels.maxLength}
+            />
           </div>
-          <TrimTimeline
-            videoRef={videoRef}
-            videoFile={videoFile}
-            fallbackThumbnailUrl={fallbackThumbnailUrl}
-            duration={duration}
-            currentTime={currentTime}
-            setCurrentTime={setCurrentTime}
-            trimRange={trimRange}
-            setTrimRange={setTrimRange}
-            minimumSeconds={minimumSeconds}
-            maximumSeconds={maximumSeconds}
-            isPlaying={isPlaying}
-            onTogglePlay={togglePlay}
-            stop={stop}
-            resume={resume}
-            onReadyChange={setThumbnailsReady}
-            labels={labels}
-            maxLengthLabel={labels.maxLength}
-          />
-          <div className={styles.actions}>
-            <button data-testid="trim-cancel" type="button" onClick={handleCancel}>{labels.cancel}</button>
-            <button data-testid="trim-use-video" type="button" onClick={handleConfirm} disabled={tooLong || tooShort || !thumbnailsReady}>{labels.confirm}</button>
+          <div className={`${styles.actions} ${footerElevated ? styles.actionsElevated : ''}`}>
+            {/* Reference (2026-09-15, corrected live — "disable的buttons你不
+                應該自己亂做，你應該用我們做好的"): these were plain <button>
+                elements with their own local .actions button/:disabled CSS —
+                a second, hand-rolled disabled-state implementation alongside
+                the shared platform/ui/button Button component's own (Figma
+                Fill/Disabled, one flat grey shared by every tone/variant).
+                Now render the shared Button directly instead of duplicating
+                that state. Reference (2026-09-15, requested live — "在做modal
+                的時候，如果下面有CTA我都會讓他 fix at the bottom...等他滑到
+                最底就沒有modal footer的陰影"): this row is now a sibling of
+                .body (the scrollable area above it), not one of its children
+                — a fixed footer rather than something that scrolls away with
+                the preview/timeline. Its shadow (.actionsElevated) only
+                applies while .body has more content below the fold; see
+                updateFooterElevation above. */}
+            <Button data-testid="trim-cancel" variant={buttonVariants.SECONDARY} tone={buttonTones.NEUTRAL} onClick={handleCancel}>{labels.cancel}</Button>
+            <Button data-testid="trim-use-video" variant={buttonVariants.PRIMARY} tone={buttonTones.BRAND} onClick={handleConfirm} disabled={tooLong || tooShort || !thumbnailsReady}>{labels.confirm}</Button>
           </div>
         </div>
       </section>

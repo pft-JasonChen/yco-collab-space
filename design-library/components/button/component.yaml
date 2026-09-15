@@ -35,12 +35,12 @@ implementation:
     - path: platform/ui/button/Button.jsx
       sha256: 45543080e0bc2ac6b2add9f8775bdf5baecf03b9ad0e7c520d687440ee2041aa
     - path: platform/ui/button/Button.module.css
-      sha256: a38284f4aa2fa4ab2c0a9e3e9ec5e9478a2e75d16d86855a46fde7457dd65855
+      sha256: c874a2254ab75b6e707af11de66b19ff740d334e2c409957bbc838ec4ed5082b
     - path: platform/ui/button/Button.stories.jsx
       sha256: 2818fc204e915570c04805560a7d1789d483f89e0acb31dec89cd8c9e19bb1b7
     - path: platform/ui/button/index.js
       sha256: 329664305c2562bc07fa8e017c9edfad051781956beb27280afb52a10da8f5d7
-  localFilesUpdated: 2026-09-10
+  localFilesUpdated: 2026-09-15
 publicApi:
   props:
     - name: variant
@@ -88,3 +88,4 @@ decisionBasis:
   - "Designer canonical review approved 2026-09-06: current implementation reviewed and signed off. RD canonical review still pending."
   - "2026-09-10: Implemented the owner-reported RD decision to classify Button as reference. Removed rd.verbatimFiles and refreshed implementation.localFiles after inspecting the changes. This restores an honest portability contract; Designer approval and pending RD canonical review remain separate. Other components retain their existing parity guarantees."
   - "2026-09-10: Spinner alpha-mask uses currentColor instead of a raw black literal; ring geometry and alpha masking are unchanged."
+  - "Disabled buttons no longer show hover/press feedback (2026-09-15, corrected live — \"已經是disable的東西就不要再加上hover效果了，以免被誤會可以點擊\"): every tone/variant rule defines its own :hover/:active feedback (almost all swap the ::before overlay's background; tone_inverse's secondary/tertiary variants, and tone_neutral's secondary/tertiary :active, paint straight onto the button itself instead) — none of those rules excluded :disabled. A native `disabled` button blocks click/focus but browsers still match :hover purely on cursor position, so a disabled button visibly reacted to being hovered — reading as clickable when it isn't. Added `.ycoButton:disabled:hover::before`/`:active::before` (background: transparent) plus explicit overrides for the non-::before tone_inverse/tone_neutral cases, all declared after every tone/variant rule so source order wins the specificity tie — same technique the pre-existing `.ycoButton:disabled` block's own comment documents. Verified via a real `:hover` match (not just CSS-in-isolation) in the browser: a disabled Button's ::before background stays transparent while `button.matches(\":hover\")` is true."

@@ -1,36 +1,27 @@
-export const MAX_TRIM_SECONDS = 60;
-export const MIN_TRIM_SECONDS = 5;
 export const FRAME_COUNT = 10;
 export const THUMBNAIL_WIDTH = 50;
-export const THUMBNAIL_HEIGHT = 56;
-export const THUMBNAIL_HEIGHT_MOBILE = 40;
-// Horizontal padding baked into the frames-area layout (trim-canvas-row /
-// trim-range-overlay both inset by this much) so handles have room to sit
-// outside the selection box instead of eating into it.
-export const FRAME_INSET = 16;
-// Must match trim-timeline.module.scss's .trimCanvasRow gap.
+// Reference (2026-09-15, merged into the shared VideoTimeline component —
+// "左邊的調好應該可以直接當右邊那組的元件"): VideoTimeline's own .frames grid
+// (var(--spacing-48) tall, no responsive variant) replaced this file's own
+// .framesArea/.canvasRow layout, so there's no separate mobile thumbnail
+// height to track anymore — one height for both breakpoints.
+export const THUMBNAIL_HEIGHT = 48;
+// Must match VideoTimeline.module.scss's .frames gap.
 export const FRAME_GAP = 4;
 
-export const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
-
-// Single source of truth for the frames-area's time-to-pixel scale, so the
-// render (trim-timeline.js) and drag (use-trim-drag.js) math can't drift out
-// of sync with each other.
-export const getPxPerSecond = (framesAreaWidth, duration) =>
-  duration ? Math.max(framesAreaWidth - FRAME_INSET * 2, 0) / duration : 0;
-
-// Each canvas is a flex: 1 slot in the row, so its actual rendered width
-// depends on the frames-area's measured width, not a fixed constant —
-// without this, the decoded thumbnail bitmap gets stretched to fit.
+// Each canvas is one of FRAME_COUNT slots in VideoTimeline's .frames grid, so
+// its actual rendered width depends on that row's measured width (reported
+// via VideoTimeline's onFrameAreaResize), not a fixed constant — without
+// this, the decoded thumbnail bitmap gets stretched to fit. Unlike the old
+// standalone layout this replaced, VideoTimeline's own frames row has no
+// inset padding of its own (handles overlay on top via the trim-range box's
+// calc() math instead of the frames row leaving room for them) — only the
+// inter-frame gaps come off the available width now.
 export const getThumbnailWidth = (framesAreaWidth) => {
   if (!framesAreaWidth) return THUMBNAIL_WIDTH;
-  const available =
-    framesAreaWidth - FRAME_INSET * 2 - FRAME_GAP * (FRAME_COUNT - 1);
+  const available = framesAreaWidth - FRAME_GAP * (FRAME_COUNT - 1);
   return Math.max(1, Math.floor(available / FRAME_COUNT));
 };
-
-export const isTrimRangeTooLong = (range) =>
-  Math.floor(range.end - range.start) > MAX_TRIM_SECONDS;
 
 // Matches the native <video> controls convention (Blink's time display
 // truncates via saturated_cast<int>, not round-to-nearest) so this modal's
