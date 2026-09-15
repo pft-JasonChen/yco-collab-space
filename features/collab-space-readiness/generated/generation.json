@@ -5,7 +5,7 @@
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "claude-code",
   "model": "claude-sonnet-5",
-  "generatedAt": "2026-09-14T10:02:03.316Z",
+  "generatedAt": "2026-09-15T01:00:20.378Z",
   "files": [
     "feature.jsx",
     "feature.module.scss"
@@ -944,7 +944,7 @@
         },
         {
           "path": "tools/design-library/run-storybook-checks.mjs",
-          "sha256": "d50cf45508152450a1ee2c049f5b5abd019ae788017e462fe3d2d4c96705a6c0"
+          "sha256": "4e3e6a5ebed0b59c5bf25762467ad7b514337dced9e0765c0d32f4a974e07c0f"
         },
         {
           "path": "tools/design-library/schemas/component-contract.schema.json",
@@ -1123,7 +1123,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "a7d50f01fd52258808d44e7715f3476011d9ce9fcfd56ca0d48170cebde4618e",
+      "hash": "d2dfb910a7701c216250d1e9b73379392fb59ba4407f0fa974d41748b01bf07a",
       "edges": [
         {
           "from": "features/collab-space-readiness/generated/feature.jsx",
@@ -1165,6 +1165,6 @@
         "react"
       ]
     },
-    "revisionHash": "fccdc28e1d0ddec3ba06d3ecf7c05f4637b6e0ff59b0797584679c5221dd24ed"
+    "revisionHash": "0766e437f0c82289ff73bf2be03b5025bd658b445f289e34d583a19d7abe3639"
   }
 }
