@@ -5,7 +5,7 @@
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "claude-code",
   "model": "claude-sonnet-5",
-  "generatedAt": "2026-09-15T05:42:10.039Z",
+  "generatedAt": "2026-09-15T06:18:59.854Z",
   "files": [
     "README.md",
     "contract/integration.yaml",
@@ -572,9 +572,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/video-timeline/component.yaml",
-        "contractSha256": "45a306d0c8cd957baf07a469b3b903eb70f92248ae981eaf9437d8734920a2f9",
+        "contractSha256": "0f9969c235076021b9fd1350bc3bef0763edfaeb2797dc15a1231dfd9da67cd2",
         "implementationImport": "platform/ui/video-timeline/index.js",
-        "implementationSha256": "aca68f4e0bb075f896179ce121e5723a7ed70b07514db191c0e8958acd9716dc",
+        "implementationSha256": "411753a712330a0a05774569708606b4dc93b0f649977c51b268a172a39487d5",
         "runtimeAssets": [
           {
             "repositoryPath": "design-library/assets/icon/yco-video-timeline/drag-handle.svg",
@@ -599,9 +599,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/video-trim-modal/component.yaml",
-        "contractSha256": "4e884e1b91e5e606be02c7ab0c06cd318055fbc3b78e6c376fc7185681fa5f24",
+        "contractSha256": "55abe10fb854b3d592954a625682a16179586f38cba8071b1d55aa14af67d0a1",
         "implementationImport": "platform/ui/video-trim-modal/index.js",
-        "implementationSha256": "ac648fd0c3bd8f6a11359a19c78c27745f0dc0eda5447a0a07e73f85e53d2aa3",
+        "implementationSha256": "32d205d35d8fb1ba196ec940905757b2d0b74b0491e5ab1f40b839d00af1b3b7",
         "runtimeAssets": []
       }
     ]
@@ -1290,11 +1290,11 @@
         },
         {
           "path": "design-library/components/video-timeline/component.yaml",
-          "sha256": "45a306d0c8cd957baf07a469b3b903eb70f92248ae981eaf9437d8734920a2f9"
+          "sha256": "0f9969c235076021b9fd1350bc3bef0763edfaeb2797dc15a1231dfd9da67cd2"
         },
         {
           "path": "design-library/components/video-trim-modal/component.yaml",
-          "sha256": "4e884e1b91e5e606be02c7ab0c06cd318055fbc3b78e6c376fc7185681fa5f24"
+          "sha256": "55abe10fb854b3d592954a625682a16179586f38cba8071b1d55aa14af67d0a1"
         },
         {
           "path": "features/collab-space-readiness/product/surface-intent.yaml",
@@ -1934,7 +1934,7 @@
         },
         {
           "path": "platform/ui/video-timeline/VideoTimeline.jsx",
-          "sha256": "61744483291a40772e223253a40771d03b3b17451b98a3de405dd070b4971995"
+          "sha256": "1dcd31fbe12e94f23d3f65d2d1eee3a71805425d9dd670f6ede196671a2e8dde"
         },
         {
           "path": "platform/ui/video-timeline/VideoTimeline.module.scss",
@@ -1954,7 +1954,7 @@
         },
         {
           "path": "platform/ui/video-trim-modal/VideoTrimModal.jsx",
-          "sha256": "9a4fba4cb310a275da69208a4bd231ae922226994635d14dbe18f2d147c8a9a0"
+          "sha256": "566a5c678d287627df847e2c526ce95fcc6e2bcfada3a92f88d853f4561c2cb8"
         },
         {
           "path": "platform/ui/video-trim-modal/VideoTrimModal.module.scss",
@@ -2054,7 +2054,7 @@
         },
         {
           "path": "tools/design-library/run-storybook-checks.mjs",
-          "sha256": "bb8ea35d4959ca67c6f05149c4664f0c7ecd07a1e251a22f225f7e5336b6e14b"
+          "sha256": "15834018a02e410f8555885c97002632ad26679a3a978cd787d21e52643b251f"
         },
         {
           "path": "tools/design-library/schemas/component-contract.schema.json",
@@ -2078,7 +2078,7 @@
         },
         {
           "path": "tools/design-library/sync-component-specs.mjs",
-          "sha256": "2f9f97682c87790d86894417ea6242b7c16fcb522941577965bd0e17f55e9a10"
+          "sha256": "e8189b7013c185b51ad884674a806659986623ba27a96167c79b3acaad502b1f"
         },
         {
           "path": "tools/design-library/validate-components.mjs",
@@ -2233,7 +2233,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "d7310e4c912153c2d9c741fbdd967988c44e0caf82859414cef106227fa5cc9f",
+      "hash": "453d4ccab05fc9e8bb0a53c2c38af1c5304126e523221d789da63f2c21d9d8da",
       "edges": [
         {
           "from": "design-library/assets/font/yco-interface-icons.style.css",
@@ -3022,6 +3022,6 @@
         "react-dom"
       ]
     },
-    "revisionHash": "b7f1caef64cff88fd2b4efb70ced5a9f117e497dce6cf42c16f0ac1c71ed93af"
+    "revisionHash": "bedb4dae5b5e4d14429f9d6b661b77783b8ce0e95331642e6e56ae15c758b640"
   }
 }

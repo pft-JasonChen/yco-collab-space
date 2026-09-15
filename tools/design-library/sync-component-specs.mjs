@@ -59,15 +59,63 @@ async function hashCurrentFiles(workspace, filePaths) {
 
 // ---- heuristic 1: public prop names ----
 
+// Splits a destructured param-list body on its TOP-LEVEL commas only — a
+// naive `.split(',')` breaks as soon as any entry has a default value with
+// its own comma-bearing braces/parens in it (e.g. `labels = {}`, or a
+// default arrow function), which single-line param lists can avoid but the
+// multi-line, heavily-commented signatures this codebase actually uses
+// cannot.
+function splitTopLevelEntries(body) {
+  const entries = [];
+  let depth = 0;
+  let current = '';
+  for (const ch of body) {
+    if (ch === '{' || ch === '[' || ch === '(') depth++;
+    else if (ch === '}' || ch === ']' || ch === ')') depth--;
+    if (ch === ',' && depth === 0) {
+      entries.push(current);
+      current = '';
+    } else {
+      current += ch;
+    }
+  }
+  if (current.trim()) entries.push(current);
+  return entries;
+}
+
 function extractDestructuredPropNames(source) {
   const names = new Set();
+  // Strip comments first — this codebase's components document individual
+  // props with substantial `/** ... */` blocks (and occasional `//` lines)
+  // INSIDE the param list, and those often contain their own commas/braces/
+  // parens, which would otherwise confuse the brace-depth split below.
+  const withoutComments = source.replace(/\/\*[\s\S]*?\*\//g, ' ').replace(/\/\/[^\n]*/g, ' ');
   // Matches `function Name({ a, b = x, ...rest })` and `= ({ a, b }) =>` styles —
-  // the consistent destructured-props convention this codebase's components use.
-  const paramListPattern = /\(\s*\{([^{}]*)\}\s*\)/g;
-  let match;
-  while ((match = paramListPattern.exec(source))) {
-    const body = match[1];
-    for (const rawEntry of body.split(',')) {
+  // the consistent destructured-props convention this codebase's components
+  // use. Finds each `({` and then walks forward tracking brace depth to find
+  // its true matching `}` (rather than stopping at the first one), so a
+  // default object value like `= {}` nested inside the param list doesn't
+  // truncate the match.
+  for (let i = 0; i < withoutComments.length - 1; i++) {
+    if (withoutComments[i] !== '(') continue;
+    let j = i + 1;
+    while (j < withoutComments.length && /\s/.test(withoutComments[j])) j++;
+    if (withoutComments[j] !== '{') continue;
+    let depth = 0;
+    let k = j;
+    for (; k < withoutComments.length; k++) {
+      if (withoutComments[k] === '{') depth++;
+      else if (withoutComments[k] === '}') {
+        depth--;
+        if (depth === 0) break;
+      }
+    }
+    if (depth !== 0) continue; // unbalanced — bail on this occurrence
+    let m = k + 1;
+    while (m < withoutComments.length && /\s/.test(withoutComments[m])) m++;
+    if (withoutComments[m] !== ')') continue;
+    const body = withoutComments.slice(j + 1, k);
+    for (const rawEntry of splitTopLevelEntries(body)) {
       const entry = rawEntry.trim();
       if (!entry || entry.startsWith('...')) continue;
       const name = entry.split('=')[0].trim().split(':')[0].trim();

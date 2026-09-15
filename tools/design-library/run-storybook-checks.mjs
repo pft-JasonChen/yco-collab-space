@@ -116,7 +116,11 @@ const stories = [
   {
     id: 'ui-upload-media-block--video-uploaded-with-feature-action',
     async interact(page) {
-      await page.getByRole('button', { name: 'Feature action' }).waitFor({ state: 'visible' });
+      // Label is 'Trim' since the story's actionSlot swapped to the shared
+      // icon font (2026-09-11) — this check was left pointing at the old
+      // placeholder label until now (2026-09-15, found while re-running
+      // test:storybook after the VideoTimeline testid-collision fix).
+      await page.getByRole('button', { name: 'Trim' }).waitFor({ state: 'visible' });
     },
   },
   {
@@ -188,8 +192,8 @@ const stories = [
     axeRules: brandContrastException,
     async interact(page) {
       await page.getByTestId('video-trim-dialog').waitFor({ state: 'visible' });
-      await page.getByTestId('canvas-trim-handle-start').waitFor({ state: 'visible' });
-      await page.getByTestId('canvas-trim-handle-end').waitFor({ state: 'visible' });
+      await page.getByTestId('trim-handle-start').waitFor({ state: 'visible' });
+      await page.getByTestId('trim-handle-end').waitFor({ state: 'visible' });
       await page.getByTestId('trim-use-video').click();
       await page.getByText('Selected 0–30 seconds', { exact: true }).waitFor({ state: 'visible' });
     },
@@ -214,7 +218,7 @@ const stories = [
       );
       const confirm = page.getByTestId('trim-use-video');
       assert.equal(await confirm.isDisabled(), false);
-      const handle = page.getByTestId('canvas-trim-handle-end');
+      const handle = page.getByTestId('trim-handle-end');
       const box = await handle.boundingBox();
       await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
       await page.mouse.down();

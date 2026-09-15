@@ -75,6 +75,10 @@ function TrimTimeline({
         </span>
         <strong data-testid="trim-selection-duration">{formatDuration(selectedSeconds)}</strong>
       </div>
+      {/* Distinct testid props below from VideoTimeline's own "canvas-*"
+          defaults (2026-09-15): video-expansion keeps its persistent canvas
+          timeline mounted while this dialog is open, so reusing those ids
+          here would give getByTestId two matches and fail strict mode. */}
       <VideoTimeline
         labels={{ trimStart: labels.trimStart, trimEnd: labels.trimEnd, position: labels.playhead }}
         duration={duration}
@@ -90,6 +94,10 @@ function TrimTimeline({
         minimumSeconds={minimumSeconds}
         showKeyframe={false}
         onFrameAreaResize={setFramesAreaWidth}
+        playbackTimelineTestId="trim-playback-timeline"
+        playbackToggleTestId="trim-playback-toggle"
+        trimHandleStartTestId="trim-handle-start"
+        trimHandleEndTestId="trim-handle-end"
         renderFrame={(index) => (
           videoFile ? (
             <canvas key={index} width={thumbnailWidth} height={THUMBNAIL_HEIGHT} ref={(element) => { canvasRefs.current[index] = element; }} />

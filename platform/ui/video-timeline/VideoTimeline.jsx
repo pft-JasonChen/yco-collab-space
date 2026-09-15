@@ -91,6 +91,17 @@ export default function VideoTimeline({
    * bitmap) doesn't need a second ResizeObserver on a second ref duplicating
    * this component's own internal geometry. */
   onFrameAreaResize,
+  /** Distinguishes this instance's data-testid values from another
+   * VideoTimeline mounted at the same time (2026-09-15): the real feature
+   * page keeps its own persistent canvas timeline mounted while
+   * VideoTrimModal's timeline (the same shared component) is also open,
+   * so a bare getByTestId('canvas-trim-handle-start') resolves to both and
+   * fails strict mode. Defaults preserve the original single-consumer
+   * names; VideoTrimModal overrides all four to its own dialog-scoped ids. */
+  playbackTimelineTestId = 'canvas-playback-timeline',
+  playbackToggleTestId = 'canvas-playback-toggle',
+  trimHandleStartTestId = 'canvas-trim-handle-start',
+  trimHandleEndTestId = 'canvas-trim-handle-end',
   className = '',
 }) {
   const labels = { ...defaultLabels, ...labelOverrides };
@@ -205,7 +216,7 @@ export default function VideoTimeline({
   return (
     <div
       className={`${styles.timeline} ${className}`}
-      data-testid="canvas-playback-timeline"
+      data-testid={playbackTimelineTestId}
       data-placement="below-canvas"
       data-frame-source={hasCapturedFrames ? 'captured-video' : posterUrl ? 'poster' : 'pending'}
       data-frame-count={frameUrls.length}
@@ -226,7 +237,7 @@ export default function VideoTimeline({
       <div className={styles.mainRow}>
         <button
           className={styles.playButton}
-          data-testid="canvas-playback-toggle"
+          data-testid={playbackToggleTestId}
           type="button"
           onClick={isPlaying ? onPause : onPlay}
           disabled={isPlaying ? !onPause : !onPlay}
@@ -279,7 +290,7 @@ export default function VideoTimeline({
               <button
                 type="button"
                 className={`${styles.handle} ${styles.handleLeft}`}
-                data-testid="canvas-trim-handle-start"
+                data-testid={trimHandleStartTestId}
                 onPointerDown={startHandleDrag('start')}
                 disabled={!onTrimStartChange}
                 aria-label={labels.trimStart}
@@ -289,7 +300,7 @@ export default function VideoTimeline({
               <button
                 type="button"
                 className={`${styles.handle} ${styles.handleRight}`}
-                data-testid="canvas-trim-handle-end"
+                data-testid={trimHandleEndTestId}
                 onPointerDown={startHandleDrag('end')}
                 disabled={!onTrimEndChange}
                 aria-label={labels.trimEnd}
