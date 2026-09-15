@@ -260,6 +260,24 @@ export default function VideoExpansionFeature() {
     );
   };
 
+  // Reference (2026-09-15, found live — "為什麼切回來edit變成一片空白"): both
+  // measurement effects below used to depend only on `loaded`, but
+  // VideoResultsSurface actually UNMOUNTS/remounts editContent's whole
+  // subtree on every Edit<->History switch ({isHistory ? historyContent :
+  // editContent}, a ternary, not a CSS show/hide) — canvasViewportRef/
+  // targetCanvasRef end up pointing at a brand-new DOM node each time, but
+  // with `loaded` unchanged (already true) neither effect reran to attach a
+  // fresh ResizeObserver to it. The stale observer, still watching the OLD
+  // (now-detached) node, never fires again, freezing canvasViewportSize/
+  // positionBounds at whatever they were on the very first mount — normally
+  // harmless since a fixed 430px viewport measured the same every time, but
+  // .canvasViewport's height is flex-driven now (today's own fill-height
+  // fix), so a remount can legitimately measure differently than the first
+  // mount did, and a frozen stale value can end up wrong (here: 0, making
+  // .targetCanvas render invisible). `activeTab` now sits in both dependency
+  // arrays purely to force a re-run — and therefore a fresh observer bound
+  // to whichever node is actually mounted — on every remount, without
+  // otherwise changing what either effect measures or how.
   useLayoutEffect(() => {
     const viewport = canvasViewportRef.current;
     if (!loaded || !viewport) {
@@ -274,7 +292,7 @@ export default function VideoExpansionFeature() {
     const observer = new ResizeObserver(measure);
     observer.observe(viewport);
     return () => observer.disconnect();
-  }, [loaded]);
+  }, [loaded, activeTab]);
 
   useLayoutEffect(() => {
     const canvas = targetCanvasRef.current;
@@ -294,7 +312,7 @@ export default function VideoExpansionFeature() {
     const observer = new ResizeObserver(measure);
     observer.observe(canvas);
     return () => observer.disconnect();
-  }, [loaded, sourceRatio, targetRatio]);
+  }, [loaded, sourceRatio, targetRatio, activeTab]);
 
   useLayoutEffect(() => {
     const frame = targetCanvasRef.current;

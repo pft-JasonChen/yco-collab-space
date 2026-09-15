@@ -5,7 +5,7 @@
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "claude-code",
   "model": "claude-sonnet-5",
-  "generatedAt": "2026-09-15T07:24:29.572Z",
+  "generatedAt": "2026-09-15T08:07:49.992Z",
   "files": [
     "feature.jsx",
     "feature.module.scss"
@@ -192,7 +192,7 @@
         },
         {
           "path": "design-library/components/credit-controls/component.yaml",
-          "sha256": "5f56412eb7dd8a6019c1653ad40d0607b8b6465abf424d39ddd8a56a2462a30e"
+          "sha256": "5dbc9271522009d7024e71ddb911ebb59d6d91c1d87587a71182f6b566ed59df"
         },
         {
           "path": "design-library/components/empty-image/component.yaml",
@@ -220,7 +220,7 @@
         },
         {
           "path": "design-library/components/upload-media-block/component.yaml",
-          "sha256": "717d4a845a69ebb1bbbefc3e109bc6c1c393035c8e7a0f1b79c72bb042e120f2"
+          "sha256": "a20b59a082e3d3357fc3e99a26a9059ca1bf4a9d6db297e7aadcdd919f189b38"
         },
         {
           "path": "design-library/components/video-history/component.yaml",
@@ -236,7 +236,7 @@
         },
         {
           "path": "design-library/components/video-timeline/component.yaml",
-          "sha256": "0f9969c235076021b9fd1350bc3bef0763edfaeb2797dc15a1231dfd9da67cd2"
+          "sha256": "e352863eec8f70ab3b27419fd6f0585a357fb0b2593c671b14e202f770a523d8"
         },
         {
           "path": "design-library/components/video-trim-modal/component.yaml",
@@ -616,11 +616,11 @@
         },
         {
           "path": "platform/ui/credit-controls/CreditControls.jsx",
-          "sha256": "73e59eb7e99fd635295874e98806631ab43f40ecde6605faa9a59e7f1ddab049"
+          "sha256": "b4efc6fb1b5180952ec173f1acde636adac55b38371f221d805f98f6b894643c"
         },
         {
           "path": "platform/ui/credit-controls/CreditControls.module.scss",
-          "sha256": "f44cd299a7011f3b946767039990fe71129cdaf422716a7406a34a75154db93d"
+          "sha256": "7cf67a99f45336d7be39c14285bcbf153d9bb00809053e1333f94825e706c5f2"
         },
         {
           "path": "platform/ui/credit-controls/CreditControls.stories.jsx",
@@ -760,7 +760,7 @@
         },
         {
           "path": "platform/ui/upload-media-block/UploadMediaBlock.module.scss",
-          "sha256": "5e508f7b88a204e325f485daefc0818caa7d85582fc5824d33188636583af7c3"
+          "sha256": "610baa5c1ca15935e99defca8b6c4bca5e7ef0ef50aff117487bbe6eeecfed11"
         },
         {
           "path": "platform/ui/upload-media-block/UploadMediaBlock.stories.jsx",
@@ -820,7 +820,7 @@
         },
         {
           "path": "platform/ui/video-timeline/VideoTimeline.jsx",
-          "sha256": "1dcd31fbe12e94f23d3f65d2d1eee3a71805425d9dd670f6ede196671a2e8dde"
+          "sha256": "cf8353fd78e02e16f91f8b7fa452127498059b952b94d1b7b1e221394acf1cdf"
         },
         {
           "path": "platform/ui/video-timeline/VideoTimeline.module.scss",
@@ -940,7 +940,7 @@
         },
         {
           "path": "tools/design-library/run-storybook-checks.mjs",
-          "sha256": "15834018a02e410f8555885c97002632ad26679a3a978cd787d21e52643b251f"
+          "sha256": "3f3f2d02f6a0cd1cd01f7de242cd91a0d5d17f7c5b898006453a0ec430674d2f"
         },
         {
           "path": "tools/design-library/schemas/component-contract.schema.json",
@@ -1119,7 +1119,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "385adb42d4e8a2a205e5b714b0d6aa34fadc2f21a333fe0f1e4cc8fd69d254bf",
+      "hash": "d597bb8fdfe68f3c4b3961fdcb283fc0b17eac015a17b21ffd942a5a9fd7dd70",
       "edges": [
         {
           "from": "features/collab-space-readiness/generated/feature.jsx",
@@ -1161,6 +1161,6 @@
         "react"
       ]
     },
-    "revisionHash": "239deecae067e9bc331b0c62442c9c2d6605114434415603d94f26c83f5d1efe"
+    "revisionHash": "5d2fb414ecb5f888ff6f09388d4d2ae18aa35ca4c55c7e7cd8ee86c592eca406"
   }
 }

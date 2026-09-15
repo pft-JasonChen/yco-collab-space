@@ -5,7 +5,7 @@
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "claude-code",
   "model": "claude-sonnet-5",
-  "generatedAt": "2026-09-15T07:24:28.431Z",
+  "generatedAt": "2026-09-15T08:06:32.545Z",
   "files": [
     "README.md",
     "contract/integration.yaml",
@@ -62,9 +62,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/credit-controls/component.yaml",
-        "contractSha256": "5f56412eb7dd8a6019c1653ad40d0607b8b6465abf424d39ddd8a56a2462a30e",
+        "contractSha256": "5dbc9271522009d7024e71ddb911ebb59d6d91c1d87587a71182f6b566ed59df",
         "implementationImport": "platform/ui/credit-controls/index.js",
-        "implementationSha256": "36e9264b29b7b27a4c0cb6381924ce88ea21bda743ce2c6ddc9706540c3de316",
+        "implementationSha256": "a9b95eee56c83384e7169c1f26d547dea5cc6dff2be9bf96ee5b688305c06a71",
         "runtimeAssets": [
           {
             "repositoryPath": "design-library/assets/icon/yco-credit-controls/add.svg",
@@ -72,7 +72,7 @@
           },
           {
             "repositoryPath": "design-library/assets/icon/yco-credit-controls/credit.svg",
-            "sha256": "fe13827402ad85122458ba7de848cbf47e0cb4401d319a6ebc8bfd511245b1d1"
+            "sha256": "4103b57ceacfc0a3c67755b49ecb313ba0fa0a540b97845684360e259572fe95"
           },
           {
             "repositoryPath": "design-library/assets/icon/yco-credit-controls/loading.png",
@@ -253,7 +253,7 @@
           },
           {
             "repositoryPath": "design-library/assets/icon/yco-credit-controls/credit.svg",
-            "sha256": "fe13827402ad85122458ba7de848cbf47e0cb4401d319a6ebc8bfd511245b1d1"
+            "sha256": "4103b57ceacfc0a3c67755b49ecb313ba0fa0a540b97845684360e259572fe95"
           },
           {
             "repositoryPath": "design-library/assets/icon/yco-credit-controls/loading.png",
@@ -389,9 +389,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/upload-media-block/component.yaml",
-        "contractSha256": "717d4a845a69ebb1bbbefc3e109bc6c1c393035c8e7a0f1b79c72bb042e120f2",
+        "contractSha256": "a20b59a082e3d3357fc3e99a26a9059ca1bf4a9d6db297e7aadcdd919f189b38",
         "implementationImport": "platform/ui/upload-media-block/index.js",
-        "implementationSha256": "d0343129dd49152a54633cd033108226e52287b7347a8ffef16bebe99b4622ea",
+        "implementationSha256": "7948140020a3a379f10b78d9f775a479774254337688fa8b4bec9acf9bdfda3c",
         "runtimeAssets": [
           {
             "repositoryPath": "design-library/assets/icon/yco-upload-media-block/add.svg",
@@ -572,9 +572,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/video-timeline/component.yaml",
-        "contractSha256": "0f9969c235076021b9fd1350bc3bef0763edfaeb2797dc15a1231dfd9da67cd2",
+        "contractSha256": "e352863eec8f70ab3b27419fd6f0585a357fb0b2593c671b14e202f770a523d8",
         "implementationImport": "platform/ui/video-timeline/index.js",
-        "implementationSha256": "411753a712330a0a05774569708606b4dc93b0f649977c51b268a172a39487d5",
+        "implementationSha256": "1622c6a0b06c8061294d56e3cad21c96e395e0466092ef2e69ba7883af3e8df7",
         "runtimeAssets": [
           {
             "repositoryPath": "design-library/assets/icon/yco-video-timeline/drag-handle.svg",
@@ -837,11 +837,11 @@
         },
         {
           "path": "features/video-expansion/generated/index.jsx",
-          "sha256": "5281cefaf5513e47332c04360f477121bbf8c84316a695d14ed05df83332755f"
+          "sha256": "aa2d7ec3cbfc573dee0cd1bcdf73828701853820340f76868d5eb89b4a94537d"
         },
         {
           "path": "features/video-expansion/generated/index.module.scss",
-          "sha256": "fbb61003b79aa05133ed042d19d191b9103b5bf25234f80ca9065c72322cb085"
+          "sha256": "25c47a411ffe9842d8d21387aa2bd2ed623739037db1fc6e2d09ae4ede7e8053"
         },
         {
           "path": "features/video-expansion/generated/settings/index.jsx",
@@ -852,7 +852,7 @@
           "sha256": "079e42b2b35548096dba01684133d3ba6cb46f86648eae166d64c204c608eaed"
         }
       ],
-      "hash": "54bd98471b887c863cd791b55b1a3811d577058dafa8d79b27ac77b66d8560d5"
+      "hash": "9cf139b796dddea5f643212674477cf0e47d9e68de20a7fa7456aeda314cb522"
     },
     "dependencies": {
       "files": [
@@ -970,7 +970,7 @@
         },
         {
           "path": "design-library/assets/icon/yco-credit-controls/credit.svg",
-          "sha256": "fe13827402ad85122458ba7de848cbf47e0cb4401d319a6ebc8bfd511245b1d1"
+          "sha256": "4103b57ceacfc0a3c67755b49ecb313ba0fa0a540b97845684360e259572fe95"
         },
         {
           "path": "design-library/assets/icon/yco-credit-controls/loading.png",
@@ -1246,7 +1246,7 @@
         },
         {
           "path": "design-library/components/credit-controls/component.yaml",
-          "sha256": "5f56412eb7dd8a6019c1653ad40d0607b8b6465abf424d39ddd8a56a2462a30e"
+          "sha256": "5dbc9271522009d7024e71ddb911ebb59d6d91c1d87587a71182f6b566ed59df"
         },
         {
           "path": "design-library/components/empty-image/component.yaml",
@@ -1274,7 +1274,7 @@
         },
         {
           "path": "design-library/components/upload-media-block/component.yaml",
-          "sha256": "717d4a845a69ebb1bbbefc3e109bc6c1c393035c8e7a0f1b79c72bb042e120f2"
+          "sha256": "a20b59a082e3d3357fc3e99a26a9059ca1bf4a9d6db297e7aadcdd919f189b38"
         },
         {
           "path": "design-library/components/video-history/component.yaml",
@@ -1290,7 +1290,7 @@
         },
         {
           "path": "design-library/components/video-timeline/component.yaml",
-          "sha256": "0f9969c235076021b9fd1350bc3bef0763edfaeb2797dc15a1231dfd9da67cd2"
+          "sha256": "e352863eec8f70ab3b27419fd6f0585a357fb0b2593c671b14e202f770a523d8"
         },
         {
           "path": "design-library/components/video-trim-modal/component.yaml",
@@ -1342,11 +1342,11 @@
         },
         {
           "path": "features/video-expansion/generated/index.jsx",
-          "sha256": "5281cefaf5513e47332c04360f477121bbf8c84316a695d14ed05df83332755f"
+          "sha256": "aa2d7ec3cbfc573dee0cd1bcdf73828701853820340f76868d5eb89b4a94537d"
         },
         {
           "path": "features/video-expansion/generated/index.module.scss",
-          "sha256": "fbb61003b79aa05133ed042d19d191b9103b5bf25234f80ca9065c72322cb085"
+          "sha256": "25c47a411ffe9842d8d21387aa2bd2ed623739037db1fc6e2d09ae4ede7e8053"
         },
         {
           "path": "features/video-expansion/generated/settings/index.jsx",
@@ -1730,11 +1730,11 @@
         },
         {
           "path": "platform/ui/credit-controls/CreditControls.jsx",
-          "sha256": "73e59eb7e99fd635295874e98806631ab43f40ecde6605faa9a59e7f1ddab049"
+          "sha256": "b4efc6fb1b5180952ec173f1acde636adac55b38371f221d805f98f6b894643c"
         },
         {
           "path": "platform/ui/credit-controls/CreditControls.module.scss",
-          "sha256": "f44cd299a7011f3b946767039990fe71129cdaf422716a7406a34a75154db93d"
+          "sha256": "7cf67a99f45336d7be39c14285bcbf153d9bb00809053e1333f94825e706c5f2"
         },
         {
           "path": "platform/ui/credit-controls/CreditControls.stories.jsx",
@@ -1874,7 +1874,7 @@
         },
         {
           "path": "platform/ui/upload-media-block/UploadMediaBlock.module.scss",
-          "sha256": "5e508f7b88a204e325f485daefc0818caa7d85582fc5824d33188636583af7c3"
+          "sha256": "610baa5c1ca15935e99defca8b6c4bca5e7ef0ef50aff117487bbe6eeecfed11"
         },
         {
           "path": "platform/ui/upload-media-block/UploadMediaBlock.stories.jsx",
@@ -1934,7 +1934,7 @@
         },
         {
           "path": "platform/ui/video-timeline/VideoTimeline.jsx",
-          "sha256": "1dcd31fbe12e94f23d3f65d2d1eee3a71805425d9dd670f6ede196671a2e8dde"
+          "sha256": "cf8353fd78e02e16f91f8b7fa452127498059b952b94d1b7b1e221394acf1cdf"
         },
         {
           "path": "platform/ui/video-timeline/VideoTimeline.module.scss",
@@ -2054,7 +2054,7 @@
         },
         {
           "path": "tools/design-library/run-storybook-checks.mjs",
-          "sha256": "15834018a02e410f8555885c97002632ad26679a3a978cd787d21e52643b251f"
+          "sha256": "3f3f2d02f6a0cd1cd01f7de242cd91a0d5d17f7c5b898006453a0ec430674d2f"
         },
         {
           "path": "tools/design-library/schemas/component-contract.schema.json",
@@ -2233,7 +2233,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "cf42c2a4af1a025bfa52d51f1eb504cf426ce728f134aa4351b5d2891731b961",
+      "hash": "2092aeb701fe00111cfa34186765a0ebc4fc36a04c32464449d6ab878e6e80f7",
       "edges": [
         {
           "from": "design-library/assets/font/yco-interface-icons.style.css",
@@ -3027,6 +3027,6 @@
         "react-dom"
       ]
     },
-    "revisionHash": "0cf68dcbf39dee7e8152bd2b6204b67c3a012fd8aa25bf8fb0584700302edd15"
+    "revisionHash": "2090514208b453178615eac41609627016916e6727b9b1711f9b51198b29f860"
   }
 }
