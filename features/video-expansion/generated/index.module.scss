@@ -32,8 +32,18 @@
 .panelContent {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-8);
   padding: var(--spacing-16);
+}
+
+/* Was a flat `gap: var(--spacing-8)` on .panelContent itself — but that
+   container is now also the footer's own flex parent (ToolPageLayout's
+   sticky-footer change, 2026-09-15), and a uniform gap would apply to the
+   settings-to-footer edge too, stacking with .footer's own margin-top
+   instead of being overridable by it. Adjacent-sibling margins let a single
+   more-specific rule (ToolPageLayout's own `.footer` class) win that one
+   edge on its own via ordinary specificity, with no double-counted spacing. */
+.panelContent > * + * {
+  margin-top: var(--spacing-8);
 }
 
 .editResult {
@@ -53,7 +63,17 @@
   justify-content: center;
   overflow: hidden;
   background: var(--background-base);
+  /* Reference (2026-09-15, reported live — "進來之後就沒有這個白底了"): the
+     card's own --background-base WAS already being applied (confirmed via
+     computed style), but against --background-alternate (the page's own
+     bg — only ~4% darker) it read as no card at all with nothing to mark
+     the edge. VideoResultsSurface's own filter-dropdown card
+     (VideoResultsSurface.module.scss) is this codebase's existing precedent
+     for a --background-base surface floating over --background-alternate —
+     border + shadow, not color contrast alone. */
+  border: 1px solid var(--stroke-weak);
   border-radius: var(--corner-radius-20);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--fill-strong) 10%, transparent);
 }
 
 .canvasWorkspace {
@@ -63,7 +83,13 @@
   min-height: 0;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  /* Was center (2026-09-15, reported live — "應該要偵測裝置高度撐滿"): with
+     .canvasViewport a hardcoded 430px regardless of how tall .canvasArea
+     actually was, `justify-content: center` just centered that fixed block
+     — plus the timeline strip below it — inside whatever extra vertical
+     space the card had, rather than using it. flex-start lets the now-
+     flexible .canvasViewport (below) claim that space itself instead. */
+  justify-content: flex-start;
   gap: var(--spacing-16);
   padding: var(--spacing-12) var(--spacing-20);
 }
@@ -71,8 +97,16 @@
 .canvasViewport {
   display: grid;
   width: 100%;
-  height: 430px;
-  flex: 0 0 430px;
+  /* Was a flat 430px regardless of viewport height — the actual root cause
+     of the reported blank space (2026-09-15, "應該要偵測裝置高度撐滿"): on a
+     tall screen, .canvasArea/.canvasWorkspace had far more than 430px+the
+     timeline strip to give, and none of it went anywhere. flex:1 lets this
+     grow to fill whatever .canvasWorkspace actually has left after the
+     timeline strip's own natural height; min/max keep it from collapsing
+     too small or growing absurdly tall on a very short/very tall window. */
+  min-height: 240px;
+  max-height: 640px;
+  flex: 1 1 auto;
   place-items: center;
   overflow: hidden;
   background: var(--fill-weak);
@@ -300,13 +334,12 @@
   .panelContent { overflow: visible; }
   .editResult { min-height: 560px; }
 
+  /* .canvasWorkspace's own justify-content:flex-start and .canvasViewport's
+     own flex:1 sizing (2026-09-15 fix, see their base rules above) already
+     apply here too — this block used to re-declare both with mobile-only
+     fixed values (400px) before that fix existed; narrower padding is the
+     one thing that's actually mobile-specific. */
   .canvasWorkspace {
-    justify-content: flex-start;
     padding: var(--spacing-12) var(--spacing-8);
-  }
-
-  .canvasViewport {
-    height: 400px;
-    flex-basis: 400px;
   }
 }

@@ -73,12 +73,19 @@ export function VideoSection({
 export function AspectRatioSection({ t, ratios, value, onChange, disabled }) {
   return (
     <section className={styles.settingsSection} data-component-role="aspect-ratio-selector">
+      {/* Reference (2026-09-15, requested live — "video expansion 不要用
+          [image_extender]，用一般的Five Ratios 那個variant就好"): was
+          ratioTypes.IMAGE_EXTENDER, a key that didn't exist on ratioTypes
+          until just now — Ratio's own default-parameter fallback silently
+          turned that into GERY_V2 anyway, so this makes explicit what was
+          already rendering, rather than switching to the newly-real
+          IMAGE_EXTENDER variant. */}
       <Ratio
         ratioList={buildRatioOptions(ratios)}
         ratio={parseRatio(value)}
         setRatio={(next) => onChange(`${next.w}:${next.h}`)}
         title={t('text.to.image.settings.advance.settings.aspect.ratio')}
-        variant={ratioTypes.IMAGE_EXTENDER}
+        variant={ratioTypes.GERY_V2}
         titleVariant={ratioTitleTypes.GERY}
         disabled={disabled}
         getOptionTestId={ratioTestId}

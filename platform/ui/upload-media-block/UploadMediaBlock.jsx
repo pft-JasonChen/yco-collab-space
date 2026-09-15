@@ -242,7 +242,21 @@ export default function UploadMediaBlock({
           aria-label={labels.preview}
         >
           {videoUrl ? (
-            <video src={videoUrl} poster={imageUrl} muted playsInline preload="metadata" />
+            <>
+              <video src={videoUrl} poster={imageUrl} muted playsInline preload="metadata" />
+              {/* Reference (2026-09-15, requested live — "1除了時間還有play和volume",
+                  comparing this thumbnail against the video-expansion settings
+                  panel's own upload block, which only showed the duration
+                  badge): a video thumbnail also needs a play affordance and a
+                  muted indicator, matching VideoTrimModal's own preview overlay
+                  (same icon font glyphs / color-mix(80%-opacity) treatment,
+                  scaled down for this block's much smaller ~112px-tall preview).
+                  Both are decorative only — this component has no inline
+                  playback state of its own, `onPreview` (the whole button's
+                  onClick) is still what actually opens a real preview. */}
+              <span className={styles.previewPlay} aria-hidden="true">{''}</span>
+              <span className={styles.previewMuted} aria-hidden="true">{''}</span>
+            </>
           ) : (
             <img src={imageUrl} alt="Uploaded media" />
           )}

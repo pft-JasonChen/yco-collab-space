@@ -23,14 +23,14 @@ implementation:
   removedDependencies: [redux, i18n, auto-scroll, device-detection, interaction-tools]
   localFiles:
     - path: platform/ui/tool-page-layout/ToolPageLayout.jsx
-      sha256: 115dbfbc5a0cd7a930e815078b2755058ad37057952f132dc556cc237662a456
+      sha256: 76340028ba9c9294479ada67d72eec6326af12ace03f2ec1a01d376d31b062dd
     - path: platform/ui/tool-page-layout/ToolPageLayout.module.scss
-      sha256: 3e600161c49663e4c5bc22b8f281cbb56b0fa53e3ae6b1dc35243de728b6ae2e
+      sha256: 9d2ac2bf1429effcbc6c8fb2bd26de670501f36f5aa3dee3ff22f588e10cff58
     - path: platform/ui/tool-page-layout/ToolPageLayout.stories.jsx
       sha256: e703dea809ba5a8151a88a0ab496016542165df88ca54b04ff242cbf4b4508dd
     - path: platform/ui/tool-page-layout/index.js
       sha256: 550af825a5f614a0507fbf3a88e2242041d7c099c66b94df0fb8f89191959f67
-  localFilesUpdated: 2026-09-11
+  localFilesUpdated: 2026-09-15
 publicApi:
   props:
     - { name: panel, required: true }
@@ -51,3 +51,5 @@ decisionBasis:
   - RD FeatureLayout is the production composition source for settings and results blocks, but its state and device dependencies are replaced with pure props and CSS breakpoints.
   - The PO approved production-surface-first composition for the Video Expansion manager-review prototype.
   - "Auto-sync (2026-09-11): `ToolPageLayout.jsx`, `ToolPageLayout.module.scss` hashes updated — no documented public prop or decisionBasis-quoted value appears to have changed, so this synced automatically. Review if this doesn't look right."
+  - "footer given a conditional sticky-vs-static rule instead of always sitting fixed at the panel's own bottom (2026-09-15, requested live — \"如果panel的settings內容多餘裝置高度才是fixed at the bottom，如果沒有就跟著settings的最後一個項目\", node 14877-145015): footer moved from being a separate flex sibling of .panelContent to that same element's own last child, with `position: sticky; bottom: 0`. At >900px, .panelContent is the actual scrolling container, so this natively gives the requested rule with no JS height-measurement: it renders exactly like static (right after the settings' last item) whenever everything already fits, and only sticks to .panelContent's own bottom edge once the settings are actually tall enough to scroll. At <=900px, .panelContent goes `overflow: visible` (panel and result stack and scroll together as one page there) — sticky would otherwise escape to whatever ancestor does scroll and pin the button mid-screen over the result column, so `.footer{position:static}` restores plain in-flow behavior for that breakpoint, matching what it already did before this change (declared after the base rule in source order — same specificity, so order decides which wins at that width)."
+  - "footer spacing given its own explicit rule instead of inheriting a flex gap (2026-09-15, requested live — \"接著settings就不用在包在一個container裡面了，離最後一個container 16px就好\", after the entry above): GenerateActionBar's own .actionBar background+box-shadow (platform/ui/credit-controls/CreditControls.module.scss) were built for a permanently-fixed-bottom-bar treatment and read as an unwanted boxed card now that the footer commonly sits in plain flow — removed, since .footer's own background already covers the sticky case's opacity need. `.panelContent > .footer` (two classes, beats a plain `.panelContent > * + *` sibling-margin rule some consuming feature might use for its own section spacing, regardless of stylesheet load order) sets margin-top: 16px so this one edge doesn't have to match — or double up with — whatever gap/margin value that feature uses between its own settings sections."

@@ -24,13 +24,14 @@
   gap: var(--spacing-4);
 }
 
-.content.gery_v2 {
-  display: grid;
-}
-
+.content.gery_v2,
 .content.image_extender {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  /* Reference (2026-09-15, reported live via a Figma Dev Mode inspect —
+     "這個是8px不是4px"): this variant was falling through to the base
+     `.content`'s 4px gap (no gery_v2-specific override existed). Scoped here
+     rather than changed on the base rule, which other variants (DEFAULT/
+     GERY) still use unmodified. */
   gap: var(--spacing-8);
 }
 
@@ -38,7 +39,8 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.content.gery_v2.moreThanTwo {
+.content.gery_v2.moreThanTwo,
+.content.image_extender {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
@@ -57,20 +59,25 @@
   cursor: pointer;
 }
 
+/* Reference (2026-09-15, reported live — "image extender被你亂改掉了，figma有
+   記錄明明是長這樣才對", with a Figma-recorded before/after showing this
+   variant as the same icon-left/label-right row gery_v2 already renders,
+   just its icon's own corner radius changed 4px → 2px, which the shared
+   .ratioBorder rule below already gives every variant): this used to be its
+   own flex-direction:column / 74px-min-height / solid-fill-when-active
+   treatment, which never actually matched anything in Figma — merged into
+   gery_v2's rules everywhere they're identical instead of two silently
+   diverging near-duplicates, since the record shows them pixel-alike. */
+/* Reference (2026-09-15, reported live with a Figma inspect — "我的border只有
+   1px誒，你的看起來比較粗"): was 2px solid --stroke-weak; Figma's own Stroke
+   panel reads Position: Inside, Weight: 1, and the swatch shown is
+   --stroke-strong (--grey-light-200), not the lighter --stroke-weak
+   (--grey-light-100) — both the width and the token were off. */
 .ratioContainer.gery,
-.ratioContainer.gery_v2 {
-  background: var(--background-base);
-  border: 2px solid var(--stroke-weak);
-}
-
+.ratioContainer.gery_v2,
 .ratioContainer.image_extender {
-  height: auto;
-  min-height: 74px;
-  flex-direction: column;
-  gap: var(--spacing-4);
-  padding: var(--spacing-8) var(--spacing-4);
   background: var(--background-base);
-  border: 1px solid var(--stroke-weak);
+  border: 1px solid var(--stroke-strong);
 }
 
 .ratioContainerActive {
@@ -78,15 +85,14 @@
   border-color: var(--stroke-brand-strong);
 }
 
+/* Reference (2026-09-15, reported live with a Figma inspect — "被選中的是
+   2px"): the selected state's own Stroke panel reads Weight: 2 against
+   Stroke/Selected, not just a color swap on the unselected state's 1px. */
 .ratioContainerActive.gery,
-.ratioContainerActive.gery_v2 {
-  border-color: var(--stroke-selected);
-}
-
+.ratioContainerActive.gery_v2,
 .ratioContainerActive.image_extender {
-  color: var(--text-inverse-strong);
-  background: var(--fill-brand-strong);
-  border-color: var(--fill-brand-strong);
+  border-width: 2px;
+  border-color: var(--stroke-selected);
 }
 
 // Ratio is a composite (container + icon block + label, not a single
@@ -100,9 +106,16 @@
   opacity: 0.3;
 }
 
+/* Reference (2026-09-15, reported live with a Figma Dev Mode inspect of node
+   15012-276926 — "ratio色塊有點大，以1:1為例，我的是18px你的是22px"): the 1:1
+   swatch (a square, so it fills the whole available box, making it the
+   easiest one to size against) was rendering its icon block at 36px outer /
+   22px inner (36 - 2×7px padding) instead of the spec's 18px inner. Dropping
+   the outer box from 36px (--spacing-32 + --spacing-4) to a plain 32px
+   (--spacing-32) against the same 7px padding gives exactly 32 - 14 = 18px. */
 .ratioWrapper {
-  width: calc(var(--spacing-32) + var(--spacing-4));
-  height: calc(var(--spacing-32) + var(--spacing-4));
+  width: var(--spacing-32);
+  height: var(--spacing-32);
   padding: calc(var(--spacing-8) - 1px);
 }
 
@@ -125,51 +138,37 @@
 }
 
 .ratioBorder.gery,
-.ratioBorder.gery_v2 {
+.ratioBorder.gery_v2,
+.ratioBorder.image_extender {
   border: none;
   background: var(--fill-weak);
 }
 
-.ratioBorder.image_extender {
-  border: 1px solid currentColor;
-  background: transparent;
-}
-
 .ratioBorderActive.gery,
-.ratioBorderActive.gery_v2 {
+.ratioBorderActive.gery_v2,
+.ratioBorderActive.image_extender {
   background: var(--fill-brand-strong);
 }
 
-.ratioBorderActive.image_extender {
-  border-width: 2px;
-  background: transparent;
-}
-
+/* Reference (2026-09-15, reported live with a Figma Dev Mode inspect of node
+   15012-276926 — "數字是用bold不是regular"): the label's Typography spec
+   reads "Small/Bold · 16/24" — this was tiny/weak (14/20, regular) on all
+   three counts, not just weight. */
 .ratioText {
   width: var(--spacing-40);
   overflow: hidden;
   text-align: center;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: var(--font-size-tiny);
-  line-height: var(--line-height-tiny);
-  font-weight: var(--font-weight-weak);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  font-weight: var(--font-weight-strong);
 }
 
 @media (max-width: 768px) {
   .content.gery_v2,
   .content.gery_v2.twoOrLess,
-  .content.gery_v2.moreThanTwo {
-    display: flex;
-    flex-wrap: nowrap;
-    padding-bottom: var(--spacing-8);
-    overflow: auto hidden;
-  }
-
-  .ratioContainer.gery_v2 {
-    min-width: calc(var(--spacing-96) + var(--spacing-8));
-  }
-
+  .content.gery_v2.moreThanTwo,
   .content.image_extender {
     display: flex;
     flex-wrap: nowrap;
@@ -177,7 +176,8 @@
     overflow: auto hidden;
   }
 
+  .ratioContainer.gery_v2,
   .ratioContainer.image_extender {
-    min-width: 88px;
+    min-width: calc(var(--spacing-96) + var(--spacing-8));
   }
 }

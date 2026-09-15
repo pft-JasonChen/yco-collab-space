@@ -48,11 +48,11 @@ export function GenerateActionBar({
   // height, not the badge. See CreditControls.module.scss's .generateButton.
   return (
     <div className={`${styles.actionBar} ${className}`} data-component-role="primary-action generate-action-with-credit">
-      {/* .actionBar establishes the size-query container; .actionBarInner is the
-          element the @container rule actually styles. An element can't query its
-          own containment context (tested empirically — padding didn't react when
-          both lived on the same node), so the padding has to live one level in. */}
-      <div className={styles.actionBarInner}>
+      {/* .actionBarInner (2026-09-15, "不需要有綠色這層padding"): its only job
+          was a width-responsive padding for this bar's old full-bleed
+          edge-to-edge treatment — removed along with that padding, since it
+          commonly sits inside an already-padded panel now instead (see
+          CreditControls.module.scss's own decisionBasis). */}
         <Button
           className={`${styles.generateButton} ${subtitle ? styles.generateButtonTwoLine : ''}`}
           data-testid="generate-video"
@@ -67,7 +67,6 @@ export function GenerateActionBar({
           </span>
           {!isLoading ? <CreditBadge value={cost} testId="generate-credit-cost" /> : null}
         </Button>
-      </div>
     </div>
   );
 }

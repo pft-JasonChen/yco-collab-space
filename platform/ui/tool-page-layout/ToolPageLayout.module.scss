@@ -19,8 +19,10 @@
 }
 
 .panelContent {
+  display: flex;
   min-height: 0;
   flex: 1;
+  flex-direction: column;
   padding: var(--spacing-24);
   overflow: hidden auto;
   scrollbar-width: none;
@@ -35,6 +37,46 @@
   min-height: 0;
   flex: 1;
   background: var(--background-alternate);
+}
+
+/* Zone wrapper around the footer. It takes the same flex behaviour the action bar had
+   as a direct child, so naming the zone costs no layout change. `display: contents`
+   would be simpler but leaves the element without a box, and a zone with no box cannot
+   be asserted as visible.
+   Reference (2026-09-15, requested live — "如果panel的settings內容多餘裝置高度
+   才是fixed at the bottom，如果沒有就跟著settings的最後一個項目", node
+   14877-145015): moved inside .panelContent (now this scroll container's
+   own last flex child, not a separate flex sibling of it) and given
+   position:sticky — when the settings above it already fit the panel,
+   sticky renders exactly like static (right after the last item, no
+   pinned-to-bottom gap); once they don't and .panelContent actually
+   scrolls, it sticks to this same scroll container's own bottom edge
+   instead of scrolling out of view. Needs its own opaque background since
+   content now scrolls in the same box behind it while stuck.
+   Declared here (before the media queries below, not after) so the
+   @media(max-width:900px) override further down — same specificity,
+   source order decides — actually wins at that width instead of being
+   silently clobbered by this same-specificity rule appearing later. */
+.footer {
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
+  flex: 0 0 auto;
+  width: 100%;
+  background: var(--background-base);
+}
+
+/* Reference (2026-09-15, requested live — "接著settings就不用在包在一個
+   container裡面了，離最後一個container 16px就好"): a consuming feature's own
+   panelContentClassName may space its settings sections via an
+   adjacent-sibling margin (e.g. video-expansion's own `.panelContent > * +
+   *`) rather than this component's simpler flex `gap`, specifically so this
+   one edge can be overridden on its own without doubling up. `.panelContent
+   > .footer` (two classes) reliably outranks a plain `> * + *` (one class)
+   regardless of which stylesheet loads first, unlike two same-specificity
+   `.footer` rules would. */
+.panelContent > .footer {
+  margin-top: var(--spacing-16);
 }
 
 @media (max-width: 1200px) {
@@ -68,13 +110,16 @@
   .result {
     min-height: 620px;
   }
-}
 
-/* Zone wrapper around the footer. It takes the same flex behaviour the action bar had
-   as a direct child, so naming the zone costs no layout change. `display: contents`
-   would be simpler but leaves the element without a box, and a zone with no box cannot
-   be asserted as visible. */
-.footer {
-  flex: 0 0 auto;
-  width: 100%;
+  /* .footer's own position:sticky (below) relies on .panelContent actually
+     being the scrolling container it sticks within — true at >900px, but
+     .panelContent just went overflow:visible above, so sticky would escape
+     to whatever ancestor DOES scroll (the whole stacked page), pinning the
+     button mid-screen over the timeline/canvas below it instead of at the
+     end of the settings. Sticky isn't the right rule here anyway — panel
+     and result are stacked and scroll together as one page at this width,
+     so the button just stays in normal flow, right after the settings. */
+  .footer {
+    position: static;
+  }
 }

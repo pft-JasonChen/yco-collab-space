@@ -5,7 +5,7 @@
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "claude-code",
   "model": "claude-sonnet-5",
-  "generatedAt": "2026-09-15T06:18:59.854Z",
+  "generatedAt": "2026-09-15T07:24:28.431Z",
   "files": [
     "README.md",
     "contract/integration.yaml",
@@ -62,9 +62,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/credit-controls/component.yaml",
-        "contractSha256": "e547c9eaa47f4f7f5008a6e6671c59ff9f636b771b9844bc9eee688f54b4f652",
+        "contractSha256": "5f56412eb7dd8a6019c1653ad40d0607b8b6465abf424d39ddd8a56a2462a30e",
         "implementationImport": "platform/ui/credit-controls/index.js",
-        "implementationSha256": "21a682f99925d7defd350677ad451375f396380c440c77f5c100a6fa34e06d9b",
+        "implementationSha256": "36e9264b29b7b27a4c0cb6381924ce88ea21bda743ce2c6ddc9706540c3de316",
         "runtimeAssets": [
           {
             "repositoryPath": "design-library/assets/icon/yco-credit-controls/add.svg",
@@ -338,9 +338,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/ratio/component.yaml",
-        "contractSha256": "c70547c5517fb14db77384d8579f06cc59f6f7cc4b1fc0553d6ee293649072aa",
+        "contractSha256": "48079e70bdec93ec563f61ef0e05a4cbee9b1bddb217dcfab7908306d83304fb",
         "implementationImport": "platform/ui/ratio/index.js",
-        "implementationSha256": "d44b587627c04e16e2abe7c28665439986b60de2ca30780be2643ec981894632",
+        "implementationSha256": "a971a661a6a8af7064a4d4b602528f7f0092f92858a1b84d9bd71c73df924979",
         "runtimeAssets": []
       },
       {
@@ -379,9 +379,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/tool-page-layout/component.yaml",
-        "contractSha256": "35d34fc168615c84b6c1c31ac9d57357899ad22ff592c51f0e3e35c98a5628c5",
+        "contractSha256": "2a13593fd30474e4501c5a6e09e5d4d5db5a99459d1820a3fe1f40595d3b5165",
         "implementationImport": "platform/ui/tool-page-layout/index.js",
-        "implementationSha256": "3345ec62defe563baa7f2d0555ffe490af77f5102e7cf1923f08367e76099805",
+        "implementationSha256": "9813983fcbca43072f4e4f81bda0622e5883dfe59a31e7271903eb4610032a47",
         "runtimeAssets": []
       },
       {
@@ -389,9 +389,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/upload-media-block/component.yaml",
-        "contractSha256": "9b19ba276fc6b6bf6efb9b14b8a07bf4688957e6a211b1476415c222d6cbacfb",
+        "contractSha256": "717d4a845a69ebb1bbbefc3e109bc6c1c393035c8e7a0f1b79c72bb042e120f2",
         "implementationImport": "platform/ui/upload-media-block/index.js",
-        "implementationSha256": "aa2235c821d3b93b9b05b58a4c09ea69f76253e590b884f1de4e8ade6685a5be",
+        "implementationSha256": "d0343129dd49152a54633cd033108226e52287b7347a8ffef16bebe99b4622ea",
         "runtimeAssets": [
           {
             "repositoryPath": "design-library/assets/icon/yco-upload-media-block/add.svg",
@@ -841,18 +841,18 @@
         },
         {
           "path": "features/video-expansion/generated/index.module.scss",
-          "sha256": "18f891a724b49d315e15d7b8f8c6c4e3d710ebed6c96c86d55b1302afd938f0d"
+          "sha256": "fbb61003b79aa05133ed042d19d191b9103b5bf25234f80ca9065c72322cb085"
         },
         {
           "path": "features/video-expansion/generated/settings/index.jsx",
-          "sha256": "6b51c32fb80507744400b4f94f56123f502813dcafb05e1630230786c27ab569"
+          "sha256": "498e13af86af1d85e134079bb7601a5cc54681566e0181e976eadb4605cae347"
         },
         {
           "path": "features/video-expansion/generated/settings/index.module.scss",
           "sha256": "079e42b2b35548096dba01684133d3ba6cb46f86648eae166d64c204c608eaed"
         }
       ],
-      "hash": "cb110658d4db8c38193c9795c8fb6a5f96a2993ff912fb2a7ba696c4cab3f76b"
+      "hash": "54bd98471b887c863cd791b55b1a3811d577058dafa8d79b27ac77b66d8560d5"
     },
     "dependencies": {
       "files": [
@@ -1246,7 +1246,7 @@
         },
         {
           "path": "design-library/components/credit-controls/component.yaml",
-          "sha256": "e547c9eaa47f4f7f5008a6e6671c59ff9f636b771b9844bc9eee688f54b4f652"
+          "sha256": "5f56412eb7dd8a6019c1653ad40d0607b8b6465abf424d39ddd8a56a2462a30e"
         },
         {
           "path": "design-library/components/empty-image/component.yaml",
@@ -1262,7 +1262,7 @@
         },
         {
           "path": "design-library/components/ratio/component.yaml",
-          "sha256": "c70547c5517fb14db77384d8579f06cc59f6f7cc4b1fc0553d6ee293649072aa"
+          "sha256": "48079e70bdec93ec563f61ef0e05a4cbee9b1bddb217dcfab7908306d83304fb"
         },
         {
           "path": "design-library/components/result-page-shell/component.yaml",
@@ -1270,11 +1270,11 @@
         },
         {
           "path": "design-library/components/tool-page-layout/component.yaml",
-          "sha256": "35d34fc168615c84b6c1c31ac9d57357899ad22ff592c51f0e3e35c98a5628c5"
+          "sha256": "2a13593fd30474e4501c5a6e09e5d4d5db5a99459d1820a3fe1f40595d3b5165"
         },
         {
           "path": "design-library/components/upload-media-block/component.yaml",
-          "sha256": "9b19ba276fc6b6bf6efb9b14b8a07bf4688957e6a211b1476415c222d6cbacfb"
+          "sha256": "717d4a845a69ebb1bbbefc3e109bc6c1c393035c8e7a0f1b79c72bb042e120f2"
         },
         {
           "path": "design-library/components/video-history/component.yaml",
@@ -1346,11 +1346,11 @@
         },
         {
           "path": "features/video-expansion/generated/index.module.scss",
-          "sha256": "18f891a724b49d315e15d7b8f8c6c4e3d710ebed6c96c86d55b1302afd938f0d"
+          "sha256": "fbb61003b79aa05133ed042d19d191b9103b5bf25234f80ca9065c72322cb085"
         },
         {
           "path": "features/video-expansion/generated/settings/index.jsx",
-          "sha256": "6b51c32fb80507744400b4f94f56123f502813dcafb05e1630230786c27ab569"
+          "sha256": "498e13af86af1d85e134079bb7601a5cc54681566e0181e976eadb4605cae347"
         },
         {
           "path": "features/video-expansion/generated/settings/index.module.scss",
@@ -1734,7 +1734,7 @@
         },
         {
           "path": "platform/ui/credit-controls/CreditControls.module.scss",
-          "sha256": "2d7bb3218e700688e81c392bfb44603ced61ddbea485e3d0a3ddc0f7a2b87efa"
+          "sha256": "f44cd299a7011f3b946767039990fe71129cdaf422716a7406a34a75154db93d"
         },
         {
           "path": "platform/ui/credit-controls/CreditControls.stories.jsx",
@@ -1814,7 +1814,7 @@
         },
         {
           "path": "platform/ui/ratio/Ratio.module.scss",
-          "sha256": "9b03ba4791f86de6c2aaa2662a464f8c5619e4dc00c05e5158608806c7e36d83"
+          "sha256": "cb698ab327919cb187c28cf175be1af851eb487f89c7b3bdf8a9de639fde2beb"
         },
         {
           "path": "platform/ui/ratio/Ratio.stories.jsx",
@@ -1826,7 +1826,7 @@
         },
         {
           "path": "platform/ui/ratio/ratioTypes.js",
-          "sha256": "319a37000e75223ac3432743967cb06b3e071a3ad2d248bd2352f0f72dca42f2"
+          "sha256": "e67e6a62e3b1fb74b423900549c396a9834b2ee2b49463baaabe1605d00eafa0"
         },
         {
           "path": "platform/ui/result-page-shell/ResultPageShell.jsx",
@@ -1854,11 +1854,11 @@
         },
         {
           "path": "platform/ui/tool-page-layout/ToolPageLayout.jsx",
-          "sha256": "115dbfbc5a0cd7a930e815078b2755058ad37057952f132dc556cc237662a456"
+          "sha256": "76340028ba9c9294479ada67d72eec6326af12ace03f2ec1a01d376d31b062dd"
         },
         {
           "path": "platform/ui/tool-page-layout/ToolPageLayout.module.scss",
-          "sha256": "3e600161c49663e4c5bc22b8f281cbb56b0fa53e3ae6b1dc35243de728b6ae2e"
+          "sha256": "9d2ac2bf1429effcbc6c8fb2bd26de670501f36f5aa3dee3ff22f588e10cff58"
         },
         {
           "path": "platform/ui/tool-page-layout/ToolPageLayout.stories.jsx",
@@ -1870,11 +1870,11 @@
         },
         {
           "path": "platform/ui/upload-media-block/UploadMediaBlock.jsx",
-          "sha256": "fee43b762ddcd52a6bce45f37a3e84be5f0a4d563abf6f3febb1a0d0f3b53e7a"
+          "sha256": "7f4d257c26b150d398657ea60b1e10b39c49ae45b87ad8c3774f5cc869634f9a"
         },
         {
           "path": "platform/ui/upload-media-block/UploadMediaBlock.module.scss",
-          "sha256": "7e1a69d125d38cf3b915557c1ecd0519524712ca0098d9078153ba09df2db928"
+          "sha256": "5e508f7b88a204e325f485daefc0818caa7d85582fc5824d33188636583af7c3"
         },
         {
           "path": "platform/ui/upload-media-block/UploadMediaBlock.stories.jsx",
@@ -2233,7 +2233,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "453d4ccab05fc9e8bb0a53c2c38af1c5304126e523221d789da63f2c21d9d8da",
+      "hash": "cf42c2a4af1a025bfa52d51f1eb504cf426ce728f134aa4351b5d2891731b961",
       "edges": [
         {
           "from": "design-library/assets/font/yco-interface-icons.style.css",
@@ -2861,6 +2861,11 @@
           "to": "platform/ui/upload-media-block/UploadMediaBlock.module.scss"
         },
         {
+          "from": "platform/ui/upload-media-block/UploadMediaBlock.module.scss",
+          "specifier": "../../../design-library/assets/font/yco-interface-icons/icomoon.woff",
+          "to": "design-library/assets/font/yco-interface-icons/icomoon.woff"
+        },
+        {
           "from": "platform/ui/video-history/index.js",
           "specifier": "./VideoHistory.jsx",
           "to": "platform/ui/video-history/VideoHistory.jsx"
@@ -3022,6 +3027,6 @@
         "react-dom"
       ]
     },
-    "revisionHash": "bedb4dae5b5e4d14429f9d6b661b77783b8ce0e95331642e6e56ae15c758b640"
+    "revisionHash": "0cf68dcbf39dee7e8152bd2b6204b67c3a012fd8aa25bf8fb0584700302edd15"
   }
 }

@@ -51,33 +51,23 @@ button.control {
 }
 
 .actionBar {
-  /* Establishes a size query context so .actionBarInner's padding can react to
-     this panel's own rendered width, not the browser viewport — the Figma
-     handoff spec's "W400 & mobile" vs "W300" split is about how wide the panel
-     this action bar sits in actually is (it can be embedded at either width
-     regardless of device), which is what a container query measures. An
-     element can't query its own containment context, so the container lives
-     here and the padding lives on .actionBarInner, one level in. */
-  container-type: inline-size;
   flex: 0 0 auto;
   width: 100%;
-  background: var(--background-base);
-  box-shadow: 0 -4px 12px color-mix(in srgb, var(--fill-strong) 8%, transparent);
 }
 
+/* Reference (2026-09-15, reported live with a DevTools box-model inspect —
+   "不需要有綠色這層padding", the green padding layer being .actionBarInner's
+   own 16px/24px): that padding (plus the container-query width-responsive
+   variant it used to have, and .actionBar's own container-type: inline-size
+   that only existed to support it) compensated for this bar spanning
+   edge-to-edge with no outer margin — the "full-bleed fixed bottom bar"
+   treatment. Now that it commonly sits in normal flow inside an
+   already-padded panel (ToolPageLayout's own .footer, see that component's
+   decisionBasis), that inset just made the button narrower than the
+   settings content above it instead of aligning with it — removed along
+   with the container-query split, which had nothing left to do once this
+   padding was gone. */
 .actionBarInner {
-  padding: var(--spacing-16) var(--spacing-24);
-}
-
-/* Figma handoff spec: W300 gets 16px side padding, W400 (and mobile) gets 24px.
-   350px is the midpoint between the two named widths — there wasn't a more
-   exact cutoff in the spec, so flag this with Designer/RD if the real threshold
-   should be somewhere else. */
-@container (max-width: 350px) {
-  .actionBarInner {
-    padding-left: var(--spacing-16);
-    padding-right: var(--spacing-16);
-  }
 }
 
 /* Fill and label colour come from the shared Button `tone_brand`/`variant_primary`

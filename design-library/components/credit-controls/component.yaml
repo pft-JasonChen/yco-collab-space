@@ -39,14 +39,14 @@ implementation:
   removedDependencies: [ redux, authentication, credit-service, pricing-modal, local-storage, i18n, lodash, analytics ]
   localFiles:
     - path: platform/ui/credit-controls/CreditControls.jsx
-      sha256: 73e59eb7e99fd635295874e98806631ab43f40ecde6605faa9a59e7f1ddab049
+      sha256: d806a893de52007e11a04d98cc084a0ca0f969bd0e7acd34c6eb4c3fc20f945e
     - path: platform/ui/credit-controls/CreditControls.module.scss
-      sha256: 2d7bb3218e700688e81c392bfb44603ced61ddbea485e3d0a3ddc0f7a2b87efa
+      sha256: 3092bdff94b34c0e2f6345cf95bb9a89ffe1fa93df098fecf6ff250002b2b183
     - path: platform/ui/credit-controls/CreditControls.stories.jsx
       sha256: 050d42c8164d821b9469c5e1a278d21cc11847de28943c4769d5846e26bd6213
     - path: platform/ui/credit-controls/index.js
       sha256: 5bcc58063e29497a2c720fb7c7c916230633f961b3645218193e31401d59e29b
-  localFilesUpdated: 2026-09-10
+  localFilesUpdated: 2026-09-15
 publicApi:
   props:
     - { name: balance, required: false }
@@ -76,3 +76,5 @@ decisionBasis:
   - "Current local hashes after the 2026-09-06 changes above: `CreditControls.jsx` → 73e59eb7e99fd635295874e98806631ab43f40ecde6605faa9a59e7f1ddab049; `CreditControls.module.scss` → bdb56f69c0748e6f3cfe7bda51d8737924cd3defcd26440315ecde3281aad854. Same deliberate-divergence status as button's own component.yaml — pending Designer/RD canonical review, not silently claimed as already approved."
   - "Designer canonical review approved 2026-09-06: current implementation reviewed and signed off. RD canonical review still pending."
   - "2026-09-10: Replaced undefined --font-weight-regular with the existing RD --font-weight-weak (400), matching the previous normal fallback."
+  - "`.actionBar`'s own background+box-shadow removed (2026-09-15, requested live — \"接著settings就不用在包在一個container裡面了，離最後一個container 16px就好\", in the context of ToolPageLayout's own footer becoming conditionally sticky rather than a permanently-fixed bottom bar — see that component's own decisionBasis): those two properties were built for a bar that's always visually separated from scrolled content behind it; now that GenerateActionBar commonly renders in plain document flow right after a panel's settings, they read as an unwanted boxed card around just the button. ToolPageLayout's own `.footer` wrapper already carries the background needed for the one case (a tall settings panel, actually stuck) where opacity still matters, so nothing was lost."
+  - "`.actionBarInner` wrapper div and its own width-responsive 16px/24px padding removed entirely (2026-09-15, reported live with a DevTools box-model inspect — \"不需要有綠色這層padding\"), along with `.actionBar`'s `container-type: inline-size` (its only reason for existing was that padding's `@container` query): both existed to inset this bar's content when it spanned edge-to-edge with no outer margin of its own — the same full-bleed treatment the entry above already retired. With no outer margin left to compensate for, the inset just made the button narrower than the settings content above it instead of matching its width."
