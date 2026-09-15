@@ -366,7 +366,7 @@ export default function VideoExpansionFeature() {
   return (
     <>
       <ResultPageShell title={featureName} showInfo={false} activeToolId="ai-video" creditBalance={mockData.credits.headerBalance} showCredits>
-        <div className={styles.page} data-testid="video-expansion-page" data-tab={activeTab}>
+        <div className={styles.page} data-testid="video-expansion-page" data-tab={activeTab} data-loaded={loaded ? 'true' : 'false'}>
           <ToolPageLayout
             panelContentClassName={styles.panelContent}
             panel={(
@@ -399,6 +399,7 @@ export default function VideoExpansionFeature() {
             )}
             result={(
               <VideoResultsSurface
+                title={featureName}
                 activeTab={activeTab}
                 onTabChange={setActiveTab}
                 processing={generationState === GENERATION_STATES.PROCESSING}
@@ -426,7 +427,15 @@ export default function VideoExpansionFeature() {
                             }} />
                           </div>
                         </div>
-                        <VideoTimeline frameUrls={timelineFrames} frameStrategy="browser-capture-10" thumbnailCount={mockData.timeline.thumbnailCount} duration={duration} startTime={trimStart} endTime={trimEnd} currentTime={currentTime} isPlaying={isPlaying} onPlay={playVideo} onPause={pauseVideo} onSeek={seekPlayback} synchronized className={styles.derivedTimeline} />
+                        {/* Label row moved back INTO VideoTimeline itself (2026-09-14, requested
+                            — "我希望你可以把1和2跟在Video Timeline這個元件"): showLeftLabel/
+                            showRightLabel render the same elapsed/duration pair this used to
+                            compute externally, now as the component's own built-in slots.
+                            showKeyframe=false: that marker flags an edit point on the video
+                            object-removal flow specifically (per Figma, jb5SgyshmuPse0L7IFm0QO
+                            node 7460:183805) — Video Expansion isn't an edit-in-place flow, so
+                            showing it here would be a misleading "this point was edited" badge. */}
+                        <VideoTimeline frameUrls={timelineFrames} frameStrategy="browser-capture-10" duration={duration} startTime={trimStart} endTime={trimEnd} currentTime={currentTime} isPlaying={isPlaying} onPlay={playVideo} onPause={pauseVideo} onSeek={seekPlayback} onTrimStartChange={setTrimStart} onTrimEndChange={setTrimEnd} showKeyframe={false} showLeftLabel showRightLabel className={styles.derivedTimeline} />
                       </div>
                     ) : <EmptyResult error={sourceState === SOURCE_STATES.ERROR} onPick={() => inputRef.current?.click()} onSample={() => loadSample()} onRecover={() => setSourceState(SOURCE_STATES.EMPTY)} />}
                   </div>

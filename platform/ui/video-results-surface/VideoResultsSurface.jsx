@@ -91,6 +91,16 @@ export default function VideoResultsSurface({
   filterValue = 'all',
   filterOptions,
   onFilterChange,
+  /** Feature-page title, shown once directly under the tab bar — mobile-only
+   * (see .mobileTitle in the module.scss): at >=900px ToolPageLayout keeps the
+   * settings panel beside this surface and the page title already lives in
+   * ResultPageShell's own header, so repeating it here would be redundant.
+   * Below that, ToolPageLayout stacks panel below this surface with no room
+   * left for a page-level heading of its own, so this is the one place a
+   * title can sit between the tabs and whichever content is active — matching
+   * a supplied reference of the real production mobile layout (tabs, then
+   * title, then the settings form). */
+  title = null,
   className = '',
 }) {
   const labels = { ...defaultLabels, ...labelOverrides };
@@ -101,7 +111,15 @@ export default function VideoResultsSurface({
         <ResultTabs labels={labels} value={activeTab} onChange={onTabChange} processing={processing} />
         {isHistory ? <HistoryFilter labels={labels} value={filterValue} options={filterOptions} onChange={onFilterChange} /> : null}
       </div>
-      <div className={isHistory ? styles.historyContent : styles.editContent}>
+      {title ? <h2 className={styles.mobileTitle}>{title}</h2> : null}
+      {/* Stable hook for a consumer to make this a flex container from the
+          outside — needed wherever a descendant relies on height:100% through
+          here, since a flex ITEM's grown size (this div, via .editContent/
+          .historyContent's own `flex:1`) doesn't count as "definite" for a
+          plain block child's percentage height. Not made flex by default here
+          because most consumers don't need it and it'd affect this file's own
+          layout assumptions for every existing usage. */}
+      <div className={isHistory ? styles.historyContent : styles.editContent} data-component-role="results-content">
         {isHistory ? historyContent : editContent}
       </div>
     </div>

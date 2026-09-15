@@ -144,8 +144,8 @@
 .emptyResult h1 {
   margin: 0 0 var(--spacing-4);
   color: var(--text-strong);
-  font-size: var(--font-size-heading-4);
-  line-height: var(--line-height-heading-4);
+  font-size: var(--font-size-heading-5);
+  line-height: var(--line-height-heading-5);
   font-weight: var(--font-weight-strong);
 }
 
@@ -163,7 +163,7 @@
   flex-direction: column;
   align-items: center;
   gap: var(--spacing-12);
-  color: var(--text-weak);
+  color: var(--text-weaker);
   font-size: var(--font-size-tiny);
   line-height: var(--line-height-tiny);
 }
@@ -186,10 +186,115 @@
 }
 
 @media (max-width: 900px) {
+  /* Was a flat `min-height: 1280px` guess, then `min-height: 100dvh` — both
+     sized against the WRONG box. `100dvh` is the whole device viewport, but
+     this element never gets the whole device viewport: PrototypeFrame's own
+     banner and ResultPageShell's mobile header both sit above it, so `.page`
+     was asking for more height than its real flex-parent chain could give it,
+     forcing a small unwanted scroll in the empty state (reported live,
+     confirmed by measuring window.innerHeight vs. this element's actual box).
+     ResultPageShell's own `.shellContent` (the direct parent here) is now a
+     flex column with `flex: 1; min-height: 0`, so `.page` can just take
+     `flex: 1; min-height: 0` too and get its real remaining height from that
+     chain instead of guessing — same technique as the empty-state card's own
+     fill-height fix below. Still lets `.page` grow taller than one screen via
+     normal block flow once the (much taller) loaded-state form is visible,
+     since flex-basis 0 + content is a floor, not a cap. */
   .page {
-    height: auto;
-    min-height: 1280px;
+    display: flex;
+    flex: 1;
+    min-height: 0;
+    flex-direction: column;
     overflow: visible;
+  }
+
+  [data-component-role='tool-page-layout'] {
+    flex: 1;
+  }
+
+  /* Reference (2026-09-14, real production mobile screenshots):
+     tabs/History-filter come first, then the page title, then the settings
+     form — not the settings form first with tabs trailing after it, which is
+     what ToolPageLayout's own @media(max-width:900px){.layout{flex-direction:
+     column}} alone produces (it just stacks panel-then-result in DOM order,
+     doesn't reorder them). Reordered here via plain CSS `order` on
+     ToolPageLayout's own stable data-surface-zone attributes rather than
+     touching ToolPageLayout itself, since this is this feature's own visual
+     requirement, not a change to how every ToolPageLayout consumer should
+     behave. */
+  /* This section's own height (783px, matching window.innerHeight — verified
+     live) came entirely from `flex:1` inside ToolPageLayout's own flex-column
+     `.layout` — but ToolPageLayout's `.result` is itself `display:block`, not
+     a flex container, so VideoResultsSurface's `.surface { height:100% }`
+     couldn't resolve against it: a flex item's *used* size from flex-grow
+     doesn't count as a definite height for a plain block child's percentage,
+     only for another flex item of that same box. Confirmed live: .surface
+     measured 698px (just hugging its own content) instead of the 783px this
+     section actually had. Making this section a flex column itself — still
+     scoped to this feature, ToolPageLayout stays untouched — turns
+     VideoResultsSurface's root back into an ordinary flex item, the case
+     percentage/flex sizing actually supports, so it (and everything inside
+     it down to the empty-state card) can finally fill the space `order:-1`
+     already gave it. */
+  [data-surface-zone='result-column'] {
+    display: flex;
+    flex-direction: column;
+    order: -1;
+  }
+
+  /* Making the section above a flex container fixes percentage-height
+     resolution in general, but VideoResultsSurface's own root only ever sets
+     `height:100%` (never `flex`) — as a flex item with the default
+     flex-grow:0, its height:100% becomes a flex-basis it won't grow past, and
+     that basis still measured short in testing (a nested flex/percentage
+     edge case, not worth chasing further). `flex:1` makes it grow to fill the
+     section directly instead, sidestepping percentage resolution entirely —
+     confirmed live this is what actually closes the gap. */
+  [data-surface-zone='result-column'] > [data-component-role='video-results-surface'] {
+    flex: 1;
+    min-height: 0;
+  }
+
+  /* Same fix, one level deeper: .editContent (this div) is a definite-height
+     flex item of .surface now, but is itself display:block, so .editResult's
+     height:100% still couldn't resolve against it — confirmed live (560px,
+     exactly its own min-height floor, not the ~650px it should have had).
+     Using VideoResultsSurface's own results-content hook rather than
+     targeting .editContent/.historyContent directly, since those class names
+     are that component's private implementation detail. */
+  [data-component-role='results-content'] {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Same fix, one level deeper again — and empirically, `display:flex` on the
+     parent alone (as tried first, here and above) was never actually enough
+     on its own: at every level in this chain, the percentage-height child
+     kept measuring at its own content/min-height size until it ALSO got an
+     explicit `flex:1` of its own, confirmed live each time. So every step
+     from here down gives the flex-item its own flex:1 rather than trusting
+     height:100% to resolve as a flex-basis substitute. */
+  .editResult {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .canvasArea,
+  .canvasAreaLoaded {
+    flex: 1;
+  }
+
+  [data-surface-zone='settings-inspector'] {
+    order: 0;
+  }
+
+  /* Confirmed (2026-09-14): before a video is uploaded, the settings form
+     duplicates the empty-state card's own "Upload Video" entry point — hide
+     it until a source is actually loaded, matching the reference's empty vs.
+     loaded screenshots (empty: just the card; loaded: the full form). */
+  .page[data-loaded='false'] [data-surface-zone='settings-inspector'] {
+    display: none;
   }
 
   .panelContent { overflow: visible; }

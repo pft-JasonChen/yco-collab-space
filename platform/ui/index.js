@@ -22,7 +22,7 @@ export { default as VideoResultsSurface, ResultTabs, HistoryFilter } from './vid
 export { default as CreditControl, CreditBadge, GenerateActionBar } from './credit-controls/index.js';
 export {
   default as ResultPageShell,
-  ProductHeader,
   ToolFamilyMenu,
   defaultToolFamilies,
 } from './result-page-shell/index.js';
+export { default as NavigationHeader } from './navigation-header/index.js';

@@ -60,7 +60,7 @@ implementation:
     - path: platform/ui/video-trim-modal/VideoTrimModal.jsx
       sha256: 9a005508f16f597fc384bfd83fbb7b7e46029bf8124ef158726c87a1d8fefbce
     - path: platform/ui/video-trim-modal/VideoTrimModal.module.scss
-      sha256: e4e09154b078b5f78a02bf5ccfae332362778c6ec01be8d13b01ab05bf798e78
+      sha256: bf6efcff617bda3b6296c9294da755ea7ca984121ce260fd571ee3b656aaba45
     - path: platform/ui/video-trim-modal/VideoTrimModal.stories.jsx
       sha256: 2e5ae65e462439f7125206c4e2f04456bfbdaa8126c1b56bfb63d6af424723e6
     - path: platform/ui/video-trim-modal/constants.js
@@ -73,7 +73,7 @@ implementation:
       sha256: a7f0574173007aa10f7cbb21a226bfd950772f1a3aa8761d087621ab83ad3305
     - path: platform/ui/video-trim-modal/useVideoTrim.js
       sha256: 90ac3b08187dd335ceb16d7174196e390f2da139889ffafd94acb19a916cbfff
-  localFilesUpdated: 2026-09-05
+  localFilesUpdated: 2026-09-14
 publicApi:
   props:
     - name: opened
@@ -99,7 +99,7 @@ publicApi:
   states: [closed, loading, ready, playing, muted, maximum-window-reached, invalid-range, confirming]
 tokens:
   lockPath: platform/tokens/tokens.lock.json
-  uses: [--background-base, --fill-brand-strong, --stroke-focus, --text-strong]
+  uses: [--background-base, --fill-brand-strong, --fill-strong, --fill-weak, --stroke-focus, --text-strong]
 assets:
   - path: assets/video/rd-component-fixtures
     usage: storybook
@@ -115,3 +115,5 @@ decisionBasis:
   - AI Agent supplies the closest existing trim behavior and presentation in the RD snapshot.
   - The port keeps local media processing only and does not import production task or account behavior.
   - The maximum trim window is enforced during handle dragging rather than only at confirm time, so a segment longer than the feature limit can never be selected.
+  - "Modal shadow color fix (2026-09-14, reported live — \"這影子顏色不太對\"): .modal's box-shadow used var(--background-overlay) as its color, which resolves to --grey-solid-0 (solid white, the same value as --background-base/--fill-white) — a white shadow renders as no visible shadow at all against the page. No dedicated shadow token exists in this token set; every other elevated surface in platform/ui composes a shadow color from --fill-strong via color-mix instead (VideoResultsSurface's card/drag-handle shadows, CreditControls' action-bar shadow) — same convention applied here (color-mix(in srgb, var(--fill-strong) 16%, transparent)) rather than inventing a new approach. Chose 16% as a middle value between the 10% used for a subtle card shadow and 24% used for a more prominent element elsewhere in platform/ui, since a modal warrants a visible-but-not-heavy lift off its own dim backdrop; no Figma shadow spec was available to match exactly."
+  - "Preview letterbox color fix (2026-09-14, reported live — \"這後面我們壓的不是黑色，是fill-weak的顏色\"): .preview's background was var(--background-inverse) (solid near-black), showing as black pillarbox/letterbox bars behind the contain-fitted video preview. Corrected to var(--fill-weak) (light grey), matching the intended design."

@@ -1,9 +1,4 @@
-import desktopLogo from '../../../design-library/assets/logo/yco-online-editor/logo-en-desktop.svg';
-import mobileLogo from '../../../design-library/assets/logo/yco-online-editor/logo-en-mobile.svg';
-import logoSymbol from '../../../design-library/assets/logo/yco-online-editor/logo-symbol.svg';
-import profileIcon from '../../../design-library/assets/icon/yco-result-page-shell/profile.svg';
-import infoIcon from '../../../design-library/assets/icon/yco-result-page-shell/info.svg';
-import { CreditControl } from '../credit-controls/index.js';
+import NavigationHeader from '../navigation-header/index.js';
 import { defaultToolFamilies } from './defaultToolFamilies.js';
 import styles from './ResultPageShell.module.scss';
 
@@ -14,62 +9,6 @@ const defaultLabels = {
   toolFamilies: 'Tool families',
   toolList: 'YCO tools',
 };
-
-export function ProductHeader({
-  labels: labelOverrides = {},
-  title,
-  showInfo = true,
-  onInfo,
-  onAccount,
-  onBrand,
-  creditBalance = 436,
-  showCredits = true,
-  onCredits,
-}) {
-  const labels = { ...defaultLabels, ...labelOverrides };
-  return (
-    <header
-      className={styles.productHeader}
-      data-testid="production-header"
-      data-surface-zone="navigation"
-      data-component-role="navigation-header"
-    >
-      <button
-        className={styles.brand}
-        type="button"
-        onClick={onBrand}
-        disabled={!onBrand}
-        aria-label={labels.home}
-      >
-        <img className={styles.logoSymbol} src={logoSymbol} alt="" aria-hidden="true" />
-        <picture>
-          <source media="(max-width: 768px)" srcSet={mobileLogo} />
-          <img className={styles.wordmark} src={desktopLogo} alt="YouCam Online Editor" />
-        </picture>
-      </button>
-      <div className={styles.titleGroup}>
-        <h1>{title}</h1>
-        {showInfo ? (
-          <button data-testid="product-title-info" type="button" onClick={onInfo} disabled={!onInfo} aria-label={`About ${title}`}>
-            <img src={infoIcon} alt="" aria-hidden="true" />
-          </button>
-        ) : null}
-      </div>
-      <div className={styles.headerActions}>
-        {showCredits ? <CreditControl balance={creditBalance} onClick={onCredits} /> : null}
-        <button
-          className={styles.account}
-          type="button"
-          onClick={onAccount}
-          disabled={!onAccount}
-          aria-label={labels.account}
-        >
-          <img src={profileIcon} alt="" aria-hidden="true" />
-        </button>
-      </div>
-    </header>
-  );
-}
 
 /* Figma's own Divider component (node 198:248): a 1px --stroke-weak line that
    fills its parent's width — here that parent is the 80px icon column, not the
@@ -143,12 +82,30 @@ export default function ResultPageShell({
   creditBalance = 436,
   showCredits = true,
   onCredits,
+  /** Which NavigationHeader userType to render (2026-09-14: NavigationHeader
+   * merged with what used to be this shell's own separate ProductHeader — see
+   * NavigationHeader.jsx's own top comment — so there's one header now, not a
+   * desktop/mobile pair). 'pro' is the default since ResultPageShell has no
+   * real subscription-tier data of its own and 'pro' is the one tier with no
+   * upsell button, the most neutral choice for a generic in-tool header. */
+  userType = 'pro',
   children,
 }) {
   const labels = { ...defaultLabels, ...labelOverrides };
   return (
     <div className={styles.shell}>
-      <ProductHeader labels={labels} title={title} showInfo={showInfo} onInfo={onInfo} onAccount={onAccount} onBrand={onBrand} creditBalance={creditBalance} showCredits={showCredits} onCredits={onCredits} />
+      <NavigationHeader
+        userType={userType}
+        showFeatureName
+        featureNameText={title}
+        showFeatureInfo={showInfo}
+        onInfo={onInfo}
+        creditBalance={creditBalance}
+        showCredits={showCredits}
+        onCredits={onCredits}
+        onAccount={onAccount}
+        onBrand={onBrand}
+      />
       <div className={styles.shellBody}>
         <ToolFamilyMenu labels={labels} items={toolItems} activeId={activeToolId} onSelect={onToolSelect} />
         <main className={styles.shellContent}>{children}</main>

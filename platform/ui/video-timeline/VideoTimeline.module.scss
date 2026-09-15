@@ -1,6 +1,37 @@
+/* Column: an optional label row (see .labelRow), then the actual playback
+   pill (.mainRow) — matching Figma's own layout (jb5SgyshmuPse0L7IFm0QO node
+   14893:252737), where the "00:00"/"00:22" pair sits in its own row above
+   the frames+Play pill, not inside it. */
 .timeline {
   display: flex;
+  flex-direction: column;
   width: min(100%, 720px);
+  gap: var(--spacing-4);
+}
+
+/* Reference (2026-09-14, requested — "我希望你可以把1和2跟在Video Timeline這
+   個元件，只是分別做布林"): two independently toggleable slots, not one
+   all-or-nothing row — see showLeftLabel/hintText/showRightLabel above. */
+.labelRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--spacing-4);
+  font-size: var(--font-size-micro);
+  line-height: var(--line-height-micro);
+  white-space: nowrap;
+}
+
+.hint {
+  color: var(--text-strong);
+}
+
+.timeValue {
+  color: var(--text-weaker);
+}
+
+.mainRow {
+  display: flex;
   min-height: 72px;
   align-items: center;
   gap: var(--spacing-12);
@@ -33,13 +64,16 @@
   box-shadow: 0 0 0 var(--spacing-4) var(--stroke-focus);
 }
 
+/* No `overflow: hidden` here (removed 2026-09-14) — the playhead now
+   deliberately overshoots this box's own height (see .playhead) to read as
+   more prominent, and clipping at this level would cut that overshoot right
+   back off. Rounding/clipping instead happens one level down, only on the
+   layers that actually need it (.frames/.framesPlaceholder). */
 .track {
   position: relative;
   height: var(--spacing-48);
   min-width: 0;
   flex: 1;
-  overflow: hidden;
-  border-radius: var(--corner-radius-4);
   cursor: pointer;
 }
 
@@ -51,6 +85,7 @@
   grid-auto-columns: 1fr;
   gap: var(--spacing-4);
   overflow: hidden;
+  border-radius: var(--corner-radius-4);
   background: var(--fill-weaker);
 }
 
@@ -63,11 +98,111 @@
   pointer-events: none;
 }
 
-.playhead {
+/* Corrected (2026-09-14, reported live): Figma's own "Show Keyframe" isn't a
+   filmstrip visibility toggle — it's this single diamond marker, centered
+   over the filmstrip, that flags an edit point on the video object-removal
+   flow. z-index sits below the trim overlay/handles/playhead so those still
+   read on top when a trim range happens to overlap the marker. */
+.keyframeMarker {
   position: absolute;
-  z-index: 2;
+  z-index: 1;
   top: 0;
   bottom: 0;
+  left: 0;
+  right: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.keyframeMarker img {
+  width: 16px;
+  height: 20px;
+}
+
+/* Reference (2026-09-14, jb5SgyshmuPse0L7IFm0QO node 14893:252737): the
+   selected [startTime, endTime] window drawn as an overlay across the
+   full-duration filmstrip beneath it — dimmed outside the selection, an
+   outlined range with two draggable handles inside it. The container itself
+   stays pointer-events:none so the seek <input> underneath still receives
+   clicks/drags anywhere that isn't a handle; only the handles opt back in. */
+.trimOverlay {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  pointer-events: none;
+}
+
+.overlayDim {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: color-mix(in srgb, var(--fill-strong) 45%, transparent);
+}
+
+.trimRange {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  box-sizing: border-box;
+  border: 1.5px solid var(--stroke-selected);
+  border-radius: var(--corner-radius-4);
+}
+
+/* Corrected (2026-09-14, reference jb5SgyshmuPse0L7IFm0QO nodes
+   14908:253051/11469:164246 — "你參考figma位置"): plain 16px, matching
+   Figma's own trim-handles-l/-r exactly — not widened. The earlier "widen
+   to reach .mainRow's own padding" attempt was the wrong fix for the right
+   complaint: per these two reference frames' actual node geometry, the
+   bordered .trimRange box itself extends by one handle-width past the true
+   time boundary on each side (see the inline style in VideoTimeline.jsx),
+   and the handle just sits flush at that box's own edge (left:0/right:0
+   below) — it isn't the handle that needs to be wider, it's the range box
+   that needs to extend further to make room for it. */
+.handle {
+  position: absolute;
+  top: -1.5px;
+  bottom: -1.5px;
+  z-index: 4;
+  display: grid;
+  width: 16px;
+  place-items: center;
+  padding: 0;
+  background: var(--fill-brand-strong);
+  border: 0;
+  cursor: ew-resize;
+  pointer-events: auto;
+}
+
+.handle:disabled {
+  cursor: default;
+}
+
+.handle img {
+  width: 16px;
+  height: 16px;
+}
+
+.handleLeft {
+  left: 0;
+  border-radius: var(--corner-radius-4) 0 0 var(--corner-radius-4);
+}
+
+.handleRight {
+  right: 0;
+  border-radius: 0 var(--corner-radius-4) var(--corner-radius-4) 0;
+}
+
+/* Reference (2026-09-14, reported live: "Playhead 的高度應該要比整個frames高，
+   比較明顯"): Figma's own Playhead is 68px against a 56px frame row (node
+   14893:252737's PlayheadContainer/Playhead) — taller than the track on both
+   ends, not flush with it, so it reads clearly above the filmstrip and the
+   trim-range outline instead of blending into them. */
+.playhead {
+  position: absolute;
+  z-index: 3;
+  top: -6px;
+  height: calc(100% + 12px);
   left: 0;
   width: var(--spacing-4);
   background: var(--fill-brand-strong);
@@ -79,7 +214,7 @@
 
 .track input {
   position: absolute;
-  z-index: 3;
+  z-index: 1;
   inset: 0;
   width: 100%;
   height: 100%;
@@ -88,21 +223,14 @@
   cursor: pointer;
 }
 
-.timeline time {
-  min-width: 78px;
-  color: var(--text-weak);
-  font-size: var(--font-size-micro);
-  line-height: var(--line-height-micro);
-  text-align: right;
-  white-space: nowrap;
-}
-
+/* The time label moved OUT of this component (2026-09-14, reference
+   jb5SgyshmuPse0L7IFm0QO node 14893:252737 — the "00:00"/"00:22" pair sits
+   in its own row above the frames+Play track, not stitched into it). A
+   consumer renders its own label from the same startTime/currentTime/endTime
+   values it already passes in here, via this module's own exported
+   formatTimelineTime — see VideoTrimModal's trim-timeline.js precedent. */
 @media (max-width: 768px) {
   .timeline {
     gap: var(--spacing-8);
-  }
-
-  .timeline time {
-    display: none;
   }
 }

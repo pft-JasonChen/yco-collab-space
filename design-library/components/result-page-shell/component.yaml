@@ -79,24 +79,22 @@ implementation:
   importPath: platform/ui/result-page-shell/index.js
   storyId: ui-result-page-shell
   framework: react
-  dependencies: [react]
+  dependencies: [react, navigation-header]
   removedDependencies: [next-router, redux, i18n, authentication, credit-service, pricing-modal, cms, analytics, textfit, lodash]
   localFiles:
     - path: platform/ui/result-page-shell/ResultPageShell.jsx
-      sha256: e125a0572543a28909a078e5c9d712a65b08e2ae2188e99e758bd497b74e9669
+      sha256: c7d78541aa3043e949ada2b11f7a9b7842b172783cb01da8282521fa474afb9e
     - path: platform/ui/result-page-shell/ResultPageShell.module.scss
-      sha256: 8f1a8c0f413f740fbfb949e4f9c29e6eb108f957a5ca114aa3110d9c8153787e
+      sha256: 07ec6ef148e929788ada2df77ac421d0fac279503f37a2415b6dec64eed20d5c
     - path: platform/ui/result-page-shell/ResultPageShell.stories.jsx
       sha256: b6e01cf2bac53afb61e4f69843a3283095c353bd78a71fd0c0804ecc86a3d22c
     - path: platform/ui/result-page-shell/index.js
-      sha256: fce3def695e612a1128955543abddc07028aa4d8177ceb02b42350077c03c548
-    - path: platform/ui/result-page-shell/ProductHeader.stories.jsx
-      sha256: 32498417a0c513cf05debc343de7ff171504ecc0ede45545bb561cc6acdad18d
+      sha256: 927483876bab226789a25131dbdc7eacb0f3028869bacf48c0b4f2e4208d8edc
     - path: platform/ui/result-page-shell/ToolFamilyMenu.stories.jsx
       sha256: ffeb7a6524ab04cb8b35cc5af8c5a1043614a6c2dd5e835589b72f9808f3f388
     - path: platform/ui/result-page-shell/defaultToolFamilies.js
       sha256: 9900cb7d579f2ded55bde9f2ed1754834cda6742685d66a3e419bc75173ac4b9
-  localFilesUpdated: 2026-09-11
+  localFilesUpdated: 2026-09-14
 publicApi:
   props:
     - name: title
@@ -121,20 +119,21 @@ publicApi:
       required: false
     - name: onCredits
       required: false
+    - { name: userType, required: false, values: [non-login, free, plus, pro] }
     - name: children
       required: false
-  states: [desktop, compact-desktop, tablet, inert-navigation, active-tool, title-info-hidden, synthetic-credit]
+  states: [desktop, compact-desktop, tablet, mobile, inert-navigation, active-tool, title-info-hidden, synthetic-credit]
 tokens:
   lockPath: platform/tokens/tokens.lock.json
-  uses: [--background-base, --fill-brand-weak, --fill-brand-press, --fill-hover, --fill-press, --stroke-weak, --stroke-focus, --stroke-selected, --teal-dark-50, --text-brand, --text-strong]
+  uses: [--background-base, --fill-brand-weak, --fill-brand-press, --fill-hover, --fill-press, --stroke-weak, --stroke-focus, --stroke-selected, --teal-dark-50, --text-brand, --text-strong, --corner-radius-24, --font-size-micro, --font-weight-strong, --line-height-micro]
 assets:
-  - path: assets/logo/yco-online-editor
-    usage: runtime
+  # assets/logo/yco-online-editor and assets/icon/yco-credit-controls dropped
+  # (2026-09-14, header merge): both were only ever pulled in by ProductHeader,
+  # which this component no longer renders — navigation-header owns its own
+  # logo and credit-control assets now (see its own component.yaml).
   - path: assets/icon/yco-result-page-shell
     usage: runtime
   - path: assets/font/yco-interface-icons
-    usage: runtime
-  - path: assets/icon/yco-credit-controls
     usage: runtime
 review:
   pilotApprover:
@@ -150,3 +149,8 @@ decisionBasis:
   - The PM approved a presentational Result Page shell with AI Video active and an inert synthetic credit balance of 436.
   - Feature titles may hide the optional information action when no information surface exists.
   - "Round 2 sidebar fixes (2026-09-11): the active tool's text/icon color was --text-information (teal, #1a74a8) — the only use of that token family anywhere in platform/ui, and mismatched against its own selected-state fill (--fill-brand-weak, brand family). Every other active/brand state (Button's tone_brand variants) pairs --text-brand with brand fills, so this was a genuine one-off bug, not an intentional second color family; corrected to --text-brand. Separately, hover/press states were missing or wrong: hover incorrectly reused the selected-state fill (--fill-brand-weak) instead of a neutral wash, and there was no press state at all. Added --fill-hover (hover), --fill-press (press) matching Button's own hover/press convention, plus Active Hover (--teal-dark-50 + --stroke-selected ring) and Active Press (--fill-brand-press + --stroke-selected ring) per Figma's MenuList component (node 13026:43818, file JXNIQPJT9I9qFrgtiaCn4i) — a full state matrix that wasn't implemented at all before. Divider and inter-button spacing were also rebuilt to match Figma's NavigationSide (node 13028:53081) exactly: the 80px icon column's own edge-to-edge divider (was incorrectly spanning the full 112px rail including the rail's own gutter padding) and flat 8px flex gaps between buttons (was accumulated margin/padding that drifted from spec). Also split the pre-existing defaultToolFamilies data array out of ResultPageShell.jsx into its own file — it was tripping Vite's react-refresh 'consistent-components-exports' check every edit (a component file exporting a plain data array alongside its components can't Fast Refresh)."
+  - "Account button size fix (2026-09-14, reported from the browser inspector): .account was 48px, which doesn't match any of Button's real size steps (32/36/42/56) — corrected to 42px (Button's 'medium' step), same convention the Round 2 Generate-button fix already established for this header. SUPERSEDED the same day by the ProductHeader/NavigationHeader merge below — .account no longer exists in this file at all, this class lived on ProductHeader which this shell no longer renders. Left here as a historical record of the fix, not a live rule."
+  - "headerActions gap fix (2026-09-14, reported from the browser inspector): the gap between CreditControl and the account button was --spacing-16 (16px); corrected to --spacing-12 (12px). SUPERSEDED the same day by the header merge below — .headerActions no longer exists in this file."
+  - "Account icon -> icon font (2026-09-14, suggested): swapped the account button's <img src={profileIcon}> for the YcoInterfaceIcons 'ic-user' glyph (U+E92B, same font already loaded for ToolFamilyMenu's .glyph icons), matching UploadMediaBlock's earlier icon-font precedent. Encountered one real transient bug worth recording: removing the profileIcon import and updating the JSX that used it were two separate edits, and Vite's dev server hot-reloaded the in-between state (import gone, usage not yet updated), throwing a real 'profileIcon is not defined' crash that a screenshot caught live — resolved once both edits landed together and the page was reloaded, not a lingering issue. SUPERSEDED the same day by the header merge below — this shell's own account button (and the accountGlyph/icon-font approach) no longer exists; the account button now comes from NavigationHeader's own image-based Avatar instead."
+  - "Mobile header swap (2026-09-14, confirmed from an annotated screenshot): below 768px, ProductHeader was replaced outright by platform/ui/navigation-header rather than squeezed into a mobile layout of its own. IMPORTANT GAP flagged at the time: NavigationHeader's own mobile row had no credits or title slot at all, so the page title and credit balance were no longer visible in the mobile header. SUPERSEDED the same day, see the header-merge entry directly below, which closes this exact gap by merging the two components instead of leaving desktop on one component and mobile on another."
+  - "ProductHeader/NavigationHeader merge (2026-09-14, explicit request: 'merge into the same component, no need to split by whether it's inside Result Page Shell, because there is no such distinction'). This shell had its own desktop-only ProductHeader (title/info/credits/account) alongside platform/ui/navigation-header's marketing-site header, which the previous entries above already had swapping in for ProductHeader at mobile widths only — two separate components for what turned out not to be a real distinction. ProductHeader is now deleted entirely (function, .stories.jsx, and every one of its own CSS classes — .productHeader/.brand/.account/.accountGlyph/.titleGroup/.logoSymbol/.wordmark/.headerActions); this shell renders NavigationHeader unconditionally at every width instead of picking between two wrapper divs, relying on NavigationHeader's own container-query breakpoints for the desktop/tablet/mobile switch. `title`/`showInfo`/`onInfo` map onto NavigationHeader's featureNameText/showFeatureName(always true here)/showFeatureInfo/onInfo; `mobileUserType` is renamed plain `userType` since it's no longer mobile-specific. NavigationHeader itself gained creditBalance/showCredits/onCredits (rendered next to Avatar on the wide row, and — closing the gap flagged above — also on the mobile row, ungated by any Figma reference since the merged combination didn't exist in the original marketing-header frames; it reuses CreditControl's own existing responsive behavior rather than a new bespoke compact treatment) — see navigation-header's own component.yaml for the full rationale. YcoInterfaceIcons/`.glyph` stays in this file's CSS — ToolFamilyMenu's icon column still uses it — only the header-specific classes were removed."

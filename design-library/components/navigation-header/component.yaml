@@ -1,0 +1,103 @@
+schemaVersion: 1
+id: navigation-header
+displayName: Navigation Header
+classification: composite
+status: pilot-approved
+rd:
+  sourcePackage: youcam-enhance-frontend
+  sourceVersion: 1.34.1
+  snapshot: yce-frontend-gm-260909
+  portability: figma-only
+  sourcePaths: []
+  sourceHashes: []
+figma:
+  status: mapped
+  fileKey: JXNIQPJT9I9qFrgtiaCn4i
+  componentSetNodeId: "12338:242779"
+  variants:
+    - non-login
+    - free
+    - plus
+    - pro
+implementation:
+  importPath: platform/ui/navigation-header/index.js
+  storyId: ui-navigation-header
+  framework: react
+  dependencies: [react, credit-controls]
+  removedDependencies: []
+  localFiles:
+    - path: platform/ui/navigation-header/NavigationHeader.jsx
+      sha256: 602bce0a58ed3afea5cebaed0d0182f8304ac46b3b17641a096512f7ed285674
+    - path: platform/ui/navigation-header/NavigationHeader.module.scss
+      sha256: 7a124addeb88722895bdd3350c1840c6ce11733ad8d298988ea1ff9b1db6f85d
+    - path: platform/ui/navigation-header/NavigationHeader.stories.jsx
+      sha256: 1ad11339c0470c0fc0391d901e64273fde4217c5d2be9cfc29e65e237cdd5c35
+    - path: platform/ui/navigation-header/index.js
+      sha256: 4f0c99da7cfd4c36ba670dda473c0755523ca5b1e7641dc86640b8646a5ca354
+  localFilesUpdated: 2026-09-14
+publicApi:
+  props:
+    - { name: userType, required: false, values: [non-login, free, plus, pro] }
+    - { name: navItems, required: false }
+    - { name: holidayPricing, required: false }
+    - { name: holidayDiscountLabel, required: false }
+    - { name: showFeatureName, required: false }
+    - { name: featureNameText, required: false }
+    - { name: showFeatureInfo, required: false }
+    - { name: creditBalance, required: false }
+    - { name: showCredits, required: false }
+    - { name: avatarSrc, required: false }
+    - { name: labels, required: false }
+    - { name: onNavItemClick, required: false }
+    - { name: onStartEditing, required: false }
+    - { name: onLoginSignup, required: false }
+    - { name: onSubscribe, required: false }
+    - { name: onUpgrade, required: false }
+    - { name: onAccount, required: false }
+    - { name: onMenuToggle, required: false }
+    - { name: onBrand, required: false }
+    - { name: onPromoAction, required: false }
+    - { name: onInfo, required: false }
+    - { name: onCredits, required: false }
+    - { name: className, required: false }
+  states: [non-login, free, plus, pro, holiday-pricing, desktop, tablet, mobile, inert, with-credits]
+tokens:
+  lockPath: platform/tokens/tokens.lock.json
+  uses: [--background-base, --text-strong, --text-inverse-strong, --stroke-strong, --stroke-focus, --fill-brand-strong, --icon-warning, --fill-warning-strong, --fill-strong, --corner-radius-32, --font-size-small, --font-size-heading-5, --line-height-small, --line-height-heading-5, --font-weight-strong]
+assets:
+  - path: assets/logo/yco-online-editor
+    usage: runtime
+  - path: assets/icon/yco-navigation-header
+    usage: runtime
+  - path: assets/icon/yco-result-page-shell
+    usage: runtime
+  # From the ProductHeader merge (2026-09-14): CreditControl's own icons,
+  # pulled in now that this component renders the credit-balance pill
+  # ResultPageShell's ProductHeader used to.
+  - path: assets/icon/yco-credit-controls
+    usage: runtime
+review:
+  pilotApprover:
+    actor: pm
+    id: collab-space-owner
+    date: 2026-09-14
+  canonicalReview:
+    designer: pending
+    rd: pending
+decisionBasis:
+  - "New component (2026-09-14): Figma's NavigationHeader (node 12338:242779, file JXNIQPJT9I9qFrgtiaCn4i) is the marketing-site top bar. It has no corresponding implementation in the vendored youcam-enhance-frontend@1.34.1 RD snapshot (that package is the in-app editor, not the marketing site), so rd.portability is figma-only, same precedent as empty-image. (Originally documented here as 'distinct from ResultPageShell's ProductHeader, the in-tool header' — see the merge entry below, which reverses that: they turned out not to be a real distinction.)"
+  - "Scope (2026-09-14): Figma defines ~90 variants (User Type x Device x Page x Holiday Pricing). This first pass models the userType axis in full (non-login/free/plus/pro, sampled directly from Figma) and the responsive axis in full for non-login (desktop/tablet/mobile all sampled) and for free/pro at desktop+mobile (sampled). Plus's mobile row and every userType's tablet row past non-login are extrapolated from the verified patterns (symbol-only logo + compact actions at tablet; same gradient-icon + dark-avatar pattern at mobile) rather than sampled from a dedicated Figma frame — flagged here rather than silently presented as pixel-verified. The Page axis (Home/Product page/Lobby/Feature room) showed no structural difference across the frames sampled other than Plus/Pro's optional featureName, so it's exposed as a plain `featureName` prop instead of a `page` enum."
+  - "Gradient fidelity (2026-09-14): Figma's Subscribe/Upgrade/promo buttons use a literal 3-stop warm-gold linear-gradient with no matching design token. tools/prototype-cli/token-policy.mjs's raw-colour scanner rejects any literal hex/rgb/rgba in platform/ui SCSS (comments included), so the gradient is composed from two existing solid tokens instead (--fill-warning-weak -> --fill-warning-strong) rather than a hand-picked literal — visually close, not a pixel-exact match to Figma's exact stops."
+  - "Mobile-tier promo icon (2026-09-14): Figma's Pro/Devices=03_Mobile frame still shows the gradient icon button seen on Free/Plus mobile, even though Pro Desktop drops the upgrade button entirely (Pro is already top tier). Its purpose isn't labelled per tier in Figma, so it's exposed as one generic `onPromoAction` handler across all three logged-in mobile variants rather than guessed apart into subscribe/upgrade-specific semantics."
+  - "Responsive mechanism (2026-09-14): breakpoints use CSS container queries (container-type/-name on .header, @container rules on descendants) rather than @media, matching the precedent already set by credit-controls' GenerateActionBar (.actionBar/.actionBarInner). This is what lets a fixed-width Storybook story actually exercise the tablet/mobile markup — a @media query resolves against the real browser viewport and ignores a narrow wrapper div entirely, which was caught live: the first draft used @media and the Mobile stories rendered the desktop row squeezed into a 375px box instead of switching to the mobile row."
+  - "Bug fixes (2026-09-14, reported from a screenshot): (1) the gradient's light stop was --fill-warning-weak, which resolves to amber-light-50 (#ffc02e0d — ~5% alpha), rendering as a near-white patch over the page background instead of a warm gradient; swapped for --icon-warning (amber-light-800, ~80% alpha), which is visibly warm at full strength. (2) the avatar's member-glyph icon was rendering oversized and overflowing the circle (\"爆開\") — .avatar img (specificity (0,1,1)) was unintentionally beating .avatarGlyph/.avatarPhoto (0,1,0 alone) and forcing them to the background circle's own 100%/inset:0 sizing instead of their own 57%/21.5% inset; fixed by giving the background circle its own .avatarBase class so it can never outrank the glyph/photo sizing regardless of source order — the same class of bug as the Round 2 sidebar tab font-weight fix, just on this component."
+  - "Bug fix (2026-09-14, reported from a screenshot): featureName was nested inside .left, right after the brand button — it rendered left-aligned trailing the logo instead of centered. Figma's own Plus/Pro frames (e.g. node 12338:242929) place it as a third sibling next to Logo/Right, not inside the logo group; fixed by making it a true middle grid column with two equal 1fr outer tracks (.hasCenter), the same centering technique ResultPageShell's ProductHeader already uses for its own title — applied only when featureName actually renders, since non-login's .left (logo+nav) and .right (2 buttons) are asymmetric enough that forcing equal-width outer tracks with nothing in the middle would serve no purpose."
+  - "Story restructuring (2026-09-14, requested): collapsed from 9 stories (one per userType/holidayPricing/showContest combination plus 3 duplicated per-userType Mobile stories) down to 3 — one per Figma device band (01_Desktop/02_Tablet/03_Mobile, named to match Figma's own devices dropdown verbatim). userType, holidayPricing and featureName are now Storybook Controls on all 3 rather than separate stories, since none of them need a different container width to demonstrate — only the device axis does (the breakpoints are a CSS container query on .header, not a prop, so it's the one axis Controls genuinely can't express and still needs a dedicated story per value)."
+  - "Controls cleanup (2026-09-14, requested): the 8 onXxx handler props and the 3 object-shaped props (navItems, holidayDiscountLabel, avatarSrc) were cluttering the Controls table with dashes and 'Set object' buttons that aren't actually editable there — same complaint as UploadMediaBlock's Controls panel earlier in this pilot. Given table:{disable:true} in the stories file, same convention as that fix; they're still normal props via args, just not surfaced as Controls widgets. Left visible: userType, holidayPricing, featureName — the ones that actually demonstrate a different rendered state."
+  - "Contest nav item removed (2026-09-14, per current Figma): showContest/onContest and the 'Contest' nav item are removed entirely — the current Figma no longer places Contest on the header at all, so this wasn't a Controls-visibility fix, it's a real feature removal. holidayPricing is unaffected and still exposed as a simple boolean since Figma's own component only has non-login instances of it."
+  - "featureName -> boolean (2026-09-14, reported from a screenshot): the single `featureName: string|null` prop is replaced by `showFeatureName` (boolean, matches Figma's own component property exactly — it's a plain on/off toggle there, not free text), `featureNameText` (the label shown when on, defaulting to 'Image to Video' since that's the only example Figma's sampled frames ever showed), and `showFeatureInfo` (boolean, independently toggles the (i) icon). Every earlier decisionBasis entry mentioning a `featureName` prop predates this rename; `.hasCenter`'s condition and all render logic now key off `showFeatureName`. `labels` and `className` were also pulled from Storybook Controls (table:{disable:true}) alongside this — same 'not actually editable there' reasoning as the onXxx/object-prop cleanup above, they're still normal props, just via args/consuming code rather than a Controls widget."
+  - "Conditional Controls (2026-09-14, requested): showFeatureName/showFeatureInfo only ever do anything for userType != non-login, so their Controls rows now use Storybook's argType `if: { arg: 'userType', neq: 'non-login' } }` to disappear entirely when userType is non-login, rather than sitting there inert. Same principle as every other Controls-cleanup entry above — a control with no visible effect for the current selection is noise, whether that's because the prop isn't wired to a widget or because the current state makes it a no-op."
+  - "Hamburger scope fix (2026-09-14, reported from a screenshot): the mobile menu button was gated behind `isNonLogin`, hidden for free/plus/pro — a misreading of Figma's own frames. Free/Plus/Pro mobile (e.g. node 12338:242919) carries the same menu icon left of the logo symbol as non-login's own frame; it's unconditional now for every userType. This is also why ResultPageShell's mobile header (userType='pro' by default) was missing its hamburger entirely before this fix."
+  - "Mobile hamburger-logo gap fix (2026-09-14, reported from Figma's own Gap inspector, 12px): .left's base 24px gap is correct for the wide-row's logo-to-nav-items spacing but was also leaking into the mobile row's hamburger-to-logo pair, which is 12px in Figma — scoped a `[data-role='mobile-row'] .left { gap: 12px }` override rather than changing the shared base rule."
+  - "Not built (2026-09-14): the mobile hamburger only renders a trigger button, not an actual nav drawer/overlay — matching this pilot's convention that RD-owned interactions (routing, state, drawer animation) are out of scope for a presentational port."
+  - "ProductHeader merge (2026-09-14, explicit request: 'merge into the same component, no need to split by whether it's inside Result Page Shell, because there is no such distinction'). result-page-shell's own ProductHeader (title/info icon/credit balance/account, desktop-only) is deleted; this component now covers both the marketing-site header AND ResultPageShell's in-tool header at every width, rather than the two being swapped at a breakpoint the way ResultPageShell's own earlier decisionBasis entries describe. Two additions made this possible, both scoped to the already-existing !isNonLogin (in-tool-page) branch: (1) the featureName info icon is now a real `<button onClick={onInfo}>` instead of a static `<img>` — ProductHeader's own onInfo had no equivalent here before. (2) new `creditBalance`/`showCredits`/`onCredits` props render credit-controls' `CreditControl` next to Avatar on the wide row, AND on the mobile row (closing a gap result-page-shell's own component.yaml had flagged: NavigationHeader's mobile row previously had no credits slot at all, so ProductHeader's swap-to-mobile silently dropped the credit balance). The mobile placement has no Figma reference for this exact combination — CreditControl's own already-responsive styling (it drops its '+' icon under 768px) is reused as-is rather than designing a new compact variant from scratch; flag for confirmation if the real design calls for something different there. See result-page-shell's own component.yaml for the ResultPageShell-side half of this change (its default export now renders this component directly, unconditionally, instead of picking between ProductHeader and this one)."

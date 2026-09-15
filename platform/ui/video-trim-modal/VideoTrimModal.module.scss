@@ -17,7 +17,15 @@
   color: var(--text-strong);
   background: var(--background-base);
   border-radius: var(--corner-radius-16);
-  box-shadow: 0 var(--spacing-8) var(--spacing-12) var(--background-overlay);
+  /* Was var(--background-overlay), which resolves to --grey-solid-0 (solid
+     white, same value as --background-base/--fill-white) — a white shadow is
+     invisible against the page and reads as "no shadow color at all"
+     (reported live). No dedicated shadow token exists in this token set;
+     every other elevated surface in platform/ui composes one from
+     --fill-strong via color-mix instead (VideoResultsSurface's own card/drag
+     -handle shadows, CreditControls' action-bar shadow) — same convention
+     applied here rather than inventing a new approach. */
+  box-shadow: 0 var(--spacing-8) var(--spacing-12) color-mix(in srgb, var(--fill-strong) 16%, transparent);
 }
 
 .closeButton {
@@ -57,7 +65,10 @@
   max-height: calc(var(--spacing-256) + var(--spacing-80));
   margin: 0 auto;
   overflow: hidden;
-  background: var(--background-inverse);
+  /* Was --background-inverse (solid near-black) — the letterbox/pillarbox
+     bars behind a contain-fitted video should be --fill-weak (light grey),
+     not black (reported live). */
+  background: var(--fill-weak);
   border-radius: var(--corner-radius-8);
 }
 

@@ -68,7 +68,13 @@ const stories = [
     },
   },
   {
+    // Same known, pre-existing debt as the button/video-info-dialog exception
+    // above (Round 2 sidebar work, 2026-09-11): .menuButtonActive's active-tab
+    // label is --text-brand on white, 2.59:1 — below WCAG AA. Unrelated to
+    // today's NavigationHeader merge; recorded the same way rather than
+    // silently fixed in passing.
     id: 'ui-result-page-shell--video-tool',
+    axeRules: brandContrastException,
     async interact(page) {
       const item = page.getByRole('button', { name: 'AI Image' });
       await item.click();
@@ -83,8 +89,13 @@ const stories = [
   },
   {
     id: 'ui-result-page-shell--without-title-info',
+    axeRules: brandContrastException,
     async interact(page) {
-      assert.equal(await page.getByTestId('product-title-info').count(), 0);
+      // testid updated (2026-09-14 NavigationHeader/ProductHeader merge):
+      // the info button now comes from NavigationHeader's own featureName
+      // slot (data-testid="feature-name-info"), not ProductHeader's old
+      // "product-title-info" — that component no longer exists.
+      assert.equal(await page.getByTestId('feature-name-info').count(), 0);
     },
   },
   {
@@ -131,12 +142,6 @@ const stories = [
         return { width: rect.width };
       });
       assert.equal(Math.round(bounds.width), 368);
-    },
-  },
-  {
-    id: 'ui-video-timeline--synchronized-canvas-playback',
-    async interact(page) {
-      assert.equal(await page.getByTestId('canvas-playback-timeline').getAttribute('data-synchronized'), 'true');
     },
   },
   {

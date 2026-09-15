@@ -1,0 +1,464 @@
+/* Figma NavigationHeader (node 12338:242779, file JXNIQPJT9I9qFrgtiaCn4i).
+   Three breakpoints map directly to Figma's own Devices variants:
+   Desktop >=1200px, Tablet 769-1199px, Mobile <=768px. The component renders
+   both a "wide" row (desktop+tablet) and a "mobile" row and lets CSS pick one —
+   the mobile row isn't just a restyle of the same buttons, Figma swaps in
+   different icon assets and drops the wordmark/nav text entirely, so two
+   markup blocks toggled by display is simpler and safer than trying to force
+   one set of elements through every breakpoint. */
+/* container-type/-name make the two breakpoint blocks below react to this
+   element's own rendered width rather than the page's viewport — matching
+   CreditControls' GenerateActionBar precedent (see its own .actionBar/
+   .actionBarInner split: a node can't query its own containment context, so
+   every width-dependent rule below targets a descendant of .header, never
+   .header itself). This is what lets a fixed-width Storybook story actually
+   demonstrate the tablet/mobile layouts without needing to resize the whole
+   browser viewport — a plain @media query would ignore a wrapper div's width
+   entirely and always resolve against the real viewport. */
+.header {
+  position: relative;
+  width: 100%;
+  container-name: navigation-header;
+  container-type: inline-size;
+  background: var(--background-base);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  padding: 0 32px;
+}
+
+.row[data-role='mobile-row'] {
+  display: none;
+}
+
+/* Same technique as ResultPageShell's ProductHeader (.productHeader): two equal
+   1fr outer tracks keep the middle (featureName) column truly centered no
+   matter how much wider .left (logo + nav) is than .right (avatar-only), since
+   both outer tracks always claim an equal share of the remaining space. Only
+   applied when a featureName is actually rendered — non-login's .left is far
+   wider than its .right, and with nothing in the middle column there's no
+   centering to protect, so it stays plain flex space-between instead of
+   fighting the same-width constraint for no reason. */
+.row.hasCenter {
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) auto minmax(280px, 1fr);
+}
+
+.row.hasCenter .left {
+  justify-self: start;
+}
+
+.row.hasCenter .right {
+  justify-self: end;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  min-width: 0;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 0 0 auto;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.brand:disabled {
+  cursor: default;
+}
+
+.logoSymbol {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 auto;
+}
+
+.wordmark {
+  display: block;
+  height: 25px;
+  width: 200px;
+}
+
+/* ----- Marketing nav (non-login only) ----- */
+.navItems {
+  display: flex;
+  align-items: center;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: var(--corner-radius-32);
+  background: transparent;
+  color: var(--text-strong);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  font-weight: var(--font-weight-strong);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.navItem:disabled {
+  cursor: default;
+}
+
+.navItem img {
+  width: 20px;
+  height: 20px;
+}
+
+.navItem .externalIcon {
+  width: 12px;
+  height: 12px;
+}
+
+.pricingPill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 6px 16px;
+  border: 0;
+  border-radius: 20px;
+  /* Figma's literal is a 3-stop warm-gold gradient (255,184,2 -> 255,165,28 ->
+     255,136,0); no gradient token exists, so this composes the closest pair of
+     already-defined solid tokens instead of a hand-picked raw colour. */
+  background: linear-gradient(90deg, var(--icon-warning), var(--fill-warning-strong));
+  color: var(--text-inverse-strong);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  font-weight: var(--font-weight-strong);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.pricingPill:disabled {
+  cursor: default;
+}
+
+.pricingPillDivider {
+  width: 1px;
+  height: 18px;
+  background: var(--text-inverse-strong);
+  opacity: 0.4;
+}
+
+/* ----- Logged-in feature name (Plus/Pro, replaces the marketing nav) ----- */
+.featureName {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-strong);
+  font-size: var(--font-size-heading-5);
+  line-height: var(--line-height-heading-5);
+  font-weight: var(--font-weight-strong);
+}
+
+.featureName img {
+  width: 16px;
+  height: 16px;
+}
+
+/* From the merged-in ProductHeader (2026-09-14): the (i) icon needs to be a
+   real button (onInfo), not the plain non-interactive <img> this block used
+   before the merge. */
+.featureInfoButton {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  padding: 4px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.featureInfoButton:disabled {
+  cursor: default;
+}
+
+.featureInfoButton img {
+  width: 16px;
+  height: 16px;
+}
+
+/* ----- Non-login right side ----- */
+.startEditingButton,
+.primaryPill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 16px;
+  border-radius: var(--corner-radius-32);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  font-weight: var(--font-weight-strong);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.startEditingButton {
+  border: 1px solid var(--stroke-strong);
+  background: transparent;
+  color: var(--text-strong);
+}
+
+.startEditingButton img {
+  width: 20px;
+  height: 20px;
+}
+
+.primaryPill {
+  border: 0;
+  background: var(--fill-brand-strong);
+  color: var(--text-inverse-strong);
+}
+
+.startEditingIconButton {
+  display: none;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border: 1px solid var(--stroke-strong);
+  border-radius: var(--corner-radius-32);
+  background: transparent;
+  cursor: pointer;
+}
+
+.startEditingIconButton img {
+  width: 24px;
+  height: 24px;
+}
+
+.compactPill {
+  display: none;
+}
+
+.startEditingButton:disabled,
+.primaryPill:disabled,
+.startEditingIconButton:disabled {
+  cursor: default;
+}
+
+/* ----- Logged-in upsell (Free "Subscribe" / Plus "Upgrade") ----- */
+.upsellButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: var(--corner-radius-32);
+  background: linear-gradient(90deg, var(--icon-warning), var(--fill-warning-strong));
+  color: var(--text-inverse-strong);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  font-weight: var(--font-weight-strong);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.upsellButton:disabled {
+  cursor: default;
+}
+
+.upsellButton img {
+  width: 20px;
+  height: 20px;
+}
+
+/* ----- Avatar (Free/Plus/Pro desktop+tablet) ----- */
+.avatar {
+  position: relative;
+  display: flex;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+}
+
+.avatar:disabled {
+  cursor: default;
+}
+
+/* Was `.avatar img` — a single class matching every <img> in .avatar, including
+   the glyph/photo below. Since `.avatar img` ((0,1,1) specificity) beats
+   `.avatarGlyph`/`.avatarPhoto` ((0,1,0) alone) whichever came later in the
+   cascade, the glyph silently inherited this rule's 100%/inset:0 instead of its
+   own 57%/21.5% — rendering the member icon at full avatar size, overflowing
+   the circle ("爆開", reported live). Scoped to its own class so it can never
+   outrank the glyph/photo sizing below regardless of source order. */
+.avatarBase {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.avatarGlyph,
+.avatarPhoto {
+  position: absolute;
+  width: 57%;
+  height: 57%;
+  inset: 21.5%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* ----- Mobile row ----- */
+.menuButton {
+  display: flex;
+  width: 32px;
+  height: 32px;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.menuButton:disabled {
+  cursor: default;
+}
+
+.menuButton img {
+  width: 24px;
+  height: 24px;
+}
+
+.mobileIconButtonPromo,
+.mobileIconButtonOutline,
+.mobileIconButtonDark {
+  display: flex;
+  width: 32px;
+  height: 32px;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: var(--corner-radius-32);
+  cursor: pointer;
+}
+
+.mobileIconButtonPromo:disabled,
+.mobileIconButtonOutline:disabled,
+.mobileIconButtonDark:disabled {
+  cursor: default;
+}
+
+.mobileIconButtonPromo {
+  border: 0;
+  background: linear-gradient(90deg, var(--icon-warning), var(--fill-warning-strong));
+}
+
+.mobileIconButtonOutline {
+  border: 1px solid var(--stroke-strong);
+  background: transparent;
+}
+
+.mobileIconButtonDark {
+  border: 0;
+  background: var(--fill-strong);
+}
+
+.mobileIconButtonPromo img,
+.mobileIconButtonOutline img,
+.mobileIconButtonDark img {
+  width: 100%;
+  height: 100%;
+}
+
+.navItem:focus-visible,
+.pricingPill:focus-visible,
+.startEditingButton:focus-visible,
+.startEditingIconButton:focus-visible,
+.primaryPill:focus-visible,
+.upsellButton:focus-visible,
+.avatar:focus-visible,
+.brand:focus-visible,
+.menuButton:focus-visible,
+.featureInfoButton:focus-visible,
+.mobileIconButtonPromo:focus-visible,
+.mobileIconButtonOutline:focus-visible,
+.mobileIconButtonDark:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px var(--stroke-focus);
+}
+
+/* ----- Tablet (769-1199px): symbol-only logo, icon-only "Start Editing",
+   compact "Sign Up" pill instead of the full "Log In / Sign Up" one. ----- */
+@container navigation-header (max-width: 1199px) {
+  .wordmark {
+    display: none;
+  }
+
+  .startEditingButton {
+    display: none;
+  }
+
+  .startEditingIconButton {
+    display: flex;
+  }
+
+  .primaryPill {
+    display: none;
+  }
+
+  .compactPill {
+    display: flex;
+  }
+}
+
+/* ----- Mobile (<=768px): swap to the hamburger + icon-only row entirely. ----- */
+@container navigation-header (max-width: 768px) {
+  .row {
+    padding: 0 16px;
+  }
+
+  .row[data-role='wide-row'] {
+    display: none;
+  }
+
+  .row[data-role='mobile-row'] {
+    display: flex;
+  }
+
+  /* .left's base 24px gap is for the wide-row's logo-to-nav-items spacing;
+     the mobile row's hamburger-to-logo pair is 12px in Figma (node
+     12338:242862 etc.), a different pairing that just happens to reuse the
+     same .left class. */
+  .row[data-role='mobile-row'] .left {
+    gap: 12px;
+  }
+}

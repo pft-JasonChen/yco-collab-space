@@ -28,6 +28,29 @@
   border-radius: var(--corner-radius-12);
 }
 
+/* Hidden by default — ToolPageLayout keeps the settings panel beside this
+   surface at >=900px and the page title already lives in ResultPageShell's
+   own header there, so this would just be a duplicate. Shown only where
+   ToolPageLayout actually stacks panel below this surface (<=900px, see its
+   own @media(max-width:900px){.layout{flex-direction:column}}) — matching
+   that exact breakpoint, not this file's own separate 992px one below, since
+   this heading exists specifically to stand in for the now-stacked page. */
+.mobileTitle {
+  display: none;
+  margin: 0;
+  padding: 0 var(--video-result-gutter) var(--spacing-16);
+  color: var(--text-strong);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  font-weight: var(--font-weight-strong);
+}
+
+@media (max-width: 900px) {
+  .mobileTitle {
+    display: block;
+  }
+}
+
 .tab,
 .activeTab {
   position: relative;
