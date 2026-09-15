@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "pack": "commerce/pricing-overlay",
+  "version": "2026-09",
+  "sourceCatalog": "rd-vendored-baseline",
+  "evidenceStatus": "vendored-source-verified",
+  "capturedAt": "2026-09-14",
+  "figma": null,
+  "trigger": "authenticated header pricing icon",
+  "rdSources": [
+    "src/components/common/headers/components/pricing-icon/index.js",
+    "src/components/common/pricing-modal/index.js",
+    "src/components/common/pricing-modal/components/feature-list.js",
+    "src/components/common/pricing-modal/components/plan-tabs.js",
+    "src/components/common/pricing-modal/components/plan-list.js"
+  ],
+  "removedDependencies": ["redux", "pricing-api", "subscription-api", "stripe", "two-checkout", "account-entitlements", "analytics", "holiday-campaigns", "currency-service"],
+  "decisionBasis": [
+    "Code tracing shows the header pricing icon opens common/pricing-modal; pack-product-modal only serves Avatar and AI Headshot pack purchases."
+  ]
+}

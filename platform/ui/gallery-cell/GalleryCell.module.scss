@@ -1,0 +1,169 @@
+// Shared gallery thumbnail cell. Figma node 17197-211221:
+// card radius 20 + 1px border + subtle bg; overlay padding 8; action gap 4;
+// duration pill bottom-left, radius 32, white bold.
+//
+// Every colour here is a token. RD's own stylesheet uses literal colour values,
+// which platform/ui's raw-colour policy rejects; the full mapping, including the
+// two that are not exact, is recorded in this component's component.yaml.
+.cell {
+  position: relative;
+  width: 100%;
+
+  // height comes from the inline `aspect-ratio` (set against the grid wrapper's
+  // width); do NOT force height:100% or the aspect-ratio is ignored.
+  // No overflow:hidden here — a hover More dropdown must escape the cell.
+}
+
+// Applied when clicking the cell does something.
+.cellClickable {
+  cursor: pointer;
+}
+
+// Clips the media to rounded corners; overlays sit on `.cell`, outside this box.
+.mediaBox {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--corner-radius-20);
+  overflow: hidden;
+  border: 1px solid var(--stroke-weak);
+  background: var(--fill-weak);
+}
+
+// Narrow layouts use the tighter Figma mobile thumbnail corner. Driven by a prop
+// rather than a media query so a fixed-width story and the grid's own measured
+// masonry switch stay in step; see component.yaml.
+.cellCompact .mediaBox {
+  border-radius: var(--corner-radius-12);
+}
+
+.media {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+// Skeleton layer sits over the still-loading <img> so the box never flashes empty.
+.mediaOverlay {
+  position: absolute;
+  inset: 0;
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--fill-weak) 25%,
+    var(--fill-weaker) 37%,
+    var(--fill-weak) 63%
+  );
+  background-size: 400% 100%;
+  animation: shimmer 1.4s ease infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shimmer {
+    animation: none;
+  }
+}
+
+// hover-play video, layered over the cover image
+.video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.playIcon {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 40px;
+  height: 40px;
+  pointer-events: none;
+}
+
+.duration {
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  height: 24px;
+  padding: 4px 8px;
+  border-radius: var(--corner-radius-32);
+  background: var(--fill-overlay-strong);
+  color: var(--text-inverse-strong);
+  font-size: var(--font-size-micro);
+  font-weight: var(--font-weight-strong);
+  line-height: var(--line-height-micro);
+}
+
+.actions {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+// Reveal on hover, and keep visible while a child (e.g. an open More menu) holds
+// focus so the menu does not vanish when the pointer leaves the cell.
+// Lower-specificity selector first, to satisfy no-descending-specificity.
+.actions:focus-within,
+.cell:hover .actions {
+  opacity: 1;
+}
+
+// Touch layouts have no hover, so the actions stay visible there.
+.cellCompact .actions {
+  opacity: 1;
+}
+
+@media (hover: none) {
+  .actions {
+    opacity: 1;
+  }
+}
+
+// Figma node 18162-99534/99532: select indicator sits top-right, 28px circle.
+// Unselected = translucent dark fill + 60% white border; selected = brand fill +
+// solid white border + a white check glyph.
+.checkbox {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--stroke-inverse-strong);
+  background-color: var(--text-weaker);
+  box-sizing: border-box;
+}
+
+.checkboxSelected {
+  border-color: var(--fill-white);
+  background-color: var(--fill-brand-strong);
+}
+
+.checkIcon {
+  width: 16px;
+  height: auto;
+}

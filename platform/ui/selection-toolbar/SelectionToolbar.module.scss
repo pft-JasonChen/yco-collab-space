@@ -1,0 +1,198 @@
+/* Gallery selection header bar, ported from RD my-gallery-page/components/
+   editing-toolbar and select-all-header. RD keeps these styles in each
+   consuming tab's own module and passes them in as a `styles` prop; a shared
+   component owns them, so the rules are transcribed here from
+   my-gallery-page/tabs/gallery/gallery.module.scss.
+
+   Colours follow app/src/surfaces/rd-port/token-colour-mapping.json. The four
+   approximations it records are itemised in this component's component.yaml. */
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.icon img {
+  width: 20px;
+  height: 20px;
+}
+
+.selectButton {
+  font-size: var(--font-size-heading-5);
+  line-height: var(--line-height-heading-5);
+  font-weight: var(--font-weight-strong);
+  color: var(--fill-white);
+  background-color: var(--fill-brand-strong);
+  border: 1px solid var(--fill-brand-strong);
+  border-radius: var(--corner-radius-32);
+  padding: 7px 20px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.selectButton:disabled {
+  background: var(--fill-disabled);
+  border: 1px solid var(--fill-disabled);
+  cursor: default;
+}
+
+.selectButton:hover:enabled {
+  background-color: var(--blue-dark-1000);
+  border: 1px solid var(--blue-dark-1000);
+  color: var(--fill-white);
+}
+
+/* RD's cancel treatment is the same pill inverted: white fill, black label and a
+   faint border. */
+.cancelStyle {
+  background-color: var(--fill-white);
+  color: var(--grey-neutral-solid-1000);
+  border: 1px solid var(--fill-disabled);
+}
+
+.cancelStyle:hover:enabled {
+  background-color: var(--fill-white);
+  border: 1px solid var(--fill-disabled);
+  color: var(--grey-neutral-solid-1000);
+}
+
+.deleteButton,
+.downloadButton {
+  font-size: var(--font-size-heading-5);
+  line-height: var(--line-height-heading-5);
+  font-weight: var(--font-weight-strong);
+  color: var(--fill-white);
+  border: 0;
+  border-radius: var(--corner-radius-32);
+  padding: 8px 20px;
+  cursor: pointer;
+}
+
+.deleteButton {
+  background-color: var(--fill-error-strong);
+}
+
+.deleteButton:hover:enabled {
+  background-color: var(--fill-error-strong);
+}
+
+.downloadButton {
+  background-color: var(--fill-brand-strong);
+}
+
+.downloadButton:hover:enabled {
+  background-color: var(--blue-dark-1000);
+}
+
+.deleteButton:disabled,
+.downloadButton:disabled {
+  background: var(--fill-disabled);
+  cursor: default;
+}
+
+.deleteButton img,
+.downloadButton img {
+  display: block;
+  height: 16px;
+  aspect-ratio: 1 / 1;
+}
+
+.selectAllLabel {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* RD renders a bare <input type="checkbox"> with no checked binding beside a
+   styled span, so the real control is invisible but present. Kept visually
+   hidden rather than removed: it is what makes the control focusable and
+   announceable, which the styled span alone is not. */
+.nativeCheckbox {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  cursor: pointer;
+}
+
+.checkbox {
+  cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border: 3px solid var(--fill-disabled);
+  border-radius: 50%;
+}
+
+.checkboxChecked {
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  width: calc(100% + 6px);
+  height: calc(100% + 6px);
+  background-color: var(--fill-brand-strong);
+  border-radius: 50%;
+}
+
+.nativeCheckbox:focus-visible + .checkbox {
+  outline: 2px solid var(--stroke-focus);
+  outline-offset: 2px;
+}
+
+.labelText {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  font-weight: var(--font-weight-strong);
+  color: var(--text-strong);
+  margin-left: 8px;
+}
+
+/* RD's own $width-md treatment: smaller pills, icon-only delete/download. The
+   icon swap is driven by the `compact` prop so a consumer can keep it in step
+   with gallery-grid's measured layout; these rules cover the sizing only. */
+@media (max-width: 768px) {
+  .icon,
+  .icon img {
+    width: 16px;
+    height: 16px;
+  }
+
+  .selectButton {
+    font-size: 16px;
+    line-height: 19px;
+    font-weight: var(--font-weight-weak);
+    padding: 7.5px 16px;
+  }
+
+  .deleteButton,
+  .downloadButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    line-height: 19px;
+    font-weight: var(--font-weight-weak);
+    padding: 10px;
+  }
+
+  .labelText {
+    margin-left: 6px;
+  }
+}

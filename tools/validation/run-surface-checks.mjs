@@ -76,10 +76,20 @@ try {
   assert.match(await page.locator("main").innerText(), /顯示 0 \/ 26/);
   await page.getByRole("searchbox", { name: "搜尋" }).fill("");
   await page.getByLabel("狀態", { exact: true }).selectOption("planned");
-  assert.match(await page.locator("main").innerText(), /顯示 16 \/ 26/);
+  assert.match(
+    await page.locator("main").innerText(),
+    new RegExp(
+      `顯示 ${index.entries.filter((entry) => entry.status === "planned").length} / ${index.entries.length}`,
+    ),
+  );
   await page.getByLabel("狀態", { exact: true }).selectOption("all");
   await page.getByLabel("預覽", { exact: true }).selectOption("preview");
-  assert.match(await page.locator("main").innerText(), /顯示 7 \/ 26/);
+  assert.match(
+    await page.locator("main").innerText(),
+    new RegExp(
+      `顯示 ${index.entries.filter((entry) => index.versions.some((version) => version.id === entry.id && version.bindings?.preview)).length} / ${index.entries.length}`,
+    ),
+  );
   await page.screenshot({ path: path.join(output, "surface-browser.png") });
   await page
     .getByRole("link", { name: "RD 待定義清單 · AI Video 試點" })

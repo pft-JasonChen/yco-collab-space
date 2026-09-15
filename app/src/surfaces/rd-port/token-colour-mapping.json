@@ -1,0 +1,2374 @@
+{
+  "approval": "PM explicitly approved approximate existing tokens where no exact token/Designer definition exists, 2026-09-15.",
+  "scope": "SCSS colour values only; RD DOM, interaction logic, sizing and token baseline unchanged.",
+  "designerReview": "pending",
+  "occurrences": [
+    {
+      "file": "app/src/surfaces/rd-port/Card.module.scss",
+      "line": 4,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/Card.module.scss",
+      "line": 26,
+      "rdColour": "#15171f",
+      "token": "--grey-slate-solid-900",
+      "resolvedTokenValue": "#12181a",
+      "match": "approximate",
+      "visualDifference": "RD #15171f → #12181a. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/Card.module.scss",
+      "line": 63,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/Card.module.scss",
+      "line": 86,
+      "rdColour": "#4c88ff",
+      "token": "--blue-light-1000",
+      "resolvedTokenValue": "#03ade2",
+      "match": "approximate",
+      "visualDifference": "RD #4c88ff → #03ade2. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/Card.module.scss",
+      "line": 86,
+      "rdColour": "#95e6ff",
+      "token": "--blue-dark-1000",
+      "resolvedTokenValue": "#a3eaff",
+      "match": "approximate",
+      "visualDifference": "RD #95e6ff → #a3eaff. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/Card.module.scss",
+      "line": 115,
+      "rdColour": "rgb(17 24 26 / 4%)",
+      "token": "--fill-hover",
+      "resolvedTokenValue": "#11181a0a",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/Card.module.scss",
+      "line": 146,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/Card.module.scss",
+      "line": 148,
+      "rdColour": "rgb(0 0 0 / 25%)",
+      "token": "--fill-disabled",
+      "resolvedTokenValue": "#11181a33",
+      "match": "approximate",
+      "visualDifference": "RD rgb(0 0 0 / 25%) → #11181a33. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/Card.module.scss",
+      "line": 176,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/Card.module.scss",
+      "line": 189,
+      "rdColour": "rgb(3 173 226 / 5%)",
+      "token": "--brand-light-50",
+      "resolvedTokenValue": "#03ade20d",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/Card.module.scss",
+      "line": 203,
+      "rdColour": "rgb(0 0 0 / 0%)",
+      "token": "transparent",
+      "resolvedTokenValue": "transparent",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/Card.module.scss",
+      "line": 227,
+      "rdColour": "#44e3ed",
+      "token": "--blue-dark-1000",
+      "resolvedTokenValue": "#a3eaff",
+      "match": "approximate",
+      "visualDifference": "RD #44e3ed → #a3eaff. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/Card.module.scss",
+      "line": 227,
+      "rdColour": "#03ade2",
+      "token": "--fill-brand-strong",
+      "resolvedTokenValue": "#03ade2",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/Card.module.scss",
+      "line": 240,
+      "rdColour": "rgb(3 173 226 / 100%)",
+      "token": "--fill-brand-strong",
+      "resolvedTokenValue": "#03ade2",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/Tab.module.scss",
+      "line": 6,
+      "rdColour": "rgb(9 22 26 / 95%)",
+      "token": "--text-strong",
+      "resolvedTokenValue": "#09161af2",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/Tab.module.scss",
+      "line": 35,
+      "rdColour": "#e62d82",
+      "token": "--fill-badge",
+      "resolvedTokenValue": "#f23b77",
+      "match": "approximate",
+      "visualDifference": "RD #e62d82 → #f23b77. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/ConfirmCancellationButton.module.scss",
+      "line": 15,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/ConfirmCancellationButton.module.scss",
+      "line": 49,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/ConfirmCancellationButton.module.scss",
+      "line": 61,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/ConfirmCancellationButton.module.scss",
+      "line": 74,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/ConfirmCancellationButton.module.scss",
+      "line": 82,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/ConfirmCancellationButton.module.scss",
+      "line": 100,
+      "rdColour": "#575757",
+      "token": "--grey-neutral-solid-800",
+      "resolvedTokenValue": "#333",
+      "match": "approximate",
+      "visualDifference": "RD #575757 → #333. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/GeneralPricing.module.scss",
+      "line": 10,
+      "rdColour": "#ffb802",
+      "token": "--yellow-solid-1000",
+      "resolvedTokenValue": "#fec62e",
+      "match": "approximate",
+      "visualDifference": "RD #ffb802 → #fec62e. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/GeneralPricing.module.scss",
+      "line": 10,
+      "rdColour": "#ffa51c",
+      "token": "--amber-light-1000",
+      "resolvedTokenValue": "#ef9b00",
+      "match": "approximate",
+      "visualDifference": "RD #ffa51c → #ef9b00. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/GeneralPricing.module.scss",
+      "line": 10,
+      "rdColour": "#f80",
+      "token": "--amber-light-1000",
+      "resolvedTokenValue": "#ef9b00",
+      "match": "approximate",
+      "visualDifference": "RD #f80 → #ef9b00. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/GeneralPricing.module.scss",
+      "line": 11,
+      "rdColour": "#15171f",
+      "token": "--grey-slate-solid-900",
+      "resolvedTokenValue": "#12181a",
+      "match": "approximate",
+      "visualDifference": "RD #15171f → #12181a. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/GeneralPricing.module.scss",
+      "line": 46,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/GeneralPricing.module.scss",
+      "line": 58,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/GeneralPricing.module.scss",
+      "line": 59,
+      "rdColour": "#15171f",
+      "token": "--grey-slate-solid-900",
+      "resolvedTokenValue": "#12181a",
+      "match": "approximate",
+      "visualDifference": "RD #15171f → #12181a. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/GeneralPricing.module.scss",
+      "line": 64,
+      "rdColour": "#15171f",
+      "token": "--grey-slate-solid-900",
+      "resolvedTokenValue": "#12181a",
+      "match": "approximate",
+      "visualDifference": "RD #15171f → #12181a. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/pricing-components-feature-list.module.scss",
+      "line": 4,
+      "rdColour": "rgb(255 255 255 / 90%)",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "approximate",
+      "visualDifference": "RD rgb(255 255 255 / 90%) → #fff. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/pricing-components-feature-list.module.scss",
+      "line": 12,
+      "rdColour": "rgb(255 255 255 / 100%)",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/pricing-components-feature-list.module.scss",
+      "line": 36,
+      "rdColour": "rgb(255 255 255 / 75%)",
+      "token": "--grey-neutral-dark-700",
+      "resolvedTokenValue": "#ffffffc7",
+      "match": "approximate",
+      "visualDifference": "RD rgb(255 255 255 / 75%) → #ffffffc7. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/pricing-components-feature-list.module.scss",
+      "line": 37,
+      "rdColour": "rgb(255 255 255 / 45%)",
+      "token": "--grey-neutral-dark-500",
+      "resolvedTokenValue": "#fff9",
+      "match": "approximate",
+      "visualDifference": "RD rgb(255 255 255 / 45%) → #fff9. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/pricing-components-feature-list.module.scss",
+      "line": 39,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/pricing-components-feature-list.module.scss",
+      "line": 39,
+      "rdColour": "#f3fff6",
+      "token": "--fill-success-weak",
+      "resolvedTokenValue": "#0acc920d",
+      "match": "approximate",
+      "visualDifference": "RD #f3fff6 → #0acc920d. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/pricing-components-feature-list.module.scss",
+      "line": 85,
+      "rdColour": "#15171f",
+      "token": "--grey-slate-solid-900",
+      "resolvedTokenValue": "#12181a",
+      "match": "approximate",
+      "visualDifference": "RD #15171f → #12181a. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/pricing-components-feature-list.module.scss",
+      "line": 97,
+      "rdColour": "rgb(3 173 226 / 100%)",
+      "token": "--fill-brand-strong",
+      "resolvedTokenValue": "#03ade2",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/GalleryPage.module.scss",
+      "line": 11,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/GalleryPage.module.scss",
+      "line": 18,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/GalleryPage.module.scss",
+      "line": 35,
+      "rdColour": "#212529",
+      "token": "--grey-slate-solid-850",
+      "resolvedTokenValue": "#1d2426",
+      "match": "approximate",
+      "visualDifference": "RD #212529 → #1d2426. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/GalleryPage.module.scss",
+      "line": 61,
+      "rdColour": "#000",
+      "token": "--grey-neutral-solid-1000",
+      "resolvedTokenValue": "#000",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/GalleryPage.module.scss",
+      "line": 79,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/GalleryPage.module.scss",
+      "line": 104,
+      "rdColour": "#212529",
+      "token": "--grey-slate-solid-850",
+      "resolvedTokenValue": "#1d2426",
+      "match": "approximate",
+      "visualDifference": "RD #212529 → #1d2426. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/GalleryPage.module.scss",
+      "line": 132,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/GalleryPage.module.scss",
+      "line": 160,
+      "rdColour": "rgb(17 24 26 / 10%)",
+      "token": "--stroke-weak",
+      "resolvedTokenValue": "#11181a1a",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/pricing-components-plan-list.module.scss",
+      "line": 96,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/pricing-components-plan-list.module.scss",
+      "line": 174,
+      "rdColour": "rgb(221 11 15 / 100%)",
+      "token": "--fill-error-strong",
+      "resolvedTokenValue": "#de0000",
+      "match": "approximate",
+      "visualDifference": "RD rgb(221 11 15 / 100%) → #de0000. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/pricing-components-plan-list.module.scss",
+      "line": 183,
+      "rdColour": "#ffc700",
+      "token": "--yellow-solid-1000",
+      "resolvedTokenValue": "#fec62e",
+      "match": "approximate",
+      "visualDifference": "RD #ffc700 → #fec62e. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/pricing-components-plan-list.module.scss",
+      "line": 183,
+      "rdColour": "#f7a300",
+      "token": "--amber-light-1000",
+      "resolvedTokenValue": "#ef9b00",
+      "match": "approximate",
+      "visualDifference": "RD #f7a300 → #ef9b00. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/pricing-components-plan-list.module.scss",
+      "line": 205,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/pricing-components-plan-list.module.scss",
+      "line": 219,
+      "rdColour": "#ff6e64",
+      "token": "--red-dark-1000",
+      "resolvedTokenValue": "#ff9c9c",
+      "match": "approximate",
+      "visualDifference": "RD #ff6e64 → #ff9c9c. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/pricing-components-plan-list.module.scss",
+      "line": 229,
+      "rdColour": "#ff3f33",
+      "token": "--red-light-1000",
+      "resolvedTokenValue": "#de0000",
+      "match": "approximate",
+      "visualDifference": "RD #ff3f33 → #de0000. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/pricing-components-plan-list.module.scss",
+      "line": 232,
+      "rdColour": "rgb(0 0 0 / 10%)",
+      "token": "--grey-neutral-light-100",
+      "resolvedTokenValue": "#0000001a",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/pricing-components-plan-list.module.scss",
+      "line": 240,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/pricing-components-plan-list.module.scss",
+      "line": 248,
+      "rdColour": "#000",
+      "token": "--grey-neutral-solid-1000",
+      "resolvedTokenValue": "#000",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/pricing-components-plan-list.module.scss",
+      "line": 252,
+      "rdColour": "#000",
+      "token": "--grey-neutral-solid-1000",
+      "resolvedTokenValue": "#000",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/Gallery.module.scss",
+      "line": 17,
+      "rdColour": "#212529",
+      "token": "--grey-slate-solid-850",
+      "resolvedTokenValue": "#1d2426",
+      "match": "approximate",
+      "visualDifference": "RD #212529 → #1d2426. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/Gallery.module.scss",
+      "line": 55,
+      "rdColour": "rgb(17 24 26 / 95%)",
+      "token": "--text-strong",
+      "resolvedTokenValue": "#09161af2",
+      "match": "approximate",
+      "visualDifference": "RD rgb(17 24 26 / 95%) → #09161af2. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/Gallery.module.scss",
+      "line": 73,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/Gallery.module.scss",
+      "line": 82,
+      "rdColour": "#d7d7d7",
+      "token": "--fill-disabled",
+      "resolvedTokenValue": "#11181a33",
+      "match": "approximate",
+      "visualDifference": "RD #d7d7d7 → #11181a33. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/Gallery.module.scss",
+      "line": 83,
+      "rdColour": "#d7d7d7",
+      "token": "--fill-disabled",
+      "resolvedTokenValue": "#11181a33",
+      "match": "approximate",
+      "visualDifference": "RD #d7d7d7 → #11181a33. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/Gallery.module.scss",
+      "line": 88,
+      "rdColour": "#46e4fa",
+      "token": "--blue-dark-1000",
+      "resolvedTokenValue": "#a3eaff",
+      "match": "approximate",
+      "visualDifference": "RD #46e4fa → #a3eaff. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/Gallery.module.scss",
+      "line": 89,
+      "rdColour": "#46e4fa",
+      "token": "--blue-dark-1000",
+      "resolvedTokenValue": "#a3eaff",
+      "match": "approximate",
+      "visualDifference": "RD #46e4fa → #a3eaff. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/Gallery.module.scss",
+      "line": 90,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/Gallery.module.scss",
+      "line": 106,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/Gallery.module.scss",
+      "line": 107,
+      "rdColour": "#de0000",
+      "token": "--fill-error-strong",
+      "resolvedTokenValue": "#de0000",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/Gallery.module.scss",
+      "line": 113,
+      "rdColour": "#d7d7d7",
+      "token": "--fill-disabled",
+      "resolvedTokenValue": "#11181a33",
+      "match": "approximate",
+      "visualDifference": "RD #d7d7d7 → #11181a33. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/Gallery.module.scss",
+      "line": 118,
+      "rdColour": "#de0000",
+      "token": "--fill-error-strong",
+      "resolvedTokenValue": "#de0000",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/Gallery.module.scss",
+      "line": 139,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/Gallery.module.scss",
+      "line": 140,
+      "rdColour": "#000",
+      "token": "--grey-neutral-solid-1000",
+      "resolvedTokenValue": "#000",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/Gallery.module.scss",
+      "line": 141,
+      "rdColour": "rgb(17 24 26 / 20%)",
+      "token": "--fill-disabled",
+      "resolvedTokenValue": "#11181a33",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/Gallery.module.scss",
+      "line": 144,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/Gallery.module.scss",
+      "line": 145,
+      "rdColour": "rgb(17 24 26 / 20%)",
+      "token": "--fill-disabled",
+      "resolvedTokenValue": "#11181a33",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/Gallery.module.scss",
+      "line": 146,
+      "rdColour": "#000",
+      "token": "--grey-neutral-solid-1000",
+      "resolvedTokenValue": "#000",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/Gallery.module.scss",
+      "line": 154,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/Gallery.module.scss",
+      "line": 161,
+      "rdColour": "#d7d7d7",
+      "token": "--fill-disabled",
+      "resolvedTokenValue": "#11181a33",
+      "match": "approximate",
+      "visualDifference": "RD #d7d7d7 → #11181a33. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/Gallery.module.scss",
+      "line": 166,
+      "rdColour": "#46e4fa",
+      "token": "--blue-dark-1000",
+      "resolvedTokenValue": "#a3eaff",
+      "match": "approximate",
+      "visualDifference": "RD #46e4fa → #a3eaff. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/Gallery.module.scss",
+      "line": 192,
+      "rdColour": "rgb(9 22 26 / 95%)",
+      "token": "--text-strong",
+      "resolvedTokenValue": "#09161af2",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/Gallery.module.scss",
+      "line": 214,
+      "rdColour": "#dddee6",
+      "token": "--fill-disabled",
+      "resolvedTokenValue": "#11181a33",
+      "match": "approximate",
+      "visualDifference": "RD #dddee6 → #11181a33. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/Gallery.module.scss",
+      "line": 241,
+      "rdColour": "rgb(255 255 255 / 60%)",
+      "token": "--grey-neutral-dark-500",
+      "resolvedTokenValue": "#fff9",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/Gallery.module.scss",
+      "line": 253,
+      "rdColour": "#212529",
+      "token": "--grey-slate-solid-850",
+      "resolvedTokenValue": "#1d2426",
+      "match": "approximate",
+      "visualDifference": "RD #212529 → #1d2426. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/Gallery.module.scss",
+      "line": 254,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/Gallery.module.scss",
+      "line": 284,
+      "rdColour": "#43454b",
+      "token": "--grey-neutral-solid-800",
+      "resolvedTokenValue": "#333",
+      "match": "approximate",
+      "visualDifference": "RD #43454b → #333. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/AiTools.module.scss",
+      "line": 17,
+      "rdColour": "#212529",
+      "token": "--grey-slate-solid-850",
+      "resolvedTokenValue": "#1d2426",
+      "match": "approximate",
+      "visualDifference": "RD #212529 → #1d2426. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/AiTools.module.scss",
+      "line": 53,
+      "rdColour": "rgb(17 24 26 / 95%)",
+      "token": "--text-strong",
+      "resolvedTokenValue": "#09161af2",
+      "match": "approximate",
+      "visualDifference": "RD rgb(17 24 26 / 95%) → #09161af2. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/AiTools.module.scss",
+      "line": 64,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/AiTools.module.scss",
+      "line": 73,
+      "rdColour": "#d7d7d7",
+      "token": "--fill-disabled",
+      "resolvedTokenValue": "#11181a33",
+      "match": "approximate",
+      "visualDifference": "RD #d7d7d7 → #11181a33. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/AiTools.module.scss",
+      "line": 74,
+      "rdColour": "#d7d7d7",
+      "token": "--fill-disabled",
+      "resolvedTokenValue": "#11181a33",
+      "match": "approximate",
+      "visualDifference": "RD #d7d7d7 → #11181a33. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/AiTools.module.scss",
+      "line": 79,
+      "rdColour": "#46e4fa",
+      "token": "--blue-dark-1000",
+      "resolvedTokenValue": "#a3eaff",
+      "match": "approximate",
+      "visualDifference": "RD #46e4fa → #a3eaff. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/AiTools.module.scss",
+      "line": 80,
+      "rdColour": "#46e4fa",
+      "token": "--blue-dark-1000",
+      "resolvedTokenValue": "#a3eaff",
+      "match": "approximate",
+      "visualDifference": "RD #46e4fa → #a3eaff. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/AiTools.module.scss",
+      "line": 81,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/AiTools.module.scss",
+      "line": 97,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/AiTools.module.scss",
+      "line": 98,
+      "rdColour": "#de0000",
+      "token": "--fill-error-strong",
+      "resolvedTokenValue": "#de0000",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/AiTools.module.scss",
+      "line": 104,
+      "rdColour": "#d7d7d7",
+      "token": "--fill-disabled",
+      "resolvedTokenValue": "#11181a33",
+      "match": "approximate",
+      "visualDifference": "RD #d7d7d7 → #11181a33. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/AiTools.module.scss",
+      "line": 109,
+      "rdColour": "#de0000",
+      "token": "--fill-error-strong",
+      "resolvedTokenValue": "#de0000",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/AiTools.module.scss",
+      "line": 125,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/AiTools.module.scss",
+      "line": 126,
+      "rdColour": "#000",
+      "token": "--grey-neutral-solid-1000",
+      "resolvedTokenValue": "#000",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/AiTools.module.scss",
+      "line": 127,
+      "rdColour": "rgb(17 24 26 / 20%)",
+      "token": "--fill-disabled",
+      "resolvedTokenValue": "#11181a33",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/AiTools.module.scss",
+      "line": 130,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/AiTools.module.scss",
+      "line": 131,
+      "rdColour": "rgb(17 24 26 / 20%)",
+      "token": "--fill-disabled",
+      "resolvedTokenValue": "#11181a33",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/AiTools.module.scss",
+      "line": 132,
+      "rdColour": "#000",
+      "token": "--grey-neutral-solid-1000",
+      "resolvedTokenValue": "#000",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/AiTools.module.scss",
+      "line": 140,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/AiTools.module.scss",
+      "line": 147,
+      "rdColour": "#d7d7d7",
+      "token": "--fill-disabled",
+      "resolvedTokenValue": "#11181a33",
+      "match": "approximate",
+      "visualDifference": "RD #d7d7d7 → #11181a33. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/AiTools.module.scss",
+      "line": 152,
+      "rdColour": "#46e4fa",
+      "token": "--blue-dark-1000",
+      "resolvedTokenValue": "#a3eaff",
+      "match": "approximate",
+      "visualDifference": "RD #46e4fa → #a3eaff. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/AiTools.module.scss",
+      "line": 173,
+      "rdColour": "rgb(9 22 26 / 95%)",
+      "token": "--text-strong",
+      "resolvedTokenValue": "#09161af2",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/AiTools.module.scss",
+      "line": 195,
+      "rdColour": "#dddee6",
+      "token": "--fill-disabled",
+      "resolvedTokenValue": "#11181a33",
+      "match": "approximate",
+      "visualDifference": "RD #dddee6 → #11181a33. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/AiTools.module.scss",
+      "line": 210,
+      "rdColour": "#e7e7e7",
+      "token": "--stroke-weak",
+      "resolvedTokenValue": "#11181a1a",
+      "match": "approximate",
+      "visualDifference": "RD #e7e7e7 → #11181a1a. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/AiTools.module.scss",
+      "line": 258,
+      "rdColour": "rgb(255 255 255 / 60%)",
+      "token": "--grey-neutral-dark-500",
+      "resolvedTokenValue": "#fff9",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/AiTools.module.scss",
+      "line": 270,
+      "rdColour": "#212529",
+      "token": "--grey-slate-solid-850",
+      "resolvedTokenValue": "#1d2426",
+      "match": "approximate",
+      "visualDifference": "RD #212529 → #1d2426. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/AiTools.module.scss",
+      "line": 271,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/AiTools.module.scss",
+      "line": 301,
+      "rdColour": "#43454b",
+      "token": "--grey-neutral-solid-800",
+      "resolvedTokenValue": "#333",
+      "match": "approximate",
+      "visualDifference": "RD #43454b → #333. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/pricing-components-feature-title-general.module.scss",
+      "line": 40,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/pricing-components-feature-title-general.module.scss",
+      "line": 52,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/pricing-components-feature-title-general.module.scss",
+      "line": 62,
+      "rdColour": "#0fb",
+      "token": "--green-dark-1000",
+      "resolvedTokenValue": "#77c7af",
+      "match": "approximate",
+      "visualDifference": "RD #0fb → #77c7af. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/pricing-components-feature-title-general.module.scss",
+      "line": 95,
+      "rdColour": "#008ac5",
+      "token": "--blue-light-1000",
+      "resolvedTokenValue": "#03ade2",
+      "match": "approximate",
+      "visualDifference": "RD #008ac5 → #03ade2. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/pricing-components-feature-title-general.module.scss",
+      "line": 95,
+      "rdColour": "#092e65",
+      "token": "--teal-light-1000",
+      "resolvedTokenValue": "#1a74a8",
+      "match": "approximate",
+      "visualDifference": "RD #092e65 → #1a74a8. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/pricing-components-feature-title-general.module.scss",
+      "line": 114,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/pricing-components-feature-title-general.module.scss",
+      "line": 126,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/DeleteConfirmModal.module.scss",
+      "line": 7,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/DeleteConfirmModal.module.scss",
+      "line": 11,
+      "rdColour": "#212529",
+      "token": "--grey-slate-solid-850",
+      "resolvedTokenValue": "#1d2426",
+      "match": "approximate",
+      "visualDifference": "RD #212529 → #1d2426. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/ColorButton.module.scss",
+      "line": 32,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/ColorButton.module.scss",
+      "line": 43,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/ColorButton.module.scss",
+      "line": 57,
+      "rdColour": "#ccc",
+      "token": "--fill-disabled",
+      "resolvedTokenValue": "#11181a33",
+      "match": "approximate",
+      "visualDifference": "RD #ccc → #11181a33. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/ColorButton.module.scss",
+      "line": 58,
+      "rdColour": "#ccc",
+      "token": "--fill-disabled",
+      "resolvedTokenValue": "#11181a33",
+      "match": "approximate",
+      "visualDifference": "RD #ccc → #11181a33. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/ColorButton.module.scss",
+      "line": 92,
+      "rdColour": "rgb(9 22 26 / 95%)",
+      "token": "--text-strong",
+      "resolvedTokenValue": "#09161af2",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/ColorButton.module.scss",
+      "line": 118,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/ColorButton.module.scss",
+      "line": 141,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/ColorButton.module.scss",
+      "line": 192,
+      "rdColour": "#e62d82",
+      "token": "--fill-badge",
+      "resolvedTokenValue": "#f23b77",
+      "match": "approximate",
+      "visualDifference": "RD #e62d82 → #f23b77. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/ColorButton.module.scss",
+      "line": 235,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/ColorButton.module.scss",
+      "line": 248,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/ColorButton.module.scss",
+      "line": 249,
+      "rdColour": "#15171f",
+      "token": "--grey-slate-solid-900",
+      "resolvedTokenValue": "#12181a",
+      "match": "approximate",
+      "visualDifference": "RD #15171f → #12181a. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/ColorButton.module.scss",
+      "line": 250,
+      "rdColour": "#15171f",
+      "token": "--grey-slate-solid-900",
+      "resolvedTokenValue": "#12181a",
+      "match": "approximate",
+      "visualDifference": "RD #15171f → #12181a. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/ColorButton.module.scss",
+      "line": 257,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/ColorButton.module.scss",
+      "line": 258,
+      "rdColour": "#15171f",
+      "token": "--grey-slate-solid-900",
+      "resolvedTokenValue": "#12181a",
+      "match": "approximate",
+      "visualDifference": "RD #15171f → #12181a. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/ColorButton.module.scss",
+      "line": 259,
+      "rdColour": "#15171f",
+      "token": "--grey-slate-solid-900",
+      "resolvedTokenValue": "#12181a",
+      "match": "approximate",
+      "visualDifference": "RD #15171f → #12181a. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/currency-index.module.scss",
+      "line": 22,
+      "rdColour": "rgb(122 122 122 / 100%)",
+      "token": "--text-weaker",
+      "resolvedTokenValue": "#11181a73",
+      "match": "approximate",
+      "visualDifference": "RD rgb(122 122 122 / 100%) → #11181a73. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/currency-index.module.scss",
+      "line": 36,
+      "rdColour": "#8c8c8c",
+      "token": "--text-weaker",
+      "resolvedTokenValue": "#11181a73",
+      "match": "approximate",
+      "visualDifference": "RD #8c8c8c → #11181a73. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/currency-index.module.scss",
+      "line": 37,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/currency-index.module.scss",
+      "line": 38,
+      "rdColour": "#212529",
+      "token": "--grey-slate-solid-850",
+      "resolvedTokenValue": "#1d2426",
+      "match": "approximate",
+      "visualDifference": "RD #212529 → #1d2426. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/currency-index.module.scss",
+      "line": 51,
+      "rdColour": "#000",
+      "token": "--grey-neutral-solid-1000",
+      "resolvedTokenValue": "#000",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/currency-index.module.scss",
+      "line": 57,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/currency-index.module.scss",
+      "line": 74,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/currency-index.module.scss",
+      "line": 92,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/currency-index.module.scss",
+      "line": 104,
+      "rdColour": "#212529",
+      "token": "--grey-slate-solid-850",
+      "resolvedTokenValue": "#1d2426",
+      "match": "approximate",
+      "visualDifference": "RD #212529 → #1d2426. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/currency-index.module.scss",
+      "line": 108,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/currency-index.module.scss",
+      "line": 136,
+      "rdColour": "#e7e7e7",
+      "token": "--stroke-weak",
+      "resolvedTokenValue": "#11181a1a",
+      "match": "approximate",
+      "visualDifference": "RD #e7e7e7 → #11181a1a. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/currency-index.module.scss",
+      "line": 151,
+      "rdColour": "#e6f7ff",
+      "token": "--fill-brand-weak",
+      "resolvedTokenValue": "#03ade20d",
+      "match": "approximate",
+      "visualDifference": "RD #e6f7ff → #03ade20d. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/pricing-index.module.scss",
+      "line": 8,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/pricing-index.module.scss",
+      "line": 12,
+      "rdColour": "#212529",
+      "token": "--grey-slate-solid-850",
+      "resolvedTokenValue": "#1d2426",
+      "match": "approximate",
+      "visualDifference": "RD #212529 → #1d2426. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/pricing-index.module.scss",
+      "line": 28,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/pricing-index.module.scss",
+      "line": 151,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/pricing-index.module.scss",
+      "line": 163,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/pricing-index.module.scss",
+      "line": 179,
+      "rdColour": "#e0e0e0",
+      "token": "--stroke-weak",
+      "resolvedTokenValue": "#11181a1a",
+      "match": "approximate",
+      "visualDifference": "RD #e0e0e0 → #11181a1a. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/pricing-index.module.scss",
+      "line": 180,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/pricing-index.module.scss",
+      "line": 201,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/pricing-components-plan-tabs.module.scss",
+      "line": 7,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/pricing-components-plan-tabs.module.scss",
+      "line": 10,
+      "rdColour": "rgb(202 204 224 / 100%)",
+      "token": "--fill-disabled",
+      "resolvedTokenValue": "#11181a33",
+      "match": "approximate",
+      "visualDifference": "RD rgb(202 204 224 / 100%) → #11181a33. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/pricing-components-plan-tabs.module.scss",
+      "line": 11,
+      "rdColour": "#44e3ed",
+      "token": "--blue-dark-1000",
+      "resolvedTokenValue": "#a3eaff",
+      "match": "approximate",
+      "visualDifference": "RD #44e3ed → #a3eaff. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/pricing-components-plan-tabs.module.scss",
+      "line": 11,
+      "rdColour": "#03ade2",
+      "token": "--fill-brand-strong",
+      "resolvedTokenValue": "#03ade2",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/pricing-components-plan-tabs.module.scss",
+      "line": 18,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/pricing-components-plan-tabs.module.scss",
+      "line": 21,
+      "rdColour": "rgb(202 204 224 / 100%)",
+      "token": "--fill-disabled",
+      "resolvedTokenValue": "#11181a33",
+      "match": "approximate",
+      "visualDifference": "RD rgb(202 204 224 / 100%) → #11181a33. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/pricing-components-plan-tabs.module.scss",
+      "line": 22,
+      "rdColour": "#ffb802",
+      "token": "--yellow-solid-1000",
+      "resolvedTokenValue": "#fec62e",
+      "match": "approximate",
+      "visualDifference": "RD #ffb802 → #fec62e. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/pricing-components-plan-tabs.module.scss",
+      "line": 22,
+      "rdColour": "#ffa51c",
+      "token": "--amber-light-1000",
+      "resolvedTokenValue": "#ef9b00",
+      "match": "approximate",
+      "visualDifference": "RD #ffa51c → #ef9b00. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/pricing-components-plan-tabs.module.scss",
+      "line": 22,
+      "rdColour": "#f80",
+      "token": "--amber-light-1000",
+      "resolvedTokenValue": "#ef9b00",
+      "match": "approximate",
+      "visualDifference": "RD #f80 → #ef9b00. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/pricing-components-plan-tabs.module.scss",
+      "line": 31,
+      "rdColour": "rgb(17 24 26 / 4%)",
+      "token": "--fill-hover",
+      "resolvedTokenValue": "#11181a0a",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/pricing-components-plan-tabs.module.scss",
+      "line": 32,
+      "rdColour": "#cacce0",
+      "token": "--fill-disabled",
+      "resolvedTokenValue": "#11181a33",
+      "match": "approximate",
+      "visualDifference": "RD #cacce0 → #11181a33. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/pricing-components-plan-tabs.module.scss",
+      "line": 51,
+      "rdColour": "rgb(17 24 26 / 65%)",
+      "token": "--text-weak",
+      "resolvedTokenValue": "#11181aa6",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/pricing-components-plan-tabs.module.scss",
+      "line": 65,
+      "rdColour": "#15171f",
+      "token": "--grey-slate-solid-900",
+      "resolvedTokenValue": "#12181a",
+      "match": "approximate",
+      "visualDifference": "RD #15171f → #12181a. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/EmptyContent.module.scss",
+      "line": 32,
+      "rdColour": "#212529",
+      "token": "--grey-slate-solid-850",
+      "resolvedTokenValue": "#1d2426",
+      "match": "approximate",
+      "visualDifference": "RD #212529 → #1d2426. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/EmptyContent.module.scss",
+      "line": 48,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/EmptyContent.module.scss",
+      "line": 49,
+      "rdColour": "#44e3ed",
+      "token": "--blue-dark-1000",
+      "resolvedTokenValue": "#a3eaff",
+      "match": "approximate",
+      "visualDifference": "RD #44e3ed → #a3eaff. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/EmptyContent.module.scss",
+      "line": 49,
+      "rdColour": "#03ade2",
+      "token": "--fill-brand-strong",
+      "resolvedTokenValue": "#03ade2",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/ButtonWrapper.module.scss",
+      "line": 3,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/ButtonWrapper.module.scss",
+      "line": 4,
+      "rdColour": "#d7d7d7",
+      "token": "--fill-disabled",
+      "resolvedTokenValue": "#11181a33",
+      "match": "approximate",
+      "visualDifference": "RD #d7d7d7 → #11181a33. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/HomeCategory.module.scss",
+      "line": 7,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/HomeCategory.module.scss",
+      "line": 43,
+      "rdColour": "#333",
+      "token": "--grey-neutral-solid-800",
+      "resolvedTokenValue": "#333",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/HomeCategory.module.scss",
+      "line": 97,
+      "rdColour": "rgb(0 0 0 / 2%)",
+      "token": "--grey-neutral-light-25",
+      "resolvedTokenValue": "#00000005",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/HomeCategory.module.scss",
+      "line": 103,
+      "rdColour": "rgb(0 0 0 / 4%)",
+      "token": "--grey-neutral-light-50",
+      "resolvedTokenValue": "#0000000a",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/HomeCategory.module.scss",
+      "line": 109,
+      "rdColour": "rgb(3 173 226 / 5%)",
+      "token": "--brand-light-50",
+      "resolvedTokenValue": "#03ade20d",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/HomeCategory.module.scss",
+      "line": 115,
+      "rdColour": "rgb(126 192 229 / 20%)",
+      "token": "--teal-dark-200",
+      "resolvedTokenValue": "#7ec0e533",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/HomeCategory.module.scss",
+      "line": 121,
+      "rdColour": "rgb(3 173 226 / 5%)",
+      "token": "--brand-light-50",
+      "resolvedTokenValue": "#03ade20d",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/HomeCategory.module.scss",
+      "line": 126,
+      "rdColour": "rgb(3 173 226 / 5%)",
+      "token": "--brand-light-50",
+      "resolvedTokenValue": "#03ade20d",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/HomeCategory.module.scss",
+      "line": 131,
+      "rdColour": "rgb(126 192 229 / 20%)",
+      "token": "--teal-dark-200",
+      "resolvedTokenValue": "#7ec0e533",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/HomeCategory.module.scss",
+      "line": 135,
+      "rdColour": "rgb(3 173 226 / 5%)",
+      "token": "--brand-light-50",
+      "resolvedTokenValue": "#03ade20d",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/HomeCategory.module.scss",
+      "line": 139,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/HomeCategory.module.scss",
+      "line": 156,
+      "rdColour": "rgb(0 0 0 / 2%)",
+      "token": "--grey-neutral-light-25",
+      "resolvedTokenValue": "#00000005",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/HomeCategory.module.scss",
+      "line": 169,
+      "rdColour": "rgb(3 173 226 / 5%)",
+      "token": "--brand-light-50",
+      "resolvedTokenValue": "#03ade20d",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/HomeCategory.module.scss",
+      "line": 182,
+      "rdColour": "rgb(3 173 226 / 5%)",
+      "token": "--brand-light-50",
+      "resolvedTokenValue": "#03ade20d",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/HomeCategory.module.scss",
+      "line": 194,
+      "rdColour": "rgb(126 192 229 / 20%)",
+      "token": "--teal-dark-200",
+      "resolvedTokenValue": "#7ec0e533",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/HomeCategory.module.scss",
+      "line": 206,
+      "rdColour": "rgb(3 173 226 / 5%)",
+      "token": "--brand-light-50",
+      "resolvedTokenValue": "#03ade20d",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/HomeCategory.module.scss",
+      "line": 218,
+      "rdColour": "rgb(3 173 226 / 5%)",
+      "token": "--brand-light-50",
+      "resolvedTokenValue": "#03ade20d",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/HomeCategory.module.scss",
+      "line": 230,
+      "rdColour": "rgb(126 192 229 / 20%)",
+      "token": "--teal-dark-200",
+      "resolvedTokenValue": "#7ec0e533",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/HomeCategory.module.scss",
+      "line": 242,
+      "rdColour": "rgb(3 173 226 / 5%)",
+      "token": "--brand-light-50",
+      "resolvedTokenValue": "#03ade20d",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/HomeCategory.module.scss",
+      "line": 254,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/HomeCategory.module.scss",
+      "line": 272,
+      "rdColour": "rgb(17 24 26 / 10%)",
+      "token": "--stroke-weak",
+      "resolvedTokenValue": "#11181a1a",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/HomeCategory.module.scss",
+      "line": 281,
+      "rdColour": "#6570fa",
+      "token": "--purple-light-1000",
+      "resolvedTokenValue": "#7e47cc",
+      "match": "approximate",
+      "visualDifference": "RD #6570fa → #7e47cc. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/HomeCategory.module.scss",
+      "line": 282,
+      "rdColour": "#a153fb",
+      "token": "--purple-light-1000",
+      "resolvedTokenValue": "#7e47cc",
+      "match": "approximate",
+      "visualDifference": "RD #a153fb → #7e47cc. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/HomeCategory.module.scss",
+      "line": 283,
+      "rdColour": "#21cdff",
+      "token": "--blue-light-1000",
+      "resolvedTokenValue": "#03ade2",
+      "match": "approximate",
+      "visualDifference": "RD #21cdff → #03ade2. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/HomeCategory.module.scss",
+      "line": 300,
+      "rdColour": "rgb(101 112 250 / 10%)",
+      "token": "--purple-light-50",
+      "resolvedTokenValue": "#7e47cc0d",
+      "match": "approximate",
+      "visualDifference": "RD rgb(101 112 250 / 10%) → #7e47cc0d. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/HomeCategory.module.scss",
+      "line": 301,
+      "rdColour": "rgb(161 83 251 / 10%)",
+      "token": "--purple-light-50",
+      "resolvedTokenValue": "#7e47cc0d",
+      "match": "approximate",
+      "visualDifference": "RD rgb(161 83 251 / 10%) → #7e47cc0d. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/HomeCategory.module.scss",
+      "line": 302,
+      "rdColour": "rgb(123 225 255 / 10%)",
+      "token": "--blue-dark-50",
+      "resolvedTokenValue": "#a3eaff0f",
+      "match": "approximate",
+      "visualDifference": "RD rgb(123 225 255 / 10%) → #a3eaff0f. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/HomeCategory.module.scss",
+      "line": 322,
+      "rdColour": "rgb(101 112 250 / 10%)",
+      "token": "--purple-light-50",
+      "resolvedTokenValue": "#7e47cc0d",
+      "match": "approximate",
+      "visualDifference": "RD rgb(101 112 250 / 10%) → #7e47cc0d. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/HomeCategory.module.scss",
+      "line": 323,
+      "rdColour": "rgb(161 83 251 / 10%)",
+      "token": "--purple-light-50",
+      "resolvedTokenValue": "#7e47cc0d",
+      "match": "approximate",
+      "visualDifference": "RD rgb(161 83 251 / 10%) → #7e47cc0d. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/HomeCategory.module.scss",
+      "line": 324,
+      "rdColour": "rgb(123 225 255 / 10%)",
+      "token": "--blue-dark-50",
+      "resolvedTokenValue": "#a3eaff0f",
+      "match": "approximate",
+      "visualDifference": "RD rgb(123 225 255 / 10%) → #a3eaff0f. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/HomeCategory.module.scss",
+      "line": 337,
+      "rdColour": "rgb(17 24 26 / 10%)",
+      "token": "--stroke-weak",
+      "resolvedTokenValue": "#11181a1a",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/GalleryCell.module.scss",
+      "line": 5,
+      "rdColour": "rgba(0,0,0,.8)",
+      "token": "--fill-overlay-strong",
+      "resolvedTokenValue": "#000c",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/GalleryCell.module.scss",
+      "line": 26,
+      "rdColour": "rgb(17 24 26 / 10%)",
+      "token": "--stroke-weak",
+      "resolvedTokenValue": "#11181a1a",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/GalleryCell.module.scss",
+      "line": 27,
+      "rdColour": "rgb(17 24 26 / 4%)",
+      "token": "--fill-hover",
+      "resolvedTokenValue": "#11181a0a",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/GalleryCell.module.scss",
+      "line": 70,
+      "rdColour": "rgb(0 0 0 / 80%)",
+      "token": "--fill-overlay-strong",
+      "resolvedTokenValue": "#000c",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/GalleryCell.module.scss",
+      "line": 71,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/GalleryCell.module.scss",
+      "line": 103,
+      "rdColour": "#03ADE2",
+      "token": "--fill-brand-strong",
+      "resolvedTokenValue": "#03ade2",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/GalleryCell.module.scss",
+      "line": 116,
+      "rdColour": "rgb(255 255 255 / 60%)",
+      "token": "--grey-neutral-dark-500",
+      "resolvedTokenValue": "#fff9",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/GalleryCell.module.scss",
+      "line": 117,
+      "rdColour": "rgb(17 24 26 / 45%)",
+      "token": "--text-weaker",
+      "resolvedTokenValue": "#11181a73",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/GalleryCell.module.scss",
+      "line": 122,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/GalleryCell.module.scss",
+      "line": 123,
+      "rdColour": "#03ade2",
+      "token": "--fill-brand-strong",
+      "resolvedTokenValue": "#03ade2",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/Header.module.scss",
+      "line": 10,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/Header.module.scss",
+      "line": 76,
+      "rdColour": "#808080",
+      "token": "--text-weaker",
+      "resolvedTokenValue": "#11181a73",
+      "match": "approximate",
+      "visualDifference": "RD #808080 → #11181a73. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/Header.module.scss",
+      "line": 101,
+      "rdColour": "rgb(0 0 0 / 0%)",
+      "token": "transparent",
+      "resolvedTokenValue": "transparent",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/CellActions.module.scss",
+      "line": 12,
+      "rdColour": "rgb(17 24 26 / 50%)",
+      "token": "--text-weaker",
+      "resolvedTokenValue": "#11181a73",
+      "match": "approximate",
+      "visualDifference": "RD rgb(17 24 26 / 50%) → #11181a73. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/CellActions.module.scss",
+      "line": 30,
+      "rdColour": "rgb(17 24 26 / 50%)",
+      "token": "--text-weaker",
+      "resolvedTokenValue": "#11181a73",
+      "match": "approximate",
+      "visualDifference": "RD rgb(17 24 26 / 50%) → #11181a73. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/CellActions.module.scss",
+      "line": 31,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/CellActions.module.scss",
+      "line": 37,
+      "rdColour": "rgb(17 24 26 / 70%)",
+      "token": "--text-weak",
+      "resolvedTokenValue": "#11181aa6",
+      "match": "approximate",
+      "visualDifference": "RD rgb(17 24 26 / 70%) → #11181aa6. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/CellActions.module.scss",
+      "line": 55,
+      "rdColour": "rgb(255 255 255 / 16%)",
+      "token": "--grey-neutral-dark-200",
+      "resolvedTokenValue": "#ffffff38",
+      "match": "approximate",
+      "visualDifference": "RD rgb(255 255 255 / 16%) → #ffffff38. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/CellActions.module.scss",
+      "line": 63,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/CellActions.module.scss",
+      "line": 64,
+      "rdColour": "#15171f",
+      "token": "--grey-slate-solid-900",
+      "resolvedTokenValue": "#12181a",
+      "match": "approximate",
+      "visualDifference": "RD #15171f → #12181a. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/CellActions.module.scss",
+      "line": 75,
+      "rdColour": "rgb(0 0 0 / 24%)",
+      "token": "--fill-disabled",
+      "resolvedTokenValue": "#11181a33",
+      "match": "approximate",
+      "visualDifference": "RD rgb(0 0 0 / 24%) → #11181a33. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/CellActions.module.scss",
+      "line": 111,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/StartEditingButton.module.scss",
+      "line": 33,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/StartEditingButton.module.scss",
+      "line": 40,
+      "rdColour": "#029cd0",
+      "token": "--blue-light-1000",
+      "resolvedTokenValue": "#03ade2",
+      "match": "approximate",
+      "visualDifference": "RD #029cd0 → #03ade2. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/StartEditingButton.module.scss",
+      "line": 41,
+      "rdColour": "rgb(0 0 0 / 8%)",
+      "token": "--grey-neutral-light-100",
+      "resolvedTokenValue": "#0000001a",
+      "match": "approximate",
+      "visualDifference": "RD rgb(0 0 0 / 8%) → #0000001a. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/StartEditingButton.module.scss",
+      "line": 41,
+      "rdColour": "rgb(0 0 0 / 12%)",
+      "token": "--grey-neutral-light-100",
+      "resolvedTokenValue": "#0000001a",
+      "match": "approximate",
+      "visualDifference": "RD rgb(0 0 0 / 12%) → #0000001a. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/StartEditingButton.module.scss",
+      "line": 45,
+      "rdColour": "#0290c0",
+      "token": "--blue-light-1000",
+      "resolvedTokenValue": "#03ade2",
+      "match": "approximate",
+      "visualDifference": "RD #0290c0 → #03ade2. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/StartEditingButton.module.scss",
+      "line": 97,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/StartEditingButton.module.scss",
+      "line": 99,
+      "rdColour": "rgb(0 0 0 / 8%)",
+      "token": "--grey-neutral-light-100",
+      "resolvedTokenValue": "#0000001a",
+      "match": "approximate",
+      "visualDifference": "RD rgb(0 0 0 / 8%) → #0000001a. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/StartEditingButton.module.scss",
+      "line": 99,
+      "rdColour": "rgb(0 0 0 / 4%)",
+      "token": "--grey-neutral-light-50",
+      "resolvedTokenValue": "#0000000a",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/StartEditingButton.module.scss",
+      "line": 133,
+      "rdColour": "#333",
+      "token": "--grey-neutral-solid-800",
+      "resolvedTokenValue": "#333",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/StartEditingButton.module.scss",
+      "line": 137,
+      "rdColour": "rgb(0 0 0 / 4%)",
+      "token": "--grey-neutral-light-50",
+      "resolvedTokenValue": "#0000000a",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/StartEditingButton.module.scss",
+      "line": 141,
+      "rdColour": "rgb(0 0 0 / 8%)",
+      "token": "--grey-neutral-light-100",
+      "resolvedTokenValue": "#0000001a",
+      "match": "approximate",
+      "visualDifference": "RD rgb(0 0 0 / 8%) → #0000001a. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/bottom-sheet.module.scss",
+      "line": 10,
+      "rdColour": "rgb(0 0 0 / 60%)",
+      "token": "--fill-overlay",
+      "resolvedTokenValue": "#0009",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/bottom-sheet.module.scss",
+      "line": 15,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/bottom-sheet.module.scss",
+      "line": 58,
+      "rdColour": "#e7e8e8",
+      "token": "--stroke-weak",
+      "resolvedTokenValue": "#11181a1a",
+      "match": "approximate",
+      "visualDifference": "RD #e7e8e8 → #11181a1a. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/bottom-sheet.module.scss",
+      "line": 60,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/CategoryBasket.module.scss",
+      "line": 73,
+      "rdColour": "rgb(3 173 226 / 30%)",
+      "token": "--brand-light-200",
+      "resolvedTokenValue": "#03ade233",
+      "match": "approximate",
+      "visualDifference": "RD rgb(3 173 226 / 30%) → #03ade233. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/CategoryBasket.module.scss",
+      "line": 74,
+      "rdColour": "rgb(3 173 226 / 60%)",
+      "token": "--brand-light-500",
+      "resolvedTokenValue": "#03ade280",
+      "match": "approximate",
+      "visualDifference": "RD rgb(3 173 226 / 60%) → #03ade280. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/CategoryBasket.module.scss",
+      "line": 82,
+      "rdColour": "rgb(63 215 91 / 30%)",
+      "token": "--green-dark-200",
+      "resolvedTokenValue": "#77c7af33",
+      "match": "approximate",
+      "visualDifference": "RD rgb(63 215 91 / 30%) → #77c7af33. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/CategoryBasket.module.scss",
+      "line": 83,
+      "rdColour": "rgb(63 215 91 / 60%)",
+      "token": "--green-dark-800",
+      "resolvedTokenValue": "#77c7afcc",
+      "match": "approximate",
+      "visualDifference": "RD rgb(63 215 91 / 60%) → #77c7afcc. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/CategoryBasket.module.scss",
+      "line": 127,
+      "rdColour": "rgb(255 255 255 / 40%)",
+      "token": "--grey-neutral-dark-500",
+      "resolvedTokenValue": "#fff9",
+      "match": "approximate",
+      "visualDifference": "RD rgb(255 255 255 / 40%) → #fff9. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/CategoryBasket.module.scss",
+      "line": 157,
+      "rdColour": "rgb(255 255 255 / 100%)",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/CategoryBasket.module.scss",
+      "line": 163,
+      "rdColour": "rgb(0 0 0 / 8%)",
+      "token": "--grey-neutral-light-100",
+      "resolvedTokenValue": "#0000001a",
+      "match": "approximate",
+      "visualDifference": "RD rgb(0 0 0 / 8%) → #0000001a. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/CategoryBasket.module.scss",
+      "line": 164,
+      "rdColour": "rgb(0 0 0 / 4%)",
+      "token": "--grey-neutral-light-50",
+      "resolvedTokenValue": "#0000000a",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/Modal.module.scss",
+      "line": 9,
+      "rdColour": "rgb(0 0 0 / 50%)",
+      "token": "--fill-overlay-weak",
+      "resolvedTokenValue": "#00000073",
+      "match": "approximate",
+      "visualDifference": "RD rgb(0 0 0 / 50%) → #00000073. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/Modal.module.scss",
+      "line": 38,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/NewLabel.module.scss",
+      "line": 6,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/NewLabel.module.scss",
+      "line": 7,
+      "rdColour": "#f23b77",
+      "token": "--fill-badge",
+      "resolvedTokenValue": "#f23b77",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/variables.scss",
+      "line": 136,
+      "rdColour": "#007bff",
+      "token": "--blue-light-1000",
+      "resolvedTokenValue": "#03ade2",
+      "match": "approximate",
+      "visualDifference": "RD #007bff → #03ade2. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/HomeLayout.module.scss",
+      "line": 10,
+      "rdColour": "#f1fdff",
+      "token": "--fill-brand-weak",
+      "resolvedTokenValue": "#03ade20d",
+      "match": "approximate",
+      "visualDifference": "RD #f1fdff → #03ade20d. Hue, brightness and/or opacity differ; temporary pending Designer definition."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/HomeLayout.module.scss",
+      "line": 10,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/HomeLayout.module.scss",
+      "line": 86,
+      "rdColour": "rgb(3 173 226 / 80%)",
+      "token": "--brand-light-800",
+      "resolvedTokenValue": "#03ade2cc",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/HomeLayout.module.scss",
+      "line": 102,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/HomeLayout.module.scss",
+      "line": 110,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/HomeLayout.module.scss",
+      "line": 183,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    },
+    {
+      "file": "app/src/surfaces/rd-port/HomeLayout.module.scss",
+      "line": 201,
+      "rdColour": "#fff",
+      "token": "--fill-white",
+      "resolvedTokenValue": "#fff",
+      "match": "exact",
+      "visualDifference": "No RGBA change (8-bit alpha rounding tolerance)."
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+schemaVersion: 1
+pack: marketing/home-authenticated
+version: 2026-09
+slots:
+  - id: brand
+    required: true
+    description: Product brand entry.
+  - id: gallery-entry
+    required: true
+    description: Header action that opens My Gallery.
+  - id: pricing-entry
+    required: true
+    description: Header pricing icon that opens the pricing overlay.
+  - id: account-summary
+    required: true
+    description: Synthetic credit and account controls.
+  - id: category-item
+    required: true
+    description: Tool-family navigation item.
+  - id: tool-card
+    required: true
+    description: CMS-independent feature card shape.

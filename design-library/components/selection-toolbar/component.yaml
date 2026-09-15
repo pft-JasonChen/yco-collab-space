@@ -1,0 +1,81 @@
+schemaVersion: 1
+id: selection-toolbar
+displayName: Selection Toolbar
+classification: composite
+status: pilot-approved
+rd:
+  sourcePackage: youcam-enhance-frontend
+  sourceVersion: 1.34.1
+  snapshot: yce-frontend-gm-260909
+  portability: reference
+  sourcePaths:
+    - src/components/my-gallery-page/components/editing-toolbar/index.js
+    - src/components/my-gallery-page/components/select-all-header/index.js
+    - src/components/my-gallery-page/tabs/gallery/gallery.module.scss
+  sourceHashes:
+    - { path: src/components/my-gallery-page/components/editing-toolbar/index.js, sha256: b53f0f1e558cf1a98da3c054ec00a1423bcf6c392e6735b747e114919551998d }
+    - { path: src/components/my-gallery-page/components/select-all-header/index.js, sha256: 247f63ef48592eb89c78548c131383ff5f46f61ecff24757876dfda35d15bdfd }
+    - { path: src/components/my-gallery-page/tabs/gallery/gallery.module.scss, sha256: 1c966073b2a5f378d1bc4012437fae36cc9dd2b825b6e284a0220ca8fe49f830 }
+figma: { status: pending, fileKey: null, componentSetNodeId: null, variants: [] }
+implementation:
+  importPath: platform/ui/selection-toolbar/index.js
+  storyId: ui-selection-toolbar
+  framework: react
+  dependencies: [react]
+  removedDependencies: [i18n, browser-utils, caller-supplied-styles]
+  localFiles:
+    - path: platform/ui/selection-toolbar/SelectionToolbar.jsx
+      sha256: 3c213e32758c2587ca269790de41949415352a6d2876af2323fe52daf34b12a9
+    - path: platform/ui/selection-toolbar/SelectionToolbar.module.scss
+      sha256: 6dc5a250576d56e2f4f7d3631437903fed4428e359060207155300881fb3ddaa
+    - path: platform/ui/selection-toolbar/SelectionToolbar.stories.jsx
+      sha256: e776a6599cc7081423771e049d2c2595c6719c5b46c534b8054ea2e003db9d1d
+    - path: platform/ui/selection-toolbar/index.js
+      sha256: 8df947f130bfbf46c70f4a5bec997e258d06d5c6070fd03d0d9f01a2e2573da0
+  localFilesUpdated: 2026-09-15
+publicApi:
+  props:
+    - { name: isEditing, required: true }
+    - { name: onToggleEditing, required: true }
+    - { name: compact, required: false }
+    - { name: selectDisabled, required: false }
+    - { name: deleteDisabled, required: false }
+    - { name: downloadDisabled, required: false }
+    - { name: hideDelete, required: false }
+    - { name: onDelete, required: false }
+    - { name: onDownload, required: false }
+    - { name: labels, required: false }
+  states: [browsing, selecting, nothing-selected, compact, delete-hidden]
+tokens:
+  lockPath: platform/tokens/tokens.lock.json
+  uses:
+    - --blue-dark-1000
+    - --corner-radius-32
+    - --fill-brand-strong
+    - --fill-disabled
+    - --fill-error-strong
+    - --fill-white
+    - --font-size-heading-5
+    - --font-size-small
+    - --font-weight-strong
+    - --font-weight-weak
+    - --grey-neutral-solid-1000
+    - --line-height-heading-5
+    - --line-height-small
+    - --stroke-focus
+    - --text-strong
+assets:
+  - path: assets/icon/yco-home-gallery
+    usage: runtime
+review:
+  pilotApprover: { actor: pm, id: collab-space-owner, date: 2026-09-15 }
+  canonicalReview: { designer: pending, rd: pending }
+decisionBasis:
+  - "Extracted from RD source on 2026-09-15 for Cloud Storage's batch selection, per the shared component workflow: no replacement UI was designed. RD splits the header bar into select-all-header (left) and editing-toolbar (right); both are promoted together because they are two halves of one row and share the same editing state."
+  - "portability is `reference`, and the reason is structural rather than incidental. RD's two components take the consuming tab's CSS module as a `styles` prop, so the same markup is styled differently per tab and neither component owns an appearance. A shared component has to own its styling, so that prop is removed and the rules are transcribed from my-gallery-page/tabs/gallery/gallery.module.scss, which is why that stylesheet is listed under sourcePaths alongside the two components."
+  - "Service substitutions (2026-09-15): RD's `getTranslationFunction()` is replaced by a `labels` prop with English defaults, per this library's rule that shared components never translate internally. RD also gates the download button behind `browserUtils.isIOs() || isIPad() || isAndroid()`, hiding it on mobile platforms entirely; that platform sniff is dropped and download is simply shown when `onDownload` is supplied, so the consumer decides. The narrow icon-only treatment RD drives from its `isMd` viewport hook becomes the `compact` prop, so it can be kept in step with gallery-grid's measured layout rather than disagreeing with it inside a fixed-width preview."
+  - "Colour mapping (2026-09-15) follows app/src/surfaces/rd-port/token-colour-mapping.json for Gallery.module.scss. Exact: `#fff` -> `--fill-white`; `#de0000` delete fill -> `--fill-error-strong` (#de0000); `#000` cancel label -> `--grey-neutral-solid-1000`; `rgb(17 24 26 / 20%)` cancel border -> `--fill-disabled` (#11181a33); `rgb(9 22 26 / 95%)` select-all label -> `--text-strong` (#09161af2)."
+  - "Colour mapping, the approximations (2026-09-15), carried from the canonical record rather than re-decided: `#d7d7d7` disabled fill -> `--fill-disabled` (#11181a33) replaces an opaque light grey with a translucent slate, so a disabled pill now takes on the page behind it; `#46e4fa` hover -> `--blue-dark-1000` (#a3eaff) is a noticeably paler cyan; `#dddee6` unchecked checkbox border -> `--fill-disabled` (#11181a33) shifts a cool grey ring to translucent slate. All three stay pending Designer definition."
+  - "Accessibility repair in the port (2026-09-15). RD's select-all renders a styled `<span>` with the click handler plus a bare `<input type=\"checkbox\">` that has no checked binding and no label association, so the real control is inert and the visible one is unreachable by keyboard. Here the input is the control — checked, changed and labelled — and the styled span is decorative, with focus forwarded to it via `:focus-visible + .checkbox`. The rendered appearance is unchanged."
+  - "The tip slot stays a `children` slot, as in RD, because the gallery passes plain text while other tabs pass sanitised HTML. This component takes the resolved node and never sanitises, so an HTML consumer keeps that responsibility."
+  - "Typography approximation (2026-09-15): RD's `.selectButton`, `.deleteButton` and `.downloadButton` drop to `font-weight: 500` below 768px, and the token set carries only `--font-weight-strong` (600) and `--font-weight-weak` (400). `--font-weight-weak` is used, so the narrow-width labels render regular where production renders medium — a visible difference, not a rounding. The desktop 600 maps exactly. RD's narrow `font-size: 16px` / `line-height: 19px` also have no matching token pair and are kept as literals, which the raw-colour policy permits because they are not colours."

@@ -1,0 +1,516 @@
+{
+  "synthetic": true,
+  "networkAllowed": false,
+  "assets": {
+    "status": "pm-temporary",
+    "note": "Thumbnails and clips live under product/mock-assets and exist to exercise mixed aspect ratios in the justified grid."
+  },
+  "plan": {
+    "id": "free",
+    "label": "Free",
+    "quotaBytes": 5368709120,
+    "quotaLabel": "5 GB",
+    "retentionDays": null,
+    "foldersGated": false,
+    "synthetic": true
+  },
+  "capacity": {
+    "thresholds": {
+      "warning": 0.75,
+      "critical": 0.9,
+      "full": 1
+    },
+    "reviewStates": [
+      {
+        "id": "normal",
+        "label": "Normal",
+        "usedBytes": 1717986918,
+        "usedLabel": "1.6 GB",
+        "remainingLabel": "3.4 GB",
+        "state": "normal"
+      },
+      {
+        "id": "warning",
+        "label": "Warning",
+        "usedBytes": 4402341478,
+        "usedLabel": "4.1 GB",
+        "remainingLabel": "0.9 GB",
+        "state": "warning"
+      },
+      {
+        "id": "critical",
+        "label": "Critical",
+        "usedBytes": 5100273561,
+        "usedLabel": "4.75 GB",
+        "remainingLabel": "0.25 GB",
+        "state": "critical"
+      },
+      {
+        "id": "full",
+        "label": "Full",
+        "usedBytes": 5368709120,
+        "usedLabel": "5 GB",
+        "remainingLabel": "0 GB",
+        "state": "full"
+      }
+    ],
+    "defaultReviewState": "normal",
+    "trashCountsAgainstQuota": true
+  },
+  "railCategories": [
+    {
+      "key": "home",
+      "label": "Home",
+      "iconName": "ic-home"
+    },
+    {
+      "key": "ai-agent",
+      "label": "AI Agent",
+      "iconName": "ic-ai-agent"
+    },
+    {
+      "key": "photo-editing",
+      "label": "AI Photo Editing",
+      "iconName": "ic-photo-editing"
+    },
+    {
+      "key": "ai-image",
+      "label": "AI Image",
+      "iconName": "ic-ai-image"
+    },
+    {
+      "key": "ai-portrait",
+      "label": "AI Portrait",
+      "iconName": "ic-portrait"
+    },
+    {
+      "key": "ai-video",
+      "label": "AI Video Editing",
+      "iconName": "ic-ai-video"
+    },
+    {
+      "key": "basic-editing",
+      "label": "Basic Editing",
+      "iconName": "ic-image"
+    },
+    {
+      "key": "batch-editing",
+      "label": "Batch Editing",
+      "iconName": "ic-layers"
+    },
+    {
+      "key": "gallery",
+      "label": "My Gallery",
+      "iconName": "ic-history"
+    },
+    {
+      "key": "video-template",
+      "label": "Video Templates",
+      "iconName": "ic-video",
+      "dividerBefore": true
+    },
+    {
+      "key": "image-template",
+      "label": "Image Templates",
+      "iconName": "ic-image"
+    },
+    {
+      "key": "api",
+      "label": "API",
+      "iconName": "ic-api-b",
+      "dividerBefore": true
+    }
+  ],
+  "tabs": [
+    {
+      "id": "projects",
+      "label": "Projects",
+      "level": 1,
+      "filter": "tool-family"
+    },
+    {
+      "id": "images",
+      "label": "Images",
+      "level": 1,
+      "filter": "tool-family"
+    },
+    {
+      "id": "videos",
+      "label": "Videos",
+      "level": 1,
+      "filter": "tool-family"
+    },
+    {
+      "id": "uploads",
+      "label": "Uploads",
+      "level": 1,
+      "filter": "format"
+    },
+    {
+      "id": "trash",
+      "label": "Trash",
+      "level": 1,
+      "filter": "none"
+    }
+  ],
+  "toolFamilies": [
+    {
+      "id": "all",
+      "label": "All",
+      "selected": true
+    },
+    {
+      "id": "portrait",
+      "label": "Portrait retouch"
+    },
+    {
+      "id": "video-generation",
+      "label": "Video generation"
+    },
+    {
+      "id": "product",
+      "label": "Product scenes"
+    },
+    {
+      "id": "retouch-expand",
+      "label": "Retouch and expand"
+    },
+    {
+      "id": "style",
+      "label": "Style generation"
+    },
+    {
+      "id": "audio",
+      "label": "Audio"
+    }
+  ],
+  "formatFilters": [
+    {
+      "id": "all",
+      "label": "All",
+      "selected": true
+    },
+    {
+      "id": "jpg",
+      "label": "JPG"
+    },
+    {
+      "id": "png",
+      "label": "PNG"
+    },
+    {
+      "id": "mp4",
+      "label": "MP4"
+    }
+  ],
+  "sortOptions": [
+    {
+      "id": "newest",
+      "label": "Newest",
+      "selected": true
+    },
+    {
+      "id": "oldest",
+      "label": "Oldest"
+    },
+    {
+      "id": "size-desc",
+      "label": "Largest first"
+    }
+  ],
+  "folders": [
+    {
+      "id": "folder-campaign",
+      "tab": "images",
+      "name": "Spring campaign",
+      "itemCount": 12,
+      "sizeBytes": 402653184,
+      "sizeLabel": "384 MB",
+      "createdLabel": "12.08.2026"
+    },
+    {
+      "id": "folder-reels",
+      "tab": "videos",
+      "name": "Reels drafts",
+      "itemCount": 5,
+      "sizeBytes": 1288490188,
+      "sizeLabel": "1.2 GB",
+      "createdLabel": "02.09.2026"
+    }
+  ],
+  "items": [
+    {
+      "id": "item-project-summer-ad",
+      "tab": "projects",
+      "name": "Summer ad cut",
+      "type": "Project",
+      "toolFamily": "video-generation",
+      "sizeBytes": 67108864,
+      "sizeLabel": "64 MB",
+      "dateLabel": "14.09.2026",
+      "ratio": 1.7778,
+      "editable": true
+    },
+    {
+      "id": "item-project-lookbook",
+      "tab": "projects",
+      "name": "Lookbook layout",
+      "type": "Project",
+      "toolFamily": "product",
+      "sizeBytes": 23068672,
+      "sizeLabel": "22 MB",
+      "dateLabel": "09.09.2026",
+      "ratio": 0.75,
+      "editable": true
+    },
+    {
+      "id": "item-image-headshot",
+      "tab": "images",
+      "name": "Team headshot retouch",
+      "type": "Image",
+      "toolFamily": "portrait",
+      "sizeBytes": 4194304,
+      "sizeLabel": "4 MB",
+      "dateLabel": "14.09.2026",
+      "ratio": 0.8,
+      "folderId": null
+    },
+    {
+      "id": "item-image-product-scene",
+      "tab": "images",
+      "name": "Bag on sand",
+      "type": "Image",
+      "toolFamily": "product",
+      "sizeBytes": 2097152,
+      "sizeLabel": "2 MB",
+      "dateLabel": "13.09.2026",
+      "ratio": 1.3333,
+      "folderId": "folder-campaign"
+    },
+    {
+      "id": "item-image-expand",
+      "tab": "images",
+      "name": "Storefront expanded",
+      "type": "Image",
+      "toolFamily": "retouch-expand",
+      "sizeBytes": 12582912,
+      "sizeLabel": "12 MB",
+      "dateLabel": "11.09.2026",
+      "ratio": 1.7778,
+      "folderId": null
+    },
+    {
+      "id": "item-video-generated",
+      "tab": "videos",
+      "name": "Motion transfer take 3",
+      "type": "Video",
+      "toolFamily": "video-generation",
+      "sizeBytes": 301989888,
+      "sizeLabel": "288 MB",
+      "dateLabel": "14.09.2026",
+      "durationLabel": "00:12",
+      "ratio": 0.5625,
+      "folderId": "folder-reels"
+    },
+    {
+      "id": "item-video-style",
+      "tab": "videos",
+      "name": "Style pass neon",
+      "type": "Video",
+      "toolFamily": "style",
+      "sizeBytes": 178257920,
+      "sizeLabel": "170 MB",
+      "dateLabel": "08.09.2026",
+      "durationLabel": "00:08",
+      "ratio": 1.7778,
+      "folderId": null
+    },
+    {
+      "id": "item-upload-source-clip",
+      "tab": "uploads",
+      "name": "trail-source.mp4",
+      "type": "Upload",
+      "format": "mp4",
+      "sizeBytes": 432013312,
+      "sizeLabel": "412 MB",
+      "dateLabel": "07.09.2026",
+      "durationLabel": "01:51",
+      "ratio": 0.5625
+    },
+    {
+      "id": "item-upload-reference",
+      "tab": "uploads",
+      "name": "brand-reference.png",
+      "type": "Upload",
+      "format": "png",
+      "sizeBytes": 8388608,
+      "sizeLabel": "8 MB",
+      "dateLabel": "05.09.2026",
+      "ratio": 1
+    }
+  ],
+  "upload": {
+    "entryLabel": "Upload",
+    "acceptedFormats": [
+      "image/png",
+      "image/jpeg",
+      "video/mp4"
+    ],
+    "perFileProgressMs": 900,
+    "batch": [
+      {
+        "name": "youcam-ai-video-01.mp4",
+        "sizeBytes": 30146560,
+        "sizeLabel": "28.75 MB",
+        "outcome": "stored"
+      },
+      {
+        "name": "youcam-ai-video-02.mp4",
+        "sizeBytes": 5191680,
+        "sizeLabel": "4.95 MB",
+        "outcome": "stored"
+      },
+      {
+        "name": "youcam-video-template-03.mp4",
+        "sizeBytes": 6584320,
+        "sizeLabel": "6.28 MB",
+        "outcome": "quota-exhausted"
+      },
+      {
+        "name": "youcam-video-template-04.mp4",
+        "sizeBytes": 13148160,
+        "sizeLabel": "12.54 MB",
+        "outcome": "quota-exhausted"
+      }
+    ],
+    "failureKinds": [
+      {
+        "id": "failed-format",
+        "title": "This file type is not supported",
+        "body": "Choose a PNG, JPG or MP4 file.",
+        "primaryAction": "Choose another file",
+        "retryable": true
+      },
+      {
+        "id": "failed-quota",
+        "title": "Ran out of space",
+        "body": "There was not enough room left to store this file.",
+        "primaryAction": "Manage space",
+        "secondaryAction": "Expand storage",
+        "retryable": false
+      }
+    ],
+    "queueWidget": false
+  },
+  "trash": {
+    "retentionDays": 30,
+    "policyNote": "Items are kept for 30 days, then deleted permanently. Items in Trash still use your storage.",
+    "sort": "date-moved",
+    "items": [
+      {
+        "id": "trash-old-render",
+        "name": "Draft render v1",
+        "type": "Video",
+        "sizeBytes": 209715200,
+        "sizeLabel": "200 MB",
+        "movedLabel": "13.09.2026",
+        "daysRemaining": 29,
+        "restoreTab": "videos",
+        "restoreFolderId": null
+      },
+      {
+        "id": "trash-expiring-soon",
+        "name": "Test crop",
+        "type": "Image",
+        "sizeBytes": 3145728,
+        "sizeLabel": "3 MB",
+        "movedLabel": "16.08.2026",
+        "daysRemaining": 1,
+        "restoreTab": "images",
+        "restoreFolderId": "folder-campaign",
+        "emphasis": "final-day"
+      }
+    ]
+  },
+  "purchase": {
+    "entryPoints": [
+      "storage-meter",
+      "critical-banner",
+      "full-dialog",
+      "quota-failed-cell"
+    ],
+    "subscription": {
+      "planId": "pro",
+      "planLabel": "Pro",
+      "quotaLabel": "100 GB",
+      "monthlyLabel": "NT$390 / month",
+      "yearlyLabel": "NT$3,588 / year",
+      "yearlySavingLabel": "Save 23%",
+      "benefits": [
+        "No watermark on exports",
+        "4K and original-resolution downloads",
+        "2,000 credits each month",
+        "Higher concurrent generation limit",
+        "Batch processing",
+        "100 GB of storage"
+      ]
+    },
+    "storagePacks": [
+      {
+        "id": "pack-10",
+        "label": "+10 GB",
+        "addedLabel": "10 GB",
+        "monthlyLabel": "NT$30 / month",
+        "yearlyLabel": "NT$300 / year",
+        "resultingTotalLabel": "5 GB + 10 GB = 15 GB"
+      },
+      {
+        "id": "pack-100",
+        "label": "+100 GB",
+        "addedLabel": "100 GB",
+        "monthlyLabel": "NT$90 / month",
+        "yearlyLabel": "NT$900 / year",
+        "resultingTotalLabel": "5 GB + 100 GB = 105 GB"
+      }
+    ],
+    "billingCycles": [
+      {
+        "id": "monthly",
+        "label": "Monthly",
+        "selected": true
+      },
+      {
+        "id": "yearly",
+        "label": "Yearly"
+      }
+    ],
+    "summary": {
+      "subtotalLabel": "NT$900",
+      "remainingValueLabel": "NT$0",
+      "amountDueLabel": "NT$900",
+      "renewalLabel": "Renews on 15.09.2027",
+      "prorationSynthetic": true
+    },
+    "checkoutInert": true,
+    "resumeQuotaFailedUploads": true
+  },
+  "batch": {
+    "actions": [
+      "download",
+      "move",
+      "trash"
+    ],
+    "showsSelectedCount": true,
+    "showsSelectedSize": true,
+    "cleanupSort": "size-desc"
+  },
+  "outOfScope": [
+    "sharing and collaboration",
+    "floating upload queue and batch cancel",
+    "search",
+    "favourites",
+    "drag into folder",
+    "dedicated manage-storage view",
+    "real payment, storage, quota or account services"
+  ]
+}

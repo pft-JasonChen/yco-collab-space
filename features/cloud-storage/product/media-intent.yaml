@@ -1,0 +1,8 @@
+schemaVersion: 1
+feature: cloud-storage
+requestedCollections: []
+decisionBasis:
+  - No shared Design Library collection is required for the PM prototype.
+  - The grid needs many thumbnails at mixed aspect ratios to exercise the justified desktop rows and the narrow two-column masonry, so the PM supplies temporary local images and short clips under product/mock-assets.
+  - Empty states reuse the shared empty-image component where a type exists; only type video is implemented today, so the remaining tabs are recorded as a design gap rather than covered by PM media.
+  - Temporary PM media must be replaced by Designer-selected media before design-final.

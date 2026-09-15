@@ -1,0 +1,280 @@
+@import "./variables.scss";
+
+%button {
+  height: 42px;
+  color: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 9px;
+  border-radius: 120px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 21px;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+
+  @include rwd-custom($width-lg) {
+    padding: 10px;
+    height: 32px;
+    width: 32px;
+  }
+}
+
+%circle-button {
+  width: 40px;
+  height: 40px;
+
+  /* margin: 0 10px 0 0; */
+  border: 2px solid var(--fill-brand-strong);
+  background-color: var(--fill-brand-strong);
+  color: var(--fill-white);
+
+  @include rwd-custom($width-lg) {
+    height: 32px;
+    width: 32px;
+  }
+}
+
+%oval-button {
+  background-color: var(--fill-brand-strong);
+  border: 1px solid var(--fill-brand-strong);
+  color: var(--fill-white);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  font-weight: 600;
+  border-radius: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 9px 22px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.disabled {
+  background-color: var(--fill-disabled) !important;
+  border-color: var(--fill-disabled);
+  cursor: unset;
+}
+
+.skeletonDisabled {
+  cursor: unset;
+}
+
+.skeletonCircle {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+
+  /* margin: 0 0 0 12px !important; */
+
+  @include rwd-custom($width-md) {
+    height: 32px;
+    width: 32px;
+  }
+}
+
+.skeletonMyAccount {
+  width: 100%;
+  height: 40px;
+  min-height: 40px;
+  border-radius: 120px;
+  margin: 0 0 30px;
+}
+
+.member {
+  @extend %button;
+  @extend %circle-button;
+
+  border: 0;
+  background-color: var(--text-strong);
+  margin: 0;
+}
+
+.iconProfile {
+  width: 40px;
+  height: 40px;
+
+  @include rwd-custom($width-md) {
+    height: 32px;
+    width: 32px;
+    pointer-events: none;
+  }
+
+  &[data-type="get.the.app.pad"] {
+    @include rwd-custom($width-lg) {
+      height: 24px;
+      width: 24px;
+    }
+  }
+}
+
+.getTheAppMobile {
+  @extend %button;
+
+  background-color: var(--fill-brand-strong);
+  color: var(--fill-white);
+
+  /* margin: 0 10px; */
+  padding: 7px 15px;
+  border: 2px solid var(--fill-brand-strong);
+  min-width: 86px;
+  min-height: 38px;
+  max-height: 42px;
+  font-size: 13px;
+  line-height: 13px;
+  white-space: break-spaces;
+
+  @include rwd-custom($width-md) {
+    height: unset;
+    width: unset;
+  }
+}
+
+.getTheAppPad {
+  @extend %button;
+
+  height: unset;
+  padding: 0;
+  background-color: var(--fill-white);
+  color: inherit;
+
+  @include rwd-custom($width-lg) {
+    height: unset;
+    width: unset;
+  }
+}
+
+.download {
+  @extend %oval-button;
+
+  display: flex;
+  flex-direction: row;
+  padding: 8px 16px;
+
+  /* margin: 0 12px 0 0; */
+
+  @include rwd-custom($width-md) {
+    flex-direction: column;
+    padding: 8px;
+    width: 32px;
+    height: 32px;
+  }
+}
+
+.logIn,
+.myAccount {
+  @extend %button;
+
+  border: 2px solid var(--fill-brand-strong);
+  background-color: white;
+  color: var(--text-brand);
+  padding: 9px;
+  width: 100%;
+  font-size: 20px;
+  line-height: 23px;
+  font-weight: 600;
+  margin: 0 0 17px;
+
+  @include rwd-custom($width-lg) {
+    height: unset;
+  }
+}
+
+.redDot {
+  position: absolute;
+  top: 0;
+  right: -8px;
+  width: 7px;
+  height: 7px;
+  background-color: var(--fill-badge);
+  border-radius: 50%;
+}
+
+.link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* margin: 0 10px 0 0; */
+}
+
+.text {
+  margin: 0 0 0 16px;
+}
+
+.icon {
+  display: block;
+  width: 23px;
+  height: 23px;
+}
+
+.noMargin {
+  margin: 0;
+}
+
+.downloadTextWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 13px;
+  margin: 0 0 0 8px;
+  white-space: nowrap;
+}
+
+.downloadText {
+  @include rwd-custom($width-md) {
+    display: none;
+  }
+}
+
+.creditText {
+  color: var(--fill-white);
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 500;
+
+  @include rwd-custom($result-dt-download-share-breakpoint) {
+    font-size: 16px;
+  }
+}
+
+.loginOval {
+  @extend %oval-button;
+
+  background-color: var(--fill-white);
+  border-color: var(--grey-slate-solid-900);
+  color: var(--grey-slate-solid-900);
+  margin: 0 10px 0 0;
+}
+
+.signupOval {
+  @extend %oval-button;
+
+  background-color: var(--fill-white);
+  border-color: var(--grey-slate-solid-900);
+  color: var(--grey-slate-solid-900);
+
+  @include rwd-custom($width-iphone-16promax) {
+    font-size: 16px;
+    padding: 9px 12px;
+  }
+
+  @include rwd-custom($width-iphone-se) {
+    padding: 9px;
+  }
+}
+
+.loginAndSignupOval {
+  @extend %oval-button;
+
+  @include rwd-custom($width-md) {
+    padding: 6px 12px;
+    height: 32px;
+    font-size: var(--font-size-tiny);
+    line-height: var(--line-height-tiny);
+  }
+}

@@ -1,0 +1,327 @@
+[
+  [
+    "AI Photo Editing",
+    [
+      [
+        "Photo Enhancer",
+        "/photo-enhance/result-photo",
+        "YCE_web_relayout_sign_in_index_Photo_Enhancer_8a094b8bad.jpg",
+        "Photo_Enhancer_36064b4258.svg",
+        "Enhance_24caa11151.mp4",
+        "hot"
+      ],
+      [
+        "Photo Repair",
+        "/products/ai-photo-repair/result-photo",
+        "webp_AI_Photo_Repair_e60349ef62.jpg",
+        "photo_repair.svg"
+      ],
+      [
+        "AI Colorize",
+        "/colorize/result-photo",
+        "YCE_web_relayout_sign_in_index_AI_Colorize_e764ff2f92.jpg",
+        "AI_Colorize_a251b3c7db.svg",
+        "AI_colorzie_video_1d76e2b8a6.mp4"
+      ],
+      [
+        "AI Color Correction",
+        "/color-correction/result-photo",
+        "YCE_web_relayout_sign_in_index_Color_Correction_e117f14a74.jpg",
+        "AI_Color_Correction_6c85f604fb.svg"
+      ],
+      [
+        "AI Lighting",
+        "/ai-lighting/result-photo",
+        "YCE_web_relayout_sign_in_index_AI_Lighting_e55a34cd7f.jpg",
+        "Al_Lighting_d5ab8bd14c.svg"
+      ],
+      [
+        "Object Removal",
+        "/object-removal/result-photo",
+        "YCE_web_relayout_sign_in_index_Object_Removal_b93ad75683.jpg",
+        "Object_Removal_ee8ea3082d.svg",
+        "Object_Removal_49c81d4d16.mp4"
+      ],
+      [
+        "AI Image Extender",
+        "/ai-image-extender/result-photo",
+        "Image_extender_8d7102ec86.jpg",
+        "Al_lmage_Extender_cf33313758.svg",
+        "AI_Image_Extender_86f8b9f179.mp4"
+      ],
+      [
+        "AI Replace",
+        "/ai-replace/result-photo",
+        "YCE_web_relayout_sign_in_index_AI_replace_b5d1fff61d.jpg",
+        "Al_Replace_1498a3d0c2.svg",
+        "AI_replace_1_0f0909bf6d.mp4",
+        "hot"
+      ],
+      [
+        "Remove Background",
+        "/remove-background/result-photo",
+        "YCE_web_relayout_sign_in_index_Remove_Background_4a318d971a.jpg",
+        "Remove_Background_8e6eb82850.svg"
+      ],
+      [
+        "Change Background",
+        "/change-background/result-photo",
+        "YCE_web_relayout_sign_in_index_Change_Background_d14668a9e9.jpg",
+        "Change_Background_a25572ed24.svg"
+      ]
+    ]
+  ],
+  [
+    "AI Image",
+    [
+      [
+        "AI Image Generator",
+        "/ai-art-generator/result-photo",
+        "thumbnail_YCE_web_relayout_sign_in_index_AI_Image_Generator_273b4e7b63_1036122ded.jpg",
+        "AI_lmage_Generator_ce28e4bc35.svg",
+        "AI_Image_Generator_288eaad551.mp4",
+        "hot"
+      ],
+      [
+        "Image Templates",
+        "/products/ai-photo-combiner/result-photo",
+        "webp_image_template_82853e3e62.jpg",
+        "ic_images_regular.svg",
+        null,
+        "new"
+      ],
+      [
+        "AI Headshot Generator",
+        "/ai-headshot-generator/create/style-selection",
+        "YCE_web_relayout_sign_in_index_AI_Headshot_9f4ee8724c.jpg",
+        "Al_Headshot_Generator_25e4db2695.svg"
+      ],
+      [
+        "AI Avatar Generator",
+        "/avatar/create/style-selection",
+        "YCE_web_relayout_sign_in_index_AI_Avatar_Generator_v3_b408d8196e.jpg",
+        "Al_Avatar_Generator_4cefb6cef1.svg"
+      ],
+      [
+        "AI Studio Generator",
+        "/ai-portrait-generator/create/style-selection",
+        "Studio_gen_b8804ecc45.jpg",
+        "AI_Studio_Generator_b777ff7b3a.svg"
+      ]
+    ]
+  ],
+  [
+    "AI Portrait",
+    [
+      [
+        "AI Hairstyle Generator",
+        "/ai-hairstyle-generator/result-photo",
+        "Hairstyle_acd130fe1d.jpg",
+        "Al_Hairstyle_Generator_744975e4fa.svg",
+        "AI_Hairstyle_Generator_bc3b5331cb.mp4",
+        "hot"
+      ],
+      [
+        "AI Hair Color",
+        "/products/hair-color-changer/result-photo",
+        "1_24_0_250827_Hair_color_1195bab14b.jpg",
+        "Al_Hair_Color_Changer_2_0de79e8bfb.svg",
+        "1_24_0_250827_Hair_color_c5c01b7b3d.mp4"
+      ],
+      [
+        "AI Beard Generator",
+        "/products/beard-filter/result-photo",
+        "250901_beard_style_634d118cdc.jpg",
+        "beard_15223e5d30.svg",
+        "250901_beard_style_55d13891df.mp4"
+      ],
+      [
+        "AI Clothes",
+        "/ai-clothes/result-photo",
+        "Clothes_fb3707e78a.jpg",
+        "Al_Clothes_725efdbaaa.svg",
+        null,
+        "hot"
+      ],
+      [
+        "Body Reshape",
+        "/products/body-reshape/result-photo",
+        "webp_1_27_0_251226_body_reshape_96dc90174f.jpg",
+        "Body_Reshape_B.svg",
+        "1_27_0_251226_body_reshape.mp4",
+        "new"
+      ],
+      [
+        "AI Face Swap",
+        "/face-swap/result-photo",
+        "YCE_web_relayout_sign_in_index_AI_Face_Swap_d3326d5924.jpg",
+        "Al_Face_Swap_04f3e68ea4.svg",
+        "Face_swap_e0f422ca35.mp4"
+      ],
+      [
+        "AI Face Reshape",
+        "/face-reshape/result-photo",
+        "Reshape.jpg",
+        "Al_Reshape_b2607055e7.svg",
+        "Reshape.mp4",
+        "hot"
+      ],
+      [
+        "AI Face Shape Detector",
+        "/face-shape-detector/result-photo",
+        "Face_shape_deeb6aa38f.jpg",
+        "Al_Face_Shape_Detector_c76155d6e1.svg"
+      ],
+      [
+        "AI Face Retouch",
+        "/products/face-retouch/result-photo",
+        "Face_retouch_6119db9726.jpg",
+        "AI_Face_Retouch_8bb2641297.svg",
+        "AI_rethouch.mp4"
+      ],
+      [
+        "AI Makeup Virtual Try On",
+        "/ai-makeup/result-photo",
+        "Makeup_vto_bfa9e0946e.jpg",
+        "Al_Makeup_Virtual_Try_On_c51fdd2282.svg"
+      ],
+      [
+        "AI Makeup Transfer",
+        "/facial-makeup-transfer-filter/result-photo",
+        "Makeup_transfer_75bd5b09a6.jpg",
+        "Al_Makeup_Transfer_ea4f906d62.svg"
+      ]
+    ]
+  ],
+  [
+    "AI Video Editing",
+    [
+      [
+        "Video Enhancer",
+        "/video-enhancer-ai/result-photo",
+        "YCE_web_relayout_sign_in_index_Video_Enhance_150d7be956.jpg",
+        "Video_Ennancer_af75c28010.svg",
+        "video_enhance_585ed5307f.mp4",
+        "hot"
+      ],
+      [
+        "Image to Video",
+        "/ai-video-generator/result-photo",
+        "YCE_web_relayout_sign_in_index_img2video_b45aba96b2.jpg",
+        "Image_to_Video_3693035389.svg",
+        "YCE_web_relayout_sign_in_index_img2video_f22746a03d.mp4",
+        "hot"
+      ],
+      [
+        "AI Video Editor",
+        "/products/ai-video-editor/result-photo",
+        "webp_Object_Swapping_Grid_Module_26085bf818.jpg",
+        "ai_video_editor.svg",
+        "Object_Swapping_Grid_Module.mp4"
+      ],
+      [
+        "Video Object Removal",
+        "/products/video-object-remover/result-photo",
+        "webp_gird_module_1b765c0bf7.jpg",
+        "video_object_removal.svg",
+        "gird_module.mp4"
+      ],
+      [
+        "Character Motion Swap",
+        "/products/ai-motion-transfer/result-photo",
+        "webp_character_motion_swap_335ef4c4d3.jpg",
+        "ai_character_motion_swap.svg",
+        "character_motion_swap.mp4",
+        "new"
+      ],
+      [
+        "Video Templates",
+        "/products/video-template/result-photo",
+        "webp_video_template_036b003ebb.jpg",
+        "ic_videos_regular.svg",
+        "video_template.mp4",
+        "new"
+      ],
+      [
+        "Text to Video",
+        "/products/ai-text-to-video-generator/result-photo",
+        "T2_V_07d6f8ab13.jpg",
+        "T2_V_f312bcaa62.svg",
+        "T2_V_2e8934b35e.mp4"
+      ],
+      [
+        "Video Face Swap",
+        "/video-face-swap/result-photo",
+        "YCE_web_relayout_sign_in_index_Video_face_swap_5deb5dbe22.jpg",
+        "Video_Face_Swap_17b7067b2f.svg",
+        "YCE_web_relayout_sign_in_index_Video_face_swap_ca8d48df6a.mp4"
+      ],
+      [
+        "Video Style Transfer",
+        "/ai-video-filters/result-photo",
+        "YCE_web_relayout_sign_in_index_Video_sryle_transfer_149ea8bbee.jpg",
+        "Video_Style_Transfer_ab9173f253.svg",
+        "YCE_web_relayout_sign_in_index_Video_sryle_transfer_3598490092.mp4"
+      ]
+    ]
+  ],
+  [
+    "Basic Editing",
+    [
+      [
+        "Effect",
+        "/products/photo-filter-effect/result-photo",
+        "Effects_e99be47ebe.jpg",
+        "Effects_R_OL_1078094ffa.svg"
+      ],
+      [
+        "Adjust Light & Color",
+        "/adjust-light-n-color/result-photo",
+        "adjust_CL_99ec12ece2.jpg",
+        "Adjust_Light_and_Color_55d9f71afc.svg"
+      ],
+      [
+        "Crop",
+        "/crop-photo/result-photo",
+        "Crop_72b6a37c99.jpg",
+        "Crop_74d7d50c53.svg"
+      ],
+      [
+        "Resize",
+        "/resize-image/result-photo",
+        "Resize_2766955554.jpg",
+        "Resize_cd94eaeba2.svg"
+      ],
+      [
+        "Flip & Rotate",
+        "/flip-and-rotate-image/result-photo",
+        "Flip_rotate_2dd5b8c230.png",
+        "Flip_and_Rotate_fbec12093e.svg"
+      ],
+      [
+        "Image Converter",
+        "/image-converter/result-photo",
+        "image_converter_5cfe5b0a09.jpg",
+        "Image_Converter_975fab3cbc.svg"
+      ]
+    ]
+  ],
+  [
+    "Batch Editing",
+    [
+      [
+        "Batch Photo Enhance",
+        "/photo-enhance/batch",
+        "Batch_photo_enhancer_212cff64d7.jpg",
+        "Batch_Photo_Ennancer_5a9f402f10.svg",
+        "image_enhancer_037c9fc3ef.mp4"
+      ],
+      [
+        "Batch Image Converter",
+        "/image-converter/batch",
+        "Batch_image_converter_7a5a5e758f.jpg",
+        "Batch_Image_Converter_90bf710149.svg"
+      ]
+    ]
+  ]
+]

@@ -1,0 +1,200 @@
+/* Capacity surfaces. No RD component covers storage quota, so the severity ramp
+   is composed from the existing warning/error semantic tokens rather than from
+   new colour: normal is neutral, warning and critical climb the amber pair, and
+   full uses the error token. */
+
+/* Deliberately does not wrap above the narrow breakpoint. The usage figure, the
+   bar and the upgrade entry are one unit: letting the actions drop to a second
+   row is exactly the separation between metric and action this feature exists to
+   avoid. */
+.meter {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12);
+  flex-wrap: nowrap;
+}
+
+.meterText {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-8);
+  white-space: nowrap;
+}
+
+.meterUsage {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  font-weight: var(--font-weight-strong);
+  color: var(--text-strong);
+  font-variant-numeric: tabular-nums;
+}
+
+.meterRemaining {
+  font-size: var(--font-size-micro);
+  line-height: var(--line-height-micro);
+  color: var(--text-weak);
+}
+
+.meterTrack {
+  flex: 1 1 160px;
+  min-width: 120px;
+  max-width: 260px;
+  height: var(--spacing-8);
+  border-radius: var(--corner-radius-32);
+  background: var(--fill-weak);
+  overflow: hidden;
+}
+
+.meterFill {
+  height: 100%;
+  border-radius: var(--corner-radius-32);
+  background: var(--fill-strong);
+  transition: width 0.25s ease, background-color 0.25s ease;
+}
+
+.meterActions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
+/* Severity ramp. Each step changes the bar and, from warning up, the remaining
+   figure too, so the state is legible without reading the number. */
+.meter[data-state='warning'] .meterFill {
+  background: var(--icon-warning);
+}
+
+.meter[data-state='warning'] .meterRemaining {
+  color: var(--text-warning);
+}
+
+.meter[data-state='critical'] .meterFill {
+  background: var(--fill-warning-strong);
+}
+
+.meter[data-state='critical'] .meterRemaining {
+  color: var(--text-warning);
+  font-weight: var(--font-weight-strong);
+}
+
+.meter[data-state='full'] .meterFill {
+  background: var(--fill-error-strong);
+}
+
+.meter[data-state='full'] .meterRemaining {
+  color: var(--text-error);
+  font-weight: var(--font-weight-strong);
+}
+
+.banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-16);
+  flex-wrap: wrap;
+  padding: var(--spacing-12) var(--spacing-16);
+  border: 1px solid var(--stroke-warning-weak);
+  border-radius: var(--corner-radius-12);
+  background: var(--fill-warning-weak);
+}
+
+.bannerText {
+  margin: 0;
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  color: var(--text-strong);
+}
+
+.bannerActions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  flex-shrink: 0;
+}
+
+.dialogBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-16);
+  background: var(--fill-overlay-strong);
+}
+
+.dialog {
+  width: 100%;
+  max-width: 420px;
+  padding: var(--spacing-24);
+  border-radius: var(--corner-radius-16);
+  background: var(--background-base);
+  box-shadow: 0 var(--spacing-8) var(--spacing-32) var(--fill-overlay-weak);
+}
+
+.dialogTitle {
+  margin: 0 0 var(--spacing-8);
+  font-size: var(--font-size-heading-5);
+  line-height: var(--line-height-heading-5);
+  font-weight: var(--font-weight-strong);
+  color: var(--text-strong);
+}
+
+.dialogBody {
+  margin: 0 0 var(--spacing-20);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  color: var(--text-weak);
+}
+
+.dialogActions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--spacing-8);
+}
+
+/* Review tool, not product UI. Dashed outline and the explicit label keep it
+   from being mistaken for a real control during manager review. */
+.reviewControl {
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+  gap: var(--spacing-8);
+  padding: var(--spacing-4) var(--spacing-8);
+  border: 1px dashed var(--stroke-strong);
+  border-radius: var(--corner-radius-8);
+  background: var(--background-alternate);
+}
+
+.reviewLabel {
+  font-size: var(--font-size-micro);
+  line-height: var(--line-height-micro);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-weak);
+}
+
+.reviewSelect {
+  font: inherit;
+  font-size: var(--font-size-micro);
+  color: var(--text-strong);
+  background: transparent;
+  border: 0;
+}
+
+@media (max-width: 768px) {
+  .banner {
+    align-items: flex-start;
+  }
+
+  .meter {
+    flex-wrap: wrap;
+  }
+
+  .meterTrack {
+    order: 3;
+    max-width: none;
+    flex-basis: 100%;
+  }
+}

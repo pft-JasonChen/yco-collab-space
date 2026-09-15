@@ -8,5 +8,9 @@ if (result.errors.length > 0) {
   process.stderr.write('  Run `npm run snapshot:vendor` with the RD snapshot reachable to refresh the baseline.\n');
   process.exitCode = 1;
 } else {
-  process.stdout.write('[snapshot] PASS ' + result.vendored + ' vendored RD files match their contracts\n');
+  process.stdout.write(
+    '[snapshot] PASS ' +
+      result.vendored +
+      ' vendored RD files match declared contracts and references\n',
+  );
 }

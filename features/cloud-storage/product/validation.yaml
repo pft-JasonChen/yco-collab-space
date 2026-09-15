@@ -1,0 +1,384 @@
+schemaVersion: 1
+feature: cloud-storage
+# Selector convention, settled 2026-09-15 when the page was composed from shared
+# components. A shared component owns its own DOM and exposes a stable
+# `data-component-role` (plus per-item keys such as `data-tab-key` /
+# `data-plan-key`); it does not carry a consumer's test taxonomy. Feature-owned
+# elements keep `data-testid`. So a check that asserts "the shared gallery tab
+# row is what renders here" targets the role, and one that asserts feature state
+# targets the testid. Selectors that still find nothing are recorded as real
+# gaps in design-gaps.yaml, not re-pointed to make a check pass.
+route: /features/cloud-storage/
+checks:
+  - id: initial-shell-and-meter
+    criterion: CS-001
+    assertions:
+      - type: visible
+        selector: "[data-testid='cloud-storage-page']"
+      - type: visible
+        selector: "[data-testid='navigation-header']"
+      - type: count
+        selector: "[data-component-role='gallery-tab']"
+        value: 5
+      - type: visible
+        selector: "[data-component-role='gallery-tab'][data-tab-key='projects']"
+      - type: visible
+        selector: "[data-component-role='gallery-tab'][data-tab-key='images']"
+      - type: visible
+        selector: "[data-component-role='gallery-tab'][data-tab-key='videos']"
+      - type: visible
+        selector: "[data-component-role='gallery-tab'][data-tab-key='uploads']"
+      - type: visible
+        selector: "[data-component-role='gallery-tab'][data-tab-key='trash']"
+      - type: visible
+        selector: "[data-testid='storage-meter']"
+      - type: visible
+        selector: "[data-testid='storage-upgrade-entry']"
+      - type: attribute
+        selector: "[data-testid='gallery-heading']"
+        name: data-meter-adjacent
+        value: "true"
+  - id: two-level-taxonomy
+    criterion: CS-002
+    steps:
+      - action: click
+        selector: "[data-component-role='gallery-tab'][data-tab-key='images']"
+    assertions:
+      - type: count
+        selector: "[data-testid='tool-family-option-all']"
+        value: 1
+      - type: attribute
+        selector: "[data-testid='tool-family-filter']"
+        name: data-level
+        value: "2"
+      - type: count
+        selector: "[data-component-role='gallery-tab']"
+        value: 5
+  - id: cell-shows-size
+    criterion: CS-003
+    steps:
+      - action: click
+        selector: "[data-component-role='gallery-tab'][data-tab-key='images']"
+    assertions:
+      - type: visible
+        selector: "[data-component-role='gallery-cell'] >> nth=0"
+      - type: visible
+        selector: "[data-testid='cell-name'] >> nth=0"
+      - type: visible
+        selector: "[data-testid='cell-size'] >> nth=0"
+      - type: visible
+        selector: "[data-testid='cell-date'] >> nth=0"
+      - type: visible
+        selector: "[data-testid='cell-type'] >> nth=0"
+  - id: sort-by-size-descending
+    criterion: CS-004
+    steps:
+      - action: click
+        selector: "[data-component-role='gallery-tab'][data-tab-key='images']"
+      - action: select
+        selector: "[data-testid='sort-control']"
+        value: size-desc
+    assertions:
+      - type: attribute
+        selector: "[data-testid='gallery-grid-section']"
+        name: data-sort
+        value: size-desc
+  - id: capacity-normal
+    criterion: CS-005
+    steps:
+      - action: select
+        selector: "[data-testid='review-usage-control']"
+        value: normal
+    assertions:
+      - type: attribute
+        selector: "[data-testid='storage-meter']"
+        name: data-state
+        value: normal
+      - type: count
+        selector: "[data-testid='storage-critical-banner']"
+        value: 0
+      - type: count
+        selector: "[data-testid='storage-full-dialog']"
+        value: 0
+  - id: capacity-warning
+    criterion: CS-006
+    steps:
+      - action: select
+        selector: "[data-testid='review-usage-control']"
+        value: warning
+    assertions:
+      - type: attribute
+        selector: "[data-testid='storage-meter']"
+        name: data-state
+        value: warning
+      - type: visible
+        selector: "[data-testid='storage-meter-remaining']"
+      - type: count
+        selector: "[data-testid='storage-critical-banner']"
+        value: 0
+  - id: capacity-critical-banner
+    criterion: CS-007
+    steps:
+      - action: select
+        selector: "[data-testid='review-usage-control']"
+        value: critical
+    assertions:
+      - type: attribute
+        selector: "[data-testid='storage-meter']"
+        name: data-state
+        value: critical
+      - type: visible
+        selector: "[data-testid='storage-critical-banner']"
+      - type: visible
+        selector: "[data-testid='banner-manage-action']"
+      - type: visible
+        selector: "[data-testid='banner-expand-action']"
+  - id: capacity-full-offers-cleanup
+    criterion: CS-008
+    steps:
+      - action: select
+        selector: "[data-testid='review-usage-control']"
+        value: full
+      - action: click
+        selector: "[data-testid='upload-entry']"
+    assertions:
+      - type: visible
+        selector: "[data-testid='storage-full-dialog']"
+      - type: visible
+        selector: "[data-testid='full-manage-action']"
+      - type: visible
+        selector: "[data-testid='full-pack-action']"
+      - type: visible
+        selector: "[data-testid='full-upgrade-action']"
+  - id: in-cell-upload-progress
+    criterion: CS-009
+    steps:
+      - action: select
+        selector: "[data-testid='review-usage-control']"
+        value: normal
+      - action: set-files
+        selector: "[data-testid='upload-input']"
+        name: sample-upload.png
+        mimeType: image/png
+        value: synthetic upload payload
+    assertions:
+      - type: attribute
+        selector: "[data-testid='upload-cell']"
+        name: data-upload-state
+        value: uploading
+      - type: visible
+        selector: "[data-testid='upload-cell-name']"
+      - type: visible
+        selector: "[data-testid='upload-progress-bar']"
+      - type: visible
+        selector: "[data-testid='upload-cancel']"
+      - type: count
+        selector: "[data-testid='upload-queue']"
+        value: 0
+  - id: quota-failure-distinct-from-format
+    criterion: CS-010
+    steps:
+      - action: select
+        selector: "[data-testid='review-usage-control']"
+        value: critical
+      - action: set-files
+        selector: "[data-testid='upload-input']"
+        name: oversized-batch.png
+        mimeType: image/png
+        value: synthetic oversized payload
+    assertions:
+      - type: attribute
+        selector: "[data-testid='upload-cell-failed']"
+        name: data-upload-state
+        value: failed-quota
+      - type: visible
+        selector: "[data-testid='quota-failure-manage']"
+      - type: visible
+        selector: "[data-testid='quota-failure-expand']"
+      - type: count
+        selector: "[data-testid='quota-failure-retry']"
+        value: 0
+  - id: format-failure-recovery
+    criterion: CS-011
+    steps:
+      - action: set-files
+        selector: "[data-testid='upload-input']"
+        name: unsupported.txt
+        mimeType: text/plain
+        value: synthetic invalid payload
+    assertions:
+      - type: attribute
+        selector: "[data-testid='upload-cell-failed']"
+        name: data-upload-state
+        value: failed-format
+      - type: visible
+        selector: "[data-testid='format-failure-choose-another']"
+  - id: folders-ungated
+    criterion: CS-012
+    steps:
+      - action: click
+        selector: "[data-component-role='gallery-tab'][data-tab-key='images']"
+      - action: click
+        selector: "[data-testid='create-folder']"
+      - action: fill
+        selector: "[data-testid='folder-name-input']"
+        value: Campaign assets
+      - action: click
+        selector: "[data-testid='folder-create-confirm']"
+      - action: click
+        selector: "[data-testid='folder-card'] >> nth=0"
+    assertions:
+      - type: count
+        selector: "[data-testid='create-folder-premium-badge']"
+        value: 0
+      - type: visible
+        selector: "[data-testid='folder-breadcrumb']"
+      - type: visible
+        selector: "[data-testid='breadcrumb-root']"
+      - type: attribute
+        selector: "[data-testid='gallery-grid-section']"
+        name: data-scope
+        value: folder
+  - id: overflow-menu-and-trash-wording
+    criterion: CS-013
+    steps:
+      - action: click
+        selector: "[data-component-role='gallery-tab'][data-tab-key='images']"
+      - action: hover
+        selector: "[data-component-role='gallery-cell'] >> nth=0"
+      - action: click
+        selector: "[data-testid='item-menu-trigger'] >> nth=0"
+    assertions:
+      - type: visible
+        selector: "[data-testid='item-menu']"
+      - type: count
+        selector: "[data-testid='item-menu-group']"
+        value: 4
+      - type: attribute
+        selector: "[data-testid='item-menu-trash']"
+        name: data-menu-position
+        value: last
+      - type: attribute
+        selector: "[data-testid='item-menu-trash']"
+        name: data-destructive
+        value: "true"
+  - id: trash-policy-and-countdown
+    criterion: CS-014
+    steps:
+      - action: click
+        selector: "[data-component-role='gallery-tab'][data-tab-key='trash']"
+    assertions:
+      - type: visible
+        selector: "[data-testid='trash-policy-banner']"
+      - type: attribute
+        selector: "[data-testid='trash-policy-banner']"
+        name: data-counts-against-quota
+        value: "true"
+      - type: visible
+        selector: "[data-testid='trash-countdown'] >> nth=0"
+      - type: visible
+        selector: "[data-testid='trash-restore'] >> nth=0"
+      - type: visible
+        selector: "[data-testid='trash-delete-forever'] >> nth=0"
+      - type: visible
+        selector: "[data-testid='trash-empty-all']"
+      - type: attribute
+        selector: "[data-testid='trash-grid']"
+        name: data-sort
+        value: date-moved
+  - id: two-path-purchase-overlay
+    criterion: CS-015
+    steps:
+      - action: click
+        selector: "[data-testid='storage-upgrade-entry']"
+      - action: click
+        selector: "[data-testid='plan-expand-storage-entry']"
+    assertions:
+      - type: visible
+        selector: "[data-component-role='pricing-overlay']"
+      - type: visible
+        selector: "[data-plan-key='pack-10']"
+      - type: visible
+        selector: "[data-plan-key='pack-100']"
+      - type: visible
+        selector: "[data-testid='pack-billing-cycle']"
+      - type: visible
+        selector: "[data-testid='pack-total']"
+      - type: visible
+        selector: "[data-testid='pack-back-to-plans']"
+  - id: purchase-resumes-failed-uploads
+    criterion: CS-016
+    steps:
+      - action: select
+        selector: "[data-testid='review-usage-control']"
+        value: critical
+      - action: set-files
+        selector: "[data-testid='upload-input']"
+        name: oversized-batch.png
+        mimeType: image/png
+        value: synthetic oversized payload
+      - action: click
+        selector: "[data-testid='quota-failure-expand']"
+      - action: click
+        selector: "[data-testid='plan-expand-storage-entry']"
+      - action: click
+        selector: "[data-plan-key='pack-100']"
+      - action: click
+        selector: "[data-testid='pricing-checkout']"
+    assertions:
+      - type: visible
+        selector: "[data-testid='purchase-success']"
+      - type: attribute
+        selector: "[data-testid='storage-meter']"
+        name: data-state
+        value: normal
+      - type: attribute
+        selector: "[data-testid='upload-cell']"
+        name: data-upload-state
+        value: uploading
+      - type: count
+        selector: "[data-component-role='pricing-overlay']"
+        value: 0
+  - id: batch-toolbar-reports-selected-size
+    criterion: CS-017
+    steps:
+      - action: click
+        selector: "[data-component-role='gallery-tab'][data-tab-key='images']"
+      - action: click
+        selector: "[data-testid='selection-toggle']"
+      - action: click
+        selector: "[data-component-role='gallery-cell'] >> nth=0"
+    assertions:
+      - type: visible
+        selector: "[data-testid='batch-toolbar']"
+      - type: visible
+        selector: "[data-testid='selected-count']"
+      - type: visible
+        selector: "[data-testid='selected-size']"
+      - type: visible
+        selector: "[data-testid='selection-download']"
+      - type: visible
+        selector: "[data-testid='batch-move']"
+      - type: visible
+        selector: "[data-testid='selection-delete']"
+  - id: responsive-reachability
+    criterion: CS-018
+    steps:
+      - action: select
+        selector: "[data-testid='review-usage-control']"
+        value: critical
+    assertions:
+      - type: visible
+        selector: "[data-testid='storage-meter']"
+      - type: visible
+        selector: "[data-testid='storage-critical-banner']"
+      - type: visible
+        selector: "[data-component-role='gallery-tab-row']"
+      - type: attribute
+        selector: "[data-component-role='gallery-tab-row']"
+        name: data-drag-scroll
+        value: "true"
+      - type: attribute
+        selector: "[data-testid='cloud-storage-page']"
+        name: data-horizontal-overflow
+        value: "false"

@@ -1,0 +1,442 @@
+/* Cloud Storage page. Composition follows RD /account/gallery: authenticated
+   header, desktop category rail, page heading, tab row, then the justified grid.
+   The heading additionally carries the capacity meter, which RD has no
+   equivalent for. */
+
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  color: var(--text-strong);
+  background: var(--background-base);
+}
+
+/* `:where()` on both sides zeroes this selector's specificity, so it sets the
+   native control font without ever outranking a shared component's own
+   typography — the specificity trap Round 2 hit with the results-surface tabs. */
+:where(.page) :where(button, input, select) {
+  font: inherit;
+}
+
+.page button:focus-visible,
+.page select:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 var(--spacing-4) var(--stroke-focus);
+}
+
+/* Zone wrappers exist so each layout zone the surface intent declares is
+   marked in the DOM. They are positioning-neutral: the wrapper takes the flex
+   role its child used to have, so the composition is unchanged. `display:
+   contents` would be neater but leaves no box, and the structure check asks
+   whether the zone is visible. */
+.railZone {
+  display: flex;
+  flex: none;
+}
+
+.meterZone {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+/* category-rail and gallery-tabs own their own appearance now; the feature
+   only positions them. */
+.rail {
+  flex: none;
+  border-right: 1px solid var(--stroke-weak);
+}
+
+.tabRow {
+  width: 100%;
+}
+
+.toolbarRight {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-16);
+  flex-wrap: wrap;
+  margin-left: auto;
+}
+
+.tip {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  color: var(--text-weak);
+}
+
+.selectionSummary {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-16);
+  padding: var(--spacing-8) var(--spacing-16);
+  border: 1px solid var(--stroke-weak);
+  border-radius: var(--corner-radius-12);
+  background: var(--background-alternate);
+  font-size: var(--font-size-small);
+}
+
+.purchaseUsage {
+  margin: 0;
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  font-weight: var(--font-weight-strong);
+  color: var(--text-strong);
+  font-variant-numeric: tabular-nums;
+}
+
+/* RD places MorePlanLink beneath the checkout button; the capacity path entry
+   takes that position. */
+.expandOnly {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  color: var(--text-brand);
+  text-decoration: underline;
+}
+
+.backToPlans {
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--fill-weak);
+  color: var(--text-strong);
+  cursor: pointer;
+  font-size: var(--font-size-heading-5);
+  line-height: 1;
+}
+
+.body {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+  padding: var(--spacing-24) var(--spacing-32);
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-24);
+  flex-wrap: wrap;
+}
+
+.title {
+  margin: 0;
+  font-size: var(--font-size-heading-3);
+  line-height: var(--line-height-heading-3);
+  font-weight: var(--font-weight-strong);
+}
+
+.quickCreate {
+  display: flex;
+  gap: var(--spacing-8);
+  flex-wrap: wrap;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-16);
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.control {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-8);
+}
+
+.controlLabel {
+  font-size: var(--font-size-micro);
+  line-height: var(--line-height-micro);
+  color: var(--text-weak);
+}
+
+.select {
+  padding: var(--spacing-4) var(--spacing-8);
+  border: 1px solid var(--stroke-weak);
+  border-radius: var(--corner-radius-8);
+  background: var(--background-base);
+  color: var(--text-strong);
+  font-size: var(--font-size-small);
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+}
+
+.sectionTitle {
+  margin: 0;
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  font-weight: var(--font-weight-strong);
+  color: var(--text-weak);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.folderRow {
+  display: flex;
+  gap: var(--spacing-16);
+  flex-wrap: wrap;
+}
+
+.folderCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  width: 220px;
+  padding: var(--spacing-12);
+  border: 1px solid var(--stroke-weak);
+  border-radius: var(--corner-radius-12);
+  background: var(--background-base);
+  text-align: left;
+  cursor: pointer;
+}
+
+.folderCard:hover {
+  background: var(--fill-hover);
+}
+
+.folderCover {
+  display: block;
+  height: 96px;
+  border-radius: var(--corner-radius-8);
+  background-color: var(--fill-weak);
+  background-size: cover;
+  background-position: center;
+}
+
+.folderName {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  font-weight: var(--font-weight-strong);
+  color: var(--text-strong);
+}
+
+.folderMeta {
+  font-size: var(--font-size-micro);
+  line-height: var(--line-height-micro);
+  color: var(--text-weak);
+  font-variant-numeric: tabular-nums;
+}
+
+.cellWrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+}
+
+/* File size on the cell is required, not decorative: it is the only information
+   in the grid that makes a cleanup decision possible. RD's own gallery omits it. */
+.cellMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.cellName {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  color: var(--text-strong);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cellFacts {
+  display: flex;
+  gap: var(--spacing-4);
+  font-size: var(--font-size-micro);
+  line-height: var(--line-height-micro);
+  color: var(--text-weak);
+  font-variant-numeric: tabular-nums;
+}
+
+.cellMenu {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  background: var(--fill-overlay-strong);
+  color: var(--text-inverse-strong);
+  line-height: 1;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  font-size: var(--font-size-small);
+  color: var(--text-weak);
+}
+
+.breadcrumbRoot {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  color: var(--text-brand);
+}
+
+.breadcrumbSeparator {
+  color: var(--text-weaker);
+}
+
+.batchToolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-16);
+  flex-wrap: wrap;
+  padding: var(--spacing-8) var(--spacing-16);
+  border: 1px solid var(--stroke-weak);
+  border-radius: var(--corner-radius-12);
+  background: var(--background-alternate);
+  font-size: var(--font-size-small);
+}
+
+.batchSize {
+  color: var(--text-weak);
+  font-variant-numeric: tabular-nums;
+}
+
+.batchActions {
+  display: flex;
+  gap: var(--spacing-4);
+  margin-left: auto;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-16);
+  padding: var(--spacing-48) var(--spacing-16);
+  border-radius: var(--corner-radius-16);
+  background: var(--background-sunken);
+}
+
+.emptyTitle {
+  margin: 0;
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  color: var(--text-weak);
+}
+
+.trashBanner {
+  padding: var(--spacing-12) var(--spacing-16);
+  border: 1px solid var(--stroke-weak);
+  border-radius: var(--corner-radius-12);
+  background: var(--background-alternate);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  color: var(--text-weak);
+}
+
+.trashSort {
+  font-size: var(--font-size-micro);
+  color: var(--text-weak);
+}
+
+.trashList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+}
+
+.trashCard {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-16);
+  flex-wrap: wrap;
+  padding: var(--spacing-12) var(--spacing-16);
+  border: 1px solid var(--stroke-weak);
+  border-radius: var(--corner-radius-12);
+}
+
+.trashCardMain {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 160px;
+}
+
+.trashName {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  color: var(--text-strong);
+}
+
+.trashMeta {
+  font-size: var(--font-size-micro);
+  line-height: var(--line-height-micro);
+  color: var(--text-weak);
+  font-variant-numeric: tabular-nums;
+}
+
+/* The remaining-days figure is the point of the trash view: a user must be able
+   to see how long they still have to change their mind. The final day is
+   emphasised rather than left to blend into the row. */
+.trashCountdown,
+.trashCountdownFinal {
+  font-size: var(--font-size-micro);
+  line-height: var(--line-height-micro);
+  font-variant-numeric: tabular-nums;
+  color: var(--text-weak);
+}
+
+.trashCountdownFinal {
+  color: var(--text-error);
+  font-weight: var(--font-weight-strong);
+}
+
+.trashActions {
+  display: flex;
+  gap: var(--spacing-4);
+}
+
+.trashFooter {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: var(--spacing-8);
+}
+
+@media (max-width: 1024px) {
+  .rail {
+    display: none;
+  }
+
+  .main {
+    padding: var(--spacing-16);
+  }
+}
+
+@media (max-width: 768px) {
+  .heading {
+    align-items: flex-start;
+  }
+
+  .batchActions {
+    margin-left: 0;
+  }
+}

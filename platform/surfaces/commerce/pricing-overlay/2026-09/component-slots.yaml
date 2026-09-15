@@ -1,0 +1,22 @@
+schemaVersion: 1
+pack: commerce/pricing-overlay
+version: 2026-09
+slots:
+  - id: close-action
+    required: true
+    description: Dismisses the overlay.
+  - id: feature-list
+    required: true
+    description: Subscription benefit summary.
+  - id: plan-tabs
+    required: true
+    description: Switches subscription and pay-as-you-go offers.
+  - id: plan-list
+    required: true
+    description: Selectable synthetic offers.
+  - id: checkout-action
+    required: true
+    description: Inert checkout affordance.
+  - id: currency-selector
+    required: true
+    description: Display-only currency choice in the preview.

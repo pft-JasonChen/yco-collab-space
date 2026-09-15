@@ -1,0 +1,7 @@
+schemaVersion: 1
+pack: library/gallery
+version: 2026-09
+visualReview:
+  status: human-required
+  dimensions: [tab-hierarchy, media-density, empty-state-clarity, responsive-masonry]
+structuralAnchors: [global-header, category-navigation, gallery-heading, gallery-content, gallery-actions]

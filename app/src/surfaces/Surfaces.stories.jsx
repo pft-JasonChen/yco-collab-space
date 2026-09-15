@@ -19,3 +19,6 @@ export const ActionFooter = story("pattern/action-footer");
 export const VideoResults = story("pattern/video-results");
 export const HistoryList = story("pattern/history-list");
 export const DetailModal = story("pattern/detail-modal");
+export const AuthenticatedHome = story("marketing/home-authenticated");
+export const Gallery = story("library/gallery");
+export const PricingOverlay = story("commerce/pricing-overlay");

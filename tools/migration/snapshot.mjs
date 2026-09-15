@@ -114,7 +114,11 @@ export async function verifySnapshot({ workspace = fromRoot() } = {}) {
   // vendored for the same reason the ported sources are: a derivation nobody can
   // re-run is not auditable.
   const snapshotName = manifest.source.snapshot;
-  for (const file of [...(manifest.siteMapSource?.files ?? []), ...(manifest.pageEntryReference?.files ?? [])]) {
+  for (const file of [
+    ...(manifest.siteMapSource?.files ?? []),
+    ...(manifest.pageEntryReference?.files ?? []),
+    ...(manifest.surfaceReference?.files ?? []),
+  ]) {
     const repositoryPath = baselinePath(snapshotName, file.source);
     if (!vendored.has(repositoryPath)) {
       errors.push('Derivation source is not vendored: ' + repositoryPath);
@@ -128,6 +132,7 @@ export async function verifySnapshot({ workspace = fromRoot() } = {}) {
     ...claimed.map((entry) => baselinePath(entry.snapshot, entry.source)),
     ...(manifest.siteMapSource?.files ?? []).map((file) => baselinePath(snapshotName, file.source)),
     ...(manifest.pageEntryReference?.files ?? []).map((file) => baselinePath(snapshotName, file.source)),
+    ...(manifest.surfaceReference?.files ?? []).map((file) => baselinePath(snapshotName, file.source)),
   ]);
   for (const file of vendored) {
     if (!claimedRepositoryPaths.has(file)) {

@@ -1,0 +1,139 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: flex-end;
+
+  // 16px inset on left/right/bottom so the sheet floats as a card
+  padding: 0 16px calc(16px + env(safe-area-inset-bottom));
+  background: var(--fill-overlay);
+}
+
+.sheet {
+  width: 100%;
+  background: var(--fill-white);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0 16px;
+}
+
+.title {
+  font-size: var(--font-size-heading-3);
+  line-height: var(--line-height-heading-3);
+  font-weight: var(--font-weight-strong);
+  color: var(--text-strong);
+}
+
+.close {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  background: none;
+  line-height: 0;
+  cursor: pointer;
+
+  img {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 13px;
+  border: 1px solid var(--stroke-weak);
+  border-radius: 24px;
+  background: var(--fill-white);
+  font-size: var(--font-size-heading-5);
+  line-height: var(--line-height-heading-5);
+  font-weight: var(--font-weight-strong);
+  color: var(--text-strong);
+  cursor: pointer;
+
+  & + & {
+    margin-top: 8px;
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+    flex: none;
+  }
+}
+
+.danger {
+  color: var(--text-error);
+  border-color: var(--stroke-error-strong);
+}
+
+// Enter: slide up + fade in, ease-out 300ms. Leave: slide down + fade out,
+// ease-in 200ms (`forwards` holds the off-screen end state until React unmounts).
+.backdrop.enter {
+  animation: fade-in 0.3s ease-out;
+}
+
+.backdrop.leave {
+  animation: fade-out 0.2s ease-in forwards;
+}
+
+.sheet.enter {
+  animation: slide-up 0.3s ease-out;
+}
+
+.sheet.leave {
+  animation: slide-down 0.2s ease-in forwards;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-down {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(100%);
+  }
+}

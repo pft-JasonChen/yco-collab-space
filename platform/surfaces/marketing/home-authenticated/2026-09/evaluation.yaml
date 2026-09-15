@@ -1,0 +1,7 @@
+schemaVersion: 1
+pack: marketing/home-authenticated
+version: 2026-09
+visualReview:
+  status: human-required
+  dimensions: [header-fidelity, category-hierarchy, card-density, responsive-composition]
+structuralAnchors: [global-header, category-navigation, quick-categories, recent-tools, tool-catalog]

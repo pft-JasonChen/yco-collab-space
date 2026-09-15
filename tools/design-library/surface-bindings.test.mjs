@@ -42,8 +42,8 @@ test("unknown ids, missing components and ambiguous resolutions fail", () => {
 test("all catalog versions have valid bindings and composed pattern versions", async () => {
   const result = await collectSurfaceVersions();
   assert.deepEqual(result.errors, []);
-  assert.equal(result.versions.length, 11);
-  assert.equal(result.versions.filter((v) => v.bindings.preview).length, 7);
+  assert.equal(result.versions.length, 14);
+  assert.equal(result.versions.filter((v) => v.bindings.preview).length, 10);
 });
 test("public index respects adoption versions and excludes private provenance", async () => {
   const index = await publicSurfaceIndex();

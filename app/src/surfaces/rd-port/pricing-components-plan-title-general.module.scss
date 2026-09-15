@@ -1,0 +1,29 @@
+@import "./variables.scss";
+
+.title {
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 100%;
+  margin-bottom: 16px;
+  white-space: nowrap;
+
+  @include rwd-custom($width-sm) {
+    display: flex;
+    flex-direction: column;
+
+    // font-size: 24px;
+    // line-height: 28.13px;
+    white-space: unset;
+    font-size: var(--font-size-heading-5);
+    line-height: var(--line-height-heading-5);
+    margin-top: 12px;
+    margin-bottom: 16px;
+  }
+
+  @include rwd-custom($width: $width-sm, $use-height: true, $height: 587px) {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 21.09px;
+    text-align: left;
+  }
+}

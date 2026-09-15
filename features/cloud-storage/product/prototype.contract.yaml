@@ -1,0 +1,257 @@
+schemaVersion: 1
+feature:
+  slug: cloud-storage
+  title: Cloud Storage
+  stage: pm-draft
+  entryRoute: /features/cloud-storage/
+  intakeStatus: confirmed
+design:
+  status: temporary
+  reference: null
+states:
+  - id: library-normal
+    description: A populated content tab with capacity below 75 percent and no interruption.
+  - id: library-empty
+    description: A content tab with no items, showing the family empty state and a create entry.
+  - id: folder-open
+    description: A folder's contents replace the tab grid and a breadcrumb returns to the tab root.
+  - id: folder-create
+    description: The create-folder dialog is open with a pre-selected default name.
+  - id: selection-mode
+    description: Batch selection is active with the shared editing toolbar, selected count and selected size.
+  - id: item-detail
+    description: The shared detail dialog is open for one item with metadata and next actions.
+  - id: delete-confirm
+    description: The move-to-trash confirmation is open and states the 30-day recovery window.
+  - id: uploading
+    description: One or more grid cells show in-cell upload progress for a local file.
+  - id: upload-format-failed
+    description: A cell shows a format failure and offers choosing another file.
+  - id: upload-quota-failed
+    description: Remaining files failed because capacity ran out, and the cells offer cleanup and capacity actions.
+  - id: storage-warning
+    description: Capacity is between 75 and 89 percent and the meter shows the warning treatment.
+  - id: storage-critical
+    description: Capacity is between 90 and 99 percent and a persistent banner sits below the heading.
+  - id: storage-full
+    description: Capacity is at 100 percent and a blocking dialog offers cleanup, a capacity pack and an upgrade.
+  - id: trash
+    description: The trash tab lists deleted items with the policy banner and per-card day counts.
+  - id: plan-overlay
+    description: The purchase overlay is open on the subscription path with current usage and plan options.
+  - id: storage-pack-overlay
+    description: The purchase overlay is open on the capacity path with packs, billing cycle and the resulting total.
+  - id: purchase-success
+    description: A synthetic purchase completed, the meter reflects the new quota and quota-failed uploads were retried.
+actions:
+  - id: switch-tab
+    from: library-normal
+    event: User selects another level-one tab
+    to: library-normal
+  - id: show-empty-tab
+    from: library-normal
+    event: User selects a tab that has no items
+    to: library-empty
+  - id: filter-by-tool-family
+    from: library-normal
+    event: User selects a tool family in the level-two filter
+    to: library-normal
+  - id: sort-by-size
+    from: library-normal
+    event: User sorts the current tab by size descending
+    to: library-normal
+  - id: open-create-folder
+    from: library-normal
+    event: User selects Create folder
+    to: folder-create
+  - id: confirm-create-folder
+    from: folder-create
+    event: User confirms the folder name
+    to: library-normal
+  - id: discard-create-folder
+    from: folder-create
+    event: User discards the dialog
+    to: library-normal
+  - id: open-folder
+    from: library-normal
+    event: User selects a folder card
+    to: folder-open
+  - id: leave-folder
+    from: folder-open
+    event: User selects the tab root in the breadcrumb
+    to: library-normal
+  - id: enter-selection
+    from: library-normal
+    event: User selects an item checkbox or the select-all header
+    to: selection-mode
+  - id: exit-selection
+    from: selection-mode
+    event: User leaves batch selection
+    to: library-normal
+  - id: open-item-detail
+    from: library-normal
+    event: User selects an item thumbnail
+    to: item-detail
+  - id: close-item-detail
+    from: item-detail
+    event: User closes the detail dialog
+    to: library-normal
+  - id: request-move-to-trash
+    from: library-normal
+    event: User selects Move to trash in the item overflow menu
+    to: delete-confirm
+  - id: confirm-move-to-trash
+    from: delete-confirm
+    event: User confirms the move
+    to: library-normal
+  - id: open-trash
+    from: library-normal
+    event: User selects the Trash tab
+    to: trash
+  - id: restore-from-trash
+    from: trash
+    event: User restores a trashed item
+    to: library-normal
+  - id: start-upload
+    from: library-normal
+    event: User selects local files to upload
+    to: uploading
+  - id: complete-upload
+    from: uploading
+    event: Every selected file fits the remaining quota
+    to: library-normal
+  - id: fail-upload-format
+    from: uploading
+    event: A selected file is unsupported or corrupt
+    to: upload-format-failed
+  - id: recover-upload-format
+    from: upload-format-failed
+    event: User chooses another file
+    to: library-normal
+  - id: exhaust-quota-during-upload
+    from: uploading
+    event: Capacity runs out before the remaining files are stored
+    to: upload-quota-failed
+  - id: reach-warning
+    from: library-normal
+    event: Stored usage passes 75 percent
+    to: storage-warning
+  - id: reach-critical
+    from: storage-warning
+    event: Stored usage passes 90 percent
+    to: storage-critical
+  - id: reach-full
+    from: storage-critical
+    event: Stored usage reaches 100 percent and an action needs space
+    to: storage-full
+  - id: clean-up-from-critical
+    from: storage-critical
+    event: User selects Manage and enters batch selection sorted by size
+    to: selection-mode
+  - id: clean-up-from-full
+    from: storage-full
+    event: User selects Manage in the blocking dialog
+    to: selection-mode
+  - id: open-plan-overlay
+    from: library-normal
+    event: User selects the upgrade entry beside the capacity meter
+    to: plan-overlay
+  - id: open-plan-overlay-from-quota-failure
+    from: upload-quota-failed
+    event: User selects the capacity action on a quota-failed cell
+    to: plan-overlay
+  - id: open-plan-overlay-from-full
+    from: storage-full
+    event: User selects a purchase action in the blocking dialog
+    to: plan-overlay
+  - id: switch-to-storage-pack
+    from: plan-overlay
+    event: User selects Expand storage only
+    to: storage-pack-overlay
+  - id: return-to-plans
+    from: storage-pack-overlay
+    event: User selects the back control
+    to: plan-overlay
+  - id: complete-purchase
+    from: storage-pack-overlay
+    event: User confirms the synthetic checkout
+    to: purchase-success
+  - id: resume-after-purchase
+    from: purchase-success
+    event: Quota-failed uploads are retried and the meter reflects the new quota
+    to: library-normal
+mocks:
+  - mocks/cloud-storage.json
+acceptance:
+  - id: CS-001
+    given: The Cloud Storage route is open
+    when: The initial state renders
+    then: The gallery shell, the five level-one tabs in order, and the capacity meter beside the upgrade entry are visible without a network request
+  - id: CS-002
+    given: The Images tab is active with a populated synthetic library
+    when: The tool-family filter is used
+    then: The level-two filter exposes an All option plus tool families, and no tool appears as a level-one tab
+  - id: CS-003
+    given: A populated content tab is open
+    when: Each item cell renders
+    then: Every cell shows its name, type, file size and date, so a cleanup decision can be made from the grid alone
+  - id: CS-004
+    given: A populated content tab is open
+    when: The user sorts by size
+    then: The grid reports size-descending order so the largest items are actionable first
+  - id: CS-005
+    given: Capacity is below 75 percent
+    when: The capacity meter renders
+    then: The meter reports the normal state and no banner or dialog interrupts the page
+  - id: CS-006
+    given: Capacity is between 75 and 89 percent
+    when: The capacity meter renders
+    then: The meter reports the warning state and shows the remaining amount without a banner
+  - id: CS-007
+    given: Capacity is between 90 and 99 percent
+    when: The page renders
+    then: The meter reports the critical state and a persistent banner below the heading offers both a cleanup action and a capacity action
+  - id: CS-008
+    given: Capacity is at 100 percent
+    when: An action that needs space is attempted
+    then: A blocking dialog offers cleanup, a capacity pack and a subscription upgrade rather than only a purchase
+  - id: CS-009
+    given: The user selects local files while capacity remains
+    when: Upload begins
+    then: Progress renders inside the grid cells the files will occupy, each with a name, a determinate bar and a cancel control, and no floating queue is present
+  - id: CS-010
+    given: Capacity runs out partway through a multi-file upload
+    when: The remaining files are processed
+    then: Those cells report a quota failure distinct from a format failure and offer cleanup and capacity actions instead of a retry
+  - id: CS-011
+    given: An unsupported local file is selected
+    when: Upload is attempted
+    then: That cell reports a format failure and offers choosing another file
+  - id: CS-012
+    given: A content tab is open
+    when: The user creates a folder, opens it and returns
+    then: Folder creation is available without any premium gate, the folder contents replace the grid, and a breadcrumb returns to the tab root
+  - id: CS-013
+    given: An item overflow menu is open
+    when: The menu renders
+    then: Actions are grouped by intent, the destructive action is last and reads as moving to trash, and confirming states the 30-day recovery window
+  - id: CS-014
+    given: The Trash tab has deleted items
+    when: The tab renders
+    then: A policy banner states the 30-day window and that trash still counts against the quota, every card shows its remaining days, and restore, delete-forever and empty-all are available
+  - id: CS-015
+    given: The purchase overlay is open on the subscription path
+    when: The user selects Expand storage only
+    then: The capacity path opens in the same overlay with both packs, a billing cycle control, and the resulting total rather than only the increment
+  - id: CS-016
+    given: Quota-failed uploads are pending and the user completes the synthetic checkout
+    when: The purchase succeeds
+    then: The meter reflects the new quota and the quota-failed uploads are retried rather than leaving the user on an unchanged page
+  - id: CS-017
+    given: Batch selection is active
+    when: Items are selected
+    then: The shared editing toolbar reports the selected count and the space those items occupy, and offers download, move to folder and move to trash
+  - id: CS-018
+    given: The feature renders at a configured viewport
+    when: The layout resolves
+    then: The capacity meter, tab row, critical banner and purchase overlay remain reachable without horizontal overflow

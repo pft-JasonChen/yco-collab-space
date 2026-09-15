@@ -1,0 +1,103 @@
+@import "./variables.scss";
+
+.flex {
+  display: flex;
+  justify-content: center;
+}
+
+.button {
+  font-size: 18px;
+  line-height: normal;
+  font-weight: 500;
+  padding: 9px 22px;
+  text-align: center;
+  border-radius: 120px;
+  color: var(--fill-white);
+  background-color: var(--fill-brand-strong);
+  align-self: flex-end;
+  cursor: pointer;
+}
+
+%common-button {
+  font-size: 18px;
+  line-height: normal;
+  font-weight: 500;
+  padding: 9px 22px;
+  text-align: center;
+  border-radius: 120px;
+  cursor: pointer;
+}
+
+%delete-account-button-common-style {
+  @extend %common-button;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid var(--fill-brand-strong);
+
+  @include rwd-custom($width-sm) {
+    flex: 1;
+  }
+}
+
+.cancelButton4DeleteAccount {
+  @extend %delete-account-button-common-style;
+
+  width: 139px;
+  color: var(--text-brand);
+  background-color: var(--fill-white);
+  margin-right: 10px;
+
+  @include rwd-custom($width-sm) {
+    margin-right: 16px;
+  }
+}
+
+.confirmButton4DeleteAccount {
+  @extend %delete-account-button-common-style;
+
+  width: 137px;
+  color: var(--fill-white);
+  background-color: var(--fill-brand-strong);
+}
+
+.twoButtonRowContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.leftButton {
+  @extend %common-button;
+
+  color: var(--text-brand);
+  background-color: var(--fill-white);
+  border: 2px solid var(--fill-brand-strong);
+  margin-right: 10px;
+}
+
+.rightButton {
+  @extend %common-button;
+
+  color: var(--fill-white);
+  background-color: var(--fill-brand-strong);
+  border: 2px solid var(--fill-brand-strong);
+}
+
+.confirmButton {
+  @extend %common-button;
+
+  color: white;
+  background-color: var(--fill-brand-strong);
+}
+
+.cancelButton {
+  @extend %common-button;
+
+  display: inline-block;
+  font-size: 14px;
+  padding: 9px 0;
+  color: var(--grey-neutral-solid-800);
+  margin: 0 auto;
+  margin-top: 10px;
+}

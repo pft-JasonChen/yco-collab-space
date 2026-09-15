@@ -1,0 +1,312 @@
+@import "./variables.scss";
+
+.container {
+  background-color: white;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 158px);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--grey-slate-solid-850);
+  margin: 20px 0;
+
+  @include rwd-custom($width-md) {
+    line-height: 18px;
+  }
+}
+
+.headerBottoms {
+  display: flex;
+  gap: 8px;
+}
+
+.icon {
+  width: 20px !important;
+  height: 20px !important;
+  cursor: pointer;
+
+  & img {
+    width: 20px !important;
+    height: 20px !important;
+  }
+
+  @include rwd-custom($width-md) {
+    width: 16px !important;
+    height: 16px !important;
+
+    & img {
+      width: 16px !important;
+      height: 16px !important;
+    }
+  }
+}
+
+.tip {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  font-weight: 400;
+  color: var(--text-strong);
+  margin: auto 8px;
+
+  @include rwd-custom($width-md) {
+    font-size: var(--font-size-tiny);
+    line-height: var(--line-height-tiny);
+    margin: auto 6px;
+  }
+}
+
+.tipHighLight {
+  font-weight: 500;
+}
+
+.selectButton {
+  font-size: var(--font-size-heading-5);
+  line-height: var(--line-height-heading-5);
+  font-weight: 600;
+  color: var(--fill-white);
+  background-color: var(--fill-brand-strong);
+  border: 1px solid var(--fill-brand-strong);
+  border-radius: 32px;
+  padding: 7px 20px;
+  cursor: pointer;
+  white-space: nowrap;
+
+  &:disabled {
+    background: var(--fill-disabled);
+    border: 1px solid var(--fill-disabled);
+    cursor: default;
+  }
+
+  &:hover:enabled {
+    background-color: var(--blue-dark-1000);
+    border: 1px solid var(--blue-dark-1000);
+    color: var(--fill-white);
+  }
+
+  @include rwd-custom($width-md) {
+    font-size: 16px;
+    line-height: 19px;
+    font-weight: 500;
+    padding: 7.5px 16px;
+    border-radius: 102px;
+  }
+}
+
+.deleteButton {
+  font-size: var(--font-size-heading-5);
+  line-height: var(--line-height-heading-5);
+  font-weight: 600;
+  color: var(--fill-white);
+  background-color: var(--fill-error-strong);
+  border-radius: 32px;
+  padding: 8px 20px;
+  cursor: pointer;
+
+  &:disabled {
+    background: var(--fill-disabled);
+    cursor: default;
+  }
+
+  &:hover:enabled {
+    background-color: var(--fill-error-strong);
+  }
+
+  @include rwd-custom($width-md) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    line-height: 19px;
+    font-weight: 500;
+    padding: 10px;
+    border-radius: 102px;
+
+    img {
+      height: 16px;
+      aspect-ratio: 1 / 1;
+    }
+  }
+}
+
+.cancelStyle {
+  background-color: var(--fill-white);
+  color: var(--grey-neutral-solid-1000);
+  border: 1px solid var(--fill-disabled);
+
+  &:hover:enabled {
+    background-color: var(--fill-white);
+    border: 1px solid var(--fill-disabled);
+    color: var(--grey-neutral-solid-1000);
+  }
+}
+
+.downloadButton {
+  font-size: var(--font-size-heading-5);
+  line-height: var(--line-height-heading-5);
+  font-weight: 600;
+  color: var(--fill-white);
+  background-color: var(--fill-brand-strong);
+  border-radius: 32px;
+  padding: 8px 20px;
+  cursor: pointer;
+
+  &:disabled {
+    background: var(--fill-disabled);
+    cursor: default;
+  }
+
+  &:hover:enabled {
+    background-color: var(--blue-dark-1000);
+  }
+
+  @include rwd-custom($width-md) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    line-height: 19px;
+    font-weight: 500;
+    padding: 10px;
+    border-radius: 102px;
+
+    img {
+      height: 16px;
+      aspect-ratio: 1 / 1;
+    }
+  }
+}
+
+.label {
+  position: relative;
+  cursor: pointer;
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  font-weight: 600;
+  color: var(--text-strong);
+  margin-left: 8px;
+
+  @include rwd-custom($width-md) {
+    margin-left: 6px;
+  }
+}
+
+.label input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  width: 0;
+  height: 0;
+}
+
+.checkbox {
+  cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border: 3px solid var(--fill-disabled);
+  border-radius: 50%;
+}
+
+.checkboxChecked {
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  width: calc(100% + 6px);
+  height: calc(100% + 6px);
+  background-color: var(--fill-brand-strong);
+  border-radius: 50%;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.cells {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.checkmark {
+  position: absolute;
+  z-index: 2;
+  border: 2px solid var(--grey-neutral-dark-500);
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 24px;
+  height: 24px;
+  top: 8px;
+  right: 8px;
+  cursor: pointer;
+}
+
+.checkmarkChecked {
+  background-color: var(--grey-slate-solid-850);
+  border: 2px solid var(--fill-white);
+  background-image: url("../../../../design-library/assets/icon/yco-home-gallery/images__icon_tick_w.svg");
+}
+
+.thumbnailContainer {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+}
+
+.thumbnail4Group {
+  position: relative !important;
+  width: 50% !important;
+  height: 50% !important;
+  object-fit: cover;
+}
+
+.thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.moduleTypeContainer {
+  display: flex;
+  margin: 5px 0 10px;
+}
+
+.moduleName {
+  color: var(--grey-neutral-solid-800);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: normal;
+  text-transform: capitalize;
+  margin: 0 0 0 7.13px;
+}
+
+.videoEditingLinkContainer {
+  margin-bottom: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: underline var(--text-brand);
+}
+
+.videoEditingLink {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 23.44px;
+  color: var(--text-brand);
+  cursor: pointer;
+}
+
+.arrowIcon {
+  width: 15.23px;
+  height: 15.23px;
+  margin-left: 5px;
+}

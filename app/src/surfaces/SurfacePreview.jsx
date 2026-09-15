@@ -1,5 +1,6 @@
 import { useState } from "react";
 import index from "virtual:surface-index";
+import RDPreview from "./rd-port/Preview.jsx";
 import poster from "../../../design-library/assets/video/rd-component-fixtures/video-object-remover-poster.jpg";
 import video from "../../../design-library/assets/video/rd-component-fixtures/video-object-remover.mp4";
 import styles from "./Surfaces.module.scss";
@@ -33,6 +34,7 @@ export default function SurfacePreview({ pack }) {
   if (!pack?.bindings?.preview) return <p>此版本尚無可渲染的實作。</p>;
   const c = resolvePreviewComponents(pack.bindings);
   const recipe = pack.bindings.preview.recipe;
+  if (["authenticated-home", "gallery", "pricing-overlay"].includes(recipe)) return <RDPreview key={recipe} recipe={recipe} />;
   const item = {
     id: "sample",
     status: state,

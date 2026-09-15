@@ -1,0 +1,79 @@
+schemaVersion: 1
+feature: cloud-storage
+gaps:
+  - id: DESIGN-001
+    status: accepted-temporary
+    description: Final Figma has not been provided. The PM approved the temporary hybrid surface for manager review, composed from library/gallery@2026-09 and commerce/pricing-overlay@2026-09.
+    resolutionOwner: Designer
+  - id: DESIGN-002
+    status: open
+    description: The capacity meter has no design. Designer must define the bar treatment, the normal, warning, critical and full tints, the placement relationship between the meter and the upgrade entry, and how the meter behaves when the heading wraps at tablet width.
+    resolutionOwner: Designer
+  - id: DESIGN-003
+    status: open
+    description: The critical banner and the full blocking dialog have no design. Both must present a cleanup action and a purchase action with clear relative weight, so that paying does not read as the only exit.
+    resolutionOwner: Designer
+  - id: DESIGN-004
+    status: open
+    description: Folder surfaces have no design. Designer must define the folder card including its item count and occupied space, the folders section placement above the grid, the breadcrumb, and the create dialog.
+    resolutionOwner: Designer
+  - id: DESIGN-005
+    status: open
+    description: Trash surfaces have no design. Designer must define the policy banner, the per-card remaining-days treatment including its final-day emphasis, and the empty state that teaches the 30-day rule.
+    resolutionOwner: Designer
+  - id: DESIGN-006
+    status: open
+    description: The upload cell has no design. Designer must define the uploading, format-failure and quota-failure states as extensions of the existing gallery-cell loading shimmer, and make the two failure kinds visually distinguishable.
+    resolutionOwner: Designer
+  - id: DESIGN-007
+    status: open
+    description: The item overflow menu has no design. Designer must define the four intent groups, the dividers, and the destructive treatment of the final move-to-trash entry.
+    resolutionOwner: Designer
+  - id: DESIGN-008
+    status: open
+    description: The capacity path of the purchase overlay has no design. Designer must define the pack selector, the billing-cycle control, the resulting-total line and the amount-due summary, all of which sit outside the borrowed pricing-overlay pack.
+    resolutionOwner: Designer
+  - id: DESIGN-009
+    status: open
+    description: "Empty states have two competing sources. RD ships gallery artwork at public/assets/images/account/gallery/emptyContent (photo-editing, video-editing, generative-ai), while platform/ui/empty-image now implements all ten Figma types as of 2026-09-14. The shared component covers Projects and Images with general, Videos with video and Uploads with upload-drag. Designer must choose one source rather than mixing both, and must supply a Trash empty state, which neither source has a type for."
+    resolutionOwner: Designer
+  - id: DESIGN-010
+    status: open
+    description: The grid cell gains a file-size line that RD's gallery does not have. Designer must confirm the cell meta hierarchy so that name, type, size and date remain legible at the smallest justified row height and in the narrow masonry.
+    resolutionOwner: Designer
+  - id: DESIGN-011
+    status: resolved
+    description: "Shared-component coverage, closed 2026-09-15. All five roles this gap listed are now catalogued and imported rather than reproduced: navigation-header for the page shell, gallery-grid, gallery-cell, gallery-tabs for the draggable tab row, and category-rail. Each was extracted from RD source under the shared component workflow with its own contract, Storybook story and browser check. What remains is Designer review of the itemised colour and typography approximations recorded in each contract, which is tracked per component rather than here."
+    resolutionOwner: Designer
+  - id: DESIGN-014
+    status: resolved
+    description: "Closed 2026-09-15. pricing-overlay is extracted from RD common/pricing-modal, catalogued, and wired as the feature's only purchase surface, so no second visual language was hardened beside production. Both defects the surface acceptance recorded against the RD preview are fixed rather than carried: the overlay renders through the shared Modal with an accessible name always supplied, so it is a real role=dialog with focus trap and Escape; and the checkout carries its own class with explicit padding, so a host page's bare button selector cannot flatten it. What the extraction does NOT cover is recorded in the component's own contract: the four seasonal themes, countdown, skeleton, currency selector and Stripe path are not ported."
+    resolutionOwner: Designer
+  - id: DESIGN-017
+    status: accepted-temporary
+    description: "design-library/assets/font/yco-category-rail/icomoon.woff is byte-identical to design-library/assets/font/yco-home-rd/icomoon.woff. The duplicate exists because library.mjs permits only .woff/.woff2 in a font collection while yco-home-rd also holds the .ttf and .svg that RD ships, and app/src/surfaces/rd-port/home-icon-styles.css references those two. Removing them would break the RD reference preview and relaxing the validator is a platform rule change, so a woff-only sibling collection was the only option touching neither. Consolidate when the preview no longer needs the legacy formats, or when the font-collection rule is revisited."
+    resolutionOwner: Designer
+  - id: DESIGN-016
+    status: accepted-temporary
+    description: "The active gallery tab uses RD's own --text-brand (#03ade2) on the page ground, which measures 2.45:1 and fails WCAG AA for text. The axe colour-contrast rule is disabled for the two gallery-tabs stories with a named exception rather than globally, and the colour is left as production ships it so the prototype does not diverge. This is the same accepted pairing already recorded for the brand button on video-expansion (DESIGN-005 there). Revisit if production changes the pairing."
+    resolutionOwner: Designer
+  - id: DESIGN-018
+    status: open
+    description: "The item overflow menu is not implemented in the wired prototype, so rename, move-to-folder and duplicate are unreachable even though the PRD requires them. RD keeps those actions in a per-item menu that has no extracted counterpart yet: its editing-toolbar offers only select, cancel, delete and download, which is what selection-toolbar faithfully carries. The cell's overflow control currently opens the move-to-trash confirmation directly. Extracting or designing that menu is the next piece of item CRUD."
+    resolutionOwner: Designer
+  - id: DESIGN-015
+    status: open
+    description: "video-info-dialog and icon-action-buttons expose video-shaped APIs (videoUrl, posterUrl, videoId, video reactions). Cloud Storage needs the same surfaces for image and project items, so a media-generic API has to be defined and the existing video-expansion consumer migrated in the same change. Until then Cloud Storage has no item detail view, which is why none of its cells open one yet."
+    resolutionOwner: Designer
+  - id: DESIGN-019
+    status: open
+    description: "Acceptance coverage, measured 2026-09-15 after the page was composed from shared components. `npm run test:rendered -- --feature cloud-storage` passes 10 of 19 checks on all three viewports and fails 9, each for a named reason rather than a harness artefact. Four fail on a missing upload input: the whole upload flow (in-cell progress, quota failure, format failure, resume-after-purchase) has no implementation, only an Upload button, so CS-009/010/011/016 cannot be exercised - see DESIGN-006. One fails on a missing folder-name input: the create-folder dialog is not built, so CS-012 stops at the dialog - see DESIGN-004. One fails on a missing item menu (CS-013) and one on a missing batch move control (CS-017), both the same unextracted per-item menu recorded in DESIGN-018; RD editing-toolbar has no batch move at all. One fails on a missing pack billing-cycle control (CS-015), which is the capacity path UI DESIGN-008 says has no design yet. The last is the surface-structure check: the surface intent lists ten required layout zones and the check asserts each is visible at every viewport, but two are rendered conditionally by design - category-navigation is hidden at 1024px and below, following RD gallery, and folder-navigation is the breadcrumb, which exists only inside a folder. That is a contract question, not a defect: either the intent needs a per-viewport or per-state qualifier, or the narrow layout needs its own category affordance the way RD puts categories in the header drawer. PM and Designer decide which; do not satisfy it by forcing a hidden element to render."
+    resolutionOwner: Designer
+  - id: DESIGN-012
+    status: accepted-temporary
+    description: PM-supplied thumbnails and clips under product/mock-assets are temporary and exist only to exercise mixed aspect ratios in the grid. They must be replaced or explicitly approved before design-final.
+    resolutionOwner: Designer
+  - id: DESIGN-013
+    status: open
+    description: The review control that sets synthetic capacity states is a prototype-only affordance. Designer must confirm a treatment that reads unmistakably as a review tool so it is never mistaken for production UI during manager review.
+    resolutionOwner: Designer

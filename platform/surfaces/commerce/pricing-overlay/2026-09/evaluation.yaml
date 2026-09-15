@@ -1,0 +1,7 @@
+schemaVersion: 1
+pack: commerce/pricing-overlay
+version: 2026-09
+visualReview:
+  status: human-required
+  dimensions: [modal-priority, benefit-plan-balance, plan-selection-clarity, responsive-scroll]
+structuralAnchors: [modal-backdrop, entitlement-summary, plan-selector, purchase-action]
