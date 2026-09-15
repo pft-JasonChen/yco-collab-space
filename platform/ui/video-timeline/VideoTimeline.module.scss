@@ -44,9 +44,15 @@
   color: var(--text-weaker);
 }
 
+/* Reference (2026-09-15, reported live with a Figma inspect — "為什麼上下有
+   留白，沒有撐滿"): had a stray min-height:72px that nothing here actually
+   needed — .playButton and .track are both a plain 48px, so align-items:
+   center just centered them inside 72px's worth of cross-axis room, leaving
+   a visible gap above and below the frames row instead of it filling this
+   pill's own height. Removed; height now comes from the 48px children plus
+   this row's own 4px top/bottom padding, with nothing forcing it taller. */
 .mainRow {
   display: flex;
-  min-height: 72px;
   align-items: center;
   gap: var(--spacing-12);
   /* Asymmetric right padding (2026-09-15, reported live via a Figma Dev Mode
@@ -62,6 +68,14 @@
   padding: var(--spacing-4) 28px var(--spacing-4) var(--spacing-12);
   background: var(--fill-weak);
   border-radius: var(--corner-radius-8);
+}
+
+/* Reference (2026-09-15, requested live — "沒有handler的時候，右邊的padding
+   想要縮回12px"): the extra 16px on top of the plain 12px above exists only
+   to clear .trimRange/the right handle's own overhang — with showTrimHandles
+   false neither renders, so nothing needs the room anymore. */
+.mainRowNoHandles {
+  padding-right: var(--spacing-12);
 }
 
 .playButton {

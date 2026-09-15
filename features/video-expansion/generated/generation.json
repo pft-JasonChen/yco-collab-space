@@ -5,7 +5,7 @@
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "claude-code",
   "model": "claude-sonnet-5",
-  "generatedAt": "2026-09-15T08:06:32.545Z",
+  "generatedAt": "2026-09-15T08:31:22.074Z",
   "files": [
     "README.md",
     "contract/integration.yaml",
@@ -62,9 +62,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/credit-controls/component.yaml",
-        "contractSha256": "5dbc9271522009d7024e71ddb911ebb59d6d91c1d87587a71182f6b566ed59df",
+        "contractSha256": "fd536567a47ba0da4f8ede24c60853eb9af4f31c17712633e8b3389d04ebde01",
         "implementationImport": "platform/ui/credit-controls/index.js",
-        "implementationSha256": "a9b95eee56c83384e7169c1f26d547dea5cc6dff2be9bf96ee5b688305c06a71",
+        "implementationSha256": "f93a38b6b07dae9707730661e0e873801ba86b3d84b4a24da4b861ea33a8f56a",
         "runtimeAssets": [
           {
             "repositoryPath": "design-library/assets/icon/yco-credit-controls/add.svg",
@@ -572,9 +572,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/video-timeline/component.yaml",
-        "contractSha256": "e352863eec8f70ab3b27419fd6f0585a357fb0b2593c671b14e202f770a523d8",
+        "contractSha256": "4c0e42086f42d9da2180e3f681754bdddf689def626c26fc855c34027ca7d161",
         "implementationImport": "platform/ui/video-timeline/index.js",
-        "implementationSha256": "1622c6a0b06c8061294d56e3cad21c96e395e0466092ef2e69ba7883af3e8df7",
+        "implementationSha256": "e8d33d7f503b8023d5ea5559401f343c4ece5046f07ab2aa1791940e3d6e19b9",
         "runtimeAssets": [
           {
             "repositoryPath": "design-library/assets/icon/yco-video-timeline/drag-handle.svg",
@@ -599,9 +599,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/video-trim-modal/component.yaml",
-        "contractSha256": "55abe10fb854b3d592954a625682a16179586f38cba8071b1d55aa14af67d0a1",
+        "contractSha256": "48ef9f0a11beda1d3f9315fa8b7825a113b9168a915408b7866731c868bfe0cb",
         "implementationImport": "platform/ui/video-trim-modal/index.js",
-        "implementationSha256": "32d205d35d8fb1ba196ec940905757b2d0b74b0491e5ab1f40b839d00af1b3b7",
+        "implementationSha256": "44d7015b6897a220879defff9ed24281b246d2d8db26258b85245551d14f3d5c",
         "runtimeAssets": []
       }
     ]
@@ -1246,7 +1246,7 @@
         },
         {
           "path": "design-library/components/credit-controls/component.yaml",
-          "sha256": "5dbc9271522009d7024e71ddb911ebb59d6d91c1d87587a71182f6b566ed59df"
+          "sha256": "fd536567a47ba0da4f8ede24c60853eb9af4f31c17712633e8b3389d04ebde01"
         },
         {
           "path": "design-library/components/empty-image/component.yaml",
@@ -1290,11 +1290,11 @@
         },
         {
           "path": "design-library/components/video-timeline/component.yaml",
-          "sha256": "e352863eec8f70ab3b27419fd6f0585a357fb0b2593c671b14e202f770a523d8"
+          "sha256": "4c0e42086f42d9da2180e3f681754bdddf689def626c26fc855c34027ca7d161"
         },
         {
           "path": "design-library/components/video-trim-modal/component.yaml",
-          "sha256": "55abe10fb854b3d592954a625682a16179586f38cba8071b1d55aa14af67d0a1"
+          "sha256": "48ef9f0a11beda1d3f9315fa8b7825a113b9168a915408b7866731c868bfe0cb"
         },
         {
           "path": "features/collab-space-readiness/product/surface-intent.yaml",
@@ -1730,11 +1730,11 @@
         },
         {
           "path": "platform/ui/credit-controls/CreditControls.jsx",
-          "sha256": "b4efc6fb1b5180952ec173f1acde636adac55b38371f221d805f98f6b894643c"
+          "sha256": "5aa681a8fa3d6a880af5f108ccf31fde2b5a81ecbc48da19cd814feddbdf3944"
         },
         {
           "path": "platform/ui/credit-controls/CreditControls.module.scss",
-          "sha256": "7cf67a99f45336d7be39c14285bcbf153d9bb00809053e1333f94825e706c5f2"
+          "sha256": "2fcc0acb1864610275b6d0e1826e51baceca7158a13d2ebcaf1aa10542da7ad8"
         },
         {
           "path": "platform/ui/credit-controls/CreditControls.stories.jsx",
@@ -1934,11 +1934,11 @@
         },
         {
           "path": "platform/ui/video-timeline/VideoTimeline.jsx",
-          "sha256": "cf8353fd78e02e16f91f8b7fa452127498059b952b94d1b7b1e221394acf1cdf"
+          "sha256": "a81233d848a658d2a520117991d89e3332d01604f4ab6948ac00a184d9a6aa90"
         },
         {
           "path": "platform/ui/video-timeline/VideoTimeline.module.scss",
-          "sha256": "34a47c91b5bc431b6aa76469a636daec8bdfdb87aef208a2d0ec8c2534b98e49"
+          "sha256": "72cf7babe6bd084ea0168e7d55a86ea2afda253a93a8433203ea369212373228"
         },
         {
           "path": "platform/ui/video-timeline/VideoTimeline.stories.jsx",
@@ -1954,11 +1954,11 @@
         },
         {
           "path": "platform/ui/video-trim-modal/VideoTrimModal.jsx",
-          "sha256": "566a5c678d287627df847e2c526ce95fcc6e2bcfada3a92f88d853f4561c2cb8"
+          "sha256": "d355a69f356bce314816c8452a08b57f8d14a33a78096be44f9b41a5311c2665"
         },
         {
           "path": "platform/ui/video-trim-modal/VideoTrimModal.module.scss",
-          "sha256": "7a1ec0e10778a93336cb8cd946d368c8072a32ac85d3b6571e86640ee66ef3c4"
+          "sha256": "5b59e78d756e3496165ac1acb2a802acd4de4873e59d1f6bf60ff2800a0e92d0"
         },
         {
           "path": "platform/ui/video-trim-modal/VideoTrimModal.stories.jsx",
@@ -2233,7 +2233,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "2092aeb701fe00111cfa34186765a0ebc4fc36a04c32464449d6ab878e6e80f7",
+      "hash": "64640ea4afc60ff561f4066abd4add86b49f125d06b48da15f3e5eb79df58c98",
       "edges": [
         {
           "from": "design-library/assets/font/yco-interface-icons.style.css",
@@ -3027,6 +3027,6 @@
         "react-dom"
       ]
     },
-    "revisionHash": "2090514208b453178615eac41609627016916e6727b9b1711f9b51198b29f860"
+    "revisionHash": "1049bc8a4e6efef81b2d47c391d07f4c69b0d173906e1448b643c85af5e17685"
   }
 }

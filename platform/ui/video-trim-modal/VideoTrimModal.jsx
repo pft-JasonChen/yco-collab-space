@@ -247,7 +247,7 @@ export default function VideoTrimModal({
         aria-labelledby="platform-video-trim-title"
         onMouseDown={(event) => event.stopPropagation()}
       >
-        <button className={styles.closeButton} type="button" onClick={handleCancel} aria-label={labels.close}><span aria-hidden="true"></span></button>
+        <button className={styles.closeButton} type="button" onClick={handleCancel} aria-label={labels.close}><span aria-hidden="true"></span></button>
         <div className={styles.content}>
           <h2 id="platform-video-trim-title" className={styles.title}>{labels.title}</h2>
           <div className={styles.body} ref={bodyRef} onScroll={updateFooterElevation}>
@@ -272,25 +272,28 @@ export default function VideoTrimModal({
               labels={labels}
               maxLengthLabel={labels.maxLength}
             />
-          </div>
-          <div className={`${styles.actions} ${footerElevated ? styles.actionsElevated : ''}`}>
-            {/* Reference (2026-09-15, corrected live — "disable的buttons你不
-                應該自己亂做，你應該用我們做好的"): these were plain <button>
-                elements with their own local .actions button/:disabled CSS —
-                a second, hand-rolled disabled-state implementation alongside
-                the shared platform/ui/button Button component's own (Figma
-                Fill/Disabled, one flat grey shared by every tone/variant).
-                Now render the shared Button directly instead of duplicating
-                that state. Reference (2026-09-15, requested live — "在做modal
-                的時候，如果下面有CTA我都會讓他 fix at the bottom...等他滑到
-                最底就沒有modal footer的陰影"): this row is now a sibling of
-                .body (the scrollable area above it), not one of its children
-                — a fixed footer rather than something that scrolls away with
-                the preview/timeline. Its shadow (.actionsElevated) only
-                applies while .body has more content below the fold; see
-                updateFooterElevation above. */}
-            <Button data-testid="trim-cancel" variant={buttonVariants.SECONDARY} tone={buttonTones.NEUTRAL} onClick={handleCancel}>{labels.cancel}</Button>
-            <Button data-testid="trim-use-video" variant={buttonVariants.PRIMARY} tone={buttonTones.BRAND} onClick={handleConfirm} disabled={tooLong || tooShort || !thumbnailsReady}>{labels.confirm}</Button>
+            <div className={`${styles.actions} ${footerElevated ? styles.actionsElevated : ''}`}>
+              {/* Reference (2026-09-15, corrected live — "disable的buttons你
+                  不應該自己亂做，你應該用我們做好的"): these were plain
+                  <button> elements with their own local .actions
+                  button/:disabled CSS — a second, hand-rolled disabled-state
+                  implementation alongside the shared platform/ui/button
+                  Button component's own (Figma Fill/Disabled, one flat grey
+                  shared by every tone/variant). Now render the shared Button
+                  directly instead of duplicating that state.
+                  Reference (2026-09-15, requested live — "螢幕高度不夠才需要
+                  做fixed at the bottom"): moved from a fixed sibling of .body
+                  to .body's own last child with position:sticky (see
+                  .module.scss) — same fix as ToolPageLayout's own Generate
+                  CTA (see that component's decisionBasis): sits right after
+                  the timeline when everything fits the modal, only sticks to
+                  .body's own bottom edge once content is actually tall
+                  enough to scroll. The shadow (.actionsElevated) still only
+                  applies while .body has more content below the fold; see
+                  updateFooterElevation above — unaffected by this move. */}
+              <Button data-testid="trim-cancel" variant={buttonVariants.SECONDARY} tone={buttonTones.NEUTRAL} onClick={handleCancel}>{labels.cancel}</Button>
+              <Button data-testid="trim-use-video" variant={buttonVariants.PRIMARY} tone={buttonTones.BRAND} onClick={handleConfirm} disabled={tooLong || tooShort || !thumbnailsReady}>{labels.confirm}</Button>
+            </div>
           </div>
         </div>
       </section>

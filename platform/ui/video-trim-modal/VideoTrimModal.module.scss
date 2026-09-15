@@ -73,11 +73,15 @@
 .closeButton span {
   /* Reference (2026-09-15, tried live — "1和2的icon有點問題...都改成icon font
      看看"): was a literal "×" (U+00D7) character sized via .closeButton's own
-     font-size: var(--font-size-heading-3). Swapped to icon-ic-x-bold
-     (U+E945) from the same icon font ResultPageShell/ToolFamilyMenu already
-     use, at a size chosen to read similarly to the previous "×" glyph. */
+     font-size: var(--font-size-heading-3). Swapped to an icon-font glyph
+     from the same font ResultPageShell/ToolFamilyMenu already use.
+     Corrected twice more (2026-09-15, reported live with a DevTools
+     inspect — "font size是24px" / "icon font我們不要用bold，我們用regular
+     就好"): was icon-ic-x-bold (U+E945) at 16px, guessed to read similarly
+     to the previous "×" — the actual spec is the font's plain (non-bold)
+     X glyph, icon-ic-x-b-regular (U+E943), at 24px. */
   font-family: 'YcoInterfaceIcons', sans-serif;
-  font-size: 16px;
+  font-size: 24px;
   font-style: normal;
   font-weight: normal;
   line-height: 1;
@@ -281,12 +285,26 @@
    button, .actions button:last-child, .actions button:disabled below),
    duplicating what Button's own ycoButton/tone/variant/disabled rules
    already do. Only the flex-row layout is this component's own concern. */
+/* Reference (2026-09-15, requested live — "螢幕高度不夠才需要做fixed at the
+   bottom"): was a fixed sibling of .body, always pinned to the modal's own
+   bottom regardless of whether .body's content actually needed the room —
+   left a visible gap between the timeline and these buttons whenever
+   content was short enough to fit. Now .body's own last child with
+   position:sticky (matching ToolPageLayout's own Generate CTA fix — see
+   that component's decisionBasis): sits right after the timeline when
+   everything fits, only sticks to .body's own bottom edge once content is
+   actually tall enough to scroll. Needs its own opaque background now that
+   content can scroll in the same box behind it while stuck. */
 .actions {
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
   display: flex;
   flex: 0 0 auto;
   justify-content: flex-end;
   gap: var(--spacing-8);
   padding: var(--spacing-24) var(--spacing-32) var(--spacing-32);
+  background: var(--background-base);
   transition: box-shadow 160ms ease;
 }
 

@@ -29,9 +29,17 @@ button.control {
   height: 26px;
 }
 
+/* Reference (2026-09-15, reported live with an inspect of the Generate
+   button's own credit badge — "這顆的高度不是32px是28px"): min-height:24px
+   never actually won against the small/bold text's own 24px line-height
+   plus 4px top/bottom padding (32px total) — explicit height overrides
+   both rather than fighting that combination. No matching token exists at
+   28px (the scale jumps 24→32), so a literal px, same as this codebase's
+   other Designer-specified in-between sizes (e.g. Ratio's own 18px icon,
+   2px corner radius). */
 .badge {
   display: inline-flex;
-  min-height: var(--spacing-24);
+  height: 28px;
   align-items: center;
   gap: var(--spacing-4);
   padding: var(--spacing-4) var(--spacing-8) var(--spacing-4) 6px;
@@ -74,11 +82,13 @@ button.control {
    pair; only the action-bar-specific full-bleed width belongs here. Height is
    overridden here rather than in Button.module.css because the Figma spec for
    this specific composition (label + credit badge riding inside a Medium button)
-   is 48px, not Button's own plain Medium height of 42px — the badge needs the
-   extra 6px, a Button on its own doesn't. */
+   is 44px, not Button's own plain Medium height of 42px — the badge needs the
+   extra 2px, a Button on its own doesn't. (2026-09-15, requested live — "有
+   credits的時候本來和你說高度是48px我們改成44px": a deliberate spec revision,
+   not a fix — was 48px.) */
 .generateButton {
   width: 100%;
-  min-height: 48px;
+  min-height: 44px;
 }
 
 /* Reference (2026-09-15, requested live — "當disable的時候無法偵測所需

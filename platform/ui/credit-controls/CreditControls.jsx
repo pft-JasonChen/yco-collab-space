@@ -43,9 +43,11 @@ export function GenerateActionBar({
   className = '',
 }) {
   // Figma handoff spec (Footer Button, 2026-09): Text Only = 42px, Text with
-  // credits = 48px, Two-line text = 56px, regardless of whether the two-line
-  // version also carries a credit badge — subtitle presence alone decides the
-  // height, not the badge. See CreditControls.module.scss's .generateButton.
+  // credits = 44px (revised 2026-09-15 from 48px — "有credits的時候本來和你
+  // 說高度是48px我們改成44px"), Two-line text = 56px, regardless of whether
+  // the two-line version also carries a credit badge — subtitle presence
+  // alone decides the height, not the badge. See CreditControls.module.scss's
+  // .generateButton.
   //
   // Reference (2026-09-15, requested live — "當disable的時候無法偵測所需
   // credits所以可以把credit拿掉，然後按鈕高度設回42px"): while disabled, the
@@ -53,7 +55,7 @@ export function GenerateActionBar({
   // finalized), so showing a specific credit number is misleading — the
   // badge is now hidden whenever disabled, not just while isLoading, which
   // makes this the plain "Text Only" composition from the spec above (42px),
-  // not "Text with credits" (48px).
+  // not "Text with credits" (44px).
   const showCredit = !isLoading && !disabled;
   return (
     <div className={`${styles.actionBar} ${className}`} data-component-role="primary-action generate-action-with-credit">

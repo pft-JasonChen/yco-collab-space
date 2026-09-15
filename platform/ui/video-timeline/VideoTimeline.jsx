@@ -247,7 +247,7 @@ export default function VideoTimeline({
           {showRightLabel ? <span className={styles.timeValue}>{formatTimelineTime(selectedDuration)}</span> : <span />}
         </div>
       ) : null}
-      <div className={styles.mainRow}>
+      <div className={`${styles.mainRow} ${showTrimHandles ? '' : styles.mainRowNoHandles}`}>
         <button
           className={styles.playButton}
           data-testid={playbackToggleTestId}

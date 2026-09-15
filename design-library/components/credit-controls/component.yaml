@@ -39,9 +39,9 @@ implementation:
   removedDependencies: [ redux, authentication, credit-service, pricing-modal, local-storage, i18n, lodash, analytics ]
   localFiles:
     - path: platform/ui/credit-controls/CreditControls.jsx
-      sha256: b4efc6fb1b5180952ec173f1acde636adac55b38371f221d805f98f6b894643c
+      sha256: 5aa681a8fa3d6a880af5f108ccf31fde2b5a81ecbc48da19cd814feddbdf3944
     - path: platform/ui/credit-controls/CreditControls.module.scss
-      sha256: 7cf67a99f45336d7be39c14285bcbf153d9bb00809053e1333f94825e706c5f2
+      sha256: 2fcc0acb1864610275b6d0e1826e51baceca7158a13d2ebcaf1aa10542da7ad8
     - path: platform/ui/credit-controls/CreditControls.stories.jsx
       sha256: 050d42c8164d821b9469c5e1a278d21cc11847de28943c4769d5846e26bd6213
     - path: platform/ui/credit-controls/index.js
@@ -80,3 +80,5 @@ decisionBasis:
   - "`.actionBarInner` wrapper div and its own width-responsive 16px/24px padding removed entirely (2026-09-15, reported live with a DevTools box-model inspect — \"不需要有綠色這層padding\"), along with `.actionBar`'s `container-type: inline-size` (its only reason for existing was that padding's `@container` query): both existed to inset this bar's content when it spanned edge-to-edge with no outer margin of its own — the same full-bleed treatment the entry above already retired. With no outer margin left to compensate for, the inset just made the button narrower than the settings content above it instead of matching its width."
   - "Credit badge now hidden whenever `disabled`, not just while `isLoading`, and the button drops to the spec's own 42px \"Text Only\" height (previously never implemented — only 48px/with-credit and 56px/two-line existed) in that case (2026-09-15, requested live — \"當disable的時候無法偵測所需credits所以可以把credit拿掉，然後按鈕高度設回42px\"): while disabled, the real cost depends on a selection that isn't finalized yet, so showing a specific number was misleading. New `showCredit = !isLoading && !disabled` gates both the badge and which height class applies; the two-line case still wins over both regardless of credit, matching the height spec's own stated precedence."
   - "`assets/icon/yco-credit-controls/credit.svg` replaced with a new asset supplied directly by the designer (2026-09-15, \"credits可以幫我取代成這顆看看嗎，你現在的看起來都有點透明透明的\" — the old asset was a ~150-path radial-gradient illustration that read as washed out at this icon's actual render size; the replacement is a simple gradient-filled circle + glyph, the same shape category but far higher-contrast at 18-24px). Same filename/path, so both CreditBadge and CreditControl (its only two consumers) picked it up with no import changes. New sha256: 4103b57ceacfc0a3c67755b49ecb313ba0fa0a540b97845684360e259572fe95."
+  - "`.badge` height corrected 32px (a min-height:24px that never actually won against the small/bold text's own 24px line-height + 4px top/bottom padding) → an explicit 28px (2026-09-15, reported live with an inspect of the Generate button's own credit badge — \"這顆的高度不是32px是28px\"). No token exists at 28px (the scale jumps 24→32), so a literal px, matching this codebase's other Designer-specified in-between sizes (Ratio's own 18px icon, 2px corner radius)."
+  - "\"Text with credits\" button height revised 48px → 44px — a deliberate spec change, not a fix (2026-09-15, requested live — \"有credits的時候本來和你說高度是48px我們改成44px\"). \"Text Only\" (42px) and \"Two-line text\" (56px) are unchanged; only this one composition's height moved."
