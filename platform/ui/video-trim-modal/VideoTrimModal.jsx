@@ -179,21 +179,50 @@ export default function VideoTrimModal({
   // preview/timeline; the footer's shadow (.actionsElevated) is toggled based
   // on whether .body has more content below the fold, not shown
   // unconditionally.
+  //
+  // footerFixed tracks a related but different question — not "is there
+  // still more content below" (footerElevated, which flips off once
+  // scrolled to the true end) but "does .body's content overflow it AT
+  // ALL", true for as long as .actions is sticky-stuck anywhere in that
+  // scroll range. Reference (2026-09-15, requested live — "這個如果是不是
+  // fixed to the bottom的狀態就不用加上左右的padding"): .actions' own left/
+  // right padding only makes sense while it's actually acting as a
+  // standalone fixed footer bar; sitting in plain flow after a short
+  // .body, it should rely on .body's own horizontal padding instead of
+  // adding a redundant second inset on top of it.
+  const [footerFixed, setFooterFixed] = useState(false);
   const updateFooterElevation = useCallback(() => {
     const el = bodyRef.current;
     if (!el) return;
     setFooterElevated(el.scrollHeight - el.scrollTop - el.clientHeight > 1);
+    setFooterFixed(el.scrollHeight - el.clientHeight > 1);
   }, []);
   useEffect(() => {
     updateFooterElevation();
   }, [updateFooterElevation, opened, duration, thumbnailsReady]);
+  // Reference (2026-09-15, found live while chasing why footerFixed never
+  // turned on — "是不是 z-index 不對的關係"): it wasn't z-index, and this
+  // silently broke footerElevated too, from well before today. This
+  // component stays mounted throughout (the parent always renders
+  // <VideoTrimModal opened={trimOpen} .../>, never conditionally), so its
+  // very first render happens with opened=false — `if (!opened ...) return
+  // null` fires before .body ever exists, bodyRef.current is null, and this
+  // effect (deps: [updateFooterElevation], a useCallback stable for the
+  // component's whole lifetime) attached its observer to that null exactly
+  // once and never ran again. Every later time the modal actually opened,
+  // .body existed but nothing was watching it — confirmed live: forcing
+  // real overflow at that point left both footerElevated and footerFixed
+  // stuck at their initial false. `opened` in the deps makes this re-run
+  // (attaching a fresh observer to whatever .body currently exists) every
+  // time the modal opens, not just the first time this component ever
+  // rendered.
   useEffect(() => {
     const el = bodyRef.current;
     if (!el) return undefined;
     const observer = new ResizeObserver(updateFooterElevation);
     observer.observe(el);
     return () => observer.disconnect();
-  }, [updateFooterElevation]);
+  }, [updateFooterElevation, opened]);
   // Same "no real maximum" guard as TrimTimeline's own hasMaximum (see its
   // comment) — gates the confirm-button disable here too, not just the hint
   // color, so a maximumSeconds={Infinity} caller never gets silently blocked
@@ -272,7 +301,7 @@ export default function VideoTrimModal({
               labels={labels}
               maxLengthLabel={labels.maxLength}
             />
-            <div className={`${styles.actions} ${footerElevated ? styles.actionsElevated : ''}`}>
+            <div className={`${styles.actions} ${footerElevated ? styles.actionsElevated : ''} ${footerFixed ? styles.actionsFixed : ''}`}>
               {/* Reference (2026-09-15, corrected live — "disable的buttons你
                   不應該自己亂做，你應該用我們做好的"): these were plain
                   <button> elements with their own local .actions

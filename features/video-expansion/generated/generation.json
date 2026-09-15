@@ -5,7 +5,7 @@
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "claude-code",
   "model": "claude-sonnet-5",
-  "generatedAt": "2026-09-15T08:31:22.074Z",
+  "generatedAt": "2026-09-15T08:59:35.565Z",
   "files": [
     "README.md",
     "contract/integration.yaml",
@@ -389,9 +389,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/upload-media-block/component.yaml",
-        "contractSha256": "a20b59a082e3d3357fc3e99a26a9059ca1bf4a9d6db297e7aadcdd919f189b38",
+        "contractSha256": "932658ae3fec4d687a1d514d987c7e06c18d8e8ec68077bf34333df3ecc148f8",
         "implementationImport": "platform/ui/upload-media-block/index.js",
-        "implementationSha256": "7948140020a3a379f10b78d9f775a479774254337688fa8b4bec9acf9bdfda3c",
+        "implementationSha256": "ea6ba2b6b74dc0eaec316bec01b0e948b34f79e684514b77e4f80085c686dff7",
         "runtimeAssets": [
           {
             "repositoryPath": "design-library/assets/icon/yco-upload-media-block/add.svg",
@@ -572,9 +572,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/video-timeline/component.yaml",
-        "contractSha256": "4c0e42086f42d9da2180e3f681754bdddf689def626c26fc855c34027ca7d161",
+        "contractSha256": "c977fffa36cae15d26d36638a35d1c5e0971e1b1eb0fe9f3715f870ade8b113e",
         "implementationImport": "platform/ui/video-timeline/index.js",
-        "implementationSha256": "e8d33d7f503b8023d5ea5559401f343c4ece5046f07ab2aa1791940e3d6e19b9",
+        "implementationSha256": "54d37777774ad719b0dd7f8039ae2c7c08dfbaa5472252854ed5840c66bd0450",
         "runtimeAssets": [
           {
             "repositoryPath": "design-library/assets/icon/yco-video-timeline/drag-handle.svg",
@@ -599,9 +599,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/video-trim-modal/component.yaml",
-        "contractSha256": "48ef9f0a11beda1d3f9315fa8b7825a113b9168a915408b7866731c868bfe0cb",
+        "contractSha256": "3fe1f1ebea2e54731b4c61c828b527582f662eb73e547181627c4fff5b2a47b1",
         "implementationImport": "platform/ui/video-trim-modal/index.js",
-        "implementationSha256": "44d7015b6897a220879defff9ed24281b246d2d8db26258b85245551d14f3d5c",
+        "implementationSha256": "cce7a2af0a1fcda968f1391465158f93709ea064171709ee308cdadc8e409314",
         "runtimeAssets": []
       }
     ]
@@ -1274,7 +1274,7 @@
         },
         {
           "path": "design-library/components/upload-media-block/component.yaml",
-          "sha256": "a20b59a082e3d3357fc3e99a26a9059ca1bf4a9d6db297e7aadcdd919f189b38"
+          "sha256": "932658ae3fec4d687a1d514d987c7e06c18d8e8ec68077bf34333df3ecc148f8"
         },
         {
           "path": "design-library/components/video-history/component.yaml",
@@ -1290,11 +1290,11 @@
         },
         {
           "path": "design-library/components/video-timeline/component.yaml",
-          "sha256": "4c0e42086f42d9da2180e3f681754bdddf689def626c26fc855c34027ca7d161"
+          "sha256": "c977fffa36cae15d26d36638a35d1c5e0971e1b1eb0fe9f3715f870ade8b113e"
         },
         {
           "path": "design-library/components/video-trim-modal/component.yaml",
-          "sha256": "48ef9f0a11beda1d3f9315fa8b7825a113b9168a915408b7866731c868bfe0cb"
+          "sha256": "3fe1f1ebea2e54731b4c61c828b527582f662eb73e547181627c4fff5b2a47b1"
         },
         {
           "path": "features/collab-space-readiness/product/surface-intent.yaml",
@@ -1874,7 +1874,7 @@
         },
         {
           "path": "platform/ui/upload-media-block/UploadMediaBlock.module.scss",
-          "sha256": "610baa5c1ca15935e99defca8b6c4bca5e7ef0ef50aff117487bbe6eeecfed11"
+          "sha256": "7dc0f16c0a038b0afd841dc80219101c1d1b3b195a2b69ac9440d843159a28c0"
         },
         {
           "path": "platform/ui/upload-media-block/UploadMediaBlock.stories.jsx",
@@ -1934,11 +1934,11 @@
         },
         {
           "path": "platform/ui/video-timeline/VideoTimeline.jsx",
-          "sha256": "a81233d848a658d2a520117991d89e3332d01604f4ab6948ac00a184d9a6aa90"
+          "sha256": "d7db6ddf79901e11d161069b11e7b0ba22c8ed0170cd39a75d167b90e47f929e"
         },
         {
           "path": "platform/ui/video-timeline/VideoTimeline.module.scss",
-          "sha256": "72cf7babe6bd084ea0168e7d55a86ea2afda253a93a8433203ea369212373228"
+          "sha256": "e4e1a9fcd06c982115ded09bfd95d6b79c718de33455e0a78f0b7446131e6739"
         },
         {
           "path": "platform/ui/video-timeline/VideoTimeline.stories.jsx",
@@ -1954,11 +1954,11 @@
         },
         {
           "path": "platform/ui/video-trim-modal/VideoTrimModal.jsx",
-          "sha256": "d355a69f356bce314816c8452a08b57f8d14a33a78096be44f9b41a5311c2665"
+          "sha256": "f24442811f2ad741d20a2a5f8ef17d51c329a19d3d1096b7fb3012778eb2aec3"
         },
         {
           "path": "platform/ui/video-trim-modal/VideoTrimModal.module.scss",
-          "sha256": "5b59e78d756e3496165ac1acb2a802acd4de4873e59d1f6bf60ff2800a0e92d0"
+          "sha256": "59435dd4d970187ababb036b9e859793b0d2ce0806f21a6ac0a807a4895a97af"
         },
         {
           "path": "platform/ui/video-trim-modal/VideoTrimModal.stories.jsx",
@@ -2233,7 +2233,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "64640ea4afc60ff561f4066abd4add86b49f125d06b48da15f3e5eb79df58c98",
+      "hash": "e746b18dfe74f2c1262b9c828cb67a34b8805bfca5400781dc4fb3b1b7e3fa48",
       "edges": [
         {
           "from": "design-library/assets/font/yco-interface-icons.style.css",
@@ -3027,6 +3027,6 @@
         "react-dom"
       ]
     },
-    "revisionHash": "1049bc8a4e6efef81b2d47c391d07f4c69b0d173906e1448b643c85af5e17685"
+    "revisionHash": "14a62d91fef3ce9729418805c02e33025003dd14003ca31669481d444c15b63b"
   }
 }

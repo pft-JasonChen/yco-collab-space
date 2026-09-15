@@ -226,6 +226,43 @@ export default function VideoTimeline({
     dragRef.current = { target, onMove, onUp };
   }, [minimumSeconds, onTrimEndChange, onTrimStartChange, safeEnd, startTime, stopDrag, trackDuration]);
 
+  // Reference (2026-09-15, requested live — "我如果是選在兩個handler中間，但
+  // 不是選中playhead的情況下，應該要整個選取區段可以左右平移"): dragging
+  // inside the trim range (but not on a handle) used to fall through to the
+  // native seek <input>, jumping the playhead there instead of doing
+  // anything with the selection itself. This pans start AND end together by
+  // the same delta, preserving the selected duration, clamped so neither end
+  // goes past the track's own [0, trackDuration] bounds — mirrors
+  // startHandleDrag's own pointer-capture pattern, just moving both edges
+  // at once instead of one.
+  const startRangePan = useCallback((event) => {
+    if (!onTrimStartChange && !onTrimEndChange) return;
+    event.preventDefault();
+    event.stopPropagation();
+    const rect = trackRef.current?.getBoundingClientRect();
+    if (!rect || !trackDuration) return;
+    const pxPerSecond = rect.width / trackDuration;
+    const panStartClientX = event.clientX;
+    const rangeStart = startTime;
+    const rangeEnd = safeEnd;
+    const rangeLength = rangeEnd - rangeStart;
+
+    const onMove = (moveEvent) => {
+      const deltaSeconds = (moveEvent.clientX - panStartClientX) / pxPerSecond;
+      const clampedStart = clamp(rangeStart + deltaSeconds, 0, Math.max(0, trackDuration - rangeLength));
+      onTrimStartChange?.(clampedStart);
+      onTrimEndChange?.(clampedStart + rangeLength);
+    };
+    const onUp = (upEvent) => stopDrag(upEvent);
+
+    const target = event.currentTarget;
+    target.setPointerCapture(event.pointerId);
+    target.addEventListener('pointermove', onMove);
+    target.addEventListener('pointerup', onUp);
+    target.addEventListener('pointercancel', onUp);
+    dragRef.current = { target, onMove, onUp };
+  }, [onTrimEndChange, onTrimStartChange, safeEnd, startTime, stopDrag, trackDuration]);
+
   return (
     <div
       className={`${styles.timeline} ${className}`}
@@ -300,6 +337,23 @@ export default function VideoTimeline({
                 width: `calc(${Math.max(0, endPercent - startPercent)}% + 32px)`,
               }}
             >
+              {/* Reference (2026-09-15, requested live — "我如果是選在兩個
+                  handler中間，但不是選中playhead的情況下，應該要整個選取
+                  區段可以左右平移"): sits UNDER the two handle buttons below
+                  (they're z-index:4 and only 16px wide at each edge, so they
+                  still win their own pixel positions) but ABOVE the native
+                  seek <input>, so a drag anywhere else in the trim range
+                  pans the whole selection instead of falling through to
+                  seek. Disabled (no pointer-events) unless there's actually
+                  somewhere to move it — panning needs BOTH callbacks, not
+                  just one, since it always sets both ends together. */}
+              {onTrimStartChange && onTrimEndChange ? (
+                <div
+                  className={styles.trimRangeMiddle}
+                  onPointerDown={startRangePan}
+                  aria-hidden="true"
+                />
+              ) : null}
               <button
                 type="button"
                 className={`${styles.handle} ${styles.handleLeft}`}

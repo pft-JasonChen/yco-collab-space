@@ -133,15 +133,20 @@
    size and contrast make sense; here it covered more of a small thumbnail
    than PM wanted). Kept centered per the same live feedback ("在中間"), just
    at the smaller, subtler size/color actually specified. */
+/* Reference (2026-09-15, requested live — "這三排的水平高度應該要一樣都在
+   底部"): was centered in the whole preview (top:50%/left:50%), sitting
+   well above .previewMuted/.duration's own shared bottom row instead of
+   in it. Same bottom edge (var(--spacing-4)) as both of those now — only
+   translateX for centering, not translateY. */
 .previewPlay {
   position: absolute;
-  top: 50%;
   left: 50%;
+  bottom: var(--spacing-4);
   display: grid;
   width: var(--spacing-24);
   height: var(--spacing-24);
   place-items: center;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
   font-family: 'YcoInterfaceIcons', sans-serif;
   font-size: 14px;
   font-style: normal;

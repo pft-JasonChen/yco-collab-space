@@ -194,6 +194,29 @@
   border-radius: var(--corner-radius-4);
 }
 
+/* Reference (2026-09-15, requested live — "我如果是選在兩個handler中間，但
+   不是選中playhead的情況下，應該要整個選取區段可以左右平移"): fills the
+   space between the two 16px handles (which sit flush at .trimRange's own
+   left:0/right:0) so a drag there pans the whole selection — see
+   startRangePan in VideoTimeline.jsx. z-index below .handle's own 4 so the
+   handles still win their own edges; pointer-events set explicitly since
+   the ancestor .trimOverlay turns it off by default for everything but
+   opts-in children. No background/border of its own — purely a hit target. */
+.trimRangeMiddle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 16px;
+  right: 16px;
+  z-index: 3;
+  pointer-events: auto;
+  cursor: grab;
+}
+
+.trimRangeMiddle:active {
+  cursor: grabbing;
+}
+
 /* Corrected (2026-09-14, reference jb5SgyshmuPse0L7IFm0QO nodes
    14908:253051/11469:164246 — "你參考figma位置"): plain 16px, matching
    Figma's own trim-handles-l/-r exactly — not widened. The earlier "widen

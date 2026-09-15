@@ -303,9 +303,29 @@
   flex: 0 0 auto;
   justify-content: flex-end;
   gap: var(--spacing-8);
-  padding: var(--spacing-24) var(--spacing-32) var(--spacing-32);
+  /* No left/right padding here (2026-09-15, requested live — "這個如果是不是
+     fixed to the bottom的狀態就不用加上左右的padding"): .actions is .body's
+     own child now, so .body's own `padding: 0 32px` already insets it
+     horizontally whenever it's sitting in plain flow — its own matching
+     32px on top of that would double it. .actionsFixed below adds it back
+     for the one case that actually needs it: acting as a standalone
+     sticky-stuck footer bar. */
+  padding: var(--spacing-24) 0 var(--spacing-32);
   background: var(--background-base);
   transition: box-shadow 160ms ease;
+}
+
+/* Reference (2026-09-15, reported live — "整個footer container應該要貼在邊
+   上"): .actions living inside .body (padding: 0 32px) means its own
+   background — needed while stuck, to occlude scrolled content behind it —
+   never reached the modal's true left/right edges either, stopping 32px
+   short on each side. Negative margin cancels exactly that padding so the
+   background spans full width while stuck; the padding below restores the
+   same visual inset for the buttons themselves on top of it. */
+.actionsFixed {
+  margin: 0 calc(-1 * var(--spacing-32));
+  padding-left: var(--spacing-32);
+  padding-right: var(--spacing-32);
 }
 
 /* Reference (2026-09-15, requested live — "等他滑到最底就沒有modal footer的
@@ -338,6 +358,12 @@
   }
 
   .actions {
-    padding: var(--spacing-16) var(--spacing-16) var(--spacing-24);
+    padding: var(--spacing-16) 0 var(--spacing-24);
+  }
+
+  .actionsFixed {
+    margin: 0 calc(-1 * var(--spacing-16));
+    padding-left: var(--spacing-16);
+    padding-right: var(--spacing-16);
   }
 }
