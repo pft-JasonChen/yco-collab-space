@@ -116,8 +116,21 @@ export default function VideoTimeline({
   // window drawn as an overlay on top of it — not a filmstrip of only the
   // selected window, which is what this component rendered before. Every
   // percentage below is against `duration`, not `selectedDuration`.
-  const trackDuration = duration > 0 ? duration : safeEnd;
-  const toPercent = (seconds) => (trackDuration > 0 ? clamp((seconds / trackDuration) * 100, 0, 100) : 0);
+  //
+  // Reference (2026-09-15, found live — video-expansion's own derived canvas
+  // timeline reported "拉到底才會是0:30但拉到一半就卡住了" after it stopped
+  // passing showTrimHandles: `duration` there is the ORIGINAL, untrimmed
+  // source length (e.g. 42s) while startTime/endTime describe a separately
+  // selected sub-range within it (e.g. 0-30s) — the "full clip with overlay"
+  // model above only makes sense while handles (and the dimmed range they
+  // sit on) are actually drawn, since together they visually explain why the
+  // playhead stops short of the track's own right edge. With showTrimHandles
+  // false there's nothing left to reference outside the selected window, so
+  // that window becomes the whole timeline: percentages are taken relative
+  // to startTime, against the window's own length, not the original source's.
+  const trackDuration = showTrimHandles ? (duration > 0 ? duration : safeEnd) : selectedDuration;
+  const percentBasisStart = showTrimHandles ? 0 : startTime;
+  const toPercent = (seconds) => (trackDuration > 0 ? clamp(((seconds - percentBasisStart) / trackDuration) * 100, 0, 100) : 0);
   const startPercent = toPercent(startTime);
   const endPercent = toPercent(safeEnd);
   const rawPlayheadPercent = toPercent(value);

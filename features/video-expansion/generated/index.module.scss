@@ -62,18 +62,27 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+}
+
+/* Reference (2026-09-15, corrected live twice — first "已經和你說過進來的時候
+   沒有這個白底，白底是空狀態用的": the white background is for the EMPTY
+   state only, a previous pass had put it on .canvasAreaLoaded too
+   (misreading an earlier, differently-scoped complaint about this same
+   card); then "empty state這個白底沒有陰影也沒有border請不要自己亂加": the
+   border+shadow that same earlier pass invented (matching a precedent
+   elsewhere in this codebase, VideoResultsSurface's own filter-dropdown
+   card) was never asked for here — plain background-base only, nothing
+   added beyond what's actually spec'd). The loaded state gets no
+   background of its own; it shows .result's own --background-alternate
+   straight through, matching every reference screenshot of the loaded
+   editor. */
+.canvasArea {
   background: var(--background-base);
-  /* Reference (2026-09-15, reported live — "進來之後就沒有這個白底了"): the
-     card's own --background-base WAS already being applied (confirmed via
-     computed style), but against --background-alternate (the page's own
-     bg — only ~4% darker) it read as no card at all with nothing to mark
-     the edge. VideoResultsSurface's own filter-dropdown card
-     (VideoResultsSurface.module.scss) is this codebase's existing precedent
-     for a --background-base surface floating over --background-alternate —
-     border + shadow, not color contrast alone. */
-  border: 1px solid var(--stroke-weak);
   border-radius: var(--corner-radius-20);
-  box-shadow: 0 4px 12px color-mix(in srgb, var(--fill-strong) 10%, transparent);
+}
+
+.canvasAreaLoaded {
+  border-radius: var(--corner-radius-20);
 }
 
 .canvasWorkspace {

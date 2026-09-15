@@ -46,6 +46,15 @@ export function GenerateActionBar({
   // credits = 48px, Two-line text = 56px, regardless of whether the two-line
   // version also carries a credit badge — subtitle presence alone decides the
   // height, not the badge. See CreditControls.module.scss's .generateButton.
+  //
+  // Reference (2026-09-15, requested live — "當disable的時候無法偵測所需
+  // credits所以可以把credit拿掉，然後按鈕高度設回42px"): while disabled, the
+  // actual cost can't be known yet (it depends on a selection that isn't
+  // finalized), so showing a specific credit number is misleading — the
+  // badge is now hidden whenever disabled, not just while isLoading, which
+  // makes this the plain "Text Only" composition from the spec above (42px),
+  // not "Text with credits" (48px).
+  const showCredit = !isLoading && !disabled;
   return (
     <div className={`${styles.actionBar} ${className}`} data-component-role="primary-action generate-action-with-credit">
       {/* .actionBarInner (2026-09-15, "不需要有綠色這層padding"): its only job
@@ -54,7 +63,7 @@ export function GenerateActionBar({
           commonly sits inside an already-padded panel now instead (see
           CreditControls.module.scss's own decisionBasis). */}
         <Button
-          className={`${styles.generateButton} ${subtitle ? styles.generateButtonTwoLine : ''}`}
+          className={`${styles.generateButton} ${subtitle ? styles.generateButtonTwoLine : (!showCredit ? styles.generateButtonNoCredit : '')}`}
           data-testid="generate-video"
           tone={buttonTones.BRAND}
           disabled={disabled}
@@ -65,7 +74,7 @@ export function GenerateActionBar({
             <span>{isLoading ? 'Generating…' : label}</span>
             {subtitle && !isLoading ? <span className={styles.generateButtonSubtitle}>{subtitle}</span> : null}
           </span>
-          {!isLoading ? <CreditBadge value={cost} testId="generate-credit-cost" /> : null}
+          {showCredit ? <CreditBadge value={cost} testId="generate-credit-cost" /> : null}
         </Button>
     </div>
   );

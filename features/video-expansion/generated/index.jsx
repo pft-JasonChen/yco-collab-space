@@ -434,8 +434,15 @@ export default function VideoExpansionFeature() {
                             showKeyframe=false: that marker flags an edit point on the video
                             object-removal flow specifically (per Figma, jb5SgyshmuPse0L7IFm0QO
                             node 7460:183805) — Video Expansion isn't an edit-in-place flow, so
-                            showing it here would be a misleading "this point was edited" badge. */}
-                        <VideoTimeline frameUrls={timelineFrames} frameStrategy="browser-capture-10" duration={duration} startTime={trimStart} endTime={trimEnd} currentTime={currentTime} isPlaying={isPlaying} onPlay={playVideo} onPause={pauseVideo} onSeek={seekPlayback} onTrimStartChange={setTrimStart} onTrimEndChange={setTrimEnd} showKeyframe={false} showLeftLabel showRightLabel className={styles.derivedTimeline} />
+                            showing it here would be a misleading "this point was edited" badge.
+                            showTrimHandles=false (2026-09-15, requested live — "已經進來這個
+                            畫面就不需要裁剪了，所以也沒有handler"): trimming only happens in
+                            VideoTrimModal's own dialog now — this derived/canvas timeline is a
+                            playback scrubber once you're past that step, so it no longer needs
+                            draggable start/end handles (or the dimmed-range overlay they ride
+                            on) of its own. onTrimStartChange/onTrimEndChange are dropped too
+                            since VideoTimeline can't reach them with the handles gone. */}
+                        <VideoTimeline frameUrls={timelineFrames} frameStrategy="browser-capture-10" duration={duration} startTime={trimStart} endTime={trimEnd} currentTime={currentTime} isPlaying={isPlaying} onPlay={playVideo} onPause={pauseVideo} onSeek={seekPlayback} showKeyframe={false} showTrimHandles={false} showLeftLabel showRightLabel className={styles.derivedTimeline} />
                       </div>
                     ) : <EmptyResult error={sourceState === SOURCE_STATES.ERROR} onPick={() => inputRef.current?.click()} onSample={() => loadSample()} onRecover={() => setSourceState(SOURCE_STATES.EMPTY)} />}
                   </div>

@@ -81,6 +81,16 @@ button.control {
   min-height: 48px;
 }
 
+/* Reference (2026-09-15, requested live — "當disable的時候無法偵測所需
+   credits所以可以把credit拿掉，然後按鈕高度設回42px"): the "Text Only = 42px"
+   half of the handoff spec quoted above .generateButton was never actually
+   implemented — only the 48px (with credit) and 56px (two-line) cases were.
+   Applied whenever GenerateActionBar hides the credit badge outside the
+   two-line case (see its own showCredit logic). */
+.generateButtonNoCredit {
+  min-height: 42px;
+}
+
 .generateButton:disabled {
   color: var(--text-inverse-strong);
   background: var(--fill-disabled);

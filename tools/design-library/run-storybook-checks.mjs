@@ -126,8 +126,12 @@ const stories = [
   {
     id: 'ui-credit-controls--generate-disabled',
     async interact(page) {
+      // Reference (2026-09-15, requested live — "當disable的時候無法偵測所需
+      // credits所以可以把credit拿掉"): the credit badge is now hidden while
+      // disabled (the real cost isn't knowable yet), not shown — this check
+      // used to assert the opposite (badge visible while disabled).
       assert.equal(await page.getByRole('button', { name: /Generate/ }).isEnabled(), false);
-      await page.getByTestId('generate-credit-cost').waitFor({ state: 'visible' });
+      await page.getByTestId('generate-credit-cost').waitFor({ state: 'hidden' });
     },
   },
   {

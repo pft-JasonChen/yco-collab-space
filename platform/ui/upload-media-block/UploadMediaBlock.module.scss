@@ -124,30 +124,33 @@
   font-weight: var(--font-weight-strong);
 }
 
-/* Reference (2026-09-15, requested live — "1除了時間還有play和volume"): a
-   video thumbnail also needs a play affordance and a muted indicator, not
-   just the duration badge. Same icon-font-glyph + color-mix(80%-opacity)
-   treatment as VideoTrimModal's own preview overlay, scaled down for this
-   block's own much smaller preview (~112px tall vs. that modal's ~336px) —
-   28px/16px there vs. this component's 56px/32px would look oversized. */
+/* Reference (2026-09-15, requested live — "1除了時間還有play和volume"; then
+   corrected — "play icon是小小顆在中間，PM不想蓋影片太多", against Figma node
+   14877:145017's own uploadArea instance): both overlay controls are 24×24
+   there, in the same dark-overlay style as the duration badge/mute badge —
+   not the larger 32px white-bg treatment first tried (borrowed from
+   VideoTrimModal's own dedicated preview, a much bigger surface where that
+   size and contrast make sense; here it covered more of a small thumbnail
+   than PM wanted). Kept centered per the same live feedback ("在中間"), just
+   at the smaller, subtler size/color actually specified. */
 .previewPlay {
   position: absolute;
   top: 50%;
   left: 50%;
   display: grid;
-  width: var(--spacing-32);
-  height: var(--spacing-32);
+  width: var(--spacing-24);
+  height: var(--spacing-24);
   place-items: center;
   transform: translate(-50%, -50%);
   font-family: 'YcoInterfaceIcons', sans-serif;
-  font-size: 18px;
+  font-size: 14px;
   font-style: normal;
   font-weight: normal;
   line-height: 1;
   speak: never;
   -webkit-font-smoothing: antialiased;
-  color: var(--icon-brand);
-  background: color-mix(in srgb, var(--fill-inverse-strong) 80%, transparent);
+  color: var(--icon-inverse-strong);
+  background: var(--fill-overlay);
   border-radius: var(--corner-radius-32);
   pointer-events: none;
 }
@@ -157,11 +160,11 @@
   left: var(--spacing-4);
   bottom: var(--spacing-4);
   display: grid;
-  width: var(--spacing-20);
-  height: var(--spacing-20);
+  width: var(--spacing-24);
+  height: var(--spacing-24);
   place-items: center;
   font-family: 'YcoInterfaceIcons', sans-serif;
-  font-size: 12px;
+  font-size: 14px;
   font-style: normal;
   font-weight: normal;
   line-height: 1;
