@@ -16,5 +16,10 @@ evals/runs/
 .collab-cache/
 work/
 
+# Local Claude Code <-> Codex handoff notes: internal workflow docs with a
+# local machine path in them, not meant for this (public) repo's history.
+/HANDOFF-CODEX.md
+/design-library/figma-sync-queue.json
+
 # .claude/launch.json is intentionally tracked: it pins the same dev port as
 # prototype.config.json so every reviewer can reproduce the browser check.
