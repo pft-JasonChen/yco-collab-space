@@ -26,7 +26,7 @@ export function VideoSection({
   onFileChange,
 }) {
   return (
-    <section className={styles.settingsSection}>
+    <section className={styles.settingsSection} data-testid="video-section">
       <h2 className={styles.sectionTitle}>{t('video.expansion.settings.video.title')}</h2>
       <div
         data-testid="video-upload-entry"

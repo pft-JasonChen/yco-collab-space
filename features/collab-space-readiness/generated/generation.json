@@ -5,7 +5,7 @@
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "claude-code",
   "model": "claude-sonnet-5",
-  "generatedAt": "2026-09-16T02:52:25.983Z",
+  "generatedAt": "2026-09-16T03:53:52.133Z",
   "files": [
     "feature.jsx",
     "feature.module.scss"
@@ -740,7 +740,7 @@
         },
         {
           "path": "design-library/components/video-results-surface/component.yaml",
-          "sha256": "126291ea2e63f73b6248c12dadc4a656cdb90e5c4785781824c14ade7e1c822c"
+          "sha256": "5af04ba85a791cb1117703335b39d1a128543c88648d0402f26f0dd0333847ed"
         },
         {
           "path": "design-library/components/video-timeline/component.yaml",
@@ -796,7 +796,7 @@
         },
         {
           "path": "platform/runtime/PrototypeFrame.module.scss",
-          "sha256": "1b8c1184e3e0f606b1537f6beefaf8da4a9b166e54048b2aa4d62ffca30bd470"
+          "sha256": "d88e4b3f6652afa6771aa6aa0617894ff7f34acce1ec6d79c95baf95ddbd8599"
         },
         {
           "path": "platform/runtime/i18n.js",
@@ -1560,11 +1560,11 @@
         },
         {
           "path": "platform/ui/video-results-surface/VideoResultsSurface.jsx",
-          "sha256": "9e8ce917642d471428f2b5bdbe6224c86fec08220aa75922689a70edfff979a5"
+          "sha256": "5f8809610d501ab1437fbad76a1cd8aed274deba0a4c2bbf3daad9b1e94f0693"
         },
         {
           "path": "platform/ui/video-results-surface/VideoResultsSurface.module.scss",
-          "sha256": "9e23da7cd2ab7c49db6310ffa89845051dc0bed919685d9a40691585b2001b39"
+          "sha256": "5548516c113a0a5fefd4cea098e686f89af4586fc4cb368e0b91a0e522de2bd0"
         },
         {
           "path": "platform/ui/video-results-surface/VideoResultsSurface.stories.jsx",
@@ -1875,7 +1875,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "c59c4a7614cc75ff20397c99978015a8f28ebf6b5611e476f19dc0c1fc604a08",
+      "hash": "65e12c9e615e70455b4d2cdfddcbd9f08c1f2ef8fac55c66f12ef39c50df8d42",
       "edges": [
         {
           "from": "features/collab-space-readiness/generated/feature.jsx",
@@ -1917,6 +1917,6 @@
         "react"
       ]
     },
-    "revisionHash": "82d006d4e535ce1e405db5c312ddb3bdffe16a748e027ec46887ef31d2a968b8"
+    "revisionHash": "5fa87d354ee3d103a24f19dcc1b166cb5c704cd9709d714508e26ea95aaf396a"
   }
 }

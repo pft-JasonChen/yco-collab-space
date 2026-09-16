@@ -35,19 +35,29 @@
    own @media(max-width:900px){.layout{flex-direction:column}}) — matching
    that exact breakpoint, not this file's own separate 992px one below, since
    this heading exists specifically to stand in for the now-stacked page. */
-.mobileTitle {
+.mobileTitleRow {
   display: none;
-  margin: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-16);
   padding: 0 var(--video-result-gutter) var(--spacing-16);
+}
+
+.mobileTitle {
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
   color: var(--text-strong);
   font-size: var(--font-size-small);
   line-height: var(--line-height-small);
   font-weight: var(--font-weight-strong);
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 @media (max-width: 900px) {
-  .mobileTitle {
-    display: block;
+  .mobileTitleRow {
+    display: flex;
   }
 }
 

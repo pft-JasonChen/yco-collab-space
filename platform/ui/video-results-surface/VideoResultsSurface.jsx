@@ -101,6 +101,16 @@ export default function VideoResultsSurface({
    * a supplied reference of the real production mobile layout (tabs, then
    * title, then the settings form). */
   title = null,
+  /** Reference (2026-09-16, requested live — "手機版上傳後...都是上傳後feature
+   * name右邊新增一顆upload button", against a real production mobile
+   * screenshot): mobile-only (renders alongside `title`, so it only ever
+   * shows where `.mobileTitle` itself does), an action slot next to the
+   * title — the production reference replaces the settings panel's own
+   * inline upload block with this small icon button once a video is loaded,
+   * rather than repeating the full block on mobile. Left generic (a node,
+   * not an "onUpload" callback) so this component stays feature-agnostic;
+   * the consumer decides what the action actually does and when it shows. */
+  titleAction = null,
   className = '',
 }) {
   const labels = { ...defaultLabels, ...labelOverrides };
@@ -111,7 +121,12 @@ export default function VideoResultsSurface({
         <ResultTabs labels={labels} value={activeTab} onChange={onTabChange} processing={processing} />
         {isHistory ? <HistoryFilter labels={labels} value={filterValue} options={filterOptions} onChange={onFilterChange} /> : null}
       </div>
-      {title ? <h2 className={styles.mobileTitle}>{title}</h2> : null}
+      {title ? (
+        <div className={styles.mobileTitleRow}>
+          <h2 className={styles.mobileTitle}>{title}</h2>
+          {titleAction}
+        </div>
+      ) : null}
       {/* Stable hook for a consumer to make this a flex container from the
           outside — needed wherever a descendant relies on height:100% through
           here, since a flex ITEM's grown size (this div, via .editContent/

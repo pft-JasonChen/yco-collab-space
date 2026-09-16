@@ -17,6 +17,24 @@
   background: var(--background-sunken);
 }
 
+/* Reference (2026-09-16, reported live from a real phone via the deployed
+   Vercel build — "這樣的高度是不對的，應該不可以讓user scroll除非高度非常小的
+   手機才有可能"): `100vh` on mobile Safari is the LARGEST possible viewport
+   (as if the address/tab bar were fully collapsed) — taller than what's
+   actually visible on first load, when those bars are still expanded. That
+   made `.shell` (and everything sized against it) taller than the real
+   visible area, so `.content`'s own `overflow: auto` fallback kicked in for
+   completely ordinary content that would otherwise fit, forcing a scroll
+   that had nothing to do with the content actually being too tall for the
+   device. `100svh` (small viewport height — the safe minimum, bars fully
+   expanded) is the correct unit here; same fix category-rail's own
+   `.scroller` already uses for the same reason. */
+@supports (height: 100svh) {
+  .shell {
+    height: 100svh;
+  }
+}
+
 .banner {
   display: flex;
   flex: 0 0 auto;

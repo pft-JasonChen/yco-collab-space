@@ -7,6 +7,55 @@
   background: var(--background-alternate);
 }
 
+/* Reference (2026-09-16, requested live — "手機版上傳後不用出現1[UploadMediaBlock
+   的整塊縮圖]，手機版都是上傳後feature name右邊新增一顆upload button", against a
+   real production mobile screenshot). Both this button and the section-hide
+   rule below are scoped to a true phone width (<=767px), NOT VideoResultsSurface's
+   own <=900px .mobileTitleRow breakpoint that button lives inside — 900px also
+   covers this project's own "tablet" viewport (768px), and its surface-intent
+   explicitly requires the uploaded-media Trim action (inside the section this
+   would hide) to stay visible once the panel stacks there ("Preserve the
+   uploaded-media Trim action... when the inspector stacks at tablet width").
+   Hidden by default and only shown under 768px so tablet keeps the full
+   upload block (with its Trim action) and doesn't also grow a second,
+   redundant upload affordance next to the title. Same circular icon-button
+   treatment as UploadMediaBlock's own .actions > button (32px, white,
+   --stroke-strong border), reused here directly since this button isn't
+   rendered inside that component. */
+.mobileUploadAction {
+  display: none;
+  flex: 0 0 auto;
+  width: var(--spacing-32);
+  height: var(--spacing-32);
+  padding: 0;
+  place-items: center;
+  color: var(--icon-neutral);
+  background: var(--background-base);
+  border: 1px solid var(--stroke-strong);
+  border-radius: var(--corner-radius-32);
+  cursor: pointer;
+}
+
+.mobileUploadAction:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 var(--spacing-4) var(--stroke-focus);
+}
+
+@media (max-width: 767px) {
+  .mobileUploadAction {
+    display: grid;
+  }
+
+  /* Once loaded, the settings panel's own Video upload block is redundant
+     with .mobileUploadAction above — the production reference doesn't
+     repeat it. Scoped to `.page[data-loaded='true']` rather than always-on
+     so the EMPTY state (no video yet) keeps showing this block on mobile —
+     it's still the only way to upload one there. */
+  .page[data-loaded='true'] [data-testid='video-section'] {
+    display: none;
+  }
+}
+
 /* `:where()` around BOTH sides zeroes this whole selector's specificity to 0 —
    lower than any single class, not just equal to one. Wrapping only
    `button, input` (specificity (0,1,0), tying a plain `.tab`/`.activeTab` class)

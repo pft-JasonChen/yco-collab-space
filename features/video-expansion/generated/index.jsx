@@ -462,6 +462,17 @@ export default function VideoExpansionFeature() {
             result={(
               <VideoResultsSurface
                 title={featureName}
+                titleAction={loaded && activeTab === 'edit' ? (
+                  <button
+                    type="button"
+                    className={styles.mobileUploadAction}
+                    data-testid="mobile-upload-action"
+                    onClick={() => inputRef.current?.click()}
+                    aria-label={t('ai.agent.dialog.upload.video')}
+                  >
+                    <Icon name="upload" size={16} />
+                  </button>
+                ) : null}
                 activeTab={activeTab}
                 onTabChange={setActiveTab}
                 processing={generationState === GENERATION_STATES.PROCESSING}
