@@ -54,9 +54,53 @@ const t = createTranslator(dictionary);
 export const featureMeta = { slug: 'video-expansion', title: 'Video Expansion', stage: 'pm-draft', readiness: 'working' };
 
 function EmptyResult({ error, onPick, onSample, onRecover }) {
+  const rootRef = useRef(null);
+  const iconRef = useRef(null);
+  const iconHeightRef = useRef(0);
+  const [hideIcon, setHideIcon] = useState(false);
+
+  // Reference (2026-09-16, requested live — first "不管手機還是桌機，當螢幕高度
+  // 不夠的時候，可以移除empty image", then corrected — "我剛剛是說高度不夠，內容
+  // 超出去container才要移除empty image，不是直接移除"): NOT a fixed viewport
+  // breakpoint (that guesses at a threshold with no real relationship to
+  // whether this content actually needs the room) — measures whether this
+  // block's own natural height actually overflows `.canvasArea` (its bounded,
+  // overflow:hidden parent), the same real-DOM-overflow technique
+  // VideoTrimModal's own footerElevated already uses (scrollHeight vs
+  // clientHeight via ResizeObserver), just measuring "would the icon fit"
+  // instead of "is there more content below". Once the icon is hidden its own
+  // height no longer contributes to `rootRef`'s scrollHeight, so its natural
+  // height (measured once, before it's ever hidden) is cached and added back
+  // on every subsequent check — otherwise the icon could never reappear even
+  // if the container later grew enough to fit it again.
+  useEffect(() => {
+    if (error) return undefined;
+    const root = rootRef.current;
+    const container = root?.parentElement;
+    if (!root || !container) return undefined;
+    const check = () => {
+      if (iconRef.current && !iconHeightRef.current) {
+        const style = getComputedStyle(iconRef.current);
+        iconHeightRef.current = iconRef.current.offsetHeight + parseFloat(style.marginBottom || '0');
+      }
+      const shortfall = root.scrollHeight - container.clientHeight;
+      const shortfallWithIcon = hideIcon ? shortfall + iconHeightRef.current : shortfall;
+      setHideIcon(shortfallWithIcon > 0);
+    };
+    check();
+    const observer = new ResizeObserver(check);
+    observer.observe(container);
+    observer.observe(root);
+    return () => observer.disconnect();
+  }, [error, hideIcon]);
+
   return (
-    <div className={styles.emptyResult} data-component-role="error-recovery">
-      <div className={error ? styles.emptyVideoIconError : styles.emptyVideoIcon}>
+    <div ref={rootRef} className={styles.emptyResult} data-component-role="error-recovery">
+      <div
+        ref={iconRef}
+        className={error ? styles.emptyVideoIconError : styles.emptyVideoIcon}
+        style={!error && hideIcon ? { display: 'none' } : undefined}
+      >
         {/* PM-classified (2026-09-11): this panel counts as a "base" surface,
             so EmptyImage renders its grey-fill artwork against it. */}
         {error ? <Icon name="warning" size={42} /> : <EmptyImage type="video" background="base" />}

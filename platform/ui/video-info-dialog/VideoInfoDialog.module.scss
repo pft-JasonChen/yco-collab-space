@@ -36,6 +36,30 @@
   cursor: pointer;
 }
 
+/* Reference (2026-09-16, requested live — "請用昨天和你說的icon font的regular
+   然後字級大小24px"): same YcoInterfaceIcons icon-font swap already applied to
+   VideoTrimModal's own close button (icon-ic-x-b-regular, U+E943) — a local
+   @font-face pointing at the same design-library icomoon.woff every other
+   icon-font consumer in this codebase declares per-module. Was a hand-drawn
+   inline SVG (DialogIcon) before this. */
+@font-face {
+  font-family: 'YcoInterfaceIcons';
+  src: url('../../../design-library/assets/font/yco-interface-icons/icomoon.woff') format('woff');
+  font-display: block;
+  font-style: normal;
+  font-weight: normal;
+}
+
+.close span {
+  font-family: 'YcoInterfaceIcons', sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  speak: never;
+  -webkit-font-smoothing: antialiased;
+}
+
 .content {
   display: flex;
   width: 100%;
@@ -166,13 +190,21 @@
   gap: var(--spacing-8);
 }
 
+/* Reference (2026-09-16, requested live — "我們有換樣式，把icon都移除，按鈕高度
+   預設兩行，也就是40px": Figma's own component dropped the leading icon
+   entirely; the label alone can now wrap onto a second line inside a fixed
+   40px box instead of the icon+single-line-ellipsis treatment this used to
+   have. Text style read directly from a Figma Dev Mode inspect — Font family/
+   Body, weight Strong, 14px size, 16px line height, 0 letter-spacing (14px =
+   --font-size-tiny, 16px = --line-height-micro; the two don't share a single
+   named pair since Figma's own spec here crosses the token system's usual
+   tiny/micro groupings). */
 .nextGrid button {
   display: flex;
   min-width: 0;
-  min-height: var(--spacing-32);
+  height: var(--spacing-40);
   align-items: center;
   justify-content: center;
-  gap: var(--spacing-4);
   padding: var(--spacing-4) var(--spacing-8);
   overflow: hidden;
   color: var(--text-strong);
@@ -180,18 +212,12 @@
   border: 1px solid var(--stroke-strong);
   border-radius: var(--corner-radius-32);
   cursor: pointer;
-  font-size: var(--font-size-micro);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-tiny);
   line-height: var(--line-height-micro);
   font-weight: var(--font-weight-strong);
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.iconAsset {
-  display: block;
-  width: var(--spacing-16);
-  height: var(--spacing-16);
-  flex: 0 0 auto;
+  letter-spacing: 0;
+  text-align: center;
 }
 
 .nextGrid button:disabled {

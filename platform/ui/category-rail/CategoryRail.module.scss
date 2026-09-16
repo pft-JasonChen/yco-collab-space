@@ -27,11 +27,46 @@
    host page's layout decision, not the component's, so the rail is static here
    and a consumer positions it. The scroll container is kept because the list
    itself has to scroll independently of the page. */
+/* Reference (2026-09-16, requested live — "scrollbar在沒有滾動的時候可以不要
+   顯示嗎？顏色也太深了，可以用Stroke/Weak"): was `scrollbar-width: none` with no
+   `::-webkit-scrollbar` counterpart — Chromium/WebKit ignore `scrollbar-width`
+   in some contexts and fall back to their own default (thick, dark) scrollbar,
+   which is what was actually showing. Rather than removing it outright (this
+   list can genuinely overflow — ToolPageLayout's own `.panelContent` hides its
+   scrollbar completely, but that content never needs one in practice), this
+   gives it a real thin/light treatment instead: a transparent thumb by default
+   (so it takes no visual weight while idle) that only turns --stroke-weak on
+   hover/focus-within, approximating "hidden unless you're about to use it"
+   without needing a JS scroll-state listener. */
 .scroller {
   max-height: calc(100vh - 64px);
   overflow: hidden auto;
   overscroll-behavior: contain;
-  scrollbar-width: none;
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+.scroller:hover,
+.scroller:focus-within {
+  scrollbar-color: var(--stroke-weak) transparent;
+}
+
+.scroller::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scroller::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scroller::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: var(--corner-radius-4);
+}
+
+.scroller:hover::-webkit-scrollbar-thumb,
+.scroller:focus-within::-webkit-scrollbar-thumb {
+  background: var(--stroke-weak);
 }
 
 @supports (height: 100svh) {

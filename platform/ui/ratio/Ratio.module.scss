@@ -191,6 +191,14 @@
 }
 
 @media (max-width: 768px) {
+  /* Reference (2026-09-16, requested live — "2的scrollbar一樣不用出現"): this
+     row's own horizontal overflow (needed so a swipe/drag can scroll past
+     .content's fixed viewport width) rendered the browser's default
+     scrollbar underneath it. A touch-swipe strip never needs a persistent
+     scrollbar affordance — same full-hide treatment as ToolPageLayout's own
+     `.panelContent` (a different case from category-rail/toolMenuScroller's
+     hover-reveal, since those are mouse-hoverable vertical lists, not a
+     touch-only horizontal one). */
   .content.gery_v2,
   .content.gery_v2.twoOrLess,
   .content.gery_v2.moreThanTwo {
@@ -198,6 +206,12 @@
     flex-wrap: nowrap;
     padding-bottom: var(--spacing-8);
     overflow: auto hidden;
+    scrollbar-width: none;
+  }
+
+  .content.gery_v2::-webkit-scrollbar,
+  .content.image_extender::-webkit-scrollbar {
+    display: none;
   }
 
   .ratioContainer.gery_v2 {
@@ -209,6 +223,7 @@
     flex-wrap: nowrap;
     padding-bottom: var(--spacing-8);
     overflow: auto hidden;
+    scrollbar-width: none;
   }
 
   .ratioContainer.image_extender {

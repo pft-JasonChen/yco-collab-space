@@ -1,21 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import IconActionButtons, { ActionIcon, actionIcons, defaultDetailActions } from '../icon-action-buttons/index.js';
+import IconActionButtons, { defaultDetailActions } from '../icon-action-buttons/index.js';
 import styles from './VideoInfoDialog.module.scss';
-
-function DialogIcon({ name }) {
-  const paths = {
-    close: <path d="m4 4 8 8M12 4l-8 8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />,
-    video: <><rect x="2.5" y="4" width="8" height="8" rx="1.5" stroke="currentColor" strokeWidth="1.4" /><path d="m10.5 7 3-1.5v5l-3-1.5" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" /></>,
-  };
-  return <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">{paths[name] ?? paths.video}</svg>;
-}
-
-function NextActionIcon({ action }) {
-  if (action.iconUrl) return <img className={styles.iconAsset} src={action.iconUrl} alt="" aria-hidden="true" />;
-  const name = action.icon ?? action.id;
-  return actionIcons[name] ? <ActionIcon className={styles.iconAsset} name={name} /> : null;
-}
 
 /** Every user-facing string is a prop so RD can hand them straight to its own t(). */
 const defaultLabels = {
@@ -82,7 +68,7 @@ export default function VideoInfoDialog({
         aria-labelledby="video-info-title"
       >
         <button ref={closeRef} className={styles.close} type="button" onClick={onClose} aria-label={labels.close}>
-          <DialogIcon name="close" />
+          <span aria-hidden="true">&#xe943;</span>
         </button>
         <div className={styles.content}>
           <div className={styles.left}>
@@ -129,7 +115,7 @@ export default function VideoInfoDialog({
                     disabled={!action.onSelect}
                     onClick={action.onSelect}
                   >
-                    <NextActionIcon action={action} />{action.label}
+                    {action.label}
                   </button>
                 ))}
               </div>

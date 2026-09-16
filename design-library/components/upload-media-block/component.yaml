@@ -40,12 +40,12 @@ implementation:
     - path: platform/ui/upload-media-block/UploadMediaBlock.jsx
       sha256: 7f4d257c26b150d398657ea60b1e10b39c49ae45b87ad8c3774f5cc869634f9a
     - path: platform/ui/upload-media-block/UploadMediaBlock.module.scss
-      sha256: 7dc0f16c0a038b0afd841dc80219101c1d1b3b195a2b69ac9440d843159a28c0
+      sha256: 454f1f22c35da8ee7d78f5b74addcf01bf9de62ac19958896a374f9462ec8e45
     - path: platform/ui/upload-media-block/UploadMediaBlock.stories.jsx
       sha256: 3c3778670c510bce5a5c5a5fa74a6f745f40ef3adfd9615ac3cb720ed2a29dcc
     - path: platform/ui/upload-media-block/index.js
       sha256: 9757155b48721ec8ee15072c84d89da4fe9576aee46d2ba7dd110c455368d0fb
-  localFilesUpdated: 2026-09-15
+  localFilesUpdated: 2026-09-16
 publicApi:
   props:
     - name: type
@@ -147,3 +147,4 @@ decisionBasis:
   - "Video thumbnail given a play affordance and a muted indicator, not just the duration badge (2026-09-15, requested live — \"1除了時間還有play和volume\", comparing this against video-expansion's own settings-panel upload block, which only showed the duration): same icon-font-glyph + color-mix(80%-opacity) treatment as VideoTrimModal's own preview overlay (icon-ic-play-f U+E97F / icon-ic-volume-x-f U+E926), scaled down (32px/20px circles vs. that modal's 56px/40px) for this block's own much smaller ~112px-tall preview. Both are decorative only — added to the `type='single'`+`videoUrl` branch's `.preview`, which has no inline playback state of its own; `onPreview` (the whole button's onClick) is still what actually opens a real preview. Added a local @font-face (same YcoInterfaceIcons/icomoon.woff every other icon-font consumer in this codebase declares per-module)."
   - "Both overlay icons corrected to 24×24, dark-overlay style, not the 32px/20px white-bg guess above (2026-09-15, requested live — \"play icon是小小顆在中間，PM不想蓋影片太多\" — against Figma node 14877:145017's own uploadArea instance, which Codex independently found while processing this component's sync-queue entry and flagged the size mismatch): that node's two circular overlay controls are both 24×24, --fill-overlay background, --icon-inverse-strong glyph — the same style .previewMuted already used, not VideoTrimModal's white-80%-opacity/--icon-brand treatment .previewPlay had borrowed (a much bigger preview surface where that size/contrast reads correctly; here it covered more of a small thumbnail than intended). Position kept centered per the same feedback (\"在中間\"), just at the smaller, subtler size/color actually specified."
   - "`.previewPlay` moved from centered-in-the-whole-preview (top:50%/left:50%) onto the same bottom row as `.previewMuted`/`.duration` — same `bottom: var(--spacing-4)`, only translateX for centering (2026-09-15, requested live — \"這三排的水平高度應該要一樣都在底部\"): all three now share one y-position instead of play floating well above the other two."
+  - "Duration badge's overlay color corrected to match the play/mute icons (2026-09-16, requested live — \"這三顆顏色好像不太一樣，都幫我用fill-overlay就好，不用strong\"): `.duration` was `--fill-overlay-strong`, one shade darker than `.previewPlay`/`.previewMuted`'s own `--fill-overlay`, so the three preview overlays didn't read as one consistent treatment. All three now use the plain `--fill-overlay` token."

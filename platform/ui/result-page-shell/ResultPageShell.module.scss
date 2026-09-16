@@ -39,6 +39,11 @@
    20 bottom, 20 left) — the 80px-wide icon column below is centered inside it,
    not offset per-button. Vertical spacing between the column's top-level blocks
    (Home / Divider / group / Divider) is a flat 8px gap, not margin. */
+/* Reference (2026-09-16, requested live — "scrollbar在沒有滾動的時候可以不要
+   顯示嗎？顏色也太深了，可以用Stroke/Weak"): had no scrollbar styling at all, so
+   it rendered the browser's own default (thick, dark) scrollbar whenever the
+   tool list overflowed. Transparent thumb by default, --stroke-weak only on
+   hover/focus-within — same treatment as category-rail's own `.scroller`. */
 .toolMenuScroller {
   height: 100%;
   overflow: hidden auto;
@@ -48,6 +53,31 @@
   align-items: center;
   gap: 8px;
   padding: 20px 12px 20px 20px;
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+.toolMenuScroller:hover,
+.toolMenuScroller:focus-within {
+  scrollbar-color: var(--stroke-weak) transparent;
+}
+
+.toolMenuScroller::-webkit-scrollbar {
+  width: 6px;
+}
+
+.toolMenuScroller::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.toolMenuScroller::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: var(--corner-radius-4);
+}
+
+.toolMenuScroller:hover::-webkit-scrollbar-thumb,
+.toolMenuScroller:focus-within::-webkit-scrollbar-thumb {
+  background: var(--stroke-weak);
 }
 
 .menuItem {

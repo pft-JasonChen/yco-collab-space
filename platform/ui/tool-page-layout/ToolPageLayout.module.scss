@@ -3,6 +3,7 @@
   width: 100%;
   height: 100%;
   min-height: 0;
+  overflow: hidden;
   background: var(--background-base);
 }
 
@@ -32,10 +33,20 @@
   display: none;
 }
 
+/* Reference (2026-09-16, requested live — "這裡應該要偵測剩下的螢幕空間有多少
+   然後撐滿它，而不是scroll"): `flex:1; min-height:0` alone doesn't stop a
+   child's own overflow from escaping upward — it keeps THIS box at its own
+   flex-resolved size, but content taller than that still renders past it
+   with nothing to clip it (same gap VideoResultsSurface's own `.editContent`
+   had). Without `overflow: hidden` here, that excess kept climbing until it
+   reached ResultPageShell's own scrollable `main`, which scrolled the whole
+   page instead of the canvas card just adapting to whatever height `.result`
+   actually has. */
 .result {
   min-width: 0;
   min-height: 0;
   flex: 1;
+  overflow: hidden;
   background: var(--background-alternate);
 }
 
