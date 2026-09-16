@@ -1,0 +1,92 @@
+schemaVersion: 1
+id: category-rail
+displayName: Category Rail
+classification: composite
+status: pilot-approved
+rd:
+  sourcePackage: youcam-enhance-frontend
+  sourceVersion: 1.34.1
+  snapshot: yce-frontend-gm-260909
+  portability: reference
+  sourcePaths:
+    - src/components/strapi/components/gridmodulesection/components/homeCategory/index.js
+    - src/components/strapi/components/gridmodulesection/components/homeCategory/index.module.scss
+    - src/components/common/headers/components/new-label/index.js
+    - src/components/common/headers/components/new-label/index.module.scss
+    - src/components/common/headers/components/external-link/index.js
+    - src/styles/home-icon-styles.css
+  sourceHashes:
+    - { path: src/components/strapi/components/gridmodulesection/components/homeCategory/index.js, sha256: 779d6e307ad296af320466caa78bfd6a14b95581b5551c1c11082940e47b8237 }
+    - { path: src/components/strapi/components/gridmodulesection/components/homeCategory/index.module.scss, sha256: f85f74be1e1ffd6244e9d7e4ad8b468c0183aa9d355cf46d690f6aa9c170801b }
+    - { path: src/components/common/headers/components/new-label/index.js, sha256: 5b13dac72d901bc549764d7ef7adac328a358cca32b8ce3bb2b7abcc5069fb46 }
+    - { path: src/components/common/headers/components/new-label/index.module.scss, sha256: 0f021dd8839aa650286d3d91976a90aec28fb840afa7b288901a902f881f0b5c }
+    - { path: src/components/common/headers/components/external-link/index.js, sha256: ed49fbc10ecee1667ac33a1ed189e2adb2f215aa8831eee95fcbe3d7e3638fee }
+    - { path: src/styles/home-icon-styles.css, sha256: 6cd44d764ed017f1c3d263f1cfaebcdc54e4f77103a21ab77f9da004a693d7b5 }
+figma: { status: pending, fileKey: null, componentSetNodeId: null, variants: [] }
+implementation:
+  importPath: platform/ui/category-rail/index.js
+  storyId: ui-category-rail
+  framework: react
+  dependencies: [react]
+  removedDependencies: [next-router, redux, session-storage, i18n, cms-sections, use-window-width, use-header-general, use-user-status, use-show-contest, start-editing-button, gallery-picker-modal, global-icon-stylesheet]
+  localFiles:
+    - path: platform/ui/category-rail/CategoryRail.jsx
+      sha256: 83fef5923162070ab6a3722529dd6ce5d9d897500af69d220cd9b1b2b0760c5a
+    - path: platform/ui/category-rail/CategoryRail.module.scss
+      sha256: bb93c9e1a2f89fa0b276a3e907893fc7d1716805e1dfaaf4f61be1bff61e0578
+    - path: platform/ui/category-rail/CategoryRail.stories.jsx
+      sha256: ed2546483a5635b53d09f694439b2d8ddaa9a5aeb97ca485d06d33a0d2adf630
+    - path: platform/ui/category-rail/index.js
+      sha256: 67eca5ef929b299644ead641110c76a632b4748ae7985bcd20d77664661c8a86
+  localFilesUpdated: 2026-09-15
+publicApi:
+  props:
+    - { name: items, required: true }
+    - { name: activeKey, required: false }
+    - { name: onSelect, required: false }
+    - { name: ariaLabel, required: false }
+    - { name: leading, required: false }
+    - { name: compact, required: false }
+    - { name: newLabel, required: false }
+    - { name: className, required: false }
+  states: [default, selected, hover, focus-visible, compact, gradient-item, external-item, divider]
+tokens:
+  lockPath: platform/tokens/tokens.lock.json
+  uses:
+    - --blue-dark-50
+    - --blue-light-1000
+    - --brand-light-50
+    - --corner-radius-24
+    - --fill-badge
+    - --fill-white
+    - --font-size-micro
+    - --font-size-tiny
+    - --font-weight-strong
+    - --grey-neutral-light-25
+    - --grey-neutral-light-50
+    - --grey-neutral-solid-800
+    - --line-height-micro
+    - --line-height-tiny
+    - --purple-light-1000
+    - --purple-light-50
+    - --stroke-weak
+    - --teal-dark-200
+    - --text-brand
+assets:
+  - path: assets/font/yco-category-rail
+    usage: runtime
+review:
+  pilotApprover: { actor: pm, id: collab-space-owner, date: 2026-09-15 }
+  canonicalReview: { designer: pending, rd: pending }
+decisionBasis:
+  - "Extracted from RD source on 2026-09-15 for Cloud Storage's desktop sidebar, per the shared component workflow: no replacement UI was designed. This was the largest of the five extractions and the only one where RD's component is a page container rather than a presentational one — 632 lines reading next/router, two redux slices, sessionStorage and four hooks, and building its own items from CMS sections plus hard-coded routes."
+  - "The split (2026-09-15): the consumer resolves `items` and `activeKey` and owns every navigation side effect; this component owns the markup, styling, roving-tabindex keyboard model and the selected/hover/focus states. RD's item shape is kept verbatim as the prop contract — key, label, icon, iconName, isNew — so a consumer's existing item builder transfers unchanged. RD's own StartEditingButton and GalleryPickerModal are not absorbed: the first is a `leading` slot, the second is a consumer concern with its own modal."
+  - "portability is `reference`. Beyond the container dependencies above, RD resolves copy through `getTranslationFunction()` and its labels arrive already translated here, so RD keeps its own implementation."
+  - "Two RD behaviours are generalised rather than hard-coded, because a shared component must not carry one consumer's taxonomy. RD draws a divider by testing `it.key === 'video-template'` and again before its API group; that becomes a `dividerBefore` flag per item. RD applies its gradient treatment by testing `data-key=\"contest\"`; that becomes a `gradient` flag. The CSS rules themselves are unchanged — only what selects them."
+  - "Icon font (2026-09-15): RD scopes its icomoon classes under a global `.homeCategory` class from src/styles/home-icon-styles.css, which the page loads. A shared component cannot assume a global stylesheet, so the face is declared in this module — the same approach result-page-shell already takes for its own face. The `.icon-ic-*` classes stay `:global` because they are applied by name from the item data and so cannot be module-hashed. The 32 codepoint mappings live in RD's stylesheet, which is listed under sourcePaths."
+  - "Font collection duplication, flagged for consolidation (2026-09-15). The face is served from assets/font/yco-category-rail/icomoon.woff, which is byte-identical (sha256 746d8b88…) to assets/font/yco-home-rd/icomoon.woff. The duplicate exists because of a real constraint collision, not preference: library.mjs permits only .woff/.woff2 in a font collection and component-contracts.mjs escalates that warning to a contract error, so any component declaring yco-home-rd fails while that collection also holds the .ttf and .svg that RD ships. Those two are live — app/src/surfaces/rd-port/home-icon-styles.css references them — so removing them would break the RD reference preview, and relaxing the validator is a platform rule change. A woff-only sibling collection was the only option that touched neither. Consolidate when the rd-port preview no longer needs the legacy formats, or when the font-collection rule is revisited."
+  - "Inline-JS colour repair (2026-09-15). RD's ExternalLink takes its colour as a JS prop default — `color = '#11181A'`, `fillOpacity = '.65'` — which is a literal the SCSS raw-colour policy never inspects. This is the class of gap the surface handoff flagged when it noted a passing token validator does not prove full coverage. The fill is `currentColor` here, so the glyph follows the row's own colour, including the brand colour a selected or focused row takes; RD's hex is a fixed near-black that does not. The 0.65 opacity is kept."
+  - "Colour mapping (2026-09-15) follows app/src/surfaces/rd-port/token-colour-mapping.json. Exact: `#fff` -> `--fill-white`; `#333` -> `--grey-neutral-solid-800`; `rgb(0 0 0 / 2%)` -> `--grey-neutral-light-25`; `rgb(0 0 0 / 4%)` -> `--grey-neutral-light-50`; `rgb(3 173 226 / 5%)` -> `--brand-light-50`; `rgb(126 192 229 / 20%)` -> `--teal-dark-200`; `rgb(17 24 26 / 10%)` -> `--stroke-weak`; and NewLabel's `#f23b77` -> `--fill-badge`."
+  - "Colour mapping, the approximations (2026-09-15), all in the gradient row and all carried from the canonical record rather than re-decided: `#6570fa` and `#a153fb` both collapse to `--purple-light-1000` (#7e47cc), so a three-stop indigo-to-violet ramp becomes a two-stop one; `#21cdff` -> `--blue-light-1000` (#03ade2); and the matching background stops `rgb(101 112 250 / 10%)` and `rgb(161 83 251 / 10%)` both collapse to `--purple-light-50`, with `rgb(123 225 255 / 10%)` -> `--blue-dark-50`. The gradient is visibly different from production and stays pending Designer definition. No consumer in this repository uses the gradient flag yet; it exists so the rail does not silently drop a treatment RD ships."
+  - "Layout ownership (2026-09-15): RD pins the rail with `position: fixed` against a 64px header offset and switches on `data-is-header-portal` for its mobile menu. Fixed positioning is the host page's decision, so the rail is static here and the consumer places it; the independent scroll container is kept because the list must scroll separately from the page. The `<=992px` icon-over-label treatment is both a media query and a `compact` prop, so a consumer can hold it in step with gallery-grid's measured layout instead of letting the two disagree inside a fixed-width preview."
+  - "Keyboard model is RD's, with one addition: RD moves the roving tabindex on arrow keys but never moves focus, so the caret is left behind. Focus follows the index here, but only while focus is already inside the rail, so an external selection change never steals it."

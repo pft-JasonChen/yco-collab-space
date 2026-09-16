@@ -1,0 +1,32 @@
+$width-sm: 640px;
+$width-md: 768px;
+$width-769: 769px;
+$width-992: 992px;
+$width-lg: 1024px;
+$width-1200: 1200px;
+$width-1199: 1199px;
+$width-xl: 1280px;
+$width-hd: 1366px;
+$width-2xl: 1536px;
+$width-1920: 1920px;
+$width-iphone-se: 375px;
+$width-iphone-13: 390px;
+$width-iphone-xr: 414px;
+$width-iphone-14promax: 430px;
+$width-iphone-16promax: 440px;
+$result-dt-download-share-breakpoint: 1180px;
+$min-height-for-150-dpi: 650px;
+$width-1250: 1250px;
+$width-1400: 1400px;
+
+:export {
+  width-sm: $width-sm;
+  width-md: $width-md;
+  width-lg: $width-lg;
+  width-xl: $width-xl;
+  width-hd: $width-hd;
+  width-2xl: $width-2xl;
+  /* stylelint-disable-next-line property-no-unknown */
+  width-1400: $width-1400;
+}
+

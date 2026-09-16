@@ -56,6 +56,9 @@ export function bindingErrors(binding, manifest, slots, components) {
         "video-results",
         "history-list",
         "detail-modal",
+        "authenticated-home",
+        "gallery",
+        "pricing-overlay",
       ].includes(binding.preview.recipe)
     )
       errors.push("Unknown preview recipe");
@@ -91,6 +94,9 @@ export function bindingErrors(binding, manifest, slots, components) {
       "video-results": ["Results", "History"],
       "history-list": ["History"],
       "detail-modal": ["Dialog"],
+      "authenticated-home": [],
+      gallery: [],
+      "pricing-overlay": [],
     };
     for (const key of required[binding.preview.recipe] ?? [])
       if (!binding.preview.components?.[key])

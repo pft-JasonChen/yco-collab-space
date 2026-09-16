@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "pack": "marketing/home-authenticated",
+  "version": "2026-09",
+  "sourceCatalog": "rd-vendored-baseline",
+  "evidenceStatus": "vendored-source-verified",
+  "capturedAt": "2026-09-14",
+  "figma": null,
+  "routes": ["/home"],
+  "rdSources": [
+    "src/pages/home.js",
+    "src/components/home/login-home-page/index.js",
+    "src/components/strapi/components/gridmodulesection/layouts/layout1300.js",
+    "src/components/strapi/components/gridmodulesection/components/homeCategory/index.js",
+    "src/components/strapi/components/gridmodulesection/components/cardsV2/index.js"
+  ],
+  "removedDependencies": ["cms", "redux", "authentication", "analytics", "file-upload", "routing-services"],
+  "decisionBasis": [
+    "The page and grid composition are authoritative RD references; content is synthetic because Collab Space never connects to CMS or account services."
+  ]
+}

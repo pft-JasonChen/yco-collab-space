@@ -1,0 +1,24 @@
+@import "./variables.scss";
+
+.newLabel {
+  width: 35px;
+  height: 15px;
+  color: var(--fill-white);
+  background-color: var(--fill-badge);
+  font-size: 10.13px;
+  line-height: 15px;
+  font-weight: 700;
+  letter-spacing: 0.506px;
+  margin: 0 0 0 8px;
+  padding: 2px 6px;
+  border-radius: 12px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.newLabelImg {
+  margin: 0 0 0 4px;
+  height: 15px;
+}

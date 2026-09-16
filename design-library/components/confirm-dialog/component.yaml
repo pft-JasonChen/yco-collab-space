@@ -1,0 +1,83 @@
+schemaVersion: 1
+id: confirm-dialog
+displayName: Confirm Dialog
+classification: composite
+status: pilot-approved
+rd:
+  sourcePackage: youcam-enhance-frontend
+  sourceVersion: 1.34.1
+  snapshot: yce-frontend-gm-260909
+  portability: reference
+  sourcePaths:
+    - src/components/common/modal/index.js
+    - src/components/common/modal/index.module.scss
+    - src/components/portal/index.js
+    - src/components/my-gallery-page/tabs/gallery/components/delete-confirm-modal/index.js
+    - src/components/my-gallery-page/tabs/gallery/components/delete-confirm-modal/index.module.scss
+    - src/components/common/message-dialog/buttons/confirm-cancellation-button/index.module.scss
+  sourceHashes:
+    - { path: src/components/common/modal/index.js, sha256: 57750d3170a0da5aa89349a909083438462d161484fb9750de5ce25f85860cd1 }
+    - { path: src/components/common/modal/index.module.scss, sha256: 905742acb0bccca4f4b75a55362f4a854990d72b983296877d940b07142b6ab8 }
+    - { path: src/components/portal/index.js, sha256: aaaf3b0f8ae3ffbac34371cf795418456b4054e40dfb0d536fffd771196b63ec }
+    - { path: src/components/my-gallery-page/tabs/gallery/components/delete-confirm-modal/index.js, sha256: 52309500613a74c14bfed09bcc01ffd04d135c75a90339dea870b53e7e329b0d }
+    - { path: src/components/my-gallery-page/tabs/gallery/components/delete-confirm-modal/index.module.scss, sha256: 22ac0a8a6d4603c73b9d8709a75f9ed9f2e97ed74a989e965ffec23aead7afaf }
+    - { path: src/components/common/message-dialog/buttons/confirm-cancellation-button/index.module.scss, sha256: d2fff80d63701d473a3c52c3767536531623b3353ccd21c25613b166741935e5 }
+figma: { status: pending, fileKey: null, componentSetNodeId: null, variants: [] }
+implementation:
+  importPath: platform/ui/confirm-dialog/index.js
+  storyId: ui-confirm-dialog
+  framework: react
+  dependencies: [react, button]
+  removedDependencies: [i18n, uuid, prop-types, host-portal-root, message-dialog-button-branches, button-wrapper]
+  localFiles:
+    - path: platform/ui/confirm-dialog/ConfirmDialog.jsx
+      sha256: d61ab276a264aadbec836e264c87fbd88ae13650013d3bf39d6d0a9a3b59ec32
+    - path: platform/ui/confirm-dialog/Modal.jsx
+      sha256: 69dbfeeb289b4222b603b1e46a73a6d55ccd7bcce5df0193034f538e7892be81
+    - path: platform/ui/confirm-dialog/ConfirmDialog.module.scss
+      sha256: eaeb9e24b5c35bb6b92f815528b4676439e22245d4d4e3f3874438ab010b1284
+    - path: platform/ui/confirm-dialog/ConfirmDialog.stories.jsx
+      sha256: c31f3b572ee07a56564b2f0d169a2760ea0e48058ae63d295a075cddab0d1437
+    - path: platform/ui/confirm-dialog/index.js
+      sha256: 8cfefe413cc4fafea494db82128965863530d1046b47b0292006297f84cf6d95
+  localFilesUpdated: 2026-09-15
+publicApi:
+  props:
+    - { name: opened, required: true }
+    - { name: title, required: true }
+    - { name: description, required: true }
+    - { name: onConfirm, required: true }
+    - { name: onCancel, required: true }
+    - { name: confirmLabel, required: false }
+    - { name: cancelLabel, required: false }
+    - { name: tone, required: false, values: [brand, destructive] }
+    - { name: closeLabel, required: false }
+    - { name: testId, required: false }
+  states: [closed, open, scale-transition, focus-trapped, destructive, brand]
+tokens:
+  lockPath: platform/tokens/tokens.lock.json
+  uses:
+    - --corner-radius-16
+    - --fill-overlay-weak
+    - --fill-white
+    - --font-weight-weak
+    - --grey-neutral-solid-800
+    - --grey-slate-solid-850
+assets:
+  - path: assets/icon/yco-home-gallery
+    usage: runtime
+review:
+  pilotApprover: { actor: pm, id: collab-space-owner, date: 2026-09-15 }
+  canonicalReview: { designer: pending, rd: pending }
+decisionBasis:
+  - "Extracted from RD source on 2026-09-15 for Cloud Storage's move-to-trash confirmation, per the shared component workflow: no replacement UI was designed. Three RD files compose it — common/modal for the overlay, components/portal for the mount, and the gallery's own delete-confirm-modal for the dialog body — and they are promoted together because the dialog is meaningless without the overlay's focus handling."
+  - "portability is `reference`. RD's dialog hard-codes delete-history copy through `getTranslationFunction()` and routes its buttons through common/message-dialog's ConfirmCancellationButton, which branches over four dialog types and depends on RD's ButtonWrapper plus its hover/touch class maps. Here the copy is props and the button pair is the catalogued `button` component, so adding a second confirmation does not mean adding a fifth branch to a shared file. RD keeps its own implementation."
+  - "Portal root (2026-09-15): RD's Portal looks up a pre-existing `#portal-root` element and renders nothing when it is absent, because RD's own document template provides one. A shared component cannot assume the host page does, so the container is created on first use and removed again only if it is still empty. Same mount point, no host requirement."
+  - "RD's overlay behaviour is carried unchanged because each piece exists for a reason its own comments record: the double requestAnimationFrame that lets a lazily-mounted dialog play its enter transition at all; the 400ms delayed unmount so the exit transition finishes; the collapse-and-park `.closed` rule rather than unmounting; and the scale transition. A `prefers-reduced-motion` block is added, which RD has no equivalent for."
+  - "Escape now closes the dialog (2026-09-15). RD's modal handles the Tab trap itself but leaves Escape to each caller's optional `onKeyDown`, and the gallery's delete dialog passes none — so in production that dialog cannot be dismissed from the keyboard. Since this component owns its own cancel affordance, Escape is wired to it here. This is a behavioural addition, not a port."
+  - "The accessible-name gate is RD's: `role='dialog'`, `aria-modal`, focus-on-open, focus-restore-on-close and the Tab trap all switch on only when `ariaLabel` or `ariaLabelledBy` is supplied. This component always supplies `aria-labelledby` pointing at its own title, so every ConfirmDialog is a real dialog — unlike the pricing overlay the surface acceptance flagged for having no dialog role."
+  - "Colour mapping (2026-09-15) follows app/src/surfaces/rd-port/token-colour-mapping.json. Exact: `#fff` -> `--fill-white`. Three approximations, carried from that record rather than re-decided: the backdrop `rgb(0 0 0 / 50%)` -> `--fill-overlay-weak` (#00000073), which is 45% rather than 50% so the page behind reads very slightly lighter; the modal's text colour `#212529` -> `--grey-slate-solid-850` (#1d2426); and the cancel link `#575757` -> `--grey-neutral-solid-800` (#333), a noticeably darker grey. All three stay pending Designer definition."
+  - "Typography is kept as RD's literals rather than forced onto tokens: 30px title, 16px/22px body, 14px cancel and the 120px pill radius have no matching token, and the raw-colour policy does not cover non-colour values. RD's `font-weight: 500` on the title and body maps to `--font-weight-weak` (400), the same medium-to-regular shift recorded on selection-toolbar."
+  - "Layout follows RD's stacked treatment rather than a conventional two-button footer: the confirm is a full-width pill and the cancel is plain text beneath it. On a destructive confirmation that asymmetry is deliberate, so the safe choice is not presented as a competing button."
+  - "A `testId` hook was added 2026-09-16 and forwarded onto the dialog node. Cloud Storage raises two confirmations from the same page — move to trash, and delete permanently from trash — and a consumer needs to tell them apart without reaching for the copy inside them."
+

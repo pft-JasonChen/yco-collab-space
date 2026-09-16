@@ -1,0 +1,109 @@
+schemaVersion: 1
+id: dropdown-select
+displayName: Dropdown Select
+classification: composite
+status: pilot-approved
+rd:
+  sourcePackage: youcam-enhance-frontend
+  sourceVersion: 1.34.1
+  snapshot: yce-frontend-gm-260909
+  portability: reference
+  sourcePaths:
+    - src/components/common/selection-control/dropdown-select/index.js
+    - src/components/common/selection-control/dropdown-select/index.module.scss
+    - src/components/common/selection-control/dropdown-select/components/DropdownButton.js
+    - src/components/common/selection-control/dropdown-select/components/DropdownButton.module.scss
+    - src/components/common/selection-control/dropdown-select/components/DropdownItem.js
+    - src/components/common/selection-control/dropdown-select/components/DropdownItem.module.scss
+    - src/components/common/selection-control/dropdown-select/hooks/use-click-outside.js
+  sourceHashes:
+    - { path: src/components/common/selection-control/dropdown-select/index.js, sha256: 0d4473f545eea6615d432a89ceed39087b8107522e2d0dccb09d6b2c11fc80de }
+    - { path: src/components/common/selection-control/dropdown-select/index.module.scss, sha256: df489d9db0028911824758202aac26de3a12247ff2701774db48772ec1811e54 }
+    - { path: src/components/common/selection-control/dropdown-select/components/DropdownButton.js, sha256: 1e08b16e97b3f6764a8a6a32da5957f06e87b2cae6eca0a669ec2529bd222eea }
+    - { path: src/components/common/selection-control/dropdown-select/components/DropdownButton.module.scss, sha256: d79f920e7656ab08b316332e79a58d7323aac216e0dcd780a6833fc89e366d89 }
+    - { path: src/components/common/selection-control/dropdown-select/components/DropdownItem.js, sha256: bb85793dd768e4613ae3e7d40c62dc7e56bca01d4ff3de407dbb44750465b8e8 }
+    - { path: src/components/common/selection-control/dropdown-select/components/DropdownItem.module.scss, sha256: 711fdef92211a09bbb7eed83cda4c40581abb5677266056868fac72e792d2bf1 }
+    - { path: src/components/common/selection-control/dropdown-select/hooks/use-click-outside.js, sha256: cbec0347d05e93b86b61433e41db2e2a0bb8fabbc1f32893ee0a16754fd79b12 }
+figma: { status: pending, fileKey: null, componentSetNodeId: null, variants: [] }
+implementation:
+  importPath: platform/ui/dropdown-select/index.js
+  storyId: ui-dropdownselect
+  framework: react
+  dependencies: [react]
+  removedDependencies: [lodash, model-icon, item-discount-enrichment, use-dropdown-select, selection-control-types, currency-assets, global-shimmer-skeleton]
+  localFiles:
+    - path: platform/ui/dropdown-select/DropdownSelect.jsx
+      sha256: 9f89bb30010817fe7dcc8b27e331712f9bf27ca21f0270a63b9332747b862a13
+    - path: platform/ui/dropdown-select/DropdownSelect.module.scss
+      sha256: 1fcb91f2e7aabe89844b4e63d70be457b2db50678a5baae4fbfc376114ab5d83
+    - path: platform/ui/dropdown-select/DropdownSelect.stories.jsx
+      sha256: 34877c93ff426ca2163db54710acedba6e8a6caec1471cf228f4ed863b4035d2
+    - path: platform/ui/dropdown-select/useClickOutside.js
+      sha256: 80531a78e65f742466f8723316bd9100fa535b30261d7706e05402d081db4ec8
+    - path: platform/ui/dropdown-select/index.js
+      sha256: 84d364a7575661a9f11872ea5ab2887b84cc5647eb2b2ec0bddb775758549c50
+  localFilesUpdated: 2026-09-15
+publicApi:
+  props:
+    - { name: items, required: true }
+    - { name: selectedKey, required: false }
+    - { name: selectedKeys, required: false }
+    - { name: onSelect, required: false }
+    - { name: mode, required: false }
+    - { name: label, required: false }
+    - { name: trigger, required: false }
+    - { name: ariaLabel, required: false }
+    - { name: align, required: false }
+    - { name: menuFixed, required: false }
+    - { name: variant, required: false }
+    - { name: onOpenChange, required: false }
+    - { name: className, required: false }
+    - { name: testId, required: false }
+    - { name: menuTestId, required: false }
+  states: [closed, open, selected, multi-group, keyboard-active, hover, focus-visible, disabled-option, destructive-option, grouped, menu-mode, plain, primary]
+tokens:
+  lockPath: platform/tokens/tokens.lock.json
+  uses:
+    - --fill-brand-strong
+    - --fill-brand-weak
+    - --fill-hover
+    - --fill-inverse-strong
+    - --fill-strong
+    - --fill-white
+    - --font-size-micro
+    - --font-weight-strong
+    - --grey-slate-solid-850
+    - --line-height-micro
+    - --spacing-4
+    - --spacing-8
+    - --spacing-24
+    - --stroke-focus
+    - --stroke-weak
+    - --text-brand
+    - --text-error
+    - --text-weak
+    - --text-weaker
+assets: []
+review:
+  pilotApprover: { actor: pm, id: collab-space-owner, date: 2026-09-15 }
+  canonicalReview: { designer: pending, rd: pending }
+decisionBasis:
+  - "Extracted from RD source on 2026-09-15 because the Cloud Storage toolbar rebuild needs five menus — media filter, tool-family filter, sort field, the New+ create menu and the per-item overflow menu — and the shared component workflow says to extract rather than design a replacement. RD already owns a dropdown with the part that is hard to get right, so nothing here is newly designed interaction."
+  - "What is carried verbatim: the combobox/listbox semantics (the trigger keeps DOM focus and points at the highlighted row through aria-activedescendant, so opening never moves focus and closing needs no restore), RD's key handling (ArrowUp/Down clamped at the ends, Enter/Space selecting the highlighted row or opening, Escape closing, Tab closing), the open-highlights-current-selection effect, close-on-outside-click registered in the capture phase, and the position:fixed flip that measures the trigger's own rect before paint. RD's comments explain why each exists and those reasons still hold."
+  - "portability is `reference`, and the gap is the display layer. RD ships one component with four hard-coded row designs selected by `uiType` — default, currency, AI model, enhance mode — plus `useItemDiscountEnrichment`, which reads a pricing SKU model to stamp a discount badge on rows, a ModelIcon that loads avatars from RD's asset paths, and an MSR tag. A shared component cannot carry one caller's row design, let alone a pricing engine, so the variant switch and all three are dropped and a row is described by data: label, optional description, and the grouping flags. RD keeps its own implementation."
+  - "One behavioural addition, and it is additive rather than a change: RD's menus are all value pickers, so it has no action-menu equivalent — but the New+ menu and the item overflow menu are actions, not values. `mode=\"menu\"` switches the roles to menu/menuitem, drops the current-value tick, and starts the keyboard highlight at the first row instead of the selection. `mode=\"select\"` is the default and behaves exactly as RD's default variant does."
+  - "Three additions the grouping needs, none of which changes RD's own rows: `dividerBefore` and `groupLabel` per item (RD's enhance-mode variant draws a hairline between every row from CSS; a grouped action menu needs the separator to be data, the same generalisation category-rail made for its own dividers), and `destructive`, so the final move-to-trash row can read as destructive without a caller reaching into the component's classes."
+  - "Service substitutions (2026-09-15): lodash `_get`/`_isObject`/`_isEmpty` become plain property access and an array check; RD's index-based selection (`dropDownSelectIndex` plus a setter, so the caller holds a number that breaks when the list reorders) becomes `selectedKey`/`onSelect(key)`; RD's empty-list skeleton depended on the global `shimmer-skeleton` class and is dropped, because a shared component should render nothing rather than assume a host stylesheet; and RD's caret is an image from a fixed asset path, replaced by an inline SVG using `currentColor` so it follows the trigger's own colour, including the brand colour an open trigger takes."
+  - "The trigger's prefix (`label`) is a separate span rather than concatenated text. RD has no prefix at all; concatenating one would bake a separator character into a shared component, and punctuation belongs to the locale."
+  - "Colour mapping (2026-09-15) follows app/src/surfaces/rd-port/token-colour-mapping.json. Exact: RD's `--fill-inverse-strong`, `--fill-brand-weak`, `--fill-brand-strong` and `--stroke-weak` are already tokens in the source and are unchanged; the menu's white ground maps to `--fill-white`."
+  - "Colour mapping, the approximations (2026-09-15), all carried from the canonical record rather than re-decided. The trigger border `#8c8c8c` -> `--text-weaker` (a translucent slate replacing an opaque mid grey, so the border now takes on the surface behind it); the menu border `#e7e7e7` -> `--stroke-weak` (same substitution, lighter); and the text colour `#212529` -> `--grey-slate-solid-850`, the same shift already recorded on confirm-dialog. One colour had no prior record: the row separator `#f0f0f0` in RD's DropdownItem, mapped here to `--stroke-weak` for the first time, which is translucent where RD is opaque. All four stay pending Designer definition."
+  - "The drop shadow on the open menu is RD's enhance-mode value, `0 8px 24px -4px rgb(0 0 0 / 16%)`, expressed as `color-mix(in srgb, var(--fill-strong) 16%, transparent)` — the convention video-trim-modal and credit-controls already use, because the token set carries no shadow token and the raw-colour policy rejects the literal. The negative spread is dropped; the tokenised spacing steps do not carry one."
+  - "Geometry is RD's default variant verbatim and stays as literals: 30px trigger height, 90px minimum width, 6px radii, 11.5px side padding, the 2.5px trigger-to-menu offset, 8px vertical menu padding, the 8/10/15px row padding, and the 200px scroll cap. None has a matching token and the raw-colour policy does not cover non-colour values."
+  - "Not ported, and deliberately so: the currency trigger and its asset, the AI-model trigger with avatar and discount badge, the enhance-mode two-line trigger, `showTag`, `dropdownPosition=\"up\"` (superseded by the measured flip), and the `variant` class zoo. A consumer that needs a two-line row passes `description`, which is what both stacked variants actually rendered."
+  - "Two consumer hooks rather than one (2026-09-15): `testId` on the trigger and `menuTestId` on the open menu, plus a generated `data-menu-position=\"last\"` on the final row. The position attribute is the component's own knowledge — a menu knows where its last row is — and it exists so a consumer can assert that a destructive entry really is last without counting rows itself."
+  - "Accessible-name repair carried in the port (2026-09-15). RD's trigger is a div with `role=\"combobox\"` and no label of its own, relying on its visible text. A combobox takes its name from the author, not from its contents, so that name never reaches assistive technology — axe reports it as a critical button-name failure, which is how it was found here. The trigger is a real button and takes `aria-label`, falling back to the `label` prop, so a consumer that supplies either gets a named control. RD keeps its own implementation and the defect with it."
+  - "Multi-group selection, added 2026-09-16. The Cloud Storage sort control is one menu holding two independent radio groups — the field and the order — which RD has no equivalent for: each of its menus picks a single value. `selectedKeys` ticks every key it contains while `onSelect` still reports one key, so the consumer decides which group that key belongs to. `selectedKey` is unchanged and remains the single-value path."
+  - "RD's other dropdown was considered and not used (2026-09-16). result-page/common/video-feature/filter-dropdown is a lighter unordered-list menu that already groups options under type headers with a divider, which is exactly the shape Cloud Storage's level-two filter needs. It was not extracted because it has no keyboard model, no listbox or combobox semantics, and closes on mousedown rather than in the capture phase; its one distinct idea, the group header, is already expressed here as `groupLabel` and `dividerBefore`. Both RD files stay in sourcePaths' sibling record only as this note."
+  - "Two accessibility defects found by axe and fixed rather than excepted (2026-09-16). A listbox may only own options and groups, so the divider element and the group label were reported as a critical aria-required-children failure; rows are now wrapped in runs, a labelled run is a real `group` carrying the label as its accessible name, and the divider is the wrapper's own border rather than an `hr`. Separately, the open trigger switched its text to `--text-brand`, which measures 2.59:1 on white — that was an addition of this port rather than anything RD does, so it is reverted and only the border marks the open state. The selected row and its tick keep the brand colour, which is the pairing DESIGN-016 already records for gallery-tabs, and the three stories carry the same named exception rather than disabling the rule globally."
+  - "The primary variant drops RD's 90px minimum trigger width (2026-09-16). That floor exists so a row of filter fields lines up; a create button is not a field and looked padded out beside the controls next to it."
+

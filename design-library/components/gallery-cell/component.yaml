@@ -1,0 +1,96 @@
+schemaVersion: 1
+id: gallery-cell
+displayName: Gallery Cell
+classification: composite
+status: pilot-approved
+rd:
+  sourcePackage: youcam-enhance-frontend
+  sourceVersion: 1.34.1
+  snapshot: yce-frontend-gm-260909
+  portability: reference
+  sourcePaths:
+    - src/components/my-gallery-page/components/gallery-cell/index.js
+    - src/components/my-gallery-page/components/gallery-cell/index.module.scss
+  sourceHashes:
+    - { path: src/components/my-gallery-page/components/gallery-cell/index.js, sha256: 27b87b7bdefc1e9d609ccf90f699f349207e4813b8502abff31003b924ce7cf9 }
+    - { path: src/components/my-gallery-page/components/gallery-cell/index.module.scss, sha256: 25b5b19a96fa2e85298b15cdc16364c28faa99461478fa5bd7deac1ec59a4cc7 }
+figma: { status: pending, fileKey: null, componentSetNodeId: null, variants: [] }
+implementation:
+  importPath: platform/ui/gallery-cell/index.js
+  storyId: ui-gallery-cell
+  framework: react
+  dependencies: [react]
+  removedDependencies: [lodash, uuid, image-lazy-load, browser-utils, video-utils, rd-asset-map, global-shimmer-class]
+  localFiles:
+    - path: platform/ui/gallery-cell/GalleryCell.jsx
+      sha256: 650e4ecd405d2bf33252bb09f421c1429e19cdf7834634eb51c5649305bfbc30
+    - path: platform/ui/gallery-cell/GalleryCell.module.scss
+      sha256: 6d3be08a4c953ce403e066c64811919787374ad730788e4192ec91dca918f4c2
+    - path: platform/ui/gallery-cell/GalleryCell.stories.jsx
+      sha256: a5981e44214604f152ae49d905492b173be4fbb03790fbec9a4cfb21c356c6ff
+    - path: platform/ui/gallery-cell/index.js
+      sha256: 560ad6bb832a5dcb35cdc5894297de17f072df60e6fa9e345647fe4f4456146b
+  localFilesUpdated: 2026-09-15
+publicApi:
+  props:
+    - { name: aspectRatio, required: true }
+    - { name: thumbnail, required: false }
+    - { name: alt, required: false }
+    - { name: isVideo, required: false }
+    - { name: videoSrc, required: false }
+    - { name: duration, required: false }
+    - { name: playIconSrc, required: false }
+    - { name: isEditing, required: false }
+    - { name: isSelected, required: false }
+    - { name: checkboxPosition, required: false }
+    - { name: checkboxOnHover, required: false }
+    - { name: onToggleSelect, required: false }
+    - { name: selectLabel, required: false }
+    - { name: onClick, required: false }
+    - { name: clickable, required: false }
+    - { name: actions, required: false }
+    - { name: badge, required: false }
+    - { name: loading, required: false }
+    - { name: compact, required: false }
+    - { name: domId, required: false }
+    - { name: className, required: false }
+  states: [default, loading, hover-play, editing, selected, compact, thumbnail-error]
+tokens:
+  lockPath: platform/tokens/tokens.lock.json
+  uses:
+    - --corner-radius-12
+    - --corner-radius-20
+    - --corner-radius-32
+    - --fill-brand-strong
+    - --fill-overlay-strong
+    - --fill-weak
+    - --fill-weaker
+    - --fill-white
+    - --font-size-micro
+    - --font-weight-strong
+    - --line-height-micro
+    - --spacing-4
+    - --stroke-focus
+    - --stroke-inverse-strong
+    - --stroke-weak
+    - --text-inverse-strong
+    - --text-weaker
+assets:
+  - path: assets/icon/yco-home-gallery
+    usage: runtime
+review:
+  pilotApprover: { actor: pm, id: collab-space-owner, date: 2026-09-15 }
+  canonicalReview: { designer: pending, rd: pending }
+decisionBasis:
+  - "Promoted from the RD port (2026-09-15) for Cloud Storage. RD's gallery-cell already carries every affordance the storage grid needs — cover image, hover playback, play icon, duration pill, selection checkbox, an actions slot and a badge slot — plus a loading shimmer that Cloud Storage extends into its upload states. Rebuilding it would have reproduced all of that by eye."
+  - "portability is `reference`, not `drop-in`. RD's file depends on five app-level services this component cannot carry — ImageLazyLoad, browserUtils.canHover, videoUtils.posterFrameSrc, an RD asset map, lodash/uuid for the DOM id — and on a global `shimmer-skeleton` class. Each is replaced below, so RD keeps its own implementation and treats this as the behaviour and visual reference rather than a file it can import back."
+  - "Service substitutions (2026-09-15): ImageLazyLoad becomes a plain `<img loading=\"lazy\">` with its own onLoad/onError, and the skeleton it used to own is now an overlay layer inside this component, so a dead thumbnail drops the shimmer instead of shimmering forever — the behaviour RD's own onError note (YCO260626P0008) describes. browserUtils.canHover becomes `window.matchMedia('(hover: hover)')`, still read after mount so a server render emits no autoplay video (RD's ebug:YCO260615P0021). posterFrameSrc is dropped: the posterless-video branch points `<video preload=\"metadata\">` at the clip itself, which renders its own first frame without RD's URL transform. The RD DOM id built from lodash `_get(item,'id')`/timestamp plus a uuid fallback becomes an optional `domId` prop, because a shared component should not invent identity for its consumer's data."
+  - "Colour mapping (2026-09-15, reconciled against the canonical record). RD's stylesheet uses literal colour values, which platform/ui's raw-colour policy rejects, so every one is mapped to a token. The authority is app/src/surfaces/rd-port/token-colour-mapping.json, which classifies all ten occurrences in this file as exact: `rgb(17 24 26 / 10%)` -> `--stroke-weak` (#11181a1a); `rgb(17 24 26 / 4%)` -> `--fill-hover` (#11181a0a); `rgb(0 0 0 / 80%)` -> `--fill-overlay-strong` (#000c); `#fff` -> `--fill-white` (#fff); `rgb(255 255 255 / 60%)` -> `--grey-neutral-dark-500` (#fff9); `rgb(17 24 26 / 45%)` -> `--text-weaker` (#11181a73); `#03ADE2` -> `--fill-brand-strong` (#03ade2). Radii 20/12/32 map to `--corner-radius-20`/`-12`/`-32`. Every colour in this component is therefore an exact value match, not an approximation."
+  - "Correction (2026-09-15): an earlier revision of this contract recorded two of those as approximate, claiming the unselected checkbox fill lost RD's slate tint and that no token resolved to solid white. Both were wrong — `--text-weaker` is #11181a73, the slate tint exactly, and `--fill-white` is #fff. The component used `--fill-overlay-weak` (#00000073, pure black) and `--fill-inverse-strong`; both are now corrected to the canonical tokens. The checkbox fill was a real colour defect, not just a documentation error."
+  - "Three deliberate token choices differ from the canonical record while resolving to the identical value, each because this is a shared component rather than a reference port: the media box background uses `--fill-weak` instead of `--fill-hover` (both #11181a0a) because the element has no hover semantics and a hover token on a static surface would misread at Designer review; the unselected checkbox border uses `--stroke-inverse-strong` instead of the primitive `--grey-neutral-dark-500` (both #fff9) because platform/ui should reference semantic aliases, not primitives; and the duration pill's text uses `--text-inverse-strong` instead of `--fill-white` (both #fff) because it is text. No rendered value changes."
+  - "Duration pill typography (2026-09-15): `font-size: 12px` maps exactly to `--font-size-micro` (0.75rem). Two do not map: RD's `line-height: 1.2` (14.4px at 12px) becomes `--line-height-micro` (1rem = 16px), and RD's `font-weight: 700` becomes `--font-weight-strong` (600) because the token set has no 700. The pill therefore sits ~1.6px taller and slightly lighter than production. Recorded here for Designer to confirm or correct rather than hidden behind a literal value the policy would reject anyway."
+  - "Narrow-layout behaviour is a `compact` prop, not a media query (2026-09-15). RD switches the 12px corner with `rwd-custom($width-md)` and keeps the actions always-visible below `$width-lg`, both against the viewport. gallery-grid already measures its own container to choose justified versus masonry, so a viewport media query here would disagree with it inside any fixed-width preview — the exact failure navigation-header hit and solved with container queries. The consumer passes `compact` alongside the grid's masonry layout. A `@media (hover: none)` rule still keeps the actions visible on real touch devices, which is a capability query rather than a width query and cannot drift from the grid."
+  - "The checkbox and the actions slot are mutually exclusive by construction: `isEditing` renders the checkbox and suppresses `actions`, so a cell can never show both. Carried over from RD unchanged."
+  - "Selection placement and reveal, added 2026-09-15 at PM request after the Cloud Storage layout review. RD renders the checkbox only in selection mode, pinned top-right, as a decorative span that the cell's own onClick toggles — so selecting always costs a mode switch first, and the box sits where the hover actions also want to be. Cloud Storage asked for the treatment the competitive set uses: the box appears on hover at the top-LEFT, and clicking it both selects the item and enters selection mode. All three are opt-in props — `checkboxPosition` defaults to RD's `top-right`, `checkboxOnHover` defaults to false, and without `onToggleSelect` the box stays RD's decorative span — so RD's own behaviour is the default and no existing caller changes. The new rules are keyed off data attributes on the cell root rather than new class names, so RD's stylesheet diff stays readable."
+  - "The opt-in box is a real `button` with `role=\"checkbox\"`, `aria-checked` and an accessible name from `selectLabel`, and it stops propagation so the cell's own onClick (open the item) and the checkbox (select it) do not both fire. The decorative span is kept for RD's path rather than replaced, so a caller that has not opted in gets exactly RD's DOM. Selected cells keep the box visible after the pointer leaves, which a pure `:hover` rule would not do."
+

@@ -1,0 +1,110 @@
+schemaVersion: 1
+id: pricing-overlay
+displayName: Pricing Overlay
+classification: composite
+status: pilot-approved
+rd:
+  sourcePackage: youcam-enhance-frontend
+  sourceVersion: 1.34.1
+  snapshot: yce-frontend-gm-260909
+  portability: reference
+  sourcePaths:
+    - src/components/common/pricing-modal/index.js
+    - src/components/common/pricing-modal/index.module.scss
+    - src/components/common/pricing-modal/components/plan-tabs.js
+    - src/components/common/pricing-modal/components/plan-tabs.module.scss
+    - src/components/common/pricing-modal/components/plan-list.js
+    - src/components/common/pricing-modal/components/plan-list.module.scss
+    - src/components/common/pricing-modal/components/feature-list.js
+    - src/components/common/pricing-modal/components/feature-list.module.scss
+    - src/components/common/pricing-modal/components/checkout-button.js
+    - src/components/common/pricing-modal/hooks/use-holiday-styles.js
+  sourceHashes:
+    - { path: src/components/common/pricing-modal/index.js, sha256: d7d8e8c6a25039f4a56cd0a8d17aa2852cbab2772ce39d87941cdf453c50a5c5 }
+    - { path: src/components/common/pricing-modal/index.module.scss, sha256: 9323b7c7099443a64c5d233794a617a84acaa5a09d5d4240081e40797c3e31ec }
+    - { path: src/components/common/pricing-modal/components/plan-tabs.js, sha256: 146d7c047dac2fa291272a1bacd9e5dcf4734b7872e2f1101feb952e625192f6 }
+    - { path: src/components/common/pricing-modal/components/plan-tabs.module.scss, sha256: 22c01ae028d65275323b099ad639145860174a00b95cf1888efdf6b916f7cbfc }
+    - { path: src/components/common/pricing-modal/components/plan-list.js, sha256: eaf6c6ea5713e04a7a4dae00c55a2ad1ebd91355127f874b60caed1816275070 }
+    - { path: src/components/common/pricing-modal/components/plan-list.module.scss, sha256: 2e155f08ba71b4dc66567610219da695ba0ccb7fc621194629866bfa6fb2daf5 }
+    - { path: src/components/common/pricing-modal/components/feature-list.js, sha256: b8483c11b2d4abe76b31a7e2043e8ddcddc069582311f54a4024f60ab4c10d2a }
+    - { path: src/components/common/pricing-modal/components/feature-list.module.scss, sha256: 050bf0d866e80e49415004d7f0ff64fbdcfd3038635c8e8291c1d36ebcf78a15 }
+    - { path: src/components/common/pricing-modal/components/checkout-button.js, sha256: afc6de906cfd2774db69c11f3896da6638c7bffa46e051d0e31987d9d2e80aed }
+    - { path: src/components/common/pricing-modal/hooks/use-holiday-styles.js, sha256: 629f903c34a9222512b4b7a3476a91e3941ede1c28cea8bb8bd966519d81dea2 }
+figma: { status: pending, fileKey: null, componentSetNodeId: null, variants: [] }
+implementation:
+  importPath: platform/ui/pricing-overlay/index.js
+  storyId: ui-pricing-overlay
+  framework: react
+  dependencies: [react, confirm-dialog, button]
+  removedDependencies: [redux, i18n, lodash, react-textfit, currency-selector, pricing-sku-model, holiday-theme-tables, countdown, plans-skeleton, stripe-checkout, debug-hooks, use-window-device, button-wrapper]
+  localFiles:
+    - path: platform/ui/pricing-overlay/PricingOverlay.jsx
+      sha256: ddefd65de329c3dfca8b3f55157ec4db29197a9ead8d59d85074b6694946f7d4
+    - path: platform/ui/pricing-overlay/PricingOverlay.module.scss
+      sha256: 6c2a1002f0da98f68aad6a0d6895fffc09886025e5dacb85b6425a1ca351eb26
+    - path: platform/ui/pricing-overlay/PricingOverlay.stories.jsx
+      sha256: 8d8831a0259c1c94d29d22fc48f0e517436bbf869484381cd14a8aac8b091ed7
+    - path: platform/ui/pricing-overlay/index.js
+      sha256: ddd954294dfe3984b340ca06580d03431af082d79be600637d5928baeca0c249
+  localFilesUpdated: 2026-09-15
+publicApi:
+  props:
+    - { name: opened, required: true }
+    - { name: title, required: true }
+    - { name: onClose, required: true }
+    - { name: plans, required: true }
+    - { name: tabs, required: false }
+    - { name: activeTabKey, required: false }
+    - { name: onTabChange, required: false }
+    - { name: selectedPlanKey, required: false }
+    - { name: onSelectPlan, required: false }
+    - { name: features, required: false }
+    - { name: summary, required: false }
+    - { name: onCheckout, required: false }
+    - { name: checkoutDisabled, required: false }
+    - { name: secondaryAction, required: false }
+    - { name: aside, required: false }
+    - { name: leadingAction, required: false }
+    - { name: labels, required: false }
+  states: [closed, open, tabbed, single-offer, plan-selected, discounted, checkout-disabled, stacked]
+tokens:
+  lockPath: platform/tokens/tokens.lock.json
+  uses:
+    - --amber-light-1000
+    - --background-alternate
+    - --blue-dark-1000
+    - --blue-dark-200
+    - --fill-badge
+    - --fill-brand-strong
+    - --fill-disabled
+    - --fill-hover
+    - --fill-white
+    - --font-size-heading-3
+    - --font-size-heading-4
+    - --font-size-micro
+    - --font-size-small
+    - --font-weight-strong
+    - --font-weight-weak
+    - --line-height-heading-4
+    - --line-height-micro
+    - --line-height-small
+    - --text-strong
+    - --text-weak
+    - --text-weaker
+    - --yellow-solid-1000
+assets:
+  - path: assets/icon/yco-home-gallery
+    usage: runtime
+review:
+  pilotApprover: { actor: pm, id: collab-space-owner, date: 2026-09-15 }
+  canonicalReview: { designer: pending, rd: pending }
+decisionBasis:
+  - "Extracted from RD source on 2026-09-15 for Cloud Storage's purchase flow, per the shared component workflow: no replacement UI was designed. RD's two-column composition is kept — benefits on the left, the offer switcher and plan cards on the right, checkout beneath — along with its single-offer pill, discount line-through and save badge."
+  - "portability is `reference`, and the gap is large. RD's modal reads redux, derives every displayed value from its pricing SKU model (currency lookup, cycle division, holiday promotion discount), and composes a currency service, a countdown, a loading skeleton and Stripe checkout. A prototype must not carry a commerce engine and must not call a payment provider, so this component takes already-resolved display strings — price, original price, save percent — and exposes checkout as a plain callback. RD keeps its own implementation."
+  - "Inline-JS colour audit (2026-09-15). This is the component the surface handoff's warning was really about: RD holds its three most visible colours not in SCSS but in a JS style table in hooks/use-holiday-styles.js, where the raw-colour scanner never sees them. `token-colour-mapping.json` does not record any of them, and a passing token validator therefore said nothing about this surface. The default-theme entries are mapped here for the first time: the active Plus tab's `radial-gradient(#44E3ED 0%, #03ADE2 49.02%)` becomes `--blue-dark-1000` to `--fill-brand-strong`; the active Pro tab's `linear-gradient(#FFB802, #FFA51C, #FF8800)` becomes `--yellow-solid-1000` to `--amber-light-1000`; the plan card's `border: 1px solid #03ade2` becomes `--fill-brand-strong`, exact; and the checkout fill `#03ade2` likewise. All four are now classes rather than inline objects, so the policy can see them from here on."
+  - "Two inline colours had no token and no prior record (2026-09-15). The selected plan card's `#eafbff` is an opaque pale cyan; the closest available is `--blue-dark-200` (#a3eaff33), which composites over white to roughly #edfbff — visually near but translucent where RD is opaque, so it will shift if the card is ever placed on a non-white ground. The Pro gradient's third stop `#FF8800` collapses onto `--amber-light-1000` (#ef9b00), the same token as its second stop, so a three-stop ramp becomes two-stop — the same collapse recorded on category-rail's gradient. Both pending Designer definition."
+  - "Colours the canonical record does cover are carried from it: `#fff` -> `--fill-white` (exact); `#03ade2` -> `--fill-brand-strong` (exact); `#44e3ed` -> `--blue-dark-1000` and `#ffb802` -> `--yellow-solid-1000`, `#ffa51c` -> `--amber-light-1000`, all three approximate."
+  - "Missing dialog role fixed, not carried (2026-09-15). The surface acceptance recorded that the IAP overlay opens without a dialog role, and warned its passing open/close test was not a keyboard or focus verdict. This component renders through the shared Modal from confirm-dialog with `ariaLabelledBy` always supplied, so it is a real `role='dialog'` with `aria-modal`, focus-on-open, focus-restore-on-close, a Tab trap and Escape-to-close. The dependency on confirm-dialog mirrors RD, whose pricing modal imports the same common/modal its delete dialog does."
+  - "Button consolidation (2026-09-15, PM requested): checkout now renders the Designer-approved shared Button as Primary/Brand/Medium. The pricing component keeps only its full-width layout class; Button owns padding, typography, states and color. The RD reference preview uses the same component, and its scoped global reset was lowered with `:where(button)` so component classes retain authority."
+  - "Not ported (2026-09-15): the four seasonal themes (halloween, blackfriday, christmas, endyear), the countdown, the plans skeleton, the currency selector, MorePlanLink and the Stripe path. The seasonal tables are dormant branches keyed off a holiday hook this prototype has no source for, and TOKEN-MIGRATION.md already notes its own counts include dormant branches. `secondaryAction` occupies MorePlanLink's position so a consumer can put its own entry there — Cloud Storage uses it for Expand storage only."
+  - "The tab row is a real `role='tablist'` of buttons with `aria-selected`, where RD uses click-handling divs — the same keyboard-reachability repair made on gallery-tabs. Plan cards are buttons with `aria-pressed` for the same reason."

@@ -1,0 +1,37 @@
+# Current implementation mapping, not the zone/slot contract.
+# Composition is declared once in component-slots.yaml.
+#
+# Updated 2026-09-15: pricing-overlay is extracted from RD common/pricing-modal
+# and catalogued, so every zone and all but one slot now name a component a
+# consumer can import from platform/ui. Before this round the whole file read
+# "surface-local RD reference preview", which was accurate then and is not now.
+# currency-selector stays unimplemented because the currency service was
+# deliberately not ported — a prototype resolves display strings instead.
+schemaVersion: 1
+pack: commerce/pricing-overlay
+version: 2026-09
+zones:
+  modal-backdrop:
+    component: confirm-dialog
+  entitlement-summary:
+    component: pricing-overlay
+  plan-selector:
+    component: pricing-overlay
+  purchase-action:
+    component: pricing-overlay
+slots:
+  close-action:
+    component: pricing-overlay
+  feature-list:
+    component: pricing-overlay
+  plan-tabs:
+    component: pricing-overlay
+  plan-list:
+    component: pricing-overlay
+  checkout-action:
+    component: pricing-overlay
+  currency-selector:
+    unimplemented: Currency service not ported; the component takes resolved display strings.
+preview:
+  recipe: pricing-overlay
+  components: {}

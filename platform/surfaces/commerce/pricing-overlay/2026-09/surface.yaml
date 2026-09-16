@@ -1,0 +1,26 @@
+schemaVersion: 1
+id: commerce/pricing-overlay
+version: 2026-09
+kind: module
+status: provisional
+shell: modal-overlay
+zones:
+  - id: modal-backdrop
+    required: true
+    description: Blocking overlay above the originating surface.
+  - id: entitlement-summary
+    required: true
+    description: Benefits and plan-context panel.
+  - id: plan-selector
+    required: true
+    description: Subscription and pay-as-you-go tabs with selectable plans.
+  - id: purchase-action
+    required: true
+    description: Inert prototype checkout action and currency control.
+responsivePriority:
+  - Preserve close and purchase actions at all viewport heights.
+  - Stack entitlement and plan panels on tablet.
+  - Allow modal content to scroll without scrolling the covered page.
+decisionBasis:
+  - The header pricing icon dispatches the shared common/pricing-modal, which is the subscription IAP owner in this RD snapshot.
+  - pack-product-modal is excluded because it is an Avatar and AI Headshot pack purchase flow, not the header subscription entry.

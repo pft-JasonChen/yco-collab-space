@@ -1,0 +1,318 @@
+@import "@/styles/variables.scss";
+
+.scrollContainer {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.container {
+  background: linear-gradient(#f1fdff, #fff);
+  padding: 62px 58px 45px;
+
+  @include rwd-custom($width-lg) {
+    padding: 25px 50px 27px;
+  }
+
+  @media (min-width: 1920px) {
+    padding: 62px 9.5% 45px;
+  }
+
+  @include rwd-custom($width-sm) {
+    padding: 25px 10px 27px;
+  }
+}
+
+.gridModuleTitle {
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 32px;
+  text-align: center;
+  margin: 80px 0 30px;
+
+  @include rwd-custom($width-lg) {
+    font-size: 26px;
+    line-height: 32px;
+    margin: 25px 0 20px;
+  }
+}
+
+.gridModuleContainer {
+  padding: 50px 0;
+
+  @include rwd-custom($width-lg) {
+    padding: 20px 0;
+  }
+
+  &[data-layoutver="1_25_0"] {
+    padding: 0;
+  }
+}
+
+.scroll {
+  scroll-margin-top: 140px;
+
+  @include rwd-custom($width-sm) {
+    scroll-margin-top: 130px;
+  }
+}
+
+.gridModule {
+  position: relative;
+  max-width: 1148px;
+  margin: 0 auto;
+}
+
+.swiperContainer {
+  position: relative;
+  width: 100%;
+}
+
+.swiper {
+  padding: 10px 0 !important;
+}
+
+.mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.5s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(3 173 226 / 80%);
+
+  @include rwd-custom($width-lg) {
+    display: none;
+  }
+}
+
+.cardContainer {
+  width: 100%;
+  height: 100%;
+  margin: 2px;
+}
+
+.maskButton {
+  width: 100%;
+  border-radius: 33px;
+  border: 2px solid #fff;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 21px;
+  background-color: transparent;
+  cursor: pointer;
+  margin: 0 26px;
+  padding: 9px 10px;
+  color: #fff !important;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  width: 44px;
+  height: 44px;
+  transform: translateY(-50%);
+  margin: 0 -5px;
+
+  @include rwd-custom($width-sm) {
+    display: none;
+  }
+}
+
+.leftArrow {
+  left: -50px;
+  display: none;
+}
+
+.rightArrow {
+  right: -50px;
+}
+
+.arrowImage {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.categoryName {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 32px;
+  margin: 0 0 12px;
+
+  @include rwd-custom($width-sm) {
+    font-size: 22px;
+    line-height: 26px;
+    margin: 1px 0;
+  }
+}
+
+.categoryContainer {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+
+  @include rwd-custom(1366px) {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  @include rwd-custom($width-xl) {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  @include rwd-custom($width-lg) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  @include rwd-custom($width-lg) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  @include rwd-custom($width-sm) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.outerContainer {
+  display: flex;
+  background-color: #fff;
+
+  &[data-layout-measured="false"] {
+    @include rwd-custom($width-992) {
+      .homeCategoryVisibility {
+        display: none;
+      }
+    }
+  }
+}
+
+.homeCategoryVisibility {
+  display: contents;
+}
+
+.rightContentContainer {
+  width: calc(100% - 316px);
+  margin-left: 316px;
+  background-color: #fff;
+  padding: 20px 40px 0 0;
+
+  @include rwd-custom($width-1200) {
+    width: calc(100% - 256px);
+    margin-left: 256px;
+    padding: 20px 24px 0 0;
+  }
+
+  @include rwd-custom($width-992) {
+    width: calc(100% - 128px);
+    margin-left: 128px;
+    padding: 20px 16px 0 0;
+  }
+
+  @include rwd-custom($width-md) {
+    width: 100%;
+    margin: 0;
+    padding: 20px 32px 0;
+  }
+
+  @include rwd-custom($width-iphone-xr) {
+    padding: 0 16px;
+  }
+
+  &[data-mobile-landscape="true"] {
+    margin: 0;
+    width: 100%;
+    padding: 0 32px 0 16px;
+  }
+}
+
+.rightCategoryName {
+  font-size: var(--font-size-heading-4);
+  font-weight: 600;
+  line-height: var(--line-height-heading-4);
+  margin: 32px 0 0;
+
+  @include rwd-custom($width-sm) {
+    margin: 14px 0 0;
+  }
+}
+
+.rightContentSwiper {
+  display: grid;
+  justify-content: start;
+  row-gap: 24px;
+  column-gap: 20px;
+
+  @media (min-width: 1920px) {
+    column-gap: 20px;
+    grid-template-columns: repeat(5, 290px);
+  }
+
+  @media (min-width: 1366px) and (max-width: 1919.98px) {
+    column-gap: 20px;
+    grid-template-columns: repeat(4, calc((100% - 3 * 20px) / 4));
+  }
+
+  @media (min-width: 1200px) and (max-width: 1365.98px) {
+    column-gap: 20px;
+    grid-template-columns: repeat(4, calc((100% - 3 * 20px) / 4));
+  }
+
+  @media (min-width: 992px) and (max-width: 1199.98px) {
+    column-gap: 20px;
+    grid-template-columns: repeat(3, calc((100% - 2 * 20px) / 3));
+  }
+
+  @media (min-width: 769px) and (max-width: 991.98px) {
+    column-gap: 20px;
+    grid-template-columns: repeat(3, calc((100% - 2 * 20px) / 3));
+  }
+
+  @media (max-width: 768.98px) {
+    column-gap: 10px;
+    grid-template-columns: repeat(2, calc((100% - 10px) / 2));
+  }
+}
+
+.rightCardContainer {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+
+  @media (min-width: 1920px) {
+    max-width: 290px;
+  }
+}
+
+// .rightContentSwiper {
+//   display: flex;
+//   flex-wrap: wrap;
+//   gap: 20px;
+
+//   @media (min-width: 1920px) {
+//     display: grid;
+//     grid-template-columns: repeat(5, minmax(0, 290px));
+//     column-gap: 20px;
+//     row-gap: 24px;
+//   }
+// }
+
+// .rightCardContainer {
+//   width: 100%;
+//   height: 100%;
+//   margin: 0;
+//   max-width: 290px;
+// }
+
+.recentMaxHeight {
+  max-height: 450px;
+  overflow: hidden;
+}
+
+.loginBannerRow {
+  inline-size: var(--effective-track-width, 100%);
+}

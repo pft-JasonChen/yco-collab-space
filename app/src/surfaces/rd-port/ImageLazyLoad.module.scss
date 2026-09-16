@@ -1,0 +1,47 @@
+.image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: block;
+}
+
+.fadeIn {
+  opacity: 1;
+  transition: opacity 500ms ease;
+}
+
+.fadeInWithoutTransition {
+  opacity: 1;
+}
+
+.fadeOut {
+  opacity: 0;
+  transition: opacity 500ms ease;
+}
+
+.fadeOutWithoutTransition {
+  opacity: 0;
+}
+
+.skeleton {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  opacity: 1;
+  transition: opacity 400ms ease;
+  pointer-events: none;
+}
+
+.skeletonHidden {
+  opacity: 0;
+}
+

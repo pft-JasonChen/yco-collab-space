@@ -1,0 +1,10 @@
+// Scoped RD globals.css button reset; avoids changing unrelated Surface packs.
+:where(.root) :where(button) {
+  font-family: inherit;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+.root a {
+  text-decoration: none;
+}

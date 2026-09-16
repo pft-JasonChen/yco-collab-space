@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "pack": "library/gallery",
+  "version": "2026-09",
+  "sourceCatalog": "rd-vendored-baseline",
+  "evidenceStatus": "vendored-source-verified",
+  "capturedAt": "2026-09-14",
+  "figma": null,
+  "routes": ["/account/gallery"],
+  "rdSources": [
+    "src/pages/account/gallery/index.js",
+    "src/components/my-gallery-page/index.js",
+    "src/components/my-gallery-page/components/tab/index.js",
+    "src/components/my-gallery-page/components/gallery-grid/index.js",
+    "src/components/my-gallery-page/components/gallery-cell/index.js"
+  ],
+  "removedDependencies": ["history-api", "task-polling", "redux", "next-router", "account-state", "downloads", "cms", "analytics"],
+  "decisionBasis": [
+    "The complete page-level structure is retained while user history is replaced by explicit synthetic populated and empty states."
+  ]
+}

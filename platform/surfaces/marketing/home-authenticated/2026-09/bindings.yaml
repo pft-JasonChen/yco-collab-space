@@ -1,0 +1,30 @@
+schemaVersion: 1
+pack: marketing/home-authenticated
+version: 2026-09
+zones:
+  global-header:
+    unimplemented: Surface-local RD reference preview; production header state is deliberately excluded.
+  category-navigation:
+    unimplemented: Surface-local RD reference preview; categories use synthetic data.
+  quick-categories:
+    unimplemented: Surface-local RD reference preview; categories use synthetic data.
+  recent-tools:
+    unimplemented: Surface-local RD reference preview; history is synthetic.
+  tool-catalog:
+    unimplemented: Surface-local RD reference preview; CMS is deliberately excluded.
+slots:
+  brand:
+    unimplemented: Surface-local RD reference preview.
+  gallery-entry:
+    unimplemented: Surface-local RD reference preview.
+  pricing-entry:
+    unimplemented: Surface-local RD reference preview.
+  account-summary:
+    unimplemented: Surface-local RD reference preview.
+  category-item:
+    unimplemented: Surface-local RD reference preview.
+  tool-card:
+    unimplemented: Surface-local RD reference preview.
+preview:
+  recipe: authenticated-home
+  components: {}

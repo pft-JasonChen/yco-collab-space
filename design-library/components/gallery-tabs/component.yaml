@@ -1,0 +1,74 @@
+schemaVersion: 1
+id: gallery-tabs
+displayName: Gallery Tabs
+classification: composite
+status: pilot-approved
+rd:
+  sourcePackage: youcam-enhance-frontend
+  sourceVersion: 1.34.1
+  snapshot: yce-frontend-gm-260909
+  portability: reference
+  sourcePaths:
+    - src/components/my-gallery-page/components/tab/index.js
+    - src/components/my-gallery-page/components/tab/index.module.scss
+    - src/components/common/drag-scroll-wrapper/index.js
+    - src/components/common/drag-scroll-wrapper/use-momentum-tracking.js
+  sourceHashes:
+    - { path: src/components/my-gallery-page/components/tab/index.js, sha256: 2e5f17788585604c206e938df4bcd04071f406b4a7cda6abf17bde15e5264d53 }
+    - { path: src/components/my-gallery-page/components/tab/index.module.scss, sha256: b1d56ff2384992f32e72b65e158dd9ec5dff1f0d03d43e496497f3336828a541 }
+    - { path: src/components/common/drag-scroll-wrapper/index.js, sha256: 3fac8cd782779a730a05f5781dfda9125ecfdc668ea90903316aacddfa36b295 }
+    - { path: src/components/common/drag-scroll-wrapper/use-momentum-tracking.js, sha256: 85f3868f9f88aa6d6163ec628cf6b9388f8367e7ebbc3e24d45b28f197970e61 }
+figma: { status: pending, fileKey: null, componentSetNodeId: null, variants: [] }
+implementation:
+  importPath: platform/ui/gallery-tabs/index.js
+  storyId: ui-gallery-tabs
+  framework: react
+  dependencies: [react]
+  removedDependencies: [i18n, lodash, browser-utils, global-hidden-scrollbar-class]
+  localFiles:
+    - path: platform/ui/gallery-tabs/GalleryTabs.jsx
+      sha256: c63d5d025a9d9a7cf97c937096be931314e36764cb1c56abcc969c813a9ae700
+    - path: platform/ui/gallery-tabs/GalleryTabs.module.scss
+      sha256: 90e53c25f93c960fa6914a74ab533c32d902dea4122ad0e0a855852406cc9c26
+    - path: platform/ui/gallery-tabs/GalleryTabs.stories.jsx
+      sha256: 02b8b9babe2fda0a1bb8abee7bdc1e7082a0eb1084a4b4041a4fb876ab8a795f
+    - path: platform/ui/gallery-tabs/DragScrollWrapper.jsx
+      sha256: a8052cbc2356f3479c7ebccd0c5c0e78056eb080ae3c5b499c1d306276e036b5
+    - path: platform/ui/gallery-tabs/useMomentumTracking.js
+      sha256: c8309f0602b0edd00f8e6887ae911031b200fc402e7589c4097ce3ac90d24f4c
+    - path: platform/ui/gallery-tabs/index.js
+      sha256: cd070b84ba2a920dac65ff4ba5233860722721019c43e06714f78c831bf2e2db
+  localFilesUpdated: 2026-09-15
+publicApi:
+  props:
+    - { name: tabs, required: true }
+    - { name: activeKey, required: true }
+    - { name: onTabChange, required: false }
+    - { name: ariaLabel, required: false }
+    - { name: className, required: false }
+  states: [default, active, red-dot, overflowing, dragging, touch]
+tokens:
+  lockPath: platform/tokens/tokens.lock.json
+  uses:
+    - --fill-badge
+    - --font-size-small
+    - --font-size-tiny
+    - --font-weight-strong
+    - --line-height-small
+    - --line-height-tiny
+    - --stroke-weak
+    - --text-brand
+    - --text-strong
+assets: []
+review:
+  pilotApprover: { actor: pm, id: collab-space-owner, date: 2026-09-15 }
+  canonicalReview: { designer: pending, rd: pending }
+decisionBasis:
+  - "Extracted from RD source on 2026-09-15 for Cloud Storage's level-one tab row, per the shared component workflow: no replacement UI was designed. RD splits this across two directories — my-gallery-page/components/tab for the tab itself and common/drag-scroll-wrapper for the strip's pointer-drag scrolling — and they are promoted together because a tab row without the drag behaviour is not the production interaction."
+  - "portability is `reference`. RD's tab calls `getTranslationFunction()` internally and receives a translation key; a shared component in this library never translates, so `label` is the resolved string and the consumer owns the key. RD's wrapper also depends on `browserUtils.isTouchDevice()` and a global `hidden-scrollbar` utility class, and its momentum hook imports `lodash/defaults`. All four are replaced, so RD keeps its own implementation."
+  - "Service substitutions (2026-09-15): `browserUtils.isTouchDevice()` becomes `matchMedia('(pointer: coarse)')` combined with `navigator.maxTouchPoints`, still read after mount so a server render never assumes a pointer device; the global `hidden-scrollbar` class becomes a local rule; `lodash/defaults` becomes an object spread with identical semantics."
+  - "Behavioural fix carried in the port (2026-09-15): RD's use-momentum-tracking keeps `momentum` and `momentumID` in module-level `let` bindings, so every mounted wrapper shares one velocity record and one animation frame. With RD's single gallery row that is invisible; a shared component can be mounted more than once, where the second instance would cancel the first's animation and inherit its velocity. Both now live in refs, one set per instance. The decay curve itself is unchanged: no coast after a 200ms pause, exponent `min((|dx|+|dy|)**0.5 / 3, 0.95)`, stop below 0.1."
+  - "The drag-versus-click guard moved into the component (2026-09-15). RD's gallery checks the wrapper's `moved` flag in its own onClick before switching tab, so a flick across the row does not also select. Leaving that to each consumer would mean every future gallery re-implements it or silently loses it, so the row owns the check and still exposes `moved` through the imperative handle for a consumer that needs it."
+  - "The tab element is a `<button>` rather than RD's `<div>` (2026-09-15). RD's div carries a click handler with no role, tabindex or keyboard handling, so the row is unreachable by keyboard. A real button restores that for free and renders identically once the browser defaults are reset. The active tab also carries `aria-current='page'`, matching how result-page-shell's tool menu marks its active item."
+  - "Colour mapping (2026-09-15), following app/src/surfaces/rd-port/token-colour-mapping.json: `rgb(9 22 26 / 95%)` -> `--text-strong` (#09161af2), recorded there as exact within 8-bit alpha rounding. One approximation: the red dot's `#e62d82` -> `--fill-badge` (#f23b77), a visibly different pink. That is the canonical record's own classification, carried here rather than re-decided, and it stays pending Designer definition."
+  - "RD's `.activeTab` colours the label with `--text-brand` but draws no underline; the sliding indicator is the gallery page's own element, not the tab's. This component keeps that split and adds only the hairline under the whole row, so a consumer that wants an animated indicator can still supply one."

@@ -1,0 +1,205 @@
+@import "@/styles/variables.scss";
+
+.pricingModal {
+  position: relative;
+}
+
+.container {
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  color: #212529;
+  overflow: hidden auto;
+
+  @include rwd-custom($width-sm) {
+    flex-direction: column;
+
+    &[data-mode="default"] {
+      justify-content: flex-start;
+      max-height: 70vh;
+    }
+  }
+}
+
+.featuresBlock {
+  position: relative;
+  flex: 1 1 50%;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 42px;
+
+  @include rwd-custom($width-1200) {
+    max-width: 46vw;
+  }
+
+  @include rwd-custom($width-sm) {
+    align-items: flex-start;
+    padding: 29px 20px;
+    max-width: unset;
+
+    &[data-mode="default"] {
+      align-items: unset;
+    }
+  }
+
+  @include rwd-custom($width-iphone-xr) {
+    padding: 29px 10px;
+    max-width: unset;
+  }
+
+  @include rwd-custom($width: $width-sm, $use-height: true, $height: 587px) {
+    padding: 10px 15px 8px;
+    max-width: unset;
+  }
+}
+
+.rightBlock {
+  flex: 1 1 50%;
+  padding: 48px 28px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 360px;
+
+  @include rwd-custom($width-sm) {
+    padding: 0 20px 18px;
+    min-width: auto;
+
+    &[data-mode="default"] {
+      padding: 0 20px;
+    }
+  }
+
+  @include rwd-custom($width: $width-sm, $use-height: true, $height: 587px) {
+    padding: 0 15px 18px;
+    min-width: auto;
+
+    &[data-mode="default"] {
+      padding: 0 15px;
+    }
+  }
+}
+
+.featuresContent {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+.featureBox {
+  @include rwd-custom($width-sm) {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--fill-brand-strong);
+
+    &[data-mode="default"] {
+      border-radius: unset;
+      overflow: unset;
+      border: unset;
+    }
+  }
+}
+
+.featureTitleContainer {
+  position: relative;
+}
+
+.topContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+
+  @include rwd-custom($width: $width-sm, $use-height: true, $height: 587px) {
+    margin-bottom: 8px;
+  }
+}
+
+.flexColumn {
+  @include rwd-custom($width-sm) {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+}
+
+.bottomContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+
+  @include rwd-custom($width: $width-sm, $use-height: true, $height: 587px) {
+    margin-bottom: 6px;
+  }
+}
+
+.buttonContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  @include rwd-custom($width-sm) {
+    // position: fixed;
+    // z-index: 3;
+
+    // left: 50%;
+    // transform: translateX(-50%);
+
+    background-color: #fff;
+
+    &[data-mode="default"] {
+      padding: 16px 20px;
+    }
+  }
+}
+
+.button {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 21.09px;
+  color: #fff;
+  border-radius: 100px;
+  padding: 14.5px 0;
+  cursor: pointer;
+
+  @include rwd-custom($width-sm) {
+    &[data-mode="default"] {
+      width: 100%;
+    }
+  }
+
+  @include rwd-custom($width: $width-sm, $use-height: true, $height: 587px) {
+    padding: 8.5px 0;
+  }
+
+  &:disabled {
+    background-color: #e0e0e0;
+    color: #fff;
+    cursor: not-allowed;
+  }
+}
+
+.close {
+  @extend %image-common-style;
+
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 12px;
+  right: 8px;
+  cursor: pointer;
+  z-index: 2;
+
+  @include rwd-custom($width-sm) {
+    top: 10px;
+    right: 15px;
+
+    &[data-mode="default"] {
+      color: #fff;
+      z-index: 3;
+    }
+  }
+}

@@ -1,0 +1,516 @@
+{
+  "schemaVersion": 1,
+  "feature": "cloud-storage",
+  "locale": "en",
+  "note": "RD global flat dot-notation keys. origin rd-existing means the key already exists in RD src/i18n/json/*.json with this exact value and must not be re-declared; origin new means RD must add it. Shape matches RD's own i18n JSON so the new subset merges directly.",
+  "keys": {
+    "cloud.storage.page.title": {
+      "value": "My Gallery",
+      "origin": "new"
+    },
+    "cloud.storage.tab.projects": {
+      "value": "Projects",
+      "origin": "new"
+    },
+    "cloud.storage.tab.images": {
+      "value": "Images",
+      "origin": "new"
+    },
+    "cloud.storage.tab.videos": {
+      "value": "Videos",
+      "origin": "new"
+    },
+    "cloud.storage.tab.uploads": {
+      "value": "Uploads",
+      "origin": "new"
+    },
+    "cloud.storage.tab.trash": {
+      "value": "Trash",
+      "origin": "new"
+    },
+    "cloud.storage.section.folders": {
+      "value": "Folders",
+      "origin": "new"
+    },
+    "cloud.storage.sort.label": {
+      "value": "Sort",
+      "origin": "new"
+    },
+    "cloud.storage.meter.usage": {
+      "value": "{{used}} of {{quota}} used",
+      "origin": "new"
+    },
+    "cloud.storage.meter.remaining": {
+      "value": "{{remaining}} left",
+      "origin": "new"
+    },
+    "cloud.storage.action.upgrade": {
+      "value": "Upgrade",
+      "origin": "new"
+    },
+    "cloud.storage.action.upgrade.pro": {
+      "value": "Upgrade to Pro",
+      "origin": "new"
+    },
+    "cloud.storage.action.expand": {
+      "value": "Add storage",
+      "origin": "new"
+    },
+    "cloud.storage.action.download": {
+      "value": "Download",
+      "origin": "new"
+    },
+    "cloud.storage.action.trash": {
+      "value": "Move to Trash",
+      "origin": "new"
+    },
+    "cloud.storage.action.restore": {
+      "value": "Restore",
+      "origin": "new"
+    },
+    "cloud.storage.action.delete.forever": {
+      "value": "Delete forever",
+      "origin": "new"
+    },
+    "cloud.storage.action.empty.trash": {
+      "value": "Empty Trash",
+      "origin": "new"
+    },
+    "cloud.storage.action.more": {
+      "value": "More actions",
+      "origin": "new"
+    },
+    "cloud.storage.trash.policy": {
+      "value": "Items are kept for {{days}} days, then deleted permanently. Items in Trash still use your storage.",
+      "origin": "new"
+    },
+    "cloud.storage.trash.countdown": {
+      "value": "{{days}} days left",
+      "origin": "new"
+    },
+    "cloud.storage.trash.countdown.last": {
+      "value": "Last day",
+      "origin": "new"
+    },
+    "cloud.storage.trash.sort": {
+      "value": "Sorted by date moved",
+      "origin": "new"
+    },
+    "cloud.storage.empty.projects": {
+      "value": "No projects yet. Start one and it will be saved here.",
+      "origin": "new"
+    },
+    "cloud.storage.empty.images": {
+      "value": "No images yet. Anything you generate or edit will be saved here.",
+      "origin": "new"
+    },
+    "cloud.storage.empty.videos": {
+      "value": "No videos yet. Anything you generate or edit will be saved here.",
+      "origin": "new"
+    },
+    "cloud.storage.empty.uploads": {
+      "value": "No uploads yet. Add source photos and clips to use in your work.",
+      "origin": "new"
+    },
+    "cloud.storage.review.label": {
+      "value": "Review state",
+      "origin": "new"
+    },
+    "cloud.storage.rail.label": {
+      "value": "Categories",
+      "origin": "new"
+    },
+    "cloud.storage.tabs.label": {
+      "value": "Gallery sections",
+      "origin": "new"
+    },
+    "cloud.storage.action.cancel": {
+      "value": "Cancel",
+      "origin": "new"
+    },
+    "cloud.storage.action.select.all": {
+      "value": "Select all",
+      "origin": "new"
+    },
+    "cloud.storage.action.close": {
+      "value": "Close",
+      "origin": "new"
+    },
+    "cloud.storage.action.buy.now": {
+      "value": "Buy now",
+      "origin": "new"
+    },
+    "cloud.storage.trash.confirm.title": {
+      "value": "Move to Trash?",
+      "origin": "new"
+    },
+    "cloud.storage.trash.confirm.body": {
+      "value": "This item stays in Trash for {{days}} days. You can restore it any time before then.",
+      "origin": "new"
+    },
+    "cloud.storage.purchase.plan.title": {
+      "value": "Choose your plan",
+      "origin": "new"
+    },
+    "cloud.storage.purchase.pack.title": {
+      "value": "Add storage",
+      "origin": "new"
+    },
+    "cloud.storage.purchase.benefits": {
+      "value": "Everything in Pro",
+      "origin": "new"
+    },
+    "cloud.storage.purchase.monthly": {
+      "value": "Monthly",
+      "origin": "new"
+    },
+    "cloud.storage.purchase.yearly": {
+      "value": "Yearly",
+      "origin": "new"
+    },
+    "cloud.storage.purchase.renewal": {
+      "value": "{{date}}",
+      "origin": "new"
+    },
+    "cloud.storage.purchase.expand.only": {
+      "value": "Expand storage only",
+      "origin": "new"
+    },
+    "cloud.storage.purchase.back": {
+      "value": "Back to plans",
+      "origin": "new"
+    },
+    "cloud.storage.purchase.pack.benefits": {
+      "value": "Storage packs",
+      "origin": "new"
+    },
+    "cloud.storage.purchase.pack.stacks": {
+      "value": "Stacks on top of your current plan",
+      "origin": "new"
+    },
+    "cloud.storage.purchase.pack.cancel": {
+      "value": "Cancel any time",
+      "origin": "new"
+    },
+    "cloud.storage.filter.tool": {
+      "value": "Tool family",
+      "origin": "new"
+    },
+    "cloud.storage.filter.media": {
+      "value": "Media",
+      "origin": "new"
+    },
+    "cloud.storage.filter.media.all": {
+      "value": "All",
+      "origin": "new"
+    },
+    "cloud.storage.filter.media.image": {
+      "value": "Images",
+      "origin": "new"
+    },
+    "cloud.storage.filter.media.video": {
+      "value": "Videos",
+      "origin": "new"
+    },
+    "cloud.storage.filter.all": {
+      "value": "All",
+      "origin": "new"
+    },
+    "cloud.storage.view.grid": {
+      "value": "Grid view",
+      "origin": "new"
+    },
+    "cloud.storage.view.list": {
+      "value": "List view",
+      "origin": "new"
+    },
+    "cloud.storage.action.new": {
+      "value": "New",
+      "origin": "new"
+    },
+    "cloud.storage.action.upload.file": {
+      "value": "File Upload",
+      "origin": "new"
+    },
+    "cloud.storage.action.move": {
+      "value": "Move to folder",
+      "origin": "new"
+    },
+    "cloud.storage.action.open": {
+      "value": "Open",
+      "origin": "new"
+    },
+    "cloud.storage.action.continue.editor": {
+      "value": "Continue in editor",
+      "origin": "new"
+    },
+    "cloud.storage.action.rename": {
+      "value": "Rename",
+      "origin": "new"
+    },
+    "cloud.storage.action.duplicate": {
+      "value": "Duplicate",
+      "origin": "new"
+    },
+    "cloud.storage.action.create": {
+      "value": "Create",
+      "origin": "new"
+    },
+    "cloud.storage.menu.group.open": {
+      "value": "Open",
+      "origin": "new"
+    },
+    "cloud.storage.menu.group.organise": {
+      "value": "Organise",
+      "origin": "new"
+    },
+    "cloud.storage.column.name": {
+      "value": "Name",
+      "origin": "new"
+    },
+    "cloud.storage.column.type": {
+      "value": "Type",
+      "origin": "new"
+    },
+    "cloud.storage.column.size": {
+      "value": "Size",
+      "origin": "new"
+    },
+    "cloud.storage.column.modified": {
+      "value": "Modified",
+      "origin": "new"
+    },
+    "cloud.storage.upload.progress": {
+      "value": "{{percent}}%",
+      "origin": "new"
+    },
+    "cloud.storage.upload.cancel": {
+      "value": "Cancel upload",
+      "origin": "new"
+    },
+    "cloud.storage.upload.failed.quota": {
+      "value": "Not enough space",
+      "origin": "new"
+    },
+    "cloud.storage.upload.failed.format": {
+      "value": "Unsupported format",
+      "origin": "new"
+    },
+    "cloud.storage.upload.choose.another": {
+      "value": "Choose another file",
+      "origin": "new"
+    },
+    "cloud.storage.folder.create.title": {
+      "value": "New folder",
+      "origin": "new"
+    },
+    "cloud.storage.folder.name.label": {
+      "value": "Folder name",
+      "origin": "new"
+    },
+    "cloud.storage.folder.name.default": {
+      "value": "Untitled folder",
+      "origin": "new"
+    },
+    "cloud.storage.pack.cycle.label": {
+      "value": "Billing cycle",
+      "origin": "new"
+    },
+    "cloud.storage.pack.total": {
+      "value": "New total {{total}}",
+      "origin": "new"
+    },
+    "cloud.storage.pack.due": {
+      "value": "Due today {{amount}}",
+      "origin": "new"
+    },
+    "cloud.storage.purchase.success": {
+      "value": "Storage added. Uploads resumed.",
+      "origin": "new"
+    },
+    "cloud.storage.demo.label": {
+      "value": "Demo",
+      "origin": "new"
+    },
+    "cloud.storage.demo.title": {
+      "value": "Demo controls",
+      "origin": "new"
+    },
+    "cloud.storage.demo.capacity": {
+      "value": "Capacity state",
+      "origin": "new"
+    },
+    "cloud.storage.demo.plan": {
+      "value": "Plan",
+      "origin": "new"
+    },
+    "cloud.storage.demo.plan.free": {
+      "value": "Free",
+      "origin": "new"
+    },
+    "cloud.storage.demo.plan.pro": {
+      "value": "Pro",
+      "origin": "new"
+    },
+    "cloud.storage.demo.collapse": {
+      "value": "Collapse demo controls",
+      "origin": "new"
+    },
+    "cloud.storage.drawer.title": {
+      "value": "Categories",
+      "origin": "new"
+    },
+    "cloud.storage.select.item": {
+      "value": "Select item",
+      "origin": "new"
+    },
+    "cloud.storage.menu.group.remove": {
+      "value": "Remove",
+      "origin": "new"
+    },
+    "cloud.storage.tab.agent": {
+      "value": "AI Agent",
+      "origin": "new"
+    },
+    "cloud.storage.empty.agent": {
+      "value": "No agent results yet. Anything a chat produces will be saved here.",
+      "origin": "new"
+    },
+    "cloud.storage.cell.session": {
+      "value": "From {{session}}",
+      "origin": "new"
+    },
+    "cloud.storage.sort.group.field": {
+      "value": "Sort by",
+      "origin": "new"
+    },
+    "cloud.storage.sort.group.order": {
+      "value": "Order",
+      "origin": "new"
+    },
+    "cloud.storage.sort.modified": {
+      "value": "Date modified",
+      "origin": "new"
+    },
+    "cloud.storage.sort.created": {
+      "value": "Date created",
+      "origin": "new"
+    },
+    "cloud.storage.sort.newest": {
+      "value": "Newest first",
+      "origin": "new"
+    },
+    "cloud.storage.sort.oldest": {
+      "value": "Oldest first",
+      "origin": "new"
+    },
+    "cloud.storage.filter.type.image": {
+      "value": "AI Image",
+      "origin": "new"
+    },
+    "cloud.storage.filter.type.video": {
+      "value": "AI Video",
+      "origin": "new"
+    },
+    "cloud.storage.action.upgrade.space": {
+      "value": "Upgrade Space",
+      "origin": "new"
+    },
+    "cloud.storage.action.expand.storage": {
+      "value": "Expand storage",
+      "origin": "new"
+    },
+    "cloud.storage.action.remove": {
+      "value": "Remove",
+      "origin": "new"
+    },
+    "cloud.storage.banner.critical.upgrade": {
+      "value": "Only {{remaining}} of storage left. Add more space to keep saving new work.",
+      "origin": "new"
+    },
+    "cloud.storage.full.headline": {
+      "value": "You have run out of storage",
+      "origin": "new"
+    },
+    "cloud.storage.full.detail": {
+      "value": "You have used all {{quota}}. New work cannot be saved until you add more space.",
+      "origin": "new"
+    },
+    "cloud.storage.batch.items": {
+      "value": "{{count}} items",
+      "origin": "new"
+    },
+    "cloud.storage.action.export": {
+      "value": "Export to",
+      "origin": "new"
+    },
+    "cloud.storage.action.exit.selection": {
+      "value": "Exit selection",
+      "origin": "new"
+    },
+    "cloud.storage.batch.items.one": {
+      "value": "1 item",
+      "origin": "new"
+    },
+    "cloud.storage.action.upload.folder": {
+      "value": "Folder Upload",
+      "origin": "new"
+    },
+    "cloud.storage.action.new.project": {
+      "value": "Create project",
+      "origin": "new"
+    },
+    "cloud.storage.action.create.folder": {
+      "value": "Create folder",
+      "origin": "new"
+    },
+    "cloud.storage.handoff.editor": {
+      "value": "Prototype boundary: this would open the editor at /{{route}}",
+      "origin": "new"
+    },
+    "cloud.storage.column.deleted": {
+      "value": "Deleted",
+      "origin": "new"
+    },
+    "cloud.storage.column.remaining": {
+      "value": "Auto-delete in",
+      "origin": "new"
+    },
+    "cloud.storage.trash.confirm.forever.title": {
+      "value": "Delete from Trash?",
+      "origin": "new"
+    },
+    "cloud.storage.trash.confirm.forever.body": {
+      "value": "You are about to delete {{name}} from the trash. This cannot be undone.",
+      "origin": "new"
+    },
+    "cloud.storage.section.files": {
+      "value": "Files",
+      "origin": "new"
+    },
+    "cloud.storage.folder.created": {
+      "value": "Created on {{date}}",
+      "origin": "new"
+    },
+    "cloud.storage.rename.title": {
+      "value": "Rename",
+      "origin": "new"
+    },
+    "cloud.storage.rename.label": {
+      "value": "Name",
+      "origin": "new"
+    },
+    "cloud.storage.move.title": {
+      "value": "Move to folder",
+      "origin": "new"
+    },
+    "cloud.storage.move.hint": {
+      "value": "Choose a folder for {{name}}.",
+      "origin": "new"
+    },
+    "cloud.storage.duplicate.suffix": {
+      "value": "{{name}} copy",
+      "origin": "new"
+    }
+  }
+}

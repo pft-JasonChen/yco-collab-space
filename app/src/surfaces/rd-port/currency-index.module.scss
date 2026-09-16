@@ -1,0 +1,153 @@
+@import "./variables.scss";
+
+.menuContainer {
+  position: relative;
+  width: fit-content;
+
+  &[data-hidden="true"] {
+    visibility: hidden;
+  }
+}
+
+.iconMenuButton {
+  position: relative;
+  display: flex;
+  cursor: pointer;
+}
+
+.iconCurrencytText {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16.41px;
+  color: var(--text-weaker);
+}
+
+.iconCurrency {
+  width: 14px;
+  height: 14px;
+  margin-right: 6px;
+}
+
+.menuButton {
+  position: relative;
+  height: 30px;
+  min-width: 90px;
+  border-radius: 6px;
+  border: 1px solid var(--text-weaker);
+  background: var(--fill-white);
+  color: var(--grey-slate-solid-850);
+  line-height: normal;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 11.5px;
+  cursor: pointer;
+
+  @include rwd-custom($width-md) {
+    min-width: 60px;
+  }
+
+  &[data-holiday="halloween"] {
+    border: 1px solid var(--grey-neutral-solid-1000);
+    min-width: 106px;
+    background-color: transparent;
+  }
+
+  &[data-holiday="black_friday"] {
+    border: 1px solid var(--fill-white);
+    min-width: 106px;
+    background-color: transparent;
+  }
+
+  &[data-holiday="end_year"] {
+    border: 1px solid var(--fill-brand-strong);
+    min-width: 106px;
+    background-color: transparent;
+  }
+}
+
+.currencytText {
+  font-size: 14px;
+  font-weight: 400;
+
+  &[data-holiday="black_friday"] {
+    color: var(--fill-white);
+  }
+
+  &[data-holiday="end_year"] {
+    color: var(--text-brand);
+  }
+}
+
+.iconDown {
+  width: 7px;
+  margin-left: 9px;
+}
+
+.currencyHolidayMode {
+  display: flex;
+  margin: 0 0 0 10px;
+
+  &[data-holiday="black_friday"] {
+    color: var(--fill-white);
+  }
+
+  &[data-holiday="end_year"] {
+    color: var(--text-brand);
+  }
+}
+
+.menuItems {
+  position: absolute;
+  max-height: 0;
+  overflow: hidden;
+  color: var(--grey-slate-solid-850);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14.06px;
+  background: var(--fill-white);
+  width: fit-content;
+  min-width: 90px;
+  border-radius: 6px;
+  margin-top: 2.5px;
+  z-index: 11;
+
+  @include rwd-custom($width-md) {
+    min-width: 60px;
+  }
+
+  &[data-holiday="true"] {
+    min-width: 106px;
+  }
+}
+
+.up {
+  // height + margin-top
+  bottom: 32.5px;
+  right: 0;
+
+  @include rwd-custom($width-md) {
+    bottom: 30px;
+  }
+}
+
+.active {
+  padding: 8px 0;
+  border: 1px solid var(--stroke-weak);
+  max-height: 200px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+
+  &[data-holiday="true"] {
+    min-width: 106px;
+  }
+}
+
+.menuItem {
+  padding: 8px 10px 8px 15px;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--fill-brand-weak);
+  }
+}

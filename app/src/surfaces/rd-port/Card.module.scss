@@ -1,0 +1,305 @@
+@import "./variables.scss";
+
+%common-title-container {
+  background-color: var(--fill-white);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 20px;
+  width: 100%;
+  margin: 8px 0 0;
+
+  @include rwd-custom($width-iphone-14promax) {
+    height: 16px;
+    margin: 8px 0;
+  }
+}
+
+.titleContainer {
+  @extend %common-title-container;
+}
+
+.title {
+  font-size: var(--font-size-tiny);
+  font-weight: 600;
+  line-height: var(--line-height-tiny);
+  color: var(--grey-slate-solid-900);
+
+  @include rwd-custom($width-sm) {
+    font-size: var(--font-size-micro);
+    line-height: var(--line-height-micro);
+  }
+}
+
+.titleIconContainer {
+  width: 30px;
+  height: 30px;
+  margin: 0 5px 0 0;
+}
+
+.titleIcon {
+  height: 100%;
+}
+
+.link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  text-decoration: none !important;
+  background-color: transparent;
+}
+
+.card {
+
+  width: 100%;
+  height: 100%;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  background-color: var(--fill-white);
+  margin-right: 0;
+
+  @include rwd-custom($width-lg) {
+    margin-right: 0;
+  }
+
+  @include rwd-custom($width-sm) {
+    margin-right: 0;
+  }
+}
+
+.imageBox {
+  position: relative;
+  height: calc(100% - 40px);
+  border-radius: 14px;
+  overflow: hidden;
+
+  @include rwd-custom($width-iphone-14promax) {
+    height: calc(100% - 30px);
+  }
+
+  &[data-startcard="true"] {
+    background: linear-gradient(180deg, var(--blue-light-1000) 0%, var(--blue-dark-1000) 100%);
+  }
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 290 / 172;
+  border-radius: 14px;
+  transform: scale(1);
+  opacity: 1;
+  transition: transform 350ms ease-in-out, opacity 350ms ease-in-out;
+}
+
+.hoverBlock {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 350ms ease-in-out;
+  pointer-events: none;
+}
+
+.videoBlock {
+  width: 100%;
+  height: 100%;
+  background-color: var(--fill-hover);
+  position: relative;
+  overflow: hidden;
+}
+
+.video {
+  position: absolute;
+  top: 10%;
+  left: 15%;
+  width: 80%;
+  object-fit: cover;
+  aspect-ratio: 290 / 172;
+  border-radius: 14px;
+  opacity: 0;
+  transition: opacity 350ms ease-in-out;
+
+  &[data-mobile="true"] {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.typeIcon {
+  position: absolute;
+  top: 50%;
+  left: calc(15% - 27px);
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background-color: var(--fill-white);
+  z-index: 1;
+  box-shadow: 0 4px 6px 0 var(--fill-disabled);
+  object-fit: none;
+  opacity: 0;
+  transition:
+    top 0.35s cubic-bezier(0.25, 0, 0.25, 1),
+    opacity 0.35s cubic-bezier(0.25, 0, 0.25, 1);
+}
+
+.imageStartCard {
+  width: 90px;
+  height: 90px;
+}
+
+.hot,
+.new {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  height: 24px;
+  z-index: 1;
+}
+
+.startCardContainer {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  background-color: var(--fill-white);
+  margin-right: 10px;
+
+  @include rwd-custom($width-lg) {
+    margin-right: 5px;
+  }
+
+  @include rwd-custom($width-sm) {
+    margin-right: 0;
+  }
+}
+
+.startCard {
+  background-color: var(--brand-light-50);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+}
+
+.fakeBlock {
+  aspect-ratio: 290 / 172;
+}
+
+.fakeTitleContainer {
+  @extend %common-title-container;
+
+  background-color: transparent;
+}
+
+.startBlock {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90px;
+  height: 90px;
+
+  @include rwd-custom($width-sm) {
+    width: 74px;
+    height: 74px;
+  }
+}
+
+.startPlus {
+  width: 56px;
+  height: 56px;
+  margin: 0 0 8px;
+  background: linear-gradient(56.35deg, var(--blue-dark-1000) -2.43%, var(--fill-brand-strong) 67.21%);
+  border-radius: 50%;
+
+  @include rwd-custom($width-sm) {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.startTitle {
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 28px;
+  color: var(--fill-brand-strong);
+  white-space: nowrap;
+
+  @include rwd-custom($width-sm) {
+    font-size: 14px;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .card:hover .typeIcon {
+    top: calc(50% - 27px);
+    opacity: 1;
+  }
+
+  .card:hover .image {
+    transform: scale(0.8);
+    opacity: 0;
+    transition: transform 350ms ease-in-out, opacity 350ms ease-in-out;
+  }
+
+  .card:hover .hoverBlock {
+    opacity: 1;
+    transition: opacity 350ms ease-in-out;
+  }
+
+  .card:hover .video {
+    opacity: 1;
+    transition: opacity 350ms ease-in-out;
+    transition-delay: calc(350ms - 120ms);
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .image {
+    transform: none !important;
+    opacity: 1 !important;
+    transition: none !important;
+  }
+
+  .hoverBlock {
+    opacity: 0 !important;
+    transition: none !important;
+    pointer-events: none !important;
+  }
+
+  .video[data-mobile="true"] {
+    opacity: 1 !important;
+    transition: none !important;
+  }
+
+  .video {
+    opacity: 1 !important;
+    transition: none !important;
+  }
+
+  .typeIcon {
+    opacity: 0 !important;
+    transition: none !important;
+  }
+
+  .card:hover .image,
+  .card:hover .hoverBlock,
+  .card:hover .video,
+  .card:hover .typeIcon {
+    transform: none !important;
+    opacity: revert-layer;
+  }
+}

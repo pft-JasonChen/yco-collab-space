@@ -1,0 +1,266 @@
+/* Tool-category sidebar, ported from RD strapi gridmodulesection homeCategory
+   plus common/headers new-label and external-link.
+
+   Colours follow app/src/surfaces/rd-port/token-colour-mapping.json; the six
+   approximations it records — all in the gradient treatment — are itemised in
+   this component's component.yaml.
+
+   The icomoon face is declared here rather than relied on globally: RD scopes
+   its icon classes under a global `.homeCategory` class from a stylesheet the
+   page loads, which a shared component cannot assume exists. Same approach
+   result-page-shell already takes for its own icon face. */
+
+@font-face {
+  font-family: yco-home-icons;
+  src: url('../../../design-library/assets/font/yco-category-rail/icomoon.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+.rail {
+  width: 300px;
+  background-color: var(--fill-white);
+}
+
+/* RD pins the rail with `position: fixed` and a 64px header offset. That is the
+   host page's layout decision, not the component's, so the rail is static here
+   and a consumer positions it. The scroll container is kept because the list
+   itself has to scroll independently of the page. */
+.scroller {
+  max-height: calc(100vh - 64px);
+  overflow: hidden auto;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+}
+
+@supports (height: 100svh) {
+  .scroller {
+    max-height: calc(100svh - 64px);
+  }
+}
+
+.item {
+  appearance: none;
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  width: 260px;
+  height: 44px;
+  color: var(--grey-neutral-solid-800);
+  font-size: var(--font-size-tiny);
+  font-weight: var(--font-weight-strong);
+  line-height: var(--line-height-tiny);
+  margin: 2px auto;
+  border-radius: var(--corner-radius-24);
+  transition: background-color 0.2s ease;
+}
+
+.iconFont {
+  font-size: 20px;
+  margin: 0 12px 0 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* The glyph classes are applied by name (`icon-ic-home`), so they cannot be
+   CSS-module-hashed. `:global` keeps the codepoint mapping addressable while
+   the face itself stays scoped to this component's markup. */
+:global([class^='icon-ic-']),
+:global([class*=' icon-ic-']) {
+  font-family: yco-home-icons, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  speak: never;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* --- Base interaction states, transcribed from RD --- */
+
+.item:hover {
+  background-color: var(--grey-neutral-light-25);
+  transition: background-color 0.1s ease;
+}
+
+.item:active {
+  background-color: var(--grey-neutral-light-50);
+}
+
+.item:focus-visible {
+  outline: none;
+  background-color: var(--brand-light-50);
+  color: var(--text-brand);
+}
+
+.item:focus:hover {
+  background-color: var(--teal-dark-200);
+  color: var(--text-brand);
+}
+
+.item:focus:active {
+  background-color: var(--brand-light-50);
+  color: var(--text-brand);
+}
+
+.item[data-selected='true'] {
+  background-color: var(--brand-light-50);
+  color: var(--text-brand);
+}
+
+.item[data-selected='true']:hover {
+  background-color: var(--teal-dark-200);
+}
+
+.item[data-selected='true']:active {
+  background-color: var(--brand-light-50);
+}
+
+.item[disabled] {
+  background-color: var(--fill-white);
+  cursor: not-allowed;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* RD keys this off `data-key="contest"`. A shared component cannot hard-code one
+   consumer's item key, so it is an item flag instead; the rules are unchanged. */
+.item[data-gradient='true'] {
+  background:
+    linear-gradient(
+      90deg,
+      var(--purple-light-50) -5.83%,
+      var(--purple-light-50) 33.02%,
+      var(--blue-dark-50) 68.21%
+    );
+}
+
+.text[data-gradient='true'] {
+  background:
+    linear-gradient(
+      90deg,
+      var(--purple-light-1000) -2.17%,
+      var(--purple-light-1000) 33.02%,
+      var(--blue-light-1000) 68.21%
+    );
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.dividerContainer {
+  width: 100%;
+  padding: 0 16px;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid var(--stroke-weak);
+  width: 100%;
+}
+
+.externalLinkIcon {
+  display: inline-flex;
+  align-items: center;
+  margin-left: auto;
+  margin-right: 16px;
+}
+
+/* RD's NewLabel badge. */
+.newLabel {
+  width: 35px;
+  height: 15px;
+  color: var(--fill-white);
+  background-color: var(--fill-badge);
+  font-size: 10.13px;
+  line-height: 15px;
+  font-weight: var(--font-weight-strong);
+  letter-spacing: 0.506px;
+  margin: 0 16px 0 auto;
+  padding: 2px 6px;
+  border-radius: 12px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hiddenHeight {
+  height: 10px;
+}
+
+/* RD's <=1200px narrowing. */
+@media (max-width: 1200px) {
+  .rail {
+    width: 240px;
+  }
+
+  .item {
+    width: 200px;
+  }
+}
+
+/* RD's <=992px icon-over-label treatment. Driven by the `compact` prop as well
+   as the width, so a consumer can hold the two in step the way gallery-grid's
+   measured layout requires. */
+@media (max-width: 992px) {
+  .rail {
+    width: 112px;
+  }
+
+  .item {
+    width: 80px;
+    height: auto;
+    flex-direction: column;
+    justify-content: center;
+    margin: 4px auto;
+    font-size: var(--font-size-micro);
+    line-height: var(--line-height-micro);
+  }
+
+  .iconFont {
+    width: 72px;
+    height: 44px;
+    margin: auto auto 2px;
+    border-radius: var(--corner-radius-24);
+  }
+
+  .newLabel,
+  .externalLinkIcon {
+    margin: 0 auto;
+  }
+}
+
+.rail[data-compact='true'] {
+  width: 112px;
+}
+
+.rail[data-compact='true'] .item {
+  width: 80px;
+  height: auto;
+  flex-direction: column;
+  justify-content: center;
+  margin: 4px auto;
+  font-size: var(--font-size-micro);
+  line-height: var(--line-height-micro);
+}
+
+.rail[data-compact='true'] .iconFont {
+  width: 72px;
+  height: 44px;
+  margin: auto auto 2px;
+  border-radius: var(--corner-radius-24);
+}
+
+.rail[data-compact='true'] .newLabel,
+.rail[data-compact='true'] .externalLinkIcon {
+  margin: 0 auto;
+}

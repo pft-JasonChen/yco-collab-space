@@ -1,0 +1,99 @@
+@import "./variables.scss";
+
+.outerWrapper {
+  background: var(--fill-white);
+  border-radius: 20px;
+}
+
+.box {
+  border-radius: 20px;
+  padding: 21px 22px;
+  margin: 18px 0 0;
+  border: 1px solid var(--fill-white);
+  background-clip: padding-box;
+
+  @include rwd-custom($width-sm) {
+    // border-radius: 0;
+    // padding: 7px 29px 13px;
+    // margin: 0;
+    // background-clip: border-box;
+    &[data-holiday="true"] {
+      border-radius: 0;
+      padding: 7px 29px 13px;
+      margin: 0;
+      background-clip: border-box;
+    }
+  }
+
+  @include rwd-custom($width: $width-sm, $use-height: true, $height: 587px) {
+    padding-bottom: 10px;
+  }
+
+  &[data-holiday="true"] {
+    background:
+      linear-gradient(
+        180deg,
+        var(--grey-neutral-dark-700) 0%,
+        var(--grey-neutral-dark-500) 100%
+      ),
+      linear-gradient(180deg, var(--fill-white) 51.77%, var(--fill-success-weak) 100%);
+    border: 0;
+  }
+}
+
+.boxItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 9px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  @include rwd-custom($width: $width-sm, $use-height: true, $height: 587px) {
+    margin-bottom: 6px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.checkmark {
+  width: 15px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+  flex-shrink: 0;
+
+  @include rwd-custom($width-sm) {
+    width: 20px;
+    margin-right: 8px;
+  }
+
+  @include rwd-custom($width: $width-sm, $use-height: true, $height: 587px) {
+    width: 15px;
+  }
+}
+
+.featureText {
+  font-weight: 400;
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+  color: var(--grey-slate-solid-900);
+  white-space: unset;
+
+  @include rwd-custom($width-sm) {
+    line-height: 16px;
+    white-space: unset;
+  }
+
+  span {
+    font-weight: 600;
+    font-size: var(--font-size-tiny);
+    line-height: var(--line-height-tiny);
+    color: var(--fill-brand-strong);
+  }
+}

@@ -1,0 +1,225 @@
+@import "./variables.scss";
+
+.root {
+  position: relative;
+  width: 100%;
+  max-width: 1564px;
+}
+
+.wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  width: 100%;
+
+  &[data-layout-measured="false"] {
+    @include rwd-custom(1392px) {
+      .grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .item:nth-child(n + 5) {
+        display: none;
+      }
+    }
+
+    @media (min-width: 401px) and (max-width: $width-iphone-xr),
+      (min-width: 433px) and (max-width: 678px),
+      (min-width: 907px) and (max-width: $width-992),
+      (min-width: 1043px) and (max-width: $width-1199) {
+      .grid {
+        grid-template-columns: repeat(5, 1fr);
+      }
+
+      .item:nth-child(5) {
+        display: flex;
+      }
+    }
+
+    @include rwd-custom(678px) {
+      flex-direction: column;
+    }
+  }
+
+  &.stacked {
+    flex-direction: column;
+  }
+}
+
+// ─── Individual panel ─────────────────────────────────────────────────────────
+.panel {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px 24px;
+  border-radius: var(--corner-radius-20);
+
+  @include rwd-custom($width-1200) {
+    padding: 16px;
+  }
+}
+
+.panelFake {
+  flex: 1;
+}
+
+.panelFirst {
+  background:
+    linear-gradient(
+      180deg,
+      var(--brand-light-200) 0%,
+      var(--brand-light-500) 100%
+    );
+}
+
+.panelSecond {
+  background:
+    linear-gradient(
+      180deg,
+      var(--green-dark-200) 0%,
+      var(--green-dark-800) 100%
+    );
+}
+
+// ─── Panel header ─────────────────────────────────────────────────────────────
+.panelHeader {
+  display: flex;
+}
+
+.panelLabel {
+  font-size: var(--font-size-heading-4);
+  line-height: var(--line-height-heading-4);
+  font-weight: 600;
+}
+
+.grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+
+  @include rwd-custom($width-1200) {
+    gap: 8px;
+  }
+}
+
+// ─── Individual item card ─────────────────────────────────────────────────────
+.item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  min-width: 82px;
+
+  @media (min-width: 1201px) and (max-width: 1204px) {
+    min-width: 81px;
+  }
+
+  // max-width: 136px;
+
+  padding: 16px 0;
+  gap: 4px;
+  text-decoration: none !important;
+  background: var(--grey-neutral-dark-500);
+  border-radius: var(--corner-radius-12);
+
+  @include rwd-custom($width-1200) {
+    min-width: 61px;
+    padding: 8px 0;
+    gap: 0;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: var(--fill-inverse-hover);
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    pointer-events: none;
+    border-radius: inherit;
+  }
+
+  &:hover::after {
+    opacity: 1;
+  }
+}
+
+.itemIcon {
+  position: relative;
+  width: 54px;
+  height: 54px;
+  border-radius: 100px;
+  background: var(--fill-white);
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 1.1852px 2.3704px -1.1852px var(--grey-neutral-light-100),
+    0 2.3704px 4.7407px -1.1852px var(--grey-neutral-light-50);
+
+  @include rwd-custom($width-1200) {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.itemIconImg {
+  width: 32px;
+  height: 32px;
+
+  @include rwd-custom($width-1200) {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.itemTitle {
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+  font-weight: 600;
+  color: var(--text-strong);
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+  > span {
+    width: 100%;
+    min-width: 0;
+    padding: 0 8px;
+  }
+}
+
+.hot,
+.new {
+  position: absolute;
+  z-index: 1;
+}
+
+.inIcon {
+  height: 18px;
+  top: -7px;
+  right: -7px;
+
+  @include rwd-custom($width-992) {
+    display: none;
+  }
+}
+
+.outsideIcon {
+  display: none;
+  height: 18px;
+  top: -8px;
+  right: 8px;
+
+  @include rwd-custom($width-992) {
+    display: block;
+  }
+}

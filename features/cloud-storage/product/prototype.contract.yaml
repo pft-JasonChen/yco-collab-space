@@ -1,0 +1,348 @@
+schemaVersion: 1
+feature:
+  slug: cloud-storage
+  title: Cloud Storage
+  stage: pm-draft
+  entryRoute: /features/cloud-storage/
+  intakeStatus: confirmed
+design:
+  status: temporary
+  reference: null
+states:
+  - id: library-normal
+    description: A populated content tab with capacity below 75 percent and no interruption.
+  - id: library-empty
+    description: A content tab with no items, showing the family empty state and a create entry.
+  - id: folder-open
+    description: A folder's contents replace the tab grid. The breadcrumb takes the page title's place and the tab row and capacity meter are hidden, so the header states where you are rather than where you could go.
+  - id: folder-create
+    description: The create-folder dialog is open with a pre-selected default name.
+  - id: selection-mode
+    description: Batch selection is active with the shared editing toolbar, selected count and selected size.
+  - id: item-detail
+    description: The shared detail dialog is open for one item with metadata and next actions. No acceptance criterion exercises this state yet; it waits on the media-generic API in DESIGN-015.
+  - id: list-view
+    description: The same tab rendered as rows, each leading with a thumbnail and carrying name, type, size and modified date.
+  - id: item-menu
+    description: The per-item overflow menu is open with its four intent groups and the destructive entry last.
+  - id: category-drawer
+    description: Below the rail breakpoint, the header drawer presents the categories the rail lists.
+  - id: delete-confirm
+    description: The move-to-trash confirmation is open and states the 30-day recovery window.
+  - id: uploading
+    description: One or more grid cells show in-cell upload progress for a local file.
+  - id: upload-format-failed
+    description: A cell shows a format failure and offers choosing another file.
+  - id: upload-quota-failed
+    description: Remaining files failed because capacity ran out, and the cells offer cleanup and capacity actions.
+  - id: storage-warning
+    description: Capacity is between 75 and 89 percent and the meter shows the warning treatment.
+  - id: storage-critical
+    description: Capacity is between 90 and 99 percent and a persistent banner sits below the heading.
+  - id: storage-full
+    description: Capacity is at 100 percent and a blocking dialog offers cleanup, a capacity pack and an upgrade.
+  - id: trash
+    description: The trash tab lists deleted items with the policy banner and per-card day counts.
+  - id: plan-overlay
+    description: The purchase overlay is open on the subscription path with current usage and plan options.
+  - id: storage-pack-overlay
+    description: The purchase overlay is open on the capacity path with packs, billing cycle and the resulting total.
+  - id: purchase-success
+    description: A synthetic purchase completed, the meter reflects the new quota and quota-failed uploads were retried.
+actions:
+  - id: switch-tab
+    from: library-normal
+    event: User selects another level-one tab
+    to: library-normal
+  - id: show-empty-tab
+    from: library-normal
+    event: User selects a tab that has no items
+    to: library-empty
+  - id: filter-by-tool-family
+    from: library-normal
+    event: User selects a tool family in the level-two filter
+    to: library-normal
+  - id: sort-by-size
+    from: library-normal
+    event: User sorts the current tab by size descending
+    to: library-normal
+  - id: switch-to-list-view
+    from: library-normal
+    event: User switches the view control to list
+    to: list-view
+  - id: switch-to-grid-view
+    from: list-view
+    event: User switches the view control to grid
+    to: library-normal
+  - id: filter-by-media
+    from: library-normal
+    event: User narrows a mixed-media tab to images or videos
+    to: library-normal
+  - id: reverse-sort-direction
+    from: library-normal
+    event: User reverses the sort direction
+    to: library-normal
+  - id: open-item-menu
+    from: library-normal
+    event: User opens a cell's overflow menu
+    to: item-menu
+  - id: close-item-menu
+    from: item-menu
+    event: User dismisses the overflow menu or picks an entry
+    to: library-normal
+  - id: open-category-drawer
+    from: library-normal
+    event: User opens the header drawer below the rail breakpoint
+    to: category-drawer
+  - id: close-category-drawer
+    from: category-drawer
+    event: User dismisses the drawer
+    to: library-normal
+  - id: open-create-folder
+    from: library-normal
+    event: User selects New folder from the create menu
+    to: folder-create
+  - id: confirm-create-folder
+    from: folder-create
+    event: User confirms the folder name
+    to: library-normal
+  - id: discard-create-folder
+    from: folder-create
+    event: User discards the dialog
+    to: library-normal
+  - id: open-folder
+    from: library-normal
+    event: User selects a folder card
+    to: folder-open
+  - id: leave-folder
+    from: folder-open
+    event: User selects the tab root in the breadcrumb
+    to: library-normal
+  - id: enter-selection
+    from: library-normal
+    event: User selects an item checkbox or the select-all header
+    to: selection-mode
+  - id: exit-selection
+    from: selection-mode
+    event: User leaves batch selection
+    to: library-normal
+  - id: open-item-detail
+    from: library-normal
+    event: User selects an item thumbnail
+    to: item-detail
+  - id: close-item-detail
+    from: item-detail
+    event: User closes the detail dialog
+    to: library-normal
+  - id: request-move-to-trash
+    from: library-normal
+    event: User selects Move to trash in the item overflow menu
+    to: delete-confirm
+  - id: confirm-move-to-trash
+    from: delete-confirm
+    event: User confirms the move
+    to: library-normal
+  - id: open-trash
+    from: library-normal
+    event: User selects the Trash tab
+    to: trash
+  - id: restore-from-trash
+    from: trash
+    event: User restores a trashed item
+    to: library-normal
+  - id: start-upload
+    from: library-normal
+    event: User selects local files to upload
+    to: uploading
+  - id: complete-upload
+    from: uploading
+    event: Every selected file fits the remaining quota
+    to: library-normal
+  - id: fail-upload-format
+    from: uploading
+    event: A selected file is unsupported or corrupt
+    to: upload-format-failed
+  - id: recover-upload-format
+    from: upload-format-failed
+    event: User chooses another file
+    to: library-normal
+  - id: exhaust-quota-during-upload
+    from: uploading
+    event: Capacity runs out before the remaining files are stored
+    to: upload-quota-failed
+  - id: reach-warning
+    from: library-normal
+    event: Stored usage passes 75 percent
+    to: storage-warning
+  - id: reach-critical
+    from: storage-warning
+    event: Stored usage passes 90 percent
+    to: storage-critical
+  - id: reach-full
+    from: storage-critical
+    event: Stored usage reaches 100 percent and an action needs space
+    to: storage-full
+  - id: clean-up-from-critical
+    from: storage-critical
+    event: User selects Manage and enters batch selection sorted by size
+    to: selection-mode
+  - id: clean-up-from-full
+    from: storage-full
+    event: User selects Manage in the blocking dialog
+    to: selection-mode
+  - id: open-plan-overlay
+    from: library-normal
+    event: User selects the upgrade entry beside the capacity meter
+    to: plan-overlay
+  - id: open-plan-overlay-from-quota-failure
+    from: upload-quota-failed
+    event: User selects the capacity action on a quota-failed cell
+    to: plan-overlay
+  - id: open-plan-overlay-from-full
+    from: storage-full
+    event: User selects a purchase action in the blocking dialog
+    to: plan-overlay
+  - id: switch-to-storage-pack
+    from: plan-overlay
+    event: User selects Expand storage only
+    to: storage-pack-overlay
+  - id: return-to-plans
+    from: storage-pack-overlay
+    event: User selects the back control
+    to: plan-overlay
+  - id: complete-purchase
+    from: storage-pack-overlay
+    event: User confirms the synthetic checkout
+    to: purchase-success
+  - id: resume-after-purchase
+    from: purchase-success
+    event: Quota-failed uploads are retried and the meter reflects the new quota
+    to: library-normal
+mocks:
+  - mocks/cloud-storage.json
+acceptance:
+  - id: CS-001
+    given: The Cloud Storage route is open
+    when: The initial state renders
+    then: The gallery shell, the six level-one tabs in order, and the capacity meter beside the upgrade entry are visible without a network request
+  - id: CS-002
+    given: The Images tab is active with a populated synthetic library
+    when: The tool-family filter is used
+    then: The level-two filter exposes an All option plus the eighteen features from the YCO feature-type sheet, grouped under AI Image and AI Video, and no tool appears as a level-one tab
+  - id: CS-003
+    given: A populated content tab is open
+    when: Each item cell renders
+    then: "Every cell shows its name, type and date. File size is deliberately absent from the cell: none of the four competitors shows it, and with the cleanup path removed there is no decision on the grid that needs it"
+  - id: CS-004
+    given: A populated content tab is open
+    when: The user changes the sort field and the order
+    then: "Sort field and order are two groups in one menu with no separate direction control, the fields are date modified and date created, and the grid reports both"
+  - id: CS-005
+    given: Capacity is below 75 percent
+    when: The capacity meter renders
+    then: The meter reports the normal state and no banner or dialog interrupts the page
+  - id: CS-006
+    given: Capacity is between 75 and 89 percent
+    when: The capacity meter renders
+    then: The meter reports the warning state and shows the remaining amount without a banner
+  - id: CS-007
+    given: Capacity is between 90 and 99 percent
+    when: The page renders
+    then: A persistent banner states the remaining space and offers a single action, adding more storage; no cleanup action is offered anywhere
+  - id: CS-008
+    given: Capacity is at 100 percent
+    when: An action that needs space is attempted
+    then: A blocking dialog shows the capacity that is full and offers one action, Upgrade Space, which opens the purchase overlay
+  - id: CS-009
+    given: The user selects local files while capacity remains
+    when: Upload begins
+    then: Progress renders inside the grid cells the files will occupy, each with a name, a determinate bar and a cancel control, and no floating queue is present
+  - id: CS-010
+    given: Capacity runs out partway through a multi-file upload
+    when: The remaining files are processed
+    then: The cell reports a quota failure distinctly from a format failure and offers Remove or Upgrade, with no retry, because retrying cannot succeed until space exists
+  - id: CS-011
+    given: An unsupported local file is selected
+    when: Upload is attempted
+    then: That cell reports a format failure and offers choosing another file
+  - id: CS-012
+    given: A content tab is open
+    when: The user creates a folder, opens it and returns
+    then: Folder creation is available without any premium gate, the folder contents replace the grid, and a breadcrumb returns to the tab root
+  - id: CS-013
+    given: An item overflow menu is open
+    when: The menu renders
+    then: "The cell action pill carries download as its own button and a More menu with three intent groups - open, organise and remove - with move-to-trash last and flagged destructive"
+  - id: CS-014
+    given: The Trash tab has deleted items
+    when: The tab renders
+    then: A policy banner states the 30-day window and that trash still counts against the quota, every card shows its remaining days, and restore, delete-forever and empty-all are available
+  - id: CS-015
+    given: The purchase overlay is open on the subscription path
+    when: The user selects Expand storage only
+    then: The capacity path opens in the same overlay with both packs, a billing cycle control, and the resulting total rather than only the increment
+  - id: CS-016
+    given: Quota-failed uploads are pending and the user completes the synthetic checkout
+    when: The purchase succeeds
+    then: The meter reflects the new quota and the quota-failed uploads are retried rather than leaving the user on an unchanged page
+  - id: CS-017
+    given: A populated content tab is open and nothing is selected
+    when: The checkbox revealed on a cell is used
+    then: Selection mode is entered by that first click and the selection bar reports the item count and the space they occupy, offers select-all and an exit, and presents export, move and delete as low-weight icon actions rather than filled buttons
+  - id: CS-018
+    given: The feature renders at a configured viewport
+    when: The layout resolves
+    then: The capacity meter, tab row, critical banner and purchase overlay remain reachable without horizontal overflow
+  - id: CS-019
+    given: A populated content tab is open
+    when: The view control is switched between grid and list
+    then: The same items render as a justified grid or as rows that each lead with a thumbnail and carry name, type, size and modified date
+  - id: CS-020
+    given: Any level-one tab is active
+    when: The create control resolves
+    then: "The create control matches the tab: Uploads offers file upload, folder upload and create folder; Projects offers create project and create folder; the other creation tabs offer create folder as a single button with no menu; and Trash offers no create control at all"
+  - id: CS-021
+    given: The feature renders below the category-rail breakpoint
+    when: The layout resolves
+    then: Category navigation stays reachable through the header drawer, and opening it presents the same categories the rail lists
+  - id: CS-022
+    given: The AI Agent tab is active
+    when: A chat session's results render
+    then: Each output is listed individually and names the session it came from, and the media filter narrows the tab to images or videos
+  - id: CS-023
+    given: A folder is open
+    when: The page header resolves
+    then: The breadcrumb replaces the page title, the level-one tab row and the capacity meter are hidden, and the breadcrumb returns to the tab root
+  - id: CS-024
+    given: The reviewer switches the demo plan to Pro
+    when: The capacity meter renders
+    then: The meter offers Expand storage rather than Upgrade, because Pro is the highest subscription and only additional capacity can be bought
+  - id: CS-025
+    given: The Trash tab is active
+    when: Its contents render
+    then: "Trash is a table of name, type, deleted date and the remaining days before automatic deletion, with an Empty Trash action and a per-row menu offering restore and delete from trash"
+  - id: CS-026
+    given: A trash row's menu is open
+    when: Delete from Trash is chosen
+    then: "A confirmation names the item and states that it cannot be undone, and only its confirm action deletes"
+  - id: CS-027
+    given: The Projects tab is active
+    when: Create project is chosen
+    then: "A file picker opens, and once a file is chosen the prototype stops at a named handoff boundary for the editor route rather than pretending to open it"
+  - id: CS-028
+    given: A cell's More menu is open
+    when: Rename is chosen and a new name confirmed
+    then: "The item carries the new name in both the grid and the list, and no other item changes"
+  - id: CS-029
+    given: A cell's More menu is open
+    when: Duplicate is chosen
+    then: "A copy appears in the same tab with its own name, and the original is untouched"
+  - id: CS-030
+    given: A cell's More menu is open in a tab that has no folders
+    when: Move to folder is chosen
+    then: "The create-folder dialog opens, and confirming it creates the folder and moves the item into it; where folders already exist a picker lists them instead"
+  - id: CS-031
+    given: A content tab is open
+    when: Folders and files render
+    then: "Each group carries its own heading, and a folder card states its item count and when it was created"
+

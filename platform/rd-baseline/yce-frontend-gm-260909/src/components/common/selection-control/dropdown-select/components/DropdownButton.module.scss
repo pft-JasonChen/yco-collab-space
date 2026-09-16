@@ -1,0 +1,166 @@
+@import "@/styles/variables.scss";
+
+.menuButton {
+  &.default {
+    position: relative;
+    height: 30px;
+    min-width: 90px;
+    border-radius: 6px;
+    border: 1px solid #8c8c8c;
+    background-color: var(--fill-inverse-strong);
+    color: #212529;
+    line-height: normal;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 11.5px;
+    cursor: pointer;
+
+    @include rwd-custom($width-md) {
+      min-width: 60px;
+    }
+  }
+
+  &.currency {
+    position: relative;
+    display: flex;
+    cursor: pointer;
+  }
+
+  &.text-to-image-ai-model {
+    position: relative;
+    height: auto;
+    min-width: 90px;
+    border-radius: 6px;
+    border: 1px solid var(--grey-light-100);
+    background-color: var(--fill-brand-weak);
+    color: #212529;
+    line-height: normal;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 16px;
+    cursor: pointer;
+  }
+
+  &.enhance-mode {
+    position: relative;
+    width: 100%;
+    height: auto;
+    border-radius: var(--corner-radius-4);
+    border: 1px solid var(--stroke-weak);
+    background-color: var(--fill-inverse-strong);
+    color: var(--text-strong);
+    line-height: normal;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    cursor: pointer;
+  }
+}
+
+.currentSelectIcon {
+  &.currency {
+    width: 14px;
+    height: 14px;
+    margin-right: 6px;
+  }
+
+  &.text-to-image-ai-model {
+    width: 32px;
+    height: 32px;
+    margin-right: 10px;
+    border: 1px solid var(--stroke-weak);
+    border-radius: 100px;
+  }
+}
+
+.arrowIcon {
+  &.text-to-image-ai-model,
+  &.enhance-mode {
+    width: 24px;
+    height: 24px;
+    transform: rotate(270deg);
+
+    &[data-isactive="true"] {
+      transform: rotate(90deg);
+    }
+  }
+
+  &.enhance-mode {
+    flex: 0 0 auto;
+    margin-left: 8px; // gap to the stacked text, per the design
+  }
+}
+
+// Stacked name + description for the enhance-mode trigger.
+.stackedText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+// Caption/Regular — 12/12, Text/Weak.
+.currentSelectDesc {
+  &.enhance-mode {
+    font-size: var(--font-size-caption);
+    line-height: var(--line-height-caption);
+    font-weight: 400;
+    color: var(--text-weak);
+  }
+}
+
+.currentSelectText {
+  font-size: 14px;
+  font-weight: 400;
+
+  &.currency {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16.41px;
+    color: rgb(122 122 122 / 100%);
+  }
+
+  &.text-to-image-ai-model,
+  &.enhance-mode {
+    font-size: var(--font-size-tiny);
+    line-height: var(--line-height-tiny);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+}
+
+.iconDown {
+  width: 7px;
+  margin-left: 9px;
+}
+
+.menuContentForTextToImageAIModel {
+  display: flex;
+  align-items: center;
+}
+
+.discountTag {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 13px;
+  padding: 1px 4px;
+  background: linear-gradient(89.77deg, #ffb802 0%, #ffa51c 32.56%, #f80 99.8%);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 500;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+
+// The trigger is a tab stop now; :focus-visible keeps the ring off mouse users.
+.menuButton:focus-visible {
+  outline: 2px solid var(--stroke-selected);
+  outline-offset: 2px;
+}

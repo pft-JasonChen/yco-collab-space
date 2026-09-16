@@ -1,0 +1,29 @@
+schemaVersion: 1
+id: library/gallery
+version: 2026-09
+kind: surface
+status: provisional
+shell: account-gallery
+zones:
+  - id: global-header
+    required: true
+    description: Shared authenticated header with home and pricing entries.
+  - id: category-navigation
+    required: true
+    description: Tool category rail shared with authenticated home on desktop.
+  - id: gallery-heading
+    required: true
+    description: My Gallery page title and sticky media-family tabs.
+  - id: gallery-content
+    required: true
+    description: Justified result grid or a media-family empty state.
+  - id: gallery-actions
+    required: true
+    description: Result selection, download and overflow actions.
+responsivePriority:
+  - Keep the tab row horizontally reachable.
+  - Collapse the category rail before shrinking gallery cells below a usable size.
+  - Use two-column masonry for narrow viewports.
+decisionBasis:
+  - RD /account/gallery owns Photos, Videos, AI Image Generator, AI Tools and AI Agent tabs.
+  - The preview preserves tab, grid, empty-state and item-action structure without history APIs or real user data.

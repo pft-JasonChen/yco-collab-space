@@ -1,0 +1,147 @@
+@import "./breakpoints.module.scss";
+
+// Upload block shared dimensions — change here to update all upload components
+$upload-block-height: 136px;
+$upload-preview-height: 120px;
+
+@mixin rwd-media(
+  $width,
+  $height: -1,
+  $use-width: true,
+  $use-height: false,
+  $use-min-width: false,
+  $use-min-height: false
+) {
+  @if $use-width and $use-height {
+    @if $use-min-width and $use-min-height {
+      @media (min-width: $width) and (min-height: $height) {
+        @content;
+      }
+    } @else if $use-min-width and not $use-min-height {
+      @media (min-width: $width) and (max-height: $height) {
+        @content;
+      }
+    } @else if not $use-min-width and $use-min-height {
+      @media (max-width: $width) and (min-height: $height) {
+        @content;
+      }
+    } @else {
+      @media (max-width: $width) and (max-height: $height) {
+        @content;
+      }
+    }
+  } @else if $use-width and not $use-height {
+    @if $use-min-width {
+      @media (min-width: $width) {
+        @content;
+      }
+    } @else {
+      @media (max-width: $width) {
+        @content;
+      }
+    }
+  } @else if not $use-width and $use-height {
+    @if $use-min-height {
+      @media (min-height: $height) {
+        @content;
+      }
+    } @else {
+      @media (max-height: $height) {
+        @content;
+      }
+    }
+  }
+}
+
+@mixin rwd-custom(
+  $width: $width-lg,
+  $height: -1,
+  $use-width: true,
+  $use-height: false,
+  $use-min-width: false,
+  $use-min-height: false,
+  $use-data-attribute: false,
+  $breakpoints: (
+    "md": $width-md,
+    "lg": $width-lg,
+  )
+) {
+  @if $use-data-attribute {
+    @each $name, $w in $breakpoints {
+      @include rwd-media(
+        $width: $w,
+        $height: $height,
+        $use-width: $use-width,
+        $use-height: $use-height,
+        $use-min-width: $use-min-width,
+        $use-min-height: $use-min-height
+      ) {
+        &[data-breakpoint='#{$name}'] {
+          @content;
+        }
+      }
+    }
+  } @else {
+    // 一般情況：直接吃你傳進來的 $width
+    @include rwd-media(
+      $width: $width,
+      $height: $height,
+      $use-width: $use-width,
+      $use-height: $use-height,
+      $use-min-width: $use-min-width,
+      $use-min-height: $use-min-height
+    ) {
+      @content;
+    }
+  }
+}
+
+@mixin rwd-hdpi($size: $width-lg) {
+  @media (max-width: $size) and (min-resolution: 110dpi) and (max-resolution: 190dpi) {
+    @content;
+  }
+}
+
+@mixin rwd-lv1-hdpi($size: $width-lg) {
+  @media (max-width: $size) and (min-resolution: 110dpi) and (max-resolution: 125dpi) {
+    @content;
+  }
+}
+
+@mixin rwd-dpi-min-custom-with-size($size: $width-lg, $min: 110dpi) {
+  @media (min-width: $size) and (min-resolution: $min) {
+    @content;
+  }
+}
+
+@mixin rwd-dpi-min-125() {
+  @media (min-resolution: 125dpi) {
+    @content;
+  }
+}
+
+@mixin rwd-between($min, $max) {
+  @media (min-width: $min) and (max-width: $max) {
+    @content;
+  }
+}
+
+%image-common-style {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+%link-common-style {
+  color: var(--blue-light-1000);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+%container-common-style {
+  width: 100%;
+  min-height: 100%;
+  padding-top: 64px;
+  display: flex;
+  flex-direction: column;
+}

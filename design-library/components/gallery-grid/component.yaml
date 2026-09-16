@@ -1,0 +1,66 @@
+schemaVersion: 1
+id: gallery-grid
+displayName: Gallery Grid
+classification: pattern
+status: pilot-approved
+rd:
+  sourcePackage: youcam-enhance-frontend
+  sourceVersion: 1.34.1
+  snapshot: yce-frontend-gm-260909
+  portability: drop-in
+  sourcePaths:
+    - src/components/my-gallery-page/components/gallery-grid/index.js
+    - src/components/my-gallery-page/components/gallery-grid/index.module.scss
+  sourceHashes:
+    - { path: src/components/my-gallery-page/components/gallery-grid/index.js, sha256: 1cea04289b32670a415c97c60c1fdfb8512b8ee48569cced3834ee9a46e4b261 }
+    - { path: src/components/my-gallery-page/components/gallery-grid/index.module.scss, sha256: 9a6a1cf272bf986c8e37c42a748d07d2d391f58875b4a86a937eeae30855b5e6 }
+figma: { status: pending, fileKey: null, componentSetNodeId: null, variants: [] }
+implementation:
+  importPath: platform/ui/gallery-grid/index.js
+  storyId: ui-gallery-grid
+  framework: react
+  dependencies: [react]
+  removedDependencies: [device-detection]
+  localFiles:
+    - path: platform/ui/gallery-grid/GalleryGrid.jsx
+      sha256: 1ebf5d6cccef9231cf70cd7d6b03d524639ceeeead2c31f7aa688a80078fe2c8
+    - path: platform/ui/gallery-grid/GalleryGrid.module.scss
+      sha256: d90e931258941c5fd24e37dba1ad61ac70d7b153fa98d0eaeeba813742d6cb96
+    - path: platform/ui/gallery-grid/GalleryGrid.stories.jsx
+      sha256: e257733053b40a2cbaf6d88acbe952d69ca3f82a6bb1143c8cbac564a0b28b2c
+    - path: platform/ui/gallery-grid/aspectRatio.js
+      sha256: a9d8205445efc8c5499f0393b27bbb211406d2aa533ba70a35fcc9270b3d37c1
+    - path: platform/ui/gallery-grid/useMediaRatios.js
+      sha256: e38ca21de248439077696c1749e90aecc7e57bccb029ba0d9d5599d292fe12f7
+    - path: platform/ui/gallery-grid/index.js
+      sha256: 4c0c24e1feb7fbf813208c89cf25b0d56e3e2561820bb5560ed4415a8c62de91
+  localFilesUpdated: 2026-09-15
+publicApi:
+  props:
+    - { name: items, required: true }
+    - { name: getKey, required: true }
+    - { name: renderCell, required: true }
+    - { name: getRatio, required: false }
+    - { name: getMedia, required: false }
+    - { name: rowHeight, required: false }
+    - { name: normalizeRatio, required: false }
+    - { name: layout, required: false, values: [auto, justified, masonry] }
+    - { name: onErroredSrc, required: false }
+    - { name: className, required: false }
+  states: [justified, masonry, measuring, empty]
+tokens:
+  lockPath: platform/tokens/tokens.lock.json
+  uses: []
+assets: []
+review:
+  pilotApprover: { actor: pm, id: collab-space-owner, date: 2026-09-15 }
+  canonicalReview: { designer: pending, rd: pending }
+decisionBasis:
+  - "Promoted from the RD port (2026-09-15) for Cloud Storage. RD's my-gallery-page/components/gallery-grid owns the justified layout every gallery family renders, and the algorithm is load-bearing rather than incidental: each cell's width is `rowHeight * ratio` and its `flex-grow` is that same number, so a row stretches up from the 200px base to fill the container, while a `maxWidth` of `240 * ratio` makes 240 a hard ceiling rather than a suggestion. Hand-rewriting that from a screenshot produces rows that look approximately right and drift under mixed ratios, which is exactly what validate:geometry exists to catch."
+  - "`.afterSeat` with `flex-grow: 9999999` absorbs the leftover space on the final incomplete row so its cells keep base size and stay left-aligned. Without it a lone portrait on the last row stretches to the full container width and renders as a giant cell — RD's own comment records this, and it is kept verbatim."
+  - "The 2-column masonry is built as two explicit flex columns rather than CSS `column-count`, because iOS Safari fails to resolve an aspect-ratio box's height inside a multicol fragmentation context and collapses the second column. Items are packed greedily into the shorter column, with height taken as 1/ratio since both columns are equal width. Carried over unchanged from RD."
+  - "Single deviation from the RD source (2026-09-15): RD switches to the masonry via `useWindowDevice().isMd`, which reads the real browser viewport. That hook is replaced by a ResizeObserver on the grid's own element plus an explicit `layout` prop. Two reasons, both precedent in this pilot: a viewport-width hook ignores a narrow wrapper entirely, so a fixed-width Storybook story could never render the masonry — the same failure navigation-header hit with @media and solved with container queries — and the masonry needs greedy column packing in JS, which a pure CSS container query cannot express, so a ResizeObserver is the JS equivalent of the container query the rest of this pilot uses. RD can reverse this by swapping the observer back for its own hook; nothing else in the file changed, which is why portability stays drop-in."
+  - "`layout` defaults to `auto`. Before the first ResizeObserver callback the grid renders justified, matching RD's own server-render behaviour where `isMd` starts false."
+  - "The two ratio helpers travel with the component rather than staying separate: `useMediaRatios` measures true dimensions off-DOM (an image's naturalWidth, a video's videoWidth — a video's poster ratio can differ from the clip's, so the clip itself is measured) and `aspectRatio.js` supplies the metadata fallback and `bucketRatio`. Both are ported from src/components/my-gallery-page/hooks/use-media-ratios.js (sha256 0f5eb7f9c5db2b47…) and use-aspect-ratio.js (sha256 ad55dfaa6afa5531…). Neither file is in the vendored baseline subset, so they are named in this entry from migration/rd-intake-inventory.json rather than listed under sourceHashes, which would imply a local file validate:rd-parity could actually check."
+  - "`tokens.uses` is empty and the SCSS declares no colour at all: this component is pure layout, and every colour in a gallery belongs to the cell it renders. That keeps the grid reusable for Projects, Images, Videos, Uploads and Trash without a per-family variant."
+  - "Stories cover the one axis Controls cannot express — justified versus masonry — because the breakpoint is a measured width, not a prop. The masonry story forces `layout` inside a 375px wrapper rather than relying on the preview viewport, which is the concrete case the ResizeObserver change exists to support. `rowHeight` and `layout` stay as Controls; items, the render callbacks and onErroredSrc are pulled from the Controls table under the same 'not actually editable there' convention this pilot applies elsewhere."

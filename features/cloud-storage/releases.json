@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 2,
+  "feature": "cloud-storage",
+  "currentStage": "intake",
+  "pendingTransition": null,
+  "transitions": [],
+  "downstreamOutputs": []
+}

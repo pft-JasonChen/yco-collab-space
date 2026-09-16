@@ -1,0 +1,120 @@
+/* Confirmation dialog and its portal overlay, ported from RD common/modal and
+   my-gallery-page/tabs/gallery/components/delete-confirm-modal.
+
+   Colours follow app/src/surfaces/rd-port/token-colour-mapping.json; the three
+   approximations it records are itemised in this component's component.yaml. */
+
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--fill-overlay-weak);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 13;
+  padding: 20px 10%;
+  opacity: 0;
+  transition: opacity 400ms ease;
+  overflow: hidden auto;
+  overscroll-behavior-y: contain;
+}
+
+.opened {
+  opacity: 1;
+  z-index: 13;
+}
+
+/* RD collapses the closed container to zero and parks it off-screen rather than
+   unmounting, so the exit transition can finish. Kept as-is. */
+.closed {
+  max-width: 0;
+  max-height: 0;
+  overflow: hidden;
+  top: -100px;
+}
+
+.modal {
+  background-color: var(--fill-white);
+  border-radius: var(--corner-radius-16);
+  position: relative;
+  overflow: hidden;
+  margin: auto;
+  width: 446px;
+  max-width: calc(100vw - 40px);
+  padding: 30px 23px 15px;
+  display: flex;
+  flex-direction: column;
+  color: var(--grey-slate-solid-850);
+}
+
+.modalWithScaleTransition {
+  transition: transform 400ms ease;
+  transform: scale(0);
+}
+
+.modalOpen {
+  transform: scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .container,
+  .modalWithScaleTransition {
+    transition: none;
+  }
+}
+
+.title {
+  margin: 0 0 10px;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: var(--font-weight-weak);
+  line-height: normal;
+}
+
+.desc {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: var(--font-weight-weak);
+  line-height: 22px;
+  margin-bottom: 20px;
+}
+
+/* RD's confirm is a wide pill aligned to the end of the column, with the cancel
+   as a plain text row beneath — not a two-button footer. */
+.confirmButton {
+  align-self: stretch;
+  border-radius: 120px;
+}
+
+.cancelButton {
+  display: inline-block;
+  border: 0;
+  background: transparent;
+  font-size: 14px;
+  line-height: normal;
+  padding: 9px 0;
+  margin: 10px auto 0;
+  color: var(--grey-neutral-solid-800);
+  cursor: pointer;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.close img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}

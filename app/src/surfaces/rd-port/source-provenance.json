@@ -1,0 +1,390 @@
+{
+  "snapshot": "yce-frontend-gm-260909",
+  "status": "integration-in-progress",
+  "files": [
+    {
+      "target": "GalleryGrid.jsx",
+      "source": "src/components/my-gallery-page/components/gallery-grid/index.js",
+      "sourceSha256": "1cea04289b32670a415c97c60c1fdfb8512b8ee48569cced3834ee9a46e4b261",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "GalleryGrid.module.scss",
+      "source": "src/components/my-gallery-page/components/gallery-grid/index.module.scss",
+      "sourceSha256": "9a6a1cf272bf986c8e37c42a748d07d2d391f58875b4a86a937eeae30855b5e6",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "GalleryCell.jsx",
+      "source": "src/components/my-gallery-page/components/gallery-cell/index.js",
+      "sourceSha256": "27b87b7bdefc1e9d609ccf90f699f349207e4813b8502abff31003b924ce7cf9",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "GalleryCell.module.scss",
+      "source": "src/components/my-gallery-page/components/gallery-cell/index.module.scss",
+      "sourceSha256": "25b5b19a96fa2e85298b15cdc16364c28faa99461478fa5bd7deac1ec59a4cc7",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "Tab.jsx",
+      "source": "src/components/my-gallery-page/components/tab/index.js",
+      "sourceSha256": "2e5f17788585604c206e938df4bcd04071f406b4a7cda6abf17bde15e5264d53",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "Tab.module.scss",
+      "source": "src/components/my-gallery-page/components/tab/index.module.scss",
+      "sourceSha256": "b1d56ff2384992f32e72b65e158dd9ec5dff1f0d03d43e496497f3336828a541",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "SelectAllHeader.jsx",
+      "source": "src/components/my-gallery-page/components/select-all-header/index.js",
+      "sourceSha256": "247f63ef48592eb89c78548c131383ff5f46f61ecff24757876dfda35d15bdfd",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "EditingToolbar.jsx",
+      "source": "src/components/my-gallery-page/components/editing-toolbar/index.js",
+      "sourceSha256": "b53f0f1e558cf1a98da3c054ec00a1423bcf6c392e6735b747e114919551998d",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "CellActions.jsx",
+      "source": "src/components/my-gallery-page/tabs/gallery/components/cell-actions/index.js",
+      "sourceSha256": "8464543277d1d12b0dd40f850d77e72064bc38b76ac397aa359ef9f96fa6b94d",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "CellActions.module.scss",
+      "source": "src/components/my-gallery-page/tabs/gallery/components/cell-actions/index.module.scss",
+      "sourceSha256": "2152bd8b85b05400f6cea83be7219339f414a7da570c9e00c311fec1b9b516da",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "bottom-sheet.jsx",
+      "source": "src/components/my-gallery-page/tabs/gallery/components/cell-actions/bottom-sheet.js",
+      "sourceSha256": "bd4ac9bd5558eef113026372e4d9f030b764a45b2630d4406749f405697ea1c3",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "bottom-sheet.module.scss",
+      "source": "src/components/my-gallery-page/tabs/gallery/components/cell-actions/bottom-sheet.module.scss",
+      "sourceSha256": "3317be27787b03f18b211a24319d8fe5f75b25b1c09ddb82fde78c77ed0a2915",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "sheet-icons.jsx",
+      "source": "src/components/my-gallery-page/tabs/gallery/components/cell-actions/sheet-icons.js",
+      "sourceSha256": "3c0a9836da20fd12ef367113979651af41d6918b8eaf3d183934e63e46861408",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "use-media-ratios.js",
+      "source": "src/components/my-gallery-page/hooks/use-media-ratios.js",
+      "sourceSha256": "0f5eb7f9c5db2b4757185d25e7e5042b18cab22a8082ab1a4be5951b0ea5765f",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "use-aspect-ratio.js",
+      "source": "src/components/my-gallery-page/hooks/use-aspect-ratio.js",
+      "sourceSha256": "ad55dfaa6afa5531b063b99df939496be940ed345e2337b34d1a388ee76a94df",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "GalleryPage.module.scss",
+      "source": "src/components/my-gallery-page/index.module.scss",
+      "sourceSha256": "9424e216d9a0df0b805d9fe9f4a9e2642e2c4c800a243ff2ceb683d569eea8d8",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "Gallery.module.scss",
+      "source": "src/components/my-gallery-page/tabs/gallery/gallery.module.scss",
+      "sourceSha256": "1c966073b2a5f378d1bc4012437fae36cc9dd2b825b6e284a0220ca8fe49f830",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "Card.jsx",
+      "source": "src/components/strapi/components/gridmodulesection/components/cardsV2/index.js",
+      "sourceSha256": "6c3c9f8de5f8910698e1d4c0df077c19894afb46e41ac92bc9890fd7ea6734e9",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "Card.module.scss",
+      "source": "src/components/strapi/components/gridmodulesection/components/cardsV2/index.module.scss",
+      "sourceSha256": "49689a302f10e9cda0a406db6ffcf508f2653486c8e9ec57e5e646beda28b966",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "HomeCategory.jsx",
+      "source": "src/components/strapi/components/gridmodulesection/components/homeCategory/index.js",
+      "sourceSha256": "779d6e307ad296af320466caa78bfd6a14b95581b5551c1c11082940e47b8237",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "HomeCategory.module.scss",
+      "source": "src/components/strapi/components/gridmodulesection/components/homeCategory/index.module.scss",
+      "sourceSha256": "f85f74be1e1ffd6244e9d7e4ad8b468c0183aa9d355cf46d690f6aa9c170801b",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "CategoryBasket.jsx",
+      "source": "src/components/strapi/components/gridmodulesection/components/categoryBasket/index.js",
+      "sourceSha256": "0ebe0115aeed78c5c299ae4bce0eada04c95b9be23d4c370422d0e621d785237",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "CategoryBasket.module.scss",
+      "source": "src/components/strapi/components/gridmodulesection/components/categoryBasket/index.module.scss",
+      "sourceSha256": "0169ec9f90a5379dc7bb4f475264da44069eef386a1fcd5eb936f5165455d8c2",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "StartEditingButton.jsx",
+      "source": "src/components/strapi/components/gridmodulesection/components/homeCategory/start-editing-button/index.js",
+      "sourceSha256": "7751996e34969ae3cffe067d2fb1976958206fc55873865d4b185b4120fba922",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "StartEditingButton.module.scss",
+      "source": "src/components/strapi/components/gridmodulesection/components/homeCategory/start-editing-button/index.module.scss",
+      "sourceSha256": "f8b01d6309a578163acd1a94c61df023532b01a9781e22d0f8c22a58152efe34",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "HomeLayout.jsx",
+      "source": "src/components/strapi/components/gridmodulesection/layouts/layout1300.js",
+      "sourceSha256": "ea0612c226135f34d584a03f708dd069a113e63c9ae67f7aca51ee1d6f8dfdb3",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "HomeLayout.module.scss",
+      "source": "src/components/strapi/components/gridmodulesection/index.module.scss",
+      "sourceSha256": "3448eabd580f4fe325c471776d7cc38607fe2f47bdc7221d493d938d5a5efe10",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "category-name-utils.js",
+      "source": "src/components/strapi/components/gridmodulesection/utils/category-name-utils.js",
+      "sourceSha256": "025b310a635564212a92aee882641b5c280040d5bedeee4f8a4961f2a4f6dde2",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "hot-new-tag-utils.js",
+      "source": "src/components/strapi/components/gridmodulesection/utils/hot-new-tag-utils.js",
+      "sourceSha256": "8d89968658f4a396600ed4ccfcfaed33cf0eacf371ccafa17f2ea400c22f4c1f",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "NewLabel.jsx",
+      "source": "src/components/common/headers/components/new-label/index.js",
+      "sourceSha256": "5b13dac72d901bc549764d7ef7adac328a358cca32b8ce3bb2b7abcc5069fb46",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "NewLabel.module.scss",
+      "source": "src/components/common/headers/components/new-label/index.module.scss",
+      "sourceSha256": "0f021dd8839aa650286d3d91976a90aec28fb840afa7b288901a902f881f0b5c",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "variables.scss",
+      "source": "src/styles/variables.scss",
+      "sourceSha256": "cb60a3acfc31eb9fe8c4391b6f33afcf674e0f73ded3d5bf2afd5e4057ba8830",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "breakpoints.module.scss",
+      "source": "src/styles/breakpoints.module.scss",
+      "sourceSha256": "c5c725f98fc168d64bce2f9f0fde061f2f6e824506ef624703484d21bdc72254",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "ImageLazyLoad.jsx",
+      "source": "src/components/common/image-lazy-load/index.js",
+      "sourceSha256": "31de647abbe933b87aa2d67cb3037b93d08c9726ca6260657a3a7391d0834e9c",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "ImageLazyLoad.module.scss",
+      "source": "src/components/common/image-lazy-load/index.module.scss",
+      "sourceSha256": "ee0c6601d8101f64cd92f67b8c1d07385907956ba33e98bf83e403d7bc1390da",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "ExternalLink.jsx",
+      "source": "src/components/common/headers/components/external-link/index.js",
+      "sourceSha256": "ed49fbc10ecee1667ac33a1ed189e2adb2f215aa8831eee95fcbe3d7e3638fee",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "HiddenFileInput.jsx",
+      "source": "src/components/result-page/common/hidden-file-input/index.js",
+      "sourceSha256": "c5fbb0568ec1f07a855ab44ff5640dea4c331cf321e5ca7def3a63ac13d4b799",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "swiper-config.js",
+      "source": "src/components/strapi/components/gridmodulesection/utils/swiper-config.js",
+      "sourceSha256": "c0d1cfc724b559999e8eefb3eb093ddf5bccd7097a2d3acb4dfa6a4aa650d2a9",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "use-window-device.js",
+      "source": "src/hooks/use-window-device.js",
+      "sourceSha256": "07dd3d31da86e76c57ec2f8397a8b6e3cd7afbb3344ef45b70229b547d5a4205",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "use-window-width.js",
+      "source": "src/hooks/use-window-width.js",
+      "sourceSha256": "36dc0835e053e0b1075d1b6015e1825152a70e21ef1b00075d258c01008f1fde",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "Portal.jsx",
+      "source": "src/components/portal/index.js",
+      "sourceSha256": "aaaf3b0f8ae3ffbac34371cf795418456b4054e40dfb0d536fffd771196b63ec",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "en.json",
+      "source": "src/i18n/json/en.json",
+      "sourceSha256": "5f01522132defac1795e5f446a584d46b6e9905b89b051dc80e4c8a53414c829",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "Logo.jsx",
+      "source": "src/components/common/headers/components/logo/logo.js",
+      "sourceSha256": "b4253262bbe9c039d55c3dd3dfed57276280b0d1d7bd7180ea6ccacb392c2709",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "Logo.module.scss",
+      "source": "src/components/common/headers/components/logo/logo.module.scss",
+      "sourceSha256": "a8b16700377873b468dfae0f7ebb193738d004e3efec1ff4f59254ad86fcc5b4",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "Header.module.scss",
+      "source": "src/components/common/headers/index.module.scss",
+      "sourceSha256": "0f82e7dd4b50467c7311c2df0f4d1a5843268f99220121280b89b61ad907167b",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "GeneralPricing.jsx",
+      "source": "src/components/common/headers/components/pricing-icon/general-pricing/index.js",
+      "sourceSha256": "798e5691f3e059d73693faac12db540ab56edbfe6617813281c92f85873d786e",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "GeneralPricing.module.scss",
+      "source": "src/components/common/headers/components/pricing-icon/general-pricing/index.module.scss",
+      "sourceSha256": "f3a5b458ca4a5600082507e68886f1988f38dae09fa330eabfd2fbfb77cb45a3",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "ColorButton.jsx",
+      "source": "src/components/common/headers/components/color-button/color-button.js",
+      "sourceSha256": "1a7572661f27497d6deb9d2466d848ecc090aea5753a3857023cc76c710895eb",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "ColorButton.module.scss",
+      "source": "src/components/common/headers/components/color-button/color-button.module.scss",
+      "sourceSha256": "daad65cf3571f9f69c52ef30d7b12820be1d9976de099d6076314db27c54e6cf",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "ButtonWrapper.jsx",
+      "source": "src/components/common/button-wrapper/index.js",
+      "sourceSha256": "665fc38dc350168489d537eed78e79d5d17b0f709c26f6bc87fa22a0a9c6498a",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "ButtonWrapper.module.scss",
+      "source": "src/components/common/button-wrapper/index.module.scss",
+      "sourceSha256": "d4cbe89f13804878618f774ca8d11a1aa3db4461169c7e548fdeab14c5cd023b",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "buttonWrapperTypes.js",
+      "source": "src/components/common/button-wrapper/types/buttonWrapperTypes.js",
+      "sourceSha256": "1dec536935002c7c3467e8ea078a402f55cb2d393f5f4fa84e64f234df5821b4",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "DragScrollWrapper.jsx",
+      "source": "src/components/common/drag-scroll-wrapper/index.js",
+      "sourceSha256": "3fac8cd782779a730a05f5781dfda9125ecfdc668ea90903316aacddfa36b295",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "use-momentum-tracking.js",
+      "source": "src/components/common/drag-scroll-wrapper/use-momentum-tracking.js",
+      "sourceSha256": "85f3868f9f88aa6d6163ec628cf6b9388f8367e7ebbc3e24d45b28f197970e61",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "DeleteConfirmModal.jsx",
+      "source": "src/components/my-gallery-page/tabs/gallery/components/delete-confirm-modal/index.js",
+      "sourceSha256": "52309500613a74c14bfed09bcc01ffd04d135c75a90339dea870b53e7e329b0d",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "DeleteConfirmModal.module.scss",
+      "source": "src/components/my-gallery-page/tabs/gallery/components/delete-confirm-modal/index.module.scss",
+      "sourceSha256": "22ac0a8a6d4603c73b9d8709a75f9ed9f2e97ed74a989e965ffec23aead7afaf",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "MyGalleryPage.jsx",
+      "source": "src/components/my-gallery-page/index.js",
+      "sourceSha256": "4429ebdbf729b0272394f095f4b696c272be6dfc0e9d43c6729efae502ba7765",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "use-gallery-page-logic.js",
+      "source": "src/components/my-gallery-page/hooks/use-logic.js",
+      "sourceSha256": "60d2df7b92fbf7e51efefe66d8a10c507deb434939af2edafa1e72ab53da5556",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "use-switch-tab.js",
+      "source": "src/components/my-gallery-page/hooks/use-switch-tab.js",
+      "sourceSha256": "2e567deb18a266bda6bb96e797ce7b96c12606ee8bb43087703524bd2bf217e0",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "Modal.jsx",
+      "source": "src/components/common/modal/index.js",
+      "sourceSha256": "57750d3170a0da5aa89349a909083438462d161484fb9750de5ce25f85860cd1",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "Modal.module.scss",
+      "source": "src/components/common/modal/index.module.scss",
+      "sourceSha256": "905742acb0bccca4f4b75a55362f4a854990d72b983296877d940b07142b6ab8",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "ConfirmCancellationButton.jsx",
+      "source": "src/components/common/message-dialog/buttons/confirm-cancellation-button/index.js",
+      "sourceSha256": "f9a42c9ef7406a54cf6c0c5a887913e2897d3ed6282fa7c18c01cd71bf0191f4",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "ConfirmCancellationButton.module.scss",
+      "source": "src/components/common/message-dialog/buttons/confirm-cancellation-button/index.module.scss",
+      "sourceSha256": "d2fff80d63701d473a3c52c3767536531623b3353ccd21c25613b166741935e5",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    },
+    {
+      "target": "HomeContainer.module.scss",
+      "source": "src/components/home/components/layout/index.module.scss",
+      "sourceSha256": "df15cf3b9551aa057b642d5869132dedc61db22701f50b9322f6fc31469cb1be",
+      "changes": "Import paths and local asset references; service dependencies replaced by local adapters. See source diff; not a claim of rendered parity."
+    }
+  ]
+}

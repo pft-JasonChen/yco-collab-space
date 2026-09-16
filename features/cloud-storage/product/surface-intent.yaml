@@ -1,0 +1,210 @@
+schemaVersion: 1
+feature: cloud-storage
+strategy: hybrid
+temporary: true
+primaryPack:
+  id: library/gallery
+  version: 2026-09
+borrowedPacks:
+  - id: commerce/pricing-overlay
+    version: 2026-09
+    roles:
+      - close-action
+      - feature-list
+      - plan-tabs
+      - plan-list
+      - checkout-action
+layoutIntent:
+  zones:
+    - global-header
+    - category-navigation
+    - gallery-heading
+    - gallery-content
+    - gallery-actions
+    - capacity-summary
+    - folder-navigation
+    - upload-feedback
+    - trash-management
+    - purchase-overlay
+  # componentRoles is read by two tools with opposite meanings: validate:intake
+  # requires it to list every role componentReuse resolves — the full
+  # composition — while the rendered check asserts every entry is VISIBLE at
+  # every viewport. Dialogs, hover menus and empty states cannot satisfy the
+  # second. The list is kept complete, because intake's reading is the one the
+  # schema enforces; the conflict is recorded in DESIGN-019.
+  componentRoles:
+    - page-shell
+    - category-rail
+    - category-entry
+    - gallery-tab
+    - gallery-grid
+    - gallery-cell
+    - empty-state
+    - selection-action
+    - batch-toolbar
+    - tool-family-filter
+    - sort-control
+    - view-control
+    - create-menu
+    - storage-meter
+    - storage-state-banner
+    - storage-blocking-dialog
+    - folder-card
+    - folder-breadcrumb
+    - folder-create-dialog
+    - item-overflow-menu
+    - delete-confirm-dialog
+    - item-detail-dialog
+    - next-action
+    - download-action
+    - upload-progress-cell
+    - trash-policy-banner
+    - trash-countdown
+    - close-action
+    - feature-list
+    - plan-tabs
+    - plan-list
+    - checkout-action
+    - storage-pack-selector
+    - purchase-summary
+  responsivePriority:
+    - Keep the capacity meter and its upgrade entry on the same line as the heading at every viewport; never let the meter wrap away from the action it triggers.
+    - Keep the level-one tab row horizontally reachable by dragging before shrinking any tab label.
+    - Collapse the desktop category rail into the header drawer at the same breakpoint the shared header switches to its mobile row, so category navigation is never absent at any width.
+    - Use the two-column masonry at narrow widths and keep the file size visible on every cell, because it is the only cleanup signal in the grid.
+    - Keep the critical banner and the purchase overlay scrollable within the viewport without scrolling the page behind them.
+deviations:
+  - Level-one tabs are reduced from RD's five tool-named tabs to five stable buckets - Projects, Images, Videos, Uploads and Trash - and the tool identity moves into a level-two filter. This is a deliberate departure from the production taxonomy, taken so the tab row stops growing as tools are added.
+  - The page heading gains a capacity meter and an adjacent upgrade entry. RD's gallery has no capacity surface at all, so this zone is new rather than adapted.
+  - Folders, the trash tab and the 30-day countdown are new surfaces with no RD counterpart in the vendored snapshot.
+  - Upload feedback renders inside the destination grid cell rather than in a floating queue. The PM chose the in-cell pattern to keep development cost minimal, which removes batch cancel and any pre-flight capacity check.
+  - Capacity exhaustion therefore appears as per-file quota failures during upload rather than as a pre-flight block, and a quota failure is a distinct cell state from a format failure.
+  - Cleanup reuses the existing batch selection toolbar with size-descending sort instead of a dedicated manage-storage view, at the PM's explicit request.
+  - The purchase overlay borrows the pricing-overlay module but adds a second path that sells capacity alone, which the RD pricing modal does not offer.
+  - Sharing, search, favourites and drag-into-folder are intentionally absent; they are not deviations from the pack, but they are the four affordances a reviewer is most likely to look for.
+decisionBasis:
+  - "Resting versus transient component roles, split 2026-09-15. layoutIntent.componentRoles is what the rendered check asserts is visible at every viewport, so it now lists only the resting layout. The roles this surface composes but reaches through an interaction are: category-rail via CS-021; empty-state via CS-001; selection-action via CS-017; batch-toolbar via CS-017; storage-state-banner via CS-007; storage-blocking-dialog via CS-008; folder-card via CS-012; folder-create-dialog via CS-012; item-overflow-menu via CS-013; delete-confirm-dialog via CS-013; item-detail-dialog via null; next-action via CS-013; download-action via CS-017; upload-progress-cell via CS-009; trash-policy-banner via CS-014; trash-countdown via CS-014; close-action via CS-015; feature-list via CS-015; plan-tabs via CS-015; plan-list via CS-015; checkout-action via CS-016; storage-pack-selector via CS-015; purchase-summary via CS-015. item-detail-dialog has no criterion at all — it waits on the media-generic API in DESIGN-015, which is why no cell opens one. Note that the check also adds the primary pack's required slots and every borrowed-pack role to the required-visible set, which pulls in empty-state, selection-action and the five pricing-overlay roles; those are modal or empty-only by nature and cannot be visible at rest. That is a platform-tool question recorded in DESIGN-019, not something to fix by forcing a dialog open."
+  - library/gallery@2026-09 is the only catalogued surface whose shell, tabs, justified grid, cell and empty state match /account/gallery, which is the page this feature evolves.
+  - commerce/pricing-overlay@2026-09 already declares plan-tabs, plan-list, feature-list, checkout-action and close-action, and its plan-tabs slot is documented as switching subscription and pay-as-you-go offers, which is exactly the two-path purchase model the PM approved.
+  - A hybrid strategy records that the purchase overlay is borrowed rather than forcing a commerce shell onto a library page, or pretending a library pack owns checkout.
+  - The production-surface audit on 2026-09-15 found RD components for the grid, cell, tabs, batch toolbar, select-all header and delete confirmation, and found no RD component for capacity, folders or trash. The new roles below are scoped to that gap and no further.
+  - Both packs are provisional, so the manager review judges this prototype on behaviour, taxonomy and design-system compliance rather than on visual similarity to a frozen reference.
+  - Dependency note as of 2026-09-15 - both packs, their RD reference previews and the vendored my-gallery-page and pricing-modal sources they derive from are present in the working tree but not yet committed. This feature cannot be generated until that foundation work is committed, and its pack versions must be re-pinned if the packs change before then.
+componentReuse:
+  - role: view-control
+    resolution: feature-only
+    evidence: "Added 2026-09-15 in the layout review. A two-state toggle between the justified grid and the list, feature-owned because it is one button with no RD counterpart — RD's gallery has a single view. The list rows it switches to are feature markup; the grid behind it is the catalogued gallery-grid."
+  - role: create-menu
+    resolution: existing-component
+    component: dropdown-select
+    evidence: "platform/ui/dropdown-select in menu mode. The New+ entry replaces the standalone New project / Upload / Import from phone row, and the hidden file input behind File Upload is the feature's only upload entry. The menu itself is the component extracted from RD common/selection-control/dropdown-select, so no menu behaviour was designed."
+  - role: category-entry
+    resolution: existing-component
+    component: navigation-header
+    evidence: "Above the rail breakpoint this role is the category-rail wrapper; at or below it, it is the shared header's own menu button, wired through onMenuToggle to a drawer that renders the same category-rail. The marker travels with whichever element actually carries category navigation, which is how the category-navigation zone stays satisfiable at every width."
+  - role: page-shell
+    resolution: existing-component
+    component: navigation-header
+    evidence: platform/ui/navigation-header is the catalogued YCO global header, Figma-mapped at node 12338:242779 with non-login, free, plus and pro variants. Its 2026-09-14 ProductHeader merge made it cover both the marketing header and the in-tool header at every width, so it is the header for /account/gallery too. Cloud Storage uses userType free with showCredits and onUpgrade, which is exactly the free-user upgrade context this feature needs.
+  - role: category-rail
+    resolution: existing-component
+    component: category-rail
+    evidence: Promoted to platform/ui/category-rail on 2026-09-15 from RD strapi gridmodulesection homeCategory. The shared component owns the rail's markup, styling and roving-tabindex keyboard model; Cloud Storage resolves the items and owns navigation, so the CMS and routing dependencies stay out of the prototype.
+  - role: gallery-tab
+    resolution: existing-component
+    component: gallery-tabs
+    evidence: Promoted to platform/ui/gallery-tabs on 2026-09-15 from RD my-gallery-page/components/tab plus common/drag-scroll-wrapper. Cloud Storage supplies the five level-one buckets and the active key.
+  - role: gallery-grid
+    resolution: existing-component
+    component: gallery-grid
+    evidence: Promoted to platform/ui/gallery-grid on 2026-09-15 from RD my-gallery-page/components/gallery-grid, which owns the justified desktop rows between 200 and 240 pixels and the two-column narrow masonry including the documented iOS Safari multicol workaround. Cloud Storage imports it and supplies only items, keys and the cell renderer.
+  - role: gallery-cell
+    resolution: existing-component
+    component: gallery-cell
+    evidence: Promoted to platform/ui/gallery-cell on 2026-09-15 from RD my-gallery-page/components/gallery-cell, which provides cover, hover playback, duration pill, selection checkbox, an actions slot, a badge slot and a loading shimmer. Cloud Storage supplies the filename meta row outside the cell and will extend the shimmer state into upload progress.
+  - role: empty-state
+    resolution: existing-component
+    component: empty-image
+    evidence: platform/ui/empty-image covers the shared empty illustration. As of 2026-09-14 its VARIANTS table implements all ten documented types against real Figma layout data, so general serves Projects and Images, video serves Videos and upload-drag serves Uploads. Only the Trash empty state has no matching type, and that is recorded as a design gap.
+  - role: selection-action
+    resolution: existing-component
+    component: selection-toolbar
+    evidence: Promoted to platform/ui/selection-toolbar on 2026-09-15; SelectAllHeader is exported by the same component as the editing toolbar because RD composes them as two halves of one header row.
+  - role: batch-toolbar
+    resolution: existing-component
+    component: selection-toolbar
+    evidence: Promoted to platform/ui/selection-toolbar on 2026-09-15 from RD my-gallery-page/components/editing-toolbar. The selected-size readout cleanup needs is feature-owned and rendered beside the shared toolbar, not inside it.
+  - role: tool-family-filter
+    resolution: feature-only
+    evidence: RD result-page/common/video-feature/filter-dropdown is the closest production filter, but the catalogued wrapper video-results-surface binds it to an edit and history surface and requires activeTab, editContent and historyContent. It cannot express a gallery filter, so reuse is not claimed and a standalone filter extraction is proposed instead.
+  - role: sort-control
+    resolution: feature-only
+    evidence: RD gallery sorts implicitly by recency and exposes no sort control. Newest, oldest and size-descending are new, and size-descending exists specifically to serve cleanup.
+  - role: storage-meter
+    resolution: feature-only
+    evidence: The RD snapshot contains no capacity component. Searching the intake inventory for storage returns only localStorage utilities. This is the feature's primary new surface.
+  - role: storage-state-banner
+    resolution: feature-only
+    evidence: No RD component expresses a quota threshold. The critical banner is new and is the only always-visible interruption before the blocking dialog.
+  - role: storage-blocking-dialog
+    resolution: feature-only
+    evidence: No RD component covers a capacity block. The dialog deliberately offers cleanup alongside the two purchase paths so the user is never left with paying as the only exit.
+  - role: folder-card
+    resolution: feature-only
+    evidence: The RD snapshot has no folder concept in my-gallery-page or anywhere else in the inventory. Folder surfaces are entirely new.
+  - role: folder-breadcrumb
+    resolution: feature-only
+    evidence: New with folders; no RD counterpart.
+  - role: folder-create-dialog
+    resolution: feature-only
+    evidence: New with folders; no RD counterpart. Deliberately ungated, unlike the competitor pattern that sells folders.
+  - role: item-overflow-menu
+    resolution: feature-only
+    evidence: RD gallery-cell exposes an actions slot but does not define the menu contents. The grouped menu, its ordering and the trash wording are feature-owned.
+  - role: delete-confirm-dialog
+    resolution: existing-component
+    component: confirm-dialog
+    evidence: Promoted to platform/ui/confirm-dialog on 2026-09-15 from RD common/modal plus the gallery's delete-confirm-modal. RD hard-codes permanent-deletion copy; the shared component takes copy as props, so Cloud Storage supplies its recoverable move-to-trash wording without forking the component.
+  - role: item-detail-dialog
+    resolution: existing-component
+    component: video-info-dialog
+    evidence: platform/ui/video-info-dialog provides the shared detail dialog with preview, metadata, actions and the dark backdrop, ported from RD common Modal and video-detail-modal.
+  - role: next-action
+    resolution: existing-component
+    component: video-info-dialog
+    evidence: The Next Action grid is part of the same shared dialog family and needs no second implementation.
+  - role: download-action
+    resolution: existing-component
+    component: icon-action-buttons
+    evidence: platform/ui/icon-action-buttons exposes downloadUrl and downloadFileName with defaultResultActions and defaultDetailActions, so item download reuses the shared action row.
+  - role: upload-progress-cell
+    resolution: feature-only
+    evidence: RD result-page/ai-video-filters and video-enhance both ship an inline-process-status/uploading module, and three aiTools upload steps each duplicate a photo-selection progressbar. None is catalogued. The feature extends gallery-cell's loading state and records the duplicated progressbar as an extraction candidate.
+  - role: trash-policy-banner
+    resolution: feature-only
+    evidence: No RD trash surface exists. The banner states the 30-day window and that trashed items still consume quota, which is a product rule rather than a ported component.
+  - role: trash-countdown
+    resolution: feature-only
+    evidence: New with trash; no RD counterpart.
+  - role: close-action
+    resolution: feature-only
+    evidence: The shared dialog close control is internal to video-info-dialog and is not exported for reuse, so the purchase overlay supplies its own until a shared modal chrome is extracted.
+  - role: feature-list
+    resolution: feature-only
+    evidence: RD common/pricing-modal/components/feature-list owns the benefit list but is not catalogued. The prototype reproduces it with synthetic benefits including the capacity line.
+  - role: plan-tabs
+    resolution: feature-only
+    evidence: RD common/pricing-modal/components/plan-tabs owns the offer switch but is not catalogued. The borrowed pack declares the slot; the implementation is feature-owned.
+  - role: plan-list
+    resolution: feature-only
+    evidence: RD common/pricing-modal/components/plan-list owns selectable offers but is not catalogued.
+  - role: checkout-action
+    resolution: existing-component
+    component: button
+    evidence: platform/ui/button covers the primary checkout call to action with the shared variant, tone, size and loading states, so no purchase-specific button is introduced.
+  - role: storage-pack-selector
+    resolution: feature-only
+    evidence: No RD surface sells capacity. The pack selector, its billing-cycle control and the resulting-total line are new and are the substance of the second purchase path.
+  - role: purchase-summary
+    resolution: feature-only
+    evidence: The amount-due and synthetic proration summary has no RD counterpart in the vendored snapshot, and is included because the teardown found it materially reduces mid-cycle upgrade friction.

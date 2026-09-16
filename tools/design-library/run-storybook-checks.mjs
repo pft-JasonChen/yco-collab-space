@@ -250,6 +250,406 @@ const stories = [
       assert.equal(bounds.left >= 0 && bounds.right <= 768 && bounds.width > 0, true);
     },
   },
+  {
+    // The justified row is the whole point of this component: cells must share a
+    // row and the row must stay inside the 200-240px band. Asserting the band
+    // rather than exact heights keeps the check honest about what the algorithm
+    // actually guarantees.
+    id: 'ui-gallery-grid--justified',
+    async interact(page) {
+      const container = page.locator('[data-component-role="gallery-grid"]');
+      await container.waitFor({ state: 'visible' });
+      assert.equal(await container.getAttribute('data-layout'), 'justified');
+      const heights = await container.evaluate((element) =>
+        [...element.children]
+          .filter((child) => child.firstElementChild)
+          .map((child) => Math.round(child.getBoundingClientRect().height)),
+      );
+      assert.equal(heights.length > 0, true);
+      assert.equal(
+        heights.every((height) => height >= 200 && height <= 240),
+        true,
+        `justified rows must stay within 200-240px, got ${heights.join(', ')}`,
+      );
+    },
+  },
+  {
+    // The masonry is the one axis Controls cannot express, and the reason the
+    // component measures its own box instead of the viewport: this story forces
+    // the layout inside a 375px wrapper while the browser window stays wide.
+    id: 'ui-gallery-grid--masonry',
+    async interact(page) {
+      const container = page.locator('[data-component-role="gallery-grid"]');
+      await container.waitFor({ state: 'visible' });
+      assert.equal(await container.getAttribute('data-layout'), 'masonry');
+      assert.equal(await container.locator('> div').count(), 2);
+    },
+  },
+  {
+    id: 'ui-gallery-cell--image',
+    async interact(page) {
+      const cell = page.locator('[data-component-role="gallery-cell"]');
+      await cell.waitFor({ state: 'visible' });
+      assert.equal(await cell.getAttribute('data-state'), 'default');
+    },
+  },
+  {
+    // Selection mode must suppress the actions slot: a cell that showed both the
+    // checkbox and the overflow button at once would be two competing targets in
+    // the same corner.
+    id: 'ui-gallery-cell--selected',
+    async interact(page) {
+      const cell = page.locator('[data-component-role="gallery-cell"]');
+      await cell.waitFor({ state: 'visible' });
+      assert.equal(await cell.getAttribute('data-state'), 'editing');
+      assert.equal(await cell.getAttribute('data-selected'), 'true');
+    },
+  },
+  {
+    // The opt-in selection treatment: the box moves to the top-left, is a real
+    // checkbox rather than RD's decorative span, and one click both selects the
+    // item and reports it — no separate mode switch first.
+    id: 'ui-gallery-cell--hover-select-top-left',
+    async interact(page) {
+      const cell = page.locator('[data-component-role="gallery-cell"]').first();
+      await cell.waitFor({ state: 'visible' });
+      assert.equal(await cell.getAttribute('data-checkbox'), 'top-left');
+      assert.equal(await cell.getAttribute('data-checkbox-on-hover'), 'true');
+      assert.equal(await cell.getAttribute('data-selected'), 'false');
+
+      const box = cell.locator('[role="checkbox"]');
+      assert.equal(await box.getAttribute('aria-checked'), 'false');
+      await box.click();
+      assert.equal(await cell.getAttribute('data-selected'), 'true');
+      assert.equal(await box.getAttribute('aria-checked'), 'true');
+    },
+  },
+  {
+    // A value picker: opening keeps focus on the trigger and points at the
+    // highlighted row, which is what makes RD's combobox model work.
+    id: 'ui-dropdownselect--value-picker',
+    axeRules: brandContrastException,
+    async interact(page) {
+      const trigger = page.locator('[data-component-role="dropdown-select"] [role="combobox"]');
+      await trigger.waitFor({ state: 'visible' });
+      assert.equal(await trigger.getAttribute('aria-expanded'), 'false');
+      await trigger.click();
+      assert.equal(await trigger.getAttribute('aria-expanded'), 'true');
+
+      const list = page.locator('[role="listbox"]');
+      assert.equal(await list.isVisible(), true);
+      assert.ok(await trigger.getAttribute('aria-activedescendant'));
+
+      await page.locator('[role="option"][data-option-key="size"]').click();
+      assert.equal(await trigger.getAttribute('aria-expanded'), 'false');
+      // The closed menu stays in the DOM (hidden), so visibility is the check,
+      // not presence.
+      assert.equal(await list.isVisible(), false, 'the menu closes after a pick');
+      assert.equal(
+        await page.locator('[role="option"][data-selected="true"]').getAttribute('data-option-key'),
+        'size',
+      );
+    },
+  },
+  {
+    // The pill exists so on-photo glyphs stay legible: it carries the ground and
+    // the buttons are transparent. The menu's children stay valid — labelled
+    // runs are real groups, never bare dividers.
+    id: 'ui-cellactions--download-and-more',
+    async interact(page) {
+      const root = page.locator('[data-component-role="cell-actions"]');
+      await root.waitFor({ state: 'visible' });
+      assert.equal(await page.locator('[data-testid="cell-action-download"]').isVisible(), true);
+
+      const more = page.locator('[data-testid="cell-more"]');
+      assert.equal(await more.getAttribute('aria-haspopup'), 'menu');
+      assert.equal(await more.getAttribute('aria-expanded'), 'false');
+
+      const menu = page.locator('[data-testid="cell-menu"]');
+      assert.equal(await menu.isVisible(), false);
+      await more.click();
+      assert.equal(await menu.isVisible(), true);
+      assert.equal(await page.locator('[role="menuitem"]').count(), 6);
+      assert.equal(await page.locator('[data-component-role="cell-actions-group"]').count(), 2);
+      assert.equal(await menu.locator(':scope > hr').count(), 0);
+
+      const trash = page.locator('[role="menuitem"][data-option-key="trash"]');
+      assert.equal(await trash.getAttribute('data-destructive'), 'true');
+      assert.equal(await trash.getAttribute('data-menu-position'), 'last');
+
+      await page.keyboard.press('Escape');
+      assert.equal(await menu.isVisible(), false);
+    },
+  },
+  {
+    // A lone action drops the Download-to-More inset rather than keeping a gap
+    // where the second button would have been.
+    id: 'ui-cellactions--download-only',
+    async interact(page) {
+      const root = page.locator('[data-component-role="cell-actions"]');
+      await root.waitFor({ state: 'visible' });
+      assert.equal(await page.locator('[data-testid="cell-action-download"]').isVisible(), true);
+      assert.equal(await page.locator('[role="menuitem"]').count(), 0);
+    },
+  },
+  {
+    // Two independent radio groups in one menu: picking an order leaves the
+    // field's tick alone, which a single selectedKey could not express.
+    id: 'ui-dropdownselect--two-groups',
+    axeRules: brandContrastException,
+    async interact(page) {
+      const trigger = page.locator('[data-component-role="dropdown-select"] [role="combobox"]');
+      await trigger.waitFor({ state: 'visible' });
+      await trigger.click();
+      assert.equal(await page.locator('[data-component-role="dropdown-group"]').count(), 2);
+      assert.equal(await page.locator('[role="option"][data-selected="true"]').count(), 2);
+
+      await page.locator('[role="option"][data-option-key="asc"]').click();
+      await trigger.click();
+      assert.equal(
+        await page.locator('[role="option"][data-option-key="modified"]').getAttribute('data-selected'),
+        'true',
+        'changing the order leaves the field selected',
+      );
+      assert.equal(
+        await page.locator('[role="option"][data-option-key="asc"]').getAttribute('data-selected'),
+        'true',
+      );
+    },
+  },
+  {
+    // The ghost selection bar: a leading exit control and unfilled actions, with
+    // the destructive one carrying colour rather than a filled ground.
+    id: 'ui-selection-toolbar--ghost-selecting',
+    async interact(page) {
+      const bar = page.locator('[data-component-role="selection-toolbar"]');
+      await bar.waitFor({ state: 'visible' });
+      assert.equal(await bar.getAttribute('data-variant'), 'ghost');
+      assert.equal(await page.locator('[data-testid="selection-exit"]').isVisible(), true);
+      assert.equal(await page.locator('[data-testid="selection-toggle"]').count(), 0);
+      assert.equal(
+        await page.locator('[data-testid="selection-delete"]').getAttribute('data-destructive'),
+        'true',
+      );
+    },
+  },
+  {
+    // An action menu, not a value picker: menu/menuitem roles, no tick, and the
+    // destructive row is marked so it can be styled without the caller reaching
+    // into the component.
+    id: 'ui-dropdownselect--action-menu',
+    axeRules: brandContrastException,
+    async interact(page) {
+      const trigger = page.locator('[data-component-role="dropdown-select"] button').first();
+      await trigger.waitFor({ state: 'visible' });
+      assert.equal(await trigger.getAttribute('aria-haspopup'), 'menu');
+      await trigger.click();
+
+      const menu = page.locator('[role="menu"]');
+      assert.equal(await menu.isVisible(), true);
+      assert.equal(await page.locator('[role="menuitem"]').count(), 7);
+      assert.equal(await page.locator('[data-component-role="dropdown-group"]').count(), 3);
+
+      const trash = page.locator('[role="menuitem"][data-option-key="trash"]');
+      assert.equal(await trash.getAttribute('data-destructive'), 'true');
+
+      await page.keyboard.press('Escape');
+      assert.equal(await menu.isVisible(), false);
+    },
+  },
+  {
+    id: 'ui-gallery-cell--loading',
+    async interact(page) {
+      const cell = page.locator('[data-component-role="gallery-cell"]');
+      await cell.waitFor({ state: 'visible' });
+      assert.equal(await cell.getAttribute('data-state'), 'loading');
+    },
+  },
+  {
+    // The row is a real tab list: selecting moves aria-current, and the tabs are
+    // buttons rather than RD's click-handling divs, so they are keyboard
+    // reachable. Both are the reasons this was extracted rather than rebuilt.
+    id: 'ui-gallery-tabs--storage-sections',
+    // The active tab is RD's own `--text-brand` on the page ground: 2.45:1,
+    // below AA. Same class of accepted production pairing as the brand button,
+    // recorded as a design gap in the consuming feature rather than recoloured
+    // here — changing it would make the prototype disagree with production.
+    axeRules: brandContrastException,
+    async interact(page) {
+      const row = page.locator('[data-component-role="gallery-tab-row"]');
+      await row.waitFor({ state: 'visible' });
+      assert.equal(await page.locator('[data-component-role="gallery-tab"]').count(), 5);
+      const videos = page.locator('[data-tab-key="videos"]');
+      await videos.click();
+      assert.equal(await videos.getAttribute('aria-current'), 'page');
+      assert.equal(await page.locator('[data-testid="gallery-tab-red-dot"]').count(), 1);
+    },
+  },
+  {
+    id: 'ui-gallery-tabs--overflowing',
+    axeRules: brandContrastException,
+    async interact(page) {
+      const row = page.locator('[data-component-role="gallery-tab-row"]');
+      await row.waitFor({ state: 'visible' });
+      assert.equal(await page.locator('[data-component-role="gallery-tab"]').count(), 5);
+    },
+  },
+  {
+    // Out of selection mode there is exactly one action and no destructive one.
+    id: 'ui-selection-toolbar--browsing',
+    axeRules: brandContrastException,
+    async interact(page) {
+      const toolbar = page.locator('[data-component-role="selection-toolbar"]');
+      await toolbar.waitFor({ state: 'visible' });
+      assert.equal(await toolbar.getAttribute('data-editing'), 'false');
+      assert.equal(await page.locator('[data-testid="selection-delete"]').count(), 0);
+      await page.locator('[data-testid="selection-toggle"]').click();
+      assert.equal(await toolbar.getAttribute('data-editing'), 'true');
+    },
+  },
+  {
+    // Selection mode swaps the left side to a real checkbox — RD's own markup
+    // leaves an unbound input beside a span that carries the handler, so this
+    // asserts the repair rather than the port.
+    id: 'ui-selection-toolbar--selecting',
+    axeRules: brandContrastException,
+    async interact(page) {
+      // The input is deliberately visually hidden behind the styled ring, so it
+      // is driven the way a user drives it: by clicking the label. That the
+      // click reaches the real control at all is the repair being asserted —
+      // RD's own markup leaves the input unbound and the span carrying the
+      // handler, so a label click there toggles nothing.
+      const checkbox = page.locator('[data-testid="select-all-input"]');
+      await checkbox.waitFor({ state: 'attached' });
+      assert.equal(await checkbox.isChecked(), false);
+      await page.getByText('Select all').click();
+      assert.equal(await checkbox.isChecked(), true);
+      await page.locator('[data-testid="selection-delete"]').waitFor({ state: 'visible' });
+      await page.locator('[data-testid="selection-download"]').waitFor({ state: 'visible' });
+    },
+  },
+  {
+    id: 'ui-selection-toolbar--nothing-selected',
+    axeRules: brandContrastException,
+    async interact(page) {
+      assert.equal(await page.locator('[data-testid="selection-delete"]').isEnabled(), false);
+      assert.equal(await page.locator('[data-testid="selection-download"]').isEnabled(), false);
+    },
+  },
+  {
+    // Always a real dialog: the surface acceptance flagged the pricing overlay
+    // for opening without one, so this component asserts the role, the
+    // accessible name and that Escape dismisses it.
+    id: 'ui-confirm-dialog--move-to-trash',
+    axeRules: brandContrastException,
+    async interact(page) {
+      const dialog = page.getByRole('dialog');
+      await dialog.waitFor({ state: 'visible' });
+      assert.equal(await dialog.getAttribute('aria-modal'), 'true');
+      assert.equal((await dialog.getAttribute('aria-labelledby'))?.length > 0, true);
+      await page.locator('[data-testid="confirm-dialog-confirm"]').waitFor({ state: 'visible' });
+      await page.locator('[data-testid="confirm-dialog-cancel"]').waitFor({ state: 'visible' });
+      await page.keyboard.press('Escape');
+      await dialog.waitFor({ state: 'hidden' });
+    },
+  },
+  {
+    // The rail's whole reason for being extracted rather than rebuilt is the
+    // interaction model: a roving tabindex where exactly one row is tabbable,
+    // arrows move it, and Enter selects. RD moves the index but never the
+    // caret, so the focus-follows assertion is the repair.
+    id: 'ui-category-rail--gallery-selected',
+    axeRules: brandContrastException,
+    async interact(page) {
+      const rail = page.locator('[data-component-role="category-rail"]');
+      await rail.waitFor({ state: 'visible' });
+      const rows = rail.locator('button');
+      assert.equal(await rows.count(), 12);
+
+      const gallery = rail.locator('[data-key="gallery"]');
+      assert.equal(await gallery.getAttribute('aria-current'), 'page');
+      assert.equal(await gallery.getAttribute('tabindex'), '0');
+      assert.equal(
+        await rail.locator('button[tabindex="0"]').count(),
+        1,
+        'exactly one row may be tabbable',
+      );
+
+      await gallery.focus();
+      await page.keyboard.press('ArrowDown');
+      const focusedKey = await page.evaluate(() =>
+        document.activeElement?.getAttribute('data-key'),
+      );
+      assert.equal(focusedKey, 'video-template', 'focus follows the roving index');
+
+      await page.keyboard.press('Enter');
+      assert.equal(
+        await rail.locator('[data-key="video-template"]').getAttribute('aria-current'),
+        'page',
+      );
+    },
+  },
+  {
+    id: 'ui-category-rail--compact',
+    axeRules: brandContrastException,
+    async interact(page) {
+      const rail = page.locator('[data-component-role="category-rail"]');
+      await rail.waitFor({ state: 'visible' });
+      assert.equal(await rail.getAttribute('data-compact'), 'true');
+    },
+  },
+  {
+    // The surface acceptance recorded that the RD IAP preview opens without a
+    // dialog role. This overlay renders through the shared Modal with an
+    // accessible name always supplied, so the role, the tablist and Escape are
+    // all asserted here rather than left to a passing open/close test.
+    id: 'ui-pricing-overlay--subscription',
+    axeRules: brandContrastException,
+    async interact(page) {
+      const dialog = page.getByRole('dialog');
+      await dialog.waitFor({ state: 'visible' });
+      assert.equal(await dialog.getAttribute('aria-modal'), 'true');
+
+      const tabs = page.locator('[data-component-role="plan-tabs"]');
+      assert.equal(await tabs.getAttribute('role'), 'tablist');
+      const plus = page.locator('[data-tab-key="plus"]');
+      await plus.click();
+      assert.equal(await plus.getAttribute('aria-selected'), 'true');
+
+      // Selecting a card is what enables checkout; RD disables it until a plan
+      // is chosen and that gate is kept.
+      const monthly = page.locator('[data-plan-key="monthly"]');
+      await monthly.click();
+      assert.equal(await monthly.getAttribute('aria-pressed'), 'true');
+      assert.equal(await page.locator('[data-testid="pricing-checkout"]').isEnabled(), true);
+
+      await page.keyboard.press('Escape');
+      await dialog.waitFor({ state: 'hidden' });
+    },
+  },
+  {
+    // RD shows a static pill rather than a one-tab switcher when a single offer
+    // applies, so there must be no tablist at all here.
+    id: 'ui-pricing-overlay--single-offer',
+    axeRules: brandContrastException,
+    async interact(page) {
+      const tabs = page.locator('[data-component-role="plan-tabs"]');
+      await tabs.waitFor({ state: 'visible' });
+      assert.equal(await tabs.getAttribute('data-single'), 'true');
+      assert.equal(await page.locator('[role="tablist"]').count(), 0);
+    },
+  },
+  {
+    // Cloud Storage's capacity path reuses the same overlay with packs instead
+    // of tiers and no switcher.
+    id: 'ui-pricing-overlay--capacity-packs',
+    axeRules: brandContrastException,
+    async interact(page) {
+      await page.getByRole('dialog').waitFor({ state: 'visible' });
+      assert.equal(await page.locator('[data-component-role="plan-tabs"]').count(), 0);
+      assert.equal(await page.locator('[data-plan-key="pack-100"]').getAttribute('aria-pressed'), 'true');
+    },
+  },
 ];
 
 async function serverReady() {

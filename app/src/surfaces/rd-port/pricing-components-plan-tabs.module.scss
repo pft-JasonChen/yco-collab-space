@@ -1,0 +1,71 @@
+@import "./variables.scss";
+
+.blueText {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16.41px;
+  color: var(--fill-white);
+  padding: 7px 20px;
+  border-radius: 40px;
+  border: 1px solid var(--fill-disabled);
+  background: radial-gradient(208.4% 361.74% at 99.98% 0%, var(--blue-dark-1000) 0%, var(--fill-brand-strong) 63.71%);
+}
+
+.orangeText {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16.41px;
+  color: var(--fill-white);
+  padding: 7px 20px;
+  border-radius: 40px;
+  border: 1px solid var(--fill-disabled);
+  background: linear-gradient(89.77deg, var(--yellow-solid-1000) 0%, var(--amber-light-1000) 32.56%, var(--amber-light-1000) 99.8%);
+}
+
+.planTabs {
+  display: flex;
+  width: 100%;
+  height: 30px;
+  border-radius: 45px;
+  margin-right: 15px;
+  background: var(--fill-hover);
+  border: 1px solid var(--fill-disabled);
+
+  @include rwd-custom($width-sm) {
+    height: 36px;
+    margin-right: 0;
+    margin-bottom: 8px;
+  }
+}
+
+.tab {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 100%;
+  border-radius: 45px;
+  color: var(--text-weak);
+  cursor: pointer;
+}
+
+.holidayTab {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 100%;
+  border-radius: 45px;
+  color: var(--grey-slate-solid-900);
+  cursor: pointer;
+}
+
+.smallTab {
+  font-size: 11px;
+}

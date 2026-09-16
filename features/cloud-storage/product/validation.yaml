@@ -1,0 +1,757 @@
+schemaVersion: 1
+feature: cloud-storage
+# Selector convention, settled 2026-09-15 when the page was composed from shared
+# components. A shared component owns its own DOM and exposes a stable
+# `data-component-role` (plus per-item keys such as `data-tab-key`,
+# `data-option-key` / `data-plan-key`); it does not carry a consumer's test
+# taxonomy. Feature-owned elements keep `data-testid`. So a check that asserts
+# "the shared gallery tab row is what renders here" targets the role, and one
+# that asserts feature state targets the testid. Selectors that still find
+# nothing are recorded as real gaps in design-gaps.yaml, not re-pointed to make
+# a check pass.
+#
+# Every check runs at every configured viewport — the harness has no per-check
+# viewport filter — so a criterion about narrow layout has to be written so it
+# holds at all three.
+route: /features/cloud-storage/
+checks:
+  - id: initial-shell-and-meter
+    criterion: CS-001
+    assertions:
+      - type: visible
+        selector: "[data-testid='cloud-storage-page']"
+      - type: visible
+        selector: "[data-testid='navigation-header']"
+      - type: count
+        selector: "[data-component-role='gallery-tab']"
+        value: 6
+      - type: visible
+        selector: "[data-component-role='gallery-tab'][data-tab-key='projects']"
+      - type: visible
+        selector: "[data-component-role='gallery-tab'][data-tab-key='images']"
+      - type: visible
+        selector: "[data-component-role='gallery-tab'][data-tab-key='videos']"
+      - type: visible
+        selector: "[data-component-role='gallery-tab'][data-tab-key='agent']"
+      - type: visible
+        selector: "[data-component-role='gallery-tab'][data-tab-key='uploads']"
+      - type: visible
+        selector: "[data-component-role='gallery-tab'][data-tab-key='trash']"
+      - type: visible
+        selector: "[data-testid='storage-meter']"
+      - type: visible
+        selector: "[data-testid='storage-upgrade-entry']"
+      - type: attribute
+        selector: "[data-testid='gallery-heading']"
+        name: data-meter-adjacent
+        value: "true"
+      # Manage left the meter row in the 2026-09-15 layout review; cleanup is
+      # reached from the critical banner and the full dialog, which CS-007 and
+      # CS-008 assert.
+      - type: count
+        selector: "[data-testid='storage-manage-entry']"
+        value: 0
+  - id: two-level-taxonomy
+    criterion: CS-002
+    steps:
+      - action: click
+        selector: "[data-component-role='gallery-tab'][data-tab-key='images']"
+      - action: click
+        selector: "[data-testid='tool-family-filter'] [role='combobox']"
+    assertions:
+      - type: visible
+        selector: "[data-testid='tool-family-filter'] [data-option-key='all']"
+      # Nineteen features from the YCO feature-type sheet, under two group
+      # headers, plus the All entry.
+      - type: count
+        selector: "[data-testid='tool-family-filter'] [data-option-key]"
+        value: 19
+      - type: count
+        selector: "[data-testid='tool-family-filter'] [data-component-role='dropdown-group']"
+        value: 2
+      - type: visible
+        selector: "[data-testid='tool-family-filter'] [data-option-key='ai-headshot-generator']"
+      - type: visible
+        selector: "[data-testid='tool-family-filter'] [data-option-key='character-motion-swap']"
+      - type: attribute
+        selector: "[data-testid='tool-family-filter']"
+        name: data-level
+        value: "2"
+      - type: count
+        selector: "[data-component-role='gallery-tab']"
+        value: 6
+      # Media is a mixed-media control, so it is absent on the tabs that already
+      # separate image from video.
+      - type: count
+        selector: "[data-testid='media-filter']"
+        value: 0
+  - id: cell-shows-meta
+    criterion: CS-003
+    steps:
+      - action: click
+        selector: "[data-component-role='gallery-tab'][data-tab-key='images']"
+    assertions:
+      - type: visible
+        selector: "[data-component-role='gallery-cell'] >> nth=0"
+      - type: visible
+        selector: "[data-testid='cell-name'] >> nth=0"
+      - type: visible
+        selector: "[data-testid='cell-date'] >> nth=0"
+      # File size is deliberately absent: no competitor shows it and the
+      # cleanup path it served has been removed.
+      - type: count
+        selector: "[data-testid='cell-size']"
+        value: 0
+      - type: visible
+        selector: "[data-testid='cell-type'] >> nth=0"
+  - id: sort-field-and-order
+    criterion: CS-004
+    steps:
+      - action: click
+        selector: "[data-component-role='gallery-tab'][data-tab-key='images']"
+      - action: click
+        selector: "[data-testid='sort-control'] [role='combobox']"
+      - action: click
+        selector: "[data-testid='sort-control'] [data-option-key='created']"
+      - action: click
+        selector: "[data-testid='sort-control'] [role='combobox']"
+      - action: click
+        selector: "[data-testid='sort-control'] [data-option-key='asc']"
+    assertions:
+      - type: attribute
+        selector: "[data-testid='gallery-grid-section']"
+        name: data-sort
+        value: created
+      - type: attribute
+        selector: "[data-testid='gallery-grid-section']"
+        name: data-direction
+        value: asc
+      # Two labelled groups in the one menu, and no separate direction control.
+      - type: count
+        selector: "[data-testid='sort-control'] [data-component-role='dropdown-group']"
+        value: 2
+      - type: count
+        selector: "[data-testid='sort-direction']"
+        value: 0
+      # Name left the field list; the reference menu carries date fields only.
+      - type: count
+        selector: "[data-testid='sort-control'] [data-option-key='name']"
+        value: 0
+  - id: capacity-normal
+    criterion: CS-005
+    steps:
+      - action: select
+        selector: "[data-testid='review-usage-control']"
+        value: normal
+    assertions:
+      - type: attribute
+        selector: "[data-testid='storage-meter']"
+        name: data-state
+        value: normal
+      - type: count
+        selector: "[data-testid='storage-critical-banner']"
+        value: 0
+      - type: count
+        selector: "[data-testid='storage-full-dialog']"
+        value: 0
+  - id: capacity-warning
+    criterion: CS-006
+    steps:
+      - action: select
+        selector: "[data-testid='review-usage-control']"
+        value: warning
+    assertions:
+      - type: attribute
+        selector: "[data-testid='storage-meter']"
+        name: data-state
+        value: warning
+      - type: visible
+        selector: "[data-testid='storage-meter-remaining']"
+      - type: count
+        selector: "[data-testid='storage-critical-banner']"
+        value: 0
+  - id: capacity-critical-banner
+    criterion: CS-007
+    steps:
+      - action: select
+        selector: "[data-testid='review-usage-control']"
+        value: critical
+    assertions:
+      - type: attribute
+        selector: "[data-testid='storage-meter']"
+        name: data-state
+        value: critical
+      - type: visible
+        selector: "[data-testid='storage-critical-banner']"
+      - type: visible
+        selector: "[data-testid='banner-expand-action']"
+      # Cleanup was removed from the product: adding space is the only exit.
+      - type: count
+        selector: "[data-testid='banner-manage-action']"
+        value: 0
+  - id: capacity-full-offers-upgrade
+    criterion: CS-008
+    steps:
+      - action: select
+        selector: "[data-testid='review-usage-control']"
+        value: full
+      - action: click
+        selector: "[data-component-role='gallery-tab'][data-tab-key='uploads']"
+      - action: click
+        selector: "[data-testid='create-entry'] [aria-haspopup='menu']"
+      - action: click
+        selector: "[data-testid='create-entry'] [data-option-key='upload-file']"
+    assertions:
+      - type: visible
+        selector: "[data-testid='storage-full-dialog']"
+      - type: visible
+        selector: "[data-testid='full-upgrade-action']"
+      # The full-width red meter overlapped the close control and is removed.
+      - type: count
+        selector: "[data-testid='full-usage-meter']"
+        value: 0
+      # One action only.
+      - type: count
+        selector: "[data-testid='full-manage-action']"
+        value: 0
+      - type: count
+        selector: "[data-testid='full-pack-action']"
+        value: 0
+  - id: in-cell-upload-progress
+    criterion: CS-009
+    steps:
+      - action: click
+        selector: "[data-component-role='gallery-tab'][data-tab-key='uploads']"
+      - action: select
+        selector: "[data-testid='review-usage-control']"
+        value: normal
+      - action: set-files
+        selector: "[data-testid='upload-input']"
+        name: sample-upload.png
+        mimeType: image/png
+        value: synthetic upload payload
+    assertions:
+      - type: attribute
+        selector: "[data-testid='upload-cell'] >> nth=0"
+        name: data-upload-state
+        value: uploading
+      - type: visible
+        selector: "[data-testid='upload-cell-name'] >> nth=0"
+      - type: visible
+        selector: "[data-testid='upload-progress-bar'] >> nth=0"
+      - type: visible
+        selector: "[data-testid='upload-cancel'] >> nth=0"
+      # Progress lives in the cell, not in a separate queue panel.
+      - type: count
+        selector: "[data-testid='upload-queue']"
+        value: 0
+  - id: quota-failure-distinct-from-format
+    criterion: CS-010
+    steps:
+      - action: click
+        selector: "[data-component-role='gallery-tab'][data-tab-key='uploads']"
+      - action: select
+        selector: "[data-testid='review-usage-control']"
+        value: critical
+      - action: set-files
+        selector: "[data-testid='upload-input']"
+        name: oversized-batch.png
+        mimeType: image/png
+        value: synthetic oversized payload
+    assertions:
+      - type: attribute
+        selector: "[data-testid='upload-cell-failed'] >> nth=0"
+        name: data-upload-state
+        value: failed-quota
+      - type: visible
+        selector: "[data-testid='quota-failure-remove']"
+      - type: visible
+        selector: "[data-testid='quota-failure-expand']"
+      - type: count
+        selector: "[data-testid='quota-failure-retry']"
+        value: 0
+      - type: count
+        selector: "[data-testid='quota-failure-manage']"
+        value: 0
+  - id: format-failure-recovery
+    criterion: CS-011
+    steps:
+      - action: click
+        selector: "[data-component-role='gallery-tab'][data-tab-key='uploads']"
+      - action: set-files
+        selector: "[data-testid='upload-input']"
+        name: unsupported.txt
+        mimeType: text/plain
+        value: synthetic invalid payload
+    assertions:
+      - type: attribute
+        selector: "[data-testid='upload-cell-failed'] >> nth=0"
+        name: data-upload-state
+        value: failed-format
+      - type: visible
+        selector: "[data-testid='format-failure-choose-another']"
+      # A format failure offers no purchase: buying storage would not help.
+      - type: count
+        selector: "[data-testid='quota-failure-expand']"
+        value: 0
+  - id: folders-ungated
+    criterion: CS-012
+    steps:
+      - action: click
+        selector: "[data-component-role='gallery-tab'][data-tab-key='images']"
+      - action: click
+        selector: "[data-testid='create-folder-entry']"
+      - action: fill
+        selector: "[data-testid='folder-name-input']"
+        value: Campaign assets
+      - action: click
+        selector: "[data-testid='confirm-dialog-confirm']"
+      - action: click
+        selector: "[data-testid='folder-card'] >> nth=0"
+    assertions:
+      - type: count
+        selector: "[data-testid='create-folder-premium-badge']"
+        value: 0
+      - type: visible
+        selector: "[data-testid='folder-breadcrumb']"
+      - type: visible
+        selector: "[data-testid='breadcrumb-root']"
+      - type: attribute
+        selector: "[data-testid='gallery-grid-section']"
+        name: data-scope
+        value: folder
+  - id: overflow-menu-and-trash-wording
+    criterion: CS-013
+    steps:
+      - action: click
+        selector: "[data-component-role='gallery-tab'][data-tab-key='images']"
+      - action: hover
+        selector: "[data-component-role='gallery-cell'] >> nth=0"
+      - action: click
+        selector: "[data-testid='item-menu-trigger'] >> nth=0"
+    assertions:
+      - type: visible
+        selector: "[data-testid='item-menu'] >> nth=0"
+      # Download is its own button on the pill, so the menu carries three
+      # intent groups rather than four.
+      - type: visible
+        selector: "[data-testid='cell-action-download'] >> nth=0"
+      - type: count
+        selector: "[data-testid='item-menu'] >> nth=0 >> [data-component-role='cell-actions-group']"
+        value: 3
+      - type: attribute
+        selector: "[data-testid='item-menu'] >> nth=0 >> [data-option-key='trash']"
+        name: data-menu-position
+        value: last
+      - type: attribute
+        selector: "[data-testid='item-menu'] >> nth=0 >> [data-option-key='trash']"
+        name: data-destructive
+        value: "true"
+  - id: trash-policy-and-countdown
+    criterion: CS-014
+    steps:
+      - action: click
+        selector: "[data-component-role='gallery-tab'][data-tab-key='trash']"
+    assertions:
+      - type: visible
+        selector: "[data-testid='trash-policy-banner']"
+      - type: attribute
+        selector: "[data-testid='trash-policy-banner']"
+        name: data-counts-against-quota
+        value: "true"
+      - type: visible
+        selector: "[data-testid='trash-countdown'] >> nth=0"
+      - type: visible
+        selector: "[data-testid='trash-empty-all']"
+      - type: attribute
+        selector: "[data-testid='trash-grid']"
+        name: data-sort
+        value: date-moved
+  - id: two-path-purchase-overlay
+    criterion: CS-015
+    steps:
+      - action: click
+        selector: "[data-testid='storage-upgrade-entry']"
+      - action: click
+        selector: "[data-testid='plan-expand-storage-entry']"
+    assertions:
+      - type: visible
+        selector: "[data-component-role='pricing-overlay']"
+      - type: visible
+        selector: "[data-plan-key='pack-10']"
+      - type: visible
+        selector: "[data-plan-key='pack-100']"
+      - type: visible
+        selector: "[data-testid='pack-billing-cycle']"
+      - type: visible
+        selector: "[data-testid='pack-total']"
+      - type: visible
+        selector: "[data-testid='pack-back-to-plans']"
+  - id: purchase-resumes-failed-uploads
+    criterion: CS-016
+    steps:
+      - action: click
+        selector: "[data-component-role='gallery-tab'][data-tab-key='uploads']"
+      - action: select
+        selector: "[data-testid='review-usage-control']"
+        value: critical
+      - action: set-files
+        selector: "[data-testid='upload-input']"
+        name: oversized-batch.png
+        mimeType: image/png
+        value: synthetic oversized payload
+      - action: click
+        selector: "[data-testid='quota-failure-expand']"
+      - action: click
+        selector: "[data-plan-key='pack-100']"
+      - action: click
+        selector: "[data-testid='pricing-checkout']"
+    assertions:
+      - type: visible
+        selector: "[data-testid='purchase-success']"
+      - type: attribute
+        selector: "[data-testid='storage-meter']"
+        name: data-state
+        value: normal
+      - type: attribute
+        selector: "[data-testid='upload-cell'] >> nth=0"
+        name: data-upload-state
+        value: uploading
+      - type: count
+        selector: "[data-component-role='pricing-overlay']"
+        value: 0
+  - id: batch-toolbar-reports-selected-size
+    criterion: CS-017
+    steps:
+      - action: click
+        selector: "[data-component-role='gallery-tab'][data-tab-key='images']"
+      - action: hover
+        selector: "[data-component-role='gallery-cell'] >> nth=0"
+      - action: click
+        selector: "[data-component-role='gallery-cell'] >> nth=0 >> [role='checkbox']"
+    assertions:
+      - type: visible
+        selector: "[data-testid='batch-toolbar']"
+      - type: visible
+        selector: "[data-testid='selected-count']"
+      - type: visible
+        selector: "[data-testid='selected-size']"
+      - type: visible
+        selector: "[data-testid='selection-download']"
+      - type: visible
+        selector: "[data-testid='batch-move']"
+      - type: visible
+        selector: "[data-testid='selection-delete']"
+      - type: visible
+        selector: "[data-testid='selection-exit']"
+      # The toolbar's Select button is gone: the first click on a cell checkbox
+      # is what enters selection mode, so the shared toolbar only ever renders
+      # while editing, and its actions are low-weight rather than filled.
+      - type: attribute
+        selector: "[data-component-role='selection-toolbar']"
+        name: data-editing
+        value: "true"
+      - type: attribute
+        selector: "[data-component-role='selection-toolbar']"
+        name: data-variant
+        value: ghost
+  - id: responsive-reachability
+    criterion: CS-018
+    steps:
+      - action: select
+        selector: "[data-testid='review-usage-control']"
+        value: critical
+    assertions:
+      - type: visible
+        selector: "[data-testid='storage-meter']"
+      - type: visible
+        selector: "[data-testid='storage-critical-banner']"
+      - type: visible
+        selector: "[data-component-role='gallery-tab-row']"
+      - type: attribute
+        selector: "[data-component-role='gallery-tab-row']"
+        name: data-drag-scroll
+        value: "true"
+      - type: attribute
+        selector: "[data-testid='cloud-storage-page']"
+        name: data-horizontal-overflow
+        value: "false"
+  - id: view-toggle-grid-and-list
+    criterion: CS-019
+    steps:
+      - action: click
+        selector: "[data-component-role='gallery-tab'][data-tab-key='images']"
+      - action: click
+        selector: "[data-testid='view-toggle']"
+    assertions:
+      - type: attribute
+        selector: "[data-testid='gallery-grid-section']"
+        name: data-view
+        value: list
+      - type: visible
+        selector: "[data-testid='item-row'] >> nth=0"
+      - type: visible
+        selector: "[data-testid='row-thumbnail'] >> nth=0"
+      - type: visible
+        selector: "[data-testid='row-modified'] >> nth=0"
+      - type: count
+        selector: "[data-component-role='gallery-grid']"
+        value: 0
+  - id: create-control-per-tab
+    criterion: CS-020
+    steps:
+      - action: click
+        selector: "[data-component-role='gallery-tab'][data-tab-key='uploads']"
+      - action: click
+        selector: "[data-testid='create-entry'] [aria-haspopup='menu']"
+    assertions:
+      - type: visible
+        selector: "[data-testid='create-entry'] [data-option-key='upload-file']"
+      - type: visible
+        selector: "[data-testid='create-entry'] [data-option-key='upload-folder']"
+      - type: visible
+        selector: "[data-testid='create-entry'] [data-option-key='new-folder']"
+      - type: count
+        selector: "[data-testid='create-entry']"
+        value: 1
+      - type: count
+        selector: "[data-testid='import-phone-entry']"
+        value: 0
+  - id: create-control-single-action
+    criterion: CS-020
+    steps:
+      - action: click
+        selector: "[data-component-role='gallery-tab'][data-tab-key='images']"
+    assertions:
+      # One action left, so it is a button rather than a menu of one.
+      - type: visible
+        selector: "[data-testid='create-folder-entry']"
+      - type: count
+        selector: "[data-testid='create-entry']"
+        value: 0
+  - id: create-control-absent-in-trash
+    criterion: CS-020
+    steps:
+      - action: click
+        selector: "[data-component-role='gallery-tab'][data-tab-key='trash']"
+    assertions:
+      - type: count
+        selector: "[data-testid='create-entry']"
+        value: 0
+      - type: count
+        selector: "[data-testid='create-folder-entry']"
+        value: 0
+      - type: visible
+        selector: "[data-testid='trash-empty-all']"
+  - id: narrow-category-drawer
+    criterion: CS-021
+    assertions:
+      # One visible category entry at every viewport: the rail above the
+      # breakpoint, the header drawer below it. This is the surface-structure
+      # zone question the layout review settled.
+      - type: visible
+        selector: "[data-testid='category-entry']"
+      - type: count
+        selector: "[data-testid='category-entry']"
+        value: 1
+      - type: visible
+        selector: "[data-surface-zone='category-navigation']"
+  - id: agent-session-outputs
+    criterion: CS-022
+    steps:
+      - action: click
+        selector: "[data-component-role='gallery-tab'][data-tab-key='agent']"
+    assertions:
+      - type: visible
+        selector: "[data-component-role='gallery-cell'] >> nth=0"
+      # Each output names the conversation it came from, which is what a flat
+      # list of results would otherwise lose.
+      - type: visible
+        selector: "[data-testid='cell-session'] >> nth=0"
+      # A chat mixes images and videos, so the media filter applies here.
+      - type: count
+        selector: "[data-testid='media-filter']"
+        value: 1
+      - type: attribute
+        selector: "[data-testid='gallery-grid-section']"
+        name: data-media
+        value: all
+  - id: folder-header-replaces-title
+    criterion: CS-023
+    steps:
+      - action: click
+        selector: "[data-component-role='gallery-tab'][data-tab-key='images']"
+      - action: click
+        selector: "[data-testid='folder-card'] >> nth=0"
+    assertions:
+      - type: visible
+        selector: "[data-testid='folder-breadcrumb']"
+      - type: visible
+        selector: "[data-testid='breadcrumb-root']"
+      # The breadcrumb takes the title's place: neither the page title nor the
+      # tab row nor the capacity meter is present inside a folder.
+      - type: count
+        selector: "[data-testid='page-title']"
+        value: 0
+      - type: count
+        selector: "[data-component-role='gallery-tab']"
+        value: 0
+      - type: count
+        selector: "[data-testid='storage-meter']"
+        value: 0
+  - id: pro-plan-expands-rather-than-upgrades
+    criterion: CS-024
+    steps:
+      - action: click
+        selector: "[data-testid='demo-plan-pro']"
+    assertions:
+      # Pro is the top subscription, so the only thing left to buy is capacity.
+      - type: visible
+        selector: "[data-testid='storage-expand-entry']"
+      - type: count
+        selector: "[data-testid='storage-upgrade-entry']"
+        value: 0
+  - id: trash-table-and-row-menu
+    criterion: CS-025
+    steps:
+      - action: click
+        selector: "[data-component-role='gallery-tab'][data-tab-key='trash']"
+      - action: click
+        selector: "[data-testid='trash-row-menu'] >> nth=0"
+    assertions:
+      - type: visible
+        selector: "[data-testid='trash-table']"
+      - type: visible
+        selector: "[data-testid='trash-row'] >> nth=0"
+      - type: visible
+        selector: "[data-option-key='restore'] >> nth=0"
+      - type: visible
+        selector: "[data-option-key='delete-forever'] >> nth=0"
+      # People is a sharing column and sharing is out of scope for v1.
+      - type: count
+        selector: "[data-testid='trash-people']"
+        value: 0
+  - id: delete-from-trash-confirmation
+    criterion: CS-026
+    steps:
+      - action: click
+        selector: "[data-component-role='gallery-tab'][data-tab-key='trash']"
+      - action: click
+        selector: "[data-testid='trash-row-menu'] >> nth=0"
+      - action: click
+        selector: "[data-option-key='delete-forever'] >> nth=0"
+      # The shared dialog keeps RD's enter transition, so it is not painted on
+      # the next tick. Hovering the confirm waits for it to be actionable; the
+      # assertions below are immediate.
+      - action: hover
+        selector: "[data-testid='confirm-dialog-confirm']"
+    assertions:
+      - type: visible
+        selector: "[data-testid='delete-forever-dialog']"
+      - type: visible
+        selector: "[data-testid='confirm-dialog-confirm']"
+      - type: visible
+        selector: "[data-testid='confirm-dialog-cancel']"
+  - id: create-project-hands-off
+    criterion: CS-027
+    steps:
+      - action: click
+        selector: "[data-component-role='gallery-tab'][data-tab-key='projects']"
+      - action: click
+        selector: "[data-testid='create-entry'] [aria-haspopup='menu']"
+      - action: click
+        selector: "[data-testid='create-entry'] [data-option-key='new-project']"
+      - action: set-files
+        selector: "[data-testid='project-input']"
+        name: source.png
+        mimeType: image/png
+        value: synthetic project source
+    assertions:
+      # The prototype names the boundary instead of pretending to route.
+      - type: visible
+        selector: "[data-testid='editor-handoff']"
+      - type: attribute
+        selector: "[data-testid='editor-handoff']"
+        name: data-route
+        value: edit/result-photo
+  - id: item-rename
+    criterion: CS-028
+    steps:
+      - action: click
+        selector: "[data-component-role='gallery-tab'][data-tab-key='images']"
+      - action: click
+        selector: "[data-testid='item-menu-trigger'] >> nth=0"
+      - action: click
+        selector: "[data-testid='item-menu'] >> nth=0 >> [data-option-key='rename']"
+      - action: fill
+        selector: "[data-testid='rename-input']"
+        value: Renamed headshot
+      - action: click
+        selector: "[data-testid='rename-dialog'] >> [data-testid='confirm-dialog-confirm']"
+      - action: hover
+        selector: "[data-testid='cell-name'] >> nth=0"
+    assertions:
+      - type: attribute
+        selector: "[data-testid='gallery-grid-section']"
+        name: data-last-rename
+        value: Renamed headshot
+      - type: count
+        selector: "[data-testid='rename-dialog']"
+        value: 0
+  - id: item-duplicate
+    criterion: CS-029
+    steps:
+      - action: click
+        selector: "[data-component-role='gallery-tab'][data-tab-key='images']"
+      - action: click
+        selector: "[data-testid='item-menu-trigger'] >> nth=0"
+      - action: click
+        selector: "[data-testid='item-menu'] >> nth=0 >> [data-option-key='duplicate']"
+    assertions:
+      # Three seeded image items plus the copy.
+      - type: count
+        selector: "[data-component-role='gallery-cell']"
+        value: 4
+  - id: item-move-creates-folder-when-none
+    criterion: CS-030
+    steps:
+      - action: click
+        selector: "[data-component-role='gallery-tab'][data-tab-key='agent']"
+      - action: click
+        selector: "[data-testid='item-menu-trigger'] >> nth=0"
+      - action: click
+        selector: "[data-testid='item-menu'] >> nth=0 >> [data-option-key='move']"
+      # AI Agent seeds no folders, so moving has to make one first.
+      - action: fill
+        selector: "[data-testid='folder-name-input']"
+        value: Cut downs
+      - action: click
+        selector: "[data-testid='folder-dialog'] >> [data-testid='confirm-dialog-confirm']"
+      - action: hover
+        selector: "[data-testid='folder-card'] >> nth=0"
+    assertions:
+      - type: visible
+        selector: "[data-testid='folder-card'] >> nth=0"
+      # Creating the folder also moved the item into it.
+      - type: attribute
+        selector: "[data-testid='folder-card'] >> nth=0"
+        name: data-item-count
+        value: "1"
+      - type: count
+        selector: "[data-testid='folder-dialog']"
+        value: 0
+  - id: group-headings-and-folder-meta
+    criterion: CS-031
+    steps:
+      - action: click
+        selector: "[data-component-role='gallery-tab'][data-tab-key='images']"
+    assertions:
+      - type: visible
+        selector: "[data-testid='section-folders']"
+      - type: visible
+        selector: "[data-testid='section-files']"
+      - type: visible
+        selector: "[data-testid='folder-count'] >> nth=0"
+      - type: visible
+        selector: "[data-testid='folder-created'] >> nth=0"
+

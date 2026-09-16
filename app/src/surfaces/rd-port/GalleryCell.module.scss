@@ -1,0 +1,129 @@
+@import "./variables.scss";
+
+// Shared gallery thumbnail cell. Figma node 17197-211221 tokens:
+// card radius 20 + 1px border + subtle bg; overlay padding 8; action gap 4;
+// duration pill bottom-left (var(--fill-overlay-strong), radius 32, white bold).
+.cell {
+  position: relative;
+  width: 100%;
+
+  // height comes from the inline `aspect-ratio` (set by the grid wrapper width);
+  // do NOT force height:100% or the aspect-ratio is ignored.
+  // No overflow:hidden here — the hover More dropdown must escape the cell.
+}
+
+// Applied when the caller passes clickable (i.e. clicking the cell does something).
+.cellClickable {
+  cursor: pointer;
+}
+
+// Clips the media to rounded corners; overlays sit on `.cell` (outside this box).
+.mediaBox {
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--stroke-weak);
+  background: var(--fill-hover);
+
+  // mobile uses a tighter corner (Figma mobile thumbnail = 12px)
+  @include rwd-custom($width-md) {
+    border-radius: 12px;
+  }
+}
+
+.media {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+// hover-play video, layered over the cover image
+.video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.playIcon {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 40px;
+  height: 40px;
+  pointer-events: none;
+}
+
+.duration {
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  height: 24px;
+  padding: 4px 8px;
+  border-radius: 32px;
+  background: var(--fill-overlay-strong);
+  color: var(--fill-white);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.actions {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+// reveal on hover, and keep visible while a child (e.g. the open More menu)
+// holds focus so the menu doesn't vanish when the pointer leaves the cell
+// (lower-specificity selector first to satisfy no-descending-specificity)
+.actions:focus-within,
+.cell:hover .actions {
+  opacity: 1;
+}
+
+// touch layouts have no hover — keep the actions (mobile/tablet More icon)
+// always visible up to desktop breakpoint
+@include rwd-custom($width-lg) {
+  .actions {
+    opacity: 1;
+  }
+}
+
+// Figma node 18162-99534/99532: select indicator sits top-right, 28px circle.
+// Unselected = translucent dark fill + white-60% border; selected = var(--fill-brand-strong)
+// fill + white border + a full white check glyph (16px, per the design's spec).
+.checkbox {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--grey-neutral-dark-500);
+  background-color: var(--text-weaker);
+  box-sizing: border-box;
+}
+
+.checkboxSelected {
+  border-color: var(--fill-white);
+  background-color: var(--fill-brand-strong);
+}
+
+.checkIcon {
+  width: 16px;
+  height: auto;
+}

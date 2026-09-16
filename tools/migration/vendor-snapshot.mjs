@@ -33,6 +33,30 @@ const rejected = manifest.rejectedPatterns ?? [];
 const written = [];
 const failures = [];
 
+for (const entry of manifest.surfaceReference?.files ?? []) {
+  if (isRejected(entry.source, rejected)) {
+    failures.push('Refused by snapshot policy: ' + entry.source);
+    continue;
+  }
+  const from = path.join(snapshotRoot, ...entry.source.split('/'));
+  if (!(await pathExists(from))) {
+    failures.push('Missing in the snapshot: ' + entry.source);
+    continue;
+  }
+  const to = path.join(
+    workspace,
+    ...baselinePath(manifest.source.snapshot, entry.source).split('/'),
+  );
+  await fs.mkdir(path.dirname(to), { recursive: true });
+  await fs.copyFile(from, to);
+  const sha256 = await sha256File(to);
+  if (sha256 !== entry.sha256) {
+    failures.push(
+      'Surface reference no longer matches its recorded hash: ' + entry.source,
+    );
+  }
+}
+
 for (const entry of claimed) {
   if (isRejected(entry.source, rejected)) {
     failures.push('Refused by snapshot policy: ' + entry.source);
@@ -60,6 +84,7 @@ const keep = new Set([
   ...claimed.map((entry) => baselinePath(entry.snapshot, entry.source)),
   ...(manifest.siteMapSource?.files ?? []).map((file) => baselinePath(snapshotName, file.source)),
   ...(manifest.pageEntryReference?.files ?? []).map((file) => baselinePath(snapshotName, file.source)),
+  ...(manifest.surfaceReference?.files ?? []).map((file) => baselinePath(snapshotName, file.source)),
 ]);
 for (const file of await listVendoredFiles(workspace)) {
   if (!keep.has(file)) {
@@ -71,8 +96,9 @@ for (const file of await listVendoredFiles(workspace)) {
 manifest.vendoredBaseline = {
   root: ['platform/rd-baseline', manifest.source.snapshot].join('/'),
   purpose:
-    'Read-only RD reference. Holds exactly the files component contracts claim under rd.sourcePaths, ' +
-    'so validate:rd-parity and validate:snapshot can run on any clone without the external snapshot.',
+    'Read-only RD reference. Holds the files component contracts claim under rd.sourcePaths plus ' +
+    'explicit taxonomy, page-entry and Surface references, so provenance gates can run on any clone ' +
+    'without the external snapshot.',
   scope: 'contract-claimed',
   fileCount: written.length,
   files: written.sort((a, b) => a.source.localeCompare(b.source)),

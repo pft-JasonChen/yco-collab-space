@@ -1,0 +1,31 @@
+$transition-duration: 200ms;
+$opacity-disabled: 0.5;
+$color-disabled-text: var(--fill-white);
+$color-disabled-bg: var(--fill-disabled);
+
+// ===== Legacy button (hoverClass / touchClass string API) =====
+.button {
+  transition:
+    color $transition-duration ease,
+    opacity $transition-duration ease,
+    background-color $transition-duration ease;
+
+  &.default {
+    opacity: $opacity-disabled;
+    pointer-events: none;
+    cursor: unset;
+  }
+
+  &.singleToolPage {
+    color: $color-disabled-text;
+    background-color: $color-disabled-bg;
+    pointer-events: none;
+    cursor: unset;
+  }
+}
+
+.noButtonStyles {
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+}

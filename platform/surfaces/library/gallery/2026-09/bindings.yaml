@@ -1,0 +1,36 @@
+# Current implementation mapping, not the zone/slot contract.
+# Composition is declared once in component-slots.yaml.
+#
+# Updated 2026-09-15: every zone and slot this surface declares now names a
+# catalogued component. Before this round the file carried a blanket
+# "RD reference preview" note on all ten, which said nothing about what a
+# consumer could actually import — the preview renders either way, and a screen
+# that opens is not an API.
+schemaVersion: 1
+pack: library/gallery
+version: 2026-09
+zones:
+  global-header:
+    component: navigation-header
+  category-navigation:
+    component: category-rail
+  gallery-heading:
+    component: gallery-tabs
+  gallery-content:
+    component: gallery-grid
+  gallery-actions:
+    component: selection-toolbar
+slots:
+  gallery-tab:
+    component: gallery-tabs
+  gallery-grid:
+    component: gallery-grid
+  gallery-cell:
+    component: gallery-cell
+  empty-state:
+    component: empty-image
+  selection-action:
+    component: selection-toolbar
+preview:
+  recipe: gallery
+  components: {}

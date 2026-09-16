@@ -1,0 +1,24 @@
+@import "./variables.scss";
+
+.pricingItemSkeleton {
+  height: 50px;
+  border: 1px solid white;
+  border-radius: 8px;
+  margin-bottom: 20px;
+
+  @include rwd-custom($width-sm) {
+    margin-bottom: 7px;
+
+    &:last-child {
+      margin-bottom: 20px;
+    }
+  }
+
+  @include rwd-custom($width: $width-sm, $use-height: true, $height: 587px) {
+    margin-bottom: 3px;
+
+    &:last-child {
+      margin-bottom: 8px;
+    }
+  }
+}

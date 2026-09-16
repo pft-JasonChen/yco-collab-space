@@ -5,7 +5,8 @@ entries:
     status: planned
   - id: marketing/home-authenticated
     kind: surface
-    status: planned
+    status: provisional
+    defaultVersion: 2026-09
   - id: marketing/product-page
     kind: surface
     status: provisional
@@ -36,13 +37,15 @@ entries:
     status: planned
   - id: library/gallery
     kind: surface
-    status: planned
+    status: provisional
+    defaultVersion: 2026-09
   - id: commerce/pricing-page
     kind: surface
     status: planned
   - id: commerce/pricing-overlay
     kind: module
-    status: planned
+    status: provisional
+    defaultVersion: 2026-09
   - id: commerce/checkout
     kind: surface
     status: planned
@@ -88,4 +91,3 @@ entries:
   - id: content/marketing-grid
     kind: module
     status: planned
-

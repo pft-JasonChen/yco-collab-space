@@ -1,0 +1,19 @@
+schemaVersion: 1
+pack: library/gallery
+version: 2026-09
+slots:
+  - id: gallery-tab
+    required: true
+    description: Selects a result family.
+  - id: gallery-grid
+    required: true
+    description: Justified desktop or masonry tablet media layout.
+  - id: gallery-cell
+    required: true
+    description: Media thumbnail with hover or touch actions.
+  - id: empty-state
+    required: true
+    description: Family-specific empty state and create action.
+  - id: selection-action
+    required: true
+    description: Selection and download affordances for synthetic items.

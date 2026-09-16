@@ -1,0 +1,85 @@
+/* Gallery level-one tab row, ported from RD my-gallery-page/components/tab plus
+   common/drag-scroll-wrapper. Colours follow the canonical record in
+   app/src/surfaces/rd-port/token-colour-mapping.json; the one approximation is
+   the red dot, itemised in this component's component.yaml. */
+
+.tabRow {
+  position: relative;
+  width: 100%;
+}
+
+/* RD applies a global `hidden-scrollbar` utility class to the drag wrapper.
+   A shared component cannot rely on a global, so the rule is local. */
+.hiddenScrollbar {
+  overflow: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.hiddenScrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.track {
+  overflow-x: auto;
+  overflow-y: hidden;
+  touch-action: pan-x;
+}
+
+.tabs {
+  display: flex;
+  align-items: center;
+  width: max-content;
+}
+
+.tab {
+  position: relative;
+  cursor: pointer;
+  border: 0;
+  background: transparent;
+  color: var(--text-strong);
+  text-align: center;
+  font-weight: var(--font-weight-strong);
+  white-space: nowrap;
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  padding: 9px 16px;
+}
+
+.activeTab {
+  color: var(--text-brand);
+}
+
+/* RD's own breakpoint for this row is $width-sm (640px). Kept as a width media
+   query rather than a container query: unlike gallery-grid, nothing here needs
+   to disagree with the viewport, and RD's first-child padding reset only makes
+   sense against the real page edge. */
+@media (max-width: 640px) {
+  .tab {
+    font-size: var(--font-size-tiny);
+    line-height: var(--line-height-tiny);
+    padding: 11px 16px;
+  }
+
+  .tab:first-child {
+    padding-left: 0;
+  }
+}
+
+.redDot {
+  position: absolute;
+  top: -7px;
+  right: -11px;
+  width: 7px;
+  height: 7px;
+  background-color: var(--fill-badge);
+  border-radius: 50%;
+}
+
+/* RD's gallery draws a hairline under the whole row, beneath the active
+   indicator. Kept so a consumer does not have to re-draw it. */
+.indicatorBottom {
+  width: 100%;
+  height: 1px;
+  background: var(--stroke-weak);
+}

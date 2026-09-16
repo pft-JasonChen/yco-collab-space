@@ -50,9 +50,9 @@
   ],
   "vendoredBaseline": {
     "root": "platform/rd-baseline/yce-frontend-gm-260909",
-    "purpose": "Read-only RD reference. Holds exactly the files component contracts claim under rd.sourcePaths, so validate:rd-parity and validate:snapshot can run on any clone without the external snapshot.",
+    "purpose": "Read-only RD reference. Holds the files component contracts claim under rd.sourcePaths plus explicit taxonomy, page-entry and Surface references, so provenance gates can run on any clone without the external snapshot.",
     "scope": "contract-claimed",
-    "fileCount": 77,
+    "fileCount": 118,
     "files": [
       {
         "source": "public/assets/fonts/icomoon.woff",
@@ -206,7 +206,7 @@
         "claimedBy": [
           "video-trim-modal"
         ],
-        "verbatim": true
+        "verbatim": false
       },
       {
         "source": "src/components/ai-agent-page/components/video-trim-modal/index.js",
@@ -270,7 +270,7 @@
         "claimedBy": [
           "button"
         ],
-        "verbatim": true
+        "verbatim": false
       },
       {
         "source": "src/components/common/button-wrapper/index.js",
@@ -289,6 +289,22 @@
         "verbatim": false
       },
       {
+        "source": "src/components/common/drag-scroll-wrapper/index.js",
+        "sha256": "3fac8cd782779a730a05f5781dfda9125ecfdc668ea90903316aacddfa36b295",
+        "claimedBy": [
+          "gallery-tabs"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/common/drag-scroll-wrapper/use-momentum-tracking.js",
+        "sha256": "85f3868f9f88aa6d6163ec628cf6b9388f8367e7ebbc3e24d45b28f197970e61",
+        "claimedBy": [
+          "gallery-tabs"
+        ],
+        "verbatim": false
+      },
+      {
         "source": "src/components/common/headers/components/credits-left/index.js",
         "sha256": "e4cea9a8210fb78271c2cd03569803f2592fc9e57cdb886073127d991f65d0f7",
         "claimedBy": [
@@ -303,6 +319,14 @@
         "claimedBy": [
           "credit-controls",
           "result-page-shell"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/common/headers/components/external-link/index.js",
+        "sha256": "ed49fbc10ecee1667ac33a1ed189e2adb2f215aa8831eee95fcbe3d7e3638fee",
+        "claimedBy": [
+          "category-rail"
         ],
         "verbatim": false
       },
@@ -339,9 +363,34 @@
         "verbatim": false
       },
       {
+        "source": "src/components/common/headers/components/new-label/index.js",
+        "sha256": "5b13dac72d901bc549764d7ef7adac328a358cca32b8ce3bb2b7abcc5069fb46",
+        "claimedBy": [
+          "category-rail"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/common/headers/components/new-label/index.module.scss",
+        "sha256": "0f021dd8839aa650286d3d91976a90aec28fb840afa7b288901a902f881f0b5c",
+        "claimedBy": [
+          "category-rail"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/common/message-dialog/buttons/confirm-cancellation-button/index.module.scss",
+        "sha256": "d2fff80d63701d473a3c52c3767536531623b3353ccd21c25613b166741935e5",
+        "claimedBy": [
+          "confirm-dialog"
+        ],
+        "verbatim": false
+      },
+      {
         "source": "src/components/common/modal/index.js",
         "sha256": "57750d3170a0da5aa89349a909083438462d161484fb9750de5ce25f85860cd1",
         "claimedBy": [
+          "confirm-dialog",
           "video-info-dialog"
         ],
         "verbatim": false
@@ -350,7 +399,88 @@
         "source": "src/components/common/modal/index.module.scss",
         "sha256": "905742acb0bccca4f4b75a55362f4a854990d72b983296877d940b07142b6ab8",
         "claimedBy": [
+          "confirm-dialog",
           "video-info-dialog"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/common/pricing-modal/components/checkout-button.js",
+        "sha256": "afc6de906cfd2774db69c11f3896da6638c7bffa46e051d0e31987d9d2e80aed",
+        "claimedBy": [
+          "pricing-overlay"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/common/pricing-modal/components/feature-list.js",
+        "sha256": "b8483c11b2d4abe76b31a7e2043e8ddcddc069582311f54a4024f60ab4c10d2a",
+        "claimedBy": [
+          "pricing-overlay"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/common/pricing-modal/components/feature-list.module.scss",
+        "sha256": "050bf0d866e80e49415004d7f0ff64fbdcfd3038635c8e8291c1d36ebcf78a15",
+        "claimedBy": [
+          "pricing-overlay"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/common/pricing-modal/components/plan-list.js",
+        "sha256": "eaf6c6ea5713e04a7a4dae00c55a2ad1ebd91355127f874b60caed1816275070",
+        "claimedBy": [
+          "pricing-overlay"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/common/pricing-modal/components/plan-list.module.scss",
+        "sha256": "2e155f08ba71b4dc66567610219da695ba0ccb7fc621194629866bfa6fb2daf5",
+        "claimedBy": [
+          "pricing-overlay"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/common/pricing-modal/components/plan-tabs.js",
+        "sha256": "146d7c047dac2fa291272a1bacd9e5dcf4734b7872e2f1101feb952e625192f6",
+        "claimedBy": [
+          "pricing-overlay"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/common/pricing-modal/components/plan-tabs.module.scss",
+        "sha256": "22c01ae028d65275323b099ad639145860174a00b95cf1888efdf6b916f7cbfc",
+        "claimedBy": [
+          "pricing-overlay"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/common/pricing-modal/hooks/use-holiday-styles.js",
+        "sha256": "629f903c34a9222512b4b7a3476a91e3941ede1c28cea8bb8bd966519d81dea2",
+        "claimedBy": [
+          "pricing-overlay"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/common/pricing-modal/index.js",
+        "sha256": "d7d8e8c6a25039f4a56cd0a8d17aa2852cbab2772ce39d87941cdf453c50a5c5",
+        "claimedBy": [
+          "pricing-overlay"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/common/pricing-modal/index.module.scss",
+        "sha256": "9323b7c7099443a64c5d233794a617a84acaa5a09d5d4240081e40797c3e31ec",
+        "claimedBy": [
+          "pricing-overlay"
         ],
         "verbatim": false
       },
@@ -387,6 +517,62 @@
         "verbatim": false
       },
       {
+        "source": "src/components/common/selection-control/dropdown-select/components/DropdownButton.js",
+        "sha256": "1e08b16e97b3f6764a8a6a32da5957f06e87b2cae6eca0a669ec2529bd222eea",
+        "claimedBy": [
+          "dropdown-select"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/common/selection-control/dropdown-select/components/DropdownButton.module.scss",
+        "sha256": "d79f920e7656ab08b316332e79a58d7323aac216e0dcd780a6833fc89e366d89",
+        "claimedBy": [
+          "dropdown-select"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/common/selection-control/dropdown-select/components/DropdownItem.js",
+        "sha256": "bb85793dd768e4613ae3e7d40c62dc7e56bca01d4ff3de407dbb44750465b8e8",
+        "claimedBy": [
+          "dropdown-select"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/common/selection-control/dropdown-select/components/DropdownItem.module.scss",
+        "sha256": "711fdef92211a09bbb7eed83cda4c40581abb5677266056868fac72e792d2bf1",
+        "claimedBy": [
+          "dropdown-select"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/common/selection-control/dropdown-select/hooks/use-click-outside.js",
+        "sha256": "cbec0347d05e93b86b61433e41db2e2a0bb8fabbc1f32893ee0a16754fd79b12",
+        "claimedBy": [
+          "dropdown-select"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/common/selection-control/dropdown-select/index.js",
+        "sha256": "0d4473f545eea6615d432a89ceed39087b8107522e2d0dccb09d6b2c11fc80de",
+        "claimedBy": [
+          "dropdown-select"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/common/selection-control/dropdown-select/index.module.scss",
+        "sha256": "df489d9db0028911824758202aac26de3a12247ff2701774db48772ec1811e54",
+        "claimedBy": [
+          "dropdown-select"
+        ],
+        "verbatim": false
+      },
+      {
         "source": "src/components/common/tab-control/segmented-control/index.js",
         "sha256": "98736264cd8b11cf5243139a24a8f4163be2b5bf999c0382d4a8ceef2a0362ab",
         "claimedBy": [
@@ -415,6 +601,134 @@
         "sha256": "d18e5f430d0b76c4cab96b9515602372459abd94cb1ee1a5bd8c71999dc2e647",
         "claimedBy": [
           "upload-media-block"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/my-gallery-page/components/editing-toolbar/index.js",
+        "sha256": "b53f0f1e558cf1a98da3c054ec00a1423bcf6c392e6735b747e114919551998d",
+        "claimedBy": [
+          "selection-toolbar"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/my-gallery-page/components/gallery-cell/index.js",
+        "sha256": "27b87b7bdefc1e9d609ccf90f699f349207e4813b8502abff31003b924ce7cf9",
+        "claimedBy": [
+          "gallery-cell"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/my-gallery-page/components/gallery-cell/index.module.scss",
+        "sha256": "25b5b19a96fa2e85298b15cdc16364c28faa99461478fa5bd7deac1ec59a4cc7",
+        "claimedBy": [
+          "gallery-cell"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/my-gallery-page/components/gallery-grid/index.js",
+        "sha256": "1cea04289b32670a415c97c60c1fdfb8512b8ee48569cced3834ee9a46e4b261",
+        "claimedBy": [
+          "gallery-grid"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/my-gallery-page/components/gallery-grid/index.module.scss",
+        "sha256": "9a6a1cf272bf986c8e37c42a748d07d2d391f58875b4a86a937eeae30855b5e6",
+        "claimedBy": [
+          "gallery-grid"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/my-gallery-page/components/select-all-header/index.js",
+        "sha256": "247f63ef48592eb89c78548c131383ff5f46f61ecff24757876dfda35d15bdfd",
+        "claimedBy": [
+          "selection-toolbar"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/my-gallery-page/components/tab/index.js",
+        "sha256": "2e5f17788585604c206e938df4bcd04071f406b4a7cda6abf17bde15e5264d53",
+        "claimedBy": [
+          "gallery-tabs"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/my-gallery-page/components/tab/index.module.scss",
+        "sha256": "b1d56ff2384992f32e72b65e158dd9ec5dff1f0d03d43e496497f3336828a541",
+        "claimedBy": [
+          "gallery-tabs"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/my-gallery-page/tabs/gallery/components/cell-actions/bottom-sheet.js",
+        "sha256": "bd4ac9bd5558eef113026372e4d9f030b764a45b2630d4406749f405697ea1c3",
+        "claimedBy": [
+          "cell-actions"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/my-gallery-page/tabs/gallery/components/cell-actions/index.js",
+        "sha256": "8464543277d1d12b0dd40f850d77e72064bc38b76ac397aa359ef9f96fa6b94d",
+        "claimedBy": [
+          "cell-actions"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/my-gallery-page/tabs/gallery/components/cell-actions/index.module.scss",
+        "sha256": "2152bd8b85b05400f6cea83be7219339f414a7da570c9e00c311fec1b9b516da",
+        "claimedBy": [
+          "cell-actions"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/my-gallery-page/tabs/gallery/components/cell-actions/sheet-icons.js",
+        "sha256": "3c0a9836da20fd12ef367113979651af41d6918b8eaf3d183934e63e46861408",
+        "claimedBy": [
+          "cell-actions"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/my-gallery-page/tabs/gallery/components/delete-confirm-modal/index.js",
+        "sha256": "52309500613a74c14bfed09bcc01ffd04d135c75a90339dea870b53e7e329b0d",
+        "claimedBy": [
+          "confirm-dialog"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/my-gallery-page/tabs/gallery/components/delete-confirm-modal/index.module.scss",
+        "sha256": "22ac0a8a6d4603c73b9d8709a75f9ed9f2e97ed74a989e965ffec23aead7afaf",
+        "claimedBy": [
+          "confirm-dialog"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/my-gallery-page/tabs/gallery/gallery.module.scss",
+        "sha256": "1c966073b2a5f378d1bc4012437fae36cc9dd2b825b6e284a0220ca8fe49f830",
+        "claimedBy": [
+          "selection-toolbar"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/portal/index.js",
+        "sha256": "aaaf3b0f8ae3ffbac34371cf795418456b4054e40dfb0d536fffd771196b63ec",
+        "claimedBy": [
+          "confirm-dialog"
         ],
         "verbatim": false
       },
@@ -669,9 +983,26 @@
         "verbatim": false
       },
       {
+        "source": "src/components/strapi/components/gridmodulesection/components/homeCategory/index.js",
+        "sha256": "779d6e307ad296af320466caa78bfd6a14b95581b5551c1c11082940e47b8237",
+        "claimedBy": [
+          "category-rail"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/strapi/components/gridmodulesection/components/homeCategory/index.module.scss",
+        "sha256": "f85f74be1e1ffd6244e9d7e4ad8b468c0183aa9d355cf46d690f6aa9c170801b",
+        "claimedBy": [
+          "category-rail"
+        ],
+        "verbatim": false
+      },
+      {
         "source": "src/styles/home-icon-styles.css",
         "sha256": "6cd44d764ed017f1c3d263f1cfaebcdc54e4f77103a21ab77f9da004a693d7b5",
         "claimedBy": [
+          "category-rail",
           "result-page-shell"
         ],
         "verbatim": false
@@ -702,6 +1033,169 @@
       {
         "source": "src/types/moduleTypes.js",
         "sha256": "db08f0e8791c37a1d10ce414a552aa069815a7cc4cc78ce3f45307ca8ded3248"
+      }
+    ]
+  },
+  "surfaceReference": {
+    "root": "platform/rd-baseline/yce-frontend-gm-260909",
+    "purpose": "Auditable RD source and asset references for the authenticated home, My Gallery, and pricing overlay Surface previews. These files are preserved as read-only evidence; the previews remove production CMS, auth, Redux, payment, analytics, and API dependencies.",
+    "scope": "cloud-storage-foundation-surfaces",
+    "files": [
+      {
+        "source": "src/pages/home.js",
+        "sha256": "ab7bc3fc6e92651ed8e979115d29de92024b29adee206cb81a3e91bdc9fc1ac7"
+      },
+      {
+        "source": "src/components/home/login-home-page/index.js",
+        "sha256": "521ffc9406937965415e09011033523781437855263f37bd7b2a191232448389"
+      },
+      {
+        "source": "src/components/strapi/components/gridmodulesection/layouts/layout1300.js",
+        "sha256": "ea0612c226135f34d584a03f708dd069a113e63c9ae67f7aca51ee1d6f8dfdb3"
+      },
+      {
+        "source": "src/components/strapi/components/gridmodulesection/index.module.scss",
+        "sha256": "3448eabd580f4fe325c471776d7cc38607fe2f47bdc7221d493d938d5a5efe10"
+      },
+      {
+        "source": "src/components/strapi/components/gridmodulesection/components/homeCategory/index.js",
+        "sha256": "779d6e307ad296af320466caa78bfd6a14b95581b5551c1c11082940e47b8237"
+      },
+      {
+        "source": "src/components/strapi/components/gridmodulesection/components/homeCategory/index.module.scss",
+        "sha256": "f85f74be1e1ffd6244e9d7e4ad8b468c0183aa9d355cf46d690f6aa9c170801b"
+      },
+      {
+        "source": "src/components/strapi/components/gridmodulesection/components/cardsV2/index.js",
+        "sha256": "6c3c9f8de5f8910698e1d4c0df077c19894afb46e41ac92bc9890fd7ea6734e9"
+      },
+      {
+        "source": "src/components/strapi/components/gridmodulesection/components/cardsV2/index.module.scss",
+        "sha256": "49689a302f10e9cda0a406db6ffcf508f2653486c8e9ec57e5e646beda28b966"
+      },
+      {
+        "source": "src/pages/account/gallery/index.js",
+        "sha256": "2a4f4ee0eb3af14640612a26cdbed0676237e7992d956e8a134c36679d6cb7d9"
+      },
+      {
+        "source": "src/components/my-gallery-page/index.js",
+        "sha256": "4429ebdbf729b0272394f095f4b696c272be6dfc0e9d43c6729efae502ba7765"
+      },
+      {
+        "source": "src/components/my-gallery-page/index.module.scss",
+        "sha256": "9424e216d9a0df0b805d9fe9f4a9e2642e2c4c800a243ff2ceb683d569eea8d8"
+      },
+      {
+        "source": "src/components/my-gallery-page/components/tab/index.js",
+        "sha256": "2e5f17788585604c206e938df4bcd04071f406b4a7cda6abf17bde15e5264d53"
+      },
+      {
+        "source": "src/components/my-gallery-page/components/tab/index.module.scss",
+        "sha256": "b1d56ff2384992f32e72b65e158dd9ec5dff1f0d03d43e496497f3336828a541"
+      },
+      {
+        "source": "src/components/my-gallery-page/components/gallery-grid/index.js",
+        "sha256": "1cea04289b32670a415c97c60c1fdfb8512b8ee48569cced3834ee9a46e4b261"
+      },
+      {
+        "source": "src/components/my-gallery-page/components/gallery-grid/index.module.scss",
+        "sha256": "9a6a1cf272bf986c8e37c42a748d07d2d391f58875b4a86a937eeae30855b5e6"
+      },
+      {
+        "source": "src/components/my-gallery-page/components/gallery-cell/index.js",
+        "sha256": "27b87b7bdefc1e9d609ccf90f699f349207e4813b8502abff31003b924ce7cf9"
+      },
+      {
+        "source": "src/components/my-gallery-page/components/gallery-cell/index.module.scss",
+        "sha256": "25b5b19a96fa2e85298b15cdc16364c28faa99461478fa5bd7deac1ec59a4cc7"
+      },
+      {
+        "source": "src/components/common/pricing-modal/index.js",
+        "sha256": "d7d8e8c6a25039f4a56cd0a8d17aa2852cbab2772ce39d87941cdf453c50a5c5"
+      },
+      {
+        "source": "src/components/common/pricing-modal/index.module.scss",
+        "sha256": "9323b7c7099443a64c5d233794a617a84acaa5a09d5d4240081e40797c3e31ec"
+      },
+      {
+        "source": "src/components/common/pricing-modal/components/plan-tabs.js",
+        "sha256": "146d7c047dac2fa291272a1bacd9e5dcf4734b7872e2f1101feb952e625192f6"
+      },
+      {
+        "source": "src/components/common/pricing-modal/components/plan-tabs.module.scss",
+        "sha256": "22c01ae028d65275323b099ad639145860174a00b95cf1888efdf6b916f7cbfc"
+      },
+      {
+        "source": "src/components/common/pricing-modal/components/plan-list.js",
+        "sha256": "eaf6c6ea5713e04a7a4dae00c55a2ad1ebd91355127f874b60caed1816275070"
+      },
+      {
+        "source": "src/components/common/pricing-modal/components/plan-list.module.scss",
+        "sha256": "2e155f08ba71b4dc66567610219da695ba0ccb7fc621194629866bfa6fb2daf5"
+      },
+      {
+        "source": "src/components/common/pricing-modal/components/feature-list.js",
+        "sha256": "b8483c11b2d4abe76b31a7e2043e8ddcddc069582311f54a4024f60ab4c10d2a"
+      },
+      {
+        "source": "src/components/common/pricing-modal/components/feature-list.module.scss",
+        "sha256": "050bf0d866e80e49415004d7f0ff64fbdcfd3038635c8e8291c1d36ebcf78a15"
+      },
+      {
+        "source": "src/components/common/pricing-modal/utils/pricingModalTypes.js",
+        "sha256": "b9cac2b476faece23dd588bb9be1fa9223afb2eeb4084defe98f3fcfc7a13428"
+      },
+      {
+        "source": "src/components/common/headers/components/pricing-icon/index.js",
+        "sha256": "2448de3bff8c481b822f661f4d59fdf088f116b0dd8284b9aace4a8a5b166aad"
+      },
+      {
+        "source": "src/components/common/headers/components/pricing-icon/index.module.scss",
+        "sha256": "14ba772951b5a8998bc4810c267c87aec328b5f29b214ae0318222f24b949936"
+      },
+      {
+        "source": "public/assets/images/header/icon_pricing_dt.svg",
+        "sha256": "233d2e9abea772b358620deb2fb868cd0e14cc69246c3b9dc52a675c7d69049d"
+      },
+      {
+        "source": "public/assets/images/header/icon_gallery.svg",
+        "sha256": "7465ac8b4a4b7a1c17d4c941b6f0d81541cd996d35b1abe6900387d29c7d22f4"
+      },
+      {
+        "source": "public/assets/images/header/icon_home.svg",
+        "sha256": "72246fa21d718fee15b74e58ae1bbd15890e3e2afb84ca4d0db720d1d866c726"
+      },
+      {
+        "source": "public/assets/images/header/dt/photo-enhance.jpg",
+        "sha256": "7f3c60a15f7ab94f007bfd8d3631ea8f69b074f5ec269ec74c16fa602c4629ae"
+      },
+      {
+        "source": "public/assets/images/header/dt/object-removal.jpg",
+        "sha256": "fc878ba1007fcc7cd5ddc559f7405e576464e47db6b3b2aad1ebbd7a6adff4df"
+      },
+      {
+        "source": "public/assets/images/header/dt/colorize.jpg",
+        "sha256": "b2a6f41085ac8ca9982d4efd8a17a159dfbc52f8b33ba07afb2bf5871648b8b5"
+      },
+      {
+        "source": "public/assets/images/header/dt/ai-art-generator.jpg",
+        "sha256": "608ac6b55a271fdfe00955a984638fd3abb06396146eea30fe03f71264ce499a"
+      },
+      {
+        "source": "public/assets/images/pricingModal/pricing_popup_bg.jpg",
+        "sha256": "0cccbe3ed2d220e99ef50dbea4ab85233ddb9b99f602dc83e8a39386af2420f7"
+      },
+      {
+        "source": "public/assets/images/account/gallery/emptyContent/photo-editing.png",
+        "sha256": "89ace857207cc198f77a1ee0e6ccfb9964f6482744f075496f79cc9ec6f35ab6"
+      },
+      {
+        "source": "public/assets/images/account/gallery/emptyContent/video-editing.png",
+        "sha256": "64832f10c6f065295e68a939d38a3d6989012c208688d9d2b0dba8ed19b16fd9"
+      },
+      {
+        "source": "public/assets/images/account/gallery/emptyContent/generative-ai.png",
+        "sha256": "ad58bccee3a909b83b225f47daad914467a6e184e637a7085f0b4883e8ee2881"
       }
     ]
   },

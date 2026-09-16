@@ -1,0 +1,25 @@
+@import "./variables.scss";
+
+.morePlan {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.morePlansText {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+  color: var(--text-brand);
+  margin-right: 6px;
+
+  @include rwd-custom($width: $width-sm, $use-height: true, $height: 587px) {
+    font-size: 12px;
+    line-height: 14px;
+  }
+}
+
+.butArrow {
+  width: 14px;
+  height: 14px;
+}

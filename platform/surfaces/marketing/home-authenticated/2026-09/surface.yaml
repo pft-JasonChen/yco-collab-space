@@ -1,0 +1,29 @@
+schemaVersion: 1
+id: marketing/home-authenticated
+version: 2026-09
+kind: surface
+status: provisional
+shell: authenticated-home
+zones:
+  - id: global-header
+    required: true
+    description: Brand, navigation, Gallery entry, pricing entry, credits and account controls.
+  - id: category-navigation
+    required: true
+    description: Persistent tool-category navigation on desktop; collapses away on tablet.
+  - id: quick-categories
+    required: true
+    description: High-priority AI Photo and AI Video category baskets.
+  - id: recent-tools
+    required: true
+    description: Recently used feature cards.
+  - id: tool-catalog
+    required: true
+    description: Categorised feature-card grid derived from the RD grid-module layout.
+responsivePriority:
+  - Preserve the global header and entry actions before secondary navigation.
+  - Hide the persistent category rail at the tablet breakpoint and keep cards readable.
+  - Reduce the tool catalog to two columns before removing categories.
+decisionBasis:
+  - RD /home is the authenticated entry and composes LoginHomePage with gridModuleSection layout 1_30_0.
+  - The preview preserves page structure and navigation semantics while replacing CMS, account state and upload services with synthetic data.
