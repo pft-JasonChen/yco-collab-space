@@ -49,6 +49,7 @@ export default function Modal({
   showModalScaleTransition = false,
   ariaLabel,
   ariaLabelledBy,
+  testId,
   onKeyDown,
   portalId = 'portal-root',
 }) {
@@ -162,6 +163,7 @@ export default function Modal({
         onKeyDown={handleModalKeyDown}
         onClick={(event) => event.stopPropagation()}
         data-component-role="modal"
+        data-testid={testId}
       >
         {children}
       </div>

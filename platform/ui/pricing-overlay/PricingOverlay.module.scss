@@ -295,26 +295,8 @@
   margin-top: auto;
 }
 
-/* RD's checkout fill is an inline literal that resolves to --fill-brand-strong
-   exactly. Explicit padding so a host page's own `button` element selector
-   cannot flatten it — the cascade defect the surface acceptance recorded
-   against the RD preview. */
 .checkoutButton {
   width: 100%;
-  padding: 12px 22px;
-  border: 0;
-  border-radius: 120px;
-  cursor: pointer;
-  background-color: var(--fill-brand-strong);
-  color: var(--fill-white);
-  font-size: 18px;
-  line-height: normal;
-  font-weight: var(--font-weight-weak);
-}
-
-.checkoutButton:disabled {
-  background-color: var(--fill-disabled);
-  cursor: default;
 }
 
 .close {

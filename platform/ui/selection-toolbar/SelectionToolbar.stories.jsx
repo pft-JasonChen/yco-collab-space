@@ -68,3 +68,18 @@ export const NothingSelected = { args: { isEditing: true, deleteDisabled: true, 
 
 // Narrow treatment: delete and download collapse to icons.
 export const Compact = { args: { isEditing: true, compact: true } };
+
+/**
+ * The low-weight treatment a selection bar wants: a leading close control, then
+ * icon-plus-label actions with no fills, so the row does not outweigh the
+ * content it acts on. RD's filled-pill row is still the default, above.
+ */
+export const GhostSelecting = {
+  args: {
+    isEditing: true,
+    variant: 'ghost',
+    onExit: () => {},
+    onDelete: () => {},
+    onDownload: () => {},
+  },
+};

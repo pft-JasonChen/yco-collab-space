@@ -142,10 +142,15 @@
 // Figma node 18162-99534/99532: select indicator sits top-right, 28px circle.
 // Unselected = translucent dark fill + 60% white border; selected = brand fill +
 // solid white border + a white check glyph.
+/* RD pins the checkbox to the top-right and only renders it in selection mode.
+   Both remain the default; the left placement and the hover reveal are opt-in
+   per the data attributes the component sets, so RD's own callers see no
+   change. */
 .checkbox {
   position: absolute;
   top: 8px;
   right: 8px;
+  padding: 0;
   z-index: 2;
   display: flex;
   align-items: center;
@@ -166,4 +171,32 @@
 .checkIcon {
   width: 16px;
   height: auto;
+}
+
+[data-checkbox='top-left'] > .checkbox {
+  right: auto;
+  left: 8px;
+}
+
+/* Revealed on hover or keyboard focus, and kept visible once the cell is
+   selected so a selection never disappears when the pointer leaves. */
+[data-checkbox-on-hover='true'] > .checkbox {
+  opacity: 0;
+  transition: opacity 120ms ease;
+}
+
+[data-checkbox-on-hover='true']:hover > .checkbox,
+[data-checkbox-on-hover='true']:focus-within > .checkbox,
+[data-checkbox-on-hover='true'][data-selected='true'] > .checkbox {
+  opacity: 1;
+}
+
+[data-checkbox-on-hover='true'] > .checkbox:focus-visible {
+  opacity: 1;
+  outline: none;
+  box-shadow: 0 0 0 var(--spacing-4) var(--stroke-focus);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-checkbox-on-hover='true'] > .checkbox { transition: none; }
 }

@@ -32,45 +32,6 @@
   height: 20px;
 }
 
-.selectButton {
-  font-size: var(--font-size-heading-5);
-  line-height: var(--line-height-heading-5);
-  font-weight: var(--font-weight-strong);
-  color: var(--fill-white);
-  background-color: var(--fill-brand-strong);
-  border: 1px solid var(--fill-brand-strong);
-  border-radius: var(--corner-radius-32);
-  padding: 7px 20px;
-  cursor: pointer;
-  white-space: nowrap;
-}
-
-.selectButton:disabled {
-  background: var(--fill-disabled);
-  border: 1px solid var(--fill-disabled);
-  cursor: default;
-}
-
-.selectButton:hover:enabled {
-  background-color: var(--blue-dark-1000);
-  border: 1px solid var(--blue-dark-1000);
-  color: var(--fill-white);
-}
-
-/* RD's cancel treatment is the same pill inverted: white fill, black label and a
-   faint border. */
-.cancelStyle {
-  background-color: var(--fill-white);
-  color: var(--grey-neutral-solid-1000);
-  border: 1px solid var(--fill-disabled);
-}
-
-.cancelStyle:hover:enabled {
-  background-color: var(--fill-white);
-  border: 1px solid var(--fill-disabled);
-  color: var(--grey-neutral-solid-1000);
-}
-
 .deleteButton,
 .downloadButton {
   font-size: var(--font-size-heading-5);
@@ -174,13 +135,6 @@
     height: 16px;
   }
 
-  .selectButton {
-    font-size: 16px;
-    line-height: 19px;
-    font-weight: var(--font-weight-weak);
-    padding: 7.5px 16px;
-  }
-
   .deleteButton,
   .downloadButton {
     display: flex;
@@ -196,3 +150,75 @@
     margin-left: 6px;
   }
 }
+
+/* Ghost variant, added 2026-09-16. RD's row is three filled pills, which in a
+   selection bar outweighs the content being acted on. Ghost keeps RD's markup
+   and only drops the fills: icon plus label, transparent, with the destructive
+   action carrying colour rather than a filled ground. RD's own default is
+   untouched. */
+
+.toolbarGhost {
+  gap: var(--spacing-16);
+}
+
+.exitButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-strong);
+  cursor: pointer;
+  line-height: 1;
+}
+
+.exitButton:hover {
+  background: var(--fill-hover);
+}
+
+.exitButton:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 var(--spacing-4) var(--stroke-focus);
+}
+
+.ghostAction {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  padding: var(--spacing-4) var(--spacing-8);
+  border: 0;
+  border-radius: var(--corner-radius-8);
+  background: transparent;
+  color: var(--text-strong);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  cursor: pointer;
+}
+
+.ghostAction img {
+  width: 18px;
+  height: 18px;
+}
+
+.ghostAction:hover:not(:disabled) {
+  background: var(--fill-hover);
+}
+
+.ghostAction:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 var(--spacing-4) var(--stroke-focus);
+}
+
+.ghostAction:disabled {
+  color: var(--text-weaker);
+  cursor: default;
+}
+
+.ghostAction[data-destructive='true'] {
+  color: var(--text-error);
+}
+

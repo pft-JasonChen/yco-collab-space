@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import GalleryCell from './GalleryCell.jsx';
 import cover from '../../../design-library/assets/image/yco-home-cms/Image_extender_8d7102ec86.jpg';
 import clip from '../../../design-library/assets/video/rd-component-fixtures/video-object-remover.mp4';
@@ -91,4 +92,42 @@ export const Selected = {
 // keeps its size so the row does not reflow when the media appears.
 export const Loading = {
   args: { loading: true, aspectRatio: 3 / 4 },
+};
+
+/**
+ * Cloud Storage's selection treatment: the box sits top-left and appears on
+ * hover, and it is a real control, so selecting is the first click rather than
+ * a mode switch followed by a click. RD's own default (top-right, selection
+ * mode only, decorative span) is unchanged and still covered by `Selected`.
+ */
+export const HoverSelectTopLeft = {
+  render: () => {
+    function Demo() {
+      const [picked, setPicked] = useState([]);
+      const toggle = (id) =>
+        setPicked((current) =>
+          current.includes(id) ? current.filter((entry) => entry !== id) : [...current, id],
+        );
+      return (
+        <div style={{ display: 'flex', gap: 12, padding: 24, background: '#fff' }}>
+          {['a', 'b'].map((id) => (
+            <div key={id} style={{ width: 200 }}>
+              <GalleryCell
+                aspectRatio={1.5}
+                thumbnail={cover}
+                alt={`Sample ${id}`}
+                checkboxPosition="top-left"
+                checkboxOnHover
+                isSelected={picked.includes(id)}
+                onToggleSelect={() => toggle(id)}
+                selectLabel="Select item"
+                domId={`hover-select-${id}`}
+              />
+            </div>
+          ))}
+        </div>
+      );
+    }
+    return <Demo />;
+  },
 };

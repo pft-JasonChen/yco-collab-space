@@ -1,5 +1,5 @@
 import styles from './pricing-index.module.scss';
-import ButtonWrapper from './ButtonWrapper.jsx';
+import Button from '../../../../platform/ui/button/index.js';
 import { PoweredByStripe as PoweredByStripe } from './pricing-adapters.jsx';
 import { getTranslationFunction } from './pricing-adapters.jsx';
 import TabsKey from './pricing-tabs-key.jsx';
@@ -12,11 +12,8 @@ export default function CheckoutButton({
   isPlusUser,
   isEmptyPlans,
   selectedPlan,
-  getPlanButtonStyles,
   handleClick,
   holidayType,
-  hoverClass,
-  touchClass,
 }) {
   const { t } = getTranslationFunction();
 
@@ -35,17 +32,17 @@ export default function CheckoutButton({
 
   return (
     <div className={styles.buttonContainer} data-mode={holidayType}>
-      <ButtonWrapper
+      <Button
         className={styles.button}
-        style={getPlanButtonStyles()}
         onClick={handleClick}
         disabled={isEmptyPlans || _isNil(selectedPlan)}
-        hoverClass={hoverClass}
-        touchClass={touchClass}
+        variant="primary"
+        tone="brand"
+        size="medium"
         data-mode={holidayType}
       >
         {getButtonLabel()}
-      </ButtonWrapper>
+      </Button>
       {isStripeMode && <PoweredByStripe disableLink={true} />}
     </div>
   );

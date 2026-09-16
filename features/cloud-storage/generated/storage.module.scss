@@ -124,6 +124,7 @@
 }
 
 .dialog {
+  position: relative;
   width: 100%;
   max-width: 420px;
   padding: var(--spacing-24);
@@ -198,3 +199,152 @@
     flex-basis: 100%;
   }
 }
+
+/* ---------- demo widget ---------- */
+
+/* Pinned bottom-left, out of the reading path of the page it controls. The
+   dashed border and the warning-ramp amber are deliberate: DESIGN-013 asks that
+   this reads unmistakably as a review tool, never as product UI. */
+.demo {
+  position: fixed;
+  left: var(--spacing-16);
+  bottom: var(--spacing-16);
+  z-index: 50;
+}
+
+.demoPill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  padding: var(--spacing-8) var(--spacing-16);
+  border: 1px dashed var(--fill-warning-strong);
+  border-radius: 999px;
+  background: var(--background-base);
+  color: var(--text-warning);
+  font-size: var(--font-size-micro);
+  line-height: var(--line-height-micro);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.demoPanel {
+  width: 232px;
+  padding: var(--spacing-12);
+  border: 1px dashed var(--fill-warning-strong);
+  border-radius: var(--corner-radius-12);
+  background: var(--background-base);
+}
+
+.demoHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-8);
+}
+
+.demoTitle {
+  font-size: var(--font-size-micro);
+  line-height: var(--line-height-micro);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-warning);
+}
+
+.demoClose {
+  border: 0;
+  background: transparent;
+  color: var(--text-warning);
+  cursor: pointer;
+  font-size: var(--font-size-small);
+  line-height: 1;
+}
+
+.demoRow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.demoRow + .demoRow {
+  margin-top: var(--spacing-12);
+}
+
+.demoRowLabel {
+  font-size: var(--font-size-micro);
+  line-height: var(--line-height-micro);
+  color: var(--text-weak);
+}
+
+.demoSegmented {
+  display: flex;
+  border: 1px solid var(--stroke-weak);
+  border-radius: var(--corner-radius-8);
+  overflow: hidden;
+}
+
+.demoSegment {
+  flex: 1;
+  border: 0;
+  background: transparent;
+  padding: var(--spacing-4);
+  cursor: pointer;
+  color: var(--text-weak);
+  font-size: var(--font-size-micro);
+}
+
+.demoSegment[aria-pressed='true'] {
+  background: var(--fill-brand-strong);
+  color: var(--text-inverse-strong);
+}
+
+/* ---------- full dialog, redesigned 2026-09-16 ---------- */
+
+.dialogClose {
+  position: absolute;
+  top: var(--spacing-12);
+  right: var(--spacing-12);
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-weak);
+  cursor: pointer;
+  line-height: 1;
+}
+
+.dialogClose:hover {
+  background: var(--fill-hover);
+  color: var(--text-strong);
+}
+
+/* The number the user is being asked to act on, at the moment of blocking. */
+.dialogMeter {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+  margin-bottom: var(--spacing-16);
+}
+
+.dialogMeterTrack {
+  height: 8px;
+  border-radius: 999px;
+  background-color: var(--fill-disabled);
+  overflow: hidden;
+}
+
+.dialogMeterFill {
+  width: 100%;
+  height: 100%;
+  background-color: var(--fill-error-strong);
+}
+
+.dialogMeterLabel {
+  font-size: var(--font-size-micro);
+  line-height: var(--line-height-micro);
+  color: var(--text-error);
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--font-weight-strong);
+}
+

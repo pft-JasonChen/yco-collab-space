@@ -11,7 +11,7 @@ gaps:
     resolutionOwner: Designer
   - id: DESIGN-003
     status: open
-    description: The critical banner and the full blocking dialog have no design. Both must present a cleanup action and a purchase action with clear relative weight, so that paying does not read as the only exit.
+    description: "Rewritten 2026-09-16 after the PM removed the cleanup path. The critical banner and the full blocking dialog now carry a single action, adding storage. Designer must define the banner treatment and the full dialog, which is no longer a bare button row: it shows the full capacity as a meter, states what is blocked and carries one primary action. Note that the earlier requirement in this gap — that paying must not read as the only exit — was deliberately reversed by the PM; it is recorded in decisions.md rather than silently dropped, and the consequence is that a blocked user has no signposted way to clear space."
     resolutionOwner: Designer
   - id: DESIGN-004
     status: open
@@ -27,7 +27,7 @@ gaps:
     resolutionOwner: Designer
   - id: DESIGN-007
     status: open
-    description: The item overflow menu has no design. Designer must define the four intent groups, the dividers, and the destructive treatment of the final move-to-trash entry.
+    description: "Rewritten 2026-09-16. The item menu is built on RD's own cell-actions cluster: Download is a button on a translucent pill and More opens RD's dark on-photo menu. Download leaving the menu collapses what was a fourth intent group, so three remain - open, organise, remove - with move-to-trash last. Following RD's own recorded guideline, the destructive entry reads white like the rest of the dark menu and is distinguished by its trash glyph rather than a red tint; the destructive flag is therefore a data attribute, not a colour. What Designer still owns is whether three labelled group headers are right inside a 142px on-photo menu, which is heavier than anything RD ships there."
     resolutionOwner: Designer
   - id: DESIGN-008
     status: open
@@ -58,8 +58,8 @@ gaps:
     description: "The active gallery tab uses RD's own --text-brand (#03ade2) on the page ground, which measures 2.45:1 and fails WCAG AA for text. The axe colour-contrast rule is disabled for the two gallery-tabs stories with a named exception rather than globally, and the colour is left as production ships it so the prototype does not diverge. This is the same accepted pairing already recorded for the brand button on video-expansion (DESIGN-005 there). Revisit if production changes the pairing."
     resolutionOwner: Designer
   - id: DESIGN-018
-    status: open
-    description: "The item overflow menu is not implemented in the wired prototype, so rename, move-to-folder and duplicate are unreachable even though the PRD requires them. RD keeps those actions in a per-item menu that has no extracted counterpart yet: its editing-toolbar offers only select, cancel, delete and download, which is what selection-toolbar faithfully carries. The cell's overflow control currently opens the move-to-trash confirmation directly. Extracting or designing that menu is the next piece of item CRUD."
+    status: resolved
+    description: "Closed 2026-09-15. The PM agreed to a new design here, because RD genuinely has nothing to extract: its editing toolbar offers only select, cancel, delete and download, which is what selection-toolbar faithfully carries. The menu is built on the extracted dropdown-select in menu mode — so the menu behaviour, keyboard model and dismissal are still RD's, only the row set is new. Four labelled groups (Open, Organise, Get, Remove) with move-to-trash last and marked destructive. Batch move, which RD also lacks, sits beside the shared selection toolbar as feature markup rather than being pushed into the shared component. Only the trash entry is wired to a real effect in this prototype; rename, move and duplicate are inert, which is the usual prototype boundary rather than a design gap."
     resolutionOwner: Designer
   - id: DESIGN-015
     status: open
@@ -67,13 +67,13 @@ gaps:
     resolutionOwner: Designer
   - id: DESIGN-019
     status: open
-    description: "Acceptance coverage, measured 2026-09-15 after the page was composed from shared components. `npm run test:rendered -- --feature cloud-storage` passes 10 of 19 checks on all three viewports and fails 9, each for a named reason rather than a harness artefact. Four fail on a missing upload input: the whole upload flow (in-cell progress, quota failure, format failure, resume-after-purchase) has no implementation, only an Upload button, so CS-009/010/011/016 cannot be exercised - see DESIGN-006. One fails on a missing folder-name input: the create-folder dialog is not built, so CS-012 stops at the dialog - see DESIGN-004. One fails on a missing item menu (CS-013) and one on a missing batch move control (CS-017), both the same unextracted per-item menu recorded in DESIGN-018; RD editing-toolbar has no batch move at all. One fails on a missing pack billing-cycle control (CS-015), which is the capacity path UI DESIGN-008 says has no design yet. The last is the surface-structure check: the surface intent lists ten required layout zones and the check asserts each is visible at every viewport, but two are rendered conditionally by design - category-navigation is hidden at 1024px and below, following RD gallery, and folder-navigation is the breadcrumb, which exists only inside a folder. That is a contract question, not a defect: either the intent needs a per-viewport or per-state qualifier, or the narrow layout needs its own category affordance the way RD puts categories in the header drawer. PM and Designer decide which; do not satisfy it by forcing a hidden element to render."
+    description: "Acceptance coverage. Measured again 2026-09-16 after the second toolbar pass: the rendered check passes 29 of 30 checks at each of the three viewports — every acceptance criterion CS-001 to CS-027 — where the first measurement was 10 of 19. The one remaining failure is surface-structure, and it is a platform-tool contract question rather than a page defect. Three parts. First, the check asserts every declared zone is VISIBLE at every viewport, but three zones are conditional by design and by PM decision: folder-navigation is the breadcrumb, which only exists inside a folder; purchase-overlay is a modal; trash-management is one tab is content. The check throws on the first of these alphabetically, currently folder-navigation, and never reaches the rest. Second, componentRoles is read by two tools with opposite meanings: validate:intake requires it to list every role componentReuse resolves, while the rendered check requires each listed role to be visible at rest, and one field cannot satisfy both. Third, the check independently adds the primary pack required slots and every borrowed-pack role to the same set, which pulls in empty-state, selection-action and the five pricing-overlay roles regardless of what the feature declares. Resolving it needs a platform decision: either zones and roles can be marked conditional, or the check asserts presence in the composition rather than visibility at rest. Do not resolve it by forcing a dialog open, pinning a breadcrumb the design removed, or deleting zones the surface really has."
     resolutionOwner: Designer
   - id: DESIGN-012
     status: accepted-temporary
     description: PM-supplied thumbnails and clips under product/mock-assets are temporary and exist only to exercise mixed aspect ratios in the grid. They must be replaced or explicitly approved before design-final.
     resolutionOwner: Designer
   - id: DESIGN-013
-    status: open
-    description: The review control that sets synthetic capacity states is a prototype-only affordance. Designer must confirm a treatment that reads unmistakably as a review tool so it is never mistaken for production UI during manager review.
+    status: resolved
+    description: "Closed 2026-09-15 by the PM layout review. The review control now lives in a Demo widget pinned bottom-left, collapsed to a single Demo pill and expanded on click. It carries the four capacity states and a Free/Pro plan switch. The treatment is deliberately not product UI: a dashed border and the warning-ramp amber, out of the page's reading path. Designer may still restyle it, but the requirement this gap recorded — that it read unmistakably as a review tool — is met."
     resolutionOwner: Designer

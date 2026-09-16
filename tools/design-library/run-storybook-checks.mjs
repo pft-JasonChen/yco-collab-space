@@ -302,6 +302,158 @@ const stories = [
     },
   },
   {
+    // The opt-in selection treatment: the box moves to the top-left, is a real
+    // checkbox rather than RD's decorative span, and one click both selects the
+    // item and reports it — no separate mode switch first.
+    id: 'ui-gallery-cell--hover-select-top-left',
+    async interact(page) {
+      const cell = page.locator('[data-component-role="gallery-cell"]').first();
+      await cell.waitFor({ state: 'visible' });
+      assert.equal(await cell.getAttribute('data-checkbox'), 'top-left');
+      assert.equal(await cell.getAttribute('data-checkbox-on-hover'), 'true');
+      assert.equal(await cell.getAttribute('data-selected'), 'false');
+
+      const box = cell.locator('[role="checkbox"]');
+      assert.equal(await box.getAttribute('aria-checked'), 'false');
+      await box.click();
+      assert.equal(await cell.getAttribute('data-selected'), 'true');
+      assert.equal(await box.getAttribute('aria-checked'), 'true');
+    },
+  },
+  {
+    // A value picker: opening keeps focus on the trigger and points at the
+    // highlighted row, which is what makes RD's combobox model work.
+    id: 'ui-dropdownselect--value-picker',
+    axeRules: brandContrastException,
+    async interact(page) {
+      const trigger = page.locator('[data-component-role="dropdown-select"] [role="combobox"]');
+      await trigger.waitFor({ state: 'visible' });
+      assert.equal(await trigger.getAttribute('aria-expanded'), 'false');
+      await trigger.click();
+      assert.equal(await trigger.getAttribute('aria-expanded'), 'true');
+
+      const list = page.locator('[role="listbox"]');
+      assert.equal(await list.isVisible(), true);
+      assert.ok(await trigger.getAttribute('aria-activedescendant'));
+
+      await page.locator('[role="option"][data-option-key="size"]').click();
+      assert.equal(await trigger.getAttribute('aria-expanded'), 'false');
+      // The closed menu stays in the DOM (hidden), so visibility is the check,
+      // not presence.
+      assert.equal(await list.isVisible(), false, 'the menu closes after a pick');
+      assert.equal(
+        await page.locator('[role="option"][data-selected="true"]').getAttribute('data-option-key'),
+        'size',
+      );
+    },
+  },
+  {
+    // The pill exists so on-photo glyphs stay legible: it carries the ground and
+    // the buttons are transparent. The menu's children stay valid — labelled
+    // runs are real groups, never bare dividers.
+    id: 'ui-cellactions--download-and-more',
+    async interact(page) {
+      const root = page.locator('[data-component-role="cell-actions"]');
+      await root.waitFor({ state: 'visible' });
+      assert.equal(await page.locator('[data-testid="cell-action-download"]').isVisible(), true);
+
+      const more = page.locator('[data-testid="cell-more"]');
+      assert.equal(await more.getAttribute('aria-haspopup'), 'menu');
+      assert.equal(await more.getAttribute('aria-expanded'), 'false');
+
+      const menu = page.locator('[data-testid="cell-menu"]');
+      assert.equal(await menu.isVisible(), false);
+      await more.click();
+      assert.equal(await menu.isVisible(), true);
+      assert.equal(await page.locator('[role="menuitem"]').count(), 6);
+      assert.equal(await page.locator('[data-component-role="cell-actions-group"]').count(), 2);
+      assert.equal(await menu.locator(':scope > hr').count(), 0);
+
+      const trash = page.locator('[role="menuitem"][data-option-key="trash"]');
+      assert.equal(await trash.getAttribute('data-destructive'), 'true');
+      assert.equal(await trash.getAttribute('data-menu-position'), 'last');
+
+      await page.keyboard.press('Escape');
+      assert.equal(await menu.isVisible(), false);
+    },
+  },
+  {
+    // A lone action drops the Download-to-More inset rather than keeping a gap
+    // where the second button would have been.
+    id: 'ui-cellactions--download-only',
+    async interact(page) {
+      const root = page.locator('[data-component-role="cell-actions"]');
+      await root.waitFor({ state: 'visible' });
+      assert.equal(await page.locator('[data-testid="cell-action-download"]').isVisible(), true);
+      assert.equal(await page.locator('[role="menuitem"]').count(), 0);
+    },
+  },
+  {
+    // Two independent radio groups in one menu: picking an order leaves the
+    // field's tick alone, which a single selectedKey could not express.
+    id: 'ui-dropdownselect--two-groups',
+    axeRules: brandContrastException,
+    async interact(page) {
+      const trigger = page.locator('[data-component-role="dropdown-select"] [role="combobox"]');
+      await trigger.waitFor({ state: 'visible' });
+      await trigger.click();
+      assert.equal(await page.locator('[data-component-role="dropdown-group"]').count(), 2);
+      assert.equal(await page.locator('[role="option"][data-selected="true"]').count(), 2);
+
+      await page.locator('[role="option"][data-option-key="asc"]').click();
+      await trigger.click();
+      assert.equal(
+        await page.locator('[role="option"][data-option-key="modified"]').getAttribute('data-selected'),
+        'true',
+        'changing the order leaves the field selected',
+      );
+      assert.equal(
+        await page.locator('[role="option"][data-option-key="asc"]').getAttribute('data-selected'),
+        'true',
+      );
+    },
+  },
+  {
+    // The ghost selection bar: a leading exit control and unfilled actions, with
+    // the destructive one carrying colour rather than a filled ground.
+    id: 'ui-selection-toolbar--ghost-selecting',
+    async interact(page) {
+      const bar = page.locator('[data-component-role="selection-toolbar"]');
+      await bar.waitFor({ state: 'visible' });
+      assert.equal(await bar.getAttribute('data-variant'), 'ghost');
+      assert.equal(await page.locator('[data-testid="selection-exit"]').isVisible(), true);
+      assert.equal(await page.locator('[data-testid="selection-toggle"]').count(), 0);
+      assert.equal(
+        await page.locator('[data-testid="selection-delete"]').getAttribute('data-destructive'),
+        'true',
+      );
+    },
+  },
+  {
+    // An action menu, not a value picker: menu/menuitem roles, no tick, and the
+    // destructive row is marked so it can be styled without the caller reaching
+    // into the component.
+    id: 'ui-dropdownselect--action-menu',
+    axeRules: brandContrastException,
+    async interact(page) {
+      const trigger = page.locator('[data-component-role="dropdown-select"] button').first();
+      await trigger.waitFor({ state: 'visible' });
+      assert.equal(await trigger.getAttribute('aria-haspopup'), 'menu');
+      await trigger.click();
+
+      const menu = page.locator('[role="menu"]');
+      assert.equal(await menu.isVisible(), true);
+      assert.equal(await page.locator('[role="menuitem"]').count(), 7);
+      assert.equal(await page.locator('[data-component-role="dropdown-group"]').count(), 3);
+
+      const trash = page.locator('[role="menuitem"][data-option-key="trash"]');
+      assert.equal(await trash.getAttribute('data-destructive'), 'true');
+
+      await page.keyboard.press('Escape');
+      assert.equal(await menu.isVisible(), false);
+    },
+  },
+  {
     id: 'ui-gallery-cell--loading',
     async interact(page) {
       const cell = page.locator('[data-component-role="gallery-cell"]');

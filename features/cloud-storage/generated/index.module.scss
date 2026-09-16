@@ -214,6 +214,7 @@
 }
 
 .folderCover {
+  position: relative;
   display: block;
   height: 96px;
   border-radius: var(--corner-radius-8);
@@ -287,15 +288,32 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-8);
-  font-size: var(--font-size-small);
+  min-width: 0;
+  font-size: var(--font-size-heading-5);
+  line-height: var(--line-height-heading-5);
   color: var(--text-weak);
+}
+
+.breadcrumbCurrent {
+  color: var(--text-strong);
+  font-weight: var(--font-weight-strong);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .breadcrumbRoot {
   border: 0;
+  padding: 0;
   background: transparent;
   cursor: pointer;
+  color: var(--text-weak);
+  font: inherit;
+}
+
+.breadcrumbRoot:hover {
   color: var(--text-brand);
+  text-decoration: underline;
 }
 
 .breadcrumbSeparator {
@@ -312,6 +330,36 @@
   border-radius: var(--corner-radius-12);
   background: var(--background-alternate);
   font-size: var(--font-size-small);
+}
+
+.batchCount {
+  font-weight: var(--font-weight-strong);
+  color: var(--text-strong);
+}
+
+/* Matched to the shared toolbar's ghost weight, so the one action the feature
+   supplies does not read louder than the three it borrows. */
+.batchGhost {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  padding: var(--spacing-4) var(--spacing-8);
+  border: 0;
+  border-radius: var(--corner-radius-8);
+  background: transparent;
+  color: var(--text-strong);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  cursor: pointer;
+}
+
+.batchGhost:hover:not(:disabled) {
+  background: var(--fill-hover);
+}
+
+.batchGhost:disabled {
+  color: var(--text-weaker);
+  cursor: default;
 }
 
 .batchSize {
@@ -422,10 +470,6 @@
 }
 
 @media (max-width: 1024px) {
-  .rail {
-    display: none;
-  }
-
   .main {
     padding: var(--spacing-16);
   }
@@ -439,4 +483,450 @@
   .batchActions {
     margin-left: 0;
   }
+}
+
+/* ---------- toolbar, 2026-09-15 layout review ---------- */
+
+.toolbarLeft {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  flex-wrap: wrap;
+}
+
+.iconControl {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 30px;
+  height: 30px;
+  padding: 0 var(--spacing-8);
+  border: 1px solid var(--stroke-weak);
+  border-radius: var(--corner-radius-8);
+  background: var(--background-base);
+  color: var(--text-strong);
+  cursor: pointer;
+  line-height: 1;
+}
+
+.iconControl:hover {
+  background: var(--fill-hover);
+}
+
+.createEntry {
+  display: inline-flex;
+}
+
+.createLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
+/* The only upload entry is the create menu, so the input itself is never shown.
+   It stays in the layout rather than display:none so a file can still be set on
+   it programmatically. */
+.fileInput {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.headerZone {
+  display: block;
+}
+
+.gridZone {
+  display: block;
+}
+
+/* ---------- upload cells ---------- */
+
+.uploadCell {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  border-radius: var(--corner-radius-12);
+  overflow: hidden;
+  background-color: var(--fill-weak);
+}
+
+.uploadMedia {
+  position: absolute;
+  inset: 0;
+  background-color: var(--fill-weak);
+}
+
+/* The shimmer is gallery-cell's own loading treatment, reused so an uploading
+   cell reads as the same kind of pending state rather than a new one. */
+.uploadShimmer {
+  background-image: linear-gradient(
+    100deg,
+    transparent 20%,
+    var(--fill-hover) 50%,
+    transparent 80%
+  );
+  background-size: 220% 100%;
+  animation: cloudStorageSweep 1.4s linear infinite;
+}
+
+@keyframes cloudStorageSweep {
+  from { background-position: 120% 0; }
+  to { background-position: -120% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .uploadShimmer { animation: none; }
+}
+
+.uploadOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-4);
+  padding: var(--spacing-12);
+  text-align: center;
+  font-size: var(--font-size-micro);
+  line-height: var(--line-height-micro);
+  color: var(--text-strong);
+}
+
+.uploadName {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.uploadTrack {
+  display: block;
+  width: 72%;
+  height: 5px;
+  border-radius: 999px;
+  background-color: var(--fill-disabled);
+  overflow: hidden;
+}
+
+.uploadFill {
+  display: block;
+  height: 100%;
+  background-color: var(--fill-brand-strong);
+}
+
+.uploadPercent,
+.uploadSize {
+  color: var(--text-weak);
+  font-variant-numeric: tabular-nums;
+}
+
+/* The two failures have to be told apart at a glance, so they differ in more
+   than colour: the quota failure offers two exits and no retry, the format
+   failure offers one. */
+.uploadFailQuota {
+  color: var(--text-error);
+  font-weight: var(--font-weight-strong);
+}
+
+.uploadFailFormat {
+  color: var(--text-weak);
+  font-weight: var(--font-weight-strong);
+}
+
+.uploadActions {
+  display: inline-flex;
+  gap: var(--spacing-8);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.uploadLink {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  color: var(--text-brand);
+  font-size: var(--font-size-micro);
+  line-height: var(--line-height-micro);
+  text-decoration: underline;
+}
+
+/* ---------- list view ---------- */
+
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.listHead,
+.itemRow {
+  display: grid;
+  /* The last column holds the action pill, which is two 24px buttons inside a
+     padded pill — a 32px column clipped it against the row's edge. */
+  grid-template-columns: 24px 48px minmax(0, 1fr) 96px 80px 128px 96px;
+  align-items: center;
+  gap: var(--spacing-12);
+  padding: var(--spacing-8) var(--spacing-4);
+  border-bottom: 1px solid var(--stroke-weak);
+}
+
+.listHead {
+  font-size: var(--font-size-micro);
+  line-height: var(--line-height-micro);
+  color: var(--text-weak);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.rowCheckbox {
+  width: 18px;
+  height: 18px;
+  border: 1px solid var(--stroke-strong);
+  border-radius: var(--corner-radius-4);
+  background: transparent;
+  cursor: pointer;
+}
+
+.rowCheckbox[data-selected='true'] {
+  border-color: var(--fill-brand-strong);
+  background: var(--fill-brand-strong);
+}
+
+.rowThumbnail {
+  display: block;
+  width: 44px;
+  height: 32px;
+  border-radius: var(--corner-radius-4);
+  background-color: var(--fill-weak);
+  background-size: cover;
+  background-position: center;
+}
+
+.rowName {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rowFact {
+  font-size: var(--font-size-micro);
+  line-height: var(--line-height-micro);
+  color: var(--text-weak);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- drawer, folder dialog, purchase extras ---------- */
+
+.drawerModal {
+  padding: 0;
+}
+
+.drawer {
+  width: 260px;
+  max-width: 80vw;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.folderField {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+  text-align: left;
+  font-size: var(--font-size-small);
+}
+
+.folderInput {
+  padding: var(--spacing-8) var(--spacing-12);
+  border: 1px solid var(--stroke-weak);
+  border-radius: var(--corner-radius-8);
+  background: var(--background-base);
+  color: var(--text-strong);
+  font-size: var(--font-size-small);
+}
+
+.packSummary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+}
+
+.packCycle {
+  display: inline-flex;
+  border: 1px solid var(--stroke-weak);
+  border-radius: var(--corner-radius-8);
+  overflow: hidden;
+  width: fit-content;
+}
+
+.packCycleOption {
+  border: 0;
+  background: transparent;
+  padding: var(--spacing-4) var(--spacing-12);
+  cursor: pointer;
+  color: var(--text-weak);
+  font-size: var(--font-size-micro);
+}
+
+.packCycleOption[aria-pressed='true'] {
+  background: var(--fill-brand-strong);
+  color: var(--text-inverse-strong);
+}
+
+.packTotal {
+  font-weight: var(--font-weight-strong);
+  color: var(--text-strong);
+}
+
+.packDue {
+  color: var(--text-weak);
+  font-size: var(--font-size-micro);
+}
+
+.successToast {
+  position: fixed;
+  left: 50%;
+  bottom: var(--spacing-24);
+  transform: translateX(-50%);
+  margin: 0;
+  padding: var(--spacing-12) var(--spacing-16);
+  border-radius: var(--corner-radius-12);
+  background: var(--fill-strong);
+  color: var(--text-inverse-strong);
+  font-size: var(--font-size-small);
+  z-index: 40;
+}
+
+/* Narrow drops the type column only. Size is the cleanup signal and the
+   modified date is what the default sort is on, so neither can go. */
+@media (max-width: 768px) {
+  .listHead,
+  .itemRow {
+    grid-template-columns: 24px 40px minmax(0, 1fr) 72px 104px 96px;
+    gap: var(--spacing-8);
+  }
+
+  .listHead > :nth-child(4),
+  .itemRow > :nth-child(4) {
+    display: none;
+  }
+}
+
+.cellSession {
+  font-size: var(--font-size-micro);
+  line-height: var(--line-height-micro);
+  color: var(--text-weaker);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---------- trash table, 2026-09-16 ---------- */
+
+.trashTable {
+  display: flex;
+  flex-direction: column;
+}
+
+.trashHead,
+.trashRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 96px 128px 128px 40px;
+  align-items: center;
+  gap: var(--spacing-12);
+  padding: var(--spacing-12) var(--spacing-4);
+  border-bottom: 1px solid var(--stroke-weak);
+}
+
+.trashHead {
+  font-size: var(--font-size-micro);
+  line-height: var(--line-height-micro);
+  font-weight: var(--font-weight-strong);
+  color: var(--text-weak);
+}
+
+.trashRowName {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12);
+  min-width: 0;
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  font-weight: var(--font-weight-strong);
+  color: var(--text-strong);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .trashHead,
+  .trashRow {
+    grid-template-columns: minmax(0, 1fr) 104px 40px;
+  }
+
+  .trashHead > :nth-child(2),
+  .trashHead > :nth-child(3),
+  .trashRow > :nth-child(2),
+  .trashRow > :nth-child(3) {
+    display: none;
+  }
+}
+
+/* The pill is right-aligned in its column so it sits clear of the row edge. */
+.itemRow > :last-child {
+  justify-self: end;
+}
+
+.folderCount {
+  position: absolute;
+  left: var(--spacing-8);
+  bottom: var(--spacing-8);
+  min-width: 22px;
+  padding: 0 var(--spacing-4);
+  border-radius: var(--corner-radius-4);
+  background: var(--fill-overlay-strong);
+  color: var(--text-inverse-strong);
+  font-size: var(--font-size-micro);
+  line-height: 20px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.moveList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  text-align: left;
+}
+
+.moveHint {
+  margin: 0 0 var(--spacing-8);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  color: var(--text-weak);
+}
+
+.moveOption {
+  padding: var(--spacing-8) var(--spacing-12);
+  border: 1px solid var(--stroke-weak);
+  border-radius: var(--corner-radius-8);
+  background: var(--background-base);
+  color: var(--text-strong);
+  font-size: var(--font-size-small);
+  text-align: left;
+  cursor: pointer;
+}
+
+.moveOption:hover {
+  background: var(--fill-hover);
 }

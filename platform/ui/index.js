@@ -33,3 +33,5 @@ export { default as SelectionToolbar, SelectAllHeader } from './selection-toolba
 export { default as ConfirmDialog, Modal } from './confirm-dialog/index.js';
 export { default as CategoryRail, ExternalLinkIcon } from './category-rail/index.js';
 export { default as PricingOverlay, PlanTabs, PlanList, FeatureList } from './pricing-overlay/index.js';
+export { default as DropdownSelect } from './dropdown-select/index.js';
+export { default as CellActions, SheetIcon } from './cell-actions/index.js';

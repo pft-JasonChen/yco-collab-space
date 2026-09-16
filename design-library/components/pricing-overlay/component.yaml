@@ -35,13 +35,13 @@ implementation:
   importPath: platform/ui/pricing-overlay/index.js
   storyId: ui-pricing-overlay
   framework: react
-  dependencies: [react, confirm-dialog]
+  dependencies: [react, confirm-dialog, button]
   removedDependencies: [redux, i18n, lodash, react-textfit, currency-selector, pricing-sku-model, holiday-theme-tables, countdown, plans-skeleton, stripe-checkout, debug-hooks, use-window-device, button-wrapper]
   localFiles:
     - path: platform/ui/pricing-overlay/PricingOverlay.jsx
-      sha256: 3ae7f82eb05088f73ca1f08863a3e4e8d2cb54f8a8cade312e7f95833fe78f98
+      sha256: ddefd65de329c3dfca8b3f55157ec4db29197a9ead8d59d85074b6694946f7d4
     - path: platform/ui/pricing-overlay/PricingOverlay.module.scss
-      sha256: 55cb9e14c28b49bc5abcad1acb095e5dccefaa926efbd7433469a581694e2a38
+      sha256: 6c2a1002f0da98f68aad6a0d6895fffc09886025e5dacb85b6425a1ca351eb26
     - path: platform/ui/pricing-overlay/PricingOverlay.stories.jsx
       sha256: 8d8831a0259c1c94d29d22fc48f0e517436bbf869484381cd14a8aac8b091ed7
     - path: platform/ui/pricing-overlay/index.js
@@ -105,6 +105,6 @@ decisionBasis:
   - "Two inline colours had no token and no prior record (2026-09-15). The selected plan card's `#eafbff` is an opaque pale cyan; the closest available is `--blue-dark-200` (#a3eaff33), which composites over white to roughly #edfbff — visually near but translucent where RD is opaque, so it will shift if the card is ever placed on a non-white ground. The Pro gradient's third stop `#FF8800` collapses onto `--amber-light-1000` (#ef9b00), the same token as its second stop, so a three-stop ramp becomes two-stop — the same collapse recorded on category-rail's gradient. Both pending Designer definition."
   - "Colours the canonical record does cover are carried from it: `#fff` -> `--fill-white` (exact); `#03ade2` -> `--fill-brand-strong` (exact); `#44e3ed` -> `--blue-dark-1000` and `#ffb802` -> `--yellow-solid-1000`, `#ffa51c` -> `--amber-light-1000`, all three approximate."
   - "Missing dialog role fixed, not carried (2026-09-15). The surface acceptance recorded that the IAP overlay opens without a dialog role, and warned its passing open/close test was not a keyboard or focus verdict. This component renders through the shared Modal from confirm-dialog with `ariaLabelledBy` always supplied, so it is a real `role='dialog'` with `aria-modal`, focus-on-open, focus-restore-on-close, a Tab trap and Escape-to-close. The dependency on confirm-dialog mirrors RD, whose pricing modal imports the same common/modal its delete dialog does."
-  - "Padding cascade addressed structurally (2026-09-15). The surface acceptance measured the RD preview's Subscribe button at ~21px padding with the declared value flattened to 0, because a preview-level `.root button` selector outranks a plain component class. This component's checkout carries its own class with explicit padding rather than relying on an element default, so a host page's bare `button` rule cannot flatten it. That does not repair the rd-port preview itself, which is a separate surface."
+  - "Button consolidation (2026-09-15, PM requested): checkout now renders the Designer-approved shared Button as Primary/Brand/Medium. The pricing component keeps only its full-width layout class; Button owns padding, typography, states and color. The RD reference preview uses the same component, and its scoped global reset was lowered with `:where(button)` so component classes retain authority."
   - "Not ported (2026-09-15): the four seasonal themes (halloween, blackfriday, christmas, endyear), the countdown, the plans skeleton, the currency selector, MorePlanLink and the Stripe path. The seasonal tables are dormant branches keyed off a holiday hook this prototype has no source for, and TOKEN-MIGRATION.md already notes its own counts include dormant branches. `secondaryAction` occupies MorePlanLink's position so a consumer can put its own entry there — Cloud Storage uses it for Expand storage only."
   - "The tab row is a real `role='tablist'` of buttons with `aria-selected`, where RD uses click-handling divs — the same keyboard-reachability repair made on gallery-tabs. Plan cards are buttons with `aria-pressed` for the same reason."

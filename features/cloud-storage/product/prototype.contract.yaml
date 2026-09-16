@@ -14,13 +14,19 @@ states:
   - id: library-empty
     description: A content tab with no items, showing the family empty state and a create entry.
   - id: folder-open
-    description: A folder's contents replace the tab grid and a breadcrumb returns to the tab root.
+    description: A folder's contents replace the tab grid. The breadcrumb takes the page title's place and the tab row and capacity meter are hidden, so the header states where you are rather than where you could go.
   - id: folder-create
     description: The create-folder dialog is open with a pre-selected default name.
   - id: selection-mode
     description: Batch selection is active with the shared editing toolbar, selected count and selected size.
   - id: item-detail
-    description: The shared detail dialog is open for one item with metadata and next actions.
+    description: The shared detail dialog is open for one item with metadata and next actions. No acceptance criterion exercises this state yet; it waits on the media-generic API in DESIGN-015.
+  - id: list-view
+    description: The same tab rendered as rows, each leading with a thumbnail and carrying name, type, size and modified date.
+  - id: item-menu
+    description: The per-item overflow menu is open with its four intent groups and the destructive entry last.
+  - id: category-drawer
+    description: Below the rail breakpoint, the header drawer presents the categories the rail lists.
   - id: delete-confirm
     description: The move-to-trash confirmation is open and states the 30-day recovery window.
   - id: uploading
@@ -60,9 +66,41 @@ actions:
     from: library-normal
     event: User sorts the current tab by size descending
     to: library-normal
+  - id: switch-to-list-view
+    from: library-normal
+    event: User switches the view control to list
+    to: list-view
+  - id: switch-to-grid-view
+    from: list-view
+    event: User switches the view control to grid
+    to: library-normal
+  - id: filter-by-media
+    from: library-normal
+    event: User narrows a mixed-media tab to images or videos
+    to: library-normal
+  - id: reverse-sort-direction
+    from: library-normal
+    event: User reverses the sort direction
+    to: library-normal
+  - id: open-item-menu
+    from: library-normal
+    event: User opens a cell's overflow menu
+    to: item-menu
+  - id: close-item-menu
+    from: item-menu
+    event: User dismisses the overflow menu or picks an entry
+    to: library-normal
+  - id: open-category-drawer
+    from: library-normal
+    event: User opens the header drawer below the rail breakpoint
+    to: category-drawer
+  - id: close-category-drawer
+    from: category-drawer
+    event: User dismisses the drawer
+    to: library-normal
   - id: open-create-folder
     from: library-normal
-    event: User selects Create folder
+    event: User selects New folder from the create menu
     to: folder-create
   - id: confirm-create-folder
     from: folder-create
@@ -186,19 +224,19 @@ acceptance:
   - id: CS-001
     given: The Cloud Storage route is open
     when: The initial state renders
-    then: The gallery shell, the five level-one tabs in order, and the capacity meter beside the upgrade entry are visible without a network request
+    then: The gallery shell, the six level-one tabs in order, and the capacity meter beside the upgrade entry are visible without a network request
   - id: CS-002
     given: The Images tab is active with a populated synthetic library
     when: The tool-family filter is used
-    then: The level-two filter exposes an All option plus tool families, and no tool appears as a level-one tab
+    then: The level-two filter exposes an All option plus the eighteen features from the YCO feature-type sheet, grouped under AI Image and AI Video, and no tool appears as a level-one tab
   - id: CS-003
     given: A populated content tab is open
     when: Each item cell renders
-    then: Every cell shows its name, type, file size and date, so a cleanup decision can be made from the grid alone
+    then: "Every cell shows its name, type and date. File size is deliberately absent from the cell: none of the four competitors shows it, and with the cleanup path removed there is no decision on the grid that needs it"
   - id: CS-004
     given: A populated content tab is open
-    when: The user sorts by size
-    then: The grid reports size-descending order so the largest items are actionable first
+    when: The user changes the sort field and the order
+    then: "Sort field and order are two groups in one menu with no separate direction control, the fields are date modified and date created, and the grid reports both"
   - id: CS-005
     given: Capacity is below 75 percent
     when: The capacity meter renders
@@ -210,11 +248,11 @@ acceptance:
   - id: CS-007
     given: Capacity is between 90 and 99 percent
     when: The page renders
-    then: The meter reports the critical state and a persistent banner below the heading offers both a cleanup action and a capacity action
+    then: A persistent banner states the remaining space and offers a single action, adding more storage; no cleanup action is offered anywhere
   - id: CS-008
     given: Capacity is at 100 percent
     when: An action that needs space is attempted
-    then: A blocking dialog offers cleanup, a capacity pack and a subscription upgrade rather than only a purchase
+    then: A blocking dialog shows the capacity that is full and offers one action, Upgrade Space, which opens the purchase overlay
   - id: CS-009
     given: The user selects local files while capacity remains
     when: Upload begins
@@ -222,7 +260,7 @@ acceptance:
   - id: CS-010
     given: Capacity runs out partway through a multi-file upload
     when: The remaining files are processed
-    then: Those cells report a quota failure distinct from a format failure and offer cleanup and capacity actions instead of a retry
+    then: The cell reports a quota failure distinctly from a format failure and offers Remove or Upgrade, with no retry, because retrying cannot succeed until space exists
   - id: CS-011
     given: An unsupported local file is selected
     when: Upload is attempted
@@ -234,7 +272,7 @@ acceptance:
   - id: CS-013
     given: An item overflow menu is open
     when: The menu renders
-    then: Actions are grouped by intent, the destructive action is last and reads as moving to trash, and confirming states the 30-day recovery window
+    then: "The cell action pill carries download as its own button and a More menu with three intent groups - open, organise and remove - with move-to-trash last and flagged destructive"
   - id: CS-014
     given: The Trash tab has deleted items
     when: The tab renders
@@ -248,10 +286,63 @@ acceptance:
     when: The purchase succeeds
     then: The meter reflects the new quota and the quota-failed uploads are retried rather than leaving the user on an unchanged page
   - id: CS-017
-    given: Batch selection is active
-    when: Items are selected
-    then: The shared editing toolbar reports the selected count and the space those items occupy, and offers download, move to folder and move to trash
+    given: A populated content tab is open and nothing is selected
+    when: The checkbox revealed on a cell is used
+    then: Selection mode is entered by that first click and the selection bar reports the item count and the space they occupy, offers select-all and an exit, and presents export, move and delete as low-weight icon actions rather than filled buttons
   - id: CS-018
     given: The feature renders at a configured viewport
     when: The layout resolves
     then: The capacity meter, tab row, critical banner and purchase overlay remain reachable without horizontal overflow
+  - id: CS-019
+    given: A populated content tab is open
+    when: The view control is switched between grid and list
+    then: The same items render as a justified grid or as rows that each lead with a thumbnail and carry name, type, size and modified date
+  - id: CS-020
+    given: Any level-one tab is active
+    when: The create control resolves
+    then: "The create control matches the tab: Uploads offers file upload, folder upload and create folder; Projects offers create project and create folder; the other creation tabs offer create folder as a single button with no menu; and Trash offers no create control at all"
+  - id: CS-021
+    given: The feature renders below the category-rail breakpoint
+    when: The layout resolves
+    then: Category navigation stays reachable through the header drawer, and opening it presents the same categories the rail lists
+  - id: CS-022
+    given: The AI Agent tab is active
+    when: A chat session's results render
+    then: Each output is listed individually and names the session it came from, and the media filter narrows the tab to images or videos
+  - id: CS-023
+    given: A folder is open
+    when: The page header resolves
+    then: The breadcrumb replaces the page title, the level-one tab row and the capacity meter are hidden, and the breadcrumb returns to the tab root
+  - id: CS-024
+    given: The reviewer switches the demo plan to Pro
+    when: The capacity meter renders
+    then: The meter offers Expand storage rather than Upgrade, because Pro is the highest subscription and only additional capacity can be bought
+  - id: CS-025
+    given: The Trash tab is active
+    when: Its contents render
+    then: "Trash is a table of name, type, deleted date and the remaining days before automatic deletion, with an Empty Trash action and a per-row menu offering restore and delete from trash"
+  - id: CS-026
+    given: A trash row's menu is open
+    when: Delete from Trash is chosen
+    then: "A confirmation names the item and states that it cannot be undone, and only its confirm action deletes"
+  - id: CS-027
+    given: The Projects tab is active
+    when: Create project is chosen
+    then: "A file picker opens, and once a file is chosen the prototype stops at a named handoff boundary for the editor route rather than pretending to open it"
+  - id: CS-028
+    given: A cell's More menu is open
+    when: Rename is chosen and a new name confirmed
+    then: "The item carries the new name in both the grid and the list, and no other item changes"
+  - id: CS-029
+    given: A cell's More menu is open
+    when: Duplicate is chosen
+    then: "A copy appears in the same tab with its own name, and the original is untouched"
+  - id: CS-030
+    given: A cell's More menu is open in a tab that has no folders
+    when: Move to folder is chosen
+    then: "The create-folder dialog opens, and confirming it creates the folder and moves the item into it; where folders already exist a picker lists them instead"
+  - id: CS-031
+    given: A content tab is open
+    when: Folders and files render
+    then: "Each group carries its own heading, and a folder card states its item count and when it was created"
+

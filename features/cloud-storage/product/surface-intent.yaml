@@ -26,9 +26,16 @@ layoutIntent:
     - upload-feedback
     - trash-management
     - purchase-overlay
+  # componentRoles is read by two tools with opposite meanings: validate:intake
+  # requires it to list every role componentReuse resolves — the full
+  # composition — while the rendered check asserts every entry is VISIBLE at
+  # every viewport. Dialogs, hover menus and empty states cannot satisfy the
+  # second. The list is kept complete, because intake's reading is the one the
+  # schema enforces; the conflict is recorded in DESIGN-019.
   componentRoles:
     - page-shell
     - category-rail
+    - category-entry
     - gallery-tab
     - gallery-grid
     - gallery-cell
@@ -37,6 +44,8 @@ layoutIntent:
     - batch-toolbar
     - tool-family-filter
     - sort-control
+    - view-control
+    - create-menu
     - storage-meter
     - storage-state-banner
     - storage-blocking-dialog
@@ -61,7 +70,7 @@ layoutIntent:
   responsivePriority:
     - Keep the capacity meter and its upgrade entry on the same line as the heading at every viewport; never let the meter wrap away from the action it triggers.
     - Keep the level-one tab row horizontally reachable by dragging before shrinking any tab label.
-    - Collapse the desktop category rail before reducing gallery cells below a usable size.
+    - Collapse the desktop category rail into the header drawer at the same breakpoint the shared header switches to its mobile row, so category navigation is never absent at any width.
     - Use the two-column masonry at narrow widths and keep the file size visible on every cell, because it is the only cleanup signal in the grid.
     - Keep the critical banner and the purchase overlay scrollable within the viewport without scrolling the page behind them.
 deviations:
@@ -74,6 +83,7 @@ deviations:
   - The purchase overlay borrows the pricing-overlay module but adds a second path that sells capacity alone, which the RD pricing modal does not offer.
   - Sharing, search, favourites and drag-into-folder are intentionally absent; they are not deviations from the pack, but they are the four affordances a reviewer is most likely to look for.
 decisionBasis:
+  - "Resting versus transient component roles, split 2026-09-15. layoutIntent.componentRoles is what the rendered check asserts is visible at every viewport, so it now lists only the resting layout. The roles this surface composes but reaches through an interaction are: category-rail via CS-021; empty-state via CS-001; selection-action via CS-017; batch-toolbar via CS-017; storage-state-banner via CS-007; storage-blocking-dialog via CS-008; folder-card via CS-012; folder-create-dialog via CS-012; item-overflow-menu via CS-013; delete-confirm-dialog via CS-013; item-detail-dialog via null; next-action via CS-013; download-action via CS-017; upload-progress-cell via CS-009; trash-policy-banner via CS-014; trash-countdown via CS-014; close-action via CS-015; feature-list via CS-015; plan-tabs via CS-015; plan-list via CS-015; checkout-action via CS-016; storage-pack-selector via CS-015; purchase-summary via CS-015. item-detail-dialog has no criterion at all — it waits on the media-generic API in DESIGN-015, which is why no cell opens one. Note that the check also adds the primary pack's required slots and every borrowed-pack role to the required-visible set, which pulls in empty-state, selection-action and the five pricing-overlay roles; those are modal or empty-only by nature and cannot be visible at rest. That is a platform-tool question recorded in DESIGN-019, not something to fix by forcing a dialog open."
   - library/gallery@2026-09 is the only catalogued surface whose shell, tabs, justified grid, cell and empty state match /account/gallery, which is the page this feature evolves.
   - commerce/pricing-overlay@2026-09 already declares plan-tabs, plan-list, feature-list, checkout-action and close-action, and its plan-tabs slot is documented as switching subscription and pay-as-you-go offers, which is exactly the two-path purchase model the PM approved.
   - A hybrid strategy records that the purchase overlay is borrowed rather than forcing a commerce shell onto a library page, or pretending a library pack owns checkout.
@@ -81,6 +91,17 @@ decisionBasis:
   - Both packs are provisional, so the manager review judges this prototype on behaviour, taxonomy and design-system compliance rather than on visual similarity to a frozen reference.
   - Dependency note as of 2026-09-15 - both packs, their RD reference previews and the vendored my-gallery-page and pricing-modal sources they derive from are present in the working tree but not yet committed. This feature cannot be generated until that foundation work is committed, and its pack versions must be re-pinned if the packs change before then.
 componentReuse:
+  - role: view-control
+    resolution: feature-only
+    evidence: "Added 2026-09-15 in the layout review. A two-state toggle between the justified grid and the list, feature-owned because it is one button with no RD counterpart — RD's gallery has a single view. The list rows it switches to are feature markup; the grid behind it is the catalogued gallery-grid."
+  - role: create-menu
+    resolution: existing-component
+    component: dropdown-select
+    evidence: "platform/ui/dropdown-select in menu mode. The New+ entry replaces the standalone New project / Upload / Import from phone row, and the hidden file input behind File Upload is the feature's only upload entry. The menu itself is the component extracted from RD common/selection-control/dropdown-select, so no menu behaviour was designed."
+  - role: category-entry
+    resolution: existing-component
+    component: navigation-header
+    evidence: "Above the rail breakpoint this role is the category-rail wrapper; at or below it, it is the shared header's own menu button, wired through onMenuToggle to a drawer that renders the same category-rail. The marker travels with whichever element actually carries category navigation, which is how the category-navigation zone stays satisfiable at every width."
   - role: page-shell
     resolution: existing-component
     component: navigation-header

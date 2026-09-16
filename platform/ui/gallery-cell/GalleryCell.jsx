@@ -22,6 +22,13 @@ import checkIconSrc from '../../../design-library/assets/icon/yco-home-gallery/i
  * @param {string} [props.playIconSrc]   static play-overlay asset (video only)
  * @param {boolean} [props.isEditing]    selection mode: shows the checkbox, hides actions
  * @param {boolean} [props.isSelected]
+ * @param {'top-right'|'top-left'} [props.checkboxPosition]  RD ships top-right; top-left is the
+ *        placement the competitive set uses and Cloud Storage asked for
+ * @param {boolean} [props.checkboxOnHover]  also reveal the checkbox on hover/focus outside
+ *        selection mode, so selecting is the first click rather than the second
+ * @param {(event: React.MouseEvent) => void} [props.onToggleSelect]  fires from the checkbox only;
+ *        without it the checkbox is decorative and the cell's own onClick still owns the toggle
+ * @param {string} [props.selectLabel]   accessible name for the checkbox control
  * @param {() => void} [props.onClick]
  * @param {boolean} [props.clickable]    pointer cursor on the cell (default true)
  * @param {React.ReactNode} [props.actions]  bottom-right hover actions
@@ -41,6 +48,10 @@ export default function GalleryCell({
   playIconSrc,
   isEditing = false,
   isSelected = false,
+  checkboxPosition = 'top-right',
+  checkboxOnHover = false,
+  onToggleSelect,
+  selectLabel = 'Select',
   onClick,
   clickable = true,
   actions,
@@ -102,7 +113,9 @@ export default function GalleryCell({
       onMouseLeave={() => setHovered(false)}
       data-component-role="gallery-cell"
       data-state={isEditing ? 'editing' : 'default'}
-      data-selected={isEditing ? String(isSelected) : undefined}
+      data-selected={isEditing || checkboxOnHover ? String(isSelected) : undefined}
+      data-checkbox={checkboxPosition}
+      data-checkbox-on-hover={checkboxOnHover ? 'true' : undefined}
     >
       {/* rounded/clipped media lives in its own box so cell-level overlays
           (e.g. an open More menu) can overflow the cell without being clipped */}
@@ -132,11 +145,31 @@ export default function GalleryCell({
         <img className={styles.playIcon} src={playIconSrc} alt="" />
       )}
       {isVideo && duration && <span className={styles.duration}>{duration}</span>}
-      {isEditing && (
-        <span className={`${styles.checkbox} ${isSelected ? styles.checkboxSelected : ''}`}>
-          {isSelected && <img className={styles.checkIcon} src={checkIconSrc} alt="" />}
-        </span>
-      )}
+      {/* RD renders the checkbox only in selection mode, as a decorative span the
+          cell's own onClick toggles. Both stay the default. With
+          `checkboxOnHover` the box is also revealed on hover or keyboard focus,
+          and with `onToggleSelect` it becomes a real control — so the first
+          click can select without a separate mode switch first. */}
+      {(isEditing || checkboxOnHover) &&
+        (onToggleSelect ? (
+          <button
+            type="button"
+            className={`${styles.checkbox} ${isSelected ? styles.checkboxSelected : ''}`}
+            role="checkbox"
+            aria-checked={isSelected}
+            aria-label={selectLabel}
+            onClick={(event) => {
+              event.stopPropagation();
+              onToggleSelect(event);
+            }}
+          >
+            {isSelected && <img className={styles.checkIcon} src={checkIconSrc} alt="" />}
+          </button>
+        ) : (
+          <span className={`${styles.checkbox} ${isSelected ? styles.checkboxSelected : ''}`}>
+            {isSelected && <img className={styles.checkIcon} src={checkIconSrc} alt="" />}
+          </span>
+        ))}
       {!isEditing && actions && (
         <div className={styles.actions} onClick={(e) => e.stopPropagation()}>
           {actions}

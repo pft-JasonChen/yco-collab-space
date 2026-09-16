@@ -122,6 +122,120 @@
   design-system compliance rather than visual similarity to a frozen production
   reference.
 
+## Layout review, 2026-09-15
+
+Decisions taken with the PM against an interactive wireframe, after the page had been
+composed from shared components. All of them replace earlier entries above.
+
+- The header row is three bands: capacity meter with the upgrade entry, the level-one
+  tab row, then one toolbar. The standalone New project / Upload / Import from phone
+  row is gone; it cost a full band for three actions and pushed the grid down.
+- `Import from phone` is dropped from v1 entirely. `Manage` leaves the meter row —
+  cleanup is still reachable from the critical banner and the full dialog, which is
+  where the user is actually blocked, and CS-007 / CS-008 keep asserting it.
+- The retention tip ("Everything you create is saved here.") is dropped. It stated the
+  product's default rather than telling anyone anything.
+- Selection no longer has a mode switch. Hovering a cell reveals a checkbox at its
+  top-left; the first click both selects that item and enters selection mode. This is
+  the pattern Picsart, Fotor, CapCut and Canva all use, and it removes a click from
+  every batch action. RD's own placement (top-right, selection mode only) stays the
+  shared component's default; Cloud Storage opts in.
+- Sort exposes Date Modified, Date Created and Alphabetical, plus File size. File size
+  was not in the PM's list but is kept, after review, because the cleanup path depends
+  on it: `Manage space` sorts by size descending so the largest items come first, and
+  CS-004 asserts it. Without a size sort there is no cleanup entry point.
+- Sort direction is a separate control rather than doubled options, so all four fields
+  can be read in either direction without eight menu entries.
+- The view control switches between the justified grid and a list whose rows lead with a
+  small thumbnail. The trash tab already rendered as a list; it now uses the same one.
+- One create entry: `New +` opens File Upload, Folder Upload and New Folder. The upload
+  file input lives behind it, which is why the upload flow could not be built before this
+  layout was settled.
+- The media filter is a mixed-media control and appears only on the tabs that hold both
+  kinds — Projects and Uploads. It replaces the JPG / PNG / MP4 format filter, whose
+  granularity nobody asked for; the sketch has two left-side controls, not three.
+- The review control moves into a collapsible Demo widget pinned bottom-left, collapsed
+  to a single `Demo` pill. It carries the four capacity states and a Free / Pro plan
+  switch, so a reviewer can see the same page under a Pro quota. Its dashed treatment is
+  deliberate: DESIGN-013 requires it to be unmistakably a review tool.
+- Below the shared header's mobile breakpoint the category rail collapses into the header
+  drawer, using the header's own menu button. The rail breakpoint moved from 1024 to 768
+  to match, so there is no width at which categories are unreachable — which is what the
+  surface-structure zone failure was really reporting.
+- The item overflow menu is newly designed, with the PM's agreement, because RD has no
+  per-item menu to extract: its editing toolbar carries only select, cancel, delete and
+  download. Four labelled groups — Open, Organise, Get, Remove — with move-to-trash last
+  and marked destructive.
+
+## Follow-up decisions, 2026-09-15
+
+- The folder view follows Fotor's header: entering a folder replaces the page title with
+  the breadcrumb and hides both the level-one tab row and the capacity meter, so the
+  header states where you are rather than where you could go. The breadcrumb root is the
+  tab you came from, not the app name, and it is the way back.
+- AI Agent becomes a sixth level-one tab, placed after Videos because it is a creation
+  source; Uploads and Trash stay the two buckets at the end.
+- The tab lists **individual outputs**, not session containers. A chat mixes images and
+  videos, so the media filter applies directly to files, and the tool-family filter keeps
+  working because each output still comes from a tool. The cost of a flat list is that
+  you cannot see which results belong together, so every agent cell names its source
+  session on the meta line. Revisit if sessions need their own lifecycle actions —
+  renaming a conversation, or reopening it with its full context.
+
+## Capacity and toolbar review, 2026-09-16
+
+- **Level two comes from the YCO Feature Type sheet.** Eighteen features under two types,
+  AI Image and AI Video, rendered as two group headers in the level-two filter. The
+  invented families (portrait, product, style, audio) are gone; every mock item is remapped
+  onto a real feature id.
+- **Sort is one menu with two groups**, Sort by and Order, replacing the field dropdown plus
+  a separate direction icon. The icon button was a control that cost a slot and said
+  nothing until you already knew what it did.
+- **File size leaves the cell.** None of the four competitors shows it, and the reason it
+  was kept — sorting largest-first to clear space — no longer exists. Size stays in the
+  selection bar, where it answers "how much will this free".
+- **Manage space is removed everywhere**: from the critical banner, the full dialog and the
+  quota-failure cell. This reverses an earlier recorded principle that paying must never be
+  the only exit, and it is a deliberate PM call, not an oversight. The consequence is that
+  a user at 100% has exactly one way forward — buy space — and can still delete items
+  manually from the grid, which is not signposted at the moment of blocking.
+- **A blocked upload offers Remove or Upgrade.** Remove clears the failed cell; retry is
+  still absent, because retrying cannot succeed until space exists.
+- **The full dialog is a real surface**, not a bare three-button box: it shows the capacity
+  that is full as a meter, states what is blocked, and carries one action, Upgrade Space,
+  which opens the purchase overlay.
+- **Pro cannot upgrade.** Pro is the highest subscription, so the meter's action becomes
+  Expand storage and goes straight to the capacity packs path.
+- **The selection bar is low-weight.** A leading close control, the item count and the
+  space they occupy, select-all, then export / move / delete as icon-plus-label actions
+  with no fills. RD's filled-pill row stays the shared component's default.
+
+## Toolbar, trash and cell actions, 2026-09-16 (second pass)
+
+- **Sort keeps date fields only.** Name leaves the list; the field group is Date modified
+  and Date created, the order group Newest / Oldest first.
+- **The create control is per tab, not one menu everywhere.** Uploads keeps File Upload /
+  Folder Upload / Create folder — which is where the upload flow now lives, because
+  "uploads" is exactly what a user's own files are. Projects offers Create project and
+  Create folder. Images, Videos and AI Agent have one action left, so it is a plain
+  Create folder button rather than a menu of one. Trash has no create control; Empty Trash
+  takes that position instead.
+- **Create project hands off rather than pretending.** It opens a file picker, and once a
+  file is chosen the prototype stops at a named boundary for `edit/result-photo`. That
+  route renders RD's `components/result-page` — 1,551 files — which is a different surface
+  (`workspace/tool-photo-editing`), not something Cloud Storage should absorb.
+- **The cell's action cluster is RD's own `cell-actions`.** The previous control was the
+  toolbar dropdown in its borderless variant, which has no ground and so vanished over a
+  light thumbnail. RD had already solved this: Download and More share a translucent dark
+  pill with white glyphs. Download becoming its own button collapses the menu's Get group,
+  so the item menu is now three groups — Open, Organise, Remove — rather than four.
+- **Trash is a table**: name, type, deleted date, and the days left before automatic
+  deletion. The People column in the reference is a sharing column and sharing is out of
+  scope for v1. Restore and Delete from Trash move into a per-row menu, and deleting
+  permanently raises a confirmation that names the item and says it cannot be undone.
+- **The full-storage dialog loses its red meter**, which overlapped the close control and
+  repeated a number the page already shows.
+
 ## Post-prototype TODO
 
 - Confirm the 5 GB free quota against YCO's real average asset size. If video generation
@@ -137,3 +251,11 @@
   upload progress bar for extraction into the shared component pilot. All four are
   reproduced as feature code in this prototype only because no catalogued component
   covers them yet.
+- AI Agent now has its own tab, listing individual outputs (decided 2026-09-15, above).
+  Still open: whether a session itself needs to be an addressable object — reopening a
+  conversation with its context, renaming it, or deleting a whole session at once. None of
+  those is reachable from a flat list of results.
+- Decide how a blocked user clears space now that Manage space is gone. Deleting from the
+  grid still works but nothing points at it from the banner or the full dialog, so the only
+  signposted exit is payment. Worth watching in review.
+

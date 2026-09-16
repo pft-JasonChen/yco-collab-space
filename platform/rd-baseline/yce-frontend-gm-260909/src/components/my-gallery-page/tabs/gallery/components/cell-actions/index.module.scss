@@ -1,0 +1,112 @@
+.root {
+  position: relative;
+  display: flex;
+  gap: 4px;
+}
+
+// Desktop: Download + More share one rounded pill shell (mobile shows a lone
+// circle, so this wrapper background is applied only on the desktop branch).
+.grouped {
+  padding: 8px 8px 8px 16px;
+  border-radius: 9999px;
+  background: rgb(17 24 26 / 50%);
+  gap: 12px;
+}
+
+// A lone icon (e.g. AI Agent download-only) sits with symmetric padding — the
+// extra left inset only makes sense for the Download→More grouping.
+.grouped.single {
+  padding: 8px;
+}
+
+.iconBtn {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background: rgb(17 24 26 / 50%);
+  color: #fff;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    background: rgb(17 24 26 / 70%);
+  }
+
+  img,
+  svg {
+    width: 18px;
+    height: 18px;
+    display: block;
+  }
+}
+
+// Inside the grouped pill the icons are transparent; the pill carries the
+// background, and hover gives each a subtle light wash for affordance.
+.grouped .iconBtn {
+  background: transparent;
+}
+
+.grouped .iconBtn:hover {
+  background: rgb(255 255 255 / 16%);
+}
+
+// More button while its menu/sheet is open: invert to a white circle with dark
+// dots (the dots are currentColor). Compound selectors keep this winning over
+// the transparent `.grouped .iconBtn` rule above.
+.iconBtn.iconBtnActive,
+.grouped .iconBtn.iconBtnActive {
+  background: #fff;
+  color: #15171f;
+}
+
+.menu {
+  position: absolute;
+  bottom: calc(100% + 4px);
+  top: auto;
+  right: 0;
+  min-width: 142px;
+  background: var(--fill-overlay-weak);
+  border-radius: var(--corner-radius-20);
+  box-shadow: 0 4px 16px rgb(0 0 0 / 24%);
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  z-index: 3;
+  backdrop-filter: blur(24px);
+}
+
+.menuItem {
+  display: flex;
+  gap: 4px;
+  border: none;
+  background: none;
+  text-align: left;
+  padding: 8px;
+  border-radius: var(--corner-radius-16);
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+  color: var(--text-inverse-strong);
+  cursor: pointer;
+  white-space: nowrap;
+
+  &:hover {
+    background: var(--fill-inverse-hover);
+  }
+
+  svg {
+    width: 18px;
+    height: 18px;
+    flex: none;
+  }
+}
+
+// Delete reads white like the rest of the dark menu (matches the guideline);
+// it's still distinguished by its trash glyph, not a red tint.
+.danger {
+  color: #fff;
+}

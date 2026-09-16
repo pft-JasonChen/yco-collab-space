@@ -31,9 +31,9 @@ implementation:
   removedDependencies: [i18n, uuid, prop-types, host-portal-root, message-dialog-button-branches, button-wrapper]
   localFiles:
     - path: platform/ui/confirm-dialog/ConfirmDialog.jsx
-      sha256: 084553ec5068bccad41bc74d25251423bb80e9b8ba5143c70532af9f63d8e91a
+      sha256: d61ab276a264aadbec836e264c87fbd88ae13650013d3bf39d6d0a9a3b59ec32
     - path: platform/ui/confirm-dialog/Modal.jsx
-      sha256: db5372a8415403cb332e6fdabf6b377adf7f1aefbf8136bdce248952a6111cc5
+      sha256: 69dbfeeb289b4222b603b1e46a73a6d55ccd7bcce5df0193034f538e7892be81
     - path: platform/ui/confirm-dialog/ConfirmDialog.module.scss
       sha256: eaeb9e24b5c35bb6b92f815528b4676439e22245d4d4e3f3874438ab010b1284
     - path: platform/ui/confirm-dialog/ConfirmDialog.stories.jsx
@@ -52,6 +52,7 @@ publicApi:
     - { name: cancelLabel, required: false }
     - { name: tone, required: false, values: [brand, destructive] }
     - { name: closeLabel, required: false }
+    - { name: testId, required: false }
   states: [closed, open, scale-transition, focus-trapped, destructive, brand]
 tokens:
   lockPath: platform/tokens/tokens.lock.json
@@ -78,3 +79,5 @@ decisionBasis:
   - "Colour mapping (2026-09-15) follows app/src/surfaces/rd-port/token-colour-mapping.json. Exact: `#fff` -> `--fill-white`. Three approximations, carried from that record rather than re-decided: the backdrop `rgb(0 0 0 / 50%)` -> `--fill-overlay-weak` (#00000073), which is 45% rather than 50% so the page behind reads very slightly lighter; the modal's text colour `#212529` -> `--grey-slate-solid-850` (#1d2426); and the cancel link `#575757` -> `--grey-neutral-solid-800` (#333), a noticeably darker grey. All three stay pending Designer definition."
   - "Typography is kept as RD's literals rather than forced onto tokens: 30px title, 16px/22px body, 14px cancel and the 120px pill radius have no matching token, and the raw-colour policy does not cover non-colour values. RD's `font-weight: 500` on the title and body maps to `--font-weight-weak` (400), the same medium-to-regular shift recorded on selection-toolbar."
   - "Layout follows RD's stacked treatment rather than a conventional two-button footer: the confirm is a full-width pill and the cancel is plain text beneath it. On a destructive confirmation that asymmetry is deliberate, so the safe choice is not presented as a competing button."
+  - "A `testId` hook was added 2026-09-16 and forwarded onto the dialog node. Cloud Storage raises two confirmations from the same page — move to trash, and delete permanently from trash — and a consumer needs to tell them apart without reaching for the copy inside them."
+

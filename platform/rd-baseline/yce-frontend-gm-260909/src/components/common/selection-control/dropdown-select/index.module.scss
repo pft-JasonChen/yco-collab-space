@@ -1,0 +1,120 @@
+@import "@/styles/variables.scss";
+
+.menuContainer {
+  position: relative;
+  width: fit-content;
+
+  &.text-to-image-ai-model {
+    width: auto;
+  }
+
+  &.enhance-mode {
+    width: 100%;
+  }
+}
+
+.menuButton {
+  &.default {
+    position: relative;
+    height: 30px;
+    min-width: 90px;
+    border-radius: 6px;
+    border: 1px solid #8c8c8c;
+    background-color: var(--fill-inverse-strong);
+    color: #212529;
+    line-height: normal;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 11.5px;
+    cursor: pointer;
+
+    @include rwd-custom($width-md) {
+      min-width: 60px;
+    }
+  }
+
+  &.currency {
+    position: relative;
+    display: flex;
+    cursor: pointer;
+  }
+
+  &.text-to-image-ai-model {
+    position: relative;
+    height: auto;
+    min-width: 90px;
+    border-radius: 6px;
+    border: 1px solid var(--grey-light-100);
+    background-color: var(--fill-brand-weak);
+    color: #212529;
+    line-height: normal;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 16px;
+    cursor: pointer;
+
+    &.skeleton {
+      padding: 0;
+      min-height: 46px;
+    }
+  }
+}
+
+.menuItems {
+  position: absolute;
+  max-height: 0;
+  overflow: hidden;
+  color: #212529;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14.06px;
+  background: #fff;
+  width: fit-content;
+  min-width: 90px;
+  border-radius: 6px;
+  margin-top: 2.5px;
+  z-index: 11;
+
+  @include rwd-custom($width-md) {
+    min-width: 60px;
+  }
+
+  &.text-to-image-ai-model,
+  &.enhance-mode {
+    width: 100%;
+  }
+}
+
+.active {
+  padding: 8px 0;
+  border: 1px solid #e7e7e7;
+  max-height: 200px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+
+  &.text-to-image-ai-model {
+    max-height: 300px;
+  }
+
+  // Overlay card: 1px Stroke/Weak + the design's drop shadow, no inner padding
+  // (each row carries its own 12/16).
+  &.enhance-mode {
+    max-height: 300px;
+    padding: 0;
+    border: 1px solid var(--stroke-weak);
+    border-radius: var(--corner-radius-4);
+    box-shadow: 0 8px 24px -4px rgb(0 0 0 / 16%);
+  }
+}
+
+.up {
+  // height + margin-top
+  bottom: 32.5px;
+  right: 0;
+
+  @include rwd-custom($width-md) {
+    bottom: 30px;
+  }
+}

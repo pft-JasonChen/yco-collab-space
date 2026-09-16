@@ -52,7 +52,7 @@
     "root": "platform/rd-baseline/yce-frontend-gm-260909",
     "purpose": "Read-only RD reference. Holds the files component contracts claim under rd.sourcePaths plus explicit taxonomy, page-entry and Surface references, so provenance gates can run on any clone without the external snapshot.",
     "scope": "contract-claimed",
-    "fileCount": 107,
+    "fileCount": 118,
     "files": [
       {
         "source": "public/assets/fonts/icomoon.woff",
@@ -517,6 +517,62 @@
         "verbatim": false
       },
       {
+        "source": "src/components/common/selection-control/dropdown-select/components/DropdownButton.js",
+        "sha256": "1e08b16e97b3f6764a8a6a32da5957f06e87b2cae6eca0a669ec2529bd222eea",
+        "claimedBy": [
+          "dropdown-select"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/common/selection-control/dropdown-select/components/DropdownButton.module.scss",
+        "sha256": "d79f920e7656ab08b316332e79a58d7323aac216e0dcd780a6833fc89e366d89",
+        "claimedBy": [
+          "dropdown-select"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/common/selection-control/dropdown-select/components/DropdownItem.js",
+        "sha256": "bb85793dd768e4613ae3e7d40c62dc7e56bca01d4ff3de407dbb44750465b8e8",
+        "claimedBy": [
+          "dropdown-select"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/common/selection-control/dropdown-select/components/DropdownItem.module.scss",
+        "sha256": "711fdef92211a09bbb7eed83cda4c40581abb5677266056868fac72e792d2bf1",
+        "claimedBy": [
+          "dropdown-select"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/common/selection-control/dropdown-select/hooks/use-click-outside.js",
+        "sha256": "cbec0347d05e93b86b61433e41db2e2a0bb8fabbc1f32893ee0a16754fd79b12",
+        "claimedBy": [
+          "dropdown-select"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/common/selection-control/dropdown-select/index.js",
+        "sha256": "0d4473f545eea6615d432a89ceed39087b8107522e2d0dccb09d6b2c11fc80de",
+        "claimedBy": [
+          "dropdown-select"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/common/selection-control/dropdown-select/index.module.scss",
+        "sha256": "df489d9db0028911824758202aac26de3a12247ff2701774db48772ec1811e54",
+        "claimedBy": [
+          "dropdown-select"
+        ],
+        "verbatim": false
+      },
+      {
         "source": "src/components/common/tab-control/segmented-control/index.js",
         "sha256": "98736264cd8b11cf5243139a24a8f4163be2b5bf999c0382d4a8ceef2a0362ab",
         "claimedBy": [
@@ -609,6 +665,38 @@
         "sha256": "b1d56ff2384992f32e72b65e158dd9ec5dff1f0d03d43e496497f3336828a541",
         "claimedBy": [
           "gallery-tabs"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/my-gallery-page/tabs/gallery/components/cell-actions/bottom-sheet.js",
+        "sha256": "bd4ac9bd5558eef113026372e4d9f030b764a45b2630d4406749f405697ea1c3",
+        "claimedBy": [
+          "cell-actions"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/my-gallery-page/tabs/gallery/components/cell-actions/index.js",
+        "sha256": "8464543277d1d12b0dd40f850d77e72064bc38b76ac397aa359ef9f96fa6b94d",
+        "claimedBy": [
+          "cell-actions"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/my-gallery-page/tabs/gallery/components/cell-actions/index.module.scss",
+        "sha256": "2152bd8b85b05400f6cea83be7219339f414a7da570c9e00c311fec1b9b516da",
+        "claimedBy": [
+          "cell-actions"
+        ],
+        "verbatim": false
+      },
+      {
+        "source": "src/components/my-gallery-page/tabs/gallery/components/cell-actions/sheet-icons.js",
+        "sha256": "3c0a9836da20fd12ef367113979651af41d6918b8eaf3d183934e63e46861408",
+        "claimedBy": [
+          "cell-actions"
         ],
         "verbatim": false
       },

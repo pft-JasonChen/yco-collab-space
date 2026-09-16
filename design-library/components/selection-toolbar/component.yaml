@@ -21,15 +21,15 @@ implementation:
   importPath: platform/ui/selection-toolbar/index.js
   storyId: ui-selection-toolbar
   framework: react
-  dependencies: [react]
+  dependencies: [react, button]
   removedDependencies: [i18n, browser-utils, caller-supplied-styles]
   localFiles:
     - path: platform/ui/selection-toolbar/SelectionToolbar.jsx
-      sha256: 3c213e32758c2587ca269790de41949415352a6d2876af2323fe52daf34b12a9
+      sha256: 10731636d1881ec44b5d47e418e051dc9325b67e073b416b116ec54741a9b480
     - path: platform/ui/selection-toolbar/SelectionToolbar.module.scss
-      sha256: 6dc5a250576d56e2f4f7d3631437903fed4428e359060207155300881fb3ddaa
+      sha256: ffe4280b070e60b85ac9939fcc4ae34853afe6cbff5e95afac415823bd7c09c6
     - path: platform/ui/selection-toolbar/SelectionToolbar.stories.jsx
-      sha256: e776a6599cc7081423771e049d2c2595c6719c5b46c534b8054ea2e003db9d1d
+      sha256: 5aa993c877cf6b5c35ff1256a787b07afab87325fcf008312bcd99bca46c99e7
     - path: platform/ui/selection-toolbar/index.js
       sha256: 8df947f130bfbf46c70f4a5bec997e258d06d5c6070fd03d0d9f01a2e2573da0
   localFilesUpdated: 2026-09-15
@@ -38,6 +38,10 @@ publicApi:
     - { name: isEditing, required: true }
     - { name: onToggleEditing, required: true }
     - { name: compact, required: false }
+    - { name: variant, required: false }
+    - { name: onExit, required: false }
+    - { name: extraActions, required: false }
+    - { name: children, required: false }
     - { name: selectDisabled, required: false }
     - { name: deleteDisabled, required: false }
     - { name: downloadDisabled, required: false }
@@ -62,8 +66,15 @@ tokens:
     - --grey-neutral-solid-1000
     - --line-height-heading-5
     - --line-height-small
+    - --corner-radius-8
+    - --fill-hover
+    - --spacing-4
+    - --spacing-8
+    - --spacing-16
     - --stroke-focus
+    - --text-error
     - --text-strong
+    - --text-weaker
 assets:
   - path: assets/icon/yco-home-gallery
     usage: runtime
@@ -79,3 +90,8 @@ decisionBasis:
   - "Accessibility repair in the port (2026-09-15). RD's select-all renders a styled `<span>` with the click handler plus a bare `<input type=\"checkbox\">` that has no checked binding and no label association, so the real control is inert and the visible one is unreachable by keyboard. Here the input is the control — checked, changed and labelled — and the styled span is decorative, with focus forwarded to it via `:focus-visible + .checkbox`. The rendered appearance is unchanged."
   - "The tip slot stays a `children` slot, as in RD, because the gallery passes plain text while other tabs pass sanitised HTML. This component takes the resolved node and never sanitises, so an HTML consumer keeps that responsibility."
   - "Typography approximation (2026-09-15): RD's `.selectButton`, `.deleteButton` and `.downloadButton` drop to `font-weight: 500` below 768px, and the token set carries only `--font-weight-strong` (600) and `--font-weight-weak` (400). `--font-weight-weak` is used, so the narrow-width labels render regular where production renders medium — a visible difference, not a rounding. The desktop 600 maps exactly. RD's narrow `font-size: 16px` / `line-height: 19px` also have no matching token pair and are kept as literals, which the raw-colour policy permits because they are not colours."
+  - "Button consolidation (2026-09-15, PM requested): Select/Cancel now renders the Designer-approved shared Button rather than carrying a second local pill implementation. Browsing maps to Primary/Brand/Small; selecting maps to Secondary/Neutral/Small. Delete and Download remain the RD toolbar controls because this request only resolves the Select toggle and their icon-only compact behavior is not represented by the Button component."
+  - "Ghost variant, added 2026-09-16 at PM request after the selection UI was reviewed. RD's row is three filled pills — a brand Select/Cancel, a red Delete and an outlined Download — which in a selection bar outweighs the content being acted on. `variant=\"ghost\"` keeps RD's markup and drops the fills: icon plus label on a transparent ground, the destructive action carrying colour rather than a filled background, and a leading close control that leaves selection mode (RD expresses that as the Cancel pill, which ghost hides). `default` is unchanged, so RD's own treatment is still what a caller gets without asking."
+  - "Tokens added for the ghost variant only: --fill-hover for the action hover ground, --text-error for the destructive action, --text-weaker for a disabled action, --corner-radius-8, --spacing-4/8/16 and --stroke-focus for the focus ring. No new colour was introduced and RD's own rules were not edited."
+  - "Ghost slots and order, 2026-09-16. `children` sits between the close control and the actions, which is where a selection bar puts its count, its size and select-all; `extraActions` sits before the destructive action, so a consumer's own action (Cloud Storage's move-to-folder, which RD has no counterpart for) lands in the group without delete losing last place. Ghost also renders download before delete, matching the reference bar's export / move / delete order. RD's default keeps its own order — delete first — untouched."
+

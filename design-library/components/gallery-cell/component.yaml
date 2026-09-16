@@ -23,11 +23,11 @@ implementation:
   removedDependencies: [lodash, uuid, image-lazy-load, browser-utils, video-utils, rd-asset-map, global-shimmer-class]
   localFiles:
     - path: platform/ui/gallery-cell/GalleryCell.jsx
-      sha256: 7783b0ca2096c81aaebe309aee5ab75bde433d721c6ffddd7298654dcc48167f
+      sha256: 650e4ecd405d2bf33252bb09f421c1429e19cdf7834634eb51c5649305bfbc30
     - path: platform/ui/gallery-cell/GalleryCell.module.scss
-      sha256: c0d40888921e604c0dcd4e968c6ce00347e7a49defa11d495c7331a9915c8680
+      sha256: 6d3be08a4c953ce403e066c64811919787374ad730788e4192ec91dca918f4c2
     - path: platform/ui/gallery-cell/GalleryCell.stories.jsx
-      sha256: f9091252bad2f57bdf6f502d251bf7524531dc02eb25c9ac32b6dd0d3af21cc5
+      sha256: a5981e44214604f152ae49d905492b173be4fbb03790fbec9a4cfb21c356c6ff
     - path: platform/ui/gallery-cell/index.js
       sha256: 560ad6bb832a5dcb35cdc5894297de17f072df60e6fa9e345647fe4f4456146b
   localFilesUpdated: 2026-09-15
@@ -42,6 +42,10 @@ publicApi:
     - { name: playIconSrc, required: false }
     - { name: isEditing, required: false }
     - { name: isSelected, required: false }
+    - { name: checkboxPosition, required: false }
+    - { name: checkboxOnHover, required: false }
+    - { name: onToggleSelect, required: false }
+    - { name: selectLabel, required: false }
     - { name: onClick, required: false }
     - { name: clickable, required: false }
     - { name: actions, required: false }
@@ -65,6 +69,8 @@ tokens:
     - --font-size-micro
     - --font-weight-strong
     - --line-height-micro
+    - --spacing-4
+    - --stroke-focus
     - --stroke-inverse-strong
     - --stroke-weak
     - --text-inverse-strong
@@ -85,3 +91,6 @@ decisionBasis:
   - "Duration pill typography (2026-09-15): `font-size: 12px` maps exactly to `--font-size-micro` (0.75rem). Two do not map: RD's `line-height: 1.2` (14.4px at 12px) becomes `--line-height-micro` (1rem = 16px), and RD's `font-weight: 700` becomes `--font-weight-strong` (600) because the token set has no 700. The pill therefore sits ~1.6px taller and slightly lighter than production. Recorded here for Designer to confirm or correct rather than hidden behind a literal value the policy would reject anyway."
   - "Narrow-layout behaviour is a `compact` prop, not a media query (2026-09-15). RD switches the 12px corner with `rwd-custom($width-md)` and keeps the actions always-visible below `$width-lg`, both against the viewport. gallery-grid already measures its own container to choose justified versus masonry, so a viewport media query here would disagree with it inside any fixed-width preview — the exact failure navigation-header hit and solved with container queries. The consumer passes `compact` alongside the grid's masonry layout. A `@media (hover: none)` rule still keeps the actions visible on real touch devices, which is a capability query rather than a width query and cannot drift from the grid."
   - "The checkbox and the actions slot are mutually exclusive by construction: `isEditing` renders the checkbox and suppresses `actions`, so a cell can never show both. Carried over from RD unchanged."
+  - "Selection placement and reveal, added 2026-09-15 at PM request after the Cloud Storage layout review. RD renders the checkbox only in selection mode, pinned top-right, as a decorative span that the cell's own onClick toggles — so selecting always costs a mode switch first, and the box sits where the hover actions also want to be. Cloud Storage asked for the treatment the competitive set uses: the box appears on hover at the top-LEFT, and clicking it both selects the item and enters selection mode. All three are opt-in props — `checkboxPosition` defaults to RD's `top-right`, `checkboxOnHover` defaults to false, and without `onToggleSelect` the box stays RD's decorative span — so RD's own behaviour is the default and no existing caller changes. The new rules are keyed off data attributes on the cell root rather than new class names, so RD's stylesheet diff stays readable."
+  - "The opt-in box is a real `button` with `role=\"checkbox\"`, `aria-checked` and an accessible name from `selectLabel`, and it stops propagation so the cell's own onClick (open the item) and the checkbox (select it) do not both fire. The decorative span is kept for RD's path rather than replaced, so a caller that has not opted in gets exactly RD's DOM. Selected cells keep the box visible after the pointer leaves, which a pure `:hover` rule would not do."
+

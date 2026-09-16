@@ -1,11 +1,11 @@
 {
   "schemaVersion": 3,
   "feature": "cloud-storage",
-  "inputHash": "b8da85126781d75c4315726800fe91629b5e4f8fb454938f7b6fad9752e9383f",
+  "inputHash": "cc8a5312e98c574ede933579961b2b34620b475eab72b820b9bffc9668351855",
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "not-recorded",
   "model": "not-recorded",
-  "generatedAt": "2026-09-15T10:36:39.589Z",
+  "generatedAt": "2026-09-16T01:27:59.238Z",
   "files": [
     "README.md",
     "feature.jsx",
@@ -101,13 +101,23 @@
         ]
       },
       {
+        "id": "cell-actions",
+        "status": "pilot-approved",
+        "figmaStatus": "pending",
+        "contractPath": "design-library/components/cell-actions/component.yaml",
+        "contractSha256": "ce6115808016f9852a25c573b482be1bf3520c09e89f7f98b907ac168f1b6d74",
+        "implementationImport": "platform/ui/cell-actions/index.js",
+        "implementationSha256": "2bc2c0e118470cc382117d39520b6c2116d6949059afcc232363ed84bb960e0c",
+        "runtimeAssets": []
+      },
+      {
         "id": "confirm-dialog",
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/confirm-dialog/component.yaml",
-        "contractSha256": "b27a1f89625794b77bfd860a84847a95ca8a877f334ff7473d6a4d1594e2811e",
+        "contractSha256": "46fc72fac45c574029cb81a6cb1227e23d142c689c35424fad31dbb479d8f579",
         "implementationImport": "platform/ui/confirm-dialog/index.js",
-        "implementationSha256": "992156f6261115c1e1852ad484ce50eff75704856fc3eafd505c677d4f9e668e",
+        "implementationSha256": "7e55c20d7177b18f1a821655f33ab82247240fa6e9a799bfc2da05f75e186030",
         "runtimeAssets": [
           {
             "repositoryPath": "design-library/assets/icon/yco-home-gallery/empty-general.svg",
@@ -259,6 +269,16 @@
         ]
       },
       {
+        "id": "dropdown-select",
+        "status": "pilot-approved",
+        "figmaStatus": "pending",
+        "contractPath": "design-library/components/dropdown-select/component.yaml",
+        "contractSha256": "a293c7c879ba7bbee9b484355cf65eb48a28434d8319d0fb6062c2611e62d702",
+        "implementationImport": "platform/ui/dropdown-select/index.js",
+        "implementationSha256": "b93108c5844f8a141144ffc5bccb35de5a04fc42f5a970fcfb90eae79e93bfc5",
+        "runtimeAssets": []
+      },
+      {
         "id": "empty-image",
         "status": "pilot-approved",
         "figmaStatus": "mapped",
@@ -358,9 +378,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/gallery-cell/component.yaml",
-        "contractSha256": "2ed9e1aef748b083c9f2e08ad1343af852d426d2fa2e0ee18358043219b0d95f",
+        "contractSha256": "e2aa232bdd6eb2d9b6b722bb23826f2d8a86beaaaf846a26ba0bb388a67bedc5",
         "implementationImport": "platform/ui/gallery-cell/index.js",
-        "implementationSha256": "9baa8b8300f376474bebc079d795716d361dae0da26e53c834e4b79964c093e1",
+        "implementationSha256": "ee862176d1091ea616af4de4e00d6d99fc5dcb326c22cbdd4c6e12d9f236384b",
         "runtimeAssets": [
           {
             "repositoryPath": "design-library/assets/icon/yco-home-gallery/empty-general.svg",
@@ -608,9 +628,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/pricing-overlay/component.yaml",
-        "contractSha256": "fbbd3795d98c5899e5d19badec2aed0ded5e2252b12ce2c8943a80b43c06a276",
+        "contractSha256": "aeccdedd2977286d9bc09836664ada8a6636574db3b3060d71e028de31bfb457",
         "implementationImport": "platform/ui/pricing-overlay/index.js",
-        "implementationSha256": "61d44b856901f09175494682c91395791277b41f4dac8ef3cf217c27f4e1b289",
+        "implementationSha256": "d8e315ebec7c040999efc99c7be5574fef6e55294ec23369423ee535731b14c5",
         "runtimeAssets": [
           {
             "repositoryPath": "design-library/assets/icon/yco-home-gallery/empty-general.svg",
@@ -743,9 +763,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/selection-toolbar/component.yaml",
-        "contractSha256": "8e4c8ea8c3c57def940c79ffc4fe6b654da56316d6eae9ee5fd035e16c678177",
+        "contractSha256": "a4598bc53d1681c4160864feb6ec7cd93b6ddf63e6ba2162032108c644274094",
         "implementationImport": "platform/ui/selection-toolbar/index.js",
-        "implementationSha256": "538ad07f097b04539a99cb02bafbf22dc2cc7c79b6596640cbc9f699b9f015f9",
+        "implementationSha256": "614600cdd4c7366fac55b4e0790f39df9ae1141391e835e7f2474e803238c83a",
         "runtimeAssets": [
           {
             "repositoryPath": "design-library/assets/icon/yco-home-gallery/empty-general.svg",
@@ -934,9 +954,11 @@
     ],
     "requiredComponentRoles": [
       "batch-toolbar",
+      "category-entry",
       "category-rail",
       "checkout-action",
       "close-action",
+      "create-menu",
       "delete-confirm-dialog",
       "download-action",
       "empty-state",
@@ -963,7 +985,8 @@
       "tool-family-filter",
       "trash-countdown",
       "trash-policy-banner",
-      "upload-progress-cell"
+      "upload-progress-cell",
+      "view-control"
     ],
     "responsivePriority": [
       "Keep the tab row horizontally reachable.",
@@ -971,12 +994,12 @@
       "Use two-column masonry for narrow viewports.",
       "Keep the capacity meter and its upgrade entry on the same line as the heading at every viewport; never let the meter wrap away from the action it triggers.",
       "Keep the level-one tab row horizontally reachable by dragging before shrinking any tab label.",
-      "Collapse the desktop category rail before reducing gallery cells below a usable size.",
+      "Collapse the desktop category rail into the header drawer at the same breakpoint the shared header switches to its mobile row, so category navigation is never absent at any width.",
       "Use the two-column masonry at narrow widths and keep the file size visible on every cell, because it is the only cleanup signal in the grid.",
       "Keep the critical banner and the purchase overlay scrollable within the viewport without scrolling the page behind them."
     ],
     "visualReview": "human-required",
-    "contextHash": "87631eb544a5a9b8f6c7ec8d94fe17086cd013103f562da6e17f0165a7b31719",
+    "contextHash": "70012e2b76531677f42a8b86d04491ece8ba5a7941da8f8282d06e650d8dc2ee",
     "sourceFiles": [
       "platform/surfaces/commerce/pricing-overlay/2026-09/bindings.yaml",
       "platform/surfaces/commerce/pricing-overlay/2026-09/component-slots.yaml",
@@ -1006,22 +1029,22 @@
         },
         {
           "path": "features/cloud-storage/generated/index.jsx",
-          "sha256": "8ce1f81ed9c3c20760e21a3e41e058cfdde57f88530c026c7e1e06738351f9c3"
+          "sha256": "7c66dd1a2bff69ee4da7d71befbbf4f9ba0f612afd0ca6f3f95c7265dd482a59"
         },
         {
           "path": "features/cloud-storage/generated/index.module.scss",
-          "sha256": "f898572c4abdcdf881c22fc9a7c5d2f7d8b2868b2cbf3ece47aed282f968c577"
+          "sha256": "d2126e7a245b1e43fcc251ad407789fbb9e2d1dfa7d998e17ccbfd9c1da67b2c"
         },
         {
           "path": "features/cloud-storage/generated/storage.jsx",
-          "sha256": "de256ec190813444b09ec5a814d76d47d8fc18a20c329db0399eeea442cad631"
+          "sha256": "fa3a17fb93dd1e3ea45ab591d3f86323dbe4b401dbe16ccd918c954d08f519ad"
         },
         {
           "path": "features/cloud-storage/generated/storage.module.scss",
-          "sha256": "4a31f738a41916b0b365ad3ec429cbfc69df93e00cbfb17c5e152e2277f462e8"
+          "sha256": "fab4843ea70862d32948fed1f5655aa74e00cd256fe39b1b46063a876e635636"
         }
       ],
-      "hash": "586aa641fad884fff3fa36fd0ed43afbddcc30be6389c62142d8688b447ae4ff"
+      "hash": "8ac4c59006d8820c249968e1b0847223d537973483e4ee03e1872b3f0efe6470"
     },
     "dependencies": {
       "files": [
@@ -1195,7 +1218,7 @@
         },
         {
           "path": "app/src/surfaces/rd-port/EditingToolbar.jsx",
-          "sha256": "172767a47de3f85ca3500437ee3487340ed01893c88b97221b9babd75bdb902d"
+          "sha256": "2934f07ed3ff4e7f1aca9a2f11c0bc62653a07eed31ab259bf8eaedaa27db199"
         },
         {
           "path": "app/src/surfaces/rd-port/EmptyContent.jsx",
@@ -1403,7 +1426,7 @@
         },
         {
           "path": "app/src/surfaces/rd-port/globals.module.scss",
-          "sha256": "15e26a58dc82f22f5a7fe38d682630c31ac4e27f1d0b7f01ffd0293143e3f12b"
+          "sha256": "821ab8a6b17ee7ef24cc4b8e9ddd83196a7507923a0e544bebed1ca8fe116ad5"
         },
         {
           "path": "app/src/surfaces/rd-port/home-cms-rows.json",
@@ -1439,7 +1462,7 @@
         },
         {
           "path": "app/src/surfaces/rd-port/pricing-components-checkout-button.jsx",
-          "sha256": "db08e9a63e46fa1541adfa0c565ac374cb56cafa6630417f61527c5b82914e93"
+          "sha256": "f4012a4cc2b0a0d6266092b39ef8cde7c6b02f6043b7a6a8bc400167f03b138b"
         },
         {
           "path": "app/src/surfaces/rd-port/pricing-components-cover-general.module.scss",
@@ -1523,11 +1546,11 @@
         },
         {
           "path": "app/src/surfaces/rd-port/pricing-index.jsx",
-          "sha256": "bda6f9f979cb1bbeb0bf3d88e04bfda650132dd218f844218538f61f43920fb5"
+          "sha256": "d75f13ad0d3a9634420dee674b49990af8544d2c43b309d63c9eda646b314f1c"
         },
         {
           "path": "app/src/surfaces/rd-port/pricing-index.module.scss",
-          "sha256": "98378f8aaba9cabf6042b2c382e601871cf3b948cfbc507ec9b48e146c121e97"
+          "sha256": "e81d949227fbb066de701dd5392682a03db37a773a430ca4a847195f40d86c7a"
         },
         {
           "path": "app/src/surfaces/rd-port/pricing-module-exports.js",
@@ -1906,12 +1929,20 @@
           "sha256": "4195181c85f4dbbecff9180ece9f12c35f1394577cadf87b810b665206201e3d"
         },
         {
+          "path": "design-library/components/cell-actions/component.yaml",
+          "sha256": "ce6115808016f9852a25c573b482be1bf3520c09e89f7f98b907ac168f1b6d74"
+        },
+        {
           "path": "design-library/components/confirm-dialog/component.yaml",
-          "sha256": "b27a1f89625794b77bfd860a84847a95ca8a877f334ff7473d6a4d1594e2811e"
+          "sha256": "46fc72fac45c574029cb81a6cb1227e23d142c689c35424fad31dbb479d8f579"
         },
         {
           "path": "design-library/components/credit-controls/component.yaml",
           "sha256": "e547c9eaa47f4f7f5008a6e6671c59ff9f636b771b9844bc9eee688f54b4f652"
+        },
+        {
+          "path": "design-library/components/dropdown-select/component.yaml",
+          "sha256": "a293c7c879ba7bbee9b484355cf65eb48a28434d8319d0fb6062c2611e62d702"
         },
         {
           "path": "design-library/components/empty-image/component.yaml",
@@ -1919,7 +1950,7 @@
         },
         {
           "path": "design-library/components/gallery-cell/component.yaml",
-          "sha256": "2ed9e1aef748b083c9f2e08ad1343af852d426d2fa2e0ee18358043219b0d95f"
+          "sha256": "e2aa232bdd6eb2d9b6b722bb23826f2d8a86beaaaf846a26ba0bb388a67bedc5"
         },
         {
           "path": "design-library/components/gallery-grid/component.yaml",
@@ -1939,7 +1970,7 @@
         },
         {
           "path": "design-library/components/pricing-overlay/component.yaml",
-          "sha256": "fbbd3795d98c5899e5d19badec2aed0ded5e2252b12ce2c8943a80b43c06a276"
+          "sha256": "aeccdedd2977286d9bc09836664ada8a6636574db3b3060d71e028de31bfb457"
         },
         {
           "path": "design-library/components/ratio/component.yaml",
@@ -1951,7 +1982,7 @@
         },
         {
           "path": "design-library/components/selection-toolbar/component.yaml",
-          "sha256": "8e4c8ea8c3c57def940c79ffc4fe6b654da56316d6eae9ee5fd035e16c678177"
+          "sha256": "a4598bc53d1681c4160864feb6ec7cd93b6ddf63e6ba2162032108c644274094"
         },
         {
           "path": "design-library/components/tool-page-layout/component.yaml",
@@ -1991,23 +2022,23 @@
         },
         {
           "path": "features/cloud-storage/generated/index.jsx",
-          "sha256": "8ce1f81ed9c3c20760e21a3e41e058cfdde57f88530c026c7e1e06738351f9c3"
+          "sha256": "7c66dd1a2bff69ee4da7d71befbbf4f9ba0f612afd0ca6f3f95c7265dd482a59"
         },
         {
           "path": "features/cloud-storage/generated/index.module.scss",
-          "sha256": "f898572c4abdcdf881c22fc9a7c5d2f7d8b2868b2cbf3ece47aed282f968c577"
+          "sha256": "d2126e7a245b1e43fcc251ad407789fbb9e2d1dfa7d998e17ccbfd9c1da67b2c"
         },
         {
           "path": "features/cloud-storage/generated/storage.jsx",
-          "sha256": "de256ec190813444b09ec5a814d76d47d8fc18a20c329db0399eeea442cad631"
+          "sha256": "fa3a17fb93dd1e3ea45ab591d3f86323dbe4b401dbe16ccd918c954d08f519ad"
         },
         {
           "path": "features/cloud-storage/generated/storage.module.scss",
-          "sha256": "4a31f738a41916b0b365ad3ec429cbfc69df93e00cbfb17c5e152e2277f462e8"
+          "sha256": "fab4843ea70862d32948fed1f5655aa74e00cd256fe39b1b46063a876e635636"
         },
         {
           "path": "features/cloud-storage/product/i18n.json",
-          "sha256": "e03ccdcf3084f35a1c5ea30da86a149c997886e399fe16703a44ba00458491ce"
+          "sha256": "9924f9cfa266c5584f0d7a548dc5dda7a7c8e4fc7a0ff5e9d223261dfe27de6f"
         },
         {
           "path": "features/cloud-storage/product/mock-assets/landscape-colorize.jpg",
@@ -2043,11 +2074,11 @@
         },
         {
           "path": "features/cloud-storage/product/mocks/cloud-storage.json",
-          "sha256": "a9afcb6182a7b0395dd34b6cacccafc080f2e333eac4947c07ee430cee5e33c6"
+          "sha256": "46fb4e81504e99cfa21ed9b038690dc924277172310bd0611d8d7d479b8d17f9"
         },
         {
           "path": "features/cloud-storage/product/surface-intent.yaml",
-          "sha256": "e8ec7f4f3a99b26ea71b0079baec5c71d513c4573d5d9e2152c9b4da92d82bf3"
+          "sha256": "13ab5e4339dcd59c7b95563568bc963dac8965e35487493356446398490dd8a7"
         },
         {
           "path": "features/collab-space-readiness/product/surface-intent.yaml",
@@ -2498,8 +2529,28 @@
           "sha256": "67eca5ef929b299644ead641110c76a632b4748ae7985bcd20d77664661c8a86"
         },
         {
+          "path": "platform/ui/cell-actions/CellActions.jsx",
+          "sha256": "952ac0af623f84a0ced0c85cc70e3356848cfecf915df76a8be3b91335f40159"
+        },
+        {
+          "path": "platform/ui/cell-actions/CellActions.module.scss",
+          "sha256": "df4edbc3264a990132b93c32e83419e1d9a019bd2e42225b9bb0d17b7190bb30"
+        },
+        {
+          "path": "platform/ui/cell-actions/CellActions.stories.jsx",
+          "sha256": "422b63ce0c273f18d12e5582a22548978c70b667661e7d7e95d290f6724dd106"
+        },
+        {
+          "path": "platform/ui/cell-actions/SheetIcon.jsx",
+          "sha256": "34eb240513ff4feea86943e029d4ffe60bec60690dc8f60f1c260a8f1c232309"
+        },
+        {
+          "path": "platform/ui/cell-actions/index.js",
+          "sha256": "1f33d03fa93fd29d62c0db4457e3384c522efb614a74d9328f09e84a57c754f4"
+        },
+        {
           "path": "platform/ui/confirm-dialog/ConfirmDialog.jsx",
-          "sha256": "084553ec5068bccad41bc74d25251423bb80e9b8ba5143c70532af9f63d8e91a"
+          "sha256": "d61ab276a264aadbec836e264c87fbd88ae13650013d3bf39d6d0a9a3b59ec32"
         },
         {
           "path": "platform/ui/confirm-dialog/ConfirmDialog.module.scss",
@@ -2511,7 +2562,7 @@
         },
         {
           "path": "platform/ui/confirm-dialog/Modal.jsx",
-          "sha256": "db5372a8415403cb332e6fdabf6b377adf7f1aefbf8136bdce248952a6111cc5"
+          "sha256": "69dbfeeb289b4222b603b1e46a73a6d55ccd7bcce5df0193034f538e7892be81"
         },
         {
           "path": "platform/ui/confirm-dialog/index.js",
@@ -2534,6 +2585,26 @@
           "sha256": "5bcc58063e29497a2c720fb7c7c916230633f961b3645218193e31401d59e29b"
         },
         {
+          "path": "platform/ui/dropdown-select/DropdownSelect.jsx",
+          "sha256": "9f89bb30010817fe7dcc8b27e331712f9bf27ca21f0270a63b9332747b862a13"
+        },
+        {
+          "path": "platform/ui/dropdown-select/DropdownSelect.module.scss",
+          "sha256": "1fcb91f2e7aabe89844b4e63d70be457b2db50678a5baae4fbfc376114ab5d83"
+        },
+        {
+          "path": "platform/ui/dropdown-select/DropdownSelect.stories.jsx",
+          "sha256": "34877c93ff426ca2163db54710acedba6e8a6caec1471cf228f4ed863b4035d2"
+        },
+        {
+          "path": "platform/ui/dropdown-select/index.js",
+          "sha256": "84d364a7575661a9f11872ea5ab2887b84cc5647eb2b2ec0bddb775758549c50"
+        },
+        {
+          "path": "platform/ui/dropdown-select/useClickOutside.js",
+          "sha256": "80531a78e65f742466f8723316bd9100fa535b30261d7706e05402d081db4ec8"
+        },
+        {
           "path": "platform/ui/empty-image/EmptyImage.jsx",
           "sha256": "2babae69137d9275a4b06c13f53097e8455dc1dd826a58afc8ff08963abb847a"
         },
@@ -2551,15 +2622,15 @@
         },
         {
           "path": "platform/ui/gallery-cell/GalleryCell.jsx",
-          "sha256": "7783b0ca2096c81aaebe309aee5ab75bde433d721c6ffddd7298654dcc48167f"
+          "sha256": "650e4ecd405d2bf33252bb09f421c1429e19cdf7834634eb51c5649305bfbc30"
         },
         {
           "path": "platform/ui/gallery-cell/GalleryCell.module.scss",
-          "sha256": "c0d40888921e604c0dcd4e968c6ce00347e7a49defa11d495c7331a9915c8680"
+          "sha256": "6d3be08a4c953ce403e066c64811919787374ad730788e4192ec91dca918f4c2"
         },
         {
           "path": "platform/ui/gallery-cell/GalleryCell.stories.jsx",
-          "sha256": "f9091252bad2f57bdf6f502d251bf7524531dc02eb25c9ac32b6dd0d3af21cc5"
+          "sha256": "a5981e44214604f152ae49d905492b173be4fbb03790fbec9a4cfb21c356c6ff"
         },
         {
           "path": "platform/ui/gallery-cell/index.js",
@@ -2639,7 +2710,7 @@
         },
         {
           "path": "platform/ui/index.js",
-          "sha256": "a9a899af1151473d32a746210241beb867a17dc7227221a7aa122748c0a52121"
+          "sha256": "ed7fc8eb7d81a070a775beae71cd22cfad5b80c9a8da08da6b2e12b94a15f6e3"
         },
         {
           "path": "platform/ui/navigation-header/NavigationHeader.jsx",
@@ -2659,11 +2730,11 @@
         },
         {
           "path": "platform/ui/pricing-overlay/PricingOverlay.jsx",
-          "sha256": "3ae7f82eb05088f73ca1f08863a3e4e8d2cb54f8a8cade312e7f95833fe78f98"
+          "sha256": "ddefd65de329c3dfca8b3f55157ec4db29197a9ead8d59d85074b6694946f7d4"
         },
         {
           "path": "platform/ui/pricing-overlay/PricingOverlay.module.scss",
-          "sha256": "55cb9e14c28b49bc5abcad1acb095e5dccefaa926efbd7433469a581694e2a38"
+          "sha256": "6c2a1002f0da98f68aad6a0d6895fffc09886025e5dacb85b6425a1ca351eb26"
         },
         {
           "path": "platform/ui/pricing-overlay/PricingOverlay.stories.jsx",
@@ -2723,15 +2794,15 @@
         },
         {
           "path": "platform/ui/selection-toolbar/SelectionToolbar.jsx",
-          "sha256": "3c213e32758c2587ca269790de41949415352a6d2876af2323fe52daf34b12a9"
+          "sha256": "10731636d1881ec44b5d47e418e051dc9325b67e073b416b116ec54741a9b480"
         },
         {
           "path": "platform/ui/selection-toolbar/SelectionToolbar.module.scss",
-          "sha256": "6dc5a250576d56e2f4f7d3631437903fed4428e359060207155300881fb3ddaa"
+          "sha256": "ffe4280b070e60b85ac9939fcc4ae34853afe6cbff5e95afac415823bd7c09c6"
         },
         {
           "path": "platform/ui/selection-toolbar/SelectionToolbar.stories.jsx",
-          "sha256": "e776a6599cc7081423771e049d2c2595c6719c5b46c534b8054ea2e003db9d1d"
+          "sha256": "5aa993c877cf6b5c35ff1256a787b07afab87325fcf008312bcd99bca46c99e7"
         },
         {
           "path": "platform/ui/selection-toolbar/index.js",
@@ -2939,7 +3010,7 @@
         },
         {
           "path": "tools/design-library/run-storybook-checks.mjs",
-          "sha256": "a44f0fc1fe3272396a931cf813f2d28564c2f602e50991b1c056b2237c3b96a9"
+          "sha256": "7d6a4ff3abd08521c764a288d2fa4a1ffab3d6ff12e2bad03681b0c68a9efcf5"
         },
         {
           "path": "tools/design-library/schemas/component-contract.schema.json",
@@ -3118,7 +3189,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "10e8e6b0cce65ff7467c131f3ff34206364e8c67b00cb2bf13f21adcc64261d0",
+      "hash": "623bb6f7116dfe89de5c40c7f304f3d173dcfdcbd6a64ab0f89038b5635a62e9",
       "edges": [
         {
           "from": "features/cloud-storage/generated/feature.jsx",
@@ -3142,8 +3213,18 @@
         },
         {
           "from": "features/cloud-storage/generated/index.jsx",
+          "specifier": "../../../platform/ui/cell-actions/index.js",
+          "to": "platform/ui/cell-actions/index.js"
+        },
+        {
+          "from": "features/cloud-storage/generated/index.jsx",
           "specifier": "../../../platform/ui/confirm-dialog/index.js",
           "to": "platform/ui/confirm-dialog/index.js"
+        },
+        {
+          "from": "features/cloud-storage/generated/index.jsx",
+          "specifier": "../../../platform/ui/dropdown-select/index.js",
+          "to": "platform/ui/dropdown-select/index.js"
         },
         {
           "from": "features/cloud-storage/generated/index.jsx",
@@ -3286,6 +3367,31 @@
           "to": "platform/ui/category-rail/CategoryRail.jsx"
         },
         {
+          "from": "platform/ui/cell-actions/CellActions.jsx",
+          "specifier": "./CellActions.module.scss",
+          "to": "platform/ui/cell-actions/CellActions.module.scss"
+        },
+        {
+          "from": "platform/ui/cell-actions/CellActions.jsx",
+          "specifier": "./SheetIcon.jsx",
+          "to": "platform/ui/cell-actions/SheetIcon.jsx"
+        },
+        {
+          "from": "platform/ui/cell-actions/CellActions.jsx",
+          "specifier": "react",
+          "to": "package:react"
+        },
+        {
+          "from": "platform/ui/cell-actions/index.js",
+          "specifier": "./CellActions.jsx",
+          "to": "platform/ui/cell-actions/CellActions.jsx"
+        },
+        {
+          "from": "platform/ui/cell-actions/index.js",
+          "specifier": "./SheetIcon.jsx",
+          "to": "platform/ui/cell-actions/SheetIcon.jsx"
+        },
+        {
           "from": "platform/ui/confirm-dialog/ConfirmDialog.jsx",
           "specifier": "../../../design-library/assets/icon/yco-home-gallery/images__icon_close.svg",
           "to": "design-library/assets/icon/yco-home-gallery/images__icon_close.svg"
@@ -3354,6 +3460,31 @@
           "from": "platform/ui/credit-controls/index.js",
           "specifier": "./CreditControls.jsx",
           "to": "platform/ui/credit-controls/CreditControls.jsx"
+        },
+        {
+          "from": "platform/ui/dropdown-select/DropdownSelect.jsx",
+          "specifier": "./DropdownSelect.module.scss",
+          "to": "platform/ui/dropdown-select/DropdownSelect.module.scss"
+        },
+        {
+          "from": "platform/ui/dropdown-select/DropdownSelect.jsx",
+          "specifier": "./useClickOutside.js",
+          "to": "platform/ui/dropdown-select/useClickOutside.js"
+        },
+        {
+          "from": "platform/ui/dropdown-select/DropdownSelect.jsx",
+          "specifier": "react",
+          "to": "package:react"
+        },
+        {
+          "from": "platform/ui/dropdown-select/index.js",
+          "specifier": "./DropdownSelect.jsx",
+          "to": "platform/ui/dropdown-select/DropdownSelect.jsx"
+        },
+        {
+          "from": "platform/ui/dropdown-select/useClickOutside.js",
+          "specifier": "react",
+          "to": "package:react"
         },
         {
           "from": "platform/ui/empty-image/EmptyImage.jsx",
@@ -3672,6 +3803,11 @@
         },
         {
           "from": "platform/ui/pricing-overlay/PricingOverlay.jsx",
+          "specifier": "../button/index.js",
+          "to": "platform/ui/button/index.js"
+        },
+        {
+          "from": "platform/ui/pricing-overlay/PricingOverlay.jsx",
           "specifier": "../confirm-dialog/index.js",
           "to": "platform/ui/confirm-dialog/index.js"
         },
@@ -3712,6 +3848,11 @@
         },
         {
           "from": "platform/ui/selection-toolbar/SelectionToolbar.jsx",
+          "specifier": "../button/index.js",
+          "to": "platform/ui/button/index.js"
+        },
+        {
+          "from": "platform/ui/selection-toolbar/SelectionToolbar.jsx",
           "specifier": "./SelectionToolbar.module.scss",
           "to": "platform/ui/selection-toolbar/SelectionToolbar.module.scss"
         }
@@ -3721,6 +3862,6 @@
         "react-dom"
       ]
     },
-    "revisionHash": "723330adca5409a85d396da6a763f68635a33ed9b3579d3665dca242dbd7fbb2"
+    "revisionHash": "823cb4448617444b6a100f09eceb4e06aa73700519d47ebbc51559cfd112ed7c"
   }
 }

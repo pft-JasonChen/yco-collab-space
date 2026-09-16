@@ -28,6 +28,8 @@ import closeIcon from '../../../design-library/assets/icon/yco-home-gallery/imag
  * @param {() => void} props.onConfirm
  * @param {() => void} props.onCancel
  * @param {string} [props.closeLabel]  accessible name for the corner close control
+ * @param {string} [props.testId]      consumer's own hook on the dialog, for a page that raises
+ *        more than one confirmation
  */
 export default function ConfirmDialog({
   opened,
@@ -39,6 +41,7 @@ export default function ConfirmDialog({
   onConfirm,
   onCancel,
   closeLabel = 'Close',
+  testId,
 }) {
   const titleId = useId();
 
@@ -49,6 +52,7 @@ export default function ConfirmDialog({
       showModalScaleTransition
       modalClassName={styles.modal}
       ariaLabelledBy={titleId}
+      testId={testId}
     >
       <h2 className={styles.title} id={titleId}>
         {title}

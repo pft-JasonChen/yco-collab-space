@@ -1,0 +1,209 @@
+/* Ported from RD common/selection-control/dropdown-select. The default variant's
+   geometry is RD's verbatim: 30px trigger, 6px radii, 11.5px side padding,
+   2.5px trigger-to-menu offset, 12px/14.06px type, 200px scroll cap. None of
+   those have matching tokens and the raw-colour policy does not cover non-colour
+   values, so they stay as literals. Every colour is mapped to a token; the
+   itemised differences are in the component contract. */
+
+.root {
+  position: relative;
+  width: fit-content;
+}
+
+/* ---------- trigger ---------- */
+
+.trigger {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-8);
+  height: 30px;
+  min-width: 90px;
+  padding: 0 11.5px;
+  border-radius: 6px;
+  border: 1px solid var(--text-weaker);
+  background-color: var(--fill-inverse-strong);
+  color: var(--grey-slate-solid-850);
+  font-size: var(--font-size-micro);
+  line-height: normal;
+  cursor: pointer;
+}
+
+.trigger:hover {
+  border-color: var(--grey-slate-solid-850);
+}
+
+.trigger:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 var(--spacing-4) var(--stroke-focus);
+}
+
+.trigger[data-open='true'] {
+  border-color: var(--fill-brand-strong);
+}
+
+/* A borderless trigger, for an icon button or an inline control that should not
+   read as a second field next to a real one. RD has no equivalent: its default
+   trigger is always a bordered field. */
+.trigger[data-variant='plain'] {
+  min-width: 0;
+  border-color: transparent;
+  background-color: transparent;
+}
+
+.trigger[data-variant='plain']:hover {
+  background-color: var(--fill-hover);
+  border-color: transparent;
+}
+
+.trigger[data-variant='primary'] {
+  /* No minimum width: a create button should hug its label rather than be
+     padded out to RD's field width, which is what the 90px floor is for. */
+  min-width: 0;
+  border-color: var(--fill-brand-strong);
+  color: var(--text-brand);
+  font-weight: var(--font-weight-strong);
+}
+
+.triggerText {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.triggerLabel {
+  color: var(--text-weak);
+}
+
+.caret {
+  flex: none;
+  transition: transform 140ms ease;
+}
+
+.caret[data-up='true'] {
+  transform: rotate(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .caret { transition: none; }
+}
+
+/* ---------- menu ---------- */
+
+.list {
+  position: absolute;
+  top: 100%;
+  min-width: 100%;
+  width: max-content;
+  max-width: 280px;
+  margin-top: 2.5px;
+  padding: var(--spacing-8) 0;
+  border: 1px solid var(--stroke-weak);
+  border-radius: 6px;
+  background: var(--fill-white);
+  color: var(--grey-slate-solid-850);
+  font-size: var(--font-size-micro);
+  line-height: var(--line-height-micro);
+  max-height: 200px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  box-shadow: 0 var(--spacing-8) var(--spacing-24) color-mix(in srgb, var(--fill-strong) 16%, transparent);
+  z-index: 11;
+}
+
+.list[data-align='end'] {
+  left: auto;
+  right: 0;
+}
+
+/* `hidden` is honoured by the host reset, but a menu pinned with position:fixed
+   is taken out of flow, so state it here too rather than relying on that. */
+.list[hidden] {
+  display: none;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-8);
+  width: 100%;
+  padding: var(--spacing-8) 10px var(--spacing-8) 15px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.option:hover:not(:disabled),
+.option[data-keyboard-active='true']:not(:disabled) {
+  background-color: var(--fill-brand-weak);
+}
+
+.option:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--stroke-focus);
+}
+
+.option[data-selected='true'] {
+  color: var(--text-brand);
+  font-weight: var(--font-weight-strong);
+}
+
+.option[data-destructive='true'] {
+  color: var(--text-error);
+}
+
+.option:disabled {
+  color: var(--text-weaker);
+  cursor: default;
+}
+
+.optionBody {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.optionLabel {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.optionDescription {
+  color: var(--text-weak);
+  font-size: var(--font-size-micro);
+  line-height: var(--line-height-micro);
+  white-space: normal;
+}
+
+.tick {
+  flex: none;
+  color: var(--text-brand);
+}
+
+/* ---------- menu-mode grouping ---------- */
+
+.block[data-divider='true'] {
+  margin-top: var(--spacing-4);
+  padding-top: var(--spacing-4);
+  border-top: 1px solid var(--stroke-weak);
+}
+
+.groupLabel {
+  padding: var(--spacing-8) 15px 2px;
+  color: var(--text-weak);
+  font-size: var(--font-size-micro);
+  line-height: var(--line-height-micro);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}

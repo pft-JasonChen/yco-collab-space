@@ -157,29 +157,7 @@
 }
 
 .button {
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 21.09px;
-  color: var(--fill-white);
-  border-radius: 100px;
-  padding: 14.5px 0;
-  cursor: pointer;
-
-  @include rwd-custom($width-sm) {
-    &[data-mode="default"] {
-      width: 100%;
-    }
-  }
-
-  @include rwd-custom($width: $width-sm, $use-height: true, $height: 587px) {
-    padding: 8.5px 0;
-  }
-
-  &:disabled {
-    background-color: var(--stroke-weak);
-    color: var(--fill-white);
-    cursor: not-allowed;
-  }
+  width: 100%;
 }
 
 .close {

@@ -1,5 +1,6 @@
 import { useId } from 'react';
 import { Modal } from '../confirm-dialog/index.js';
+import Button from '../button/index.js';
 import styles from './PricingOverlay.module.scss';
 import closeIcon from '../../../design-library/assets/icon/yco-home-gallery/images__icon_close.svg';
 
@@ -226,15 +227,17 @@ export default function PricingOverlay({
           {summary && <div className={styles.summary}>{summary}</div>}
 
           <div className={styles.buttonContainer}>
-            <button
-              type="button"
+            <Button
               className={styles.checkoutButton}
               onClick={onCheckout}
               disabled={checkoutDisabled || !selectedPlanKey}
+              variant="primary"
+              tone="brand"
+              size="medium"
               data-testid="pricing-checkout"
             >
               {copy.checkout}
-            </button>
+            </Button>
             {secondaryAction}
           </div>
         </div>

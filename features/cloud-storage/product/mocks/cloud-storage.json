@@ -141,6 +141,12 @@
       "filter": "tool-family"
     },
     {
+      "id": "agent",
+      "label": "AI Agent",
+      "level": 1,
+      "filter": "tool-family"
+    },
+    {
       "id": "uploads",
       "label": "Uploads",
       "level": 1,
@@ -160,62 +166,123 @@
       "selected": true
     },
     {
-      "id": "portrait",
-      "label": "Portrait retouch"
+      "id": "ai-image-generator",
+      "label": "AI Image Generator",
+      "group": "image",
+      "groupFirst": true
     },
     {
-      "id": "video-generation",
-      "label": "Video generation"
+      "id": "ai-hairstyle-generator",
+      "label": "AI Hairstyle Generator",
+      "group": "image",
+      "groupFirst": false
     },
     {
-      "id": "product",
-      "label": "Product scenes"
+      "id": "ai-beard-style",
+      "label": "AI Beard Style",
+      "group": "image",
+      "groupFirst": false
     },
     {
-      "id": "retouch-expand",
-      "label": "Retouch and expand"
+      "id": "ai-clothes",
+      "label": "AI Clothes",
+      "group": "image",
+      "groupFirst": false
     },
     {
-      "id": "style",
-      "label": "Style generation"
+      "id": "ai-makeup-transfer",
+      "label": "AI Makeup Transfer",
+      "group": "image",
+      "groupFirst": false
     },
     {
-      "id": "audio",
-      "label": "Audio"
-    }
-  ],
-  "formatFilters": [
-    {
-      "id": "all",
-      "label": "All",
-      "selected": true
+      "id": "ai-headshot-generator",
+      "label": "AI Headshot Generator",
+      "group": "image",
+      "groupFirst": false
     },
     {
-      "id": "jpg",
-      "label": "JPG"
+      "id": "ai-avatar-generator",
+      "label": "AI Avatar Generator",
+      "group": "image",
+      "groupFirst": false
     },
     {
-      "id": "png",
-      "label": "PNG"
+      "id": "ai-studio-generator",
+      "label": "AI Studio Generator",
+      "group": "image",
+      "groupFirst": false
     },
     {
-      "id": "mp4",
-      "label": "MP4"
+      "id": "image-to-video",
+      "label": "Image to Video",
+      "group": "video",
+      "groupFirst": true
+    },
+    {
+      "id": "video-enhancer",
+      "label": "Video Enhancer",
+      "group": "video",
+      "groupFirst": false
+    },
+    {
+      "id": "ai-video-editor",
+      "label": "AI Video Editor",
+      "group": "video",
+      "groupFirst": false
+    },
+    {
+      "id": "video-object-removal",
+      "label": "Video Object Removal",
+      "group": "video",
+      "groupFirst": false
+    },
+    {
+      "id": "auto-edit",
+      "label": "Auto Edit",
+      "group": "video",
+      "groupFirst": false
+    },
+    {
+      "id": "video-repair",
+      "label": "Video Repair",
+      "group": "video",
+      "groupFirst": false
+    },
+    {
+      "id": "character-motion-swap",
+      "label": "Character Motion Swap",
+      "group": "video",
+      "groupFirst": false
+    },
+    {
+      "id": "text-to-video",
+      "label": "Text to Video",
+      "group": "video",
+      "groupFirst": false
+    },
+    {
+      "id": "video-face-swap",
+      "label": "Video Face Swap",
+      "group": "video",
+      "groupFirst": false
+    },
+    {
+      "id": "video-style-transfer",
+      "label": "Video Style Transfer",
+      "group": "video",
+      "groupFirst": false
     }
   ],
   "sortOptions": [
     {
-      "id": "newest",
-      "label": "Newest",
+      "id": "modified",
+      "label": "Date modified",
       "selected": true
     },
     {
-      "id": "oldest",
-      "label": "Oldest"
-    },
-    {
-      "id": "size-desc",
-      "label": "Largest first"
+      "id": "created",
+      "label": "Date created"
     }
   ],
   "folders": [
@@ -244,86 +311,121 @@
       "tab": "projects",
       "name": "Summer ad cut",
       "type": "Project",
-      "toolFamily": "video-generation",
+      "toolFamily": "image-to-video",
       "sizeBytes": 67108864,
       "sizeLabel": "64 MB",
       "dateLabel": "14.09.2026",
       "ratio": 1.7778,
-      "editable": true
+      "editable": true,
+      "media": "image",
+      "createdLabel": "14.09.2026",
+      "modifiedLabel": "14.09.2026",
+      "createdAt": 20260901,
+      "modifiedAt": 20260910
     },
     {
       "id": "item-project-lookbook",
       "tab": "projects",
       "name": "Lookbook layout",
       "type": "Project",
-      "toolFamily": "product",
+      "toolFamily": "ai-clothes",
       "sizeBytes": 23068672,
       "sizeLabel": "22 MB",
       "dateLabel": "09.09.2026",
       "ratio": 0.75,
-      "editable": true
+      "editable": true,
+      "media": "image",
+      "createdLabel": "09.09.2026",
+      "modifiedLabel": "09.09.2026",
+      "createdAt": 20260902,
+      "modifiedAt": 20260913
     },
     {
       "id": "item-image-headshot",
       "tab": "images",
       "name": "Team headshot retouch",
       "type": "Image",
-      "toolFamily": "portrait",
+      "toolFamily": "ai-headshot-generator",
       "sizeBytes": 4194304,
       "sizeLabel": "4 MB",
       "dateLabel": "14.09.2026",
       "ratio": 0.8,
-      "folderId": null
+      "folderId": null,
+      "media": "image",
+      "createdLabel": "14.09.2026",
+      "modifiedLabel": "14.09.2026",
+      "createdAt": 20260903,
+      "modifiedAt": 20260916
     },
     {
       "id": "item-image-product-scene",
       "tab": "images",
       "name": "Bag on sand",
       "type": "Image",
-      "toolFamily": "product",
+      "toolFamily": "ai-studio-generator",
       "sizeBytes": 2097152,
       "sizeLabel": "2 MB",
       "dateLabel": "13.09.2026",
       "ratio": 1.3333,
-      "folderId": "folder-campaign"
+      "folderId": "folder-campaign",
+      "media": "image",
+      "createdLabel": "13.09.2026",
+      "modifiedLabel": "13.09.2026",
+      "createdAt": 20260904,
+      "modifiedAt": 20260910
     },
     {
       "id": "item-image-expand",
       "tab": "images",
       "name": "Storefront expanded",
       "type": "Image",
-      "toolFamily": "retouch-expand",
+      "toolFamily": "ai-image-generator",
       "sizeBytes": 12582912,
       "sizeLabel": "12 MB",
       "dateLabel": "11.09.2026",
       "ratio": 1.7778,
-      "folderId": null
+      "folderId": null,
+      "media": "image",
+      "createdLabel": "11.09.2026",
+      "modifiedLabel": "11.09.2026",
+      "createdAt": 20260905,
+      "modifiedAt": 20260913
     },
     {
       "id": "item-video-generated",
       "tab": "videos",
       "name": "Motion transfer take 3",
       "type": "Video",
-      "toolFamily": "video-generation",
+      "toolFamily": "text-to-video",
       "sizeBytes": 301989888,
       "sizeLabel": "288 MB",
       "dateLabel": "14.09.2026",
       "durationLabel": "00:12",
       "ratio": 0.5625,
-      "folderId": "folder-reels"
+      "folderId": "folder-reels",
+      "media": "video",
+      "createdLabel": "14.09.2026",
+      "modifiedLabel": "14.09.2026",
+      "createdAt": 20260906,
+      "modifiedAt": 20260916
     },
     {
       "id": "item-video-style",
       "tab": "videos",
       "name": "Style pass neon",
       "type": "Video",
-      "toolFamily": "style",
+      "toolFamily": "video-style-transfer",
       "sizeBytes": 178257920,
       "sizeLabel": "170 MB",
       "dateLabel": "08.09.2026",
       "durationLabel": "00:08",
       "ratio": 1.7778,
-      "folderId": null
+      "folderId": null,
+      "media": "video",
+      "createdLabel": "08.09.2026",
+      "modifiedLabel": "08.09.2026",
+      "createdAt": 20260907,
+      "modifiedAt": 20260910
     },
     {
       "id": "item-upload-source-clip",
@@ -335,7 +437,13 @@
       "sizeLabel": "412 MB",
       "dateLabel": "07.09.2026",
       "durationLabel": "01:51",
-      "ratio": 0.5625
+      "ratio": 0.5625,
+      "media": "image",
+      "createdLabel": "07.09.2026",
+      "modifiedLabel": "07.09.2026",
+      "createdAt": 20260908,
+      "modifiedAt": 20260913,
+      "toolFamily": "video-enhancer"
     },
     {
       "id": "item-upload-reference",
@@ -346,7 +454,67 @@
       "sizeBytes": 8388608,
       "sizeLabel": "8 MB",
       "dateLabel": "05.09.2026",
-      "ratio": 1
+      "ratio": 1,
+      "media": "image",
+      "createdLabel": "05.09.2026",
+      "modifiedLabel": "05.09.2026",
+      "createdAt": 20260909,
+      "modifiedAt": 20260916,
+      "toolFamily": "ai-image-generator"
+    },
+    {
+      "id": "item-agent-hero-still",
+      "tab": "agent",
+      "name": "Campaign hero still",
+      "type": "Image",
+      "media": "image",
+      "sessionName": "Autumn launch brief",
+      "toolFamily": "ai-studio-generator",
+      "sizeBytes": 5242880,
+      "sizeLabel": "5 MB",
+      "dateLabel": "13.09.2026",
+      "createdLabel": "13.09.2026",
+      "modifiedLabel": "13.09.2026",
+      "createdAt": 20260913,
+      "modifiedAt": 20260913,
+      "ratio": 1.5,
+      "editable": true
+    },
+    {
+      "id": "item-agent-hero-cut",
+      "tab": "agent",
+      "name": "Campaign hero cut",
+      "type": "Video",
+      "media": "video",
+      "sessionName": "Autumn launch brief",
+      "toolFamily": "image-to-video",
+      "sizeBytes": 31457280,
+      "sizeLabel": "30 MB",
+      "dateLabel": "13.09.2026",
+      "createdLabel": "13.09.2026",
+      "modifiedLabel": "13.09.2026",
+      "createdAt": 20260913,
+      "modifiedAt": 20260914,
+      "ratio": 1.7778,
+      "editable": true
+    },
+    {
+      "id": "item-agent-portrait-set",
+      "tab": "agent",
+      "name": "Founder portrait set",
+      "type": "Image",
+      "media": "image",
+      "sessionName": "About page refresh",
+      "toolFamily": "ai-headshot-generator",
+      "sizeBytes": 8388608,
+      "sizeLabel": "8 MB",
+      "dateLabel": "11.09.2026",
+      "createdLabel": "11.09.2026",
+      "modifiedLabel": "11.09.2026",
+      "createdAt": 20260911,
+      "modifiedAt": 20260911,
+      "ratio": 0.75,
+      "editable": true
     }
   ],
   "upload": {
@@ -386,18 +554,16 @@
     "failureKinds": [
       {
         "id": "failed-format",
-        "title": "This file type is not supported",
-        "body": "Choose a PNG, JPG or MP4 file.",
-        "primaryAction": "Choose another file",
-        "retryable": true
+        "actions": [
+          "choose-another"
+        ]
       },
       {
         "id": "failed-quota",
-        "title": "Ran out of space",
-        "body": "There was not enough room left to store this file.",
-        "primaryAction": "Manage space",
-        "secondaryAction": "Expand storage",
-        "retryable": false
+        "actions": [
+          "remove",
+          "upgrade"
+        ]
       }
     ],
     "queueWidget": false
@@ -416,7 +582,8 @@
         "movedLabel": "13.09.2026",
         "daysRemaining": 29,
         "restoreTab": "videos",
-        "restoreFolderId": null
+        "restoreFolderId": null,
+        "deletedLabel": "13.09.2026"
       },
       {
         "id": "trash-expiring-soon",
@@ -428,7 +595,26 @@
         "daysRemaining": 1,
         "restoreTab": "images",
         "restoreFolderId": "folder-campaign",
-        "emphasis": "final-day"
+        "emphasis": "final-day",
+        "deletedLabel": "16.08.2026"
+      }
+    ],
+    "columns": [
+      "name",
+      "type",
+      "deleted",
+      "remaining"
+    ],
+    "rowMenu": [
+      {
+        "id": "restore",
+        "label": "Restore"
+      },
+      {
+        "id": "delete-forever",
+        "label": "Delete from Trash",
+        "destructive": true,
+        "icon": "delete"
       }
     ]
   },
@@ -496,13 +682,12 @@
   },
   "batch": {
     "actions": [
-      "download",
+      "export",
       "move",
-      "trash"
+      "delete"
     ],
     "showsSelectedCount": true,
-    "showsSelectedSize": true,
-    "cleanupSort": "size-desc"
+    "showsSelectedSize": true
   },
   "outOfScope": [
     "sharing and collaboration",
@@ -512,5 +697,139 @@
     "drag into folder",
     "dedicated manage-storage view",
     "real payment, storage, quota or account services"
-  ]
+  ],
+  "mediaFilters": [
+    {
+      "id": "all",
+      "label": "All",
+      "selected": true
+    },
+    {
+      "id": "image",
+      "label": "Images"
+    },
+    {
+      "id": "video",
+      "label": "Videos"
+    }
+  ],
+  "mediaFilterTabs": [
+    "projects",
+    "uploads",
+    "agent"
+  ],
+  "viewModes": [
+    {
+      "id": "grid",
+      "label": "Grid",
+      "selected": true
+    },
+    {
+      "id": "list",
+      "label": "List"
+    }
+  ],
+  "itemMenu": [
+    {
+      "id": "open",
+      "label": "Open",
+      "group": "open",
+      "icon": "edit"
+    },
+    {
+      "id": "continue",
+      "label": "Continue in editor",
+      "icon": "edit"
+    },
+    {
+      "id": "rename",
+      "label": "Rename",
+      "group": "organise"
+    },
+    {
+      "id": "move",
+      "label": "Move to folder"
+    },
+    {
+      "id": "duplicate",
+      "label": "Duplicate"
+    },
+    {
+      "id": "trash",
+      "label": "Move to Trash",
+      "destructive": true,
+      "icon": "delete"
+    }
+  ],
+  "toolFamilyGroups": [
+    {
+      "id": "image",
+      "label": "AI Image"
+    },
+    {
+      "id": "video",
+      "label": "AI Video"
+    }
+  ],
+  "sortOrders": [
+    {
+      "id": "desc",
+      "selected": true
+    },
+    {
+      "id": "asc"
+    }
+  ],
+  "createControls": {
+    "projects": {
+      "kind": "menu",
+      "items": [
+        {
+          "id": "new-project",
+          "label": "Create project"
+        },
+        {
+          "id": "new-folder",
+          "label": "Create folder"
+        }
+      ]
+    },
+    "images": {
+      "kind": "button",
+      "action": "new-folder"
+    },
+    "videos": {
+      "kind": "button",
+      "action": "new-folder"
+    },
+    "agent": {
+      "kind": "button",
+      "action": "new-folder"
+    },
+    "uploads": {
+      "kind": "menu",
+      "items": [
+        {
+          "id": "upload-file",
+          "label": "File Upload"
+        },
+        {
+          "id": "upload-folder",
+          "label": "Folder Upload"
+        },
+        {
+          "id": "new-folder",
+          "label": "Create folder",
+          "dividerBefore": true
+        }
+      ]
+    },
+    "trash": {
+      "kind": "none"
+    }
+  },
+  "projectHandoff": {
+    "route": "edit/result-photo",
+    "adapter": "editor-boundary"
+  }
 }

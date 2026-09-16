@@ -18,7 +18,6 @@ import _isEmpty from 'lodash/isEmpty';
 import { usePricingLogic as useLogic } from './pricing-adapters.jsx';
 import { useSelector } from './pricing-adapters.jsx';
 import { useMemo } from 'react';
-import { hoverClassMap, touchClassMap } from './pricing-adapters.jsx';
 import { usePreviewLeft as usePreviewLeft } from './pricing-adapters.jsx';
 import { useDebugPreviewLeft as useDebugPreviewLeft } from './pricing-adapters.jsx';
 import { useCheckHolidayProduct as useCheckHolidayProduct } from './pricing-adapters.jsx';
@@ -59,7 +58,6 @@ export default function PricingModal() {
     setSelectedPlan,
     selectedPlan,
     savePercent,
-    getPlanButtonStyles,
     handleClick,
     isEmptyPlans,
     isStripeMode,
@@ -94,7 +92,6 @@ export default function PricingModal() {
     isPlusUser,
     isEmptyPlans,
     selectedPlan,
-    getPlanButtonStyles,
     handleClick,
     holidayType: HolidayType,
   };
@@ -225,15 +222,7 @@ export default function PricingModal() {
             />
           </div>
           {(isHolidayMode || !isMobile) && (
-            <CheckoutButton
-              {...checkoutButtonProps}
-              hoverClass={
-                !isHolidayMode ? hoverClassMap.hover46e4fa : undefined
-              }
-              touchClass={
-                !isHolidayMode ? touchClassMap.hover46e4fa : undefined
-              }
-            />
+            <CheckoutButton {...checkoutButtonProps} />
           )}
         </div>
         {!isHolidayMode && !isMobile && (
@@ -248,11 +237,7 @@ export default function PricingModal() {
         )}
       </div>
       {!isHolidayMode && isMobile && (
-        <CheckoutButton
-          {...checkoutButtonProps}
-          hoverClass={hoverClassMap.hover46e4fa}
-          touchClass={touchClassMap.hover46e4fa}
-        />
+        <CheckoutButton {...checkoutButtonProps} />
       )}
       {isHolidayMode && (
         <div

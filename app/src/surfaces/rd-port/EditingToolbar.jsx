@@ -1,6 +1,7 @@
 import assetMap from './rd-assets.js';
 import { getTranslationFunction } from './adapters.jsx';
 import { browserUtils as browserUtils } from './adapters.jsx';
+import Button from '../../../../platform/ui/button/index.js';
 
 /**
  * The right side of the gallery / ai-tools header bar: the select/cancel
@@ -38,17 +39,17 @@ export default function EditingToolbar({
 
   return (
     <>
-      <button
-        className={`${styles.selectButton} ${
-          isEditing ? styles.cancelStyle : ''
-        } `}
+      <Button
+        variant={isEditing ? 'secondary' : 'primary'}
+        tone={isEditing ? 'neutral' : 'brand'}
+        size="small"
         disabled={selectDisabled}
         onClick={onToggleEditing}
       >
         {t(
           !isEditing ? 'my.account.history.select' : 'my.account.history.cancel'
         )}
-      </button>
+      </Button>
       {isEditing &&
         !hideDelete &&
         (!isMd ? (

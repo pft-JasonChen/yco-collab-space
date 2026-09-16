@@ -1,0 +1,85 @@
+schemaVersion: 1
+id: cell-actions
+displayName: Cell Actions
+classification: composite
+status: pilot-approved
+rd:
+  sourcePackage: youcam-enhance-frontend
+  sourceVersion: 1.34.1
+  snapshot: yce-frontend-gm-260909
+  portability: reference
+  sourcePaths:
+    - src/components/my-gallery-page/tabs/gallery/components/cell-actions/index.js
+    - src/components/my-gallery-page/tabs/gallery/components/cell-actions/index.module.scss
+    - src/components/my-gallery-page/tabs/gallery/components/cell-actions/sheet-icons.js
+    - src/components/my-gallery-page/tabs/gallery/components/cell-actions/bottom-sheet.js
+  sourceHashes:
+    - { path: src/components/my-gallery-page/tabs/gallery/components/cell-actions/index.js, sha256: 8464543277d1d12b0dd40f850d77e72064bc38b76ac397aa359ef9f96fa6b94d }
+    - { path: src/components/my-gallery-page/tabs/gallery/components/cell-actions/index.module.scss, sha256: 2152bd8b85b05400f6cea83be7219339f414a7da570c9e00c311fec1b9b516da }
+    - { path: src/components/my-gallery-page/tabs/gallery/components/cell-actions/sheet-icons.js, sha256: 3c0a9836da20fd12ef367113979651af41d6918b8eaf3d183934e63e46861408 }
+    - { path: src/components/my-gallery-page/tabs/gallery/components/cell-actions/bottom-sheet.js, sha256: bd4ac9bd5558eef113026372e4d9f030b764a45b2630d4406749f405697ea1c3 }
+figma: { status: pending, fileKey: null, componentSetNodeId: null, variants: [] }
+implementation:
+  importPath: platform/ui/cell-actions/index.js
+  storyId: ui-cellactions
+  framework: react
+  dependencies: [react]
+  removedDependencies: [prop-types, use-window-device, i18n, bottom-sheet, rd-download-asset]
+  localFiles:
+    - path: platform/ui/cell-actions/CellActions.jsx
+      sha256: 952ac0af623f84a0ced0c85cc70e3356848cfecf915df76a8be3b91335f40159
+    - path: platform/ui/cell-actions/CellActions.module.scss
+      sha256: df4edbc3264a990132b93c32e83419e1d9a019bd2e42225b9bb0d17b7190bb30
+    - path: platform/ui/cell-actions/CellActions.stories.jsx
+      sha256: 422b63ce0c273f18d12e5582a22548978c70b667661e7d7e95d290f6724dd106
+    - path: platform/ui/cell-actions/SheetIcon.jsx
+      sha256: 34eb240513ff4feea86943e029d4ffe60bec60690dc8f60f1c260a8f1c232309
+    - path: platform/ui/cell-actions/index.js
+      sha256: 1f33d03fa93fd29d62c0db4457e3384c522efb614a74d9328f09e84a57c754f4
+  localFilesUpdated: 2026-09-16
+publicApi:
+  props:
+    - { name: onDownload, required: false }
+    - { name: menuItems, required: false }
+    - { name: downloadLabel, required: false }
+    - { name: moreLabel, required: false }
+    - { name: menuTestId, required: false }
+    - { name: testId, required: false }
+    - { name: className, required: false }
+  states: [default, single-action, menu-open, hover, focus-visible, destructive-item, grouped, coarse-pointer]
+tokens:
+  lockPath: platform/tokens/tokens.lock.json
+  uses:
+    - --corner-radius-16
+    - --corner-radius-20
+    - --fill-inverse-hover
+    - --fill-overlay-weak
+    - --fill-strong
+    - --fill-white
+    - --font-size-micro
+    - --font-size-tiny
+    - --grey-neutral-dark-200
+    - --grey-neutral-dark-500
+    - --grey-slate-solid-900
+    - --line-height-micro
+    - --line-height-tiny
+    - --spacing-4
+    - --spacing-8
+    - --spacing-12
+    - --spacing-16
+    - --stroke-focus
+    - --text-inverse-strong
+    - --text-weaker
+assets: []
+review:
+  pilotApprover: { actor: pm, id: collab-space-owner, date: 2026-09-16 }
+  canonicalReview: { designer: pending, rd: pending }
+decisionBasis:
+  - "Extracted from RD source on 2026-09-16 because the PM reported the grid's overflow control was invisible. The cause was using the catalogued dropdown-select in its borderless variant over a photograph: it has no ground, so dark glyphs vanish against a light thumbnail. RD had already solved this — Download and More share one rounded pill with a translucent dark ground and white glyphs — so the fix was to extract that component rather than restyle a toolbar control into an on-photo one."
+  - "This is the second menu in the catalogue, and deliberately so. dropdown-select is a toolbar control: light ground, dark text, listbox or menu semantics, keyboard model. This one sits over a photograph: dark glass, backdrop blur, white text, anchored above its trigger. They are two visual languages in production and collapsing them would make one of the two wrong. The keyboard-navigable listbox model is not carried here because RD's is a short on-photo action list rather than a value picker; Escape and outside-click both close it, and the trigger carries aria-haspopup and aria-expanded."
+  - "portability is `reference`. RD reads `useWindowDevice()` and `getTranslationFunction()`, imports its download glyph from a fixed asset path, and depends on PropTypes. Labels are props here, the glyph is inlined from RD's own sheet-icons, and the device read becomes a matchMedia on `(pointer: coarse)` taken after mount so a server render never assumes a pointer type. RD keeps its own implementation."
+  - "Not ported: the mobile bottom sheet. RD swaps the desktop dropdown for a full action sheet below 992px, which needs a portal, a backdrop and a drag affordance of its own. The narrowest viewport this prototype is reviewed at is 768px — a tablet, not a phone — where the anchored menu reads correctly. What is carried from that branch is the part that matters at any pointer type: on a coarse pointer the More button is always visible rather than hover-revealed, because a touch device has no hover to reveal it with. Recorded here rather than silently dropped; a phone breakpoint would need the sheet."
+  - "Grouping is the one addition (2026-09-16): `groupLabel` and `dividerBefore` per item, the same generalisation category-rail and dropdown-select already carry. RD's menu is flat because it holds two or three items; Cloud Storage's holds six across separate intents. A labelled run becomes a real `group` carrying the label as its accessible name, so the menu's children stay valid."
+  - "RD's own note on the destructive item is preserved: delete reads white like the rest of the dark menu, distinguished by its trash glyph rather than a red tint, because that is what the guideline shows. The `danger` flag therefore sets a data attribute a consumer can assert on, not a colour."
+  - "Colour mapping (2026-09-16) follows app/src/surfaces/rd-port/token-colour-mapping.json, and every value in this component is recorded there: `rgb(17 24 26 / 50%)` pill and icon ground -> `--text-weaker`; `rgb(255 255 255 / 16%)` hover wash and the group divider -> `--grey-neutral-dark-200`; `#fff` -> `--fill-white`; `#15171f` active dots -> `--grey-slate-solid-900`. RD's own tokens (`--fill-overlay-weak`, `--fill-inverse-hover`, `--text-inverse-strong`, the corner radii and the tiny type pair) are unchanged. The one value with no token is the menu shadow's `rgb(0 0 0 / 24%)`, expressed as `color-mix(in srgb, var(--fill-strong) 24%, transparent)` — the convention video-trim-modal, credit-controls and dropdown-select already use."
+  - "Two differences from RD's hover rule are deliberate. RD gives the lone icon button its own dark ground and the grouped ones a transparent one; here the pill always carries the ground and the buttons are transparent, with `single` only changing the padding, because RD's separate-ground branch existed for the mobile lone-icon case this port does not ship. And the icon hover wash is applied unconditionally rather than only inside `.grouped`, which is the same result for every case that survives."
