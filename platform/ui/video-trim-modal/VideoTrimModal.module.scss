@@ -116,12 +116,20 @@
   font-weight: var(--font-weight-strong);
 }
 
+/* Reference (2026-09-16, requested live — a DevTools flex-gap overlay
+   showing two hatched bands, "第二條紫色的可以移除"): a flat `gap` here
+   applied the same 24px both before .timelineSection AND before .actions —
+   redundant for the second one, since .actions already has its own
+   padding-top:24px (needed so its own background still reads as padding,
+   not gap, on the rare case it's NOT the last flex child pushing right up
+   against .body's edge). Replaced with an explicit margin-top on
+   .timelineSection alone, so only the first gap (preview → timeline)
+   remains and .actions relies solely on its own padding. */
 .body {
   display: flex;
   flex-direction: column;
   flex: 1;
   min-height: 0;
-  gap: var(--spacing-24);
   padding: 0 var(--spacing-32);
   overflow-y: auto;
 }
@@ -258,6 +266,7 @@
   flex-direction: column;
   flex-shrink: 0;
   gap: var(--spacing-4);
+  margin-top: var(--spacing-24);
 }
 
 .timelineMeta {
@@ -362,8 +371,11 @@
   }
 
   .body {
-    gap: var(--spacing-16);
     padding: 0 var(--spacing-16);
+  }
+
+  .timelineSection {
+    margin-top: var(--spacing-16);
   }
 
   .actions {

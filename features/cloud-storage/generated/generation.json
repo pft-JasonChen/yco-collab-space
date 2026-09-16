@@ -5,7 +5,7 @@
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "claude-code",
   "model": "claude-sonnet-5",
-  "generatedAt": "2026-09-16T04:46:18.832Z",
+  "generatedAt": "2026-09-16T05:06:03.661Z",
   "files": [
     "README.md",
     "feature.jsx",
@@ -2002,7 +2002,7 @@
         },
         {
           "path": "design-library/components/video-info-dialog/component.yaml",
-          "sha256": "785e637f4910f622e7224965665155d6b37de2f8971ce412ea4ab1692cf99405"
+          "sha256": "427d1be4f55d6cdf99527704010d4adca139d552146ae9bbcf3a3fae2bc987eb"
         },
         {
           "path": "design-library/components/video-results-surface/component.yaml",
@@ -2010,11 +2010,11 @@
         },
         {
           "path": "design-library/components/video-timeline/component.yaml",
-          "sha256": "ada3644bab92df12ea1a2498082b24e206a27b08b50a405e0c1fc1f807dc5e4e"
+          "sha256": "bc46170f119f3f3bb36f455f9feeb0dbe97b539206be6298de0911c6fb1b40d7"
         },
         {
           "path": "design-library/components/video-trim-modal/component.yaml",
-          "sha256": "c1b55ee348f9e01197cd0db2841c4204770cbc849941346e8c69b19b65b197c2"
+          "sha256": "3049e249e315c74bcd6ff11890969209c089513d45c05ee2950c37753e9b48af"
         },
         {
           "path": "features/cloud-storage/generated/README.md",
@@ -2866,7 +2866,7 @@
         },
         {
           "path": "platform/ui/video-info-dialog/VideoInfoDialog.module.scss",
-          "sha256": "5dbe8027c47e8c1490ad84dea7754b473325625124358a87c1c5df6465807730"
+          "sha256": "6128091087375a31ee7de41bec0f9d756991ec64bff73c2e57231e0dc9382731"
         },
         {
           "path": "platform/ui/video-info-dialog/VideoInfoDialog.stories.jsx",
@@ -2898,7 +2898,7 @@
         },
         {
           "path": "platform/ui/video-timeline/VideoTimeline.module.scss",
-          "sha256": "4b2b6c492a6fb1462258b7000af9e8639ec47721be1b80a87b6009930205277d"
+          "sha256": "881aec53cae80dbd2f9f7eac9454cbfa47974f5b3ffb9eda25b058a0ed3b06a2"
         },
         {
           "path": "platform/ui/video-timeline/VideoTimeline.stories.jsx",
@@ -2918,7 +2918,7 @@
         },
         {
           "path": "platform/ui/video-trim-modal/VideoTrimModal.module.scss",
-          "sha256": "3febc7fe9e91c6f3e4f83398871c94f9a3c7137d84c5775bd7d8fc8a61d7fe90"
+          "sha256": "f5c6c87e998dc131154b7c1d9ebcf8dae1af72bf3e630e6c67aeb4e8706e4255"
         },
         {
           "path": "platform/ui/video-trim-modal/VideoTrimModal.stories.jsx",
@@ -3193,7 +3193,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "32779740381b8a65abfa02fb832ebf2e43640c9eddbf44832dc300f9a3babd4c",
+      "hash": "da17d5cd659954850ce55a31853e2ecc870c03d590894f1bdb44ec2a3c82596b",
       "edges": [
         {
           "from": "features/cloud-storage/generated/feature.jsx",
@@ -3866,6 +3866,6 @@
         "react-dom"
       ]
     },
-    "revisionHash": "d31a11b44b3edef6307a7d7feecbfa1c42b15d22a0889e23adf7913e9a81841e"
+    "revisionHash": "ddc9e8cd2874f61af8fbf05d233c4fea3a2376403c75165dfa4c5cefcf88852e"
   }
 }

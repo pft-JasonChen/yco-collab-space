@@ -80,8 +80,19 @@
    想要縮回12px"): the extra 16px on top of the plain 12px above exists only
    to clear .trimRange/the right handle's own overhang — with showTrimHandles
    false neither renders, so nothing needs the room anymore. */
+/* Reference (2026-09-16, requested live via a DevTools inspect — gap toggled
+   off, padding shown collapsed to var(--spacing-4)): the with-handles
+   20px gap and 28px-right/12px-elsewhere padding both exist only to clear
+   .trimRange/the handles' own overhang; without them (showTrimHandles
+   false — video-expansion's own persistent canvas timeline, not
+   VideoTrimModal) there's nothing to clear, so this variant gets its own
+   flat 4px on every side and no gap at all, not just the narrower
+   padding-right it had before. Scoped to this modifier alone — the
+   with-handles .mainRow above (VideoTrimModal) keeps its own 20px gap and
+   asymmetric padding untouched. */
 .mainRowNoHandles {
-  padding-right: var(--spacing-12);
+  gap: 0;
+  padding: var(--spacing-4);
 }
 
 .playButton {

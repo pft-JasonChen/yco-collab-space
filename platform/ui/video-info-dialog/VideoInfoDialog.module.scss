@@ -220,8 +220,15 @@
   text-align: center;
 }
 
+/* Reference (2026-09-16, requested live — "為什麼其他顆字都灰灰的"): was
+   opacity:0.64 on :disabled, dimming every Next Action except whichever one
+   happens to have onSelect wired (video-expansion, this pilot's only
+   implemented target) — a purely per-prototype implementation detail, not a
+   real design state. Confirmed live: every option's text should read the
+   same dark/Strong regardless of whether this prototype happens to wire a
+   click handler for it. Still functionally inert (cursor:default), just no
+   longer visually distinguished. */
 .nextGrid button:disabled {
-  opacity: 0.64;
   cursor: default;
 }
 
