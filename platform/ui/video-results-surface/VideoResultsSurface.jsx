@@ -95,7 +95,7 @@ export default function VideoResultsSurface({
    * (see .mobileTitle in the module.scss): at >=768px ToolPageLayout keeps the
    * settings panel beside this surface and the page title already lives in
    * ResultPageShell's own header, so repeating it here would be redundant.
-   * Below that (<=767px), ToolPageLayout stacks panel below this surface with no room
+   * Below that (<=768px), ToolPageLayout stacks panel below this surface with no room
    * left for a page-level heading of its own, so this is the one place a
    * title can sit between the tabs and whichever content is active — matching
    * a supplied reference of the real production mobile layout (tabs, then

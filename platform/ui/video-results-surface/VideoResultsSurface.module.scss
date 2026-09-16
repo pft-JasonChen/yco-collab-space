@@ -31,8 +31,8 @@
 /* Hidden by default — ToolPageLayout keeps the settings panel beside this
    surface at >=768px and the page title already lives in ResultPageShell's
    own header there, so this would just be a duplicate. Shown only where
-   ToolPageLayout actually stacks panel below this surface (<=767px, see its
-   own @media(max-width:767px){.layout{flex-direction:column}}, matching the
+   ToolPageLayout actually stacks panel below this surface (<=768px, see its
+   own @media(max-width:768px){.layout{flex-direction:column}}, matching the
    project's real mobile breakpoint) — matching that exact breakpoint, not
    this file's own separate 992px one below, since this heading exists
    specifically to stand in for the now-stacked page. */
@@ -56,9 +56,27 @@
   white-space: nowrap;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .mobileTitleRow {
     display: flex;
+  }
+
+  /* Reference (2026-09-16, requested live — "這裏也要fixed", right after
+     Generate was pinned to the bottom of the viewport): the Edit/History
+     tabs are the very first thing in ResultPageShell's own scrolling
+     container at this breakpoint (panel and result stack into one scrolling
+     page), so `position: sticky; top: 0` pins it to that container's own
+     top edge as soon as the page scrolls past it — unlike the Generate
+     footer, sticky is the right tool here (not fixed): this element is the
+     FIRST thing in the scroll flow, with real content below it to scroll
+     past, which is exactly the case sticky detaches for. Needs its own
+     opaque background since content now scrolls underneath it while stuck —
+     matches `.surface`'s own background so it's invisible until it
+     actually detaches. */
+  .toolbar {
+    position: sticky;
+    top: 0;
+    background: var(--background-alternate);
   }
 }
 

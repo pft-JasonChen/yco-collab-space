@@ -5,7 +5,7 @@
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "claude-code",
   "model": "claude-sonnet-5",
-  "generatedAt": "2026-09-16T08:26:44.787Z",
+  "generatedAt": "2026-09-16T11:03:49.862Z",
   "files": [
     "feature.jsx",
     "feature.module.scss"
@@ -724,7 +724,7 @@
         },
         {
           "path": "design-library/components/tool-page-layout/component.yaml",
-          "sha256": "3e18296a578374b42ce163aa472f7543cee4cadfa5cefbb90bca175bd364eb63"
+          "sha256": "593e73476f7a2574cde99889557512cb64ef972a5f6e615571e9aacc519181d5"
         },
         {
           "path": "design-library/components/upload-media-block/component.yaml",
@@ -740,7 +740,7 @@
         },
         {
           "path": "design-library/components/video-results-surface/component.yaml",
-          "sha256": "e5bb7ed9ac37785c1a131eaa42e217d622f520e2b966013675c9823173f6078c"
+          "sha256": "007dc1ab7604f55eae34bbdcf1d05fe6a59b73c0f5d4fb07811b37190f1c92dc"
         },
         {
           "path": "design-library/components/video-timeline/component.yaml",
@@ -1500,7 +1500,7 @@
         },
         {
           "path": "platform/ui/tool-page-layout/ToolPageLayout.module.scss",
-          "sha256": "70def0263adafff6a1a0b69071ed905e6adbdeef77c98ec6afb1ef2e6c7b4660"
+          "sha256": "f032cd23fcd5c01f591d3c006d9c65988d2617e45f9077ceac7d532166509258"
         },
         {
           "path": "platform/ui/tool-page-layout/ToolPageLayout.stories.jsx",
@@ -1560,11 +1560,11 @@
         },
         {
           "path": "platform/ui/video-results-surface/VideoResultsSurface.jsx",
-          "sha256": "f6d0feeab197a9a21bca280e0b6651bb5764dbc4b30375ce6155ea2b79b3d8e1"
+          "sha256": "47222a54477d6c39cd8e8ed71f29f19f2ab03539dd207c8f060c68d4a61eecc5"
         },
         {
           "path": "platform/ui/video-results-surface/VideoResultsSurface.module.scss",
-          "sha256": "d62203b379049f0ec61b9cec3ae830440a6fcac582bfa30090cd3acc202fe93d"
+          "sha256": "95e3b6b36956bccbe21efd2a48c81fb5cb317b12d633a880600eba793d61a05a"
         },
         {
           "path": "platform/ui/video-results-surface/VideoResultsSurface.stories.jsx",
@@ -1624,7 +1624,7 @@
         },
         {
           "path": "prototype.config.json",
-          "sha256": "0808e7b5fac0ec818cdacb6bd1e4c37382d7ebdaaf426d04b2bb590654e1d853"
+          "sha256": "db6432eaaf4024c8735ee7d1a9ac35eddfd3b00304eacf5e471ba36989f87c9b"
         },
         {
           "path": "tools/collab-space/generate-reference.mjs",
@@ -1875,7 +1875,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "573baf9e3999bff8c3ce4449f824a77856321d97a5b0e640d05b1a188ebb458c",
+      "hash": "31fe69e40f09f887572beb7a1ebe1b3b46502125c5ec7d3d49cf33ef7bc1d5a9",
       "edges": [
         {
           "from": "features/collab-space-readiness/generated/feature.jsx",
@@ -1917,6 +1917,6 @@
         "react"
       ]
     },
-    "revisionHash": "04c922bc03d1f49c9bc4bc16bcd3d290839bf1fae3f2cac1ef8548b99902b6e7"
+    "revisionHash": "8eee1fa372f55be136597e585e8ac205485d0a5053dc53dad807a09c7828c56e"
   }
 }

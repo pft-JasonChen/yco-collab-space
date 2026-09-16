@@ -65,7 +65,7 @@
    instead of scrolling out of view. Needs its own opaque background since
    content now scrolls in the same box behind it while stuck.
    Declared here (before the media queries below, not after) so the
-   @media(max-width:767px) override further down — same specificity,
+   @media(max-width:768px) override further down — same specificity,
    source order decides — actually wins at that width instead of being
    silently clobbered by this same-specificity rule appearing later. */
 .footer {
@@ -106,7 +106,7 @@
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   /* Reference (2026-09-16, requested live — "手機版我只有說upload Area 移除，
      但是給人家選ratio和generate button還是要在，不然人家怎麼操作", diagnosed
      live): `.layout`'s own base-rule `overflow: hidden` (declared once,
@@ -172,10 +172,27 @@
   .result {
     flex: none;
     height: 100%;
+    /* Reference (2026-09-16, requested live — "這裏也要fixed", against
+       VideoResultsSurface's own Edit/History tabs — see that component's
+       own module.scss for the actual `position: sticky` rule): `overflow:
+       hidden` (base rule above, for the desktop/tablet side-by-side case,
+       where `.result` has a real percentage height and needs it) makes
+       `.result` a scroll container per spec purely by having a non-visible
+       overflow value, even though nothing here actually scrolls it — that
+       alone was enough to become the nearest sticky-positioning ancestor
+       for anything stuck inside it, instead of ResultPageShell's own
+       `.shellContent` (the box that ACTUALLY scrolls at this breakpoint).
+       Confirmed live: a `position:sticky;top:0` toolbar inside `.result`
+       just scrolled away with it (measured well above the viewport, top:
+       -136px) rather than pinning to the real scrolled viewport. `overflow:
+       visible` here removes `.result` from sticky's ancestor search
+       entirely, letting `.shellContent` do that job like it already does
+       for `.layout` and `.panelContent`. */
+    overflow: visible;
   }
 
   /* .footer's own position:sticky (below) relies on .panelContent actually
-     being the scrolling container it sticks within — true at >767px, but
+     being the scrolling container it sticks within — true at >768px, but
      .panelContent just went overflow:visible above, so sticky would escape
      to whatever ancestor DOES scroll (the whole stacked page), pinning the
      button mid-screen over the timeline/canvas below it instead of at the

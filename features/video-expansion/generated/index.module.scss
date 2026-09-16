@@ -10,8 +10,8 @@
 /* Reference (2026-09-16, requested live — "手機版上傳後不用出現1[UploadMediaBlock
    的整塊縮圖]，手機版都是上傳後feature name右邊新增一顆upload button", against a
    real production mobile screenshot). Both this button and the section-hide
-   rule below are scoped to a true phone width (<=767px) — matching
-   VideoResultsSurface's own <=767px .mobileTitleRow breakpoint that button
+   rule below are scoped to a true phone width (<=768px) — matching
+   VideoResultsSurface's own <=768px .mobileTitleRow breakpoint that button
    lives inside (both now aligned to the project's real mobile breakpoint,
    2026-09-16 — "768以下才是變成手機版"), and its surface-intent explicitly
    requires the uploaded-media Trim action (inside the section this would
@@ -42,7 +42,7 @@
   box-shadow: 0 0 0 var(--spacing-4) var(--stroke-focus);
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .mobileUploadAction {
     display: grid;
   }
@@ -295,11 +295,11 @@
 }
 
 /* Breakpoint matches ToolPageLayout's own stacking breakpoint (updated
-   2026-09-16 to 767px, see that component's own module.scss — "769~991
+   2026-09-16 to 768px, see that component's own module.scss — "769~991
    panel是 w300, 992以上 panel是 w400, 768以下才是變成手機版"); everything below
    depends on `.layout{flex-direction:column}` actually being active, so it
    has to track that breakpoint exactly rather than use its own guess. */
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   /* Was a flat `min-height: 1280px` guess, then `min-height: 100dvh` — both
      sized against the WRONG box. `100dvh` is the whole device viewport, but
      this element never gets the whole device viewport: PrototypeFrame's own
@@ -329,7 +329,7 @@
   /* Reference (2026-09-14, real production mobile screenshots):
      tabs/History-filter come first, then the page title, then the settings
      form — not the settings form first with tabs trailing after it, which is
-     what ToolPageLayout's own @media(max-width:767px){.layout{flex-direction:
+     what ToolPageLayout's own @media(max-width:768px){.layout{flex-direction:
      column}} alone produces (it just stacks panel-then-result in DOM order,
      doesn't reorder them). Reordered here via plain CSS `order` on
      ToolPageLayout's own stable data-surface-zone attributes rather than

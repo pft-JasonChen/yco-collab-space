@@ -5,7 +5,7 @@
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "claude-code",
   "model": "claude-sonnet-5",
-  "generatedAt": "2026-09-16T10:24:40.437Z",
+  "generatedAt": "2026-09-16T11:03:48.928Z",
   "files": [
     "README.md",
     "contract/integration.yaml",
@@ -379,9 +379,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/tool-page-layout/component.yaml",
-        "contractSha256": "3e18296a578374b42ce163aa472f7543cee4cadfa5cefbb90bca175bd364eb63",
+        "contractSha256": "593e73476f7a2574cde99889557512cb64ef972a5f6e615571e9aacc519181d5",
         "implementationImport": "platform/ui/tool-page-layout/index.js",
-        "implementationSha256": "aa98a907bc5bb4970dbb48ac1100481919031f762a259a69b9fccb477ffc2b9f",
+        "implementationSha256": "c125156bbfa071e45db348c7e139bfe4772d5483b9bfbe825636ba6cda303483",
         "runtimeAssets": []
       },
       {
@@ -562,9 +562,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/video-results-surface/component.yaml",
-        "contractSha256": "e5bb7ed9ac37785c1a131eaa42e217d622f520e2b966013675c9823173f6078c",
+        "contractSha256": "007dc1ab7604f55eae34bbdcf1d05fe6a59b73c0f5d4fb07811b37190f1c92dc",
         "implementationImport": "platform/ui/video-results-surface/index.js",
-        "implementationSha256": "4ee8766badd7d03d0e05699518c874364f94ee9bb368717fa1aa1fd31e9faedb",
+        "implementationSha256": "fb12a4c31cc7e5e76584ab97c23fdba0e5e7b472621787ce80c9c1ce68086763",
         "runtimeAssets": []
       },
       {
@@ -841,7 +841,7 @@
         },
         {
           "path": "features/video-expansion/generated/index.module.scss",
-          "sha256": "a85a2640d79a4e3b3aa96786cbaed84e64c99c779309ab8fec405d3d24da8e28"
+          "sha256": "a50f57b8f969ab635119df10995b5a981161f5c1e2673edb2f050d8cd469ee92"
         },
         {
           "path": "features/video-expansion/generated/settings/index.jsx",
@@ -852,7 +852,7 @@
           "sha256": "079e42b2b35548096dba01684133d3ba6cb46f86648eae166d64c204c608eaed"
         }
       ],
-      "hash": "b02ec59943e73c0773b0e5fcbd49a4f829cb70c4b11ca9474387ab2d9b1ccfa8"
+      "hash": "39cee7c95af1df49813d4b334306694e0d03d018541b62a7829ec864dd844dff"
     },
     "dependencies": {
       "files": [
@@ -1778,7 +1778,7 @@
         },
         {
           "path": "design-library/components/tool-page-layout/component.yaml",
-          "sha256": "3e18296a578374b42ce163aa472f7543cee4cadfa5cefbb90bca175bd364eb63"
+          "sha256": "593e73476f7a2574cde99889557512cb64ef972a5f6e615571e9aacc519181d5"
         },
         {
           "path": "design-library/components/upload-media-block/component.yaml",
@@ -1794,7 +1794,7 @@
         },
         {
           "path": "design-library/components/video-results-surface/component.yaml",
-          "sha256": "e5bb7ed9ac37785c1a131eaa42e217d622f520e2b966013675c9823173f6078c"
+          "sha256": "007dc1ab7604f55eae34bbdcf1d05fe6a59b73c0f5d4fb07811b37190f1c92dc"
         },
         {
           "path": "design-library/components/video-timeline/component.yaml",
@@ -1858,7 +1858,7 @@
         },
         {
           "path": "features/video-expansion/generated/index.module.scss",
-          "sha256": "a85a2640d79a4e3b3aa96786cbaed84e64c99c779309ab8fec405d3d24da8e28"
+          "sha256": "a50f57b8f969ab635119df10995b5a981161f5c1e2673edb2f050d8cd469ee92"
         },
         {
           "path": "features/video-expansion/generated/settings/index.jsx",
@@ -2614,7 +2614,7 @@
         },
         {
           "path": "platform/ui/tool-page-layout/ToolPageLayout.module.scss",
-          "sha256": "70def0263adafff6a1a0b69071ed905e6adbdeef77c98ec6afb1ef2e6c7b4660"
+          "sha256": "f032cd23fcd5c01f591d3c006d9c65988d2617e45f9077ceac7d532166509258"
         },
         {
           "path": "platform/ui/tool-page-layout/ToolPageLayout.stories.jsx",
@@ -2674,11 +2674,11 @@
         },
         {
           "path": "platform/ui/video-results-surface/VideoResultsSurface.jsx",
-          "sha256": "f6d0feeab197a9a21bca280e0b6651bb5764dbc4b30375ce6155ea2b79b3d8e1"
+          "sha256": "47222a54477d6c39cd8e8ed71f29f19f2ab03539dd207c8f060c68d4a61eecc5"
         },
         {
           "path": "platform/ui/video-results-surface/VideoResultsSurface.module.scss",
-          "sha256": "d62203b379049f0ec61b9cec3ae830440a6fcac582bfa30090cd3acc202fe93d"
+          "sha256": "95e3b6b36956bccbe21efd2a48c81fb5cb317b12d633a880600eba793d61a05a"
         },
         {
           "path": "platform/ui/video-results-surface/VideoResultsSurface.stories.jsx",
@@ -2738,7 +2738,7 @@
         },
         {
           "path": "prototype.config.json",
-          "sha256": "0808e7b5fac0ec818cdacb6bd1e4c37382d7ebdaaf426d04b2bb590654e1d853"
+          "sha256": "db6432eaaf4024c8735ee7d1a9ac35eddfd3b00304eacf5e471ba36989f87c9b"
         },
         {
           "path": "tools/collab-space/generate-reference.mjs",
@@ -2989,7 +2989,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "fae6e7a9254622cc10e5af6e4044a4eb9b9017f34320f85e73276c1c227c761f",
+      "hash": "f91e1b5beb2d9af83f293a41fc2f65898a0a05bc20088d614a0714de50bbc615",
       "edges": [
         {
           "from": "design-library/assets/font/yco-interface-icons.style.css",
@@ -3788,6 +3788,6 @@
         "react-dom"
       ]
     },
-    "revisionHash": "af5bb9f9459fbd717673a97bab4c1ad59c28e226f17a7ebd589c4f4bc54e3d08"
+    "revisionHash": "5c043c73b33dc6d7bfd6d257a8233eb8f4a6f95f64ee5f5084f73b28b7582289"
   }
 }
