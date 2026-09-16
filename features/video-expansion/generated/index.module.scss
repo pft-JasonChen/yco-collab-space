@@ -354,19 +354,26 @@
     display: flex;
     flex-direction: column;
     order: -1;
-    /* Reference (2026-09-16, same pass as .editResult's own compact-card
-       cap below — "有什麼辦法讓1的高度縮小一點2 fixed at the button"):
-       ToolPageLayout's own `.result` class (this same element, shared
-       component) sets `height: 100%` at this breakpoint — deliberately, so
-       the canvas can fill available space in the general case. With
-       .editResult itself now capped much smaller, that still left this
-       whole section claiming the full remaining height regardless, so a
-       large empty gap sat between the now-small canvas card and the
-       settings-inspector section stacked after it (confirmed live: this
-       element measured 780px tall — the full available height — while its
-       own content, editResult included, needed nowhere near that). `height:
-       auto` overrides just for this feature so the section sizes to its
-       actual (now compact) content instead. */
+  }
+
+  /* Reference (2026-09-16, same pass as .editResult's own compact-card cap
+     below — "有什麼辦法讓1的高度縮小一點2 fixed at the button"): ToolPageLayout's
+     own `.result` class (this same element, shared component) sets `height:
+     100%` at this breakpoint — deliberately, so the canvas can fill
+     available space in the general case, which is exactly right for the
+     EMPTY state's own centered white card (needs the full height to center
+     within). With .editResult itself now capped much smaller for the LOADED
+     state only, that still left this whole section claiming the full
+     remaining height regardless, so a large empty gap sat between the now-
+     small canvas card and the settings-inspector section stacked after it
+     (confirmed live: this element measured 780px tall — the full available
+     height — while its own content, editResult included, needed nowhere
+     near that). Scoped to `.page[data-loaded='true']` — reported live as
+     "為什麼手機空狀態變這樣" [why did the mobile empty state turn into this]
+     the first time this was written unscoped: it also shrank the EMPTY
+     state's own result-column, leaving a tall blank gap below the centered
+     white card instead of it filling the screen the way it did before. */
+  .page[data-loaded='true'] [data-surface-zone='result-column'] {
     height: auto;
   }
 
@@ -408,16 +415,21 @@
     flex: 1;
   }
 
-  /* min-height dropped from the shared base rule's 360px (2026-09-16, same
-     pass as .editResult's own max-height cap above): that base min-height
-     still applied unconditionally here even after capping .editResult's own
-     height to 210px, so this child just overflowed past its now-smaller
-     parent — confirmed live (.editResult measured 210px as set, but the
-     next-section's position never moved, meaning the visible card was
-     still actually 360px tall underneath). */
   .canvasArea,
   .canvasAreaLoaded {
     flex: 1;
+  }
+
+  /* min-height dropped from the shared base rule's 360px, LOADED state only
+     (2026-09-16, same pass as .editResult's own max-height cap below): that
+     base min-height still applied unconditionally here even after capping
+     .editResult's own height to 210px, so this child just overflowed past
+     its now-smaller parent — confirmed live (.editResult measured 210px as
+     set, but the next-section's position never moved, meaning the visible
+     card was still actually 360px tall underneath). Scoped to loaded only —
+     see .editResult's own scoped rule below for why unscoped broke the
+     empty state. */
+  .page[data-loaded='true'] .canvasAreaLoaded {
     min-height: 0;
   }
 
@@ -452,8 +464,17 @@
      is what actually shrinks it — .editResult still tries to grow (flex:1
      unchanged), it just clamps well short of the full remaining height now;
      min-height dropped below the new max so they don't fight the same way
-     .canvasViewport's own min/max just did. */
-  .editResult {
+     .canvasViewport's own min/max just did.
+
+     Scoped to `.page[data-loaded='true']` (2026-09-16, reported live —
+     "為什麼手機空狀態變這樣" [why did the mobile empty state turn into this]):
+     .editResult wraps BOTH the empty and loaded states (only the child
+     toggles between .canvasArea/.canvasAreaLoaded), so writing this
+     unscoped also capped the EMPTY state's own centered white card to
+     210px — which needs the full available height to center within,
+     exactly like result-column's own scoped rule above. Left a tall blank
+     gap below the card instead of the card filling the screen. */
+  .page[data-loaded='true'] .editResult {
     min-height: 0;
     max-height: 210px;
   }

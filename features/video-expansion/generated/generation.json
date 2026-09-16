@@ -5,7 +5,7 @@
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "claude-code",
   "model": "claude-sonnet-5",
-  "generatedAt": "2026-09-16T08:57:59.118Z",
+  "generatedAt": "2026-09-16T10:24:40.437Z",
   "files": [
     "README.md",
     "contract/integration.yaml",
@@ -841,7 +841,7 @@
         },
         {
           "path": "features/video-expansion/generated/index.module.scss",
-          "sha256": "e52309244100aadfd7d4ccdba9a2b44b706667331ff05bd5f58e7bcd0f02637e"
+          "sha256": "a85a2640d79a4e3b3aa96786cbaed84e64c99c779309ab8fec405d3d24da8e28"
         },
         {
           "path": "features/video-expansion/generated/settings/index.jsx",
@@ -852,7 +852,7 @@
           "sha256": "079e42b2b35548096dba01684133d3ba6cb46f86648eae166d64c204c608eaed"
         }
       ],
-      "hash": "3f22ad7b8a07f354102d90da942dd6c4e6c0ea1d27e9821f4090e8be6f817594"
+      "hash": "b02ec59943e73c0773b0e5fcbd49a4f829cb70c4b11ca9474387ab2d9b1ccfa8"
     },
     "dependencies": {
       "files": [
@@ -1858,7 +1858,7 @@
         },
         {
           "path": "features/video-expansion/generated/index.module.scss",
-          "sha256": "e52309244100aadfd7d4ccdba9a2b44b706667331ff05bd5f58e7bcd0f02637e"
+          "sha256": "a85a2640d79a4e3b3aa96786cbaed84e64c99c779309ab8fec405d3d24da8e28"
         },
         {
           "path": "features/video-expansion/generated/settings/index.jsx",
@@ -2989,7 +2989,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "be03eb47c0e02ab9733010d2dbdabbb6351386cc767fc26c5f03bed50f8afec3",
+      "hash": "fae6e7a9254622cc10e5af6e4044a4eb9b9017f34320f85e73276c1c227c761f",
       "edges": [
         {
           "from": "design-library/assets/font/yco-interface-icons.style.css",
@@ -3788,6 +3788,6 @@
         "react-dom"
       ]
     },
-    "revisionHash": "b8a2939aa276b819ec6c226f30abf7cff2c98af2abf750e69f9d1bcad601a2f9"
+    "revisionHash": "af5bb9f9459fbd717673a97bab4c1ad59c28e226f17a7ebd589c4f4bc54e3d08"
   }
 }
