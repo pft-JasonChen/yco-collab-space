@@ -295,10 +295,19 @@
    everything fits, only sticks to .body's own bottom edge once content is
    actually tall enough to scroll. Needs its own opaque background now that
    content can scroll in the same box behind it while stuck. */
+/* Reference (2026-09-16, reported live — "是不是 z-index 不對的關係" /
+   "不就和你說是z-index的問題" — confirmed via a DevTools inspect): was
+   z-index:1, lower than VideoTimeline's own .handle (4) and
+   .trimRangeMiddle/.playhead (3) — .track's position:relative alone doesn't
+   establish a stacking context (that needs position + a real z-index too),
+   so those escape upward and stacked directly against this footer in
+   whatever ancestor context they actually share, winning whenever the two
+   visually overlapped on a short viewport. Bumped well above every value
+   used inside VideoTimeline so this footer always wins that comparison. */
 .actions {
   position: sticky;
   bottom: 0;
-  z-index: 1;
+  z-index: 10;
   display: flex;
   flex: 0 0 auto;
   justify-content: flex-end;

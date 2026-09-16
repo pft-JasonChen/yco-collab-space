@@ -131,7 +131,6 @@
     ]
   },
   "errors": {
-    "upload": "This video cannot be opened. Choose another file.",
-    "generation": "Video expansion failed. Try again."
+    "upload": "This video cannot be opened. Choose another file."
   }
 }

@@ -141,13 +141,22 @@
   min-height: 0;
   flex-direction: column;
   align-items: center;
-  /* Was center (2026-09-15, reported live — "應該要偵測裝置高度撐滿"): with
-     .canvasViewport a hardcoded 430px regardless of how tall .canvasArea
-     actually was, `justify-content: center` just centered that fixed block
-     — plus the timeline strip below it — inside whatever extra vertical
-     space the card had, rather than using it. flex-start lets the now-
-     flexible .canvasViewport (below) claim that space itself instead. */
-  justify-content: flex-start;
+  /* Was center, then flex-start (2026-09-15, reported live —
+     "應該要偵測裝置高度撐滿"): with .canvasViewport a hardcoded 430px
+     regardless of how tall .canvasArea actually was, center just centered
+     that fixed block in whatever extra vertical space the card had instead
+     of using it — flex-start let the newly-flexible .canvasViewport (below)
+     claim that space itself. Back to center (2026-09-16, reported live —
+     "為什麼下面要那麼多留白，但是開發者模式打開後就是對的"): .canvasViewport's
+     own max-height:640px cap means it can still stop growing well short of
+     a genuinely tall window, and flex-start dumped 100% of that leftover
+     space below the timeline as dead space (only "fixed" by opening
+     DevTools, which shrinks the page enough that the cap stops applying —
+     not a real fix). `flex:1` still lets .canvasViewport claim all
+     available space up to its cap either way; `justify-content` only
+     matters for whatever's left over once it stops growing, and center
+     distributes that evenly instead of dumping it in one place. */
+  justify-content: center;
   gap: var(--spacing-16);
 }
 

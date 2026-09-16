@@ -173,16 +173,6 @@ checks:
         selector: "[data-testid='upload-error']"
       - type: visible
         selector: "[data-testid='choose-another-video']"
-  - id: retry-failed-generation
-    criterion: VE-008
-    steps:
-      - action: click
-        selector: "[data-testid='history-tab']"
-      - action: click
-        selector: "[data-testid='retry-failed-generation']"
-    assertions:
-      - type: visible
-        selector: "[data-testid='generation-processing-card']"
   - id: responsive-workspace
     criterion: VE-009
     steps:

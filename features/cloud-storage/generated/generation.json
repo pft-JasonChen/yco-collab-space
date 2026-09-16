@@ -5,7 +5,7 @@
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "claude-code",
   "model": "claude-sonnet-5",
-  "generatedAt": "2026-09-16T03:53:53.033Z",
+  "generatedAt": "2026-09-16T04:38:55.231Z",
   "files": [
     "README.md",
     "feature.jsx",
@@ -1990,7 +1990,7 @@
         },
         {
           "path": "design-library/components/tool-page-layout/component.yaml",
-          "sha256": "7c81fd52a158019c9a247f3cf7f2fce7ea90bd8df669c1e342ca1afc271344d9"
+          "sha256": "9196628c3e873d56c49a3dcf234ece7205e587d9f173ab42c3fb5fb555302cdc"
         },
         {
           "path": "design-library/components/upload-media-block/component.yaml",
@@ -2014,7 +2014,7 @@
         },
         {
           "path": "design-library/components/video-trim-modal/component.yaml",
-          "sha256": "3fe1f1ebea2e54731b4c61c828b527582f662eb73e547181627c4fff5b2a47b1"
+          "sha256": "c1b55ee348f9e01197cd0db2841c4204770cbc849941346e8c69b19b65b197c2"
         },
         {
           "path": "features/cloud-storage/generated/README.md",
@@ -2818,7 +2818,7 @@
         },
         {
           "path": "platform/ui/tool-page-layout/ToolPageLayout.module.scss",
-          "sha256": "d68511fb2cfe211b91dc2b9b6ff9e447294cea8c06f3933809400d65111c8c9b"
+          "sha256": "5ccb74f55f55addacdc1768386889ab4c04b9b0efd30695fe03bd5b5707555df"
         },
         {
           "path": "platform/ui/tool-page-layout/ToolPageLayout.stories.jsx",
@@ -2918,7 +2918,7 @@
         },
         {
           "path": "platform/ui/video-trim-modal/VideoTrimModal.module.scss",
-          "sha256": "59435dd4d970187ababb036b9e859793b0d2ce0806f21a6ac0a807a4895a97af"
+          "sha256": "3febc7fe9e91c6f3e4f83398871c94f9a3c7137d84c5775bd7d8fc8a61d7fe90"
         },
         {
           "path": "platform/ui/video-trim-modal/VideoTrimModal.stories.jsx",
@@ -3193,7 +3193,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "cdbd04ba54a186874dfcdcf18d6879f216e1ffe1d2b8690c1f7458f0982cf385",
+      "hash": "9c51408016eed1d4d3da4dcb62ffab4f5bcc291c683a47b766bb2a17986644b6",
       "edges": [
         {
           "from": "features/cloud-storage/generated/feature.jsx",
@@ -3866,6 +3866,6 @@
         "react-dom"
       ]
     },
-    "revisionHash": "58402940590e5842a7f162efd53a3ae943c3f9e5a4e9c6edeef22b0b9f2fcd7d"
+    "revisionHash": "7699f1e92eb4e4871ef394f2fd7381ee19bf93030c4964f713dd52e3bbf3f258"
   }
 }

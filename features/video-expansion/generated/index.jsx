@@ -416,7 +416,6 @@ export default function VideoExpansionFeature() {
     ...(generationState === GENERATION_STATES.PROCESSING ? [{ id: 'generated-processing', status: 'processing', testId: 'generation-processing-card', tags: [featureName], processingLabel: t('video.expansion.processing.label'), processingDescription: t('video.expansion.processing.desc') }] : []),
     ...(generationState === GENERATION_STATES.SUCCESS ? [{ id: 'generated-success', status: 'success', testId: 'generated-history-thumbnail', title: featureName, tags: [featureName], date: t('video.expansion.history.just.now'), videoUrl: sampleVideo, posterUrl: sampleThumbnail, primaryActionLabel: t('header.items.product.video.enhancer') }] : []),
     { id: 'existing-success', status: 'success', cardTestId: 'history-success-card', featureTagTestId: 'history-success-feature-tag', testId: 'history-success-thumbnail', title: featureName, tags: [featureName], date: '09-01 19:33', videoUrl: sampleVideo, posterUrl: sampleThumbnail, primaryActionLabel: t('header.items.product.video.enhancer') },
-    { id: 'existing-failed', status: 'failed', title: featureName, tags: [featureName], date: '09-01 17:07', failureLabel: t('video.expansion.failure.title'), failureDescription: mockData.errors.generation, retryTestId: 'retry-failed-generation' },
   ];
   const nextActions = mockData.videoDetail.nextActions.map((action) => ({
     id: action.id,

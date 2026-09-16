@@ -112,14 +112,42 @@
     width: 100%;
     min-width: 0;
     height: auto;
+    /* Without this, .panel (default flex-shrink:1) gets squeezed toward 0 to
+       make room for .result's own height:100% claim on .layout's auto-sized
+       box (see .result's own comment below) — flex-shrink:0 guarantees this
+       panel always keeps its full natural content height regardless of
+       what .result claims. */
+    flex-shrink: 0;
   }
 
   .panelContent {
     overflow: visible;
   }
 
+  /* Reference (2026-09-16, requested live — "為什麼後面到一個程度就沒有動了，
+     根本空間還很多，都還沒裁切到內容", then "你是不是沒有扣掉其他元件"): was a
+     flat 620px, chosen once against a specific phone and never revisited —
+     it neither grew with a taller real viewport (the canvas plateaued well
+     short of the actually available space) nor tracked NavigationHeader/the
+     tabs+title row above it. A viewport-unit min-height (100svh) was tried
+     next and reverted — it's an ITEM min-height on a `flex: 1` (flex-basis:
+     0%) child of an auto-height flex container, and that combination has a
+     real, confirmed-live browser quirk: the item itself still renders at
+     its min-height, but that min-height doesn't bubble up into `.layout`'s
+     own auto-height calculation, which sizes as if this child contributed
+     0 — `.layout` then computes too short a box for what `.result` actually
+     needs, `overflow: hidden` clips the excess, and `.panel` (laid out
+     after, sharing the now-too-small remainder) gets squeezed to 0 height
+     (caught by test:rendered — tablet/responsive-workspace, `settings-
+     inspector` no longer visible). `.layout`'s own `min-height: 100%`
+     (above) is already the correctly-subtracted available height (100% of
+     `.page`, which is itself already NavigationHeader-subtracted via the
+     ordinary percentage-height chain) — switching `.result` from flex-grow
+     to a plain `height: 100%` inherits that already-correct value directly,
+     with no flex-basis/auto-container ambiguity to fall into. */
   .result {
-    min-height: 620px;
+    flex: none;
+    height: 100%;
   }
 
   /* .footer's own position:sticky (below) relies on .panelContent actually

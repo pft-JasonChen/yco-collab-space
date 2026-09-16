@@ -61,7 +61,9 @@
 - The supplied MP4 and JPEG are approved as temporary PM media for this prototype.
 - Existing Next Action choices remain visible, but only Video Expansion is required to
   function.
-- Unsupported-upload and generation-failure recovery are required prototype states.
+- Unsupported-upload recovery is a required prototype state. (Generation-failure
+  recovery in History was also originally required — see the 2026-09-16 reversal
+  below.)
 - All upload, generation, History, and handoff behavior is synthetic and local.
 
 ## Decision basis
@@ -101,6 +103,13 @@
 - On 2026-09-02 the PM selected browser-side ten-frame timeline capture over a
   first-frame-only script or a fixed placeholder so manager review reflects the
   current uploaded video while remaining deployable as a static Vercel prototype.
+- On 2026-09-16, after checking with the PM, a permanently-failed generation card in
+  History (`existing-failed`, with its Retry action) was removed: History never
+  actually has this state. This reverses the original "generation-failure recovery
+  in History" requirement above and removes VE-008 (retry a failed History card)
+  from the acceptance criteria and its `retry-failed-generation` rendered-validation
+  scenario — upload-error recovery (VE-007, a different state, mid-upload rather
+  than post-generation) is unaffected and stays required.
 
 ## Post-prototype TODO
 

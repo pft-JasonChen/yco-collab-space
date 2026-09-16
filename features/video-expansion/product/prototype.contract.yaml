@@ -107,10 +107,6 @@ acceptance:
     given: The feature is in the empty state
     when: The user selects an unsupported or corrupt local file
     then: An upload error appears and the user can return to upload another file
-  - id: VE-008
-    given: A synthetic generation task has failed in History
-    when: The user selects Retry
-    then: The failed card returns to processing without a network request
   - id: VE-009
     given: The supplied sample is loaded
     when: The feature renders at a configured viewport

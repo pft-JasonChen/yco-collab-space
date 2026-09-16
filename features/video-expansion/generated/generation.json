@@ -1,11 +1,11 @@
 {
   "schemaVersion": 3,
   "feature": "video-expansion",
-  "inputHash": "63cdb5d96d2fc77577f84e2760e9188e108297bc300ac1a959b1bbf25cf6c18e",
+  "inputHash": "1bf5ed267030062f673b5f6f01ca124aa281cb1b046ccc63bad37a9e1ac16288",
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "claude-code",
   "model": "claude-sonnet-5",
-  "generatedAt": "2026-09-16T04:00:19.357Z",
+  "generatedAt": "2026-09-16T04:38:53.557Z",
   "files": [
     "README.md",
     "contract/integration.yaml",
@@ -379,9 +379,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/tool-page-layout/component.yaml",
-        "contractSha256": "7c81fd52a158019c9a247f3cf7f2fce7ea90bd8df669c1e342ca1afc271344d9",
+        "contractSha256": "9196628c3e873d56c49a3dcf234ece7205e587d9f173ab42c3fb5fb555302cdc",
         "implementationImport": "platform/ui/tool-page-layout/index.js",
-        "implementationSha256": "b0a3dd4bcd86932e87a6761b435c09877e9b8a8264f4fda4c8d8c45d78bcab2f",
+        "implementationSha256": "031d1d34a6b0aa2d57b708fd4ef73c41233089d93f47318cfc94db84e2552127",
         "runtimeAssets": []
       },
       {
@@ -599,9 +599,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/video-trim-modal/component.yaml",
-        "contractSha256": "3fe1f1ebea2e54731b4c61c828b527582f662eb73e547181627c4fff5b2a47b1",
+        "contractSha256": "c1b55ee348f9e01197cd0db2841c4204770cbc849941346e8c69b19b65b197c2",
         "implementationImport": "platform/ui/video-trim-modal/index.js",
-        "implementationSha256": "cce7a2af0a1fcda968f1391465158f93709ea064171709ee308cdadc8e409314",
+        "implementationSha256": "107fbf28e4474c3bc00a8b4e53ff21f2510b9a3bc026b1fb1939c7ca396318cd",
         "runtimeAssets": []
       }
     ]
@@ -837,11 +837,11 @@
         },
         {
           "path": "features/video-expansion/generated/index.jsx",
-          "sha256": "3038f22960bdad8ac2deca063222e6bbb63aeecd44b2437ffec56d9e8265913c"
+          "sha256": "3c2777ae3444d106e4c260d9dfd33526c4c523007aff324a424f9598596bec37"
         },
         {
           "path": "features/video-expansion/generated/index.module.scss",
-          "sha256": "106dc4a41c334812995d9a505bc19c32c85ab14878530ac3ec3126a5e9efba53"
+          "sha256": "957d65df14e329b87d563963fb0afe4b7c271cf70939ae5f82d25f157d15df2b"
         },
         {
           "path": "features/video-expansion/generated/settings/index.jsx",
@@ -852,7 +852,7 @@
           "sha256": "079e42b2b35548096dba01684133d3ba6cb46f86648eae166d64c204c608eaed"
         }
       ],
-      "hash": "ec6e14ba8611e1a5a20b53252c9478536bf5df75204748b11c7aa41383195439"
+      "hash": "582767e9a4425cb12b78e408e564e29589e82e7befc0234a7cb983216f2a6b35"
     },
     "dependencies": {
       "files": [
@@ -1778,7 +1778,7 @@
         },
         {
           "path": "design-library/components/tool-page-layout/component.yaml",
-          "sha256": "7c81fd52a158019c9a247f3cf7f2fce7ea90bd8df669c1e342ca1afc271344d9"
+          "sha256": "9196628c3e873d56c49a3dcf234ece7205e587d9f173ab42c3fb5fb555302cdc"
         },
         {
           "path": "design-library/components/upload-media-block/component.yaml",
@@ -1802,7 +1802,7 @@
         },
         {
           "path": "design-library/components/video-trim-modal/component.yaml",
-          "sha256": "3fe1f1ebea2e54731b4c61c828b527582f662eb73e547181627c4fff5b2a47b1"
+          "sha256": "c1b55ee348f9e01197cd0db2841c4204770cbc849941346e8c69b19b65b197c2"
         },
         {
           "path": "features/cloud-storage/product/surface-intent.yaml",
@@ -1854,11 +1854,11 @@
         },
         {
           "path": "features/video-expansion/generated/index.jsx",
-          "sha256": "3038f22960bdad8ac2deca063222e6bbb63aeecd44b2437ffec56d9e8265913c"
+          "sha256": "3c2777ae3444d106e4c260d9dfd33526c4c523007aff324a424f9598596bec37"
         },
         {
           "path": "features/video-expansion/generated/index.module.scss",
-          "sha256": "106dc4a41c334812995d9a505bc19c32c85ab14878530ac3ec3126a5e9efba53"
+          "sha256": "957d65df14e329b87d563963fb0afe4b7c271cf70939ae5f82d25f157d15df2b"
         },
         {
           "path": "features/video-expansion/generated/settings/index.jsx",
@@ -1870,7 +1870,7 @@
         },
         {
           "path": "features/video-expansion/product/i18n.json",
-          "sha256": "0174d75c388279afa339cba314dd2182008692eaa467782f42c9253ebfe4eacc"
+          "sha256": "6ce5f2c5bf379097980e01fada3edbb21b2af78d8d34eb9521871a1a567f7c1e"
         },
         {
           "path": "features/video-expansion/product/mock-assets/sample image.jpg",
@@ -1882,7 +1882,7 @@
         },
         {
           "path": "features/video-expansion/product/mocks/video-expansion.json",
-          "sha256": "0a4c393fc9d0b4ad176d1f9cdd05491b4afb7c9a73f1026afbee1d8abbd893df"
+          "sha256": "06e01a0c815c2a97bc242f575ddfe71438582ae6170e5790ba578e00a5d5f77d"
         },
         {
           "path": "features/video-expansion/product/surface-intent.yaml",
@@ -2614,7 +2614,7 @@
         },
         {
           "path": "platform/ui/tool-page-layout/ToolPageLayout.module.scss",
-          "sha256": "d68511fb2cfe211b91dc2b9b6ff9e447294cea8c06f3933809400d65111c8c9b"
+          "sha256": "5ccb74f55f55addacdc1768386889ab4c04b9b0efd30695fe03bd5b5707555df"
         },
         {
           "path": "platform/ui/tool-page-layout/ToolPageLayout.stories.jsx",
@@ -2714,7 +2714,7 @@
         },
         {
           "path": "platform/ui/video-trim-modal/VideoTrimModal.module.scss",
-          "sha256": "59435dd4d970187ababb036b9e859793b0d2ce0806f21a6ac0a807a4895a97af"
+          "sha256": "3febc7fe9e91c6f3e4f83398871c94f9a3c7137d84c5775bd7d8fc8a61d7fe90"
         },
         {
           "path": "platform/ui/video-trim-modal/VideoTrimModal.stories.jsx",
@@ -2989,7 +2989,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "3c91362f3fd5fdc7d32ccf165b74a7e0c486d999f55ecb12b8c5530ef0319c24",
+      "hash": "edee5a24b7e7200856e2b014443055327be8062ea595b55e2c0952ade349899d",
       "edges": [
         {
           "from": "design-library/assets/font/yco-interface-icons.style.css",
@@ -3788,6 +3788,6 @@
         "react-dom"
       ]
     },
-    "revisionHash": "9f9c6a7207f299e4b62740615c3710501f92fb4768569360eed7f49e85e75ef7"
+    "revisionHash": "86ceba6db9b1c6f36bdd04c57823ac349bb716c156f3eff2d1d4922101617e4d"
   }
 }

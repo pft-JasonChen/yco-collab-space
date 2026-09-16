@@ -76,10 +76,6 @@
       "value": "Expanding the selected frame…",
       "origin": "new"
     },
-    "video.expansion.failure.title": {
-      "value": "Video expansion failed",
-      "origin": "new"
-    },
     "video.expansion.history.just.now": {
       "value": "Just now",
       "origin": "new"
