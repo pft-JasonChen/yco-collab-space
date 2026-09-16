@@ -5,7 +5,7 @@
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "claude-code",
   "model": "claude-sonnet-5",
-  "generatedAt": "2026-09-16T13:52:53.534Z",
+  "generatedAt": "2026-09-16T14:38:30.429Z",
   "files": [
     "README.md",
     "contract/integration.yaml",
@@ -562,9 +562,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/video-results-surface/component.yaml",
-        "contractSha256": "689176c183a4322dd66db1ac6114ef7d93010f4af63bf3e4b83f98a3357192e7",
+        "contractSha256": "5fdb20d3fb734b3d07bb6856d753acf3140f9c61f9147400718e4b989b9b25e9",
         "implementationImport": "platform/ui/video-results-surface/index.js",
-        "implementationSha256": "33bd6fed590834a7a3e737e1f05fdfe23a17cce2db464b993de3ef8ba655a32b",
+        "implementationSha256": "2f576f2ff6d5ff916b91a04e67a408984d40f872490c020e550ef16aa84d2dbb",
         "runtimeAssets": []
       },
       {
@@ -1794,7 +1794,7 @@
         },
         {
           "path": "design-library/components/video-results-surface/component.yaml",
-          "sha256": "689176c183a4322dd66db1ac6114ef7d93010f4af63bf3e4b83f98a3357192e7"
+          "sha256": "5fdb20d3fb734b3d07bb6856d753acf3140f9c61f9147400718e4b989b9b25e9"
         },
         {
           "path": "design-library/components/video-timeline/component.yaml",
@@ -2678,7 +2678,7 @@
         },
         {
           "path": "platform/ui/video-results-surface/VideoResultsSurface.module.scss",
-          "sha256": "239a9f9b98d04fe4b38b29e402b83654c07fc7e303b4c6b1c3c9ea94c48b48dd"
+          "sha256": "2c37baa228811078667f93eebe62b1c2a93931a5e041c5e3d62170c82de45332"
         },
         {
           "path": "platform/ui/video-results-surface/VideoResultsSurface.stories.jsx",
@@ -2989,7 +2989,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "d48b06efa6539c96e4fe7e52943b6fa3b54cd9004de1b5e11a3f7a5e71259d27",
+      "hash": "46280ed2cb9e64ab06cf7bfa4d9fbd617c8e02e615dd78b1158ed432c8d15d44",
       "edges": [
         {
           "from": "design-library/assets/font/yco-interface-icons.style.css",
@@ -3788,6 +3788,6 @@
         "react-dom"
       ]
     },
-    "revisionHash": "3ffc82bdf3da045e704e8ca8bc624eac98ff6c2e587aa0092bd4ea6a33d66b57"
+    "revisionHash": "cf6c5d2a992429378235dc88debdf1ebfd82b959e248106b49623744e09d0374"
   }
 }

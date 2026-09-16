@@ -243,17 +243,32 @@
    out to want a different alignment at this narrower width, not just a
    smaller version of tablet's own layout. */
 @media (max-width: 768px) {
+  /* Correction (2026-09-16, requested live — "dropdown menu你沒看我給你的
+     截圖嗎，寬度要滿版扣掉padding", against a screenshot showing the list
+     spanning the full card width): `align-self: center` (the first attempt)
+     centered `.filter` at its own trigger-button-sized width, which only
+     ever gave the dropdown LIST that same narrow width to anchor against no
+     matter how it was positioned. `.toolbar`'s own `align-items: stretch`
+     (992px rule above) is what every other child here already relies on for
+     full width, but the SAME 992px block also sets `.filter`'s own
+     `align-self: flex-end` — a property this later, more-specific-width
+     block doesn't win just by not mentioning it, so that flex-end carried
+     straight through until set back to `stretch` explicitly here. With
+     `.filter` actually stretched to the same full content width as
+     `.tabs`, `justify-content: center` centers the trigger BUTTON within
+     that full-width box, and `.filter ul` can then just span `.filter`'s
+     own full width directly — exactly "full width minus the toolbar's own
+     padding" the way `.tabs` already reads. */
   .filter {
-    align-self: center;
+    align-self: stretch;
+    display: flex;
+    justify-content: center;
   }
 
-  /* The list is anchored `right: 0` (base rule above) to line up with a
-     right-aligned trigger — now that the trigger itself is centered, the
-     list needs its own centered anchor too, or it'd hang off to one side
-     of a trigger no longer at that edge. */
   .filter ul {
     right: auto;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
+    width: 100%;
+    min-width: 0;
   }
 }
