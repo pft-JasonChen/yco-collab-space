@@ -8,8 +8,14 @@ const PLACEHOLDER = /\{\{(\w+)\}\}/g;
 /**
  * PM-owned copy, keyed the way RD keys it. A key marked `rd-existing` already
  * lives in RD's dictionary; only `new` keys travel with the handoff.
+ *
+ * Intake authors the copy deck before any generated code exists, so a key may carry
+ * `status: planned`. The intake gate accepts an unused planned key; the full gate
+ * does not, because after generation an unused key is dead copy whichever way it
+ * is labelled. Update cannot edit product source, so the label is informational
+ * once the key is used; Intake or Revise clears it.
  */
-export function i18nDictionaryErrors(dictionary, usedKeys) {
+export function i18nDictionaryErrors(dictionary, usedKeys, { intakeOnly = false } = {}) {
   const errors = [];
   if (!dictionary || dictionary.schemaVersion !== 1) {
     return ['product/i18n.json is missing or has an unsupported schemaVersion.'];
@@ -29,14 +35,24 @@ export function i18nDictionaryErrors(dictionary, usedKeys) {
     if (!['rd-existing', 'new'].includes(entry?.origin)) {
       errors.push(`i18n key needs origin "rd-existing" or "new": ${key}`);
     }
+    if (entry?.status !== undefined && entry.status !== 'planned') {
+      errors.push(`i18n key status must be "planned" when present: ${key}`);
+    }
   }
 
   const declared = new Set(entries.map(([key]) => key));
   for (const key of usedKeys) {
     if (!declared.has(key)) errors.push(`Generated code uses an undeclared i18n key: ${key}`);
   }
-  for (const key of declared) {
-    if (!usedKeys.has(key)) errors.push(`i18n key is declared but never used: ${key}`);
+  for (const [key, entry] of entries) {
+    if (usedKeys.has(key)) continue;
+    const planned = entry?.status === 'planned';
+    if (planned && intakeOnly) continue;
+    errors.push(
+      planned
+        ? `i18n key is still planned after generation; use it or remove it: ${key}`
+        : `i18n key is declared but never used: ${key}`,
+    );
   }
   return errors;
 }

@@ -8,9 +8,12 @@ later, Designer-owned Figma and token inputs.
 1. Read `prototype.config.json`.
 2. Read `collab-space.map.yaml`; it is the machine-readable authority for stages,
    actors, artifacts and path boundaries.
-3. Read the target feature's `product/intake.md`, `product/prd.md`,
-   `product/prototype.contract.yaml`, `product/surface-intent.yaml`,
-   `product/decisions.md` and `product/validation.yaml`.
+3. For generation, run `npm run feature:digest -- <feature>` and read
+   `.collab-cache/features/<feature>/digest.md`: the contract, the resolved surface
+   with presence, every role's reuse resolution, the shared component APIs, the
+   canonical decisions, open gaps and i18n keys. Read `product/prd.md`,
+   `product/validation.yaml` and `product/mocks/**` alongside it. For Intake, read
+   `product/research/brief.md` first when it exists, then the feature's `product/**`.
 4. Read `product/media-intent.yaml`, `design/design-gaps.yaml` and `releases.json`.
 5. Index only the Design Library collections named in media intent; do not search every asset.
 6. Resolve the feature's `reuse`, `hybrid` or `novel` Surface context.
@@ -57,6 +60,21 @@ Phase 0 documents these boundaries but does not enforce CODEOWNERS yet.
   selects a collection in natural language and `generation.json` pins exact files/hashes.
 - Stage approvals must use `stage:transition`; never infer approval from prose or edit
   `releases.json` by hand.
+- `surface-intent.yaml` declares the complete composition; `layoutIntent.presence`
+  marks what is not on screen before an interaction (`on-interaction`, `conditional`,
+  `deferred` with a reason). The rendered check asserts only the at-rest set. Never
+  satisfy a structure failure by forcing a dialog open or deleting a zone.
+- `product/decisions.md` keeps `## Decisions` canonical — rewrite a bullet in place when
+  it changes — and appends each PM pass to `## Review log`. The digest reads only the
+  canonical sections.
+- `product/i18n.json` keys authored before generation carry `status: planned`; after
+  generation every key must be used.
+- `product/research/**` and `product/wireframe/**` are PM review material, excluded
+  from the generation input hash. A confirmed brief must be cited by `intake.md`.
+- A generation ends with `npm run prototype:finish -- <feature> --adapter <adapter>
+  --model <model-id>`; `generation.json` without an adapter and model is not evidence.
+- Fix loops run through the validator role, re-run only failing checks, and stop after
+  three rounds or when the same check fails twice in a row.
 
 ## Commands
 
@@ -71,11 +89,20 @@ npm run test:surfaces # after npm run build; starts its own preview server
 npm run validate:rd-parity
 npm run test:rendered -- --feature <feature>
 npm run prototype:create -- <feature> "<Feature title>"
+npm run feature:digest -- <feature>
+npm run prototype:check:fast -- <feature> [--check a,b] [--viewport name] [--no-build]
+npm run rendered:summary -- <feature>
+npm run prototype:finish -- <feature> --adapter <adapter> --model <model-id> [--usage '{...}'] [--skip-guard]
+npm run workflow:begin -- <workflow> <feature>   # also written by Claude's prompt hook
+npm run workflow:end
 npm run stage:transition -- --feature <feature> --to <stage> --actor <actor> --confirm
 npm run eval:workflow -- --case collab-space-readiness-regression
+npm run eval:workflow -- --case cloud-storage-regression
 npm run eval:mutations
 ```
 
-The user-facing AI workflows are `/prototype-intake <feature>` and
-`/prototype-update <feature>`. Phase 0 reserves
-`/prototype-promote` but does not automate promotion.
+The user-facing AI workflows are `/prototype-research`, `/prototype-intake`,
+`/prototype-wireframe`, `/prototype-update` and `/prototype-revise`, each taking a
+feature slug. `/prototype-promote` shows the evidence and runs `stage:transition` after
+the named role confirms. Procedures live in `agent-adapters/workflows/`; the Claude
+harness (hooks, sub-agents, context packs) is described in `CLAUDE.md`.

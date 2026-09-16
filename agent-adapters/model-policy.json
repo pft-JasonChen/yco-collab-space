@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 2,
+  "note": "Preferences, not an allowlist. Both Claude and OpenAI are first-class because the team runs Claude Code and Codex. Model ids are the ones current when this file was written (2026-09-16); verify against the provider's list before recording one in generation.json, and record the id actually used, never the alias.",
+  "rules": {
+    "reviewerMustDifferFromBuilder": true,
+    "crossProviderReviewPreferred": true,
+    "validatorNeverEdits": true,
+    "recordActualModelId": true
+  },
+  "roles": {
+    "main": {
+      "purpose": "Interviews the PM, plans the composition, generates React and SCSS.",
+      "claude": { "model": "environment-selected-high-capability-model", "example": "claude-fable-5-1" },
+      "openai": { "model": "environment-selected-high-capability-model", "example": "gpt-5-codex" }
+    },
+    "researcher": {
+      "purpose": "Operates the browser on competitor products and audits the RD catalogue; returns only the brief.",
+      "claude": { "model": "same tier as main", "agent": ".claude/agents/prototype-researcher.md" },
+      "openai": { "model": "same tier as main", "invoke": "codex exec --profile research  (see codex/subagents.md)" }
+    },
+    "validator": {
+      "purpose": "Runs prototype:check:fast and returns the compressed failure list. Cheapest capable model.",
+      "claude": { "model": "claude-haiku-4-5-20251001", "agent": ".claude/agents/prototype-validator.md" },
+      "openai": { "model": "gpt-5-mini", "invoke": "codex exec -m gpt-5-mini  (see codex/subagents.md)" }
+    },
+    "reviewer": {
+      "purpose": "Scores the intake rubric or the visual rubric and returns schema-valid JSON. Must not be the builder model.",
+      "claude": { "model": "claude-sonnet-5", "agent": ".claude/agents/prototype-reviewer.md" },
+      "openai": { "model": "gpt-5", "invoke": "codex exec -m gpt-5  (see codex/subagents.md)" }
+    }
+  },
+  "pairings": [
+    { "builder": "claude", "reviewer": "openai", "preferred": true },
+    { "builder": "openai", "reviewer": "claude", "preferred": true },
+    { "builder": "claude", "reviewer": "claude", "allowed": true, "condition": "reviewer model id differs from builder model id" },
+    { "builder": "openai", "reviewer": "openai", "allowed": true, "condition": "reviewer model id differs from builder model id" }
+  ]
+}
