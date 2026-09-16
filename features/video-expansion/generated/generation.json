@@ -5,7 +5,7 @@
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "claude-code",
   "model": "claude-sonnet-5",
-  "generatedAt": "2026-09-16T08:31:36.077Z",
+  "generatedAt": "2026-09-16T08:57:59.118Z",
   "files": [
     "README.md",
     "contract/integration.yaml",
@@ -841,7 +841,7 @@
         },
         {
           "path": "features/video-expansion/generated/index.module.scss",
-          "sha256": "8ff2e1282901e9b0184137f3708e9cded25fe8fd1aec032dcf8b5094badce090"
+          "sha256": "e52309244100aadfd7d4ccdba9a2b44b706667331ff05bd5f58e7bcd0f02637e"
         },
         {
           "path": "features/video-expansion/generated/settings/index.jsx",
@@ -852,7 +852,7 @@
           "sha256": "079e42b2b35548096dba01684133d3ba6cb46f86648eae166d64c204c608eaed"
         }
       ],
-      "hash": "83cc4119c572c419c8d5bdcee24715fab9e1483a54ff0a00e5cad2e3d00e3b49"
+      "hash": "3f22ad7b8a07f354102d90da942dd6c4e6c0ea1d27e9821f4090e8be6f817594"
     },
     "dependencies": {
       "files": [
@@ -1858,7 +1858,7 @@
         },
         {
           "path": "features/video-expansion/generated/index.module.scss",
-          "sha256": "8ff2e1282901e9b0184137f3708e9cded25fe8fd1aec032dcf8b5094badce090"
+          "sha256": "e52309244100aadfd7d4ccdba9a2b44b706667331ff05bd5f58e7bcd0f02637e"
         },
         {
           "path": "features/video-expansion/generated/settings/index.jsx",
@@ -2989,7 +2989,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "5415473735d95e3d3458fbbea6f90a2f553f80f21ed3452da5db0a2e7544956f",
+      "hash": "be03eb47c0e02ab9733010d2dbdabbb6351386cc767fc26c5f03bed50f8afec3",
       "edges": [
         {
           "from": "design-library/assets/font/yco-interface-icons.style.css",
@@ -3788,6 +3788,6 @@
         "react-dom"
       ]
     },
-    "revisionHash": "4afa0c11799da474a4d80a513072574a1e79883818fc7fd9a8d5fe6025b95455"
+    "revisionHash": "b8a2939aa276b819ec6c226f30abf7cff2c98af2abf750e69f9d1bcad601a2f9"
   }
 }

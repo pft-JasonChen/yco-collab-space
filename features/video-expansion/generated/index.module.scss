@@ -354,6 +354,20 @@
     display: flex;
     flex-direction: column;
     order: -1;
+    /* Reference (2026-09-16, same pass as .editResult's own compact-card
+       cap below — "有什麼辦法讓1的高度縮小一點2 fixed at the button"):
+       ToolPageLayout's own `.result` class (this same element, shared
+       component) sets `height: 100%` at this breakpoint — deliberately, so
+       the canvas can fill available space in the general case. With
+       .editResult itself now capped much smaller, that still left this
+       whole section claiming the full remaining height regardless, so a
+       large empty gap sat between the now-small canvas card and the
+       settings-inspector section stacked after it (confirmed live: this
+       element measured 780px tall — the full available height — while its
+       own content, editResult included, needed nowhere near that). `height:
+       auto` overrides just for this feature so the section sizes to its
+       actual (now compact) content instead. */
+    height: auto;
   }
 
   /* Making the section above a flex container fixes percentage-height
@@ -394,9 +408,17 @@
     flex: 1;
   }
 
+  /* min-height dropped from the shared base rule's 360px (2026-09-16, same
+     pass as .editResult's own max-height cap above): that base min-height
+     still applied unconditionally here even after capping .editResult's own
+     height to 210px, so this child just overflowed past its now-smaller
+     parent — confirmed live (.editResult measured 210px as set, but the
+     next-section's position never moved, meaning the visible card was
+     still actually 360px tall underneath). */
   .canvasArea,
   .canvasAreaLoaded {
     flex: 1;
+    min-height: 0;
   }
 
   [data-surface-zone='settings-inspector'] {
@@ -412,5 +434,60 @@
   }
 
   .panelContent { overflow: visible; }
-  .editResult { min-height: 240px; }
+
+  /* min-height was a flat 240px (an earlier, separate live request — "改成
+     240px"); reference now (2026-09-16, requested live — "有什麼辦法讓1的高度
+     縮小一點2 fixed at the button", against a screenshot marking the whole
+     canvas CARD, not just the checkered video area inside it, as too tall):
+     first tried capping just .canvasViewport's own max-height — confirmed
+     live this did nothing, because .canvasViewport's un-overridden base
+     min-height (240px) already exceeds any smaller max-height, and min wins
+     that conflict per spec, so it stayed pinned at 240px regardless. The
+     actual reason the CARD itself was so tall: .editResult is `flex: 1`
+     inside a chain that deliberately fills all remaining viewport height
+     (built earlier this session, "這裡應該要偵測剩下的螢幕空間有多少然後撐滿
+     它") — correct for making the canvas track available space in general,
+     but on a phone that leaves no room to see Aspect ratio/Generate without
+     scrolling past nearly the whole screen. Capping the OUTER card directly
+     is what actually shrinks it — .editResult still tries to grow (flex:1
+     unchanged), it just clamps well short of the full remaining height now;
+     min-height dropped below the new max so they don't fight the same way
+     .canvasViewport's own min/max just did. */
+  .editResult {
+    min-height: 0;
+    max-height: 210px;
+  }
+
+  /* Generate now pinned to the bottom of the viewport instead of sitting in
+     normal flow at the end of the settings — targets ToolPageLayout's own
+     stable `data-surface-zone="primary-action"` hook (the same element as
+     its `.footer` class) rather than that shared component's own module, so
+     this is this feature's own visual requirement, not a change to every
+     ToolPageLayout consumer's mobile footer behavior. `position: fixed`
+     (not sticky) because the footer is the LAST element in the stacked
+     page's own flow — nothing scrolls past it for sticky to detach from, so
+     sticky would just render inline, not actually pin. `.panelContent` gets
+     matching bottom padding so this fixed bar doesn't cover the last
+     settings row once scrolled all the way down. */
+  /* Reference (2026-09-16, requested live — "fix at the bottom還是要有
+     padding，幫我參考錄影和figma", node 14729:268960): ToolPageLayout's own
+     `.footer` has no padding of its own (it normally sits inside
+     `.panelContent`, which already supplies it) — now that this bar is
+     full-bleed `position: fixed` instead, it needs its own inset so Generate
+     doesn't sit flush against the screen edges, matching the Figma
+     reference's bottom action bar (button padded on every side, not
+     edge-to-edge). */
+  [data-surface-zone='primary-action'] {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 20;
+    padding: var(--spacing-16);
+    box-shadow: 0 -2px 8px color-mix(in srgb, var(--fill-strong) 10%, transparent);
+  }
+
+  .panelContent {
+    padding-bottom: var(--spacing-96);
+  }
 }
