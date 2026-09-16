@@ -5,7 +5,7 @@
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "not-recorded",
   "model": "not-recorded",
-  "generatedAt": "2026-09-16T01:27:59.238Z",
+  "generatedAt": "2026-09-16T02:23:21.051Z",
   "files": [
     "README.md",
     "feature.jsx",
@@ -250,9 +250,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/credit-controls/component.yaml",
-        "contractSha256": "e547c9eaa47f4f7f5008a6e6671c59ff9f636b771b9844bc9eee688f54b4f652",
+        "contractSha256": "fd536567a47ba0da4f8ede24c60853eb9af4f31c17712633e8b3389d04ebde01",
         "implementationImport": "platform/ui/credit-controls/index.js",
-        "implementationSha256": "21a682f99925d7defd350677ad451375f396380c440c77f5c100a6fa34e06d9b",
+        "implementationSha256": "f93a38b6b07dae9707730661e0e873801ba86b3d84b4a24da4b861ea33a8f56a",
         "runtimeAssets": [
           {
             "repositoryPath": "design-library/assets/icon/yco-credit-controls/add.svg",
@@ -260,7 +260,7 @@
           },
           {
             "repositoryPath": "design-library/assets/icon/yco-credit-controls/credit.svg",
-            "sha256": "fe13827402ad85122458ba7de848cbf47e0cb4401d319a6ebc8bfd511245b1d1"
+            "sha256": "4103b57ceacfc0a3c67755b49ecb313ba0fa0a540b97845684360e259572fe95"
           },
           {
             "repositoryPath": "design-library/assets/icon/yco-credit-controls/loading.png",
@@ -533,9 +533,9 @@
         "status": "pilot-approved",
         "figmaStatus": "mapped",
         "contractPath": "design-library/components/navigation-header/component.yaml",
-        "contractSha256": "928e20194f3535a32f497c476facee1dcffd89985fc499291f006312a9acff74",
+        "contractSha256": "ac566cb9042dfb4a427d793e69c9e28f749f9d5460d78d6d863c610efa238739",
         "implementationImport": "platform/ui/navigation-header/index.js",
-        "implementationSha256": "c580cbedb606c8e88926ba4b4642728c80e285796a65b9dfa059085db271c3a5",
+        "implementationSha256": "872787864f25247d39ba02f9b289c562b9177473ce57f1ee619351336fbb6b95",
         "runtimeAssets": [
           {
             "repositoryPath": "design-library/assets/icon/yco-credit-controls/add.svg",
@@ -543,7 +543,7 @@
           },
           {
             "repositoryPath": "design-library/assets/icon/yco-credit-controls/credit.svg",
-            "sha256": "fe13827402ad85122458ba7de848cbf47e0cb4401d319a6ebc8bfd511245b1d1"
+            "sha256": "4103b57ceacfc0a3c67755b49ecb313ba0fa0a540b97845684360e259572fe95"
           },
           {
             "repositoryPath": "design-library/assets/icon/yco-credit-controls/loading.png",
@@ -1625,12 +1625,16 @@
           "sha256": "746d8b88009c7cf0c9b03a160361e1dc8de8406dc3ef893f65e2399e9054ebec"
         },
         {
+          "path": "design-library/assets/font/yco-interface-icons/icomoon.woff",
+          "sha256": "f0d37908c2be5fc100af22a08bc35516ff28440d48b1e69a8473e288453c169b"
+        },
+        {
           "path": "design-library/assets/icon/yco-credit-controls/add.svg",
           "sha256": "2bb3284338e2893ec78d567ba65f511f11ca1b004d0948e6b737fe3417758457"
         },
         {
           "path": "design-library/assets/icon/yco-credit-controls/credit.svg",
-          "sha256": "fe13827402ad85122458ba7de848cbf47e0cb4401d319a6ebc8bfd511245b1d1"
+          "sha256": "4103b57ceacfc0a3c67755b49ecb313ba0fa0a540b97845684360e259572fe95"
         },
         {
           "path": "design-library/assets/icon/yco-credit-controls/loading.png",
@@ -1938,7 +1942,7 @@
         },
         {
           "path": "design-library/components/credit-controls/component.yaml",
-          "sha256": "e547c9eaa47f4f7f5008a6e6671c59ff9f636b771b9844bc9eee688f54b4f652"
+          "sha256": "fd536567a47ba0da4f8ede24c60853eb9af4f31c17712633e8b3389d04ebde01"
         },
         {
           "path": "design-library/components/dropdown-select/component.yaml",
@@ -1966,7 +1970,7 @@
         },
         {
           "path": "design-library/components/navigation-header/component.yaml",
-          "sha256": "928e20194f3535a32f497c476facee1dcffd89985fc499291f006312a9acff74"
+          "sha256": "ac566cb9042dfb4a427d793e69c9e28f749f9d5460d78d6d863c610efa238739"
         },
         {
           "path": "design-library/components/pricing-overlay/component.yaml",
@@ -1974,7 +1978,7 @@
         },
         {
           "path": "design-library/components/ratio/component.yaml",
-          "sha256": "c70547c5517fb14db77384d8579f06cc59f6f7cc4b1fc0553d6ee293649072aa"
+          "sha256": "8fe7701c0af0795fe19181f9dd576ca9e86e1c9d52beb9cf5b4e5459d06e7346"
         },
         {
           "path": "design-library/components/result-page-shell/component.yaml",
@@ -1986,19 +1990,19 @@
         },
         {
           "path": "design-library/components/tool-page-layout/component.yaml",
-          "sha256": "35d34fc168615c84b6c1c31ac9d57357899ad22ff592c51f0e3e35c98a5628c5"
+          "sha256": "2a13593fd30474e4501c5a6e09e5d4d5db5a99459d1820a3fe1f40595d3b5165"
         },
         {
           "path": "design-library/components/upload-media-block/component.yaml",
-          "sha256": "9b19ba276fc6b6bf6efb9b14b8a07bf4688957e6a211b1476415c222d6cbacfb"
+          "sha256": "932658ae3fec4d687a1d514d987c7e06c18d8e8ec68077bf34333df3ecc148f8"
         },
         {
           "path": "design-library/components/video-history/component.yaml",
-          "sha256": "67976c6bfede3e29cbdbe434b370d0a4239b19a98e159a195dcbaad0df28bb62"
+          "sha256": "6d2a328c4b5acecb153295dabfe038d0882a512da95b45731b91d18031c07621"
         },
         {
           "path": "design-library/components/video-info-dialog/component.yaml",
-          "sha256": "b943dc3a8f53d733239aaee94a96e5d245c020811665e233a4a46775f3637aa6"
+          "sha256": "b7875a3aed8fdeb490062b1e2a61d725e4964d7f48295742195f2abde6ce9581"
         },
         {
           "path": "design-library/components/video-results-surface/component.yaml",
@@ -2006,11 +2010,11 @@
         },
         {
           "path": "design-library/components/video-timeline/component.yaml",
-          "sha256": "0f9969c235076021b9fd1350bc3bef0763edfaeb2797dc15a1231dfd9da67cd2"
+          "sha256": "c977fffa36cae15d26d36638a35d1c5e0971e1b1eb0fe9f3715f870ade8b113e"
         },
         {
           "path": "design-library/components/video-trim-modal/component.yaml",
-          "sha256": "55abe10fb854b3d592954a625682a16179586f38cba8071b1d55aa14af67d0a1"
+          "sha256": "3fe1f1ebea2e54731b4c61c828b527582f662eb73e547181627c4fff5b2a47b1"
         },
         {
           "path": "features/cloud-storage/generated/README.md",
@@ -2098,7 +2102,7 @@
         },
         {
           "path": "package-lock.json",
-          "sha256": "76f7927ecf86a4b2dce599bc495aaa9fce9910f9d9c9c26384c6ae5accef73bc"
+          "sha256": "4ccccc30b5647f23b163c068465d46ea93b51728a0a328dc72d5d8de2325398b"
         },
         {
           "path": "package.json",
@@ -2570,11 +2574,11 @@
         },
         {
           "path": "platform/ui/credit-controls/CreditControls.jsx",
-          "sha256": "73e59eb7e99fd635295874e98806631ab43f40ecde6605faa9a59e7f1ddab049"
+          "sha256": "5aa681a8fa3d6a880af5f108ccf31fde2b5a81ecbc48da19cd814feddbdf3944"
         },
         {
           "path": "platform/ui/credit-controls/CreditControls.module.scss",
-          "sha256": "2d7bb3218e700688e81c392bfb44603ced61ddbea485e3d0a3ddc0f7a2b87efa"
+          "sha256": "2fcc0acb1864610275b6d0e1826e51baceca7158a13d2ebcaf1aa10542da7ad8"
         },
         {
           "path": "platform/ui/credit-controls/CreditControls.stories.jsx",
@@ -2714,11 +2718,11 @@
         },
         {
           "path": "platform/ui/navigation-header/NavigationHeader.jsx",
-          "sha256": "602bce0a58ed3afea5cebaed0d0182f8304ac46b3b17641a096512f7ed285674"
+          "sha256": "6c5b6bc7987068f98e229f7ae1aeeb4e198060833b7330376b175f17b8d3fefe"
         },
         {
           "path": "platform/ui/navigation-header/NavigationHeader.module.scss",
-          "sha256": "7a124addeb88722895bdd3350c1840c6ce11733ad8d298988ea1ff9b1db6f85d"
+          "sha256": "e0bbaef59c3c85b4eb26ed261d5518b29bd48788d009f2bed9b59ec6a61f661e"
         },
         {
           "path": "platform/ui/navigation-header/NavigationHeader.stories.jsx",
@@ -2754,7 +2758,7 @@
         },
         {
           "path": "platform/ui/ratio/Ratio.module.scss",
-          "sha256": "9b03ba4791f86de6c2aaa2662a464f8c5619e4dc00c05e5158608806c7e36d83"
+          "sha256": "54c7fa75dcc49b6480566fec904f01b28c5aadd2d9fdeb6c128487367a335188"
         },
         {
           "path": "platform/ui/ratio/Ratio.stories.jsx",
@@ -2766,7 +2770,7 @@
         },
         {
           "path": "platform/ui/ratio/ratioTypes.js",
-          "sha256": "319a37000e75223ac3432743967cb06b3e071a3ad2d248bd2352f0f72dca42f2"
+          "sha256": "e67e6a62e3b1fb74b423900549c396a9834b2ee2b49463baaabe1605d00eafa0"
         },
         {
           "path": "platform/ui/result-page-shell/ResultPageShell.jsx",
@@ -2810,11 +2814,11 @@
         },
         {
           "path": "platform/ui/tool-page-layout/ToolPageLayout.jsx",
-          "sha256": "115dbfbc5a0cd7a930e815078b2755058ad37057952f132dc556cc237662a456"
+          "sha256": "76340028ba9c9294479ada67d72eec6326af12ace03f2ec1a01d376d31b062dd"
         },
         {
           "path": "platform/ui/tool-page-layout/ToolPageLayout.module.scss",
-          "sha256": "3e600161c49663e4c5bc22b8f281cbb56b0fa53e3ae6b1dc35243de728b6ae2e"
+          "sha256": "9d2ac2bf1429effcbc6c8fb2bd26de670501f36f5aa3dee3ff22f588e10cff58"
         },
         {
           "path": "platform/ui/tool-page-layout/ToolPageLayout.stories.jsx",
@@ -2826,11 +2830,11 @@
         },
         {
           "path": "platform/ui/upload-media-block/UploadMediaBlock.jsx",
-          "sha256": "fee43b762ddcd52a6bce45f37a3e84be5f0a4d563abf6f3febb1a0d0f3b53e7a"
+          "sha256": "7f4d257c26b150d398657ea60b1e10b39c49ae45b87ad8c3774f5cc869634f9a"
         },
         {
           "path": "platform/ui/upload-media-block/UploadMediaBlock.module.scss",
-          "sha256": "7e1a69d125d38cf3b915557c1ecd0519524712ca0098d9078153ba09df2db928"
+          "sha256": "7dc0f16c0a038b0afd841dc80219101c1d1b3b195a2b69ac9440d843159a28c0"
         },
         {
           "path": "platform/ui/upload-media-block/UploadMediaBlock.stories.jsx",
@@ -2890,11 +2894,11 @@
         },
         {
           "path": "platform/ui/video-timeline/VideoTimeline.jsx",
-          "sha256": "1dcd31fbe12e94f23d3f65d2d1eee3a71805425d9dd670f6ede196671a2e8dde"
+          "sha256": "d7db6ddf79901e11d161069b11e7b0ba22c8ed0170cd39a75d167b90e47f929e"
         },
         {
           "path": "platform/ui/video-timeline/VideoTimeline.module.scss",
-          "sha256": "34a47c91b5bc431b6aa76469a636daec8bdfdb87aef208a2d0ec8c2534b98e49"
+          "sha256": "e4e1a9fcd06c982115ded09bfd95d6b79c718de33455e0a78f0b7446131e6739"
         },
         {
           "path": "platform/ui/video-timeline/VideoTimeline.stories.jsx",
@@ -2910,11 +2914,11 @@
         },
         {
           "path": "platform/ui/video-trim-modal/VideoTrimModal.jsx",
-          "sha256": "566a5c678d287627df847e2c526ce95fcc6e2bcfada3a92f88d853f4561c2cb8"
+          "sha256": "f24442811f2ad741d20a2a5f8ef17d51c329a19d3d1096b7fb3012778eb2aec3"
         },
         {
           "path": "platform/ui/video-trim-modal/VideoTrimModal.module.scss",
-          "sha256": "7a1ec0e10778a93336cb8cd946d368c8072a32ac85d3b6571e86640ee66ef3c4"
+          "sha256": "59435dd4d970187ababb036b9e859793b0d2ce0806f21a6ac0a807a4895a97af"
         },
         {
           "path": "platform/ui/video-trim-modal/VideoTrimModal.stories.jsx",
@@ -3010,7 +3014,7 @@
         },
         {
           "path": "tools/design-library/run-storybook-checks.mjs",
-          "sha256": "7d6a4ff3abd08521c764a288d2fa4a1ffab3d6ff12e2bad03681b0c68a9efcf5"
+          "sha256": "9abe89eb8e69fe58c82db55457bc89a159ed8e0793d11a500801542644f2e768"
         },
         {
           "path": "tools/design-library/schemas/component-contract.schema.json",
@@ -3189,7 +3193,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "623bb6f7116dfe89de5c40c7f304f3d173dcfdcbd6a64ab0f89038b5635a62e9",
+      "hash": "0c3424eda8882d0cd42680676f6ae576226d156b144caf347c0725bdb6abc971",
       "edges": [
         {
           "from": "features/cloud-storage/generated/feature.jsx",
@@ -3713,11 +3717,6 @@
         },
         {
           "from": "platform/ui/navigation-header/NavigationHeader.jsx",
-          "specifier": "../../../design-library/assets/icon/yco-navigation-header/avatar-member-glyph.svg",
-          "to": "design-library/assets/icon/yco-navigation-header/avatar-member-glyph.svg"
-        },
-        {
-          "from": "platform/ui/navigation-header/NavigationHeader.jsx",
           "specifier": "../../../design-library/assets/icon/yco-navigation-header/avatar-photo-circle.svg",
           "to": "design-library/assets/icon/yco-navigation-header/avatar-photo-circle.svg"
         },
@@ -3792,6 +3791,11 @@
           "to": "platform/ui/navigation-header/NavigationHeader.module.scss"
         },
         {
+          "from": "platform/ui/navigation-header/NavigationHeader.module.scss",
+          "specifier": "../../../design-library/assets/font/yco-interface-icons/icomoon.woff",
+          "to": "design-library/assets/font/yco-interface-icons/icomoon.woff"
+        },
+        {
           "from": "platform/ui/pricing-overlay/index.js",
           "specifier": "./PricingOverlay.jsx",
           "to": "platform/ui/pricing-overlay/PricingOverlay.jsx"
@@ -3862,6 +3866,6 @@
         "react-dom"
       ]
     },
-    "revisionHash": "823cb4448617444b6a100f09eceb4e06aa73700519d47ebbc51559cfd112ed7c"
+    "revisionHash": "4899d73487ac9228d4765c52e7584e24ac45eb55ef131d7affb339b1ec926c7b"
   }
 }
