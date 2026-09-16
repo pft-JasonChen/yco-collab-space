@@ -98,11 +98,24 @@
   background: var(--fill-warning-weak);
 }
 
+/* Full is the same bar one step up the existing severity ramp: the error pair
+   the meter's own fill already uses at this state, so nothing new is introduced
+   to say that saving is now blocked rather than nearly blocked. */
+.banner[data-state='full'] {
+  border-color: var(--stroke-error-weak);
+  background: var(--fill-error-weak);
+}
+
 .bannerText {
   margin: 0;
   font-size: var(--font-size-small);
   line-height: var(--line-height-small);
   color: var(--text-strong);
+}
+
+.banner[data-state='full'] .bannerText {
+  color: var(--text-error);
+  font-weight: var(--font-weight-strong);
 }
 
 .bannerActions {

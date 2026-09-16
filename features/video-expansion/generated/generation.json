@@ -3,9 +3,9 @@
   "feature": "video-expansion",
   "inputHash": "63cdb5d96d2fc77577f84e2760e9188e108297bc300ac1a959b1bbf25cf6c18e",
   "generatorInstructionsVersion": "collab-contract-v1",
-  "adapter": "claude-code",
-  "model": "claude-sonnet-5",
-  "generatedAt": "2026-09-16T02:23:22.099Z",
+  "adapter": "not-recorded",
+  "model": "not-recorded",
+  "generatedAt": "2026-09-16T05:10:31.743Z",
   "files": [
     "README.md",
     "contract/integration.yaml",
@@ -1733,6 +1733,10 @@
           "sha256": "fd536567a47ba0da4f8ede24c60853eb9af4f31c17712633e8b3389d04ebde01"
         },
         {
+          "path": "design-library/components/data-table/component.yaml",
+          "sha256": "1db883f29511d475a76f3befd7e324b22eb7053f914ca07b8be6127d2189ed66"
+        },
+        {
           "path": "design-library/components/dropdown-select/component.yaml",
           "sha256": "a293c7c879ba7bbee9b484355cf65eb48a28434d8319d0fb6062c2611e62d702"
         },
@@ -1774,7 +1778,7 @@
         },
         {
           "path": "design-library/components/selection-toolbar/component.yaml",
-          "sha256": "a4598bc53d1681c4160864feb6ec7cd93b6ddf63e6ba2162032108c644274094"
+          "sha256": "90a335c79280bbbd43b0686078fb0e39d56f86ca61e5a1a6547cd645b5ae10f4"
         },
         {
           "path": "design-library/components/tool-page-layout/component.yaml",
@@ -1806,7 +1810,7 @@
         },
         {
           "path": "features/cloud-storage/product/surface-intent.yaml",
-          "sha256": "13ab5e4339dcd59c7b95563568bc963dac8965e35487493356446398490dd8a7"
+          "sha256": "03cacbcea771a59ae599a1a87a0cf27f4cce8609d8267fa892c61e3e6b24587a"
         },
         {
           "path": "features/collab-space-readiness/product/surface-intent.yaml",
@@ -2385,6 +2389,22 @@
           "sha256": "5bcc58063e29497a2c720fb7c7c916230633f961b3645218193e31401d59e29b"
         },
         {
+          "path": "platform/ui/data-table/DataTable.jsx",
+          "sha256": "58426cbf41e27dedee17a9ac925e36b0d46d805bde1adc02032b55c4e21f9370"
+        },
+        {
+          "path": "platform/ui/data-table/DataTable.module.scss",
+          "sha256": "500cf217e11e5ac82e20b9f62c9c783308d468598e5470d81bd1d6b17db4727c"
+        },
+        {
+          "path": "platform/ui/data-table/DataTable.stories.jsx",
+          "sha256": "79525e8716bf5714ba4dc65cc6ba46148601730fc84bfeed8584d673395b5020"
+        },
+        {
+          "path": "platform/ui/data-table/index.js",
+          "sha256": "bd254449d9b3918666d156a52af483b8e8c16dea30f9186a6d7849f45460eb57"
+        },
+        {
           "path": "platform/ui/dropdown-select/DropdownSelect.jsx",
           "sha256": "9f89bb30010817fe7dcc8b27e331712f9bf27ca21f0270a63b9332747b862a13"
         },
@@ -2510,7 +2530,7 @@
         },
         {
           "path": "platform/ui/index.js",
-          "sha256": "ed7fc8eb7d81a070a775beae71cd22cfad5b80c9a8da08da6b2e12b94a15f6e3"
+          "sha256": "8a6ff31c24394117fa5d3e4403f811507d403aaf6e93422a02719fe3289b45d6"
         },
         {
           "path": "platform/ui/navigation-header/NavigationHeader.jsx",
@@ -2594,11 +2614,11 @@
         },
         {
           "path": "platform/ui/selection-toolbar/SelectionToolbar.jsx",
-          "sha256": "10731636d1881ec44b5d47e418e051dc9325b67e073b416b116ec54741a9b480"
+          "sha256": "6ee32221dccf250fc48c2abdad57a200dd4365c90e421b89a10ee9700ea94aba"
         },
         {
           "path": "platform/ui/selection-toolbar/SelectionToolbar.module.scss",
-          "sha256": "ffe4280b070e60b85ac9939fcc4ae34853afe6cbff5e95afac415823bd7c09c6"
+          "sha256": "8266b4721a042a69cf413220239d64c8e6cce832e5821d05ab2055b6acaa9957"
         },
         {
           "path": "platform/ui/selection-toolbar/SelectionToolbar.stories.jsx",
@@ -2810,7 +2830,7 @@
         },
         {
           "path": "tools/design-library/run-storybook-checks.mjs",
-          "sha256": "9abe89eb8e69fe58c82db55457bc89a159ed8e0793d11a500801542644f2e768"
+          "sha256": "4c9123b58d3be8f1bd9f31246efca5b33018271598a6da4f39f32fd91c15ba71"
         },
         {
           "path": "tools/design-library/schemas/component-contract.schema.json",
@@ -2989,7 +3009,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "f3e344cc5730921e09bd51f3338218f197549d508c36b83964d1339f533ec1d2",
+      "hash": "16d80d3ae0b3a085650b02e893f50d0bd0291ccf01045068910f90d3352c05fb",
       "edges": [
         {
           "from": "design-library/assets/font/yco-interface-icons.style.css",
@@ -3783,6 +3803,6 @@
         "react-dom"
       ]
     },
-    "revisionHash": "f147e86ee627707b9f43f2a36d6027e5469204c16d7dec97d2e4ec3347c62c63"
+    "revisionHash": "6055d5429ec4125e24a29ee14bbfd57abe4259c0a20200401e98ac6d5d74653b"
   }
 }

@@ -1,0 +1,116 @@
+schemaVersion: 1
+id: data-table
+displayName: Data Table
+classification: composite
+status: pilot-approved
+rd:
+  sourcePackage: youcam-enhance-frontend
+  sourceVersion: 1.34.1
+  snapshot: yce-frontend-gm-260909
+  portability: figma-only
+  sourcePaths: []
+  sourceHashes: []
+figma:
+  status: mapped
+  fileKey: dQrdKB9F5ky52YKHfh9Zd0
+  componentSetNodeId: "14892:36402"
+  variants:
+    - heading-cell-default
+    - heading-cell-checkbox
+    - data-cell-text
+    - data-cell-avatar
+    - data-cell-badge
+    - data-cell-checkbox
+    - data-cell-action-icons
+implementation:
+  importPath: platform/ui/data-table/index.js
+  storyId: ui-data-table
+  framework: react
+  dependencies: [react]
+  removedDependencies: []
+  localFiles:
+    - path: platform/ui/data-table/DataTable.jsx
+      sha256: 58426cbf41e27dedee17a9ac925e36b0d46d805bde1adc02032b55c4e21f9370
+    - path: platform/ui/data-table/DataTable.module.scss
+      sha256: 500cf217e11e5ac82e20b9f62c9c783308d468598e5470d81bd1d6b17db4727c
+    - path: platform/ui/data-table/DataTable.stories.jsx
+      sha256: 79525e8716bf5714ba4dc65cc6ba46148601730fc84bfeed8584d673395b5020
+    - path: platform/ui/data-table/index.js
+      sha256: bd254449d9b3918666d156a52af483b8e8c16dea30f9186a6d7849f45460eb57
+  localFilesUpdated: 2026-09-16
+publicApi:
+  props:
+    - { name: columns, required: false }
+    - { name: selectable, required: false }
+    - { name: allSelected, required: false }
+    - { name: onToggleAll, required: false }
+    - { name: labels, required: false }
+    - { name: children, required: false }
+    - { name: className, required: false }
+    - { name: testId, required: false }
+    - { name: checked, required: false }
+    - { name: onChange, required: false }
+    - { name: ariaLabel, required: false }
+    - { name: thumbnail, required: false }
+    - { name: primary, required: false }
+    - { name: secondary, required: false }
+    - { name: primaryTestId, required: false }
+    - { name: secondaryTestId, required: false }
+    - { name: align, required: false }
+    - { name: icon, required: false }
+    - { name: label, required: false }
+    - { name: onClick, required: false }
+    - { name: disabled, required: false }
+    - { name: tone, required: false, values: [neutral, destructive] }
+    - { name: selected, required: false }
+    - { name: onToggleSelect, required: false }
+    - { name: selectLabel, required: false }
+    - { name: selectTestId, required: false }
+  states: [default, selectable, row-selected, row-hover, checkbox-focus-visible, action-destructive, action-disabled, narrow]
+tokens:
+  lockPath: platform/tokens/tokens.lock.json
+  uses:
+    - --background-alternate
+    - --corner-radius-4
+    - --corner-radius-8
+    - --fill-brand-strong
+    - --fill-hover
+    - --fill-inverse-strong
+    - --fill-weak
+    - --font-size-small
+    - --font-size-tiny
+    - --font-weight-strong
+    - --line-height-small
+    - --line-height-tiny
+    - --spacing-4
+    - --spacing-8
+    - --spacing-12
+    - --spacing-16
+    - --spacing-20
+    - --spacing-24
+    - --stroke-focus
+    - --stroke-strong
+    - --stroke-weak
+    - --text-error
+    - --text-strong
+    - --text-weak
+    - --text-weaker
+assets:
+  - path: assets/icon/yco-home-gallery
+    usage: runtime
+review:
+  pilotApprover: { actor: pm, id: collab-space-owner, date: 2026-09-16 }
+  canonicalReview: { designer: pending, rd: pending }
+decisionBasis:
+  - "Extracted on 2026-09-16 because the PM reported that Cloud Storage's Trash table and its list view did not look like the same product. They were two ad-hoc CSS grids in one feature stylesheet: 5 columns against 7, `var(--spacing-12)` row padding against `var(--spacing-8)`, an uppercase letter-spaced header against a plain one, and different row actions. Neither matched the guideline table. This component is that table, so the two views are now one structure with one set of column definitions."
+  - "portability is `figma-only`. RD's gallery has no table view at any route in the vendored snapshot, so there is nothing to point `sourcePaths` at. The source is Figma Guideline_YCO_2025 node 14892:36402, and every Figma variable in that node maps one-to-one onto a token RD already ships — `--background/alternate`, `--stroke/weak`, `--stroke/strong`, `--text/strong`, `--text/weak`, `--fill/inverse-strong` — so no colour here is an approximation and none is new."
+  - "A CSS grid, not a `<table>`. The columns have to stay aligned between the header and every row while a cell carries arbitrary content — a thumbnail above two lines of text, a menu trigger, a countdown that changes colour on its final day. Table semantics are supplied explicitly through `role=\"table\"`, `role=\"row\"`, `role=\"columnheader\"` and `role=\"cell\"`, so assistive technology still reads it as a table. The track list is computed from the same `columns` array the header renders from and reaches the DOM as an inline `gridTemplateColumns`, passed to each row through context, so a row cannot fall out of step with its own headings. It is not a component-local custom property: the token policy only knows RD's set and reads any other `var()` as an undeclared token. That rules out expressing the narrow track list in a media query too, so the breakpoint is read with `matchMedia` and the right list applied directly — the same way this codebase's other viewport-dependent components resolve theirs."
+  - "The spec's fixed heights are kept as written: `min-height: 48px` on the header and `min-height: 80px` on a row, with `0 var(--spacing-24)` and `0 var(--spacing-20)` padding. They are `min-height` rather than `height` so a wrapped cell grows instead of overflowing, which is the only deviation from the Figma frame and the one the narrow breakpoint depends on."
+  - "Below 768px a column marked `narrowHidden` leaves the track list entirely rather than being squeezed. Both tables this replaces already dropped columns at that width by hand, in `@media (max-width: 768px)` blocks that named cells by `:nth-child()` — a rule that silently targets the wrong cell the moment a column is inserted."
+  - "The checkbox column has no heading ground. In the guideline the header's `--background/alternate` fill starts at the first labelled column, so the select-all box sits on the page rather than on the tint, and that is reproduced rather than smoothed over."
+  - "Action glyphs are masked, not painted. The design library's gallery icons are white artwork drawn for RD's dark pills and filled buttons; on a light table an `<img>` of one is invisible. `.iconGlyph` sets `background-color: currentColor` and masks the same asset, so one icon file serves both grounds and the destructive tone's `var(--text-error)` reaches the glyph as well as the label. The same fix is applied to selection-toolbar's ghost variant."
+  - "The Figma avatar is a 40px circle at `--spacing/48` radius. Here it is a 40px square at `var(--corner-radius-8)`, because what these tables picture is a piece of media, not a person, and a circular crop of a 16:9 still loses the subject. Recorded as a deliberate deviation rather than an oversight."
+  - "The Badge data-cell variant in the Figma node is not ported. Nothing in the first consumer needs a status chip, and a badge is its own component with its own tone ramp; porting it here would fork that ramp into a table. Cells take arbitrary children, so a consumer that gains one can pass it without this component growing a variant."
+  - "Auto-sync (2026-09-16): `DataTable.jsx`, `DataTable.module.scss` hashes updated — no documented public prop or decisionBasis-quoted value appears to have changed, so this synced automatically. Review if this doesn't look right."
+  - "Auto-sync (2026-09-16): `DataTable.jsx`, `DataTable.module.scss` hashes updated — no documented public prop or decisionBasis-quoted value appears to have changed, so this synced automatically. Review if this doesn't look right."
+  - "Auto-sync (2026-09-16): `DataTable.jsx`, `DataTable.module.scss`, `DataTable.stories.jsx` hashes updated — no documented public prop or decisionBasis-quoted value appears to have changed, so this synced automatically. Review if this doesn't look right."
