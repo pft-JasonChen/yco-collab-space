@@ -204,6 +204,23 @@
   height: 18px;
 }
 
+/* White artwork masked into the button's own colour rather than painted, so the
+   glyph is legible on the ghost row's light ground and the destructive action's
+   red reaches its trash icon. */
+.ghostGlyph {
+  display: block;
+  width: 18px;
+  height: 18px;
+  flex: none;
+  background-color: currentColor;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
+}
+
 .ghostAction:hover:not(:disabled) {
   background: var(--fill-hover);
 }

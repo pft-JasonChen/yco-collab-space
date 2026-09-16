@@ -45,6 +45,7 @@ layoutIntent:
     - tool-family-filter
     - sort-control
     - view-control
+    - data-table
     - create-menu
     - storage-meter
     - storage-state-banner
@@ -83,7 +84,7 @@ deviations:
   - The purchase overlay borrows the pricing-overlay module but adds a second path that sells capacity alone, which the RD pricing modal does not offer.
   - Sharing, search, favourites and drag-into-folder are intentionally absent; they are not deviations from the pack, but they are the four affordances a reviewer is most likely to look for.
 decisionBasis:
-  - "Resting versus transient component roles, split 2026-09-15. layoutIntent.componentRoles is what the rendered check asserts is visible at every viewport, so it now lists only the resting layout. The roles this surface composes but reaches through an interaction are: category-rail via CS-021; empty-state via CS-001; selection-action via CS-017; batch-toolbar via CS-017; storage-state-banner via CS-007; storage-blocking-dialog via CS-008; folder-card via CS-012; folder-create-dialog via CS-012; item-overflow-menu via CS-013; delete-confirm-dialog via CS-013; item-detail-dialog via null; next-action via CS-013; download-action via CS-017; upload-progress-cell via CS-009; trash-policy-banner via CS-014; trash-countdown via CS-014; close-action via CS-015; feature-list via CS-015; plan-tabs via CS-015; plan-list via CS-015; checkout-action via CS-016; storage-pack-selector via CS-015; purchase-summary via CS-015. item-detail-dialog has no criterion at all — it waits on the media-generic API in DESIGN-015, which is why no cell opens one. Note that the check also adds the primary pack's required slots and every borrowed-pack role to the required-visible set, which pulls in empty-state, selection-action and the five pricing-overlay roles; those are modal or empty-only by nature and cannot be visible at rest. That is a platform-tool question recorded in DESIGN-019, not something to fix by forcing a dialog open."
+  - "Resting versus transient component roles, split 2026-09-15. layoutIntent.componentRoles is what the rendered check asserts is visible at every viewport, so it now lists only the resting layout. The roles this surface composes but reaches through an interaction are: category-rail via CS-021; empty-state via CS-001; selection-action via CS-017; batch-toolbar via CS-017; storage-state-banner via CS-007; storage-blocking-dialog via CS-008; folder-card via CS-012; folder-create-dialog via CS-012; item-overflow-menu via CS-013; delete-confirm-dialog via CS-013; item-detail-dialog via null; next-action via CS-013; download-action via CS-017; upload-progress-cell via CS-009; trash-policy-banner via CS-014; trash-countdown via CS-014; close-action via CS-015; feature-list via CS-015; plan-tabs via CS-015; plan-list via CS-015; checkout-action via CS-016; storage-pack-selector via CS-015; purchase-summary via CS-015; data-table via CS-035 (it is the list view and the Trash table, neither of which is the resting view). item-detail-dialog has no criterion at all — it waits on the media-generic API in DESIGN-015, which is why no cell opens one. Note that the check also adds the primary pack's required slots and every borrowed-pack role to the required-visible set, which pulls in empty-state, selection-action and the five pricing-overlay roles; those are modal or empty-only by nature and cannot be visible at rest. That is a platform-tool question recorded in DESIGN-019, not something to fix by forcing a dialog open."
   - library/gallery@2026-09 is the only catalogued surface whose shell, tabs, justified grid, cell and empty state match /account/gallery, which is the page this feature evolves.
   - commerce/pricing-overlay@2026-09 already declares plan-tabs, plan-list, feature-list, checkout-action and close-action, and its plan-tabs slot is documented as switching subscription and pay-as-you-go offers, which is exactly the two-path purchase model the PM approved.
   - A hybrid strategy records that the purchase overlay is borrowed rather than forcing a commerce shell onto a library page, or pretending a library pack owns checkout.
@@ -93,7 +94,11 @@ decisionBasis:
 componentReuse:
   - role: view-control
     resolution: feature-only
-    evidence: "Added 2026-09-15 in the layout review. A two-state toggle between the justified grid and the list, feature-owned because it is one button with no RD counterpart — RD's gallery has a single view. The list rows it switches to are feature markup; the grid behind it is the catalogued gallery-grid."
+    evidence: "Added 2026-09-15 in the layout review. A two-state toggle between the justified grid and the list, feature-owned because it is one button with no RD counterpart — RD's gallery has a single view. The grid behind it is the catalogued gallery-grid; as of 2026-09-16 the list behind it is the catalogued data-table."
+  - role: data-table
+    resolution: existing-component
+    component: data-table
+    evidence: "platform/ui/data-table, extracted on 2026-09-16 from the guideline Figma table (Guideline_YCO_2025 node 14892:36402) after the PM reported that this feature's two tables did not look like the same product. The list view and the Trash table were separate CSS grids in one stylesheet — different column counts, row paddings and header weights — and neither matched the guideline. Both now declare columns against the same component. There is no RD counterpart to reuse instead: RD's gallery has no table view at any route in the vendored snapshot, which is why the contract is figma-only."
   - role: create-menu
     resolution: existing-component
     component: dropdown-select

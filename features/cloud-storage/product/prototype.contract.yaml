@@ -227,12 +227,12 @@ acceptance:
     then: The gallery shell, the six level-one tabs in order, and the capacity meter beside the upgrade entry are visible without a network request
   - id: CS-002
     given: The Images tab is active with a populated synthetic library
-    when: The tool-family filter is used
-    then: The level-two filter exposes an All option plus the eighteen features from the YCO feature-type sheet, grouped under AI Image and AI Video, and no tool appears as a level-one tab
+    when: The level-two Type filter is used
+    then: "The filter is labelled Type and is scoped to the tab's own medium: Images offers All plus the eight AI Image features with no group header, Videos offers All plus the ten AI Video features, and the mixed tabs offer all eighteen under both AI Image and AI Video headers. No tool appears as a level-one tab"
   - id: CS-003
     given: A populated content tab is open
     when: Each item cell renders
-    then: "Every cell shows its name, type and date. File size is deliberately absent from the cell: none of the four competitors shows it, and with the cleanup path removed there is no decision on the grid that needs it"
+    then: "Every cell shows its name, then its type, file size and date in that order. Size returned to the cell on 2026-09-16: the page's meter keeps asking the user to make a decision about space, and a cell that omits how big a file is cannot support one"
   - id: CS-004
     given: A populated content tab is open
     when: The user changes the sort field and the order
@@ -345,4 +345,19 @@ acceptance:
     given: A content tab is open
     when: Folders and files render
     then: "Each group carries its own heading, and a folder card states its item count and when it was created"
-
+  - id: CS-032
+    given: Capacity is at 100 percent
+    when: The page renders
+    then: "A persistent banner states that storage is full and offers the same single exit the critical banner offers, carrying the error step of the existing severity ramp rather than the warning step. The blocking dialog still raises separately, at the moment an action needs space"
+  - id: CS-033
+    given: The Trash tab is active
+    when: Rows are selected
+    then: "The same selection bar the content tabs use reports the count and the selected size and offers Restore and Delete forever, and no export action, because exporting out of Trash would be a way to keep a file already thrown away"
+  - id: CS-034
+    given: The Trash tab holds items
+    when: Empty Trash is chosen
+    then: "A confirmation states how many items will be deleted permanently, and only its confirm action empties the trash; afterwards the tab shows an empty state and the Empty Trash action is disabled"
+  - id: CS-035
+    given: A content tab is in list view, and the Trash tab
+    when: Either table renders
+    then: "Both are the same shared table component - one header treatment, one row height, one checkbox - differing only in which columns they declare"

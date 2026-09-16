@@ -194,6 +194,7 @@ composed from shared components. All of them replace earlier entries above.
 - **File size leaves the cell.** None of the four competitors shows it, and the reason it
   was kept — sorting largest-first to clear space — no longer exists. Size stays in the
   selection bar, where it answers "how much will this free".
+  _Reversed on 2026-09-16 — see the PM review below._
 - **Manage space is removed everywhere**: from the critical banner, the full dialog and the
   quota-failure cell. This reverses an earlier recorded principle that paying must never be
   the only exit, and it is a deliberate PM call, not an oversight. The consequence is that
@@ -235,6 +236,56 @@ composed from shared components. All of them replace earlier entries above.
   permanently raises a confirmation that names the item and says it cannot be undone.
 - **The full-storage dialog loses its red meter**, which overlapped the close control and
   repeated a number the page already shows.
+
+## PM review, 2026-09-16 (third pass)
+
+- **The level-two filter is called Type, and it is scoped to the tab's own medium.** It was
+  labelled Tool family, which named an internal taxonomy rather than the thing being
+  picked. On Images the menu now lists the eight AI Image features and nothing else; on
+  Videos, the ten AI Video ones. Offering the other medium's features on a single-medium tab
+  was offering eleven filters that can only ever empty the grid. The group headers go with
+  them on those two tabs, because a header there names the tab you are standing on. The
+  mixed tabs — Projects, AI Agent, Uploads — keep all eighteen under both headers, since
+  there a video feature is a real filter.
+- **File size returns to the grid cell**, as type, size, date, matching the order the list
+  view's columns already used. The 2026-09-16 decision to drop it reasoned from the removed
+  cleanup path and from competitors. Both still hold, and it is still being reversed: this
+  page carries a capacity meter that asks the user to decide about space on every visit, and
+  a cell that says what a file is and when it was made but not how big it is cannot support
+  that decision. The competitor set is not carrying a storage meter.
+- **Full capacity gets a banner of its own**, the same shape as the critical one and one
+  step up the same severity ramp — the error pair the meter's fill already uses at that
+  state. Until now, 100 percent was visible only in the meter until something failed; the
+  blocking dialog said so at the moment of a save, which is the worst moment to learn it.
+  The dialog is unchanged and still raises separately.
+- **Trash rows are selectable, and Empty Trash works.** Empty Trash had no handler at all —
+  a button that has always done nothing. It now raises a confirmation that states how many
+  items go, and the tab has an empty state, which it never needed before because nothing
+  could empty it. Selection in Trash uses the same bar the content tabs use, reporting the
+  same count and selected size, and offers Restore and Delete forever. It does not offer
+  Export: exporting out of Trash is a way to keep a file you have already thrown away.
+  Restore is a real move — the mock records which tab and folder each row came from — and
+  raises a short confirmation toast, because otherwise restoring and deleting look identical
+  from the grid.
+- **The list view and the Trash table are one component.** They were two CSS grids in the
+  same stylesheet with different row heights, paddings, header weights and row actions, so
+  the same product had two tables that did not look related. Both are now the shared
+  `data-table`, extracted from the guideline Figma table, and the only thing that differs is
+  which columns each declares. The library row's on-photo action pill goes with it: that
+  control exists to stay legible over a photograph, and on a white table it was the one
+  element that did not belong to the table. Both tables now carry the same plain row menu,
+  which is what Trash already used. Download stays reachable as its own icon button.
+- **The capacity meter's action uses the secondary brand button at tiny size**, replacing a
+  tertiary small one, so Expand storage and Upgrade sit at the weight the button set
+  intends for an inline action beside a metric.
+- **The Add storage overlay loses its blue title pill.** With one offer, the shared pricing
+  overlay falls back to RD's single-offer badge, which here restated the dialog's own title
+  immediately beneath it. Passing no tabs removes it without touching the shared component.
+- **The selection bar's icons are masked rather than painted.** They are RD's white glyphs,
+  drawn for its filled pills; on the ghost bar's light ground they were white on white. The
+  same asset now takes the button's own colour, which also carries the destructive action's
+  red onto its trash icon. The fix is in the shared component, so every ghost-variant
+  consumer gets it.
 
 ## Post-prototype TODO
 

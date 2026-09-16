@@ -51,11 +51,23 @@ export function StorageMeter({ t, usage, state, isPro, onUpgrade, onExpand }) {
           so rather than offering a plan the user already has. */}
       <div className={styles.meterActions}>
         {isPro ? (
-          <Button variant="tertiary" size="small" onClick={onExpand} data-testid="storage-expand-entry">
+          <Button
+            variant="secondary"
+            tone="brand"
+            size="tiny"
+            onClick={onExpand}
+            data-testid="storage-expand-entry"
+          >
             {t('cloud.storage.action.expand.storage')}
           </Button>
         ) : (
-          <Button variant="tertiary" size="small" onClick={onUpgrade} data-testid="storage-upgrade-entry">
+          <Button
+            variant="secondary"
+            tone="brand"
+            size="tiny"
+            onClick={onUpgrade}
+            data-testid="storage-upgrade-entry"
+          >
             {t('cloud.storage.action.upgrade')}
           </Button>
         )}
@@ -65,14 +77,28 @@ export function StorageMeter({ t, usage, state, isPro, onUpgrade, onExpand }) {
 }
 
 /**
- * Persistent banner from 90 percent. It is the last warning before an action is
- * actually blocked, so it carries both exits: clearing space and buying it.
+ * Persistent banner from 90 percent, and again once the quota is spent. Critical
+ * is the last warning before an action is blocked; full is the state where it
+ * already is, and it keeps a bar of its own rather than waiting for the blocking
+ * dialog — a user who is over quota should be told so while looking at the page,
+ * not only at the moment a save fails. The two are one component because they
+ * say the same thing at two severities: the copy and the error ramp change, the
+ * shape and the single exit do not.
  */
-export function StorageCriticalBanner({ t, usage, onExpand }) {
+export function StorageStateBanner({ t, usage, state, onExpand }) {
+  const isFull = state === 'full';
   return (
-    <div className={styles.banner} data-testid="storage-critical-banner" role="status">
+    <div
+      className={styles.banner}
+      data-testid={isFull ? 'storage-full-banner' : 'storage-critical-banner'}
+      data-component-role="storage-state-banner"
+      data-state={state}
+      role="status"
+    >
       <p className={styles.bannerText}>
-        {t('cloud.storage.banner.critical.upgrade', { remaining: usage.remainingLabel })}
+        {isFull
+          ? t('cloud.storage.banner.full.upgrade')
+          : t('cloud.storage.banner.critical.upgrade', { remaining: usage.remainingLabel })}
       </p>
       {/* Cleanup was removed from the product on 2026-09-16, so adding space is
           the only action here. Recorded in decisions.md, including what it
