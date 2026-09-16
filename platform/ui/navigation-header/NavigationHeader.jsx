@@ -5,7 +5,6 @@ import externalLinkIcon from '../../../design-library/assets/icon/yco-navigation
 import wandIcon from '../../../design-library/assets/icon/yco-navigation-header/wand-start-editing.svg';
 import crownIcon from '../../../design-library/assets/icon/yco-navigation-header/crown.svg';
 import avatarPhotoCircle from '../../../design-library/assets/icon/yco-navigation-header/avatar-photo-circle.svg';
-import avatarMemberGlyph from '../../../design-library/assets/icon/yco-navigation-header/avatar-member-glyph.svg';
 import hamburgerIcon from '../../../design-library/assets/icon/yco-navigation-header/hamburger.svg';
 import mobilePromoIcon from '../../../design-library/assets/icon/yco-navigation-header/mobile-promo-icon.svg';
 import mobileWandIcon from '../../../design-library/assets/icon/yco-navigation-header/mobile-wand-icon.svg';
@@ -83,7 +82,7 @@ function Avatar({ src, onClick, label }) {
       {src ? (
         <img className={styles.avatarPhoto} src={src} alt="" aria-hidden="true" />
       ) : (
-        <img className={styles.avatarGlyph} src={avatarMemberGlyph} alt="" aria-hidden="true" />
+        <span className={styles.avatarGlyph} aria-hidden="true">&#xe92b;</span>
       )}
     </button>
   );

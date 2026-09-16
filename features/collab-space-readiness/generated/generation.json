@@ -5,7 +5,7 @@
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "claude-code",
   "model": "claude-sonnet-5",
-  "generatedAt": "2026-09-15T08:59:36.476Z",
+  "generatedAt": "2026-09-16T01:55:51.069Z",
   "files": [
     "feature.jsx",
     "feature.module.scss"
@@ -204,11 +204,11 @@
         },
         {
           "path": "design-library/components/navigation-header/component.yaml",
-          "sha256": "928e20194f3535a32f497c476facee1dcffd89985fc499291f006312a9acff74"
+          "sha256": "ac566cb9042dfb4a427d793e69c9e28f749f9d5460d78d6d863c610efa238739"
         },
         {
           "path": "design-library/components/ratio/component.yaml",
-          "sha256": "48079e70bdec93ec563f61ef0e05a4cbee9b1bddb217dcfab7908306d83304fb"
+          "sha256": "8fe7701c0af0795fe19181f9dd576ca9e86e1c9d52beb9cf5b4e5459d06e7346"
         },
         {
           "path": "design-library/components/result-page-shell/component.yaml",
@@ -224,11 +224,11 @@
         },
         {
           "path": "design-library/components/video-history/component.yaml",
-          "sha256": "67976c6bfede3e29cbdbe434b370d0a4239b19a98e159a195dcbaad0df28bb62"
+          "sha256": "6d2a328c4b5acecb153295dabfe038d0882a512da95b45731b91d18031c07621"
         },
         {
           "path": "design-library/components/video-info-dialog/component.yaml",
-          "sha256": "b943dc3a8f53d733239aaee94a96e5d245c020811665e233a4a46775f3637aa6"
+          "sha256": "b7875a3aed8fdeb490062b1e2a61d725e4964d7f48295742195f2abde6ce9581"
         },
         {
           "path": "design-library/components/video-results-surface/component.yaml",
@@ -676,11 +676,11 @@
         },
         {
           "path": "platform/ui/navigation-header/NavigationHeader.jsx",
-          "sha256": "602bce0a58ed3afea5cebaed0d0182f8304ac46b3b17641a096512f7ed285674"
+          "sha256": "6c5b6bc7987068f98e229f7ae1aeeb4e198060833b7330376b175f17b8d3fefe"
         },
         {
           "path": "platform/ui/navigation-header/NavigationHeader.module.scss",
-          "sha256": "7a124addeb88722895bdd3350c1840c6ce11733ad8d298988ea1ff9b1db6f85d"
+          "sha256": "e0bbaef59c3c85b4eb26ed261d5518b29bd48788d009f2bed9b59ec6a61f661e"
         },
         {
           "path": "platform/ui/navigation-header/NavigationHeader.stories.jsx",
@@ -700,7 +700,7 @@
         },
         {
           "path": "platform/ui/ratio/Ratio.module.scss",
-          "sha256": "cb698ab327919cb187c28cf175be1af851eb487f89c7b3bdf8a9de639fde2beb"
+          "sha256": "54c7fa75dcc49b6480566fec904f01b28c5aadd2d9fdeb6c128487367a335188"
         },
         {
           "path": "platform/ui/ratio/Ratio.stories.jsx",
@@ -1119,7 +1119,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "c151a7c82f7574253a9e6548c487ba8ce9617b88061d2ea0337eccdd083fa1c0",
+      "hash": "9bdf847cdda84031600a0333e21d1f9a272a7927b3376fd07dda83ca1591cb46",
       "edges": [
         {
           "from": "features/collab-space-readiness/generated/feature.jsx",
@@ -1161,6 +1161,6 @@
         "react"
       ]
     },
-    "revisionHash": "5b03694e99073717ec492bfbc3750a836f9f301ae112b392ad898e1944eae659"
+    "revisionHash": "c4b38440b785ebce4696b5d5eb9d88b985a0dae989f4f019c3ce672e5d800b0d"
   }
 }

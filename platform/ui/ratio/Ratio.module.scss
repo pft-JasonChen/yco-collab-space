@@ -24,8 +24,7 @@
   gap: var(--spacing-4);
 }
 
-.content.gery_v2,
-.content.image_extender {
+.content.gery_v2 {
   display: grid;
   /* Reference (2026-09-15, reported live via a Figma Dev Mode inspect —
      "這個是8px不是4px"): this variant was falling through to the base
@@ -39,9 +38,14 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.content.gery_v2.moreThanTwo,
-.content.image_extender {
+.content.gery_v2.moreThanTwo {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.content.image_extender {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--spacing-8);
 }
 
 .ratioContainer {
@@ -59,25 +63,33 @@
   cursor: pointer;
 }
 
-/* Reference (2026-09-15, reported live — "image extender被你亂改掉了，figma有
-   記錄明明是長這樣才對", with a Figma-recorded before/after showing this
-   variant as the same icon-left/label-right row gery_v2 already renders,
-   just its icon's own corner radius changed 4px → 2px, which the shared
-   .ratioBorder rule below already gives every variant): this used to be its
-   own flex-direction:column / 74px-min-height / solid-fill-when-active
-   treatment, which never actually matched anything in Figma — merged into
-   gery_v2's rules everywhere they're identical instead of two silently
-   diverging near-duplicates, since the record shows them pixel-alike. */
+/* Reverted (2026-09-16, reported live — "我昨天好像有和你說，image extender左邊
+   才是對的" / "你after反而改錯了"): the 2026-09-15 merge that used to sit here
+   (see git history, commit 4da2d78) wrongly assumed image_extender matched
+   gery_v2's icon-left/label-right row based on an unrelated corner-radius
+   record. It does not — image_extender keeps its own distinct vertical
+   layout with a solid fill when selected, restored below (and after the
+   .ratioContainerActive/.ratioBorder/.ratioBorderActive rules further down)
+   to their pre-merge values. */
 /* Reference (2026-09-15, reported live with a Figma inspect — "我的border只有
    1px誒，你的看起來比較粗"): was 2px solid --stroke-weak; Figma's own Stroke
    panel reads Position: Inside, Weight: 1, and the swatch shown is
    --stroke-strong (--grey-light-200), not the lighter --stroke-weak
    (--grey-light-100) — both the width and the token were off. */
 .ratioContainer.gery,
-.ratioContainer.gery_v2,
-.ratioContainer.image_extender {
+.ratioContainer.gery_v2 {
   background: var(--background-base);
   border: 1px solid var(--stroke-strong);
+}
+
+.ratioContainer.image_extender {
+  height: auto;
+  min-height: 74px;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  padding: var(--spacing-8) var(--spacing-4);
+  background: var(--background-base);
+  border: 1px solid var(--stroke-weak);
 }
 
 .ratioContainerActive {
@@ -89,10 +101,15 @@
    2px"): the selected state's own Stroke panel reads Weight: 2 against
    Stroke/Selected, not just a color swap on the unselected state's 1px. */
 .ratioContainerActive.gery,
-.ratioContainerActive.gery_v2,
-.ratioContainerActive.image_extender {
+.ratioContainerActive.gery_v2 {
   border-width: 2px;
   border-color: var(--stroke-selected);
+}
+
+.ratioContainerActive.image_extender {
+  color: var(--text-inverse-strong);
+  background: var(--fill-brand-strong);
+  border-color: var(--fill-brand-strong);
 }
 
 // Ratio is a composite (container + icon block + label, not a single
@@ -138,16 +155,24 @@
 }
 
 .ratioBorder.gery,
-.ratioBorder.gery_v2,
-.ratioBorder.image_extender {
+.ratioBorder.gery_v2 {
   border: none;
   background: var(--fill-weak);
 }
 
+.ratioBorder.image_extender {
+  border: 1px solid currentColor;
+  background: transparent;
+}
+
 .ratioBorderActive.gery,
-.ratioBorderActive.gery_v2,
-.ratioBorderActive.image_extender {
+.ratioBorderActive.gery_v2 {
   background: var(--fill-brand-strong);
+}
+
+.ratioBorderActive.image_extender {
+  border-width: 2px;
+  background: transparent;
 }
 
 /* Reference (2026-09-15, reported live with a Figma Dev Mode inspect of node
@@ -168,7 +193,17 @@
 @media (max-width: 768px) {
   .content.gery_v2,
   .content.gery_v2.twoOrLess,
-  .content.gery_v2.moreThanTwo,
+  .content.gery_v2.moreThanTwo {
+    display: flex;
+    flex-wrap: nowrap;
+    padding-bottom: var(--spacing-8);
+    overflow: auto hidden;
+  }
+
+  .ratioContainer.gery_v2 {
+    min-width: calc(var(--spacing-96) + var(--spacing-8));
+  }
+
   .content.image_extender {
     display: flex;
     flex-wrap: nowrap;
@@ -176,8 +211,7 @@
     overflow: auto hidden;
   }
 
-  .ratioContainer.gery_v2,
   .ratioContainer.image_extender {
-    min-width: calc(var(--spacing-96) + var(--spacing-8));
+    min-width: 88px;
   }
 }

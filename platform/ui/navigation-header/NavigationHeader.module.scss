@@ -15,6 +15,20 @@
    demonstrate the tablet/mobile layouts without needing to resize the whole
    browser viewport — a plain @media query would ignore a wrapper div's width
    entirely and always resolve against the real viewport. */
+/* Reference (2026-09-16, requested live — "user icon我昨天已經和你說用icon
+   font了"): the no-photo avatar glyph was a hand-drawn SVG import
+   (avatar-member-glyph.svg); swapped to the same YcoInterfaceIcons icon font
+   every other icon-font consumer in this codebase declares a local @font-face
+   for (icon-ic-user, U+E92B) — browsers de-duplicate identical @font-face
+   declarations by src, so repeating it here is harmless. */
+@font-face {
+  font-family: 'YcoInterfaceIcons';
+  src: url('../../../design-library/assets/font/yco-interface-icons/icomoon.woff') format('woff');
+  font-display: block;
+  font-style: normal;
+  font-weight: normal;
+}
+
 .header {
   position: relative;
   width: 100%;
@@ -326,7 +340,6 @@
   height: 100%;
 }
 
-.avatarGlyph,
 .avatarPhoto {
   position: absolute;
   width: 57%;
@@ -334,6 +347,20 @@
   inset: 21.5%;
   border-radius: 50%;
   object-fit: cover;
+}
+
+.avatarGlyph {
+  position: absolute;
+  inset: 21.5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'YcoInterfaceIcons', sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  color: var(--icon-inverse-strong);
 }
 
 /* ----- Mobile row ----- */
