@@ -473,10 +473,26 @@
      unscoped also capped the EMPTY state's own centered white card to
      210px — which needs the full available height to center within,
      exactly like result-column's own scoped rule above. Left a tall blank
-     gap below the card instead of the card filling the screen. */
+     gap below the card instead of the card filling the screen.
+
+     210px raised to 340px (2026-09-16, reported live — "video timeline
+     怎麼不見了" [why did the video timeline disappear]): 210px only left
+     room for .canvasViewport itself (which still wants its own
+     un-overridden 240px min-height from the base rule — min beats a
+     smaller max, same conflict `.canvasViewport`'s own attempt hit above),
+     with nothing left over for `.timeline` (the thumbnail scrubber row,
+     ~80px, laid out below it in the same `.canvasWorkspace` flex column)
+     — confirmed live, measured: `.timeline`'s own `.mainRow` (the actual
+     thumbnails) sat entirely past `.canvasAreaLoaded`'s own clipped
+     bottom edge, `overflow:hidden` cut it off completely, leaving only a
+     sliver of the `.labelRow` (00:00/0:30) barely peeking through. 340px
+     comfortably fits `.canvasViewport`'s natural 240px + the workspace's
+     own 16px gap + the timeline's ~80px with a little room to spare,
+     rather than fighting `.canvasViewport`'s own min-height down further
+     (which would cramp the video preview itself instead). */
   .page[data-loaded='true'] .editResult {
     min-height: 0;
-    max-height: 210px;
+    max-height: 340px;
   }
 
   /* Generate now pinned to the bottom of the viewport instead of sitting in

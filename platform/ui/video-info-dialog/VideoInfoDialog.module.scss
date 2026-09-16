@@ -232,6 +232,21 @@
   cursor: default;
 }
 
+/* Reference (2026-09-16, requested live — "這幾顆都是按鈕，所以要有hover press
+   效果"): these had no interaction feedback at all — same neutral
+   --fill-hover/--fill-press tokens SelectionToolbar's own ghost actions use
+   for an outlined/transparent-background button. Not excluding :disabled —
+   same reasoning as the entry directly above: this prototype's onSelect
+   wiring is an implementation detail, not a real design distinction, so
+   every option gets the same feedback regardless. */
+.nextGrid button:hover {
+  background: var(--fill-hover);
+}
+
+.nextGrid button:active {
+  background: var(--fill-press);
+}
+
 .footer {
   display: flex;
   align-items: center;
@@ -251,7 +266,22 @@
   background: var(--fill-strong);
   border: none;
   border-radius: var(--corner-radius-32);
+  cursor: pointer;
   font-weight: var(--font-weight-strong);
+}
+
+/* Same pass as .nextGrid button's own hover/press above ("這幾顆都是按鈕，所以
+   要有hover press效果") — this is a dark/--fill-strong button (matches
+   Button.module.css's own tone_neutral.variant_primary), so it takes that
+   pairing's own --fill-inverse-hover/--fill-inverse-press tokens instead of
+   the plain --fill-hover/--fill-press pair the outlined Next Action pills
+   use. */
+.footer .retry:hover {
+  background: var(--fill-inverse-hover);
+}
+
+.footer .retry:active {
+  background: var(--fill-inverse-press);
 }
 
 .close:focus-visible,
