@@ -107,6 +107,17 @@ checks:
         selector: "[data-testid='target-ratio-frame']"
         name: data-frame-contained
         value: "true"
+  - id: generate-shows-cost
+    criterion: VE-004
+    steps:
+      - action: click
+        selector: "[data-testid='load-sample-video']"
+      - action: click
+        selector: "[data-testid='trim-use-video']"
+    assertions:
+      - type: text
+        selector: "[data-testid='generate-credit-cost']"
+        value: "10"
   - id: start-generation
     criterion: VE-004
     steps:
@@ -117,9 +128,6 @@ checks:
       - action: click
         selector: "[data-testid='generate-video']"
     assertions:
-      - type: text
-        selector: "[data-testid='generate-credit-cost']"
-        value: "10"
       - type: attribute
         selector: "[data-testid='history-tab']"
         name: aria-selected

@@ -135,11 +135,21 @@
   overflow-x: auto;
 }
 
+/* Reference (2026-09-16, requested live — "1的ratio應該和2一樣", against a
+   screenshot marking this thumbnail 1 and the main video player above it
+   2): was a flat width:auto/max-width:152px + height:100px box (~1.52:1,
+   roughly 3:2) — an arbitrary size that didn't track the actual video's
+   own ratio at all, so it read visibly more square/cropped than the 16:9
+   player above it. `aspect-ratio` instead of a fixed height lets this
+   track the same 16:9 this dialog's own video content uses (the actual
+   uploaded/source video could in principle be any ratio, but 16:9 is what
+   every reference and mock fixture in this component uses — same value
+   the main player itself resolves to for this content). */
 .sources img {
   display: block;
-  width: auto;
-  max-width: calc(var(--spacing-128) + var(--spacing-24));
-  height: calc(var(--spacing-96) + var(--spacing-4));
+  width: calc(var(--spacing-128) + var(--spacing-24));
+  aspect-ratio: 16 / 9;
+  height: auto;
   flex: 0 0 auto;
   object-fit: cover;
   background: var(--fill-weak);

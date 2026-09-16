@@ -110,6 +110,18 @@
   from the acceptance criteria and its `retry-failed-generation` rendered-validation
   scenario — upload-error recovery (VE-007, a different state, mid-upload rather
   than post-generation) is unaffected and stays required.
+- On 2026-09-16, requested live ("History的tab不會有 generate這顆"), Generate
+  (ToolPageLayout's `footer` prop) was scoped to only render on the Edit tab, not
+  History — it had been rendering regardless of `activeTab` since this feature's
+  settings panel isn't itself tab-gated. VE-004's `start-generation` validation
+  scenario asserted `generate-credit-cost` (the "10" cost badge inside Generate
+  itself) was still visible AFTER clicking Generate, by which point the app has
+  already switched to History — that assertion depended on the very behavior just
+  corrected. Split into two scenarios: `generate-shows-cost` checks the cost badge
+  while still on the Edit tab (before Generate is clicked, where VE-004's "shows a
+  synthetic cost of 10" clause actually applies), `start-generation` keeps checking
+  the post-click History-tab-activated + processing-card assertions, minus the now
+  Edit-tab-only cost badge.
 
 ## Post-prototype TODO
 

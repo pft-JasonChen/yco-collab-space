@@ -233,3 +233,27 @@
     align-self: flex-end;
   }
 }
+
+/* Reference (2026-09-16, requested live — "手機版的dropdown 是置中", node
+   3319:48930): at true mobile width the filter trigger (and by extension
+   its dropdown list, anchored to the trigger below it) sits centered under
+   the tabs, not right-aligned like the 992px rule above gives it — that
+   rule was written for the wider 769-991px tablet range this same
+   `.toolbar{flex-direction:column}` stack also covers, and mobile turns
+   out to want a different alignment at this narrower width, not just a
+   smaller version of tablet's own layout. */
+@media (max-width: 768px) {
+  .filter {
+    align-self: center;
+  }
+
+  /* The list is anchored `right: 0` (base rule above) to line up with a
+     right-aligned trigger — now that the trigger itself is centered, the
+     list needs its own centered anchor too, or it'd hang off to one side
+     of a trigger no longer at that edge. */
+  .filter ul {
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}

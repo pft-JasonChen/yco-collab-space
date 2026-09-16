@@ -5,7 +5,7 @@
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "claude-code",
   "model": "claude-sonnet-5",
-  "generatedAt": "2026-09-16T13:29:06.629Z",
+  "generatedAt": "2026-09-16T13:52:54.633Z",
   "files": [
     "feature.jsx",
     "feature.module.scss"
@@ -736,11 +736,11 @@
         },
         {
           "path": "design-library/components/video-info-dialog/component.yaml",
-          "sha256": "bbcb8dd434c4b1a78d2f682cd01df20430eb3b59928e28fa378577ae37d3007f"
+          "sha256": "f20cb40c20374f81ca6d2727a1aed379b1496b5f6ceec9165e4fc84bbb84e098"
         },
         {
           "path": "design-library/components/video-results-surface/component.yaml",
-          "sha256": "007dc1ab7604f55eae34bbdcf1d05fe6a59b73c0f5d4fb07811b37190f1c92dc"
+          "sha256": "689176c183a4322dd66db1ac6114ef7d93010f4af63bf3e4b83f98a3357192e7"
         },
         {
           "path": "design-library/components/video-timeline/component.yaml",
@@ -1548,7 +1548,7 @@
         },
         {
           "path": "platform/ui/video-info-dialog/VideoInfoDialog.module.scss",
-          "sha256": "0866c90f09e4f900a65ea3f71dad171d0f7ddbb867ee828e8b1cc00ea27294dd"
+          "sha256": "e15566cda27fcc5b36a0fe529193498d49a943de43043ee4692d06aaf53c920a"
         },
         {
           "path": "platform/ui/video-info-dialog/VideoInfoDialog.stories.jsx",
@@ -1564,7 +1564,7 @@
         },
         {
           "path": "platform/ui/video-results-surface/VideoResultsSurface.module.scss",
-          "sha256": "95e3b6b36956bccbe21efd2a48c81fb5cb317b12d633a880600eba793d61a05a"
+          "sha256": "239a9f9b98d04fe4b38b29e402b83654c07fc7e303b4c6b1c3c9ea94c48b48dd"
         },
         {
           "path": "platform/ui/video-results-surface/VideoResultsSurface.stories.jsx",
@@ -1875,7 +1875,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "1bd3b37988e91f68b39e96e878205f387580291c4638a1ad09c7bfd3584ca6fd",
+      "hash": "396866bb66afc179318f308bae53e4a805fe26bac76983e74cfce07b50eea468",
       "edges": [
         {
           "from": "features/collab-space-readiness/generated/feature.jsx",
@@ -1917,6 +1917,6 @@
         "react"
       ]
     },
-    "revisionHash": "670ad421fe307e3af430cd4b3639eb65468d29f726819029d6760a48dd65339a"
+    "revisionHash": "b92d32f239997ae42e496dbdbc33400c94e8f2bbd37fcf4c8869b0788ebadb22"
   }
 }
