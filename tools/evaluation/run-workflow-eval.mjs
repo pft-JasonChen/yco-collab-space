@@ -20,6 +20,18 @@ function argument(name, fallback = null) {
   return index >= 0 ? process.argv[index + 1] : fallback;
 }
 
+// generation.json.usage is optional cost evidence the adapter records; the report
+// shows it so a workflow change can be judged on tokens and rounds, not only on PASS.
+function formatUsage(usage) {
+  if (!usage) return 'not recorded';
+  const parts = [];
+  if (Number.isFinite(usage.inputTokens) || Number.isFinite(usage.outputTokens)) {
+    parts.push((usage.inputTokens ?? '?') + ' in / ' + (usage.outputTokens ?? '?') + ' out');
+  }
+  if (Number.isFinite(usage.rounds)) parts.push(usage.rounds + ' rounds');
+  return parts.length > 0 ? parts.join(', ') : 'not recorded';
+}
+
 function markdownReport(report) {
   const lines = [
     '# Workflow evaluation — ' + report.case.id,
@@ -32,8 +44,8 @@ function markdownReport(report) {
     '- pass^k: ' + report.summary.passToK,
     '- Visual review: ' + report.summary.visualReview,
     '',
-    '| Trial | Source boundary | Gates | Rendered | Duration | Verdict |',
-    '|---|---|---|---|---|---|',
+    '| Trial | Source boundary | Gates | Rendered | Duration | Usage | Verdict |',
+    '|---|---|---|---|---|---|---|',
   ];
 
   for (const trial of report.trials) {
@@ -49,6 +61,8 @@ function markdownReport(report) {
         ' | ' +
         trial.durationMs +
         ' ms | ' +
+        formatUsage(trial.usage) +
+        ' | ' +
         trial.verdict +
         ' |',
     );
@@ -176,6 +190,7 @@ for (let trialNumber = 1; trialNumber <= requestedTrials; trialNumber += 1) {
       renderedPassed,
       surfaceMatches,
       visualReview: generation.surface?.visualReview || 'not-recorded',
+      usage: generation.usage ?? null,
       sourceChanges,
       durationMs: Date.now() - startedAt,
       commands,

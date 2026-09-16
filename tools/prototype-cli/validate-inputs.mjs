@@ -13,9 +13,12 @@ import {
 } from './project.mjs';
 import {
   acceptanceCoverageErrors,
+  intakeReferencesBrief,
   missingMarkdownSections,
   requiredDecisionSections,
   requiredIntakeSections,
+  researchBriefErrors,
+  researchBriefStatus,
 } from './intake-policy.mjs';
 import {
   resolveSurfaceContext,
@@ -152,7 +155,11 @@ async function validateFeature(feature) {
     if (dictionary.feature !== feature) {
       errors.push('i18n.json feature does not match folder: ' + feature);
     }
-    errors.push(...i18nDictionaryErrors(dictionary, await collectUsedI18nKeys(featureRoot)));
+    errors.push(
+      ...i18nDictionaryErrors(dictionary, await collectUsedI18nKeys(featureRoot), {
+        intakeOnly,
+      }),
+    );
     errors.push(...i18nPlaceholderErrors(dictionary));
   }
   const payloadSamples = await payloadSampleErrors(featureRoot);
@@ -231,6 +238,25 @@ async function validateFeature(feature) {
     }
   }
 
+  // Research is optional. A confirmed brief is an Intake input: it must be well
+  // formed, every recommendation must carry a source, and intake.md must cite it.
+  const briefPath = path.join(productRoot, 'research', 'brief.md');
+  if (await pathExists(briefPath)) {
+    const brief = await fs.readFile(briefPath, 'utf8');
+    errors.push(
+      ...researchBriefErrors(brief).map((error) => 'research/brief.md: ' + error),
+    );
+    if (
+      researchBriefStatus(brief) === 'confirmed' &&
+      (await pathExists(intakePath)) &&
+      !intakeReferencesBrief(await fs.readFile(intakePath, 'utf8'))
+    ) {
+      errors.push(
+        'intake.md must reference product/research/brief.md when the research brief is confirmed.',
+      );
+    }
+  }
+
   const packReferences = [
     surfaceIntent.primaryPack,
     ...surfaceIntent.borrowedPacks,
@@ -257,6 +283,19 @@ async function validateFeature(feature) {
 
   const surfaceResult = await resolveSurfaceContext(feature);
   errors.push(...surfaceResult.errors);
+
+  // A zone or role that is not at rest may name the criterion whose check reaches
+  // it; when it does, the criterion has to exist.
+  const acceptanceIds = new Set(contract.acceptance.map((criterion) => criterion.id));
+  for (const [group, entries] of Object.entries(surfaceResult.context?.presence ?? {})) {
+    for (const [id, entry] of Object.entries(entries)) {
+      if (entry.via && !acceptanceIds.has(entry.via)) {
+        errors.push(
+          'presence.' + group + '.' + id + ' references an unknown acceptance criterion: ' + entry.via,
+        );
+      }
+    }
+  }
 
   for (const mock of contract.mocks) {
     const mockPath = path.join(productRoot, mock);

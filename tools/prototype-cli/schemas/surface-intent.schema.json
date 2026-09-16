@@ -79,6 +79,19 @@
             "type": "string",
             "minLength": 1
           }
+        },
+        "presence": {
+          "description": "How a zone or component role is reached. at-rest (default): visible on the entry route before any interaction, so the rendered check asserts it at every viewport. on-interaction: reached through a user action such as a dialog, menu or toolbar. conditional: present only in some data or viewport state, such as a breadcrumb inside a folder or an empty state. deferred: declared in the composition but not rendered in this revision; a reason is required. Only at-rest entries are asserted visible by test:rendered. Ids may name zones or roles the feature declares or ones a pinned pack contributes.",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "zones": {
+              "$ref": "#/$defs/presenceMap"
+            },
+            "componentRoles": {
+              "$ref": "#/$defs/presenceMap"
+            }
+          }
         }
       }
     },
@@ -106,6 +119,49 @@
     }
   },
   "$defs": {
+    "presenceKind": {
+      "enum": [
+        "at-rest",
+        "on-interaction",
+        "conditional",
+        "deferred"
+      ]
+    },
+    "presenceMap": {
+      "type": "object",
+      "additionalProperties": false,
+      "patternProperties": {
+        "^[a-z0-9]+(?:-[a-z0-9]+)*$": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/presenceKind"
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "presence"
+              ],
+              "properties": {
+                "presence": {
+                  "$ref": "#/$defs/presenceKind"
+                },
+                "via": {
+                  "description": "Acceptance criterion id whose validation check reaches this zone or role.",
+                  "type": "string",
+                  "minLength": 1
+                },
+                "reason": {
+                  "description": "Required for deferred entries: why the composition declares it but this revision does not render it.",
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
     "packReference": {
       "type": "object",
       "additionalProperties": false,

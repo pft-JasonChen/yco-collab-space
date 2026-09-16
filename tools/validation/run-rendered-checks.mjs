@@ -19,6 +19,20 @@ function cliFeature() {
   );
 }
 
+// Fix-loop filters. `--check a,b` and `--viewport name` re-run only what failed; a
+// filtered run writes its evidence as rendered-validation.partial.* so it can never
+// be mistaken for the full evidence a stage transition is approved against.
+function cliList(flag) {
+  const index = process.argv.indexOf(flag);
+  if (index < 0) return null;
+  return String(process.argv[index + 1] ?? '')
+    .split(',')
+    .map((value) => value.trim())
+    .filter(Boolean);
+}
+
+const SURFACE_CHECK_ID = 'surface-structure';
+
 async function waitForServer(url, child) {
   const deadline = Date.now() + 30000;
 
@@ -187,21 +201,38 @@ async function applyAssertion(page, assertion) {
   throw new Error('Unsupported assertion type: ' + assertion.type);
 }
 
+/**
+ * Two measurements: the document, and the PrototypeFrame content container. The
+ * frame is `overflow: auto`, so a feature wider than the viewport scrolls inside
+ * it and the document never grows; measuring only the document would pass.
+ */
 async function assertNoHorizontalOverflow(page, viewport) {
-  const dimensions = await page.evaluate(() => ({
-    clientWidth: document.documentElement.clientWidth,
-    scrollWidth: document.documentElement.scrollWidth,
-  }));
+  const measurements = await page.evaluate(() => {
+    const read = (element) => ({
+      clientWidth: element.clientWidth,
+      scrollWidth: element.scrollWidth,
+    });
+    const frame = document.querySelector('[data-prototype-frame="content"]');
+    return {
+      document: read(document.documentElement),
+      frame: frame ? read(frame) : null,
+    };
+  });
 
-  if (dimensions.scrollWidth > dimensions.clientWidth + 1) {
-    throw new Error(
-      'Horizontal overflow at ' +
-        viewport.name +
-        ': scrollWidth=' +
-        dimensions.scrollWidth +
-        ', clientWidth=' +
-        dimensions.clientWidth,
-    );
+  for (const [label, dimensions] of Object.entries(measurements)) {
+    if (!dimensions) continue;
+    if (dimensions.scrollWidth > dimensions.clientWidth + 1) {
+      throw new Error(
+        'Horizontal overflow at ' +
+          viewport.name +
+          ' (' +
+          label +
+          '): scrollWidth=' +
+          dimensions.scrollWidth +
+          ', clientWidth=' +
+          dimensions.clientWidth,
+      );
+    }
   }
 }
 
@@ -224,19 +255,30 @@ async function assertGeometry(page, viewport, facts) {
   }
 }
 
+/**
+ * Only the at-rest composition is asserted here. A zone or role the intent marks
+ * on-interaction, conditional or deferred is reached by the validation checks
+ * whose steps open it, not by looking for it on the entry route.
+ */
 async function assertSurfaceStructure(page, surface) {
-  for (const zone of surface.requiredZones) {
+  const zones = surface.atRestZones ?? surface.requiredZones;
+  const roles = surface.atRestComponentRoles ?? surface.requiredComponentRoles;
+
+  // A role such as gallery-cell legitimately matches many elements; the structure
+  // check asks whether the composition is present, so the first match decides.
+  // Playwright's strict mode would otherwise throw on any repeated role.
+  for (const zone of zones) {
     const selector = '[data-surface-zone="' + zone + '"]';
 
-    if (!(await page.locator(selector).isVisible())) {
+    if (!(await page.locator(selector).first().isVisible())) {
       throw new Error('Missing required surface zone: ' + zone);
     }
   }
 
-  for (const role of surface.requiredComponentRoles) {
+  for (const role of roles) {
     const selector = '[data-component-role~="' + role + '"]';
 
-    if (!(await page.locator(selector).isVisible())) {
+    if (!(await page.locator(selector).first().isVisible())) {
       throw new Error('Missing required component role: ' + role);
     }
   }
@@ -276,6 +318,33 @@ const feature = cliFeature();
 const config = await readJson('prototype.config.json');
 const validation = await readYaml(
   path.join('features', feature, 'product', 'validation.yaml'),
+);
+const selectedChecks = cliList('--check');
+const selectedViewports = cliList('--viewport');
+const partialRun = Boolean(selectedChecks || selectedViewports);
+
+if (selectedChecks) {
+  const knownChecks = new Set([SURFACE_CHECK_ID, ...validation.checks.map((check) => check.id)]);
+  const unknownChecks = selectedChecks.filter((id) => !knownChecks.has(id));
+  if (unknownChecks.length > 0) {
+    throw new Error('Unknown --check id(s): ' + unknownChecks.join(', '));
+  }
+}
+
+if (selectedViewports) {
+  const knownViewports = new Set(config.viewports.map((viewport) => viewport.name));
+  const unknownViewports = selectedViewports.filter((name) => !knownViewports.has(name));
+  if (unknownViewports.length > 0) {
+    throw new Error('Unknown --viewport name(s): ' + unknownViewports.join(', '));
+  }
+}
+
+const runSurfaceCheck = !selectedChecks || selectedChecks.includes(SURFACE_CHECK_ID);
+const selectedValidationChecks = validation.checks.filter(
+  (check) => !selectedChecks || selectedChecks.includes(check.id),
+);
+const runViewports = config.viewports.filter(
+  (viewport) => !selectedViewports || selectedViewports.includes(viewport.name),
 );
 const surfaceResult = await resolveSurfaceContext(feature);
 
@@ -324,7 +393,7 @@ try {
   await waitForServer(baseUrl, server);
   browser = await chromium.launch({ headless: true });
 
-  for (const viewport of config.viewports) {
+  for (const viewport of runViewports) {
     const context = await browser.newContext({
       viewport: {
         width: viewport.width,
@@ -362,52 +431,54 @@ try {
     let surfacePassed = true;
     let surfaceError = null;
 
-    try {
-      const response = await page.goto(routeUrl, {
-        waitUntil: 'networkidle',
+    if (runSurfaceCheck) {
+      try {
+        const response = await page.goto(routeUrl, {
+          waitUntil: 'networkidle',
+        });
+
+        if (!response?.ok()) {
+          throw new Error('HTTP navigation failed: ' + response?.status());
+        }
+
+        await assertSurfaceStructure(page, surface);
+        await assertGeometry(page, viewport, geometry);
+        await assertNoHorizontalOverflow(page, viewport);
+
+        if (consoleErrors.length > 0) {
+          throw new Error('Console errors: ' + consoleErrors.join('; '));
+        }
+
+        if (pageErrors.length > 0) {
+          throw new Error('Page errors: ' + pageErrors.join('; '));
+        }
+
+        if (unexpectedRequests.length > 0) {
+          throw new Error(
+            'Unexpected network requests: ' + unexpectedRequests.join('; '),
+          );
+        }
+      } catch (caughtError) {
+        surfacePassed = false;
+        surfaceError = caughtError.message;
+      }
+
+      await page.screenshot({
+        path: surfaceScreenshotPath,
+        fullPage: true,
       });
 
-      if (!response?.ok()) {
-        throw new Error('HTTP navigation failed: ' + response?.status());
-      }
-
-      await assertSurfaceStructure(page, surface);
-      await assertGeometry(page, viewport, geometry);
-      await assertNoHorizontalOverflow(page, viewport);
-
-      if (consoleErrors.length > 0) {
-        throw new Error('Console errors: ' + consoleErrors.join('; '));
-      }
-
-      if (pageErrors.length > 0) {
-        throw new Error('Page errors: ' + pageErrors.join('; '));
-      }
-
-      if (unexpectedRequests.length > 0) {
-        throw new Error(
-          'Unexpected network requests: ' + unexpectedRequests.join('; '),
-        );
-      }
-    } catch (caughtError) {
-      surfacePassed = false;
-      surfaceError = caughtError.message;
+      results.push({
+        viewport: viewport.name,
+        check: SURFACE_CHECK_ID,
+        criterion: 'surface:' + surface.strategy,
+        passed: surfacePassed,
+        error: surfaceError,
+        screenshot: 'screenshots/' + surfaceScreenshotName,
+      });
     }
 
-    await page.screenshot({
-      path: surfaceScreenshotPath,
-      fullPage: true,
-    });
-
-    results.push({
-      viewport: viewport.name,
-      check: 'surface-structure',
-      criterion: 'surface:' + surface.strategy,
-      passed: surfacePassed,
-      error: surfaceError,
-      screenshot: 'screenshots/' + surfaceScreenshotName,
-    });
-
-    for (const check of validation.checks) {
+    for (const check of selectedValidationChecks) {
       const errorStart = {
         console: consoleErrors.length,
         page: pageErrors.length,
@@ -492,6 +563,10 @@ const report = {
   baseUrl,
   generatedAt: new Date().toISOString(),
   passed: results.every((result) => result.passed),
+  partial: partialRun,
+  selection: partialRun
+    ? { checks: selectedChecks, viewports: selectedViewports }
+    : null,
   surface: {
     strategy: surface.strategy,
     primaryPack: surface.primaryPack,
@@ -502,14 +577,30 @@ const report = {
   results,
 };
 
+const evidenceBaseName = partialRun
+  ? 'rendered-validation.partial'
+  : 'rendered-validation';
+
 await fs.writeFile(
-  path.join(evidenceRoot, 'rendered-validation.json'),
+  path.join(evidenceRoot, evidenceBaseName + '.json'),
   JSON.stringify(report, null, 2) + '\n',
 );
 await fs.writeFile(
-  path.join(evidenceRoot, 'rendered-validation.md'),
+  path.join(evidenceRoot, evidenceBaseName + '.md'),
   reportMarkdown(feature, baseUrl, results),
 );
+
+if (partialRun) {
+  process.stdout.write(
+    '[rendered] PARTIAL run (' +
+      (selectedChecks ? 'checks: ' + selectedChecks.join(',') : 'all checks') +
+      '; ' +
+      (selectedViewports ? 'viewports: ' + selectedViewports.join(',') : 'all viewports') +
+      ') — evidence written to ' +
+      evidenceBaseName +
+      '.json; run the full check before any stage transition\n',
+  );
+}
 
 if (!report.passed) {
   process.stderr.write('[rendered] FAIL ' + feature + '\n');
@@ -535,7 +626,7 @@ if (!report.passed) {
       ' — ' +
       results.length +
       ' checks across ' +
-      config.viewports.length +
+      runViewports.length +
       ' viewports\n',
   );
 }

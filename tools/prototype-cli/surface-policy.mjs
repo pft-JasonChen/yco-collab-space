@@ -12,7 +12,98 @@ export function surfacePackRelativeRoot(reference) {
   );
 }
 
-export function novelSurfaceContext(intent) {
+export const presenceKinds = [
+  "at-rest",
+  "on-interaction",
+  "conditional",
+  "deferred",
+];
+
+function sortedObject(value) {
+  return Object.fromEntries(
+    Object.keys(value)
+      .sort()
+      .map((key) => [key, value[key]]),
+  );
+}
+
+function presenceEntries(layoutIntent, group) {
+  const entries = {};
+  for (const [id, value] of Object.entries(
+    layoutIntent?.presence?.[group] ?? {},
+  )) {
+    entries[id] = typeof value === "string" ? { presence: value } : { ...value };
+  }
+  return entries;
+}
+
+/**
+ * A composition lists every zone and role it owns; presence says which of them are
+ * on screen before any interaction. The rendered check asserts only the at-rest set,
+ * so a dialog, a hover menu or a breadcrumb that exists only inside a folder can be
+ * declared without forcing the check to open it. Ids may be feature-declared or
+ * contributed by a pinned pack; anything else is an error.
+ */
+export function resolvePresence(
+  layoutIntent,
+  requiredZones,
+  requiredComponentRoles,
+) {
+  const errors = [];
+  const presence = {
+    zones: presenceEntries(layoutIntent, "zones"),
+    componentRoles: presenceEntries(layoutIntent, "componentRoles"),
+  };
+  const known = {
+    zones: new Set(requiredZones),
+    componentRoles: new Set(requiredComponentRoles),
+  };
+
+  for (const group of ["zones", "componentRoles"]) {
+    const label = group === "zones" ? "zone" : "component role";
+    for (const [id, entry] of Object.entries(presence[group])) {
+      if (!presenceKinds.includes(entry.presence)) {
+        errors.push(
+          "presence." + group + "." + id + " must be one of " + presenceKinds.join(", "),
+        );
+      }
+      if (!known[group].has(id)) {
+        errors.push(
+          "presence." + group + "." + id + " is not a declared or pack-required " + label,
+        );
+      }
+      if (entry.presence === "deferred" && !entry.reason) {
+        errors.push(
+          "presence." + group + "." + id + " is deferred and must record a reason",
+        );
+      }
+    }
+  }
+
+  const atRest = (group, ids) =>
+    [...ids]
+      .filter((id) => (presence[group][id]?.presence ?? "at-rest") === "at-rest")
+      .sort();
+
+  return {
+    errors,
+    presence: {
+      zones: sortedObject(presence.zones),
+      componentRoles: sortedObject(presence.componentRoles),
+    },
+    atRestZones: atRest("zones", requiredZones),
+    atRestComponentRoles: atRest("componentRoles", requiredComponentRoles),
+  };
+}
+
+export function novelSurfaceContext(
+  intent,
+  resolved = resolvePresence(
+    intent.layoutIntent,
+    intent.layoutIntent.zones,
+    intent.layoutIntent.componentRoles,
+  ),
+) {
   const context = {
     strategy: "novel",
     temporary: intent.temporary,
@@ -20,6 +111,9 @@ export function novelSurfaceContext(intent) {
     borrowedPacks: [],
     requiredZones: [...intent.layoutIntent.zones],
     requiredComponentRoles: [...intent.layoutIntent.componentRoles],
+    presence: resolved.presence,
+    atRestZones: resolved.atRestZones,
+    atRestComponentRoles: resolved.atRestComponentRoles,
     responsivePriority: [...intent.layoutIntent.responsivePriority],
     visualReview: "human-required",
   };
@@ -170,7 +264,15 @@ export async function resolveSurfaceContextFromIntent(
   { workspace = fromRoot() } = {},
 ) {
   if (intent.strategy === "novel") {
-    return { errors: [], context: novelSurfaceContext(intent) };
+    const resolved = resolvePresence(
+      intent.layoutIntent,
+      intent.layoutIntent.zones,
+      intent.layoutIntent.componentRoles,
+    );
+    if (resolved.errors.length > 0) {
+      return { errors: resolved.errors, context: null };
+    }
+    return { errors: [], context: novelSurfaceContext(intent, resolved) };
   }
 
   const catalog = await readYaml("platform/surfaces/catalog.yaml", workspace);
@@ -280,6 +382,12 @@ export async function resolveSurfaceContextFromIntent(
     }
   };
   for (const pack of packs) await visit(pack);
+  const resolvedPresence = resolvePresence(
+    intent.layoutIntent,
+    requiredZones,
+    requiredComponentRoles,
+  );
+  errors.push(...resolvedPresence.errors);
   if (errors.length) return { errors: [...new Set(errors)], context: null };
   const dependencies = [...resolved.values()].sort((a, b) =>
     (a.id + "@" + a.version).localeCompare(b.id + "@" + b.version, "en"),
@@ -306,6 +414,9 @@ export async function resolveSurfaceContextFromIntent(
     })),
     requiredZones: [...requiredZones].sort(),
     requiredComponentRoles: [...requiredComponentRoles].sort(),
+    presence: resolvedPresence.presence,
+    atRestZones: resolvedPresence.atRestZones,
+    atRestComponentRoles: resolvedPresence.atRestComponentRoles,
     responsivePriority: [
       ...primaryResult.pack.responsivePriority,
       ...intent.layoutIntent.responsivePriority,

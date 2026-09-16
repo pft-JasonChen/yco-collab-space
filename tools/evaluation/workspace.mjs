@@ -51,7 +51,12 @@ export async function createIsolatedWorkspace(label = 'trial') {
   const nodeModulesStat = await fs.stat(sourceNodeModules).catch(() => null);
 
   if (nodeModulesStat?.isDirectory()) {
-    await fs.symlink(sourceNodeModules, targetNodeModules, 'dir');
+    // A directory symlink needs elevated rights on Windows; a junction does not.
+    await fs.symlink(
+      sourceNodeModules,
+      targetNodeModules,
+      process.platform === 'win32' ? 'junction' : 'dir',
+    );
   }
 
   return workspace;
@@ -78,6 +83,8 @@ export function runCommand(command, args, options = {}) {
         ...options.env,
       },
       stdio: ['ignore', 'pipe', 'pipe'],
+      // `npm` is npm.cmd on Windows and only resolves through a shell.
+      shell: process.platform === 'win32',
     });
     const stdout = [];
     const stderr = [];

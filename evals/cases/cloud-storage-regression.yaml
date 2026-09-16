@@ -1,0 +1,9 @@
+schemaVersion: 1
+id: cloud-storage-regression
+suite: regression
+feature: cloud-storage
+trials: 1
+rendered: true
+expectedSurfaceStrategy: hybrid
+decisionBasis:
+  - Cloud Storage is the first real feature. It exercises a hybrid surface, presence on conditional zones and roles, shared-component reuse, planned i18n keys and the two-tier decisions file together, which the readiness fixture cannot.

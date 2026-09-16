@@ -47,7 +47,15 @@ The built-in readiness feature is:
 npm run prototype:create -- my-feature "My Feature"
 ```
 
-First ask a supported AI agent to run:
+When the feature introduces a new page pattern or a model competitors have already
+shaped, research it first. The browser work runs in a sub-agent and only the brief
+comes back:
+
+```text
+/prototype-research my-feature "one-line statement of the need"
+```
+
+Then ask a supported AI agent to run:
 
 ```text
 /prototype-intake my-feature
@@ -64,7 +72,21 @@ When Intake passes, run:
 ```
 
 The update workflow snapshots `product/**` and `design/**` before generation and fails
-if either source tree changes while React／SCSS is being generated.
+if either source tree changes while React／SCSS is being generated. Before the first
+update, `/prototype-wireframe my-feature` lets the PM settle the layout on a static
+greyscale page instead of on generated React.
+
+After a manager review, do not run a full update. Hand the feedback to:
+
+```text
+/prototype-revise my-feature
+```
+
+Revise maps each feedback item to the source file it changes, rewrites `decisions.md`
+in place, regenerates only the affected layers and re-records provenance. The fix loop
+uses `npm run prototype:check:fast -- my-feature` and `npm run rendered:summary`; the
+full `npm run build` runs once at the end. `CLAUDE.md` describes the Claude Code hooks
+and sub-agents that enforce this; `agent-adapters/codex/subagents.md` covers Codex.
 
 若功能需要共用圖片、icon或影片，PM只要在需求中說「請 index
 `assets/<type>/<collection>`」；Designer把檔案上傳至相同的
