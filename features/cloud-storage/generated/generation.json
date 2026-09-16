@@ -5,7 +5,7 @@
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "claude-code",
   "model": "claude-sonnet-5",
-  "generatedAt": "2026-09-16T02:44:15.489Z",
+  "generatedAt": "2026-09-16T02:52:27.138Z",
   "files": [
     "README.md",
     "feature.jsx",
@@ -2102,7 +2102,7 @@
         },
         {
           "path": "package-lock.json",
-          "sha256": "76f7927ecf86a4b2dce599bc495aaa9fce9910f9d9c9c26384c6ae5accef73bc"
+          "sha256": "4ccccc30b5647f23b163c068465d46ea93b51728a0a328dc72d5d8de2325398b"
         },
         {
           "path": "package.json",
@@ -3193,7 +3193,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "d29e591394c5939ba6fe0ab78d2bb93c2b4e4cf7f9f1801d7d3fdb9a1fdd2e38",
+      "hash": "427733852c333a57e2ca455b3b67f44ad5a20cb80cfe17e21b65e4788478d44e",
       "edges": [
         {
           "from": "features/cloud-storage/generated/feature.jsx",
@@ -3866,6 +3866,6 @@
         "react-dom"
       ]
     },
-    "revisionHash": "e5b23657da75357d9a5a85f2259c67dd477fee66ad2a84e0f517a77cea25d79e"
+    "revisionHash": "6b6c04817f456c33297703423af56c7da4cb85134d4f5722aba879fae31579db"
   }
 }

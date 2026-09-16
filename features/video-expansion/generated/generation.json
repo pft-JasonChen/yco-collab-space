@@ -5,7 +5,7 @@
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "claude-code",
   "model": "claude-sonnet-5",
-  "generatedAt": "2026-09-16T02:43:34.710Z",
+  "generatedAt": "2026-09-16T02:52:24.967Z",
   "files": [
     "README.md",
     "contract/integration.yaml",
@@ -1898,7 +1898,7 @@
         },
         {
           "path": "package-lock.json",
-          "sha256": "76f7927ecf86a4b2dce599bc495aaa9fce9910f9d9c9c26384c6ae5accef73bc"
+          "sha256": "4ccccc30b5647f23b163c068465d46ea93b51728a0a328dc72d5d8de2325398b"
         },
         {
           "path": "package.json",
@@ -2989,7 +2989,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "922e4f8b839600635b015c1967884ae66b59b8aa97133ea6b6f4f1d1a04e5159",
+      "hash": "ab5ef1b20190a4d192abd76bd239ece5d77a57c2588a90f11a9742eba4399a7b",
       "edges": [
         {
           "from": "design-library/assets/font/yco-interface-icons.style.css",
@@ -3788,6 +3788,6 @@
         "react-dom"
       ]
     },
-    "revisionHash": "b354fd6d5b95b4c10b1332102f1f1cbdc37f9866b30b099e756d9e386439d291"
+    "revisionHash": "7afccaf1ce6aeb10d82991915b91fb76dd1b7889d7d20377b823618bf15ebdaf"
   }
 }
