@@ -131,7 +131,7 @@ export default function VideoInfoDialog({
                   downloadUrl={videoUrl}
                   downloadFileName={downloadFileName}
                 />
-                {onRetry ? <button className={styles.retry} type="button" onClick={onRetry}>{labels.retry}</button> : null}
+                {onRetry ? <button className={styles.retry} type="button" onClick={onRetry}><span>{labels.retry}</span></button> : null}
               </div>
             </section>
           </div>

@@ -5,7 +5,7 @@
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "claude-code",
   "model": "claude-sonnet-5",
-  "generatedAt": "2026-09-16T11:19:07.215Z",
+  "generatedAt": "2026-09-16T13:29:07.612Z",
   "files": [
     "README.md",
     "feature.jsx",
@@ -2002,7 +2002,7 @@
         },
         {
           "path": "design-library/components/video-info-dialog/component.yaml",
-          "sha256": "beec40781a635b27a879ac0cfa1484179cd1f0bfc67ab107d69e62281318ce8e"
+          "sha256": "bbcb8dd434c4b1a78d2f682cd01df20430eb3b59928e28fa378577ae37d3007f"
         },
         {
           "path": "design-library/components/video-results-surface/component.yaml",
@@ -2862,11 +2862,11 @@
         },
         {
           "path": "platform/ui/video-info-dialog/VideoInfoDialog.jsx",
-          "sha256": "3bec425f16aed247b12f061bae173690c36ed15e2e3a8aab6ddc47772948d815"
+          "sha256": "632eceefabab5512a075e1756addff5c910c74a14b47fe5510337dd855520b38"
         },
         {
           "path": "platform/ui/video-info-dialog/VideoInfoDialog.module.scss",
-          "sha256": "ae2e506999d6954855de5c7156256a31fb56bfd053562fb0b0799f2c6450e596"
+          "sha256": "0866c90f09e4f900a65ea3f71dad171d0f7ddbb867ee828e8b1cc00ea27294dd"
         },
         {
           "path": "platform/ui/video-info-dialog/VideoInfoDialog.stories.jsx",
@@ -3193,7 +3193,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "016a2b3cd168c5879a3374f4a193ef43950fa4cf10efa2bacf816e97a2a54efd",
+      "hash": "7534122780d264958ee23e746cd18aa2bd79c3abe48e3ef9a57d4f34eabff988",
       "edges": [
         {
           "from": "features/cloud-storage/generated/feature.jsx",
@@ -3866,6 +3866,6 @@
         "react-dom"
       ]
     },
-    "revisionHash": "58ea26f8d755d4d5bfc9ab9cccde0999243d4493e11eb629b04487983ac79529"
+    "revisionHash": "d81ebe94fba120d89027c230b924d45ce0d4685b0164f49791dfa0b99dd162a0"
   }
 }

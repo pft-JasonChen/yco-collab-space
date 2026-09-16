@@ -247,17 +247,29 @@
   background: var(--fill-press);
 }
 
+/* Reference (2026-09-16, requested live — "中間還是要有距離啊，你去看一下", node
+   3245:619733): `justify-content: space-between` alone only spaces the icon
+   row and Retry apart when there's leftover width beyond what both need —
+   that was the case while Retry had a fixed min-width, but now that it's
+   `flex: 1` (fills whatever's left, see its own rule below) there IS no
+   leftover for space-between to distribute; Retry's box starts flush
+   against the icon row with zero gap. An explicit `gap` guarantees a floor
+   regardless of how much (or little) extra width Retry ends up claiming. */
 .footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: var(--spacing-16);
   margin-top: var(--spacing-8);
 }
 
 /* Like/dislike/download presentation comes from the shared Icon Action Buttons
    component; only the dialog's own Retry action is styled here. */
 .footer .retry {
+  position: relative;
+  isolation: isolate;
   display: grid;
+  flex: 0 0 auto;
   min-width: calc(var(--spacing-128) + var(--spacing-24));
   height: var(--spacing-32);
   place-items: center;
@@ -270,17 +282,49 @@
   font-weight: var(--font-weight-strong);
 }
 
-/* Same pass as .nextGrid button's own hover/press above ("這幾顆都是按鈕，所以
-   要有hover press效果") — this is a dark/--fill-strong button (matches
-   Button.module.css's own tone_neutral.variant_primary), so it takes that
-   pairing's own --fill-inverse-hover/--fill-inverse-press tokens instead of
-   the plain --fill-hover/--fill-press pair the outlined Next Action pills
-   use. */
-.footer .retry:hover {
+/* Reference (2026-09-16, requested live — "Retry hover的時候消失了，你有去看
+   Storybook 黑色按鈕的hover嗎？你應該接下來所有按鈕都要去Storybook拿好後，有
+   需要調整再來調整"): the first attempt directly swapped `background` to
+   `--fill-inverse-hover`/`--fill-inverse-press` — both are deliberately
+   translucent overlay tints (~12%/~20% white), meant to LAYER over a solid
+   fill, not replace it outright. Replacing `--fill-strong` with one
+   directly turned Retry almost fully transparent on the dialog's white
+   background — it visually vanished instead of just tinting, confirmed
+   live against a screenshot. Checked Storybook's own Button
+   (Button.module.css, `tone_neutral.variant_primary`, the shared source
+   for this exact dark-fill/light-text combination) for the actual pattern
+   it uses: a separate `::before`, absolutely positioned UNDER the label
+   (label given z-index:1 below) and OVER the real background, starting
+   transparent and only becoming the tint on hover/active — so the tint
+   composites on top of `--fill-strong` instead of replacing it. Copied
+   that structure here verbatim rather than re-deriving it. One difference
+   from Button.module.css: this button's label was bare text, not a child
+   element, so `.footer .retry > *` (lifting content above the overlay via
+   z-index) had nothing to match — bare inline text paints BEFORE a z-
+   index:0 positioned sibling in stacking order, so it would have painted
+   UNDER the tint once non-transparent, same class of bug moved from "whole
+   button invisible" to "label invisible on hover". Wrapped the label in a
+   `<span>` in the .jsx so this rule has a real element to lift. */
+.footer .retry::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  background: transparent;
+  pointer-events: none;
+}
+
+.footer .retry > * {
+  position: relative;
+  z-index: 1;
+}
+
+.footer .retry:hover::before {
   background: var(--fill-inverse-hover);
 }
 
-.footer .retry:active {
+.footer .retry:active::before {
   background: var(--fill-inverse-press);
 }
 
@@ -313,5 +357,20 @@
   .right {
     max-width: none;
     flex: none;
+  }
+
+  /* Reference (2026-09-16, requested live — "這顆不是固定寬度，手機是偵測剩餘
+     空間，稱滿剩餘空間", against a screenshot showing Retry overlapping the
+     like/dislike/download icons): Retry's own fixed min-width (above,
+     unchanged for >=992px) doesn't shrink or yield space back to its
+     siblings — at a narrow mobile dialog width the icon row and Retry
+     together no longer fit their natural sizes side by side, and neither
+     one gives way, so they overlapped instead of one shrinking. `flex: 1;
+     min-width: 0` lets Retry fill whatever space is actually left after
+     the icon row takes its own natural size, instead of insisting on its
+     desktop-width floor. */
+  .footer .retry {
+    flex: 1;
+    min-width: 0;
   }
 }

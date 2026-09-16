@@ -5,7 +5,7 @@
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "claude-code",
   "model": "claude-sonnet-5",
-  "generatedAt": "2026-09-16T11:19:05.192Z",
+  "generatedAt": "2026-09-16T13:29:05.188Z",
   "files": [
     "README.md",
     "contract/integration.yaml",
@@ -499,9 +499,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/video-info-dialog/component.yaml",
-        "contractSha256": "beec40781a635b27a879ac0cfa1484179cd1f0bfc67ab107d69e62281318ce8e",
+        "contractSha256": "bbcb8dd434c4b1a78d2f682cd01df20430eb3b59928e28fa378577ae37d3007f",
         "implementationImport": "platform/ui/video-info-dialog/index.js",
-        "implementationSha256": "2dc61ae9229837d9a74b620d4f78b962f1f3e71d83703e72ff0f812ff9d56849",
+        "implementationSha256": "639f8293ee79ad8b8864c5954cc4cd08ec8bc5ca665bcbdd6f8b80e999fd95aa",
         "runtimeAssets": [
           {
             "repositoryPath": "design-library/assets/icon/yco-video-actions/character-motion-swap.svg",
@@ -1790,7 +1790,7 @@
         },
         {
           "path": "design-library/components/video-info-dialog/component.yaml",
-          "sha256": "beec40781a635b27a879ac0cfa1484179cd1f0bfc67ab107d69e62281318ce8e"
+          "sha256": "bbcb8dd434c4b1a78d2f682cd01df20430eb3b59928e28fa378577ae37d3007f"
         },
         {
           "path": "design-library/components/video-results-surface/component.yaml",
@@ -2658,11 +2658,11 @@
         },
         {
           "path": "platform/ui/video-info-dialog/VideoInfoDialog.jsx",
-          "sha256": "3bec425f16aed247b12f061bae173690c36ed15e2e3a8aab6ddc47772948d815"
+          "sha256": "632eceefabab5512a075e1756addff5c910c74a14b47fe5510337dd855520b38"
         },
         {
           "path": "platform/ui/video-info-dialog/VideoInfoDialog.module.scss",
-          "sha256": "ae2e506999d6954855de5c7156256a31fb56bfd053562fb0b0799f2c6450e596"
+          "sha256": "0866c90f09e4f900a65ea3f71dad171d0f7ddbb867ee828e8b1cc00ea27294dd"
         },
         {
           "path": "platform/ui/video-info-dialog/VideoInfoDialog.stories.jsx",
@@ -2989,7 +2989,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "79dc2a76e742565a15e0468fc19f1a6791248cb13a7a6361b09147f82fae4a37",
+      "hash": "b2040a57414e1537275e0cbc99500ce2e63493848e0ff957f6fc55b1b6df3779",
       "edges": [
         {
           "from": "design-library/assets/font/yco-interface-icons.style.css",
@@ -3788,6 +3788,6 @@
         "react-dom"
       ]
     },
-    "revisionHash": "038346eb5a03018a73b723ae4378749b09db46bfba3e4600fd9a3cfaf74aa1b6"
+    "revisionHash": "0e2910c1a26a2395649c10889f0c8ae1aa34c5cff95206965fc95d1fce7f78e9"
   }
 }
