@@ -19,6 +19,17 @@
   background: var(--fill-weaker);
 }
 
+/* Reference (2026-09-16, requested live — the SVG dasharray attempt below
+   read as "怪怪的，有被切到的感覺" [wrong, like it's being cut] at the
+   rounded corners, then the user pasted Figma's own Dev Mode "copy as CSS"
+   for this whole shape directly): border/radius go straight on `.uploadBlock`
+   itself now, verbatim from that export, instead of a separate inset
+   overlay with a hand-tuned dash pattern. A plain `border-style: dashed`
+   doesn't hit Figma's exact 4px-dash/4px-gap spec, but it doesn't have the
+   SVG version's corner artifact either — asked for by name over the
+   pixel-perfect-but-broken alternative. `background` was already
+   `--fill-weaker` via the shared `.uploadBlock, .mediaBlock` rule above,
+   unaffected by any of this. */
 .uploadBlock {
   position: relative;
   display: flex;
@@ -27,16 +38,9 @@
   padding: var(--spacing-24);
   color: var(--text-strong);
   text-align: left;
-  border: 0;
-  cursor: pointer;
-}
-
-.dashedBorder {
-  position: absolute;
-  inset: 1px;
   border: 1px dashed var(--stroke-strong);
   border-radius: var(--corner-radius-8);
-  pointer-events: none;
+  cursor: pointer;
 }
 
 .uploadBlock:disabled {

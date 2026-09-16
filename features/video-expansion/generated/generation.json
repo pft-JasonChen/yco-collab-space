@@ -5,7 +5,7 @@
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "claude-code",
   "model": "claude-sonnet-5",
-  "generatedAt": "2026-09-16T05:06:01.794Z",
+  "generatedAt": "2026-09-16T07:38:17.253Z",
   "files": [
     "README.md",
     "contract/integration.yaml",
@@ -389,9 +389,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/upload-media-block/component.yaml",
-        "contractSha256": "c7ae08f022f93572604d57a2d146b3fd4557375fafe40d1b2052c1949a0bcc59",
+        "contractSha256": "7ec4406b8f01cf3bbbf727e7cdc9248d5ae81e8b70f783ac2ca27fab5269992d",
         "implementationImport": "platform/ui/upload-media-block/index.js",
-        "implementationSha256": "77792eab793c15df54f849f239edd7d7ef3374562ec8f4ca893464689e865297",
+        "implementationSha256": "7055b328b4c1e1f30b3456b0bb006a72159ea75e4ae3afe9f68c6a35c6004ee5",
         "runtimeAssets": [
           {
             "repositoryPath": "design-library/assets/icon/yco-upload-media-block/add.svg",
@@ -841,7 +841,7 @@
         },
         {
           "path": "features/video-expansion/generated/index.module.scss",
-          "sha256": "957d65df14e329b87d563963fb0afe4b7c271cf70939ae5f82d25f157d15df2b"
+          "sha256": "cea2fe81c065602f74aecc4b153ba2113fdea89c85a8ce50cf4145d71c50b13b"
         },
         {
           "path": "features/video-expansion/generated/settings/index.jsx",
@@ -852,7 +852,7 @@
           "sha256": "079e42b2b35548096dba01684133d3ba6cb46f86648eae166d64c204c608eaed"
         }
       ],
-      "hash": "582767e9a4425cb12b78e408e564e29589e82e7befc0234a7cb983216f2a6b35"
+      "hash": "fe16e7df4798df4f9f6cc40beb60746f71cbb7d17dc8aa1c216aac1f60ff4181"
     },
     "dependencies": {
       "files": [
@@ -1782,7 +1782,7 @@
         },
         {
           "path": "design-library/components/upload-media-block/component.yaml",
-          "sha256": "c7ae08f022f93572604d57a2d146b3fd4557375fafe40d1b2052c1949a0bcc59"
+          "sha256": "7ec4406b8f01cf3bbbf727e7cdc9248d5ae81e8b70f783ac2ca27fab5269992d"
         },
         {
           "path": "design-library/components/video-history/component.yaml",
@@ -1858,7 +1858,7 @@
         },
         {
           "path": "features/video-expansion/generated/index.module.scss",
-          "sha256": "957d65df14e329b87d563963fb0afe4b7c271cf70939ae5f82d25f157d15df2b"
+          "sha256": "cea2fe81c065602f74aecc4b153ba2113fdea89c85a8ce50cf4145d71c50b13b"
         },
         {
           "path": "features/video-expansion/generated/settings/index.jsx",
@@ -2626,11 +2626,11 @@
         },
         {
           "path": "platform/ui/upload-media-block/UploadMediaBlock.jsx",
-          "sha256": "7f4d257c26b150d398657ea60b1e10b39c49ae45b87ad8c3774f5cc869634f9a"
+          "sha256": "f65432f0bb271bd5a0b4c3033e2a477d6871faa6526d9fff57648e77eb3bceec"
         },
         {
           "path": "platform/ui/upload-media-block/UploadMediaBlock.module.scss",
-          "sha256": "454f1f22c35da8ee7d78f5b74addcf01bf9de62ac19958896a374f9462ec8e45"
+          "sha256": "42185a13b5cd95cec0a20d2d34456dde8975937e6f5ebc559726229910165b71"
         },
         {
           "path": "platform/ui/upload-media-block/UploadMediaBlock.stories.jsx",
@@ -2989,7 +2989,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "1bc933202cc4652198f3485fc669321abaf3ab1dbb44fec83d87c428a6b1d22a",
+      "hash": "951672022e7294488e9565d72cb0361fa838d72fb796d0bc6f87045b7bd8639e",
       "edges": [
         {
           "from": "design-library/assets/font/yco-interface-icons.style.css",
@@ -3788,6 +3788,6 @@
         "react-dom"
       ]
     },
-    "revisionHash": "d11ad01bef0f81b6ce9a44d022f3452c67171e820ee85fba678d54814ff7094f"
+    "revisionHash": "8386e167e928714bdaec68e6920eef5804049b39cda9ead3dd4ba9d02a7c7de0"
   }
 }

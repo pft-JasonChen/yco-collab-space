@@ -223,7 +223,6 @@ export default function UploadMediaBlock({
         disabled={disabled || !onUpload}
         onClick={onUpload}
       >
-        <span className={styles.dashedBorder} aria-hidden="true" />
         <img className={styles.addIcon} src={addIcon} alt="" aria-hidden="true" />
         <span className={styles.uploadCopy}>
           <strong>{uploadTitle}</strong>
