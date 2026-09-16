@@ -10,11 +10,12 @@
 /* Reference (2026-09-16, requested live — "手機版上傳後不用出現1[UploadMediaBlock
    的整塊縮圖]，手機版都是上傳後feature name右邊新增一顆upload button", against a
    real production mobile screenshot). Both this button and the section-hide
-   rule below are scoped to a true phone width (<=767px), NOT VideoResultsSurface's
-   own <=900px .mobileTitleRow breakpoint that button lives inside — 900px also
-   covers this project's own "tablet" viewport (768px), and its surface-intent
-   explicitly requires the uploaded-media Trim action (inside the section this
-   would hide) to stay visible once the panel stacks there ("Preserve the
+   rule below are scoped to a true phone width (<=767px) — matching
+   VideoResultsSurface's own <=767px .mobileTitleRow breakpoint that button
+   lives inside (both now aligned to the project's real mobile breakpoint,
+   2026-09-16 — "768以下才是變成手機版"), and its surface-intent explicitly
+   requires the uploaded-media Trim action (inside the section this would
+   hide) to stay visible once the panel stacks at tablet width ("Preserve the
    uploaded-media Trim action... when the inspector stacks at tablet width").
    Hidden by default and only shown under 768px so tablet keeps the full
    upload block (with its Trim action) and doesn't also grow a second,
@@ -130,9 +131,11 @@
   border-radius: var(--corner-radius-20);
 }
 
-.canvasAreaLoaded {
-  border-radius: var(--corner-radius-20);
-}
+/* Reference (2026-09-16, requested live via a DevTools inspect of
+   ._canvasAreaLoaded — "這個拿掉"): the loaded canvas area previously got
+   the same 20px corner radius as the empty-state card above, but the two
+   states aren't the same shape — removed so the loaded state renders with
+   square corners, only .canvasArea (empty state) keeps the rounding. */
 
 .canvasWorkspace {
   display: flex;
@@ -291,7 +294,12 @@
   object-fit: cover;
 }
 
-@media (max-width: 900px) {
+/* Breakpoint matches ToolPageLayout's own stacking breakpoint (updated
+   2026-09-16 to 767px, see that component's own module.scss — "769~991
+   panel是 w300, 992以上 panel是 w400, 768以下才是變成手機版"); everything below
+   depends on `.layout{flex-direction:column}` actually being active, so it
+   has to track that breakpoint exactly rather than use its own guess. */
+@media (max-width: 767px) {
   /* Was a flat `min-height: 1280px` guess, then `min-height: 100dvh` — both
      sized against the WRONG box. `100dvh` is the whole device viewport, but
      this element never gets the whole device viewport: PrototypeFrame's own
@@ -321,7 +329,7 @@
   /* Reference (2026-09-14, real production mobile screenshots):
      tabs/History-filter come first, then the page title, then the settings
      form — not the settings form first with tabs trailing after it, which is
-     what ToolPageLayout's own @media(max-width:900px){.layout{flex-direction:
+     what ToolPageLayout's own @media(max-width:767px){.layout{flex-direction:
      column}} alone produces (it just stacks panel-then-result in DOM order,
      doesn't reorder them). Reordered here via plain CSS `order` on
      ToolPageLayout's own stable data-surface-zone attributes rather than

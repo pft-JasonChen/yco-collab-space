@@ -223,6 +223,27 @@ export default function UploadMediaBlock({
         disabled={disabled || !onUpload}
         onClick={onUpload}
       >
+        {/* Reference (2026-09-16, see UploadMediaBlock.module.scss's own
+            .dashedBorder comment for the full back-and-forth): pathLength
+            normalizes this rect's total length to 248 declared units
+            regardless of its real rendered size, so a whole-number dasharray
+            (124 dash+gap periods) always closes cleanly with no leftover
+            seam at the rounded corners — while still landing close to
+            Figma's actual 4px-dash/4px-gap spec at this shape's own default
+            368x136 size. The rect itself is inset by half the stroke width
+            (0.5px) on every side, rx/ry shrunk to match (7.5, from 8) — an
+            SVG stroke paints centered on its path by default, so a rect
+            drawn flush with the box edge (x=0/y=0/100%/100%) only ever has
+            HALF its 1px width actually inside the box; the other half either
+            bled outside (before .uploadBlock had overflow:hidden) or, after
+            that fix, got clipped away, leaving every straight edge looking
+            like a 0.5px sliver ("感覺有被切一半", reported live once the
+            corners themselves looked right). Insetting the path itself keeps
+            the FULL stroke inside the box on every edge, corners included —
+            overflow:hidden stays on as a safety net, not the source of truth. */}
+        <svg className={styles.dashedBorder} aria-hidden="true" width="100%" height="100%">
+          <rect x="0.5" y="0.5" width="calc(100% - 1px)" height="calc(100% - 1px)" rx="7.5" ry="7.5" fill="none" stroke="var(--stroke-strong)" strokeWidth="1" pathLength="248" strokeDasharray="1 1" />
+        </svg>
         <img className={styles.addIcon} src={addIcon} alt="" aria-hidden="true" />
         <span className={styles.uploadCopy}>
           <strong>{uploadTitle}</strong>

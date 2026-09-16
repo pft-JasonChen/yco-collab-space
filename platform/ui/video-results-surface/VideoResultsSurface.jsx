@@ -92,10 +92,10 @@ export default function VideoResultsSurface({
   filterOptions,
   onFilterChange,
   /** Feature-page title, shown once directly under the tab bar — mobile-only
-   * (see .mobileTitle in the module.scss): at >=900px ToolPageLayout keeps the
+   * (see .mobileTitle in the module.scss): at >=768px ToolPageLayout keeps the
    * settings panel beside this surface and the page title already lives in
    * ResultPageShell's own header, so repeating it here would be redundant.
-   * Below that, ToolPageLayout stacks panel below this surface with no room
+   * Below that (<=767px), ToolPageLayout stacks panel below this surface with no room
    * left for a page-level heading of its own, so this is the one place a
    * title can sit between the tabs and whichever content is active — matching
    * a supplied reference of the real production mobile layout (tabs, then

@@ -19,17 +19,6 @@
   background: var(--fill-weaker);
 }
 
-/* Reference (2026-09-16, requested live — the SVG dasharray attempt below
-   read as "怪怪的，有被切到的感覺" [wrong, like it's being cut] at the
-   rounded corners, then the user pasted Figma's own Dev Mode "copy as CSS"
-   for this whole shape directly): border/radius go straight on `.uploadBlock`
-   itself now, verbatim from that export, instead of a separate inset
-   overlay with a hand-tuned dash pattern. A plain `border-style: dashed`
-   doesn't hit Figma's exact 4px-dash/4px-gap spec, but it doesn't have the
-   SVG version's corner artifact either — asked for by name over the
-   pixel-perfect-but-broken alternative. `background` was already
-   `--fill-weaker` via the shared `.uploadBlock, .mediaBlock` rule above,
-   unaffected by any of this. */
 .uploadBlock {
   position: relative;
   display: flex;
@@ -38,9 +27,43 @@
   padding: var(--spacing-24);
   color: var(--text-strong);
   text-align: left;
-  border: 1px dashed var(--stroke-strong);
+  border: 0;
   border-radius: var(--corner-radius-8);
+  /* Reference (2026-09-16, requested live — "轉角處沒有被container裁切到，所以
+     stroke看起來比較粗"): .dashedBorder's <rect> strokes its path centered
+     (half the 1px width inside the rx:8 curve, half outside, standard SVG
+     behaviour), and without this the outside half was never clipped to this
+     button's own rounded corner — only this element's OWN background
+     respects border-radius automatically, an absolutely-positioned child
+     does not unless the parent actually clips. That uncropped sliver was
+     what read as a "thicker" corner. */
+  overflow: hidden;
   cursor: pointer;
+}
+
+/* Reference (2026-09-16, three live corrections on this same outline in one
+   turn): (1) tried plain CSS `border: 1px dashed`, matching Figma Dev Mode's
+   own "copy as CSS" for this shape verbatim — reported back as "可是密度沒有
+   那麼高誒" [but the density isn't nearly high enough]: a browser's own
+   dashed-border renderer doesn't respect Figma's actual Dash 4/Gap 4 spec,
+   it picks its own (much sparser) dash length. (2) An earlier attempt this
+   same turn used a plain `stroke-dasharray="4 4"` on an SVG rect for that
+   exact ratio, but reported as "有被切到的感覺" [looks cut] right at the
+   rounded corners — the rect's actual perimeter is never an exact multiple
+   of the 8px dash+gap period, so the pattern doesn't close evenly and
+   leaves a stray short segment right where the path starts/ends, most
+   visible on the curve. Fixed by giving the `<rect>` an explicit
+   `pathLength` — normalizing its total length to a declared value instead
+   of its real one — and sizing `stroke-dasharray` in THOSE normalized units
+   as a whole number of periods (248 units = 124 whole 2-unit dash+gap
+   periods): the pattern is now guaranteed to close with no leftover
+   segment regardless of the rect's actual rendered size, while still
+   landing very close to a true 4px dash/4px gap at this shape's own
+   368x136 default size (~994px perimeter / 124 periods ≈ 4.01px each). */
+.dashedBorder {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
 }
 
 .uploadBlock:disabled {

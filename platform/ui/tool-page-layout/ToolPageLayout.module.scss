@@ -65,7 +65,7 @@
    instead of scrolling out of view. Needs its own opaque background since
    content now scrolls in the same box behind it while stuck.
    Declared here (before the media queries below, not after) so the
-   @media(max-width:900px) override further down — same specificity,
+   @media(max-width:767px) override further down — same specificity,
    source order decides — actually wins at that width instead of being
    silently clobbered by this same-specificity rule appearing later. */
 .footer {
@@ -90,10 +90,15 @@
   margin-top: var(--spacing-16);
 }
 
-@media (max-width: 1200px) {
+/* Breakpoints below match the project's shared responsive rules
+   (confirmed live, 2026-09-16 — "769~991 panel是 w300, 992以上 panel是 w400,
+   768以下才是變成手機版"), not this component's own earlier guesses
+   (1200px/900px) — those were never actually reconciled against the
+   project's real tablet/desktop split. */
+@media (max-width: 991px) {
   .panel {
-    width: 320px;
-    min-width: 320px;
+    width: 300px;
+    min-width: 300px;
   }
 
   .panelContent {
@@ -101,11 +106,30 @@
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 767px) {
+  /* Reference (2026-09-16, requested live — "手機版我只有說upload Area 移除，
+     但是給人家選ratio和generate button還是要在，不然人家怎麼操作", diagnosed
+     live): `.layout`'s own base-rule `overflow: hidden` (declared once,
+     above, for the desktop/tablet side-by-side case) was never overridden
+     here — combined with `.result`'s own hard, non-shrinking `height: 100%`
+     below and `.panel`'s own `flex-shrink: 0`, the two stacked children's
+     combined natural height (canvas + settings, ~956px measured live)
+     regularly exceeds whatever height Video Expansion's own
+     `[data-component-role='tool-page-layout']{flex:1}` mobile rule hands
+     `.layout` (~780px, its share of one screen) — the excess (here, the
+     WHOLE settings-inspector panel: aspect ratio + Generate, not just the
+     upload block the user actually asked to remove) got clipped away with
+     no scrollbar, since `overflow: hidden` doesn't scroll. `overflow:
+     visible` here lets that excess escape upward to ResultPageShell's own
+     `.shellContent`, which already goes `overflow: auto` at this same
+     breakpoint specifically to scroll taller stacked mobile content — this
+     was already the intended scroll container, `.layout` just wasn't
+     letting anything reach it. */
   .layout {
     height: auto;
     min-height: 100%;
     flex-direction: column;
+    overflow: visible;
   }
 
   .panel {
@@ -151,7 +175,7 @@
   }
 
   /* .footer's own position:sticky (below) relies on .panelContent actually
-     being the scrolling container it sticks within — true at >900px, but
+     being the scrolling container it sticks within — true at >767px, but
      .panelContent just went overflow:visible above, so sticky would escape
      to whatever ancestor DOES scroll (the whole stacked page), pinning the
      button mid-screen over the timeline/canvas below it instead of at the

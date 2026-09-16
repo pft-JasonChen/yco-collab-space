@@ -348,4 +348,25 @@
     top: -7px;
     height: calc(100% + 14px);
   }
+
+  /* Reference (2026-09-16, requested live via a DevTools inspect of
+     ._mainRow — "mobile有handler的padding和gap可以幫我改這樣嗎"): the
+     with-handles .mainRow (VideoTrimModal's own timeline) keeps its 20px
+     gap/28px-right-padding recipe at desktop, but on mobile the gap tightens
+     to --spacing-12 and the left padding drops to 0 (right stays 28px — the
+     handle-overhang clearance above still applies at this width). Left
+     align-items/background/border-radius alone, only these two changed.
+     Scoped as `.mainRow:not(.mainRowNoHandles)` rather than a bare
+     `.mainRow` — both classes render on the SAME element for the no-handles
+     variant (video-expansion's own persistent canvas timeline; see its own
+     JSX, `${styles.mainRow} ${showTrimHandles ? '' : styles.mainRowNoHandles}`),
+     and a bare same-specificity `.mainRow` here would win over
+     `.mainRowNoHandles`'s own all-widths gap:0/padding:4px rule purely by
+     appearing later in this file — confirmed live, it did exactly that
+     before this selector was scoped (the persistent canvas's mobile timeline
+     picked up this 12px gap/asymmetric padding it was never supposed to). */
+  .mainRow:not(.mainRowNoHandles) {
+    gap: var(--spacing-12);
+    padding: var(--spacing-4) 28px var(--spacing-4) var(--spacing-0);
+  }
 }
