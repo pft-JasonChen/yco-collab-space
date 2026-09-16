@@ -54,7 +54,13 @@
 .mainRow {
   display: flex;
   align-items: center;
-  gap: var(--spacing-12);
+  /* Reference (2026-09-16, requested live — "手機版和桌機的大小不太一樣，你比較
+     看看", against jb5SgyshmuPse0L7IFm0QO node 7460:183805's own Devices=dt/
+     Devices=mb variants): was --spacing-12 (12px); both variants actually
+     read gap:20px between the play button and the frames row — not a value
+     that differs by device, just one this component had wrong at every
+     width. */
+  gap: var(--spacing-20);
   /* Asymmetric right padding (2026-09-15, reported live via a Figma Dev Mode
      inspect of this same frame — "灰底右邊的padding應該改成28px，不然右邊的
      handler會超出去"): .trimRange (below) extends 16px past the track's own
@@ -91,6 +97,11 @@
   cursor: pointer;
 }
 
+/* Reference (2026-09-16, same node/request as .mainRow's gap fix above):
+   Figma's own Play_Fill icon is 24px on Devices=dt but 20px on
+   Devices=mb — this genuinely does differ by device, unlike the gap.
+   Desktop value stays the default; see the @media block below for the
+   mobile override. */
 .playGlyph {
   font-family: 'YcoInterfaceIcons', sans-serif;
   font-size: 24px;
@@ -113,9 +124,14 @@
    more prominent, and clipping at this level would cut that overshoot right
    back off. Rounding/clipping instead happens one level down, only on the
    layers that actually need it (.frames/.framesPlaceholder). */
+/* Reference (2026-09-16, same node/request as .mainRow's gap fix above):
+   was a flat --spacing-48 (48px) at every width — Figma's own frame row is
+   actually 56px on Devices=dt and 40px on Devices=mb, two different values
+   that happened to average out close to 48. Desktop value stays the
+   default; see the @media block below for the mobile override. */
 .track {
   position: relative;
-  height: var(--spacing-48);
+  height: var(--spacing-56);
   min-width: 0;
   flex: 1;
   cursor: pointer;
@@ -300,5 +316,25 @@
 @media (max-width: 768px) {
   .timeline {
     gap: var(--spacing-8);
+  }
+
+  /* Reference (2026-09-16, requested live — "手機版和桌機的大小不太一樣，你比較
+     看看", against jb5SgyshmuPse0L7IFm0QO node 7460:183805's own Devices=mb
+     variant): the frame row is 40px there (not the desktop-default 56px),
+     the Play_Fill icon is 20px (not 24px), and the playhead is 54px against
+     that 40px row — a 14px overshoot split evenly (7px each side), not the
+     desktop 12px/6px split, since Figma specs it as its own absolute value
+     rather than a fixed delta over the row height. */
+  .track {
+    height: var(--spacing-40);
+  }
+
+  .playGlyph {
+    font-size: 20px;
+  }
+
+  .playhead {
+    top: -7px;
+    height: calc(100% + 14px);
   }
 }

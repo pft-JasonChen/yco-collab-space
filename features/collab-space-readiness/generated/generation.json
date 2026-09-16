@@ -5,7 +5,7 @@
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "claude-code",
   "model": "claude-sonnet-5",
-  "generatedAt": "2026-09-16T04:38:54.467Z",
+  "generatedAt": "2026-09-16T04:46:18.057Z",
   "files": [
     "feature.jsx",
     "feature.module.scss"
@@ -744,7 +744,7 @@
         },
         {
           "path": "design-library/components/video-timeline/component.yaml",
-          "sha256": "c977fffa36cae15d26d36638a35d1c5e0971e1b1eb0fe9f3715f870ade8b113e"
+          "sha256": "ada3644bab92df12ea1a2498082b24e206a27b08b50a405e0c1fc1f807dc5e4e"
         },
         {
           "path": "design-library/components/video-trim-modal/component.yaml",
@@ -1580,7 +1580,7 @@
         },
         {
           "path": "platform/ui/video-timeline/VideoTimeline.module.scss",
-          "sha256": "e4e1a9fcd06c982115ded09bfd95d6b79c718de33455e0a78f0b7446131e6739"
+          "sha256": "4b2b6c492a6fb1462258b7000af9e8639ec47721be1b80a87b6009930205277d"
         },
         {
           "path": "platform/ui/video-timeline/VideoTimeline.stories.jsx",
@@ -1875,7 +1875,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "cb5b3b623e25a20debce461cd0c191fc14a6bb1c33d6b2bda9c76df0b7a26e8a",
+      "hash": "127aedd631bc076053ccc615af2ecc71182f8085d0dc336df6c1099554e3643f",
       "edges": [
         {
           "from": "features/collab-space-readiness/generated/feature.jsx",
@@ -1917,6 +1917,6 @@
         "react"
       ]
     },
-    "revisionHash": "6ed495ac676b25b6e5915175392af34f2dfa0f2c588bf5e9540dc0b32b2ac17f"
+    "revisionHash": "ac0dfa669dc1d368ffdf295c168e51655559c30d4d896bbd3c1419a3aac240be"
   }
 }
