@@ -100,7 +100,6 @@
      flexible .canvasViewport (below) claim that space itself instead. */
   justify-content: flex-start;
   gap: var(--spacing-16);
-  padding: var(--spacing-12) var(--spacing-20);
 }
 
 .canvasViewport {
@@ -119,7 +118,13 @@
   place-items: center;
   overflow: hidden;
   background: var(--fill-weak);
-  border-radius: var(--corner-radius-20);
+  /* Reference (2026-09-16, requested live — "上傳後灰底的圓角是8px", against RD's
+     own Video Object Removal reference frames "dt_Video Object
+     Removal_Empty"/"_Uploaded"): was --corner-radius-20, matching the empty
+     state's own white card (.canvasArea, correctly 20px per the same
+     reference's "空狀態白底的圓角是20px") — but the uploaded state's inner gray
+     surface is its own smaller 8px radius, not a copy of the outer card's. */
+  border-radius: var(--corner-radius-8);
 }
 
 .targetCanvas {
@@ -342,13 +347,4 @@
 
   .panelContent { overflow: visible; }
   .editResult { min-height: 560px; }
-
-  /* .canvasWorkspace's own justify-content:flex-start and .canvasViewport's
-     own flex:1 sizing (2026-09-15 fix, see their base rules above) already
-     apply here too — this block used to re-declare both with mobile-only
-     fixed values (400px) before that fix existed; narrower padding is the
-     one thing that's actually mobile-specific. */
-  .canvasWorkspace {
-    padding: var(--spacing-12) var(--spacing-8);
-  }
 }

@@ -33,12 +33,12 @@ implementation:
     - path: platform/ui/video-results-surface/VideoResultsSurface.jsx
       sha256: 9e8ce917642d471428f2b5bdbe6224c86fec08220aa75922689a70edfff979a5
     - path: platform/ui/video-results-surface/VideoResultsSurface.module.scss
-      sha256: 9eb6d14e4be0869a3380ee18f1155095640fb3b7db97dd3e642a7f6e27ff9037
+      sha256: 9e23da7cd2ab7c49db6310ffa89845051dc0bed919685d9a40691585b2001b39
     - path: platform/ui/video-results-surface/VideoResultsSurface.stories.jsx
       sha256: 3a45f5cf175d75cea0f77f2c72c1b7d13dad3a558b3a2879ebcfd8b5f1a86968
     - path: platform/ui/video-results-surface/index.js
       sha256: a5c4964e876fb65b31092450339a011549c9f778821f9eb7b439ceec53e79678
-  localFilesUpdated: 2026-09-14
+  localFilesUpdated: 2026-09-16
 publicApi:
   props:
     - { name: activeTab, required: true, values: [edit, history] }
@@ -65,3 +65,5 @@ decisionBasis:
   - "New optional `title` prop (2026-09-14, from real production mobile screenshots): rendered as a heading directly under the tab bar, visible only at <=900px (matching the exact width ToolPageLayout's own @media(max-width:900px){.layout{flex-direction:column}} switches at, not this file's separate pre-existing 992px breakpoint). At >=900px ToolPageLayout keeps the settings panel beside this surface and the feature's own page title already lives in ResultPageShell's header, so repeating it here would duplicate it; below that, ToolPageLayout stacks panel below this surface with the settings form no longer beside a header carrying the title, so this is the one place matching the reference's 'tabs, then title, then form' order without requiring a bigger restructure of ToolPageLayout itself (which stays untouched — Video Expansion also reorders panel-after-result at that same breakpoint via plain CSS `order` on ToolPageLayout's own stable data-surface-zone attributes, entirely from its own feature-level stylesheet)."
   - "mobileTitle font-size fix (2026-09-14, reported): was --font-size-heading-4/--line-height-heading-4 — corrected to --font-size-small/--line-height-small. font-weight-strong was left as-is; only the size/line-height pair was wrong, not the weight."
   - "New stable hook (2026-09-14): the edit/history content div now also carries data-component-role='results-content', so a consumer can turn it into a flex container from the outside. Needed for Video Expansion's empty-state card to actually fill the viewport height (reported live, then diagnosed): a flex item's grown size (this div, via its own flex:1) isn't a 'definite' height for a plain block child's percentage height — confirmed empirically that display:flex on the parent alone wasn't enough either; the child also needs its own explicit flex:1 rather than relying on height:100% to resolve as a flex-basis substitute. Not made flex by default in this file itself, since most existing consumers don't need it and it could shift assumptions app-wide."
+  - "`.editContent` given `overflow: hidden`, matching its own `.historyContent` sibling (2026-09-16, requested live — \"這裡應該要偵測剩下的螢幕空間有多少然後撐滿它，而不是scroll\"): without it, whenever a consumer's canvas card (inside editContent) had content taller than the space actually available (e.g. video-expansion's empty state with its icon showing), the excess didn't clip at the card — it escaped upward past this flex item's own box, which stays at its flex-resolved size regardless (`overflow: visible` doesn't grow a flex item to fit an overflowing child, it just stops clipping it), and kept inflating every ancestor up to ResultPageShell's own scrollable `main`, which then scrolled the whole page instead of the card adapting to whatever height it actually had. See tool-page-layout's own component.yaml for the matching fix one level up (`.result`/`.layout`)."
+  - "Auto-sync (2026-09-16): `VideoResultsSurface.module.scss` hash updated — no documented public prop or decisionBasis-quoted value appears to have changed, so this synced automatically. Review if this doesn't look right."

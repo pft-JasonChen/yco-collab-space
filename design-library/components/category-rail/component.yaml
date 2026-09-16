@@ -33,12 +33,12 @@ implementation:
     - path: platform/ui/category-rail/CategoryRail.jsx
       sha256: 83fef5923162070ab6a3722529dd6ce5d9d897500af69d220cd9b1b2b0760c5a
     - path: platform/ui/category-rail/CategoryRail.module.scss
-      sha256: bb93c9e1a2f89fa0b276a3e907893fc7d1716805e1dfaaf4f61be1bff61e0578
+      sha256: 84a83ef6cc6035983c1035ade6989d0b53cc9bf9624a73717a6d084d276161cc
     - path: platform/ui/category-rail/CategoryRail.stories.jsx
       sha256: ed2546483a5635b53d09f694439b2d8ddaa9a5aeb97ca485d06d33a0d2adf630
     - path: platform/ui/category-rail/index.js
       sha256: 67eca5ef929b299644ead641110c76a632b4748ae7985bcd20d77664661c8a86
-  localFilesUpdated: 2026-09-15
+  localFilesUpdated: 2026-09-16
 publicApi:
   props:
     - { name: items, required: true }
@@ -90,3 +90,5 @@ decisionBasis:
   - "Colour mapping, the approximations (2026-09-15), all in the gradient row and all carried from the canonical record rather than re-decided: `#6570fa` and `#a153fb` both collapse to `--purple-light-1000` (#7e47cc), so a three-stop indigo-to-violet ramp becomes a two-stop one; `#21cdff` -> `--blue-light-1000` (#03ade2); and the matching background stops `rgb(101 112 250 / 10%)` and `rgb(161 83 251 / 10%)` both collapse to `--purple-light-50`, with `rgb(123 225 255 / 10%)` -> `--blue-dark-50`. The gradient is visibly different from production and stays pending Designer definition. No consumer in this repository uses the gradient flag yet; it exists so the rail does not silently drop a treatment RD ships."
   - "Layout ownership (2026-09-15): RD pins the rail with `position: fixed` against a 64px header offset and switches on `data-is-header-portal` for its mobile menu. Fixed positioning is the host page's decision, so the rail is static here and the consumer places it; the independent scroll container is kept because the list must scroll separately from the page. The `<=992px` icon-over-label treatment is both a media query and a `compact` prop, so a consumer can hold it in step with gallery-grid's measured layout instead of letting the two disagree inside a fixed-width preview."
   - "Keyboard model is RD's, with one addition: RD moves the roving tabindex on arrow keys but never moves focus, so the caret is left behind. Focus follows the index here, but only while focus is already inside the rail, so an external selection change never steals it."
+  - "Scroller scrollbar restyled (2026-09-16, requested live — \"scrollbar在沒有滾動的時候可以不要顯示嗎？顏色也太深了，可以用Stroke/Weak\"): `.scroller` had `scrollbar-width: none` with no `::-webkit-scrollbar` counterpart, so Chromium/WebKit contexts that ignore `scrollbar-width` fell back to the browser default (thick, dark) scrollbar instead of actually hiding it. Given a real transparent-by-default/`--stroke-weak`-on-hover treatment instead of a full hide, since this list can genuinely overflow and a hover-revealed thumb is a real affordance, not just decoration."
+  - "Auto-sync (2026-09-16): `CategoryRail.module.scss` hash updated — no documented public prop or decisionBasis-quoted value appears to have changed, so this synced automatically. Review if this doesn't look right."

@@ -5,7 +5,7 @@
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "not-recorded",
   "model": "not-recorded",
-  "generatedAt": "2026-09-16T05:10:31.743Z",
+  "generatedAt": "2026-09-16T06:51:34.931Z",
   "files": [
     "README.md",
     "contract/integration.yaml",
@@ -338,9 +338,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/ratio/component.yaml",
-        "contractSha256": "8fe7701c0af0795fe19181f9dd576ca9e86e1c9d52beb9cf5b4e5459d06e7346",
+        "contractSha256": "b27707ede6d3acd3a06fca5704c7ee4d80adeca6a378a90f47fd0efc3da4f340",
         "implementationImport": "platform/ui/ratio/index.js",
-        "implementationSha256": "0ea719094957284b31a851de04b050e5e96497556d93feaa11a4ea522bd2420b",
+        "implementationSha256": "3c4f643e722d4ddf66edf1778db5bb8b25aa03a28fd3d9717c47da9f64035a39",
         "runtimeAssets": []
       },
       {
@@ -348,9 +348,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/result-page-shell/component.yaml",
-        "contractSha256": "1b100ec1cf0d0db2a89bc00035d446222e5201e1902e1978c53c4fe315fc198c",
+        "contractSha256": "dcf0e9940f9ed6078d58d93fac70f5af65a55b0e1cbaec9be9d71dc10bf296cb",
         "implementationImport": "platform/ui/result-page-shell/index.js",
-        "implementationSha256": "0ccd6e35d300ba2d946b3e934220e6694b190cce0e9f16d48bf46bc7110ca8ea",
+        "implementationSha256": "a0fed58c5c443cb6e3a0606289a8a94e26fe712f0cf3e1b390998249afd1bd1d",
         "runtimeAssets": [
           {
             "repositoryPath": "design-library/assets/font/yco-interface-icons/icomoon.woff",
@@ -379,9 +379,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/tool-page-layout/component.yaml",
-        "contractSha256": "2a13593fd30474e4501c5a6e09e5d4d5db5a99459d1820a3fe1f40595d3b5165",
+        "contractSha256": "7c81fd52a158019c9a247f3cf7f2fce7ea90bd8df669c1e342ca1afc271344d9",
         "implementationImport": "platform/ui/tool-page-layout/index.js",
-        "implementationSha256": "9813983fcbca43072f4e4f81bda0622e5883dfe59a31e7271903eb4610032a47",
+        "implementationSha256": "b0a3dd4bcd86932e87a6761b435c09877e9b8a8264f4fda4c8d8c45d78bcab2f",
         "runtimeAssets": []
       },
       {
@@ -389,9 +389,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/upload-media-block/component.yaml",
-        "contractSha256": "932658ae3fec4d687a1d514d987c7e06c18d8e8ec68077bf34333df3ecc148f8",
+        "contractSha256": "c7ae08f022f93572604d57a2d146b3fd4557375fafe40d1b2052c1949a0bcc59",
         "implementationImport": "platform/ui/upload-media-block/index.js",
-        "implementationSha256": "ea6ba2b6b74dc0eaec316bec01b0e948b34f79e684514b77e4f80085c686dff7",
+        "implementationSha256": "77792eab793c15df54f849f239edd7d7ef3374562ec8f4ca893464689e865297",
         "runtimeAssets": [
           {
             "repositoryPath": "design-library/assets/icon/yco-upload-media-block/add.svg",
@@ -499,9 +499,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/video-info-dialog/component.yaml",
-        "contractSha256": "b7875a3aed8fdeb490062b1e2a61d725e4964d7f48295742195f2abde6ce9581",
+        "contractSha256": "785e637f4910f622e7224965665155d6b37de2f8971ce412ea4ab1692cf99405",
         "implementationImport": "platform/ui/video-info-dialog/index.js",
-        "implementationSha256": "abfc3c89eaea7d82bac1ef2b0fc7a147f99481437a1c0eca82f3fba0face042f",
+        "implementationSha256": "9071c9bd1a23e55f58a6d7433f0844c1cf1a918f6917f7a9151b2a4b38dbecf6",
         "runtimeAssets": [
           {
             "repositoryPath": "design-library/assets/icon/yco-video-actions/character-motion-swap.svg",
@@ -562,9 +562,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/video-results-surface/component.yaml",
-        "contractSha256": "f7949fb3e53dc0f97ede29efd3ac2ad6f788a246c887c8b67a8812d02f2ff246",
+        "contractSha256": "126291ea2e63f73b6248c12dadc4a656cdb90e5c4785781824c14ade7e1c822c",
         "implementationImport": "platform/ui/video-results-surface/index.js",
-        "implementationSha256": "1fe72b06f8ece7c08854192c5e7bb0c27026414cb4e195f7e0ac8c9e0adb098a",
+        "implementationSha256": "9c08498eae4eff59b15824577cba4cdb9aed4ceb18cf4bb8f53e07fd95a5d89b",
         "runtimeAssets": []
       },
       {
@@ -837,11 +837,11 @@
         },
         {
           "path": "features/video-expansion/generated/index.jsx",
-          "sha256": "aa2d7ec3cbfc573dee0cd1bcdf73828701853820340f76868d5eb89b4a94537d"
+          "sha256": "68eaf4c53384182a776ae2c3274c5f9a6869a7ff3c1a3726a6b810a86c0c236d"
         },
         {
           "path": "features/video-expansion/generated/index.module.scss",
-          "sha256": "25c47a411ffe9842d8d21387aa2bd2ed623739037db1fc6e2d09ae4ede7e8053"
+          "sha256": "1684c0a8d9de1e4939bd7ac672e7ce1c269475c7198f3ced636a7a3b398cb6c9"
         },
         {
           "path": "features/video-expansion/generated/settings/index.jsx",
@@ -852,7 +852,7 @@
           "sha256": "079e42b2b35548096dba01684133d3ba6cb46f86648eae166d64c204c608eaed"
         }
       ],
-      "hash": "9cf139b796dddea5f643212674477cf0e47d9e68de20a7fa7456aeda314cb522"
+      "hash": "2a4360f46df3e8667494e996c6a5f86c8327cdeca5a5c1daf0d1af742268edb9"
     },
     "dependencies": {
       "files": [
@@ -1718,7 +1718,7 @@
         },
         {
           "path": "design-library/components/category-rail/component.yaml",
-          "sha256": "4195181c85f4dbbecff9180ece9f12c35f1394577cadf87b810b665206201e3d"
+          "sha256": "5e0d362467e837329f935c49dd6f441a40cc1afe1a5ddf2f529ab3981747d104"
         },
         {
           "path": "design-library/components/cell-actions/component.yaml",
@@ -1770,11 +1770,11 @@
         },
         {
           "path": "design-library/components/ratio/component.yaml",
-          "sha256": "8fe7701c0af0795fe19181f9dd576ca9e86e1c9d52beb9cf5b4e5459d06e7346"
+          "sha256": "b27707ede6d3acd3a06fca5704c7ee4d80adeca6a378a90f47fd0efc3da4f340"
         },
         {
           "path": "design-library/components/result-page-shell/component.yaml",
-          "sha256": "1b100ec1cf0d0db2a89bc00035d446222e5201e1902e1978c53c4fe315fc198c"
+          "sha256": "dcf0e9940f9ed6078d58d93fac70f5af65a55b0e1cbaec9be9d71dc10bf296cb"
         },
         {
           "path": "design-library/components/selection-toolbar/component.yaml",
@@ -1782,11 +1782,11 @@
         },
         {
           "path": "design-library/components/tool-page-layout/component.yaml",
-          "sha256": "2a13593fd30474e4501c5a6e09e5d4d5db5a99459d1820a3fe1f40595d3b5165"
+          "sha256": "7c81fd52a158019c9a247f3cf7f2fce7ea90bd8df669c1e342ca1afc271344d9"
         },
         {
           "path": "design-library/components/upload-media-block/component.yaml",
-          "sha256": "932658ae3fec4d687a1d514d987c7e06c18d8e8ec68077bf34333df3ecc148f8"
+          "sha256": "c7ae08f022f93572604d57a2d146b3fd4557375fafe40d1b2052c1949a0bcc59"
         },
         {
           "path": "design-library/components/video-history/component.yaml",
@@ -1794,11 +1794,11 @@
         },
         {
           "path": "design-library/components/video-info-dialog/component.yaml",
-          "sha256": "b7875a3aed8fdeb490062b1e2a61d725e4964d7f48295742195f2abde6ce9581"
+          "sha256": "785e637f4910f622e7224965665155d6b37de2f8971ce412ea4ab1692cf99405"
         },
         {
           "path": "design-library/components/video-results-surface/component.yaml",
-          "sha256": "f7949fb3e53dc0f97ede29efd3ac2ad6f788a246c887c8b67a8812d02f2ff246"
+          "sha256": "126291ea2e63f73b6248c12dadc4a656cdb90e5c4785781824c14ade7e1c822c"
         },
         {
           "path": "design-library/components/video-timeline/component.yaml",
@@ -1858,11 +1858,11 @@
         },
         {
           "path": "features/video-expansion/generated/index.jsx",
-          "sha256": "aa2d7ec3cbfc573dee0cd1bcdf73828701853820340f76868d5eb89b4a94537d"
+          "sha256": "68eaf4c53384182a776ae2c3274c5f9a6869a7ff3c1a3726a6b810a86c0c236d"
         },
         {
           "path": "features/video-expansion/generated/index.module.scss",
-          "sha256": "25c47a411ffe9842d8d21387aa2bd2ed623739037db1fc6e2d09ae4ede7e8053"
+          "sha256": "1684c0a8d9de1e4939bd7ac672e7ce1c269475c7198f3ced636a7a3b398cb6c9"
         },
         {
           "path": "features/video-expansion/generated/settings/index.jsx",
@@ -1910,7 +1910,7 @@
         },
         {
           "path": "platform/runtime/PrototypeFrame.jsx",
-          "sha256": "6620139f238d2bd8013c52439dda8f5a28ced98a35be5d7757772c5a2a80e55e"
+          "sha256": "b00a47df24020d32be1dfa0862f487d3fcdb8b7bc6fc6d3fae584c1bd1272bb0"
         },
         {
           "path": "platform/runtime/PrototypeFrame.module.scss",
@@ -2322,7 +2322,7 @@
         },
         {
           "path": "platform/ui/category-rail/CategoryRail.module.scss",
-          "sha256": "bb93c9e1a2f89fa0b276a3e907893fc7d1716805e1dfaaf4f61be1bff61e0578"
+          "sha256": "84a83ef6cc6035983c1035ade6989d0b53cc9bf9624a73717a6d084d276161cc"
         },
         {
           "path": "platform/ui/category-rail/CategoryRail.stories.jsx",
@@ -2574,7 +2574,7 @@
         },
         {
           "path": "platform/ui/ratio/Ratio.module.scss",
-          "sha256": "54c7fa75dcc49b6480566fec904f01b28c5aadd2d9fdeb6c128487367a335188"
+          "sha256": "3c49c8d0bc67e643770f4e79e2f2306735dad8b4b0ea471294f83a9c62817ecd"
         },
         {
           "path": "platform/ui/ratio/Ratio.stories.jsx",
@@ -2594,7 +2594,7 @@
         },
         {
           "path": "platform/ui/result-page-shell/ResultPageShell.module.scss",
-          "sha256": "07ec6ef148e929788ada2df77ac421d0fac279503f37a2415b6dec64eed20d5c"
+          "sha256": "2df4c0d7e7c9667c1a8bc66a3b5eac78024fe1e4378d96c05546ab681e69809c"
         },
         {
           "path": "platform/ui/result-page-shell/ResultPageShell.stories.jsx",
@@ -2634,7 +2634,7 @@
         },
         {
           "path": "platform/ui/tool-page-layout/ToolPageLayout.module.scss",
-          "sha256": "9d2ac2bf1429effcbc6c8fb2bd26de670501f36f5aa3dee3ff22f588e10cff58"
+          "sha256": "d68511fb2cfe211b91dc2b9b6ff9e447294cea8c06f3933809400d65111c8c9b"
         },
         {
           "path": "platform/ui/tool-page-layout/ToolPageLayout.stories.jsx",
@@ -2650,7 +2650,7 @@
         },
         {
           "path": "platform/ui/upload-media-block/UploadMediaBlock.module.scss",
-          "sha256": "7dc0f16c0a038b0afd841dc80219101c1d1b3b195a2b69ac9440d843159a28c0"
+          "sha256": "454f1f22c35da8ee7d78f5b74addcf01bf9de62ac19958896a374f9462ec8e45"
         },
         {
           "path": "platform/ui/upload-media-block/UploadMediaBlock.stories.jsx",
@@ -2678,11 +2678,11 @@
         },
         {
           "path": "platform/ui/video-info-dialog/VideoInfoDialog.jsx",
-          "sha256": "61b65705a122738079534237f3e6478b119eb7aa46a96ef027c277ab60eaba3a"
+          "sha256": "3bec425f16aed247b12f061bae173690c36ed15e2e3a8aab6ddc47772948d815"
         },
         {
           "path": "platform/ui/video-info-dialog/VideoInfoDialog.module.scss",
-          "sha256": "b2ce1f2766e568cedc20bbffcc263e93e9438ceb7db4aa5dceab909c7d8333a4"
+          "sha256": "5dbe8027c47e8c1490ad84dea7754b473325625124358a87c1c5df6465807730"
         },
         {
           "path": "platform/ui/video-info-dialog/VideoInfoDialog.stories.jsx",
@@ -2698,7 +2698,7 @@
         },
         {
           "path": "platform/ui/video-results-surface/VideoResultsSurface.module.scss",
-          "sha256": "9eb6d14e4be0869a3380ee18f1155095640fb3b7db97dd3e642a7f6e27ff9037"
+          "sha256": "9e23da7cd2ab7c49db6310ffa89845051dc0bed919685d9a40691585b2001b39"
         },
         {
           "path": "platform/ui/video-results-surface/VideoResultsSurface.stories.jsx",
@@ -3009,7 +3009,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "16d80d3ae0b3a085650b02e893f50d0bd0291ccf01045068910f90d3352c05fb",
+      "hash": "6c3ddd1b5daccf269af9b8d1029a26b5670c700a4c1d57df8ab38a86072e497f",
       "edges": [
         {
           "from": "design-library/assets/font/yco-interface-icons.style.css",
@@ -3682,6 +3682,11 @@
           "to": "package:react"
         },
         {
+          "from": "platform/ui/video-info-dialog/VideoInfoDialog.module.scss",
+          "specifier": "../../../design-library/assets/font/yco-interface-icons/icomoon.woff",
+          "to": "design-library/assets/font/yco-interface-icons/icomoon.woff"
+        },
+        {
           "from": "platform/ui/video-results-surface/index.js",
           "specifier": "./VideoResultsSurface.jsx",
           "to": "platform/ui/video-results-surface/VideoResultsSurface.jsx"
@@ -3803,6 +3808,6 @@
         "react-dom"
       ]
     },
-    "revisionHash": "6055d5429ec4125e24a29ee14bbfd57abe4259c0a20200401e98ac6d5d74653b"
+    "revisionHash": "77a8f3f4024066087ddab5df81bb8ad0fcd84c1b6f71604017a3d853f1ab18d3"
   }
 }

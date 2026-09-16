@@ -163,6 +163,17 @@
   /* Bottom was --spacing-8, the only side not using the gutter — the canvas
      card sat 24px from the left/right edges but only 8px from the bottom. */
   padding: 0 var(--video-result-gutter) var(--video-result-gutter);
+  /* Reference (2026-09-16, requested live — "這裡應該要偵測剩下的螢幕空間有多少
+     然後撐滿它，而不是scroll"): was missing the `overflow: hidden` its own
+     .historyContent sibling already has. Without it, whenever the canvas
+     card's own content (e.g. the empty-state icon+copy) was taller than the
+     space actually available, the excess didn't just clip inside the card —
+     it escaped upward past this flex item's own box (which stays at its
+     flex-resolved size regardless, `overflow: visible` doesn't grow it) and
+     inflated every ancestor up to ResultPageShell's own scrollable `main`,
+     which then scrolled the WHOLE page instead of the card adapting to
+     whatever height it actually had. */
+  overflow: hidden;
 }
 
 .historyContent {

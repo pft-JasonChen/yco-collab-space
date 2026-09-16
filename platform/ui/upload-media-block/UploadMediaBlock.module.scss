@@ -108,6 +108,10 @@
   object-fit: contain;
 }
 
+/* Reference (2026-09-16, reported live — "這三顆顏色好像不太一樣，都幫我用
+   fill-overlay就好，不用strong"): was --fill-overlay-strong, one shade darker
+   than .previewPlay/.previewMuted's own --fill-overlay, so the three preview
+   overlays (mute, play, duration) didn't read as one consistent treatment. */
 .duration {
   position: absolute;
   right: var(--spacing-4);
@@ -117,7 +121,7 @@
   place-items: center;
   padding: 0 var(--spacing-8);
   color: var(--text-inverse-strong);
-  background: var(--fill-overlay-strong);
+  background: var(--fill-overlay);
   border-radius: var(--corner-radius-32);
   font-size: var(--font-size-micro);
   line-height: var(--line-height-micro);
