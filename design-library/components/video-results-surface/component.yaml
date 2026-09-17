@@ -33,12 +33,12 @@ implementation:
     - path: platform/ui/video-results-surface/VideoResultsSurface.jsx
       sha256: 47222a54477d6c39cd8e8ed71f29f19f2ab03539dd207c8f060c68d4a61eecc5
     - path: platform/ui/video-results-surface/VideoResultsSurface.module.scss
-      sha256: 2c37baa228811078667f93eebe62b1c2a93931a5e041c5e3d62170c82de45332
+      sha256: a54629716176afa032ff5bc7694d8d539b7b92e64b2b3425bf4d68e6b02e154e
     - path: platform/ui/video-results-surface/VideoResultsSurface.stories.jsx
       sha256: 3a45f5cf175d75cea0f77f2c72c1b7d13dad3a558b3a2879ebcfd8b5f1a86968
     - path: platform/ui/video-results-surface/index.js
       sha256: a5c4964e876fb65b31092450339a011549c9f778821f9eb7b439ceec53e79678
-  localFilesUpdated: 2026-09-16
+  localFilesUpdated: 2026-09-17
 publicApi:
   props:
     - { name: activeTab, required: true, values: [edit, history] }
@@ -77,4 +77,8 @@ decisionBasis:
   - "Auto-sync (2026-09-16): `VideoResultsSurface.jsx`, `VideoResultsSurface.module.scss` hashes updated — no documented public prop or decisionBasis-quoted value appears to have changed, so this synced automatically. Review if this doesn't look right."
   - "Mobile `.filter` centering corrected — full-width dropdown, not just a centered narrow trigger (2026-09-16, requested live — \"dropdown menu你沒看我給你的截圖嗎，寬度要滿版扣掉padding\", after the entry directly above): `align-self: center` only centers a flex item at its OWN content width — since `.filter` itself is just the ~68px trigger button's own box, that gave the dropdown list underneath it that same narrow ~68px box to anchor against no matter how the list itself was positioned. `.toolbar`'s own `align-items: stretch` (992px rule) is what `.tabs` already relies on for full width, but the SAME 992px block also sets `.filter`'s own `align-self: flex-end` — explicitly reset to `stretch` here so `.filter` actually stretches to that same full content width, with `justify-content: center` then centering the trigger BUTTON within it, and `.filter ul` spanning `.filter`'s own now-full width directly."
   - "Auto-sync (2026-09-16): `VideoResultsSurface.module.scss` hash updated — no documented public prop or decisionBasis-quoted value appears to have changed, so this synced automatically. Review if this doesn't look right."
+  - "`.mobileTitleRow` given a fixed 48px height and flat 24px side padding, no bottom padding (2026-09-16, requested live via a DevTools inline-style experiment — height:48px, padding:0 24px): was auto-height with a `var(--video-result-gutter)` side inset (16px at this breakpoint) and a spacing-16 bottom gap."
   - "Auto-sync (2026-09-16): `VideoResultsSurface.module.scss` hash updated — no documented public prop or decisionBasis-quoted value appears to have changed, so this synced automatically. Review if this doesn't look right."
+  - "`.toolbar` given a tighter bottom padding at mobile width only (2026-09-16, requested live via a DevTools inline-style experiment — padding-bottom:8px): was var(--spacing-16) on all four sides; scoped to <=768px so the gap down to `.mobileTitleRow` right below it tightens without affecting desktop/tablet, where `.toolbar` has no title row beneath it."
+  - "Auto-sync (2026-09-17): `VideoResultsSurface.module.scss` hash updated — no documented public prop or decisionBasis-quoted value appears to have changed, so this synced automatically. Review if this doesn't look right."
+  - "Auto-sync (2026-09-17): `VideoResultsSurface.module.scss` hash updated — no documented public prop or decisionBasis-quoted value appears to have changed, so this synced automatically. Review if this doesn't look right."

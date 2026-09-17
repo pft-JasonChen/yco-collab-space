@@ -5,7 +5,7 @@
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "claude-code",
   "model": "claude-sonnet-5",
-  "generatedAt": "2026-09-17T02:45:38.823Z",
+  "generatedAt": "2026-09-17T03:15:31.247Z",
   "files": [
     "README.md",
     "feature.jsx",
@@ -2310,7 +2310,7 @@
         },
         {
           "path": "design-library/components/video-results-surface/component.yaml",
-          "sha256": "5fdb20d3fb734b3d07bb6856d753acf3140f9c61f9147400718e4b989b9b25e9"
+          "sha256": "ed649e9843be93bca0ab45dc5d182bc18f0b2079ef44b929617c897cdbf852aa"
         },
         {
           "path": "design-library/components/video-timeline/component.yaml",
@@ -3202,7 +3202,7 @@
         },
         {
           "path": "platform/ui/video-results-surface/VideoResultsSurface.module.scss",
-          "sha256": "2c37baa228811078667f93eebe62b1c2a93931a5e041c5e3d62170c82de45332"
+          "sha256": "a54629716176afa032ff5bc7694d8d539b7b92e64b2b3425bf4d68e6b02e154e"
         },
         {
           "path": "platform/ui/video-results-surface/VideoResultsSurface.stories.jsx",
@@ -3517,7 +3517,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "6bb34ac6d366e01fcc60238455ac389350dccbe1559f7a17d72c3cd24d65cf74",
+      "hash": "cd1987adb4c2a8fedf224b523abdf0ffd170b65de37d0ad83b91fb163a176f52",
       "edges": [
         {
           "from": "features/cloud-storage/generated/feature.jsx",
@@ -4220,6 +4220,6 @@
         "react-dom"
       ]
     },
-    "revisionHash": "baad1d217f5c4fda4ce83bae5081ed889855ea10e03e4b55561629db176471c1"
+    "revisionHash": "81195595ea7034d7232bed0158f3c9c844428edf2fd4326ee6302abed1701b28"
   }
 }
