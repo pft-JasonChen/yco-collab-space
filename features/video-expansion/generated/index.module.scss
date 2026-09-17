@@ -178,8 +178,16 @@
      grow to fill whatever .canvasWorkspace actually has left after the
      timeline strip's own natural height; min/max keep it from collapsing
      too small or growing absurdly tall on a very short/very tall window. */
-  min-height: 240px;
+  /* Reference (2026-09-16, requested live via a DevTools inline-style
+     experiment — min-height:200px, height:30vh added): min-height lowered
+     from 240px so this can actually shrink toward 30vh on a short viewport
+     instead of flooring out at 240 regardless; `height: 30vh` gives flex's
+     "auto" basis a viewport-relative starting point instead of a purely
+     content-based one, while still bounded by min/max-height and still
+     free to grow via flex:1 when more space is actually available. */
+  min-height: 200px;
   max-height: 640px;
+  height: 30vh;
   flex: 1 1 auto;
   place-items: center;
   overflow: hidden;

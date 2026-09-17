@@ -139,6 +139,10 @@
   flex: 0 0 auto;
 }
 
+/* font-weight added (2026-09-16, requested live via a DevTools inline-style
+   experiment — font-weight:var(--font-weight-strong)): was unset, so it
+   fell back to the browser's own default button weight rather than a
+   token-driven value. */
 .filter > button {
   display: inline-flex;
   min-width: 68px;
@@ -154,6 +158,7 @@
   cursor: pointer;
   font-size: var(--font-size-small);
   line-height: var(--line-height-small);
+  font-weight: var(--font-weight-strong);
 }
 
 .chevron {

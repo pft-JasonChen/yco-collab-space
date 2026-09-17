@@ -33,7 +33,7 @@ implementation:
     - path: platform/ui/video-results-surface/VideoResultsSurface.jsx
       sha256: 47222a54477d6c39cd8e8ed71f29f19f2ab03539dd207c8f060c68d4a61eecc5
     - path: platform/ui/video-results-surface/VideoResultsSurface.module.scss
-      sha256: a54629716176afa032ff5bc7694d8d539b7b92e64b2b3425bf4d68e6b02e154e
+      sha256: 9527fff257b964f5b7645b836edd0d276ecf7ccb441d2eacb86dda14cbe1425c
     - path: platform/ui/video-results-surface/VideoResultsSurface.stories.jsx
       sha256: 3a45f5cf175d75cea0f77f2c72c1b7d13dad3a558b3a2879ebcfd8b5f1a86968
     - path: platform/ui/video-results-surface/index.js
@@ -80,5 +80,7 @@ decisionBasis:
   - "`.mobileTitleRow` given a fixed 48px height and flat 24px side padding, no bottom padding (2026-09-16, requested live via a DevTools inline-style experiment — height:48px, padding:0 24px): was auto-height with a `var(--video-result-gutter)` side inset (16px at this breakpoint) and a spacing-16 bottom gap."
   - "Auto-sync (2026-09-16): `VideoResultsSurface.module.scss` hash updated — no documented public prop or decisionBasis-quoted value appears to have changed, so this synced automatically. Review if this doesn't look right."
   - "`.toolbar` given a tighter bottom padding at mobile width only (2026-09-16, requested live via a DevTools inline-style experiment — padding-bottom:8px): was var(--spacing-16) on all four sides; scoped to <=768px so the gap down to `.mobileTitleRow` right below it tightens without affecting desktop/tablet, where `.toolbar` has no title row beneath it."
+  - "Auto-sync (2026-09-17): `VideoResultsSurface.module.scss` hash updated — no documented public prop or decisionBasis-quoted value appears to have changed, so this synced automatically. Review if this doesn't look right."
+  - "`.filter > button` given font-weight:var(--font-weight-strong) (2026-09-16, requested live via a DevTools inline-style experiment): was unset, falling back to the browser's own default button weight instead of a token-driven value."
   - "Auto-sync (2026-09-17): `VideoResultsSurface.module.scss` hash updated — no documented public prop or decisionBasis-quoted value appears to have changed, so this synced automatically. Review if this doesn't look right."
   - "Auto-sync (2026-09-17): `VideoResultsSurface.module.scss` hash updated — no documented public prop or decisionBasis-quoted value appears to have changed, so this synced automatically. Review if this doesn't look right."
