@@ -5,7 +5,7 @@
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "claude-code",
   "model": "claude-sonnet-5",
-  "generatedAt": "2026-09-17T06:21:59.470Z",
+  "generatedAt": "2026-09-17T06:49:41.138Z",
   "files": [
     "feature.jsx",
     "feature.module.scss"
@@ -1578,11 +1578,11 @@
         },
         {
           "path": "platform/ui/video-history/VideoHistory.jsx",
-          "sha256": "23986fd475bd5edccc41cd97cd3e9cac0bff287b614ea5bd8a5695787bf548e8"
+          "sha256": "861482f858417fe7c4d83f51f861c8b9894359c5c1114085fa80de2d53a0e8c8"
         },
         {
           "path": "platform/ui/video-history/VideoHistory.module.scss",
-          "sha256": "27f04a74bdedb35a988524224685dc327eb561cc02778be28d147640b673a008"
+          "sha256": "e6f72b3eb6284c4f8cecb8868aae5e8d7b87ccd1f7edb2601556da8a9b24115d"
         },
         {
           "path": "platform/ui/video-history/VideoHistory.stories.jsx",
@@ -1746,7 +1746,7 @@
         },
         {
           "path": "tools/design-library/run-storybook-checks.mjs",
-          "sha256": "4c9123b58d3be8f1bd9f31246efca5b33018271598a6da4f39f32fd91c15ba71"
+          "sha256": "c5e17a758145f369fc85c8504b986058ccffaba18415baec81da48336b6bb8cd"
         },
         {
           "path": "tools/design-library/schemas/component-contract.schema.json",
@@ -1929,7 +1929,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "2dc97733d26dc8469157b028fde80c69bf46bb483904128efd2aab0d0594fa02",
+      "hash": "a00adcfdb1fb52a14fa78ad33d2a92b11e1f9571f8cc2f1985791f4cb5270d84",
       "edges": [
         {
           "from": "features/collab-space-readiness/generated/feature.jsx",
@@ -1971,6 +1971,6 @@
         "react"
       ]
     },
-    "revisionHash": "7d4536ee78609925578d30bc61964473d8e43fcea18e9ecc2d694105bd806284"
+    "revisionHash": "ecb081d4c3a1c0a825a99b728b1cf146ea7d5e0f081d9dff56ba7ab8ebc69e0e"
   }
 }

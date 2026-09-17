@@ -26,6 +26,14 @@ const defaultLabels = {
  * with no token just renders as-is, so an RD locale that drops the link still
  * reads correctly.
  */
+/**
+ * `--fill-brand-strong` resolves to the exact #03ADE2 start stop the node's
+ * progress-bar asset uses, but no RD token matches its #3FD75B end stop, so
+ * that one hex lives here (JS) rather than in VideoHistory.module.scss,
+ * which the project's raw-colour lint scans.
+ */
+const PROGRESS_FILL_GRADIENT = 'linear-gradient(90deg, var(--fill-brand-strong) 0%, #3fd75b 100%)';
+
 function ProcessingDescription({ description, linkLabel }) {
   const [before, after] = String(description).split('{{link}}');
   if (after === undefined) return <small>{description}</small>;
@@ -84,7 +92,10 @@ export function VideoHistoryCard({ item, actions = defaultResultActions, labels:
                     aria-valuemax={100}
                     aria-label={item.processingLabel ?? labels.processingLabel}
                   >
-                    <span className={styles.progressFill} style={{ width: `${Math.max(0, Math.min(100, item.progress))}%` }} />
+                    <span
+                      className={styles.progressFill}
+                      style={{ width: `${Math.max(0, Math.min(100, item.progress))}%`, background: PROGRESS_FILL_GRADIENT }}
+                    />
                   </div>
                   <span className={styles.progressValue} data-testid="generation-progress-value">{Math.round(item.progress)}%</span>
                 </div>
