@@ -9,13 +9,34 @@ function CardIcon({ name }) {
 /** Every user-facing string is a prop so RD can hand them straight to its own t(). */
 const defaultLabels = {
   prompt: 'Prompt',
-  processingLabel: 'Generating video',
-  processingDescription: 'Preparing your result…',
+  processingLabel: 'Video Generating',
+  /** `{{link}}` is replaced by `processingLinkLabel`, rendered emphasised. */
+  processingDescription: 'Feel free to explore other features! Once Completed, the video will be saved in {{link}}.',
+  processingLinkLabel: 'My Gallery',
   failureLabel: 'Video generation failed',
   retry: 'Retry',
   openDetail: 'Open {{title}} details',
   untitled: 'video',
 };
+
+/**
+ * Split the processing description on its `{{link}}` token so the linked part
+ * (Figma node 4536:162056 underlines "My Gallery" inside the sentence) keeps
+ * its own styling without the consumer having to hand over markup. A string
+ * with no token just renders as-is, so an RD locale that drops the link still
+ * reads correctly.
+ */
+function ProcessingDescription({ description, linkLabel }) {
+  const [before, after] = String(description).split('{{link}}');
+  if (after === undefined) return <small>{description}</small>;
+  return (
+    <small>
+      {before}
+      <span className={styles.processingLink}>{linkLabel}</span>
+      {after}
+    </small>
+  );
+}
 
 export function VideoHistoryCard({ item, actions = defaultResultActions, labels: labelOverrides = {}, onOpen, onRetry, onLike, onDislike, onEdit, onDownload }) {
   const labels = { ...defaultLabels, ...labelOverrides };
@@ -35,9 +56,40 @@ export function VideoHistoryCard({ item, actions = defaultResultActions, labels:
       <div className={styles.media}>
         {processing ? (
           <div className={styles.processing} data-testid={item.testId ?? 'generation-processing-card'}>
-            <span className={styles.spinner} aria-hidden="true" />
-            <strong>{item.processingLabel ?? labels.processingLabel}</strong>
-            <small>{item.processingDescription ?? labels.processingDescription}</small>
+            {/* Two copies of the same still (Figma node 4536:162056): one
+                `cover`+blurred to fill the card edge to edge, one `contain` on
+                top so the real frame still reads at its own ratio. Both are
+                decorative — the status text below carries the meaning. */}
+            {item.posterUrl ? (
+              <>
+                <img className={styles.processingBackdrop} src={item.posterUrl} alt="" aria-hidden="true" />
+                <img className={styles.processingStill} src={item.posterUrl} alt="" aria-hidden="true" />
+              </>
+            ) : null}
+            <div className={styles.processingScrim}>
+              <div className={styles.processingCopy}>
+                <strong>{item.processingLabel ?? labels.processingLabel}</strong>
+                <ProcessingDescription
+                  description={item.processingDescription ?? labels.processingDescription}
+                  linkLabel={item.processingLinkLabel ?? labels.processingLinkLabel}
+                />
+              </div>
+              {Number.isFinite(item.progress) ? (
+                <div className={styles.progress}>
+                  <div
+                    className={styles.progressTrack}
+                    role="progressbar"
+                    aria-valuenow={Math.round(item.progress)}
+                    aria-valuemin={0}
+                    aria-valuemax={100}
+                    aria-label={item.processingLabel ?? labels.processingLabel}
+                  >
+                    <span className={styles.progressFill} style={{ width: `${Math.max(0, Math.min(100, item.progress))}%` }} />
+                  </div>
+                  <span className={styles.progressValue} data-testid="generation-progress-value">{Math.round(item.progress)}%</span>
+                </div>
+              ) : null}
+            </div>
           </div>
         ) : failed ? (
           <div className={styles.failed}>

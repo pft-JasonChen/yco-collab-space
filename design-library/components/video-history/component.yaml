@@ -47,14 +47,14 @@ implementation:
   removedDependencies: [redux, i18n, lodash, task-fetching, polling, routing, cms, analytics, download-service, device-detection]
   localFiles:
     - path: platform/ui/video-history/VideoHistory.jsx
-      sha256: dee003939444905cdfed1aa1aac3a02436ef357b364388577995e733763e5f40
+      sha256: 23986fd475bd5edccc41cd97cd3e9cac0bff287b614ea5bd8a5695787bf548e8
     - path: platform/ui/video-history/VideoHistory.module.scss
-      sha256: 6ad25110d7720092abac227bab7041d80e9b1ef90159463bc6ac6358892132f1
+      sha256: c026f0449bff9e170fb99d1f3459ecaacf1a782cbd206adf3015468efb297e91
     - path: platform/ui/video-history/VideoHistory.stories.jsx
-      sha256: 73ad2a86bb31f7d4c62bd6a7ea57a55d802c1d86de07efec0dd9ed2aab986187
+      sha256: 6ee7dca79f9117545a61f74857c19180edf4f0abba3ed694d06bb5c08ee61cec
     - path: platform/ui/video-history/index.js
       sha256: 0a6649d7dbec4529ae25c7541bc4eec3df4aa987e8ca32554f58ac4075221331
-  localFilesUpdated: 2026-09-16
+  localFilesUpdated: 2026-09-17
 publicApi:
   props:
     - name: items
@@ -101,4 +101,6 @@ decisionBasis:
   - The pilot exposes synthetic item data and callbacks instead of production task fetching, polling, download and routing behavior.
   - Action buttons use the allowlisted RD img2Vid Next Action icons; the filter is composed by Video Results Surface instead of duplicated inside the list.
   - Like, dislike, edit and download are delegated to the shared Icon Action Buttons family, mirroring how RD's result-video card composes `video-feature/icon-action-buttons` rather than owning its own action row.
+  - "Processing card rebuilt against Figma node 4536:162056 (2026-09-17, requested live — \"generating的畫面你做錯了，你沒有修改到，請參考figma\"): was a grey --fill-weaker panel with a spinning ring and dark text, which matched nothing in the design. Figma specifies the generating state as the source still itself — one copy cover-blurred to fill the card, one contained on top, both dimmed under a --fill/overlay-weak (rgba(0,0,0,0.45)) backdrop-blurred scrim — with white Heading-5/Bold title, a Tiny/Regular --text/inverse-weak description whose 'My Gallery' segment is bold/underlined/white, and a determinate 224x10 progress bar (track white@12%, fill a #03ADE2->#3FD75B gradient spanning the FILLED width, read from the node's own bar asset) above a Tiny/Bold percentage. Three new optional item fields carry it: `posterUrl` (already the convention on completed items), `progress` (0-100; the bar and percentage only render when it is a finite number, so a consumer with no progress signal still gets the card), and `processingLinkLabel`. The description keeps a `{{link}}` token — the same replace-token convention `openDetail`/`sourceAlt` already use — so the emphasised segment stays inside one translatable sentence instead of being split across props. `.processing` keeps an opaque --background-inverse base so the white text still has dark backing when no poster is supplied. The spinner and its keyframes are gone; `.failed` is unchanged and no longer shares a rule with `.processing`."
   - "Auto-sync (2026-09-16): `VideoHistory.jsx` hash updated — no documented public prop or decisionBasis-quoted value appears to have changed, so this synced automatically. Review if this doesn't look right."
+  - "Auto-sync (2026-09-17): `VideoHistory.jsx`, `VideoHistory.module.scss`, `VideoHistory.stories.jsx` hashes updated — no documented public prop or decisionBasis-quoted value appears to have changed, so this synced automatically. Review if this doesn't look right."

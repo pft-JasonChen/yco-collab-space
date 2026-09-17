@@ -130,7 +130,6 @@
   cursor: pointer;
 }
 
-.processing,
 .failed {
   display: flex;
   width: 100%;
@@ -144,30 +143,131 @@
   background: var(--fill-weaker);
 }
 
-.processing strong,
 .failed strong {
   color: var(--text-strong);
   font-size: var(--font-size-small);
   line-height: var(--line-height-small);
 }
 
-.processing small,
 .failed small {
   font-size: var(--font-size-tiny);
   line-height: var(--line-height-tiny);
 }
 
-.spinner {
-  width: var(--spacing-48);
-  height: var(--spacing-48);
-  border: var(--spacing-4) solid var(--stroke-brand-weak);
-  border-top-color: var(--stroke-brand-strong);
-  border-radius: var(--corner-radius-32);
-  animation: spin 1s linear infinite;
+/* Reference (2026-09-17, requested live — "generating的畫面你做錯了...請參考
+   figma", node 4536:162056): was a grey --fill-weaker panel with a spinning
+   ring and dark text. Figma specifies the generating card as the source still
+   itself — blurred edge-to-edge underneath, the real frame contained on top,
+   both dimmed by a --fill/overlay-weak scrim — with white
+   status text and a determinate gradient progress bar over it. The base dark
+   background matters even when a consumer passes no poster: the text is white
+   either way, so it needs something dark behind it regardless. */
+.processing {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--background-inverse);
 }
 
-@keyframes spin {
-  to { transform: rotate(1turn); }
+.processingBackdrop,
+.processingStill {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  user-select: none;
+}
+
+.processingBackdrop {
+  object-fit: cover;
+  filter: blur(10px);
+  /* The blur samples past the element's own edges, which would otherwise show
+     as a soft transparent rim inside the card's rounded corners. */
+  transform: scale(1.1);
+}
+
+.processingStill {
+  object-fit: contain;
+}
+
+.processingScrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-16);
+  padding: 0 var(--spacing-40);
+  color: var(--text-inverse-strong);
+  text-align: center;
+  background: var(--fill-overlay-weak);
+  backdrop-filter: blur(10px);
+}
+
+/* Figma's own tree here is three nested stacks, not one: the scrim's 16px gap
+   separates the text block from the progress block, and each of those two
+   carries its own tighter 4px internally. Kept as separate wrappers so no gap
+   value has to be cancelled out by a margin. */
+.processingCopy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.processing strong {
+  font-size: var(--font-size-heading-5);
+  line-height: var(--line-height-heading-5);
+  font-weight: var(--font-weight-strong);
+}
+
+.processing small {
+  color: var(--text-inverse-weak);
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+}
+
+.processingLink {
+  color: var(--text-inverse-strong);
+  font-weight: var(--font-weight-strong);
+  text-decoration: underline;
+}
+
+.progress {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
+.progressTrack {
+  position: relative;
+  width: 224px;
+  max-width: 100%;
+  height: 10px;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--fill-white) 12%, transparent);
+  border-radius: 5px;
+}
+
+.progressFill {
+  display: block;
+  height: 100%;
+  /* Gradient read from the node's own progress-bar asset: it spans the FILLED
+     width, not the whole track, so it always runs cyan-to-green end to end
+     however far along the run is. */
+  background: linear-gradient(90deg, var(--fill-brand-strong) 0%, var(--green-dark-1000) 100%);
+  border-radius: inherit;
+  transition: width 200ms linear;
+}
+
+.progressValue {
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+  font-weight: var(--font-weight-strong);
 }
 
 .failed {

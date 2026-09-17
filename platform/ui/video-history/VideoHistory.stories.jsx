@@ -26,7 +26,7 @@ export const Completed = { args: { items: [successItem], onOpen: () => {} } };
 export const ProcessingAndFailed = {
   args: {
     items: [
-      { id: 'processing', status: 'processing', title: 'Video Expansion' },
+      { id: 'processing', status: 'processing', title: 'Video Expansion', posterUrl: samplePoster, progress: 72 },
       { id: 'failed', status: 'failed', title: 'Video Expansion', failureDescription: 'Please try again.' },
     ],
     onRetry: () => {},

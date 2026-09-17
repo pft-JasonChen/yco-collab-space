@@ -73,7 +73,11 @@
       "origin": "new"
     },
     "video.expansion.processing.desc": {
-      "value": "Expanding the selected frame…",
+      "value": "Feel free to explore other features! Once Completed, the video will be saved in {{link}}.",
+      "origin": "new"
+    },
+    "video.expansion.processing.gallery": {
+      "value": "My Gallery",
       "origin": "new"
     },
     "video.expansion.history.just.now": {
@@ -117,7 +121,7 @@
       "origin": "rd-existing"
     },
     "video.expansion.processing.label": {
-      "value": "Generating video",
+      "value": "Video Generating",
       "origin": "new"
     }
   }

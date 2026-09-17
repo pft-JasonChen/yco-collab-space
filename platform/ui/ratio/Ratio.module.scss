@@ -199,11 +199,26 @@
      `.panelContent` (a different case from category-rail/toolMenuScroller's
      hover-reveal, since those are mouse-hoverable vertical lists, not a
      touch-only horizontal one). */
+  /* Reference (2026-09-17, requested live — "偵測到螢幕外面還有內容，就移除
+     padding，不要讓東西剩一半的感覺", against a screenshot of the last option
+     clipped mid-card): this strip scrolls inside a container that has its own
+     16px side gutter, so overflowing options stopped 16px short of the screen
+     edge — the cut-off card read as "broken/half-rendered" rather than "keep
+     swiping". Negative inline margins pull the strip out to the true screen
+     edges, with matching inline padding putting the FIRST and LAST options
+     back on the same 16px gutter as everything above them. Net effect: when
+     the options fit, this looks identical to before; when they overflow, the
+     overflow runs to the real edge instead of behind a dead padding band —
+     no JS overflow detection needed, the geometry does it. 16px is this
+     project's standard mobile gutter (video-expansion's own .panelContent,
+     VideoResultsSurface's --video-result-gutter at this width). */
   .content.gery_v2,
   .content.gery_v2.twoOrLess,
   .content.gery_v2.moreThanTwo {
     display: flex;
     flex-wrap: nowrap;
+    margin-inline: calc(-1 * var(--spacing-16));
+    padding-inline: var(--spacing-16);
     padding-bottom: var(--spacing-8);
     overflow: auto hidden;
     scrollbar-width: none;

@@ -1,11 +1,11 @@
 {
   "schemaVersion": 3,
   "feature": "video-expansion",
-  "inputHash": "1fee45c482a40b8733b25e2c059743e9333623c0e4dcf4f11d2c534de5e4a85a",
+  "inputHash": "38a8fd5aa92759cd86b63979e73ba54400a28e4917bd6285d559868c4477b56d",
   "generatorInstructionsVersion": "collab-contract-v1",
-  "adapter": "claude-code",
-  "model": "claude-sonnet-5",
-  "generatedAt": "2026-09-17T03:53:35.093Z",
+  "adapter": "not-recorded",
+  "model": "not-recorded",
+  "generatedAt": "2026-09-17T04:36:54.149Z",
   "files": [
     "README.md",
     "contract/integration.yaml",
@@ -243,9 +243,9 @@
         "status": "pilot-approved",
         "figmaStatus": "mapped",
         "contractPath": "design-library/components/navigation-header/component.yaml",
-        "contractSha256": "a049c8781f4295dc3e8f8c44d6cb5c71b8c76bb2a000eaee5f7c93df4d34de40",
+        "contractSha256": "f50b810a2b956b0b75e4b966ad4a3896b7a0e0169563abe3498d3e9dd9fa5fac",
         "implementationImport": "platform/ui/navigation-header/index.js",
-        "implementationSha256": "4407f6eb8df86ff50a52ce79fe7dc80469ebf213caee0f63735790aa2408d962",
+        "implementationSha256": "138b11428f1921575bfc3bf83322aca4762d69b9d2ada082cc8b9936a9e341c0",
         "runtimeAssets": [
           {
             "repositoryPath": "design-library/assets/icon/yco-credit-controls/add.svg",
@@ -338,9 +338,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/ratio/component.yaml",
-        "contractSha256": "b27707ede6d3acd3a06fca5704c7ee4d80adeca6a378a90f47fd0efc3da4f340",
+        "contractSha256": "171e3d4059b07f7613053043c081e6a17dbfab0e25318bad6be1b0f8e3fe7ad3",
         "implementationImport": "platform/ui/ratio/index.js",
-        "implementationSha256": "3c4f643e722d4ddf66edf1778db5bb8b25aa03a28fd3d9717c47da9f64035a39",
+        "implementationSha256": "e1ef855e1c582cace29fde9881017862e1d5a985f3a98346a539ad3bdc7b16a1",
         "runtimeAssets": []
       },
       {
@@ -436,9 +436,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/video-history/component.yaml",
-        "contractSha256": "6d2a328c4b5acecb153295dabfe038d0882a512da95b45731b91d18031c07621",
+        "contractSha256": "648d859738fd3833a59f638152c25e7fd6f0f227a673d318f60ca0f554b1a17b",
         "implementationImport": "platform/ui/video-history/index.js",
-        "implementationSha256": "bd831ac8a00e6239abfb158c93ffa8b7e747c3ba49f048c60e86f3ccf85555cb",
+        "implementationSha256": "6544f79b66aa3c52b682701cffb432b48ecaca872405b61962ad6621eb086822",
         "runtimeAssets": [
           {
             "repositoryPath": "design-library/assets/icon/yco-video-actions/character-motion-swap.svg",
@@ -562,9 +562,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/video-results-surface/component.yaml",
-        "contractSha256": "2ab26c1f314ff0ac07b6c9b33310c04ceb3a12df4c2e6fa09a8fee069ea5ab43",
+        "contractSha256": "889d88a461dad5f471a25b3229f7c5c0118e6c35ae983b730c0fbf082a08c23c",
         "implementationImport": "platform/ui/video-results-surface/index.js",
-        "implementationSha256": "8928af01ad37363b399b25b0c5691d208fabcbcb38929a567fa2ee6076297b21",
+        "implementationSha256": "780ff84166ae5f647fa9dcc24b8bbd3ecd737bb88003f6969b56e39a02dee781",
         "runtimeAssets": []
       },
       {
@@ -848,7 +848,7 @@
         },
         {
           "path": "features/video-expansion/generated/data/canvas-geometry.js",
-          "sha256": "e26bb15a083af9d529dd945714b150c4b4f5028cc13b760321ee198a170b78dd"
+          "sha256": "d00e0fca404bff62c7a85dc20ae0c2b0e93f8ae94744d4ce0899275de2d428f7"
         },
         {
           "path": "features/video-expansion/generated/data/defaults.js",
@@ -876,7 +876,7 @@
         },
         {
           "path": "features/video-expansion/generated/index.jsx",
-          "sha256": "733a374ff58c943dbf7a30f68bdae7113967aced1597389e37dd8a96f1d77352"
+          "sha256": "68ea9a0dda933c3324ae575600d500790aca82f2f844512e3c07a9fd8e4573c1"
         },
         {
           "path": "features/video-expansion/generated/index.module.scss",
@@ -891,7 +891,7 @@
           "sha256": "079e42b2b35548096dba01684133d3ba6cb46f86648eae166d64c204c608eaed"
         }
       ],
-      "hash": "3bbc1c5db2d792a13b4f5230a8ab6ed22b05a8a282a4125fccf0cb16dff57c3b"
+      "hash": "dbeb521c0fb29e305cebe20c805305dd5d057ce5f7eda72150c57502cccd488a"
     },
     "dependencies": {
       "files": [
@@ -1817,7 +1817,7 @@
         },
         {
           "path": "design-library/components/navigation-header/component.yaml",
-          "sha256": "a049c8781f4295dc3e8f8c44d6cb5c71b8c76bb2a000eaee5f7c93df4d34de40"
+          "sha256": "f50b810a2b956b0b75e4b966ad4a3896b7a0e0169563abe3498d3e9dd9fa5fac"
         },
         {
           "path": "design-library/components/pricing-overlay/component.yaml",
@@ -1825,7 +1825,7 @@
         },
         {
           "path": "design-library/components/ratio/component.yaml",
-          "sha256": "b27707ede6d3acd3a06fca5704c7ee4d80adeca6a378a90f47fd0efc3da4f340"
+          "sha256": "171e3d4059b07f7613053043c081e6a17dbfab0e25318bad6be1b0f8e3fe7ad3"
         },
         {
           "path": "design-library/components/result-page-shell/component.yaml",
@@ -1845,7 +1845,7 @@
         },
         {
           "path": "design-library/components/video-history/component.yaml",
-          "sha256": "6d2a328c4b5acecb153295dabfe038d0882a512da95b45731b91d18031c07621"
+          "sha256": "648d859738fd3833a59f638152c25e7fd6f0f227a673d318f60ca0f554b1a17b"
         },
         {
           "path": "design-library/components/video-info-dialog/component.yaml",
@@ -1853,7 +1853,7 @@
         },
         {
           "path": "design-library/components/video-results-surface/component.yaml",
-          "sha256": "2ab26c1f314ff0ac07b6c9b33310c04ceb3a12df4c2e6fa09a8fee069ea5ab43"
+          "sha256": "889d88a461dad5f471a25b3229f7c5c0118e6c35ae983b730c0fbf082a08c23c"
         },
         {
           "path": "design-library/components/video-timeline/component.yaml",
@@ -1885,7 +1885,7 @@
         },
         {
           "path": "features/video-expansion/generated/data/canvas-geometry.js",
-          "sha256": "e26bb15a083af9d529dd945714b150c4b4f5028cc13b760321ee198a170b78dd"
+          "sha256": "d00e0fca404bff62c7a85dc20ae0c2b0e93f8ae94744d4ce0899275de2d428f7"
         },
         {
           "path": "features/video-expansion/generated/data/defaults.js",
@@ -1913,7 +1913,7 @@
         },
         {
           "path": "features/video-expansion/generated/index.jsx",
-          "sha256": "733a374ff58c943dbf7a30f68bdae7113967aced1597389e37dd8a96f1d77352"
+          "sha256": "68ea9a0dda933c3324ae575600d500790aca82f2f844512e3c07a9fd8e4573c1"
         },
         {
           "path": "features/video-expansion/generated/index.module.scss",
@@ -1929,7 +1929,7 @@
         },
         {
           "path": "features/video-expansion/product/i18n.json",
-          "sha256": "6ce5f2c5bf379097980e01fada3edbb21b2af78d8d34eb9521871a1a567f7c1e"
+          "sha256": "0fc5ae40a1b3a4ffd3ec497cb3d539ae9b36ec83ab5c05b6183747f95db264ff"
         },
         {
           "path": "features/video-expansion/product/mock-assets/sample image.jpg",
@@ -2593,7 +2593,7 @@
         },
         {
           "path": "platform/ui/navigation-header/NavigationHeader.module.scss",
-          "sha256": "a7119047bf30483eb0a2643bbadd990fcfeb79869db2ea4afb16a955f1a9c376"
+          "sha256": "d6fd14ac01d5ad6e2fd8b77bc5ebcb23254bac33fd61d5778c53199cb9c033da"
         },
         {
           "path": "platform/ui/navigation-header/NavigationHeader.stories.jsx",
@@ -2629,7 +2629,7 @@
         },
         {
           "path": "platform/ui/ratio/Ratio.module.scss",
-          "sha256": "3c49c8d0bc67e643770f4e79e2f2306735dad8b4b0ea471294f83a9c62817ecd"
+          "sha256": "4b007e926d42668dd6f4e97a17d8df9c7b6d7432f376f5e109c19060e4920ff0"
         },
         {
           "path": "platform/ui/ratio/Ratio.stories.jsx",
@@ -2717,15 +2717,15 @@
         },
         {
           "path": "platform/ui/video-history/VideoHistory.jsx",
-          "sha256": "dee003939444905cdfed1aa1aac3a02436ef357b364388577995e733763e5f40"
+          "sha256": "23986fd475bd5edccc41cd97cd3e9cac0bff287b614ea5bd8a5695787bf548e8"
         },
         {
           "path": "platform/ui/video-history/VideoHistory.module.scss",
-          "sha256": "6ad25110d7720092abac227bab7041d80e9b1ef90159463bc6ac6358892132f1"
+          "sha256": "f63ec6a13a3cb4bc32b2ee663760f23350736495ce6904577603fa9018463c27"
         },
         {
           "path": "platform/ui/video-history/VideoHistory.stories.jsx",
-          "sha256": "73ad2a86bb31f7d4c62bd6a7ea57a55d802c1d86de07efec0dd9ed2aab986187"
+          "sha256": "6ee7dca79f9117545a61f74857c19180edf4f0abba3ed694d06bb5c08ee61cec"
         },
         {
           "path": "platform/ui/video-history/index.js",
@@ -2753,7 +2753,7 @@
         },
         {
           "path": "platform/ui/video-results-surface/VideoResultsSurface.module.scss",
-          "sha256": "9527fff257b964f5b7645b836edd0d276ecf7ccb441d2eacb86dda14cbe1425c"
+          "sha256": "6c6ec214f2de5c0ccb07ec8ccdd2dd39b31cc85ffadcd93eb47a6ec03453348c"
         },
         {
           "path": "platform/ui/video-results-surface/VideoResultsSurface.stories.jsx",
@@ -3068,7 +3068,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "9403c1947c4060166425d447199a6f9b7181cbcf5d622782ded0c05eb28cfc40",
+      "hash": "36017cf6a4b453b6b5602816e01b44e0afd1eddc4a825aa9dca45fe5eaaa40c2",
       "edges": [
         {
           "from": "design-library/assets/font/yco-interface-icons.style.css",
@@ -3867,6 +3867,6 @@
         "react-dom"
       ]
     },
-    "revisionHash": "6a5543dc5e4685c8b546cdb4f82196211989ea44c0b14000c4d14703e51049af"
+    "revisionHash": "4620fec7bb39e90944f7905db916c02fd84877331fdd1b683725afc2616a1320"
   }
 }

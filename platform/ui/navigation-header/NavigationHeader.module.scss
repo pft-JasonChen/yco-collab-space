@@ -356,7 +356,11 @@
   align-items: center;
   justify-content: center;
   font-family: 'YcoInterfaceIcons', sans-serif;
-  font-size: 18px;
+  /* 18px -> 22px at every width (2026-09-17, requested live — "這顆font-size
+     要改22px"). A desktop-only 22px container-query tier was added a day
+     earlier off "桌機版font-size調一下"; with the base now 22px that tier had
+     nothing left to say and was removed rather than left as a no-op. */
+  font-size: 22px;
   font-style: normal;
   font-weight: normal;
   line-height: 1;
@@ -441,17 +445,6 @@
 .mobileIconButtonDark:focus-visible {
   outline: none;
   box-shadow: 0 0 0 4px var(--stroke-focus);
-}
-
-/* ----- Desktop (>1199px): larger avatar glyph (2026-09-16, requested live —
-   "桌機版font-size調一下", against a DevTools inspect showing 22px): base
-   rule above is 18px, used as the tablet/mobile size below 1200px; desktop
-   gets its own larger glyph via this component's existing container-query
-   tiers rather than changing the shared base value for every width. ----- */
-@container navigation-header (min-width: 1200px) {
-  .avatarGlyph {
-    font-size: 22px;
-  }
 }
 
 /* ----- Tablet (769-1199px): symbol-only logo, icon-only "Start Editing",

@@ -4,8 +4,8 @@
   "inputHash": "1935d7384890f5bbf16c324747842cf4d47a261018f704534fe697f806972d58",
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "claude-code",
-  "model": "claude-sonnet-5",
-  "generatedAt": "2026-09-17T03:53:36.112Z",
+  "model": "claude-opus-5",
+  "generatedAt": "2026-09-17T04:32:29.720Z",
   "files": [
     "feature.jsx",
     "feature.module.scss"
@@ -738,7 +738,7 @@
         },
         {
           "path": "design-library/components/navigation-header/component.yaml",
-          "sha256": "a049c8781f4295dc3e8f8c44d6cb5c71b8c76bb2a000eaee5f7c93df4d34de40"
+          "sha256": "f50b810a2b956b0b75e4b966ad4a3896b7a0e0169563abe3498d3e9dd9fa5fac"
         },
         {
           "path": "design-library/components/pricing-overlay/component.yaml",
@@ -746,7 +746,7 @@
         },
         {
           "path": "design-library/components/ratio/component.yaml",
-          "sha256": "b27707ede6d3acd3a06fca5704c7ee4d80adeca6a378a90f47fd0efc3da4f340"
+          "sha256": "171e3d4059b07f7613053043c081e6a17dbfab0e25318bad6be1b0f8e3fe7ad3"
         },
         {
           "path": "design-library/components/result-page-shell/component.yaml",
@@ -766,7 +766,7 @@
         },
         {
           "path": "design-library/components/video-history/component.yaml",
-          "sha256": "6d2a328c4b5acecb153295dabfe038d0882a512da95b45731b91d18031c07621"
+          "sha256": "648d859738fd3833a59f638152c25e7fd6f0f227a673d318f60ca0f554b1a17b"
         },
         {
           "path": "design-library/components/video-info-dialog/component.yaml",
@@ -774,7 +774,7 @@
         },
         {
           "path": "design-library/components/video-results-surface/component.yaml",
-          "sha256": "2ab26c1f314ff0ac07b6c9b33310c04ceb3a12df4c2e6fa09a8fee069ea5ab43"
+          "sha256": "889d88a461dad5f471a25b3229f7c5c0118e6c35ae983b730c0fbf082a08c23c"
         },
         {
           "path": "design-library/components/video-timeline/component.yaml",
@@ -1454,7 +1454,7 @@
         },
         {
           "path": "platform/ui/navigation-header/NavigationHeader.module.scss",
-          "sha256": "a7119047bf30483eb0a2643bbadd990fcfeb79869db2ea4afb16a955f1a9c376"
+          "sha256": "d6fd14ac01d5ad6e2fd8b77bc5ebcb23254bac33fd61d5778c53199cb9c033da"
         },
         {
           "path": "platform/ui/navigation-header/NavigationHeader.stories.jsx",
@@ -1490,7 +1490,7 @@
         },
         {
           "path": "platform/ui/ratio/Ratio.module.scss",
-          "sha256": "3c49c8d0bc67e643770f4e79e2f2306735dad8b4b0ea471294f83a9c62817ecd"
+          "sha256": "4b007e926d42668dd6f4e97a17d8df9c7b6d7432f376f5e109c19060e4920ff0"
         },
         {
           "path": "platform/ui/ratio/Ratio.stories.jsx",
@@ -1578,15 +1578,15 @@
         },
         {
           "path": "platform/ui/video-history/VideoHistory.jsx",
-          "sha256": "dee003939444905cdfed1aa1aac3a02436ef357b364388577995e733763e5f40"
+          "sha256": "23986fd475bd5edccc41cd97cd3e9cac0bff287b614ea5bd8a5695787bf548e8"
         },
         {
           "path": "platform/ui/video-history/VideoHistory.module.scss",
-          "sha256": "6ad25110d7720092abac227bab7041d80e9b1ef90159463bc6ac6358892132f1"
+          "sha256": "c026f0449bff9e170fb99d1f3459ecaacf1a782cbd206adf3015468efb297e91"
         },
         {
           "path": "platform/ui/video-history/VideoHistory.stories.jsx",
-          "sha256": "73ad2a86bb31f7d4c62bd6a7ea57a55d802c1d86de07efec0dd9ed2aab986187"
+          "sha256": "6ee7dca79f9117545a61f74857c19180edf4f0abba3ed694d06bb5c08ee61cec"
         },
         {
           "path": "platform/ui/video-history/index.js",
@@ -1614,7 +1614,7 @@
         },
         {
           "path": "platform/ui/video-results-surface/VideoResultsSurface.module.scss",
-          "sha256": "9527fff257b964f5b7645b836edd0d276ecf7ccb441d2eacb86dda14cbe1425c"
+          "sha256": "6c6ec214f2de5c0ccb07ec8ccdd2dd39b31cc85ffadcd93eb47a6ec03453348c"
         },
         {
           "path": "platform/ui/video-results-surface/VideoResultsSurface.stories.jsx",
@@ -1929,7 +1929,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "7083ed1a8f39187bc85ed267289bc595bbd1cdc244c309023b6b182bcc3e3921",
+      "hash": "35e2ab626004309057cf100542994c1bc84aaaaccad5f6004d370713526892ec",
       "edges": [
         {
           "from": "features/collab-space-readiness/generated/feature.jsx",
@@ -1971,6 +1971,6 @@
         "react"
       ]
     },
-    "revisionHash": "30d681bee056bbd09d656071e53a6539aadeb253b2091a0fe04aa0e0fe67d818"
+    "revisionHash": "cb88a9c5f4584bf312868f2b186a70900c33cba9c45ac99a6ab7d82a1cb164e1"
   }
 }

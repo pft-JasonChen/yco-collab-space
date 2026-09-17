@@ -33,7 +33,7 @@ implementation:
     - path: platform/ui/video-results-surface/VideoResultsSurface.jsx
       sha256: 47222a54477d6c39cd8e8ed71f29f19f2ab03539dd207c8f060c68d4a61eecc5
     - path: platform/ui/video-results-surface/VideoResultsSurface.module.scss
-      sha256: 9527fff257b964f5b7645b836edd0d276ecf7ccb441d2eacb86dda14cbe1425c
+      sha256: 6c6ec214f2de5c0ccb07ec8ccdd2dd39b31cc85ffadcd93eb47a6ec03453348c
     - path: platform/ui/video-results-surface/VideoResultsSurface.stories.jsx
       sha256: 3a45f5cf175d75cea0f77f2c72c1b7d13dad3a558b3a2879ebcfd8b5f1a86968
     - path: platform/ui/video-results-surface/index.js
@@ -82,5 +82,7 @@ decisionBasis:
   - "`.toolbar` given a tighter bottom padding at mobile width only (2026-09-16, requested live via a DevTools inline-style experiment — padding-bottom:8px): was var(--spacing-16) on all four sides; scoped to <=768px so the gap down to `.mobileTitleRow` right below it tightens without affecting desktop/tablet, where `.toolbar` has no title row beneath it."
   - "Auto-sync (2026-09-17): `VideoResultsSurface.module.scss` hash updated — no documented public prop or decisionBasis-quoted value appears to have changed, so this synced automatically. Review if this doesn't look right."
   - "`.filter > button` given font-weight:var(--font-weight-strong) (2026-09-16, requested live via a DevTools inline-style experiment): was unset, falling back to the browser's own default button weight instead of a token-driven value."
+  - "Auto-sync (2026-09-17): `VideoResultsSurface.module.scss` hash updated — no documented public prop or decisionBasis-quoted value appears to have changed, so this synced automatically. Review if this doesn't look right."
+  - "`.toolbar`'s mobile bottom gap halved again, and its min-height released (2026-09-17, requested live — \"這個距離也想要再小一半\", against a screenshot boxing the whole band between the tab pills and the title text): padding-bottom went 8px -> 4px, but confirmed live that alone moved the gap by zero — the base rule's `min-height: 78px` was the real floor (the tabs row only needs 16+50+4=70px at this width, so the remainder sat as dead slack below the tabs, out of reach of any padding change). Released to 0 at <=768px so the row sizes to its own content and the padding value governs; measured gap tab-pills-to-title-text 24px -> 16px. The residual 12px is `.mobileTitleRow`'s own 48px height centring a 24px text line, left alone since that 48px was itself an explicit request."
   - "Auto-sync (2026-09-17): `VideoResultsSurface.module.scss` hash updated — no documented public prop or decisionBasis-quoted value appears to have changed, so this synced automatically. Review if this doesn't look right."
   - "Auto-sync (2026-09-17): `VideoResultsSurface.module.scss` hash updated — no documented public prop or decisionBasis-quoted value appears to have changed, so this synced automatically. Review if this doesn't look right."

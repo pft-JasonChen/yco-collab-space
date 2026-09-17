@@ -51,6 +51,9 @@ import styles from './index.module.scss';
 
 const t = createTranslator(dictionary);
 
+/** How often the mock generating run republishes its 0-100 progress value. */
+const PROGRESS_TICK_MS = 80;
+
 export const featureMeta = { slug: 'video-expansion', title: 'Video Expansion', stage: 'pm-draft', readiness: 'working' };
 
 function EmptyResult({ error, onPick, onSample, onRecover }) {
@@ -150,6 +153,7 @@ export default function VideoExpansionFeature() {
   const [trimOpen, setTrimOpen] = useState(false);
   const [trimIsInitial, setTrimIsInitial] = useState(false);
   const [generationState, setGenerationState] = useState(GENERATION_STATES.IDLE);
+  const [progress, setProgress] = useState(0);
   const [detailOpen, setDetailOpen] = useState(false);
   const [historyFilter, setHistoryFilter] = useState('all');
   const inputRef = useRef(null);
@@ -158,6 +162,7 @@ export default function VideoExpansionFeature() {
   const targetCanvasRef = useRef(null);
   const objectUrlRef = useRef(null);
   const timerRef = useRef(null);
+  const progressTimerRef = useRef(null);
   const dragRef = useRef(null);
 
   const loaded = sourceState === SOURCE_STATES.LOADED;
@@ -171,6 +176,7 @@ export default function VideoExpansionFeature() {
 
   useEffect(() => () => {
     window.clearTimeout(timerRef.current);
+    window.clearInterval(progressTimerRef.current);
     if (objectUrlRef.current) URL.revokeObjectURL(objectUrlRef.current);
   }, []);
 
@@ -292,16 +298,35 @@ export default function VideoExpansionFeature() {
 
   // RD replaces this with useProcess/runTask; the prototype only advances the
   // synthetic lifecycle so History can show every state.
+  /**
+   * Reference (2026-09-17, requested live — "generating的畫面你做錯了...請參考
+   * figma", node 4536:162056): that card shows a determinate bar and a
+   * percentage, so the mock run needs a real 0-100 value to report rather
+   * than just a delay that ends. Ticks on a fixed interval across the same
+   * `processingDelayMs` the success timeout already uses, so the bar always
+   * lands on 100% exactly as the run finishes.
+   */
   const beginProcessing = () => {
     window.clearTimeout(timerRef.current);
+    window.clearInterval(progressTimerRef.current);
     videoRef.current?.pause();
     setIsPlaying(false);
     setGenerationState(GENERATION_STATES.PROCESSING);
+    setProgress(0);
     setActiveTab('history');
-    timerRef.current = window.setTimeout(
-      () => setGenerationState(GENERATION_STATES.SUCCESS),
-      mockData.generation.processingDelayMs,
-    );
+
+    const totalMs = mockData.generation.processingDelayMs;
+    const startedAt = Date.now();
+    progressTimerRef.current = window.setInterval(() => {
+      const elapsed = Date.now() - startedAt;
+      setProgress(Math.min(100, (elapsed / totalMs) * 100));
+    }, PROGRESS_TICK_MS);
+
+    timerRef.current = window.setTimeout(() => {
+      window.clearInterval(progressTimerRef.current);
+      setProgress(100);
+      setGenerationState(GENERATION_STATES.SUCCESS);
+    }, totalMs);
   };
 
   // Reference (2026-09-15, found live — "為什麼切回來edit變成一片空白"): both
@@ -413,7 +438,7 @@ export default function VideoExpansionFeature() {
   const featureName = t('header.items.product.video.expansion');
 
   const historyItems = [
-    ...(generationState === GENERATION_STATES.PROCESSING ? [{ id: 'generated-processing', status: 'processing', testId: 'generation-processing-card', tags: [featureName], processingLabel: t('video.expansion.processing.label'), processingDescription: t('video.expansion.processing.desc') }] : []),
+    ...(generationState === GENERATION_STATES.PROCESSING ? [{ id: 'generated-processing', status: 'processing', testId: 'generation-processing-card', tags: [featureName], posterUrl: timelineFrames[0] ?? sampleThumbnail, progress, processingLabel: t('video.expansion.processing.label'), processingDescription: t('video.expansion.processing.desc'), processingLinkLabel: t('video.expansion.processing.gallery') }] : []),
     ...(generationState === GENERATION_STATES.SUCCESS ? [{ id: 'generated-success', status: 'success', testId: 'generated-history-thumbnail', title: featureName, tags: [featureName], date: t('video.expansion.history.just.now'), videoUrl: sampleVideo, posterUrl: sampleThumbnail, primaryActionLabel: t('header.items.product.video.enhancer') }] : []),
     { id: 'existing-success', status: 'success', cardTestId: 'history-success-card', featureTagTestId: 'history-success-feature-tag', testId: 'history-success-thumbnail', title: featureName, tags: [featureName], date: '09-01 19:33', videoUrl: sampleVideo, posterUrl: sampleThumbnail, primaryActionLabel: t('header.items.product.video.enhancer') },
   ];

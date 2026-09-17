@@ -16,8 +16,18 @@ export const RATIO_SWATCH_PADDING = {
   '16:9': '11.375px 7px',
 };
 
-/** Inset between the canvas viewport and the target frame, in CSS px. */
-export const CANVAS_VIEWPORT_INSET = 32;
+/**
+ * Inset between the canvas viewport and the target frame, in CSS px (total,
+ * so half of it lands on each side).
+ *
+ * Halved from 32 to 16 (2026-09-17, requested live — "我想要1的padding再小一
+ * 半，等於讓裡面的東西大一點", against a screenshot marking the grey band
+ * around the target frame): the frame is what the user actually works with,
+ * so the surrounding breathing room was taking space the frame itself could
+ * use. Nothing else reads this constant, so the change is purely "frame gets
+ * 16px more in each axis".
+ */
+export const CANVAS_VIEWPORT_INSET = 16;
 
 /** Two ratios closer than this read as "the same shape" to a viewer. */
 export const RATIO_MATCH_TOLERANCE = 0.015;
