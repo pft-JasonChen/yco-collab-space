@@ -325,8 +325,10 @@
    values it already passes in here, via this module's own exported
    formatTimelineTime — see VideoTrimModal's trim-timeline.js precedent. */
 @media (max-width: 768px) {
+  /* Reference (2026-09-16, requested live via a DevTools inline-style
+     experiment — gap:var(--spacing-0)): was var(--spacing-8). */
   .timeline {
-    gap: var(--spacing-8);
+    gap: var(--spacing-0);
   }
 
   /* Reference (2026-09-16, requested live — "手機版和桌機的大小不太一樣，你比較

@@ -5,7 +5,7 @@
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "claude-code",
   "model": "claude-sonnet-5",
-  "generatedAt": "2026-09-17T03:15:29.431Z",
+  "generatedAt": "2026-09-17T03:45:28.837Z",
   "files": [
     "README.md",
     "contract/integration.yaml",
@@ -243,9 +243,9 @@
         "status": "pilot-approved",
         "figmaStatus": "mapped",
         "contractPath": "design-library/components/navigation-header/component.yaml",
-        "contractSha256": "ac566cb9042dfb4a427d793e69c9e28f749f9d5460d78d6d863c610efa238739",
+        "contractSha256": "a049c8781f4295dc3e8f8c44d6cb5c71b8c76bb2a000eaee5f7c93df4d34de40",
         "implementationImport": "platform/ui/navigation-header/index.js",
-        "implementationSha256": "872787864f25247d39ba02f9b289c562b9177473ce57f1ee619351336fbb6b95",
+        "implementationSha256": "4407f6eb8df86ff50a52ce79fe7dc80469ebf213caee0f63735790aa2408d962",
         "runtimeAssets": [
           {
             "repositoryPath": "design-library/assets/icon/yco-credit-controls/add.svg",
@@ -572,9 +572,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/video-timeline/component.yaml",
-        "contractSha256": "9ff04b84ad04238e9297c088b12b25e6f750bf2521ffe7fa4e4dfe19457ab296",
+        "contractSha256": "ebc4bfe0528e7d319cdbdcbf982877a5a30147c4d9c4215a8df5610dc600ee80",
         "implementationImport": "platform/ui/video-timeline/index.js",
-        "implementationSha256": "8251dd5b6d47493503d2f97e547fa9ee4daf9c978ae9534147f5cd511bce19b0",
+        "implementationSha256": "ac27cf1f41bd1427ff805a402698caa96b3a48723515000d7ab1964beb835253",
         "runtimeAssets": [
           {
             "repositoryPath": "design-library/assets/icon/yco-video-timeline/drag-handle.svg",
@@ -1817,7 +1817,7 @@
         },
         {
           "path": "design-library/components/navigation-header/component.yaml",
-          "sha256": "ac566cb9042dfb4a427d793e69c9e28f749f9d5460d78d6d863c610efa238739"
+          "sha256": "a049c8781f4295dc3e8f8c44d6cb5c71b8c76bb2a000eaee5f7c93df4d34de40"
         },
         {
           "path": "design-library/components/pricing-overlay/component.yaml",
@@ -1857,7 +1857,7 @@
         },
         {
           "path": "design-library/components/video-timeline/component.yaml",
-          "sha256": "9ff04b84ad04238e9297c088b12b25e6f750bf2521ffe7fa4e4dfe19457ab296"
+          "sha256": "ebc4bfe0528e7d319cdbdcbf982877a5a30147c4d9c4215a8df5610dc600ee80"
         },
         {
           "path": "design-library/components/video-trim-modal/component.yaml",
@@ -2593,7 +2593,7 @@
         },
         {
           "path": "platform/ui/navigation-header/NavigationHeader.module.scss",
-          "sha256": "e0bbaef59c3c85b4eb26ed261d5518b29bd48788d009f2bed9b59ec6a61f661e"
+          "sha256": "a7119047bf30483eb0a2643bbadd990fcfeb79869db2ea4afb16a955f1a9c376"
         },
         {
           "path": "platform/ui/navigation-header/NavigationHeader.stories.jsx",
@@ -2769,7 +2769,7 @@
         },
         {
           "path": "platform/ui/video-timeline/VideoTimeline.module.scss",
-          "sha256": "3d2d81376176eefae0b7e40e33419c950bf319034dfb1aad4899eb5f10f90650"
+          "sha256": "434cc8123fce05e0b6f51570df16285fff6c93dbe318f5693b82c12d59f7f1f3"
         },
         {
           "path": "platform/ui/video-timeline/VideoTimeline.stories.jsx",
@@ -3068,7 +3068,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "6f323e30fbc6a64872c3b5500f12b1be4ea97bc00d6fd867d80bde2633842cea",
+      "hash": "8fb2bf7a64f3d0a890b86a07cacad385cca34e1c8bfba2b709966d586c577037",
       "edges": [
         {
           "from": "design-library/assets/font/yco-interface-icons.style.css",
@@ -3867,6 +3867,6 @@
         "react-dom"
       ]
     },
-    "revisionHash": "efdea0c120ec08e31c22441ee7d1c472f9f7a666000001f4cb32e5d5ba07adea"
+    "revisionHash": "7c680d0bbb5b2c1b3c312c53e58bfa31dbc98c1a38c3dccdff4c58d9c6c6fc09"
   }
 }

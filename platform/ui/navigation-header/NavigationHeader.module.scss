@@ -443,6 +443,17 @@
   box-shadow: 0 0 0 4px var(--stroke-focus);
 }
 
+/* ----- Desktop (>1199px): larger avatar glyph (2026-09-16, requested live —
+   "桌機版font-size調一下", against a DevTools inspect showing 22px): base
+   rule above is 18px, used as the tablet/mobile size below 1200px; desktop
+   gets its own larger glyph via this component's existing container-query
+   tiers rather than changing the shared base value for every width. ----- */
+@container navigation-header (min-width: 1200px) {
+  .avatarGlyph {
+    font-size: 22px;
+  }
+}
+
 /* ----- Tablet (769-1199px): symbol-only logo, icon-only "Start Editing",
    compact "Sign Up" pill instead of the full "Log In / Sign Up" one. ----- */
 @container navigation-header (max-width: 1199px) {

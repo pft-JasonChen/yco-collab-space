@@ -5,7 +5,7 @@
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "claude-code",
   "model": "claude-sonnet-5",
-  "generatedAt": "2026-09-17T03:15:30.432Z",
+  "generatedAt": "2026-09-17T03:45:29.913Z",
   "files": [
     "feature.jsx",
     "feature.module.scss"
@@ -738,7 +738,7 @@
         },
         {
           "path": "design-library/components/navigation-header/component.yaml",
-          "sha256": "ac566cb9042dfb4a427d793e69c9e28f749f9d5460d78d6d863c610efa238739"
+          "sha256": "a049c8781f4295dc3e8f8c44d6cb5c71b8c76bb2a000eaee5f7c93df4d34de40"
         },
         {
           "path": "design-library/components/pricing-overlay/component.yaml",
@@ -778,7 +778,7 @@
         },
         {
           "path": "design-library/components/video-timeline/component.yaml",
-          "sha256": "9ff04b84ad04238e9297c088b12b25e6f750bf2521ffe7fa4e4dfe19457ab296"
+          "sha256": "ebc4bfe0528e7d319cdbdcbf982877a5a30147c4d9c4215a8df5610dc600ee80"
         },
         {
           "path": "design-library/components/video-trim-modal/component.yaml",
@@ -1454,7 +1454,7 @@
         },
         {
           "path": "platform/ui/navigation-header/NavigationHeader.module.scss",
-          "sha256": "e0bbaef59c3c85b4eb26ed261d5518b29bd48788d009f2bed9b59ec6a61f661e"
+          "sha256": "a7119047bf30483eb0a2643bbadd990fcfeb79869db2ea4afb16a955f1a9c376"
         },
         {
           "path": "platform/ui/navigation-header/NavigationHeader.stories.jsx",
@@ -1630,7 +1630,7 @@
         },
         {
           "path": "platform/ui/video-timeline/VideoTimeline.module.scss",
-          "sha256": "3d2d81376176eefae0b7e40e33419c950bf319034dfb1aad4899eb5f10f90650"
+          "sha256": "434cc8123fce05e0b6f51570df16285fff6c93dbe318f5693b82c12d59f7f1f3"
         },
         {
           "path": "platform/ui/video-timeline/VideoTimeline.stories.jsx",
@@ -1929,7 +1929,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "edc777fb9dd9cacc52fc4c1679623cfa2a0bfa175674391a2cd78a859d8c54ba",
+      "hash": "efc48cc26bd454bb96aa2fe86bf26f9a9725e17465b61d058757ea179dabee96",
       "edges": [
         {
           "from": "features/collab-space-readiness/generated/feature.jsx",
@@ -1971,6 +1971,6 @@
         "react"
       ]
     },
-    "revisionHash": "40f8a87781cf03e94ba5cd1915632847b5f3c233bb435647f4917c49cfbefa48"
+    "revisionHash": "6dfaf6a14bd14881cb3d9cab24ade194e743ac9bd2a8043f527ff8464f84a5a7"
   }
 }

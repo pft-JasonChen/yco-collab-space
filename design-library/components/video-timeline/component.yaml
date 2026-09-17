@@ -29,12 +29,12 @@ implementation:
     - path: platform/ui/video-timeline/VideoTimeline.jsx
       sha256: d7db6ddf79901e11d161069b11e7b0ba22c8ed0170cd39a75d167b90e47f929e
     - path: platform/ui/video-timeline/VideoTimeline.module.scss
-      sha256: 3d2d81376176eefae0b7e40e33419c950bf319034dfb1aad4899eb5f10f90650
+      sha256: 434cc8123fce05e0b6f51570df16285fff6c93dbe318f5693b82c12d59f7f1f3
     - path: platform/ui/video-timeline/VideoTimeline.stories.jsx
       sha256: cf9ee49c161de1f9731cdef6922a9495f574e14af1d17f17638a7c2c58c09474
     - path: platform/ui/video-timeline/index.js
       sha256: a5278176ccab299379b01ef80e0f17c00c68336585b6add570a61a12a0f0199a
-  localFilesUpdated: 2026-09-16
+  localFilesUpdated: 2026-09-17
 publicApi:
   props:
     - { name: posterUrl, required: false }
@@ -97,4 +97,6 @@ decisionBasis:
   - "`.mainRowNoHandles` given its own flat 4px padding and no gap, not just a narrower right padding (2026-09-16, requested live via a DevTools inspect — gap toggled off, padding shown collapsed to a single 4px value — \"gap拿掉，然後padding都變4px，但是這是沒有handler的情況下才是，不要混淆了\"): the with-handles 20px gap and 28px-right/12px-elsewhere padding on the base `.mainRow` both exist only to clear `.trimRange`/the handles' own overhang; this modifier (showTrimHandles false — video-expansion's own persistent canvas timeline, not VideoTrimModal) previously only narrowed `padding-right` back to 12px and left the 20px gap and other three sides untouched, even though nothing needs clearing without handles at all. Now `gap: 0` and `padding: var(--spacing-4)` on every side. Scoped to this modifier alone — confirmed the with-handles `.mainRow` (VideoTrimModal) is unaffected, still 20px gap / 4px-28px-4px-12px padding."
   - "Auto-sync (2026-09-16): `VideoTimeline.module.scss` hash updated — no documented public prop or decisionBasis-quoted value appears to have changed, so this synced automatically. Review if this doesn't look right."
   - "With-handles `.mainRow` given its own mobile gap/padding override, scoped as `.mainRow:not(.mainRowNoHandles)` (2026-09-16, requested live via a DevTools inspect — \"mobile有handler的padding和gap可以幫我改這樣嗎\"): at <=768px this variant's gap tightens from --spacing-20 to --spacing-12 and its left padding drops from --spacing-12 to 0 (right stays 28px — the handle-overhang clearance above still applies at this width). First written as a bare `.mainRow` rule in the same mobile block that already holds `.mainRowNoHandles`'s own all-widths gap:0/padding:4px rule — confirmed live this actually WON on the no-handles variant too (both classes render on the same element there, same specificity, this new rule simply came later in the file), undoing that modifier's own fix at mobile widths. `:not(.mainRowNoHandles)` fixes it without reordering anything; re-verified live both variants render correctly together (no-handles: gap 0/padding 4px flat; with-handles: gap 12px/padding 4px-28px-4px-0)."
+  - "`.timeline`'s mobile gap set to 0 (2026-09-16, requested live via a DevTools inline-style experiment — gap:var(--spacing-0)): was var(--spacing-8) at <=768px, between the label row (00:00/0:30) and the thumbnail scrubber row below it."
   - "Auto-sync (2026-09-16): `VideoTimeline.module.scss` hash updated — no documented public prop or decisionBasis-quoted value appears to have changed, so this synced automatically. Review if this doesn't look right."
+  - "Auto-sync (2026-09-17): `VideoTimeline.module.scss` hash updated — no documented public prop or decisionBasis-quoted value appears to have changed, so this synced automatically. Review if this doesn't look right."
