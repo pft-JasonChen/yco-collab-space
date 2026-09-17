@@ -80,16 +80,18 @@
    想要縮回12px"): the extra 16px on top of the plain 12px above exists only
    to clear .trimRange/the right handle's own overhang — with showTrimHandles
    false neither renders, so nothing needs the room anymore. */
-/* So the padding-right above drops back to the plain 12px the other three
-   sides use: the extra 16px on top of it exists only to clear .trimRange/the
-   right handle's own overhang, and with showTrimHandles false neither
-   renders. The 20px gap stays — that one is the spec value for this row at
-   both device sizes, not handle clearance.
-   The flat 4px-everywhere/no-gap version of this rule (2026-09-16, via a
-   DevTools inspect) now lives in the phone breakpoint at the end of this
-   file instead of applying at every width: "padding變小是只有手機版，桌機版
-   還是要維持原本的設定" (2026-09-17). */
+/* Without handles nothing needs clearing on either axis, so both the base
+   row's 20px gap and the extra 16px of right padding (which exist only for
+   .trimRange/the right handle's own overhang) come back in: the gap to 8px
+   and the padding to the plain 12px the other three sides use.
+   8px is this variant's own desktop value, given live as a DevTools
+   experiment (2026-09-17 — "沒有handler的時候，桌機版gap是8px"); it is NOT
+   the base row's 20px, which stays with the handles. The phone closes the
+   row up entirely (gap 0, flat 4px) in the breakpoint at the end of this
+   file — that tightening is the phone's alone: "padding變小是只有手機版，
+   桌機版還是要維持原本的設定". */
 .mainRowNoHandles {
+  gap: var(--spacing-8);
   padding: var(--spacing-4) var(--spacing-12);
 }
 
