@@ -80,19 +80,17 @@
    想要縮回12px"): the extra 16px on top of the plain 12px above exists only
    to clear .trimRange/the right handle's own overhang — with showTrimHandles
    false neither renders, so nothing needs the room anymore. */
-/* Reference (2026-09-16, requested live via a DevTools inspect — gap toggled
-   off, padding shown collapsed to var(--spacing-4)): the with-handles
-   20px gap and 28px-right/12px-elsewhere padding both exist only to clear
-   .trimRange/the handles' own overhang; without them (showTrimHandles
-   false — video-expansion's own persistent canvas timeline, not
-   VideoTrimModal) there's nothing to clear, so this variant gets its own
-   flat 4px on every side and no gap at all, not just the narrower
-   padding-right it had before. Scoped to this modifier alone — the
-   with-handles .mainRow above (VideoTrimModal) keeps its own 20px gap and
-   asymmetric padding untouched. */
+/* So the padding-right above drops back to the plain 12px the other three
+   sides use: the extra 16px on top of it exists only to clear .trimRange/the
+   right handle's own overhang, and with showTrimHandles false neither
+   renders. The 20px gap stays — that one is the spec value for this row at
+   both device sizes, not handle clearance.
+   The flat 4px-everywhere/no-gap version of this rule (2026-09-16, via a
+   DevTools inspect) now lives in the phone breakpoint at the end of this
+   file instead of applying at every width: "padding變小是只有手機版，桌機版
+   還是要維持原本的設定" (2026-09-17). */
 .mainRowNoHandles {
-  gap: 0;
-  padding: var(--spacing-4);
+  padding: var(--spacing-4) var(--spacing-12);
 }
 
 .playButton {
@@ -370,5 +368,17 @@
   .mainRow:not(.mainRowNoHandles) {
     gap: var(--spacing-12);
     padding: var(--spacing-4) 28px var(--spacing-4) var(--spacing-0);
+  }
+
+  /* Reference (2026-09-16, requested live via a DevTools inspect — gap
+     toggled off, padding shown collapsed to var(--spacing-4)); moved under
+     this breakpoint on 2026-09-17 ("padding變小是只有手機版，桌機版還是要維持
+     原本的設定"). Without handles there is no .trimRange overhang to clear,
+     so the phone can close the row up entirely; desktop keeps the 20px gap
+     and 12px padding from the base rules. Same-specificity as
+     `.mainRowNoHandles` above but later in the file, so it wins here. */
+  .mainRowNoHandles {
+    gap: 0;
+    padding: var(--spacing-4);
   }
 }

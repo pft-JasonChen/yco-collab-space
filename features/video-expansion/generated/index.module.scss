@@ -168,17 +168,27 @@
      Nothing shows in that space: the loaded canvas area draws no
      background of its own. */
   justify-content: flex-start;
-  /* Reference (2026-09-16, requested live — "390 的手機沒辦法露出ratio 怕user
-     找不到...我們先改這兩個地方看看能露出多少"): trying a tighter 8px (was
-     16px) between the video preview and the timeline strip below it, to
-     free up a little more room for Aspect Ratio to surface without
-     scrolling on a short real phone viewport. */
-  gap: var(--spacing-8);
+  /* Gap between the video preview and the timeline strip below it. The
+     tighter 8px was asked for to free room for Aspect Ratio on a short
+     phone viewport (2026-09-16 — "390 的手機沒辦法露出ratio 怕user 找不到...
+     我們先改這兩個地方看看能露出多少"), so it belongs to the phone alone;
+     applying it at every width was corrected on 2026-09-17
+     ("padding變小是只有手機版，桌機版還是要維持原本的設定"). The phone's own
+     8px is in the media query below. */
+  gap: var(--spacing-16);
 }
 
 .canvasViewport {
   display: grid;
   width: 100%;
+  /* Gap between this grey panel and the target frame inside it, total across
+     both sides. Read back by index.jsx (canvasSpace.inset) and handed to
+     canvas-geometry's own sizing, so the breakpoint that decides it lives
+     here with every other responsive rule instead of as a JS media query.
+     32 is the original; the phone's tighter 16 is set in the media query
+     below — halving it at EVERY width was the mistake corrected on
+     2026-09-17 ("padding變小是只有手機版，桌機版還是要維持原本的設定"). */
+  --canvas-inset: 32px;
   /* Height comes from JS now (canvasViewportHeightFor, set as an inline
      style from the panel's own measured width), not from flex-fill —
      min/max-height here are just the same bounds as a static fallback for
@@ -330,6 +340,21 @@
    depends on `.layout{flex-direction:column}` actually being active, so it
    has to track that breakpoint exactly rather than use its own guess. */
 @media (max-width: 768px) {
+  /* The two tightenings that were asked for against phone screenshots, and
+     that belong to the phone alone (2026-09-17 — "padding變小是只有手機版，
+     桌機版還是要維持原本的設定"): half the breathing room around the target
+     frame ("我想要1的padding再小一半，等於讓裡面的東西大一點"), and a tighter
+     preview-to-timeline gap so Aspect ratio can surface without scrolling on
+     a 390x550 viewport ("390 的手機沒辦法露出ratio 怕user 找不到"). Both
+     desktop values stay put in the base rules above. */
+  .canvasViewport {
+    --canvas-inset: 16px;
+  }
+
+  .canvasWorkspace {
+    gap: var(--spacing-8);
+  }
+
   /* Was a flat `min-height: 1280px` guess, then `min-height: 100dvh` — both
      sized against the WRONG box. `100dvh` is the whole device viewport, but
      this element never gets the whole device viewport: PrototypeFrame's own

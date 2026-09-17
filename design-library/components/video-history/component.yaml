@@ -47,9 +47,9 @@ implementation:
   removedDependencies: [redux, i18n, lodash, task-fetching, polling, routing, cms, analytics, download-service, device-detection]
   localFiles:
     - path: platform/ui/video-history/VideoHistory.jsx
-      sha256: 23986fd475bd5edccc41cd97cd3e9cac0bff287b614ea5bd8a5695787bf548e8
+      sha256: 861482f858417fe7c4d83f51f861c8b9894359c5c1114085fa80de2d53a0e8c8
     - path: platform/ui/video-history/VideoHistory.module.scss
-      sha256: 27f04a74bdedb35a988524224685dc327eb561cc02778be28d147640b673a008
+      sha256: e6f72b3eb6284c4f8cecb8868aae5e8d7b87ccd1f7edb2601556da8a9b24115d
     - path: platform/ui/video-history/VideoHistory.stories.jsx
       sha256: 6ee7dca79f9117545a61f74857c19180edf4f0abba3ed694d06bb5c08ee61cec
     - path: platform/ui/video-history/index.js
@@ -105,3 +105,4 @@ decisionBasis:
   - "Auto-sync (2026-09-16): `VideoHistory.jsx` hash updated — no documented public prop or decisionBasis-quoted value appears to have changed, so this synced automatically. Review if this doesn't look right."
   - "Auto-sync (2026-09-17): `VideoHistory.jsx`, `VideoHistory.module.scss`, `VideoHistory.stories.jsx` hashes updated — no documented public prop or decisionBasis-quoted value appears to have changed, so this synced automatically. Review if this doesn't look right."
   - "Auto-sync (2026-09-17): `VideoHistory.module.scss` hash updated — no documented public prop or decisionBasis-quoted value appears to have changed, so this synced automatically. Review if this doesn't look right."
+  - "Auto-sync (2026-09-17): `VideoHistory.jsx`, `VideoHistory.module.scss` hashes updated — no documented public prop or decisionBasis-quoted value appears to have changed, so this synced automatically. Review if this doesn't look right."

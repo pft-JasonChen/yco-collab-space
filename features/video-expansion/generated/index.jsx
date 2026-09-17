@@ -38,6 +38,7 @@ import {
   SOURCE_STATES,
 } from './data/defaults.js';
 import {
+  CANVAS_VIEWPORT_INSET,
   canvasViewportHeightFor,
   clampPosition,
   isContained as fitsInsideFrame,
@@ -146,7 +147,7 @@ export default function VideoExpansionFeature() {
   const [ratio, setRatio] = useState(DEFAULT_RATIO);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [positionBounds, setPositionBounds] = useState({ x: 0, y: 0 });
-  const [canvasSpace, setCanvasSpace] = useState({ width: 0, availableHeight: 0 });
+  const [canvasSpace, setCanvasSpace] = useState({ width: 0, availableHeight: 0, inset: CANVAS_VIEWPORT_INSET });
   const [isContained, setIsContained] = useState(true);
   const [currentTime, setCurrentTime] = useState(mockData.sourceVideo.trimStartSeconds);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -177,12 +178,12 @@ export default function VideoExpansionFeature() {
   // the timeline below has taken its share), neither of which depends on
   // what this computes.
   const canvasViewportHeight = useMemo(
-    () => canvasViewportHeightFor(canvasSpace.width, targetRatio, canvasSpace.availableHeight),
-    [canvasSpace.width, canvasSpace.availableHeight, targetRatio],
+    () => canvasViewportHeightFor(canvasSpace.width, targetRatio, canvasSpace.availableHeight, canvasSpace.inset),
+    [canvasSpace.width, canvasSpace.availableHeight, canvasSpace.inset, targetRatio],
   );
   const targetFrameSize = useMemo(
-    () => frameSizeFor({ width: canvasSpace.width, height: canvasViewportHeight }, targetRatio),
-    [canvasSpace.width, canvasViewportHeight, targetRatio],
+    () => frameSizeFor({ width: canvasSpace.width, height: canvasViewportHeight }, targetRatio, canvasSpace.inset),
+    [canvasSpace.width, canvasSpace.inset, canvasViewportHeight, targetRatio],
   );
 
   useEffect(() => () => {
@@ -363,7 +364,7 @@ export default function VideoExpansionFeature() {
     const viewport = canvasViewportRef.current;
     const workspace = canvasWorkspaceRef.current;
     if (!loaded || !viewport || !workspace) {
-      setCanvasSpace({ width: 0, availableHeight: 0 });
+      setCanvasSpace({ width: 0, availableHeight: 0, inset: CANVAS_VIEWPORT_INSET });
       return undefined;
     }
     // The panel's OWN height is deliberately not measured: it is what this
@@ -379,11 +380,19 @@ export default function VideoExpansionFeature() {
         if (child === viewport) continue;
         taken += child.offsetHeight + gap;
       }
+      // --canvas-inset carries the breakpoint's own value (32 desktop, 16
+      // phone), so the responsive decision stays in the stylesheet.
+      const inset = parseFloat(window.getComputedStyle(viewport).getPropertyValue('--canvas-inset'));
       const next = {
         width: viewport.clientWidth,
         availableHeight: Math.max(0, workspace.clientHeight - taken),
+        inset: Number.isFinite(inset) ? inset : CANVAS_VIEWPORT_INSET,
       };
-      setCanvasSpace((current) => current.width === next.width && current.availableHeight === next.availableHeight ? current : next);
+      setCanvasSpace((current) => (
+        current.width === next.width && current.availableHeight === next.availableHeight && current.inset === next.inset
+          ? current
+          : next
+      ));
     };
     measure();
     const observer = new ResizeObserver(measure);

@@ -17,17 +17,20 @@ export const RATIO_SWATCH_PADDING = {
 };
 
 /**
- * Inset between the canvas viewport and the target frame, in CSS px (total,
- * so half of it lands on each side).
+ * Default inset between the canvas viewport and the target frame, in CSS px
+ * (total, so half of it lands on each side) — the fallback for callers that
+ * pass no inset of their own.
  *
- * Halved from 32 to 16 (2026-09-17, requested live — "我想要1的padding再小一
- * 半，等於讓裡面的東西大一點", against a screenshot marking the grey band
- * around the target frame): the frame is what the user actually works with,
- * so the surrounding breathing room was taking space the frame itself could
- * use. Nothing else reads this constant, so the change is purely "frame gets
- * 16px more in each axis".
+ * Halving this to 16 was requested against a PHONE screenshot (2026-09-17 —
+ * "我想要1的padding再小一半，等於讓裡面的東西大一點", marking the grey band
+ * around the target frame), and applying it at every width was the mistake:
+ * "padding變小是只有手機版，桌機版還是要維持原本的設定". Desktop keeps the
+ * original 32 here; the phone's 16 rides in as the `inset` argument, read off
+ * `--canvas-inset` in index.module.scss so the breakpoint stays defined in
+ * CSS with every other responsive rule rather than being duplicated as a JS
+ * media query.
  */
-export const CANVAS_VIEWPORT_INSET = 16;
+export const CANVAS_VIEWPORT_INSET = 32;
 
 /**
  * Floor/ceiling for the canvas viewport's own height, in CSS px. Kept as the
@@ -97,9 +100,9 @@ export function movementAxis(sourceRatio, targetRatio) {
  * out to remove. Pass the same height to targetFrameSize that goes on the
  * box and they cannot drift.
  */
-export function canvasViewportHeightFor(width, targetRatio, availableHeight = 0) {
-  const availableWidth = Math.max(0, width - CANVAS_VIEWPORT_INSET);
-  const hug = targetRatio ? availableWidth / targetRatio + CANVAS_VIEWPORT_INSET : 0;
+export function canvasViewportHeightFor(width, targetRatio, availableHeight = 0, inset = CANVAS_VIEWPORT_INSET) {
+  const availableWidth = Math.max(0, width - inset);
+  const hug = targetRatio ? availableWidth / targetRatio + inset : 0;
   // A real ceiling beats the nominal one: the panel may never take more than
   // the space its workspace actually has left, or it would overflow a
   // height-capped card (the mobile layout's own .editResult) and clip the
@@ -112,9 +115,9 @@ export function canvasViewportHeightFor(width, targetRatio, availableHeight = 0)
 }
 
 /** Largest target frame that fits the viewport while keeping the target ratio. */
-export function targetFrameSize(viewportSize, targetRatio) {
-  const availableWidth = Math.max(0, viewportSize.width - CANVAS_VIEWPORT_INSET);
-  const availableHeight = Math.max(0, viewportSize.height - CANVAS_VIEWPORT_INSET);
+export function targetFrameSize(viewportSize, targetRatio, inset = CANVAS_VIEWPORT_INSET) {
+  const availableWidth = Math.max(0, viewportSize.width - inset);
+  const availableHeight = Math.max(0, viewportSize.height - inset);
   if (!availableWidth || !availableHeight || !targetRatio) return { width: 0, height: 0 };
   if (availableWidth / availableHeight > targetRatio) {
     return { width: Math.floor(availableHeight * targetRatio), height: Math.floor(availableHeight) };
