@@ -5,7 +5,7 @@
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "claude-code",
   "model": "claude-opus-5",
-  "generatedAt": "2026-09-17T08:06:45.844Z",
+  "generatedAt": "2026-09-17T11:24:34.835Z",
   "files": [
     "README.md",
     "contract/integration.yaml",
@@ -572,9 +572,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/video-timeline/component.yaml",
-        "contractSha256": "09a7d573a69bf2e66b24a79cbeec26240ada34999297dca2642a369f1431ac62",
+        "contractSha256": "6b30faacfde537aa3d68d9587405cf9794f3cd8992ab1778ac589e4631fbb060",
         "implementationImport": "platform/ui/video-timeline/index.js",
-        "implementationSha256": "116810193315de786fab4255f3d8554b3e0d8c0827b59aa5b59c928f58994894",
+        "implementationSha256": "58fe1c270e2060f0eba434925addf13e212e674f976f30607898344775a1ec8b",
         "runtimeAssets": [
           {
             "repositoryPath": "design-library/assets/icon/yco-video-timeline/drag-handle.svg",
@@ -848,7 +848,7 @@
         },
         {
           "path": "features/video-expansion/generated/data/canvas-geometry.js",
-          "sha256": "992ac2d7425a41ca6afecdfae7ab7a11f8b2d28949e3a42bd56daf8f80ade8b8"
+          "sha256": "024d2744abb73919f0a55910a59908a10bd2414f97c19589f1cbd1dd2f539661"
         },
         {
           "path": "features/video-expansion/generated/data/defaults.js",
@@ -876,11 +876,11 @@
         },
         {
           "path": "features/video-expansion/generated/index.jsx",
-          "sha256": "81ae576a00e76b969c6a49436798b20fb65b56a9c87f65eb5e7f58438e657bdb"
+          "sha256": "71876fe315eea94991fe96552a5349a703026a951b1a4d17623def6b17750b84"
         },
         {
           "path": "features/video-expansion/generated/index.module.scss",
-          "sha256": "d92f2ee581348216c98eb7a12abfb03899bd2172f2d638d926446a14923e3ecc"
+          "sha256": "7bf59f3a9ff6a031caf95fcaf6dfa2c020b0759515ca09d021d5744d3dc36e8e"
         },
         {
           "path": "features/video-expansion/generated/settings/index.jsx",
@@ -891,7 +891,7 @@
           "sha256": "079e42b2b35548096dba01684133d3ba6cb46f86648eae166d64c204c608eaed"
         }
       ],
-      "hash": "f5e780d1836fd778a5687bb25822300b8c21945fc0d0771893cd2543d623e177"
+      "hash": "0ed45ca8ab52398cb335076b8203fb5cc3142b2cb23909e1157ef6f2c900082f"
     },
     "dependencies": {
       "files": [
@@ -1857,7 +1857,7 @@
         },
         {
           "path": "design-library/components/video-timeline/component.yaml",
-          "sha256": "09a7d573a69bf2e66b24a79cbeec26240ada34999297dca2642a369f1431ac62"
+          "sha256": "6b30faacfde537aa3d68d9587405cf9794f3cd8992ab1778ac589e4631fbb060"
         },
         {
           "path": "design-library/components/video-trim-modal/component.yaml",
@@ -1885,7 +1885,7 @@
         },
         {
           "path": "features/video-expansion/generated/data/canvas-geometry.js",
-          "sha256": "992ac2d7425a41ca6afecdfae7ab7a11f8b2d28949e3a42bd56daf8f80ade8b8"
+          "sha256": "024d2744abb73919f0a55910a59908a10bd2414f97c19589f1cbd1dd2f539661"
         },
         {
           "path": "features/video-expansion/generated/data/defaults.js",
@@ -1913,11 +1913,11 @@
         },
         {
           "path": "features/video-expansion/generated/index.jsx",
-          "sha256": "81ae576a00e76b969c6a49436798b20fb65b56a9c87f65eb5e7f58438e657bdb"
+          "sha256": "71876fe315eea94991fe96552a5349a703026a951b1a4d17623def6b17750b84"
         },
         {
           "path": "features/video-expansion/generated/index.module.scss",
-          "sha256": "d92f2ee581348216c98eb7a12abfb03899bd2172f2d638d926446a14923e3ecc"
+          "sha256": "7bf59f3a9ff6a031caf95fcaf6dfa2c020b0759515ca09d021d5744d3dc36e8e"
         },
         {
           "path": "features/video-expansion/generated/settings/index.jsx",
@@ -2769,7 +2769,7 @@
         },
         {
           "path": "platform/ui/video-timeline/VideoTimeline.module.scss",
-          "sha256": "c954a795c5f0cb0f1a49e9d1dcec66c7e1916bab01fed1f7c4046e1e07dbe727"
+          "sha256": "35f6703a4a0b42411080a277ebc6e96751a73158358fe6b6ec40b1c54460db79"
         },
         {
           "path": "platform/ui/video-timeline/VideoTimeline.stories.jsx",
@@ -3068,7 +3068,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "f8056da3c7704ebe5953e83404e3374f0c3ee76c9fd26ffad7aabe08451fac29",
+      "hash": "752e757fd8498ba2dd72aff02a0e502a3d945494034ab6fa7c5fb74a8cc4a7b5",
       "edges": [
         {
           "from": "design-library/assets/font/yco-interface-icons.style.css",
@@ -3867,6 +3867,6 @@
         "react-dom"
       ]
     },
-    "revisionHash": "cbe323a2f3127913b899987fd33bc35ac942db338fcb504ece199b22e48e9e74"
+    "revisionHash": "4c24c7c70682788b16bacf19f67d37bdf27898b6fac7a0f66859b5364d464b4d"
   }
 }

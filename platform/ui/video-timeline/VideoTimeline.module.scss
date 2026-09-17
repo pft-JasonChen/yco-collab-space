@@ -154,6 +154,16 @@
   height: 100%;
   grid-auto-flow: column;
   grid-auto-columns: 1fr;
+  /* Reference (2026-09-17, reported live — "這些frame是crop center 不是 crop
+     top"): the implicit row was `auto`, and a grid item's automatic minimum
+     size is its own intrinsic height, so each slot's row grew to the frame's
+     full aspect-correct height (measured 80px inside this 56px row) and
+     `overflow: hidden` below simply cut the excess off the BOTTOM — every
+     thumbnail showed the top of the frame and object-fit never came into it,
+     because the image box was never shorter than the image. minmax(0, 1fr)
+     drops that automatic minimum so the row is exactly this element's own
+     height, which lets object-fit: cover do the cropping, from the centre. */
+  grid-auto-rows: minmax(0, 1fr);
   gap: var(--spacing-4);
   overflow: hidden;
   border-radius: var(--corner-radius-4);
@@ -166,6 +176,9 @@
   display: block;
   width: 100%;
   height: 100%;
+  /* Same automatic-minimum rule as the row above, on the item itself. */
+  min-width: 0;
+  min-height: 0;
   object-fit: cover;
   pointer-events: none;
 }

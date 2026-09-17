@@ -374,8 +374,13 @@ export default function VideoExpansionFeature() {
     // sibling (the timeline strip) and the gaps between them are accounted
     // for.
     const measure = () => {
-      const gap = parseFloat(window.getComputedStyle(workspace).rowGap) || 0;
-      let taken = 0;
+      const workspaceStyle = window.getComputedStyle(workspace);
+      const gap = parseFloat(workspaceStyle.rowGap) || 0;
+      // clientHeight includes padding, but flex children are laid out in the
+      // content box — and the bottom padding is deliberately reserved for the
+      // playhead's overhang, so it is not height the panel may take.
+      const padding = (parseFloat(workspaceStyle.paddingTop) || 0) + (parseFloat(workspaceStyle.paddingBottom) || 0);
+      let taken = padding;
       for (const child of workspace.children) {
         if (child === viewport) continue;
         taken += child.offsetHeight + gap;

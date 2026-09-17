@@ -176,6 +176,16 @@
      ("padding變小是只有手機版，桌機版還是要維持原本的設定"). The phone's own
      8px is in the media query below. */
   gap: var(--spacing-16);
+  /* Room for the timeline playhead, which is deliberately taller than the
+     frame row it sits on (VideoTimeline's own .playhead: top -6px, height
+     100% + 12px) and so hangs a couple of px below the timeline's border
+     box. Nothing used to notice, because .canvasViewport stopped growing at
+     a fixed 640px and left slack underneath; now that it takes exactly the
+     height the workspace has free, that overhang landed under
+     .canvasAreaLoaded's own `overflow: hidden` and was clipped (measured
+     2px at 1920x1200). The measurement in index.jsx subtracts this padding,
+     so it is real reserved room rather than height the panel claims twice. */
+  padding-bottom: var(--spacing-4);
 }
 
 .canvasViewport {
@@ -206,15 +216,16 @@
      is exactly what shouldn't be claimed. Hugging the frame's own
      width-driven height happens to solve both: on a narrow phone the
      frame itself is short, so the panel is naturally short too. */
-  max-height: 640px;
   /* No flex-grow (the panel must stop claiming leftover space) and no
      flex-shrink either: the JS height already accounts for how much room
      the workspace has, so letting flexbox squeeze it on top of that would
      make the box disagree with the frame sized to fit it — exactly the
-     drift this pass removed. No CSS min-height for the same reason: min
-     beats height, so a 200px floor here would re-overflow a card with less
-     than 200px to give (the floor lives in canvasViewportHeightFor, where
-     it can yield to the real ceiling). */
+     drift this pass removed. No CSS min-height or max-height for the same
+     reason: either would beat the computed height and put the box back out
+     of step with the frame fitted to it. Both bounds live in
+     canvasViewportHeightFor, where they can yield to the workspace's real
+     free height — the 640px max-height that used to sit here is why every
+     ratio pinned to the same panel size on a wide screen (2026-09-17). */
   flex: 0 0 auto;
   place-items: center;
   overflow: hidden;

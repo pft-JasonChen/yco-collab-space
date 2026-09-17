@@ -32,14 +32,25 @@ export const RATIO_SWATCH_PADDING = {
  */
 export const CANVAS_VIEWPORT_INSET = 32;
 
-/**
- * Floor/ceiling for the canvas viewport's own height, in CSS px. Kept as the
- * single source of truth for both the JS-computed hug-height below and
- * index.module.scss's matching `.canvasViewport` min-height/max-height (a
- * static fallback for the instant before the first measurement paints).
- */
 export const CANVAS_VIEWPORT_MIN_HEIGHT = 200;
-export const CANVAS_VIEWPORT_MAX_HEIGHT = 640;
+
+/**
+ * Height to assume before the workspace has been measured, in CSS px — NOT a
+ * cap on the measured result.
+ *
+ * It used to be a hard 640px ceiling, left over from when the panel grew to
+ * fill instead of hugging. Reported live on a large desktop (2026-09-17 —
+ * "你本來做切換ratio的時候canvas 也會切換高度，但是剛剛不知道為什麼又變成
+ * 固定高度，變成下面的空白一直回存在"): the wider the column, the taller
+ * every ratio's hug height, so past a certain width they ALL exceeded 640
+ * and every ratio pinned to the same 640px panel — the height stopped
+ * responding to the ratio at all, and the space it refused to use stayed
+ * blank below the timeline. Measured at 1600x900, four of the five ratios
+ * already sat on the ceiling together. The workspace's own free height is
+ * the only ceiling that means anything here, so that is the only one
+ * applied once it is known.
+ */
+export const CANVAS_VIEWPORT_FALLBACK_HEIGHT = 640;
 
 /** Two ratios closer than this read as "the same shape" to a viewer. */
 export const RATIO_MATCH_TOLERANCE = 0.015;
@@ -103,13 +114,12 @@ export function movementAxis(sourceRatio, targetRatio) {
 export function canvasViewportHeightFor(width, targetRatio, availableHeight = 0, inset = CANVAS_VIEWPORT_INSET) {
   const availableWidth = Math.max(0, width - inset);
   const hug = targetRatio ? availableWidth / targetRatio + inset : 0;
-  // A real ceiling beats the nominal one: the panel may never take more than
-  // the space its workspace actually has left, or it would overflow a
-  // height-capped card (the mobile layout's own .editResult) and clip the
-  // timeline under it. The floor yields to that ceiling for the same reason.
-  const ceiling = availableHeight > 0
-    ? Math.min(CANVAS_VIEWPORT_MAX_HEIGHT, availableHeight)
-    : CANVAS_VIEWPORT_MAX_HEIGHT;
+  // The workspace's own free height is the whole ceiling: the panel may never
+  // take more than that or it would overflow a height-capped card (the mobile
+  // layout's own .editResult) and clip the timeline under it, and it should
+  // never take LESS on account of a fixed number, or the height stops
+  // answering to the ratio on a wide screen. The floor yields to it too.
+  const ceiling = availableHeight > 0 ? availableHeight : CANVAS_VIEWPORT_FALLBACK_HEIGHT;
   const floor = Math.min(CANVAS_VIEWPORT_MIN_HEIGHT, ceiling);
   return Math.round(Math.min(Math.max(hug, floor), ceiling));
 }
