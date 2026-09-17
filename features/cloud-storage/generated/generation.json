@@ -5,7 +5,7 @@
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "claude-code",
   "model": "claude-sonnet-5",
-  "generatedAt": "2026-09-17T01:23:53.928Z",
+  "generatedAt": "2026-09-17T02:45:38.823Z",
   "files": [
     "README.md",
     "feature.jsx",
@@ -2294,7 +2294,7 @@
         },
         {
           "path": "design-library/components/tool-page-layout/component.yaml",
-          "sha256": "593e73476f7a2574cde99889557512cb64ef972a5f6e615571e9aacc519181d5"
+          "sha256": "8934f32054bb17520112d2fef4946be0997e842859d74e219473e5706a1345f8"
         },
         {
           "path": "design-library/components/upload-media-block/component.yaml",
@@ -3138,7 +3138,7 @@
         },
         {
           "path": "platform/ui/tool-page-layout/ToolPageLayout.module.scss",
-          "sha256": "f032cd23fcd5c01f591d3c006d9c65988d2617e45f9077ceac7d532166509258"
+          "sha256": "70500edcf2d8945e8e5b1bcff8881e5ba4e508139a907606633e151f88dd1bef"
         },
         {
           "path": "platform/ui/tool-page-layout/ToolPageLayout.stories.jsx",
@@ -3517,7 +3517,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "4cba04bef600e94eb92f8e548a5fdd0b437132fd402fd1ec6306f43c2eabb8a2",
+      "hash": "6bb34ac6d366e01fcc60238455ac389350dccbe1559f7a17d72c3cd24d65cf74",
       "edges": [
         {
           "from": "features/cloud-storage/generated/feature.jsx",
@@ -4220,6 +4220,6 @@
         "react-dom"
       ]
     },
-    "revisionHash": "d21e5e9bdc61eb37c431bd73fb62fad781c68211efb7005e1abeccadc9eb1392"
+    "revisionHash": "baad1d217f5c4fda4ce83bae5081ed889855ea10e03e4b55561629db176471c1"
   }
 }

@@ -5,7 +5,7 @@
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "claude-code",
   "model": "claude-sonnet-5",
-  "generatedAt": "2026-09-17T01:23:52.195Z",
+  "generatedAt": "2026-09-17T02:45:28.510Z",
   "files": [
     "README.md",
     "contract/integration.yaml",
@@ -379,9 +379,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/tool-page-layout/component.yaml",
-        "contractSha256": "593e73476f7a2574cde99889557512cb64ef972a5f6e615571e9aacc519181d5",
+        "contractSha256": "8934f32054bb17520112d2fef4946be0997e842859d74e219473e5706a1345f8",
         "implementationImport": "platform/ui/tool-page-layout/index.js",
-        "implementationSha256": "c125156bbfa071e45db348c7e139bfe4772d5483b9bfbe825636ba6cda303483",
+        "implementationSha256": "252cc90bdb6b3731b9e6dfc230b8646b439eb18cdfbb67be728b3768ae30ff69",
         "runtimeAssets": []
       },
       {
@@ -880,7 +880,7 @@
         },
         {
           "path": "features/video-expansion/generated/index.module.scss",
-          "sha256": "8879c85158c3de97c78cacf03c4d8ecc65834ed742896f64b8f81c62e0591cd0"
+          "sha256": "5cef1c114a9005a08e759fe5b3e6478b629f800249992a1355ed6d542a2ab82b"
         },
         {
           "path": "features/video-expansion/generated/settings/index.jsx",
@@ -891,7 +891,7 @@
           "sha256": "079e42b2b35548096dba01684133d3ba6cb46f86648eae166d64c204c608eaed"
         }
       ],
-      "hash": "f2ba17edc30639bbfe8cd588ba6c90fe667aca37ae31d76a7b910b258698cf2f"
+      "hash": "c1f658b001ab12b5cd08312bbcda2e1e5add099dd4ac7e83452b2685d872bd13"
     },
     "dependencies": {
       "files": [
@@ -1837,7 +1837,7 @@
         },
         {
           "path": "design-library/components/tool-page-layout/component.yaml",
-          "sha256": "593e73476f7a2574cde99889557512cb64ef972a5f6e615571e9aacc519181d5"
+          "sha256": "8934f32054bb17520112d2fef4946be0997e842859d74e219473e5706a1345f8"
         },
         {
           "path": "design-library/components/upload-media-block/component.yaml",
@@ -1917,7 +1917,7 @@
         },
         {
           "path": "features/video-expansion/generated/index.module.scss",
-          "sha256": "8879c85158c3de97c78cacf03c4d8ecc65834ed742896f64b8f81c62e0591cd0"
+          "sha256": "5cef1c114a9005a08e759fe5b3e6478b629f800249992a1355ed6d542a2ab82b"
         },
         {
           "path": "features/video-expansion/generated/settings/index.jsx",
@@ -2689,7 +2689,7 @@
         },
         {
           "path": "platform/ui/tool-page-layout/ToolPageLayout.module.scss",
-          "sha256": "f032cd23fcd5c01f591d3c006d9c65988d2617e45f9077ceac7d532166509258"
+          "sha256": "70500edcf2d8945e8e5b1bcff8881e5ba4e508139a907606633e151f88dd1bef"
         },
         {
           "path": "platform/ui/tool-page-layout/ToolPageLayout.stories.jsx",
@@ -3068,7 +3068,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "b3cf7eabedffe5843a22e32cedafe6e42b16a15dca9dd27b7f75bad48d6be716",
+      "hash": "fdb54a3ef75a30a6344749ad0f6edac4c2595f5b430ea70b993f9651aa06b01d",
       "edges": [
         {
           "from": "design-library/assets/font/yco-interface-icons.style.css",
@@ -3867,6 +3867,6 @@
         "react-dom"
       ]
     },
-    "revisionHash": "ad3eff15c7e72dcf2805bcd1379d608a0aa98c3214461d9085b318b37be2bec1"
+    "revisionHash": "f153dc7e16b2d151a9a04e8e4b310beb0b8263ee51866a353e46fab77c4f43e8"
   }
 }

@@ -7,9 +7,24 @@
   background: var(--background-base);
 }
 
+/* Reference (2026-09-16, requested live — "playhead的z-index好像還是有問題誒",
+   against a real-device screenshot of VideoTimeline's playhead bleeding
+   through the mobile fixed Generate footer): `.result` (this panel's own
+   sibling, holding the canvas/timeline) is `position: static` — it never
+   establishes its own stacking context, so a z-indexed descendant inside
+   it (VideoTimeline's own `.playhead`/`.handle`, z-index 3/4) isn't
+   contained there either; it keeps bubbling up to whichever ancestor
+   stacking context actually exists, same as this `.panel`'s own z-index:2
+   does. Confirmed live: both ended up compared directly against each
+   other at that same shared level, and 3 beat 2 — raising `.panel` to 10
+   (still well under Generate's own locally-scoped z-index:20 inside it)
+   fixed it immediately. 2 was never actually enough to reliably beat
+   whatever a descendant might declare; it just happened to work until
+   video-expansion's own persistent canvas timeline (z-index 3/4) was
+   added into `.result`. */
 .panel {
   position: relative;
-  z-index: 2;
+  z-index: 10;
   display: flex;
   width: 400px;
   min-width: 400px;

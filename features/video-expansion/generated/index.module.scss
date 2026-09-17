@@ -160,7 +160,12 @@
      matters for whatever's left over once it stops growing, and center
      distributes that evenly instead of dumping it in one place. */
   justify-content: center;
-  gap: var(--spacing-16);
+  /* Reference (2026-09-16, requested live — "390 的手機沒辦法露出ratio 怕user
+     找不到...我們先改這兩個地方看看能露出多少"): trying a tighter 8px (was
+     16px) between the video preview and the timeline strip below it, to
+     free up a little more room for Aspect Ratio to surface without
+     scrolling on a short real phone viewport. */
+  gap: var(--spacing-8);
 }
 
 .canvasViewport {
@@ -524,7 +529,18 @@
     box-shadow: 0 -2px 8px color-mix(in srgb, var(--fill-strong) 10%, transparent);
   }
 
+  /* Reference (2026-09-16, requested live — "390 的手機沒辦法露出ratio 怕user
+     找不到...我們先改這兩個地方看看能露出多少"): 96px was sized as a safety
+     margin above Generate's own ~76px real footprint (44px button + 16px
+     top/bottom padding), not a measured value. First tried a flat 16px
+     (removing the reservation entirely) to see how much of Aspect Ratio
+     surfaces without scrolling — confirmed live this revealed more up
+     front, but at full scroll Generate then overlapped and hid the actual
+     ratio option buttons (only the "Aspect ratio" label peeked out above
+     it). 80px is Generate's own measured footprint (76px) plus a 4px
+     margin — clears it with no overlap, while still recovering 16px over
+     the original 96px guess. */
   .panelContent {
-    padding-bottom: var(--spacing-96);
+    padding-bottom: 80px;
   }
 }
