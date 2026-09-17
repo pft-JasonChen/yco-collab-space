@@ -146,7 +146,7 @@ export default function VideoExpansionFeature() {
   const [ratio, setRatio] = useState(DEFAULT_RATIO);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [positionBounds, setPositionBounds] = useState({ x: 0, y: 0 });
-  const [canvasViewportSize, setCanvasViewportSize] = useState({ width: 0, height: 0 });
+  const [canvasSpace, setCanvasSpace] = useState({ width: 0, availableHeight: 0 });
   const [isContained, setIsContained] = useState(true);
   const [currentTime, setCurrentTime] = useState(mockData.sourceVideo.trimStartSeconds);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -160,6 +160,7 @@ export default function VideoExpansionFeature() {
   const inputRef = useRef(null);
   const videoRef = useRef(null);
   const canvasViewportRef = useRef(null);
+  const canvasWorkspaceRef = useRef(null);
   const targetCanvasRef = useRef(null);
   const objectUrlRef = useRef(null);
   const timerRef = useRef(null);
@@ -170,21 +171,18 @@ export default function VideoExpansionFeature() {
   const targetRatio = ratioValue(ratio);
   const selectedDuration = durationOf(trimStart, trimEnd);
   const movement = useMemo(() => movementAxis(sourceRatio, targetRatio), [sourceRatio, targetRatio]);
-  // canvasViewportHeight is a PREFERRED height (fed to the box as a CSS
-  // height, from width alone, so it hugs content instead of flex-filling
-  // leftover space) — but the box can still be flex-shrunk smaller than
-  // that if a genuinely tight ancestor (e.g. the mobile layout's own
-  // .editResult max-height) doesn't have room for it. targetFrameSize must
-  // fit inside whatever the box ACTUALLY rendered at, so it stays derived
-  // from the measured canvasViewportSize (both dimensions), not from this
-  // preferred value directly — self-correcting the same way it always did.
+  // One height decides both the grey panel and the frame inside it, so they
+  // can never disagree: canvasSpace holds only what layout imposes from the
+  // outside (the panel's width, and the height its workspace has left once
+  // the timeline below has taken its share), neither of which depends on
+  // what this computes.
   const canvasViewportHeight = useMemo(
-    () => canvasViewportHeightFor(canvasViewportSize.width, targetRatio),
-    [canvasViewportSize.width, targetRatio],
+    () => canvasViewportHeightFor(canvasSpace.width, targetRatio, canvasSpace.availableHeight),
+    [canvasSpace.width, canvasSpace.availableHeight, targetRatio],
   );
   const targetFrameSize = useMemo(
-    () => frameSizeFor(canvasViewportSize, targetRatio),
-    [canvasViewportSize, targetRatio],
+    () => frameSizeFor({ width: canvasSpace.width, height: canvasViewportHeight }, targetRatio),
+    [canvasSpace.width, canvasViewportHeight, targetRatio],
   );
 
   useEffect(() => () => {
@@ -350,12 +348,12 @@ export default function VideoExpansionFeature() {
   // targetCanvasRef end up pointing at a brand-new DOM node each time, but
   // with `loaded` unchanged (already true) neither effect reran to attach a
   // fresh ResizeObserver to it. The stale observer, still watching the OLD
-  // (now-detached) node, never fires again, freezing canvasViewportSize/
+  // (now-detached) node, never fires again, freezing canvasSpace/
   // positionBounds at whatever they were on the very first mount — normally
   // harmless since a fixed 430px viewport measured the same every time, but
-  // .canvasViewport's height is content-driven now (computed from its own
-  // measured WIDTH, see canvasViewportHeightFor), so a remount can
-  // legitimately measure a different width than the first mount did, and a
+  // .canvasViewport's size is content-driven now (see
+  // canvasViewportHeightFor), so a remount can legitimately measure
+  // differently than the first mount did, and a
   // frozen stale value can end up wrong (here: 0, making
   // .targetCanvas render invisible). `activeTab` now sits in both dependency
   // arrays purely to force a re-run — and therefore a fresh observer bound
@@ -363,17 +361,34 @@ export default function VideoExpansionFeature() {
   // otherwise changing what either effect measures or how.
   useLayoutEffect(() => {
     const viewport = canvasViewportRef.current;
-    if (!loaded || !viewport) {
-      setCanvasViewportSize({ width: 0, height: 0 });
+    const workspace = canvasWorkspaceRef.current;
+    if (!loaded || !viewport || !workspace) {
+      setCanvasSpace({ width: 0, availableHeight: 0 });
       return undefined;
     }
+    // The panel's OWN height is deliberately not measured: it is what this
+    // measurement decides, so reading it back is what let the panel and the
+    // frame drift apart before. What gets read is only what layout imposes —
+    // the panel's width, and the workspace height still free once every
+    // sibling (the timeline strip) and the gaps between them are accounted
+    // for.
     const measure = () => {
-      const nextSize = { width: viewport.clientWidth, height: viewport.clientHeight };
-      setCanvasViewportSize((current) => current.width === nextSize.width && current.height === nextSize.height ? current : nextSize);
+      const gap = parseFloat(window.getComputedStyle(workspace).rowGap) || 0;
+      let taken = 0;
+      for (const child of workspace.children) {
+        if (child === viewport) continue;
+        taken += child.offsetHeight + gap;
+      }
+      const next = {
+        width: viewport.clientWidth,
+        availableHeight: Math.max(0, workspace.clientHeight - taken),
+      };
+      setCanvasSpace((current) => current.width === next.width && current.availableHeight === next.availableHeight ? current : next);
     };
     measure();
     const observer = new ResizeObserver(measure);
-    observer.observe(viewport);
+    observer.observe(workspace);
+    for (const child of workspace.children) observer.observe(child);
     return () => observer.disconnect();
   }, [loaded, activeTab]);
 
@@ -521,7 +536,7 @@ export default function VideoExpansionFeature() {
                   <div className={styles.editResult} data-surface-zone="canvas-playback-timeline" data-component-role="video-playback-timeline">
                   <div className={loaded ? styles.canvasAreaLoaded : styles.canvasArea} data-testid={loaded ? 'video-canvas' : undefined} data-ratio={ratio} data-component-role="video-player canvas-drag-positioning" data-surface-zone="video-result">
                     {loaded ? (
-                      <div className={styles.canvasWorkspace}>
+                      <div ref={canvasWorkspaceRef} className={styles.canvasWorkspace}>
                         <div ref={canvasViewportRef} className={styles.canvasViewport} data-testid="canvas-viewport" data-fixed-height="true" style={{ height: `${canvasViewportHeight}px` }}>
                           <div ref={targetCanvasRef} className={styles.targetCanvas} data-testid="target-ratio-frame" data-frame-contained={targetFrameSize.width > 0 ? 'true' : 'false'} style={{ width: `${targetFrameSize.width}px`, height: `${targetFrameSize.height}px`, aspectRatio: ratio.replace(':', ' / '), visibility: targetFrameSize.width > 0 ? 'visible' : 'hidden' }} onPointerDown={beginDrag} onPointerMove={moveDrag} onPointerUp={endDrag} onPointerCancel={endDrag}>
                             <video ref={videoRef} className={styles.canvasVideo} data-testid="canvas-video" data-fit="contain" data-contained={isContained ? 'true' : 'false'} data-draggable="true" data-movement={movement} data-playing={isPlaying ? 'true' : 'false'} src={sourceSrc} muted playsInline preload="auto" loop={!sourceFile} style={{ ...mediaSizing, transform: `translate(${position.x}px, ${position.y}px)` }} onLoadedMetadata={(event) => { event.currentTarget.currentTime = event.currentTarget.duration < trimEnd ? 0 : trimStart; }} onPlay={() => setIsPlaying(true)} onPause={() => setIsPlaying(false)} onTimeUpdate={(event) => {

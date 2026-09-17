@@ -155,13 +155,19 @@
      a genuinely tall window, and flex-start dumped 100% of that leftover
      space below the timeline as dead space (only "fixed" by opening
      DevTools, which shrinks the page enough that the cap stops applying —
-     not a real fix). .canvasViewport no longer grows to fill leftover
-     space at all (2026-09-17, it hugs its own frame's height instead —
-     see its own rule below), so there is typically MORE leftover space in
-     here now, not less; `justify-content: center` still distributes it
-     evenly above/below the {viewport, timeline} pair rather than dumping
-     it all below one of them. */
-  justify-content: center;
+     not a real fix). Back to flex-start (2026-09-17, reported live —
+     "一個靠上一個置中很奇怪", against a 1024x1366 screenshot): .canvasViewport
+     no longer grows to fill leftover space at all (it hugs its own frame's
+     height now — see its own rule below), which is what the 2026-09-16
+     centering was compensating for. With the panel hugging, centering just
+     moved the same unused height from inside the grey box to above and
+     below it — measured live, the video still started 418px down a 1196px
+     column while the settings column beside it started at its top, which
+     is the mismatch that was reported. Whatever height the canvas does not
+     need now collects below the pair instead, so both columns start level.
+     Nothing shows in that space: the loaded canvas area draws no
+     background of its own. */
+  justify-content: flex-start;
   /* Reference (2026-09-16, requested live — "390 的手機沒辦法露出ratio 怕user
      找不到...我們先改這兩個地方看看能露出多少"): trying a tighter 8px (was
      16px) between the video preview and the timeline strip below it, to
@@ -190,14 +196,16 @@
      is exactly what shouldn't be claimed. Hugging the frame's own
      width-driven height happens to solve both: on a narrow phone the
      frame itself is short, so the panel is naturally short too. */
-  min-height: 200px;
   max-height: 640px;
-  /* flex-grow:0 is the actual fix (stop claiming leftover space); flex-
-     shrink stays 1 so a genuinely tight ancestor (e.g. the mobile layout's
-     own .editResult max-height below) can still squeeze this smaller than
-     its preferred height instead of overflowing it — the JS side already
-     re-fits the frame to whatever height this actually renders at. */
-  flex: 0 1 auto;
+  /* No flex-grow (the panel must stop claiming leftover space) and no
+     flex-shrink either: the JS height already accounts for how much room
+     the workspace has, so letting flexbox squeeze it on top of that would
+     make the box disagree with the frame sized to fit it — exactly the
+     drift this pass removed. No CSS min-height for the same reason: min
+     beats height, so a 200px floor here would re-overflow a card with less
+     than 200px to give (the floor lives in canvasViewportHeightFor, where
+     it can yield to the real ceiling). */
+  flex: 0 0 auto;
   place-items: center;
   overflow: hidden;
   background: var(--fill-weak);

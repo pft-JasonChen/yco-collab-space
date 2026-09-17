@@ -82,17 +82,33 @@ export function movementAxis(sourceRatio, targetRatio) {
  * below): the panel's height used to come from CSS alone (min/max-height
  * plus a 30vh starting basis, flex:1 free to grow) — driven by the
  * viewport itself, not by what the frame actually needed. This instead
- * derives the frame's height from the panel's WIDTH (which layout already
- * sets independently, so no circularity) and returns panel height = that
- * frame height + the same inset used around it, clamped to the existing
+ * derives the frame's height from the panel's WIDTH and from how much
+ * height the workspace has left — both imposed by layout from the outside,
+ * so neither depends on the frame this sizes, and one measurement decides
+ * the panel and the frame together. The result is clamped to the existing
  * min/max so both the old short-mobile floor ("390 的手機沒辦法露出ratio")
  * and the old wide-desktop ceiling still hold.
+ *
+ * Deriving the two from separate sources is what broke this the first time
+ * (2026-09-17): the panel took a JS height from width while targetFrameSize
+ * kept fitting to the panel's own separately measured height, so a missed
+ * resize notification left them disagreeing permanently — a 640px panel
+ * around a 252px frame, 388px of grey void, worse than the 194px this set
+ * out to remove. Pass the same height to targetFrameSize that goes on the
+ * box and they cannot drift.
  */
-export function canvasViewportHeightFor(width, targetRatio) {
+export function canvasViewportHeightFor(width, targetRatio, availableHeight = 0) {
   const availableWidth = Math.max(0, width - CANVAS_VIEWPORT_INSET);
-  const frameHeight = targetRatio ? availableWidth / targetRatio : 0;
-  const desired = frameHeight + CANVAS_VIEWPORT_INSET;
-  return Math.round(Math.min(CANVAS_VIEWPORT_MAX_HEIGHT, Math.max(CANVAS_VIEWPORT_MIN_HEIGHT, desired)));
+  const hug = targetRatio ? availableWidth / targetRatio + CANVAS_VIEWPORT_INSET : 0;
+  // A real ceiling beats the nominal one: the panel may never take more than
+  // the space its workspace actually has left, or it would overflow a
+  // height-capped card (the mobile layout's own .editResult) and clip the
+  // timeline under it. The floor yields to that ceiling for the same reason.
+  const ceiling = availableHeight > 0
+    ? Math.min(CANVAS_VIEWPORT_MAX_HEIGHT, availableHeight)
+    : CANVAS_VIEWPORT_MAX_HEIGHT;
+  const floor = Math.min(CANVAS_VIEWPORT_MIN_HEIGHT, ceiling);
+  return Math.round(Math.min(Math.max(hug, floor), ceiling));
 }
 
 /** Largest target frame that fits the viewport while keeping the target ratio. */
