@@ -162,7 +162,12 @@ const stories = [
   {
     id: 'ui-video-history--processing-and-failed',
     async interact(page) {
-      await page.getByText('Generating video').waitFor({ state: 'visible' });
+      // Reference (2026-09-17, requested live — "generating的畫面你做錯了...
+      // 請參考figma", node 4536:162056): label copy changed from "Generating
+      // video" to "Video Generating" as part of matching the design; this
+      // check was still asserting the pre-redesign text.
+      await page.getByText('Video Generating').waitFor({ state: 'visible' });
+      await page.getByText('72%').waitFor({ state: 'visible' });
       await page.getByRole('button', { name: 'Retry' }).click();
     },
   },

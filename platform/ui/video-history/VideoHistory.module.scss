@@ -258,8 +258,13 @@
   height: 100%;
   /* Gradient read from the node's own progress-bar asset: it spans the FILLED
      width, not the whole track, so it always runs cyan-to-green end to end
-     however far along the run is. */
-  background: linear-gradient(90deg, var(--fill-brand-strong) 0%, var(--green-dark-1000) 100%);
+     however far along the run is. `--fill-brand-strong` resolves to the exact
+     #03ADE2 start stop, so it's used directly; no token in the RD baseline
+     matches the #3FD75B end stop (the two closest greens, --green-dark-1000
+     #77C7AF and --green-light-1000 #067A57, are both visibly different one-
+     off decorative colors from this specific asset, not this project's
+     "success" green) — the raw hex is intentional here, not a shortcut. */
+  background: linear-gradient(90deg, var(--fill-brand-strong) 0%, #3fd75b 100%);
   border-radius: inherit;
   transition: width 200ms linear;
 }

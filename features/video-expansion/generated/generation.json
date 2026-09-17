@@ -3,9 +3,9 @@
   "feature": "video-expansion",
   "inputHash": "38a8fd5aa92759cd86b63979e73ba54400a28e4917bd6285d559868c4477b56d",
   "generatorInstructionsVersion": "collab-contract-v1",
-  "adapter": "not-recorded",
-  "model": "not-recorded",
-  "generatedAt": "2026-09-17T04:36:54.149Z",
+  "adapter": "claude-code",
+  "model": "claude-sonnet-5",
+  "generatedAt": "2026-09-17T06:21:58.195Z",
   "files": [
     "README.md",
     "contract/integration.yaml",
@@ -436,9 +436,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/video-history/component.yaml",
-        "contractSha256": "648d859738fd3833a59f638152c25e7fd6f0f227a673d318f60ca0f554b1a17b",
+        "contractSha256": "69411c1204a8dda901aa45a1bbe3e93ddb652b21a775641f61b010bc9d7c257f",
         "implementationImport": "platform/ui/video-history/index.js",
-        "implementationSha256": "6544f79b66aa3c52b682701cffb432b48ecaca872405b61962ad6621eb086822",
+        "implementationSha256": "550fce0ec1d07a016446dd8c2ad15a663e1450c7b9449c36452da0eb48dd3081",
         "runtimeAssets": [
           {
             "repositoryPath": "design-library/assets/icon/yco-video-actions/character-motion-swap.svg",
@@ -1845,7 +1845,7 @@
         },
         {
           "path": "design-library/components/video-history/component.yaml",
-          "sha256": "648d859738fd3833a59f638152c25e7fd6f0f227a673d318f60ca0f554b1a17b"
+          "sha256": "69411c1204a8dda901aa45a1bbe3e93ddb652b21a775641f61b010bc9d7c257f"
         },
         {
           "path": "design-library/components/video-info-dialog/component.yaml",
@@ -2721,7 +2721,7 @@
         },
         {
           "path": "platform/ui/video-history/VideoHistory.module.scss",
-          "sha256": "f63ec6a13a3cb4bc32b2ee663760f23350736495ce6904577603fa9018463c27"
+          "sha256": "27f04a74bdedb35a988524224685dc327eb561cc02778be28d147640b673a008"
         },
         {
           "path": "platform/ui/video-history/VideoHistory.stories.jsx",
@@ -3068,7 +3068,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "36017cf6a4b453b6b5602816e01b44e0afd1eddc4a825aa9dca45fe5eaaa40c2",
+      "hash": "8cfa067dba2c2c147e18c71cb57dd00c47b4973c2ec29822df311a7c3d13b1f2",
       "edges": [
         {
           "from": "design-library/assets/font/yco-interface-icons.style.css",
@@ -3867,6 +3867,6 @@
         "react-dom"
       ]
     },
-    "revisionHash": "4620fec7bb39e90944f7905db916c02fd84877331fdd1b683725afc2616a1320"
+    "revisionHash": "0be1c94ede09b9bc22e7d40427692fd64938f55db61d6b0ee4a4af13378cca15"
   }
 }
