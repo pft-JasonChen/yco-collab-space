@@ -155,10 +155,12 @@
      a genuinely tall window, and flex-start dumped 100% of that leftover
      space below the timeline as dead space (only "fixed" by opening
      DevTools, which shrinks the page enough that the cap stops applying —
-     not a real fix). `flex:1` still lets .canvasViewport claim all
-     available space up to its cap either way; `justify-content` only
-     matters for whatever's left over once it stops growing, and center
-     distributes that evenly instead of dumping it in one place. */
+     not a real fix). .canvasViewport no longer grows to fill leftover
+     space at all (2026-09-17, it hugs its own frame's height instead —
+     see its own rule below), so there is typically MORE leftover space in
+     here now, not less; `justify-content: center` still distributes it
+     evenly above/below the {viewport, timeline} pair rather than dumping
+     it all below one of them. */
   justify-content: center;
   /* Reference (2026-09-16, requested live — "390 的手機沒辦法露出ratio 怕user
      找不到...我們先改這兩個地方看看能露出多少"): trying a tighter 8px (was
@@ -171,24 +173,31 @@
 .canvasViewport {
   display: grid;
   width: 100%;
-  /* Was a flat 430px regardless of viewport height — the actual root cause
-     of the reported blank space (2026-09-15, "應該要偵測裝置高度撐滿"): on a
-     tall screen, .canvasArea/.canvasWorkspace had far more than 430px+the
-     timeline strip to give, and none of it went anywhere. flex:1 lets this
-     grow to fill whatever .canvasWorkspace actually has left after the
-     timeline strip's own natural height; min/max keep it from collapsing
-     too small or growing absurdly tall on a very short/very tall window. */
-  /* Reference (2026-09-16, requested live via a DevTools inline-style
-     experiment — min-height:200px, height:30vh added): min-height lowered
-     from 240px so this can actually shrink toward 30vh on a short viewport
-     instead of flooring out at 240 regardless; `height: 30vh` gives flex's
-     "auto" basis a viewport-relative starting point instead of a purely
-     content-based one, while still bounded by min/max-height and still
-     free to grow via flex:1 when more space is actually available. */
+  /* Height comes from JS now (canvasViewportHeightFor, set as an inline
+     style from the panel's own measured width), not from flex-fill —
+     min/max-height here are just the same bounds as a static fallback for
+     the instant before the first measurement paints.
+     Reference (2026-09-17, requested live — "你會不會覺得在這個尺寸的螢幕，
+     一個靠上一個置中很奇怪", against a 1024x1366 screenshot: the panel sat
+     at its 640px max-height cap while the actual 16:9 frame inside it
+     measured only 252px tall, 194px of dead grey space above and below):
+     this used to be flex:1 1 auto with a height:30vh starting basis,
+     letting the panel independently claim whatever vertical space
+     .canvasWorkspace had left rather than only what the frame needed —
+     correct for the ORIGINAL problem this solved (a short mobile viewport
+     hiding Aspect ratio/Generate below a too-tall fixed panel, "390 的手機
+     沒辦法露出ratio"), but wrong on a tall screen where "leftover space"
+     is exactly what shouldn't be claimed. Hugging the frame's own
+     width-driven height happens to solve both: on a narrow phone the
+     frame itself is short, so the panel is naturally short too. */
   min-height: 200px;
   max-height: 640px;
-  height: 30vh;
-  flex: 1 1 auto;
+  /* flex-grow:0 is the actual fix (stop claiming leftover space); flex-
+     shrink stays 1 so a genuinely tight ancestor (e.g. the mobile layout's
+     own .editResult max-height below) can still squeeze this smaller than
+     its preferred height instead of overflowing it — the JS side already
+     re-fits the frame to whatever height this actually renders at. */
+  flex: 0 1 auto;
   place-items: center;
   overflow: hidden;
   background: var(--fill-weak);

@@ -38,6 +38,7 @@ import {
   SOURCE_STATES,
 } from './data/defaults.js';
 import {
+  canvasViewportHeightFor,
   clampPosition,
   isContained as fitsInsideFrame,
   mediaSizing as sizingFor,
@@ -169,6 +170,18 @@ export default function VideoExpansionFeature() {
   const targetRatio = ratioValue(ratio);
   const selectedDuration = durationOf(trimStart, trimEnd);
   const movement = useMemo(() => movementAxis(sourceRatio, targetRatio), [sourceRatio, targetRatio]);
+  // canvasViewportHeight is a PREFERRED height (fed to the box as a CSS
+  // height, from width alone, so it hugs content instead of flex-filling
+  // leftover space) — but the box can still be flex-shrunk smaller than
+  // that if a genuinely tight ancestor (e.g. the mobile layout's own
+  // .editResult max-height) doesn't have room for it. targetFrameSize must
+  // fit inside whatever the box ACTUALLY rendered at, so it stays derived
+  // from the measured canvasViewportSize (both dimensions), not from this
+  // preferred value directly — self-correcting the same way it always did.
+  const canvasViewportHeight = useMemo(
+    () => canvasViewportHeightFor(canvasViewportSize.width, targetRatio),
+    [canvasViewportSize.width, targetRatio],
+  );
   const targetFrameSize = useMemo(
     () => frameSizeFor(canvasViewportSize, targetRatio),
     [canvasViewportSize, targetRatio],
@@ -340,9 +353,10 @@ export default function VideoExpansionFeature() {
   // (now-detached) node, never fires again, freezing canvasViewportSize/
   // positionBounds at whatever they were on the very first mount — normally
   // harmless since a fixed 430px viewport measured the same every time, but
-  // .canvasViewport's height is flex-driven now (today's own fill-height
-  // fix), so a remount can legitimately measure differently than the first
-  // mount did, and a frozen stale value can end up wrong (here: 0, making
+  // .canvasViewport's height is content-driven now (computed from its own
+  // measured WIDTH, see canvasViewportHeightFor), so a remount can
+  // legitimately measure a different width than the first mount did, and a
+  // frozen stale value can end up wrong (here: 0, making
   // .targetCanvas render invisible). `activeTab` now sits in both dependency
   // arrays purely to force a re-run — and therefore a fresh observer bound
   // to whichever node is actually mounted — on every remount, without
@@ -508,7 +522,7 @@ export default function VideoExpansionFeature() {
                   <div className={loaded ? styles.canvasAreaLoaded : styles.canvasArea} data-testid={loaded ? 'video-canvas' : undefined} data-ratio={ratio} data-component-role="video-player canvas-drag-positioning" data-surface-zone="video-result">
                     {loaded ? (
                       <div className={styles.canvasWorkspace}>
-                        <div ref={canvasViewportRef} className={styles.canvasViewport} data-testid="canvas-viewport" data-fixed-height="true">
+                        <div ref={canvasViewportRef} className={styles.canvasViewport} data-testid="canvas-viewport" data-fixed-height="true" style={{ height: `${canvasViewportHeight}px` }}>
                           <div ref={targetCanvasRef} className={styles.targetCanvas} data-testid="target-ratio-frame" data-frame-contained={targetFrameSize.width > 0 ? 'true' : 'false'} style={{ width: `${targetFrameSize.width}px`, height: `${targetFrameSize.height}px`, aspectRatio: ratio.replace(':', ' / '), visibility: targetFrameSize.width > 0 ? 'visible' : 'hidden' }} onPointerDown={beginDrag} onPointerMove={moveDrag} onPointerUp={endDrag} onPointerCancel={endDrag}>
                             <video ref={videoRef} className={styles.canvasVideo} data-testid="canvas-video" data-fit="contain" data-contained={isContained ? 'true' : 'false'} data-draggable="true" data-movement={movement} data-playing={isPlaying ? 'true' : 'false'} src={sourceSrc} muted playsInline preload="auto" loop={!sourceFile} style={{ ...mediaSizing, transform: `translate(${position.x}px, ${position.y}px)` }} onLoadedMetadata={(event) => { event.currentTarget.currentTime = event.currentTarget.duration < trimEnd ? 0 : trimStart; }} onPlay={() => setIsPlaying(true)} onPause={() => setIsPlaying(false)} onTimeUpdate={(event) => {
                               const video = event.currentTarget;

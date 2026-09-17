@@ -29,6 +29,15 @@ export const RATIO_SWATCH_PADDING = {
  */
 export const CANVAS_VIEWPORT_INSET = 16;
 
+/**
+ * Floor/ceiling for the canvas viewport's own height, in CSS px. Kept as the
+ * single source of truth for both the JS-computed hug-height below and
+ * index.module.scss's matching `.canvasViewport` min-height/max-height (a
+ * static fallback for the instant before the first measurement paints).
+ */
+export const CANVAS_VIEWPORT_MIN_HEIGHT = 200;
+export const CANVAS_VIEWPORT_MAX_HEIGHT = 640;
+
 /** Two ratios closer than this read as "the same shape" to a viewer. */
 export const RATIO_MATCH_TOLERANCE = 0.015;
 
@@ -59,6 +68,31 @@ export function buildRatioOptions(ratios) {
 export function movementAxis(sourceRatio, targetRatio) {
   if (Math.abs(sourceRatio - targetRatio) < RATIO_MATCH_TOLERANCE) return 'free';
   return sourceRatio < targetRatio ? 'horizontal' : 'vertical';
+}
+
+/**
+ * The canvas viewport's own height, sized to hug the target frame at the
+ * viewport's current width rather than independently claiming leftover
+ * vertical space.
+ *
+ * Reference (2026-09-17, requested live — "你會不會覺得在這個尺寸的螢幕，一個
+ * 靠上一個置中很奇怪", against a 1024x1366 screenshot; measured live: the
+ * panel sat at its 640px max-height cap while the actual 16:9 frame inside
+ * it was only 252px tall, leaving 194px of dead grey space above and
+ * below): the panel's height used to come from CSS alone (min/max-height
+ * plus a 30vh starting basis, flex:1 free to grow) — driven by the
+ * viewport itself, not by what the frame actually needed. This instead
+ * derives the frame's height from the panel's WIDTH (which layout already
+ * sets independently, so no circularity) and returns panel height = that
+ * frame height + the same inset used around it, clamped to the existing
+ * min/max so both the old short-mobile floor ("390 的手機沒辦法露出ratio")
+ * and the old wide-desktop ceiling still hold.
+ */
+export function canvasViewportHeightFor(width, targetRatio) {
+  const availableWidth = Math.max(0, width - CANVAS_VIEWPORT_INSET);
+  const frameHeight = targetRatio ? availableWidth / targetRatio : 0;
+  const desired = frameHeight + CANVAS_VIEWPORT_INSET;
+  return Math.round(Math.min(CANVAS_VIEWPORT_MAX_HEIGHT, Math.max(CANVAS_VIEWPORT_MIN_HEIGHT, desired)));
 }
 
 /** Largest target frame that fits the viewport while keeping the target ratio. */
