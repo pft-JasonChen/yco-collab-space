@@ -198,6 +198,69 @@ const mutations = [
     ],
   },
   {
+    id: 'intake-missing-review-goal',
+    expected: /intake\.md is missing sections: Review goal/,
+    mutate: (workspace) =>
+      replace(
+        workspace,
+        'features/collab-space-readiness/product/intake.md',
+        '## Review goal',
+        '## Review target',
+      ),
+    grader: ['npm', ['run', 'validate:intake', '--', '--feature', feature]],
+  },
+  {
+    id: 'research-recommendation-without-source',
+    expected: /research\/brief\.md: recommendation has no source/,
+    mutate: (workspace) =>
+      replace(
+        workspace,
+        'features/collab-space-readiness/product/research/brief.md',
+        ' source: ',
+        ' origin: ',
+      ),
+    grader: ['npm', ['run', 'validate:intake', '--', '--feature', feature]],
+  },
+  {
+    id: 'presence-undeclared-role',
+    expected: /presence\.componentRoles\.ghost-role is not a declared or pack-required component role/,
+    mutate: (workspace) =>
+      updateYaml(
+        workspace,
+        'features/collab-space-readiness/product/surface-intent.yaml',
+        (intent) => {
+          intent.layoutIntent.presence = {
+            componentRoles: { 'ghost-role': 'conditional' },
+          };
+        },
+      ),
+    grader: ['npm', ['run', 'validate:intake', '--', '--feature', feature]],
+  },
+  {
+    id: 'i18n-planned-key-never-used',
+    expected: /i18n key is still planned after generation; use it or remove it: readiness\.eval\.planned/,
+    mutate: (workspace) =>
+      fs.writeFile(
+        path.join(workspace, 'features/collab-space-readiness/product/i18n.json'),
+        JSON.stringify(
+          {
+            schemaVersion: 1,
+            feature: 'collab-space-readiness',
+            locale: 'en',
+            keys: {
+              'readiness.eval.planned': { value: 'Planned', origin: 'new', status: 'planned' },
+            },
+          },
+          null,
+          2,
+        ) + '\n',
+      ),
+    grader: [
+      'npm',
+      ['run', 'validate:inputs', '--', '--feature', feature],
+    ],
+  },
+  {
     id: 'source-boundary-mutation',
     expected: /product\/prd\.md/,
     mutate: (workspace) =>
@@ -257,14 +320,30 @@ const mutations = [
   },
 ];
 
+// `--only a,b` re-runs a subset while a grader is being fixed; the report says so.
+const onlyIndex = process.argv.indexOf('--only');
+const only =
+  onlyIndex >= 0
+    ? new Set(String(process.argv[onlyIndex + 1] ?? '').split(',').map((id) => id.trim()).filter(Boolean))
+    : null;
+const selectedMutations = only
+  ? mutations.filter((mutation) => only.has(mutation.id))
+  : mutations;
+
+if (only) {
+  const unknown = [...only].filter((id) => !mutations.some((mutation) => mutation.id === id));
+  if (unknown.length > 0) throw new Error('Unknown mutation id(s): ' + unknown.join(', '));
+}
+
 const runId =
   new Date().toISOString().replaceAll(':', '-').replaceAll('.', '-') +
-  '-mutation-suite';
+  '-mutation-suite' +
+  (only ? '-partial' : '');
 const runRoot = fromRoot('evals', 'runs', runId);
 await fs.mkdir(runRoot, { recursive: true });
 const results = [];
 
-for (const mutation of mutations) {
+for (const mutation of selectedMutations) {
   const workspace = await createIsolatedWorkspace('mutation-' + mutation.id);
   const commands = [];
   let caught = false;
@@ -323,6 +402,7 @@ const report = {
   passed: results.every((result) => result.caught),
   caught: results.filter((result) => result.caught).length,
   total: results.length,
+  partial: Boolean(only),
   decisionBasis: [
     'A workflow evaluator is trustworthy only if it detects deliberately seeded failures.',
   ],

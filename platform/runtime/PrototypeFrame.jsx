@@ -10,7 +10,12 @@ import styles from './PrototypeFrame.module.scss';
 export default function PrototypeFrame({ children }) {
   return (
     <div className={styles.shell}>
-      <div className={styles.content}>{children}</div>
+      {/* data-prototype-frame lets the rendered check measure this scroll
+          container: `.content` is `overflow: auto`, so a feature wider than
+          the viewport scrolls in here and never widens the document. */}
+      <div className={styles.content} data-prototype-frame="content">
+        {children}
+      </div>
     </div>
   );
 }

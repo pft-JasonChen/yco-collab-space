@@ -45,6 +45,32 @@ test('surface-intent schema accepts a complete novel strategy', () => {
   assert.equal(validateSurfaceIntent(baseIntent()), true);
 });
 
+test('surface-intent schema accepts presence entries as a kind or an object', () => {
+  const intent = baseIntent();
+  intent.layoutIntent.presence = {
+    zones: { 'primary-content': 'at-rest' },
+    componentRoles: {
+      'primary-action': { presence: 'deferred', reason: 'Waits on DESIGN-001.' },
+    },
+  };
+
+  assert.equal(validateSurfaceIntent(intent), true);
+});
+
+test('surface-intent schema rejects an unknown presence kind', () => {
+  const intent = baseIntent();
+  intent.layoutIntent.presence = { zones: { 'primary-content': 'sometimes' } };
+
+  assert.equal(validateSurfaceIntent(intent), false);
+});
+
+test('surface-intent schema rejects a presence object without a kind', () => {
+  const intent = baseIntent();
+  intent.layoutIntent.presence = { componentRoles: { 'primary-action': { via: 'AC-001' } } };
+
+  assert.equal(validateSurfaceIntent(intent), false);
+});
+
 test('surface-intent schema rejects reuse without a primary pack', () => {
   const intent = baseIntent();
   intent.strategy = 'reuse';

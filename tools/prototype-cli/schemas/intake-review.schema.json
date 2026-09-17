@@ -1,0 +1,98 @@
+{
+  "$id": "intake-review",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "kind",
+    "feature",
+    "reviewer",
+    "status",
+    "dimensions",
+    "decisionBasis"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "kind": {
+      "const": "intake"
+    },
+    "feature": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "reviewer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "name"],
+      "properties": {
+        "type": {
+          "enum": ["human", "model"]
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "provider": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        }
+      }
+    },
+    "status": {
+      "enum": ["pass", "fail", "unknown"]
+    },
+    "dimensions": {
+      "description": "One entry per rubric dimension in evals/graders/intake-rubric.md. Every dimension must be present.",
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "status", "reason", "quote"],
+        "properties": {
+          "id": {
+            "enum": [
+              "review-goal-decidable",
+              "scope-traceable",
+              "acceptance-testable",
+              "decisions-evidenced",
+              "open-decisions-honest",
+              "reuse-resolved",
+              "presence-declared"
+            ]
+          },
+          "status": {
+            "enum": ["pass", "fail", "unknown"]
+          },
+          "score": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 4
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          },
+          "quote": {
+            "description": "The line from the source files that decided the status, quoted verbatim.",
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "decisionBasis": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  }
+}

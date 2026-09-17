@@ -27,3 +27,7 @@ None for this internal readiness fixture.
 
 The smallest useful vertical slice must prove source inputs, generation, browser
 behavior and network isolation together.
+
+The fixture research brief in `product/research/brief.md` exists so the intake gate and
+the mutation suite exercise the research rules; its production audit confirms the
+shared Button is the only catalogued component the fixture needs.

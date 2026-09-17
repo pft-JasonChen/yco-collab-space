@@ -263,7 +263,7 @@
 
 .cellFacts {
   display: flex;
-  gap: var(--spacing-4);
+  gap: var(--spacing-8);
   font-size: var(--font-size-micro);
   line-height: var(--line-height-micro);
   color: var(--text-weak);
@@ -411,81 +411,24 @@
   gap: var(--spacing-8);
 }
 
-.trashCard {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-16);
-  flex-wrap: wrap;
-  padding: var(--spacing-12) var(--spacing-16);
-  border: 1px solid var(--stroke-weak);
-  border-radius: var(--corner-radius-12);
-}
-
-.trashCardMain {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  flex: 1;
-  min-width: 160px;
-}
-
-.trashName {
-  font-size: var(--font-size-small);
-  line-height: var(--line-height-small);
-  color: var(--text-strong);
-}
-
-.trashMeta {
-  font-size: var(--font-size-micro);
-  line-height: var(--line-height-micro);
-  color: var(--text-weak);
-  font-variant-numeric: tabular-nums;
-}
-
 /* The remaining-days figure is the point of the trash view: a user must be able
    to see how long they still have to change their mind. The final day is
-   emphasised rather than left to blend into the row. */
-.trashCountdown,
-.trashCountdownFinal {
-  font-size: var(--font-size-micro);
-  line-height: var(--line-height-micro);
+   emphasised rather than left to blend into the row.
+
+   These ride on a shared table cell, which sets its own colour at the same
+   specificity. The `[role='cell']` qualifier is what makes the override
+   deterministic rather than dependent on which stylesheet the bundler emits
+   first, and the cell keeps its own type scale. */
+.trashCountdown[role='cell'],
+.trashCountdownFinal[role='cell'] {
   font-variant-numeric: tabular-nums;
   color: var(--text-weak);
 }
 
-.trashCountdownFinal {
+.trashCountdownFinal[role='cell'] {
   color: var(--text-error);
   font-weight: var(--font-weight-strong);
 }
-
-.trashActions {
-  display: flex;
-  gap: var(--spacing-4);
-}
-
-.trashFooter {
-  display: flex;
-  justify-content: flex-end;
-  padding-top: var(--spacing-8);
-}
-
-@media (max-width: 1024px) {
-  .main {
-    padding: var(--spacing-16);
-  }
-}
-
-@media (max-width: 768px) {
-  .heading {
-    align-items: flex-start;
-  }
-
-  .batchActions {
-    margin-left: 0;
-  }
-}
-
-/* ---------- toolbar, 2026-09-15 layout review ---------- */
 
 .toolbarLeft {
   display: flex;
@@ -660,71 +603,24 @@
 
 /* ---------- list view ---------- */
 
+/* The list view is now the shared table plus whatever is uploading above it, so
+   this is a stacking context and nothing more — the grid, the row heights and
+   the column tracks all belong to the table. */
 .list {
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
-.listHead,
-.itemRow {
+/* In list view an upload is still a tile — it has a thumbnail-shaped progress
+   ground, not a row of facts — so the queue sits in its own strip above the
+   table instead of being stretched to a row's width. */
+.listUploads {
   display: grid;
-  /* The last column holds the action pill, which is two 24px buttons inside a
-     padded pill — a 32px column clipped it against the row's edge. */
-  grid-template-columns: 24px 48px minmax(0, 1fr) 96px 80px 128px 96px;
-  align-items: center;
-  gap: var(--spacing-12);
-  padding: var(--spacing-8) var(--spacing-4);
-  border-bottom: 1px solid var(--stroke-weak);
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--spacing-16);
+  padding-bottom: var(--spacing-16);
 }
-
-.listHead {
-  font-size: var(--font-size-micro);
-  line-height: var(--line-height-micro);
-  color: var(--text-weak);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
-
-.rowCheckbox {
-  width: 18px;
-  height: 18px;
-  border: 1px solid var(--stroke-strong);
-  border-radius: var(--corner-radius-4);
-  background: transparent;
-  cursor: pointer;
-}
-
-.rowCheckbox[data-selected='true'] {
-  border-color: var(--fill-brand-strong);
-  background: var(--fill-brand-strong);
-}
-
-.rowThumbnail {
-  display: block;
-  width: 44px;
-  height: 32px;
-  border-radius: var(--corner-radius-4);
-  background-color: var(--fill-weak);
-  background-size: cover;
-  background-position: center;
-}
-
-.rowName {
-  font-size: var(--font-size-small);
-  line-height: var(--line-height-small);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.rowFact {
-  font-size: var(--font-size-micro);
-  line-height: var(--line-height-micro);
-  color: var(--text-weak);
-  font-variant-numeric: tabular-nums;
-}
-
-/* ---------- drawer, folder dialog, purchase extras ---------- */
 
 .drawerModal {
   padding: 0;
@@ -828,63 +724,6 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-/* ---------- trash table, 2026-09-16 ---------- */
-
-.trashTable {
-  display: flex;
-  flex-direction: column;
-}
-
-.trashHead,
-.trashRow {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 96px 128px 128px 40px;
-  align-items: center;
-  gap: var(--spacing-12);
-  padding: var(--spacing-12) var(--spacing-4);
-  border-bottom: 1px solid var(--stroke-weak);
-}
-
-.trashHead {
-  font-size: var(--font-size-micro);
-  line-height: var(--line-height-micro);
-  font-weight: var(--font-weight-strong);
-  color: var(--text-weak);
-}
-
-.trashRowName {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-12);
-  min-width: 0;
-  font-size: var(--font-size-small);
-  line-height: var(--line-height-small);
-  font-weight: var(--font-weight-strong);
-  color: var(--text-strong);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-@media (max-width: 768px) {
-  .trashHead,
-  .trashRow {
-    grid-template-columns: minmax(0, 1fr) 104px 40px;
-  }
-
-  .trashHead > :nth-child(2),
-  .trashHead > :nth-child(3),
-  .trashRow > :nth-child(2),
-  .trashRow > :nth-child(3) {
-    display: none;
-  }
-}
-
-/* The pill is right-aligned in its column so it sits clear of the row edge. */
-.itemRow > :last-child {
-  justify-self: end;
 }
 
 .folderCount {

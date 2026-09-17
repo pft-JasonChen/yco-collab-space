@@ -35,3 +35,12 @@ export { default as CategoryRail, ExternalLinkIcon } from './category-rail/index
 export { default as PricingOverlay, PlanTabs, PlanList, FeatureList } from './pricing-overlay/index.js';
 export { default as DropdownSelect } from './dropdown-select/index.js';
 export { default as CellActions, SheetIcon } from './cell-actions/index.js';
+export {
+  default as DataTable,
+  TableRow,
+  TableCell,
+  TableMediaCell,
+  TableActionsCell,
+  TableIconButton,
+  TableCheckbox,
+} from './data-table/index.js';

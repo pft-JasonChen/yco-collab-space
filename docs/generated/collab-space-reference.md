@@ -36,6 +36,8 @@ flowchart LR
 | Artifact | Owner | 位置 | 性質 | 狀態 |
 |---|---|---|---|---|
 | `pm-product-source` | Product manager | `features/{feature}/product/**` | source | active |
+| `research-brief` | Product manager | `features/{feature}/product/research/**` | source | active |
+| `wireframe-review` | Product manager | `features/{feature}/product/wireframe/**` | source | active |
 | `design-library` | Designer | `design-library/**` | source | active |
 | `feature-design-record` | Designer | `features/{feature}/design/**` | source | proposed |
 | `generated-prototype` | AI agent | `features/{feature}/generated/**` | derived | active |
@@ -46,6 +48,13 @@ flowchart LR
 
 ## Workflow 寫入邊界
 
+### `prototype-research`
+
+- Actors: Product manager、AI agent
+- 可寫入：`features/{feature}/product/research/**`、`docs/research/**`
+- 保護區：`platform`、`design-library`、`features/{feature}/generated`
+- Enforcement: `error`
+
 ### `prototype-intake`
 
 - Actors: Product manager、AI agent
@@ -53,11 +62,25 @@ flowchart LR
 - 保護區：`platform`、`design-library`
 - Enforcement: `error`
 
+### `prototype-wireframe`
+
+- Actors: Product manager、AI agent
+- 可寫入：`features/{feature}/product/wireframe/**`
+- 保護區：`platform`、`design-library`、`features/{feature}/generated`
+- Enforcement: `error`
+
 ### `prototype-update`
 
 - Actors: AI agent
 - 可寫入：`features/{feature}/generated/**`、`features/{feature}/evidence/**`、`.prototype-state/**`、`.collab-cache/**`
 - 保護區：`collab-space.map.yaml`、`features/{feature}/product`、`features/{feature}/design`、`design-library`、`platform`
+- Enforcement: `error`
+
+### `prototype-revise`
+
+- Actors: Product manager、AI agent
+- 可寫入：`features/{feature}/product/**`、`features/{feature}/design/design-gaps.yaml`、`features/{feature}/generated/**`、`features/{feature}/evidence/**`、`.prototype-state/**`、`.collab-cache/**`
+- 保護區：`collab-space.map.yaml`、`design-library`、`platform`
 - Enforcement: `error`
 
 ### `design-library-upload`
@@ -91,3 +114,5 @@ flowchart LR
 - Shared design resources live once in the global Design Library; feature revisions pin exact selections.
 - Agent and validator rules are enforced now, while human Git enforcement remains proposed.
 - The Product Owner authorised the component-foundation pilot so Designer, RD and Agent can iteratively adjust shared components and Storybook without changing feature product behaviour.
+- Research briefs and wireframes are PM review material that feeds Intake; they are excluded from the generation input hash so an edit to either never stales a prototype, and a confirmed brief must be cited by intake.md.
+- Revise is the PM feedback loop. It may change product source and regenerate only the affected layers, so it carries both write sets and must end by re-recording provenance rather than by a source-guard check.

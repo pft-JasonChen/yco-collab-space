@@ -1,0 +1,264 @@
+/* Transcribed from Figma Guideline_YCO_2025 node 14892:36402. Every colour is a
+   semantic token: the Figma variables map one-to-one onto RD's own set
+   (--background/alternate, --stroke/weak, --stroke/strong, --text/strong,
+   --text/weak, --fill/inverse-strong), so nothing here is an approximation. The
+   fixed 48px header and 80px row heights are the spec's own values. */
+
+.table {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+}
+
+/* The track list itself arrives as an inline style, computed from the `columns`
+   array — a component-local custom property would read as an undeclared token to
+   the token policy, which only knows RD's set. */
+.head,
+.row {
+  display: grid;
+  align-items: center;
+}
+
+.head {
+  min-height: 48px;
+  background: var(--background-alternate);
+  border-top: 1px solid var(--stroke-weak);
+  border-bottom: 1px solid var(--stroke-weak);
+}
+
+.headCell {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  padding: 0 var(--spacing-24);
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+  font-weight: var(--font-weight-strong);
+  color: var(--text-strong);
+}
+
+.headCell[data-align='end'] {
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.row {
+  min-height: 80px;
+  border-bottom: 1px solid var(--stroke-weak);
+}
+
+.row:hover {
+  background: var(--fill-hover);
+}
+
+.cell {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  padding: 0 var(--spacing-20);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  color: var(--text-strong);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cell[data-align='end'] {
+  justify-content: flex-end;
+  text-align: right;
+}
+
+/* The checkbox column carries no heading ground in the spec, and it is the one
+   column whose width is its content. */
+.selectCell {
+  justify-content: center;
+  padding: 0 var(--spacing-16);
+  background: transparent;
+}
+
+.actionsCell {
+  gap: var(--spacing-4);
+  padding-right: var(--spacing-12);
+  overflow: visible;
+}
+
+/* Names a column whose heading is not drawn. Clipped rather than hidden, so it
+   reaches assistive technology and nothing else. */
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---------- checkbox ---------- */
+
+.checkboxLabel {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* The real control stays in the DOM and is laid over the styled box rather than
+   collapsed to nothing: it is what makes the box focusable and announceable,
+   which the styled span alone is not, and at full size it is also the thing a
+   pointer and a test actually hit. */
+.nativeCheckbox {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkbox {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--stroke-strong);
+  border-radius: var(--corner-radius-4);
+  background: var(--fill-inverse-strong);
+}
+
+.checkbox[data-checked='true'] {
+  border-color: var(--fill-brand-strong);
+  background: var(--fill-brand-strong);
+}
+
+/* The tick is white artwork, so it is hidden rather than recoloured when the box
+   is empty — an unchecked box is a white square and the glyph would vanish into
+   it anyway. */
+.checkboxTick {
+  width: 14px;
+  height: auto;
+  opacity: 0;
+}
+
+.checkbox[data-checked='true'] .checkboxTick {
+  opacity: 1;
+}
+
+.nativeCheckbox:focus-visible + .checkbox {
+  outline: none;
+  box-shadow: 0 0 0 var(--spacing-4) var(--stroke-focus);
+}
+
+/* ---------- media cell ---------- */
+
+.mediaCell {
+  gap: var(--spacing-12);
+}
+
+.mediaThumbnail {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--stroke-weak);
+  border-radius: var(--corner-radius-8);
+  background-color: var(--fill-weak);
+  background-size: cover;
+  background-position: center;
+}
+
+.mediaText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.mediaPrimary {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  color: var(--text-strong);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mediaSecondary {
+  font-size: var(--font-size-tiny);
+  line-height: var(--line-height-tiny);
+  color: var(--text-weak);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---------- action icons ---------- */
+
+.iconButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 42px;
+  height: 42px;
+  padding: var(--spacing-8);
+  border: 0;
+  border-radius: var(--corner-radius-8);
+  background: transparent;
+  color: var(--text-strong);
+  cursor: pointer;
+  line-height: 1;
+}
+
+.iconButton:hover:not(:disabled) {
+  background: var(--fill-hover);
+}
+
+.iconButton:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 var(--spacing-4) var(--stroke-focus);
+}
+
+.iconButton:disabled {
+  color: var(--text-weaker);
+  cursor: default;
+}
+
+.iconButton[data-tone='destructive'] {
+  color: var(--text-error);
+}
+
+/* The library's action glyphs are white artwork drawn for dark grounds. Masking
+   rather than painting them lets the same asset take the button's own colour on
+   this light table instead of disappearing into it. */
+.iconGlyph {
+  display: block;
+  width: 24px;
+  height: 24px;
+  background-color: currentColor;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
+}
+
+/* ---------- narrow ---------- */
+
+@media (max-width: 768px) {
+  .headCell[data-narrow-hidden='true'],
+  .cell[data-narrow-hidden='true'] {
+    display: none;
+  }
+
+  .headCell,
+  .cell {
+    padding: 0 var(--spacing-12);
+  }
+}

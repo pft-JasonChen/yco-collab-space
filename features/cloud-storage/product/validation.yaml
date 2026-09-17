@@ -61,18 +61,21 @@ checks:
     assertions:
       - type: visible
         selector: "[data-testid='tool-family-filter'] [data-option-key='all']"
-      # Nineteen features from the YCO feature-type sheet, under two group
-      # headers, plus the All entry.
+      # Images is one medium already, so its Type menu is the eight AI Image
+      # features plus All, and no group header: the header would name the tab
+      # you are standing on. The eleven video features cannot match a row here,
+      # so offering them only empties the grid.
       - type: count
         selector: "[data-testid='tool-family-filter'] [data-option-key]"
-        value: 19
+        value: 9
       - type: count
         selector: "[data-testid='tool-family-filter'] [data-component-role='dropdown-group']"
-        value: 2
+        value: 0
       - type: visible
         selector: "[data-testid='tool-family-filter'] [data-option-key='ai-headshot-generator']"
-      - type: visible
+      - type: count
         selector: "[data-testid='tool-family-filter'] [data-option-key='character-motion-swap']"
+        value: 0
       - type: attribute
         selector: "[data-testid='tool-family-filter']"
         name: data-level
@@ -97,11 +100,10 @@ checks:
         selector: "[data-testid='cell-name'] >> nth=0"
       - type: visible
         selector: "[data-testid='cell-date'] >> nth=0"
-      # File size is deliberately absent: no competitor shows it and the
-      # cleanup path it served has been removed.
-      - type: count
-        selector: "[data-testid='cell-size']"
-        value: 0
+      # Size returned to the cell on 2026-09-16: type, size, date, in the same
+      # order the list view's columns carry them.
+      - type: visible
+        selector: "[data-testid='cell-size'] >> nth=0"
       - type: visible
         selector: "[data-testid='cell-type'] >> nth=0"
   - id: sort-field-and-order
@@ -740,6 +742,88 @@ checks:
       - type: count
         selector: "[data-testid='folder-dialog']"
         value: 0
+  - id: capacity-full-banner
+    criterion: CS-032
+    steps:
+      - action: select
+        selector: "[data-testid='review-usage-control']"
+        value: full
+    assertions:
+      - type: attribute
+        selector: "[data-testid='storage-meter']"
+        name: data-state
+        value: full
+      - type: visible
+        selector: "[data-testid='storage-full-banner']"
+      - type: visible
+        selector: "[data-testid='banner-expand-action']"
+      # Full is the error step of the same ramp, not a second warning.
+      - type: attribute
+        selector: "[data-testid='storage-full-banner']"
+        name: data-state
+        value: full
+      # The warning-level banner is not also on the page at 100 percent.
+      - type: count
+        selector: "[data-testid='storage-critical-banner']"
+        value: 0
+  - id: trash-select-restores-and-deletes
+    criterion: CS-033
+    steps:
+      - action: click
+        selector: "[data-component-role='gallery-tab'][data-tab-key='trash']"
+      - action: click
+        selector: "[data-testid='trash-row-select'] >> nth=0"
+    assertions:
+      - type: visible
+        selector: "[data-testid='batch-toolbar']"
+      - type: visible
+        selector: "[data-testid='selected-count']"
+      - type: visible
+        selector: "[data-testid='selected-size']"
+      - type: visible
+        selector: "[data-testid='batch-restore']"
+      - type: visible
+        selector: "[data-testid='selection-delete']"
+      # Exporting out of Trash would be a way to keep a file already thrown away.
+      - type: count
+        selector: "[data-testid='selection-download']"
+        value: 0
+  - id: trash-empty-all-confirms
+    criterion: CS-034
+    steps:
+      - action: click
+        selector: "[data-component-role='gallery-tab'][data-tab-key='trash']"
+      - action: click
+        selector: "[data-testid='trash-empty-all']"
+      - action: hover
+        selector: "[data-testid='confirm-dialog-confirm']"
+    assertions:
+      - type: visible
+        selector: "[data-testid='empty-trash-dialog']"
+      - type: visible
+        selector: "[data-testid='confirm-dialog-confirm']"
+      - type: visible
+        selector: "[data-testid='confirm-dialog-cancel']"
+  - id: list-and-trash-share-one-table
+    criterion: CS-035
+    steps:
+      - action: click
+        selector: "[data-component-role='gallery-tab'][data-tab-key='images']"
+      - action: click
+        selector: "[data-testid='view-toggle']"
+    assertions:
+      - type: visible
+        selector: "[data-testid='item-table']"
+      - type: attribute
+        selector: "[data-testid='item-table']"
+        name: data-component-role
+        value: data-table
+      - type: visible
+        selector: "[data-component-role='data-table-head'] >> nth=0"
+      # The row checkbox is the table's own native control, laid over the
+      # styled box so it is what a pointer hits.
+      - type: visible
+        selector: "[data-testid='row-select'] >> nth=0"
   - id: group-headings-and-folder-meta
     criterion: CS-031
     steps:

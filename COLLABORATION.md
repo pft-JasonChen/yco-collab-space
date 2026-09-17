@@ -13,19 +13,24 @@ Designer 與 RD 在建立正式 `/platform` 前，請共同 review
 
 ```mermaid
 flowchart LR
-    PM[PM<br/>需求、PRD、Contract、驗收、假資料]
-    INTAKE[AI Intake<br/>釐清需求與 Surface 策略]
-    BUILD[AI Update<br/>生成 React prototype]
-    CHECK[自動驗證<br/>static、build、browser、evaluation]
+    PM[PM<br/>一句話需求、PRD、Contract、驗收、假資料]
+    RESEARCH[AI Research（選用）<br/>production audit＋競品＋UX 提案 → brief]
+    INTAKE[AI Intake<br/>釐清需求、Surface 策略、presence、rubric]
+    WIRE[Wireframe review（選用）<br/>PM 在靜態版面上定 band 與密度]
+    BUILD[AI Update<br/>分層生成 React prototype]
+    CHECK[自動驗證<br/>fast gate → full gate、validator sub-agent]
     LEAD[主管 Review]
+    REVISE[AI Revise<br/>feedback → source delta → 只重生受影響層]
     DESIGN[Designer<br/>Figma final＋design tokens]
     DREVIEW[Design review prototype]
     FINAL[design-final]
     RD[RD<br/>取用整包 repo 作為開發參考]
     QA[QA<br/>YCO-spec 人工測試規格]
 
-    PM --> INTAKE --> BUILD --> CHECK --> LEAD
-    LEAD -->|需要修改| PM
+    PM --> RESEARCH --> INTAKE --> WIRE --> BUILD --> CHECK --> LEAD
+    PM --> INTAKE
+    INTAKE --> BUILD
+    LEAD -->|需要修改| REVISE --> CHECK
     LEAD -->|允許進入設計| DESIGN
     DESIGN --> BUILD --> DREVIEW
     DREVIEW -->|仍需調整| DESIGN
@@ -33,17 +38,18 @@ flowchart LR
     FINAL -. Phase 1 .-> QA
 ```
 
-主管的 feedback 不需要另外建立一份逐字紀錄；PM 將 feedback 轉成明確需求，更新
-source-of-truth 後，再重新生成 prototype。
+主管的 feedback 不需要另外建立一份逐字紀錄；PM 用 `/prototype-revise` 把 feedback
+轉成明確的來源檔 delta（`decisions.md` 就地改寫＋review log 記一筆），Agent 只重生受影響
+的層，再跑 fast gate。整份重新 update 只在第一次生成或 platform 變更時才需要。
 
 ## 每個角色負責什麼
 
 | 角色 | 負責的內容 | 如何看成果 | 原則上不做什麼 |
 |---|---|---|---|
-| PM（目前也是 Collab Space Owner） | Intake、PRD、行為 Contract、驗收條件、假資料、Surface 策略與最終範圍決策 | 執行本機 preview 或之後的公開 preview URL | 不手改 `generated/**` |
+| PM（目前也是 Collab Space Owner） | 一句話需求、採納哪些 research 建議、Intake、PRD、行為 Contract、驗收條件、假資料、Surface 策略、wireframe layout review、把主管 feedback 交給 revise | 執行本機 preview 或之後的公開 preview URL | 不手改 `generated/**` |
 | 主管 | 操作 prototype、判斷是否允許開發、把修改方向告訴 PM | 只需開啟 preview URL | 不必操作 repo，也不必另寫 feedback log |
 | Designer | 提供 Figma final、design tokens與全域 Design Library素材；可觸發 update 即時查看結果 | 本機或公開 preview URL／本機 Library Browser | 不需寫 manifest；目前建議不手改 prototype code，也不改 PM 的產品行為 |
-| AI Agent | 訪談 Intake、依來源檔生成 React／SCSS、執行驗證並留下 provenance | 回報 gate 與 evidence | Update 時不得改 PM／Designer source-of-truth |
+| AI Agent | Research（瀏覽器操作交給 sub-agent）、訪談 Intake、依 digest 分層生成 React／SCSS、透過 validator sub-agent 跑驗證、留下含 model 與 usage 的 provenance；rubric 由不同模型的 reviewer 打分 | 回報 gate、rubric JSON 與 evidence | Update 時不得改 PM／Designer source-of-truth；生成模型不得替自己的產出打分 |
 | RD | 在 design-final 後取得整個 private repo，參考 UI code、tokens 與行為規格，再搬到 RD repo 串後端 | clone／下載 repo | 不需把 RD repo 合回這個空間；這裡的 prototype 永遠不串後端 |
 | QA | 使用保留的 YCO-spec 做人工測試 | 規格頁與 prototype | 新 repo 的 YCO-spec adapter 尚未實作，Phase 1 前仍沿用既有流程 |
 
@@ -53,6 +59,8 @@ source-of-truth 後，再重新生成 prototype。
 
 | 位置 | 內容 | 主要 Owner | 性質 |
 |---|---|---|---|
+| `product/research/brief.md` | 選用。production audit、競品證據等級表、UX 原則、每條都有來源的建議、待 PM 確認清單；confirmed 後 intake 必須引用。不進 generation hash | PM（AI 起草） | Source of truth（review material） |
+| `product/wireframe/**` | 選用。生成前的靜態版面與 PM 在上面做的 layout 決策清單。不進 generation hash | PM（AI 起草） | Review material |
 | `product/intake.md` | 需求訪談結論與尚未回答的問題 | PM | Source of truth |
 | `product/prd.md` | 產品目的、範圍與需求 | PM | Source of truth |
 | `product/prototype.contract.yaml` | Prototype 必須具備的狀態、事件與結果 | PM | 可執行的 source of truth |
@@ -61,7 +69,7 @@ source-of-truth 後，再重新生成 prototype。
 | `product/mocks/**` | 假資料；不得包含正式資料或後端連線 | PM | Source of truth |
 | `product/i18n.json` | 使用者可見文案，用 RD 全域扁平 key；`origin: rd-existing` 表示 RD 已有該 key，`new` 表示 RD 要新增 | PM | Source of truth |
 | `product/payload-samples/**` | 選用。已知的 engine payload 形狀，供 RD 直接串 API。必須去識別化 | PM | Source of truth |
-| `product/decisions.md` | 會影響產品或架構的決策與判斷依據 | PM | Source of truth |
+| `product/decisions.md` | `## Decisions` 是 canonical（決策變了就就地改寫），`## Review log` 是每輪 PM review 的 append-only 紀錄；digest 只讀 canonical 段 | PM | Source of truth |
 | `product/media-intent.yaml` | 本功能要查詢的全域素材 collection與用途 | PM | Source of truth |
 | `product/mock-assets/**` | PM第一版暫時素材；design-final禁止 | PM | Temporary source |
 | `design/design.ref.json`、`design/design-gaps.yaml` | 設計參考與尚缺的 token／component | Designer；初期可由 PM 標示缺口 | Source of truth |
@@ -97,7 +105,19 @@ npm run prototype:create -- <feature-slug> "<Feature Name>"
 npm run prototype:create -- image-relight "Image Relight"
 ```
 
-### 2. 先做 Intake，不先硬選 Surface Pack
+### 2. Research（選用）：先查 production，再看競品
+
+```text
+/prototype-research <feature-slug> "<一句話需求>"
+```
+
+新功能引入新的頁型、購買或容量模型，或競品已經塑造了使用者預期時才需要。Agent 先做
+production audit（RD 已有什麼、缺什麼），再由 research sub-agent 操作瀏覽器做競品拆解，
+主 context 只讀回來的 `product/research/brief.md`。brief 的每條建議都必須標 `source:`，
+證據等級表必填；PM 確認採納哪些建議後才把 status 改成 `confirmed`，Intake 就必須引用它。
+Agent 不會登入、不會建立帳號、不會輸入任何憑證；需要登入才看得到的頁面由 PM 自己先開好。
+
+### 3. 先做 Intake，不先硬選 Surface Pack
 
 - Claude：執行 `/prototype-intake <feature-slug>`
 - Codex：要求它使用 `prototype-intake` skill 訪談該功能
@@ -105,7 +125,13 @@ npm run prototype:create -- image-relight "Image Relight"
 Intake 會先釐清問題、review 目標、必要狀態、假資料與驗收條件，再由 PM 確認
 摘要。確認前不應寫入正式 product source。
 
-### 3. 選擇 Surface 策略
+Intake 寫入 `surface-intent.yaml` 時會宣告完整的 zones／roles，並在 `presence` 標出哪些不是
+一進頁面就看得到的（dialog、menu、breadcrumb、empty state、平板才收進 drawer 的 rail）。
+rendered check 只斷言 at-rest 的部分。`validate:intake` 通過後，由不同模型的 reviewer
+sub-agent 依 `evals/graders/intake-rubric.md` 打分；任何一項 `fail` 會以引用原句的方式回到
+PM，不會靜默進入生成。
+
+### 4. 選擇 Surface 策略
 
 | 策略 | 何時使用 | 做法 |
 |---|---|---|
@@ -116,7 +142,19 @@ Intake 會先釐清問題、review 目標、必要狀態、假資料與驗收條
 Surface Pack 是加速器，不是新功能的准入條件。Catalog 草案見
 [`docs/surfaces/surface-pack-catalog-draft.md`](docs/surfaces/surface-pack-catalog-draft.md)。
 
-### 4. 生成或更新 prototype
+### 5. Wireframe review（選用）：在生成前把版面定下來
+
+```text
+/prototype-wireframe <feature-slug>
+```
+
+Agent 依 surface context 畫出每個 viewport 的灰階靜態版面（每個 zone／role 一個標籤框），
+PM 在上面決定 band 順序、拿掉什麼、缺什麼。決策記在 `product/wireframe/README.md`，再由
+`/prototype-revise` 或 `/prototype-intake` 寫回 `surface-intent.yaml` 與 `decisions.md`。
+Cloud Storage 的 2026-09-15 layout review 就是在互動 wireframe 上完成的；在生成後的 React
+上做同樣的事，每一輪都是一次全量重生。
+
+### 6. 生成或更新 prototype
 
 - Claude：執行 `/prototype-update <feature-slug>`
 - Codex：要求它使用 `prototype-update` skill 更新該功能
@@ -131,11 +169,18 @@ collection，再把本版實際使用的檔案與 hash鎖進 `generation.json`�
 Designer／PM可用 `npm run library:browser` 在本機看所有 collection。這個 browser不屬於
 公開 Vite app，public build只會包含prototype實際引用的素材。
 
-### 5. 驗證與 review
+Update 從 `npm run feature:digest -- <feature>` 產生的 digest 開始，不再整份重讀
+`product/**`；分層生成（settings／data／index／contract），驗證交給 validator sub-agent
+跑 `prototype:check:fast`，主 context 只讀 `rendered:summary` 的壓縮清單。最後以
+`npm run prototype:finish -- <feature> --adapter <adapter> --model <model-id>` 記錄
+provenance；Claude 的 Stop hook 不允許在沒記錄 model 的情況下結束。
+
+### 7. 驗證與 review
 
 ```bash
-npm run validate
-npm run build
+npm run prototype:check:fast -- <feature-slug>     # 修錯迭代用：static gates + build:app + rendered
+npm run rendered:summary -- <feature-slug>         # 失敗清單與只重跑失敗 check 的指令
+npm run build                                       # fast gate 全綠後跑一次完整 gate
 npm run test:rendered -- --feature <feature-slug>
 ```
 
@@ -156,8 +201,9 @@ npm run test:rendered -- --feature <feature-slug>
 
 | 情境 | 誰先改什麼 | 接著做什麼 |
 |---|---|---|
-| 主管要求改流程或功能 | PM 更新 PRD／Contract／validation／mock | 重新執行 prototype update 與驗證 |
-| 主管只要求改視覺方向 | PM 先把要求轉成可交付的設計需求；Designer 之後納入 Figma／token | 重新 update，產生 design review prototype |
+| 主管要求改流程或功能 | PM 把 feedback 用原話交給 `/prototype-revise`；Agent 先列 feedback → 來源檔 → 受影響層 的對照表，PM 確認後才動手 | Agent 就地改寫 `## Decisions`、review log 記一筆、只重生受影響層、跑 fast gate、重新記錄 provenance |
+| 主管只要求改視覺方向 | PM 先把要求轉成可交付的設計需求；Designer 之後納入 Figma／token。在 revise 對照表裡這類項目是 design gap，不是 code 變更 | Designer 提供後重新 update，產生 design review prototype |
+| 主管要改版面結構 | 先回 `/prototype-wireframe` 在靜態版面上定案 | 決策寫回 source 後再 revise |
 | Designer 發現缺 token | 記錄在 `design/design-gaps.yaml`，與 RD 討論是否補進權威 token | 未確認前不在 feature 內自創 token 值 |
 | Designer 想即時看成果 | Designer 可以觸發 update | 建議仍由來源檔驅動，不直接手改 `generated/**` |
 | RD 要開始正式開發 | PM 告知哪個 feature 已達 design-final | RD 取得整個 repo，自行搬到 RD repo 串後端 |
@@ -200,6 +246,14 @@ npm run test:rendered -- --feature <feature-slug>
 | 能力 | 狀態 |
 |---|---|
 | PM Intake 與確認 gate | 已完成 |
+| Research brief（production audit＋競品證據等級＋來源必填）與 intake 引用檢查 | 已完成（2026-09-16） |
+| Wireframe review workflow | 已完成（2026-09-16）；決策回寫靠 revise |
+| Revise（feedback → source delta → 局部重生） | 已完成（2026-09-16） |
+| `presence`：conditional／on-interaction／deferred 的 zone 與 role 不再被 rendered check 誤判 | 已完成（2026-09-16）；cloud-storage 待本機跑 `test:rendered` 確認 30/30 |
+| Claude hooks（write guard、generated lint、provenance stop） | 已完成（2026-09-16）；Codex 沿用事後 source-guard |
+| Sub-agent 角色（researcher／validator／reviewer）與 Claude／OpenAI model policy | 已完成（2026-09-16）；OpenAI model id 需依當時清單確認 |
+| Intake rubric 與 mutation 擴充 | 已完成（2026-09-16）；rubric 尚未與 PM 標記校準 |
+| `feature:digest`、`prototype:check:fast`、`rendered:summary`、`prototype:finish` | 已完成（2026-09-16） |
 | React／SCSS prototype 生成骨架 | 已完成 |
 | `reuse`／`hybrid`／`novel` Surface 策略 | 已完成 |
 | Source mutation protection | 已完成 |

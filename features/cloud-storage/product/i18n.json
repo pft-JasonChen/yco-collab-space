@@ -193,7 +193,7 @@
       "origin": "new"
     },
     "cloud.storage.filter.tool": {
-      "value": "Tool family",
+      "value": "Type",
       "origin": "new"
     },
     "cloud.storage.filter.media": {
@@ -510,6 +510,38 @@
     },
     "cloud.storage.duplicate.suffix": {
       "value": "{{name}} copy",
+      "origin": "new"
+    },
+    "cloud.storage.banner.full.upgrade": {
+      "value": "Storage is full. New work cannot be saved until you add more space.",
+      "origin": "new"
+    },
+    "cloud.storage.trash.empty.title": {
+      "value": "Empty Trash?",
+      "origin": "new"
+    },
+    "cloud.storage.trash.empty.body": {
+      "value": "{{count}} items will be deleted permanently. This cannot be undone.",
+      "origin": "new"
+    },
+    "cloud.storage.trash.empty.body.one": {
+      "value": "1 item will be deleted permanently. This cannot be undone.",
+      "origin": "new"
+    },
+    "cloud.storage.trash.confirm.forever.body.many": {
+      "value": "You are about to delete {{count}} items from the trash. This cannot be undone.",
+      "origin": "new"
+    },
+    "cloud.storage.trash.restore.done": {
+      "value": "Restored to its original tab.",
+      "origin": "new"
+    },
+    "cloud.storage.empty.trash": {
+      "value": "Trash is empty.",
+      "origin": "new"
+    },
+    "cloud.storage.column.actions": {
+      "value": "Actions",
       "origin": "new"
     }
   }

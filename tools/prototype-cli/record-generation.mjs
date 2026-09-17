@@ -23,6 +23,41 @@ const model =
   modelIndex >= 0
     ? process.argv[modelIndex + 1]
     : process.env.PROTOTYPE_MODEL || 'not-recorded';
+// Optional cost record: how many tokens and fix-loop rounds this generation took.
+// The adapter fills it; it is evidence for the workflow evaluation, not a gate.
+function parseUsage(argv) {
+  const inlineIndex = argv.indexOf('--usage');
+  const fileIndex = argv.indexOf('--usage-file');
+  let raw = null;
+  if (inlineIndex >= 0) raw = argv[inlineIndex + 1];
+  else if (fileIndex >= 0) raw = null;
+  else return null;
+  return { raw, file: fileIndex >= 0 ? argv[fileIndex + 1] : null };
+}
+
+async function readUsage(argv) {
+  const request = parseUsage(argv);
+  if (!request) return null;
+  const source = request.file
+    ? await fs.readFile(path.resolve(request.file), 'utf8')
+    : request.raw;
+  let usage;
+  try {
+    usage = JSON.parse(source);
+  } catch (error) {
+    throw new Error('--usage must be a JSON object: ' + error.message);
+  }
+  const allowed = ['inputTokens', 'outputTokens', 'rounds', 'durationMs', 'provider'];
+  for (const key of Object.keys(usage)) {
+    if (!allowed.includes(key)) throw new Error('Unknown usage field: ' + key);
+    if (key !== 'provider' && !Number.isFinite(usage[key])) {
+      throw new Error('Usage field must be a number: ' + key);
+    }
+  }
+  return usage;
+}
+
+const usage = await readUsage(process.argv);
 const generatedRoot = fromRoot('features', feature, 'generated');
 const featureModule = path.join(generatedRoot, 'feature.jsx');
 
@@ -59,6 +94,7 @@ const metadata = {
   tokens: await buildTokenProvenance(),
   surface: surfaceResult.context,
 };
+if (usage) metadata.usage = usage;
 metadata.integrity = await generationIntegrity(feature, { surface: surfaceResult.context, components: metadata.components });
 
 await fs.writeFile(

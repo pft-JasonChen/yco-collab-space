@@ -1,6 +1,13 @@
 # Cloud Storage — Product decisions
 
+`## Decisions` is canonical and reflects the prototype as it stands after the PM review
+passes recorded in `## Review log`. On 2026-09-16 the agent folded the five dated review
+sections that used to follow the Decisions list into this shape; each pass is kept
+verbatim below, and a bullet here that a pass changed says so in the log, not here.
+
 ## Decisions
+
+### Positioning and surface
 
 - The feature name and slug are Cloud Storage and `cloud-storage`.
 - Cloud Storage evolves the existing `/account/gallery` page rather than adding a second
@@ -9,60 +16,134 @@
 - The surface strategy is hybrid: `library/gallery@2026-09` is primary and
   `commerce/pricing-overlay@2026-09` is borrowed for `close-action`, `feature-list`,
   `plan-tabs`, `plan-list` and `checkout-action`.
-- The taxonomy is two levels. Level one is five fixed tabs in this order: Projects,
-  Images, Videos, Uploads, Trash. Level two is a tool-family filter inside Images and
-  Videos, and a file-format filter inside Uploads.
-- Today's tool-named tabs — Photos, Videos, AI Image Generator, AI Tools, AI Agent — are
-  replaced. Tool identity moves into the level-two filter so that adding a tool never
-  adds a tab.
+- The header is three bands: the capacity meter with its action, the level-one tab row,
+  then one toolbar. There is no standalone New project / Upload / Import row, Import from
+  phone is not in v1, and the retention tip is dropped.
+- Below the shared header's mobile breakpoint (768px) the category rail collapses into
+  the header drawer through the header's own menu button, so categories are reachable at
+  every width.
+- Entering a folder replaces the page title with the breadcrumb and hides both the
+  level-one tab row and the capacity meter. The breadcrumb root is the tab you came from
+  and is the way back.
+
+### Taxonomy and filtering
+
+- The taxonomy is two levels. Level one is six fixed tabs in this order: Projects,
+  Images, Videos, AI Agent, Uploads, Trash. Adding a tool never adds a tab. Today's
+  tool-named tabs — Photos, Videos, AI Image Generator, AI Tools, AI Agent — are replaced.
 - Projects is a separate level-one tab rather than a filter. Re-editable work and
-  finished output are different user intents, and collapsing them into media type would
-  erase the distinction the PM required.
-- Sorting offers newest, oldest and size-descending on every content tab.
-  Size-descending is the cleanup path. Trash sorts by the date moved.
-- The free plan is 5 GB with no retention limit. Folders, renaming, moving, batch
-  actions and trash are all available on the free plan and are never gated.
-- Paid capacity is 100 GB on the subscription, plus purchasable capacity packs of
-  10 GB and 100 GB with monthly and yearly billing. All prices and quotas are synthetic.
-- The capacity meter sits in the page heading, adjacent to the upgrade entry. The metric
-  and the action it triggers are never separated.
-- Capacity has four states driven by one usage value: normal below 75 percent, warning
-  from 75 to 89, critical from 90 to 99 with a persistent banner, and full at 100 with a
-  blocking dialog raised at the moment an action needs space.
-- Every capacity state above normal offers a cleanup action alongside the purchase
-  action. Paying is never the only exit.
-- Cleanup does not get a dedicated view in this version. The cleanup action enters the
-  existing batch selection mode with sort switched to size-descending, and the batch
-  toolbar reports the space the selection occupies.
+  finished output are different user intents.
+- AI Agent is a level-one tab placed after Videos because it is a creation source. It
+  lists individual outputs, not session containers; every agent cell names its source
+  session on the meta line.
+- Level two is the Type filter, drawn from the YCO Feature Type sheet: eighteen features
+  under two types, AI Image and AI Video. On Images the menu lists the eight AI Image
+  features and nothing else; on Videos the ten AI Video features; neither shows group
+  headers. The mixed tabs — Projects, AI Agent, Uploads — list all eighteen under both
+  headers.
+- A media filter (images / videos) appears only on the mixed-media tabs. There is no
+  file-format filter.
+- Sort is one menu with two groups: Sort by (Date modified, Date created) and Order
+  (Newest first, Oldest first). There is no name sort and no size sort. Trash sorts by
+  the date an item was moved.
+- A view control switches between the justified grid and a list whose rows lead with a
+  small thumbnail.
+
+### Creating and uploading
+
+- The create control is per tab. Uploads offers File Upload / Folder Upload / Create
+  folder, and the hidden file input behind File Upload is the feature's only upload
+  entry. Projects offers Create project and Create folder. Images, Videos and AI Agent
+  have a plain Create folder button. Trash has no create control; Empty Trash takes that
+  position.
+- Create project opens a file picker and, once a file is chosen, stops at a named
+  boundary for `edit/result-photo`, which is a different surface
+  (`workspace/tool-photo-editing`) this feature does not absorb.
 - Upload progress renders inside the destination grid cell, extending the existing
-  gallery-cell loading state. No floating upload queue is built.
-- Consequently there is no batch cancel and no pre-flight capacity check. Files upload
-  one at a time until the quota is exhausted.
-- When the quota is exhausted mid-batch, the remaining files become quota failures.
-  A quota failure is a distinct cell state from a format failure: a format failure
-  offers another file, a quota failure offers cleanup and capacity and does not offer a
-  retry that cannot succeed.
+  gallery-cell loading state. No floating upload queue is built, so there is no batch
+  cancel and no pre-flight capacity check. Files upload one at a time until the quota is
+  exhausted.
+- When the quota is exhausted mid-batch, the remaining files become quota failures. A
+  quota failure is a distinct cell state from a format failure: a format failure offers
+  another file; a quota failure offers Remove or Upgrade and never a retry that cannot
+  succeed.
 - A completed synthetic purchase retries the quota-failed uploads instead of returning
   the user to an unchanged page.
+
+### Capacity and purchase
+
+- The free plan is 5 GB with no retention limit. Folders, renaming, moving, batch
+  actions and trash are all available on the free plan and are never gated.
+- Paid capacity is 100 GB on the subscription, plus purchasable capacity packs of 10 GB
+  and 100 GB with monthly and yearly billing. All prices and quotas are synthetic.
+- The capacity meter sits in the page heading adjacent to its action, which is the
+  secondary brand button at tiny size: Upgrade for a free user, Expand storage for Pro.
+  Pro is the highest subscription, so its action goes straight to the capacity packs.
+- Capacity has four states driven by one usage value: normal below 75 percent, warning
+  from 75 to 89, critical from 90 to 99 with a persistent banner, and full at 100 with a
+  full banner of the same shape one step up the severity ramp, plus a blocking dialog
+  raised at the moment an action needs space. The full dialog states what is blocked and
+  carries one action, Upgrade Space, which opens the purchase overlay; it has no meter of
+  its own.
+- Manage space is removed everywhere: from the critical banner, the full dialog and the
+  quota-failure cell. This reverses the earlier principle that paying must never be the
+  only exit, and it is a deliberate PM call. A user at 100 percent has one signposted way
+  forward, buying space, and can still delete items manually from the grid.
+- The purchase overlay opens on the subscription path and exposes a secondary Expand
+  storage only entry that switches to the capacity path in the same overlay, with a back
+  control. The capacity path states the resulting total rather than only the increment.
+  The Add storage overlay carries no title pill. Checkout is inert: confirming advances to
+  a synthetic success state that updates the meter, closes the overlay and retries
+  quota-failed uploads.
+
+### Items, selection and actions
+
+- A cell shows its thumbnail, a type-appropriate badge, the item name, then type, size
+  and date. File size stays on the cell: the page carries a capacity meter that asks the
+  user to decide about space on every visit, and a cell that omits size cannot support
+  that decision.
+- Selection has no mode switch. Hovering a cell reveals a checkbox at its top-left; the
+  first click both selects that item and enters selection mode. RD's placement stays the
+  shared component's default; Cloud Storage opts in.
+- The cell's action cluster is RD's own `cell-actions`: Download is a button on the
+  translucent dark pill and More opens RD's dark on-photo menu. The menu has three
+  labelled groups — Open, Organise, Remove — with move-to-trash last; the destructive
+  entry is flagged by a data attribute and its trash glyph, not by colour.
+- The selection bar is low-weight: a leading close control, the item count and the space
+  those items occupy, select-all, then export / move / delete as icon-plus-label actions
+  with no fills. Its icons are masked to the button's own colour so the destructive tone
+  reaches the glyph.
+- The list view and the Trash table are one shared component, `data-table`, and differ
+  only in the columns each declares. Both carry the same plain row menu; Download stays
+  reachable as its own icon button.
+
+### Folders and trash
+
+- A folder card shows its name, item count and the space it occupies. Creating a folder
+  opens a small dialog with a pre-selected default name.
 - Deletion is always recoverable. Items move to trash, are held 30 days, show their
-  remaining days on the card, and can be restored, deleted permanently or emptied in
-  bulk.
+  remaining days, and can be restored, deleted permanently or emptied in bulk.
+- Trash is a table: name, type, deleted date, and the days left before automatic
+  deletion. Restore and Delete forever sit in a per-row menu; deleting permanently raises
+  a confirmation that names the item and says it cannot be undone.
+- Trash rows are selectable with the same bar the content tabs use, reporting count and
+  selected size, offering Restore and Delete forever and not Export. Restore is a real
+  move back to the tab and folder the item came from and raises a short confirmation
+  toast.
+- Empty Trash raises a confirmation that states how many items go. Trash has an empty
+  state that teaches the 30-day rule.
 - Trashed items still count against the quota, and the trash banner says so.
-- The purchase overlay opens on the subscription path and exposes a secondary
-  Expand storage only entry that switches to the capacity path in the same overlay, with
-  a back control. The capacity path states the resulting total rather than only the
-  increment.
-- File size is shown on every grid cell. RD's gallery does not show it, and without it a
-  cleanup decision cannot be made from the grid.
-- Search, favourites and drag-into-folder are excluded from this version.
-- A floating upload queue and a dedicated manage-storage view are excluded from this
-  version.
-- Sharing and every collaboration surface are excluded from this feature entirely.
-- The prototype exposes one review control that sets synthetic usage to each capacity
-  state, because those states cannot be reached reliably by uploading during a review.
-- `product/i18n.json` is not authored at Intake. The dictionary validator requires every
-  declared key to be used by generated code, so the copy deck is specified in the PRD and
-  the dictionary is authored during `prototype-update` alongside the generated feature.
+
+### Review tooling and boundaries
+
+- The prototype exposes one review control, a Demo widget pinned bottom-left and
+  collapsed to a single Demo pill, carrying the four capacity states and a Free / Pro
+  plan switch. Its dashed treatment marks it as a review tool, not product UI.
+- Search, favourites and drag-into-folder are excluded from this version, as are a
+  floating upload queue and a dedicated manage-storage view. Sharing and every
+  collaboration surface are excluded from this feature entirely.
+- `product/i18n.json` keys are declared with `status: planned` at Intake; the full gate
+  requires every key to be used once code is generated.
 - All storage, quota, upload, purchase, renewal and trash behaviour is local and
   synthetic. No backend, storage service, payment provider or account state is implied.
 
@@ -84,7 +165,7 @@
   therefore the genuinely new surfaces, and the review is scoped to them.
 - Tool-named tabs do not survive tool growth. Fotor's equivalent filter reached 62
   entries and now needs a search field inside the dropdown to remain usable. YCO's five
-  tabs would follow the same path, so level one was fixed at five buckets.
+  tabs would follow the same path, so level one was fixed.
 - The PM selected the two-level taxonomy over both keeping RD's five tabs and moving to
   a lifecycle taxonomy, on the basis that it preserves the current mental model while
   removing the growth problem.
@@ -107,22 +188,34 @@
 - No competitor shows the resulting total when a capacity pack is bought, and no
   competitor resumes the interrupted action after purchase. Both were added because the
   teardown identified them as concrete, low-cost differentiators.
-- Only Picsart shows file size on the grid cell. It is the single piece of information a
-  cleanup decision needs, so it was adopted despite RD's gallery omitting it.
+- Only Picsart shows file size on the grid cell. It was dropped on 2026-09-16 when the
+  cleanup path went, then restored the same day because the capacity meter makes space a
+  decision on every visit and the competitor set is not carrying a meter.
 - The PM chose in-cell upload progress over a floating queue explicitly to minimise
   development cost, and accepted the two consequences: no batch cancel, and capacity
   exhaustion surfacing as per-file failures rather than as a pre-flight block. RD already
   ships an inline uploading status in AI Video Filters and Video Enhance, and three
   aiTools upload steps each duplicate a photo-selection progress bar, so the in-cell
   pattern has production precedent and an extraction candidate.
-- The PM declined a dedicated manage-storage view and directed cleanup to reuse the
-  existing batch toolbar with size sorting, accepting that the released-space figure is
-  shown only during selection rather than as a standing view.
+- The PM declined a dedicated manage-storage view on 2026-09-15 and then, on 2026-09-16,
+  removed the cleanup entry altogether. The reversal of "paying is never the only exit"
+  is recorded as a deliberate call with its consequence, not dropped silently.
+- The selection pattern (hover checkbox, first click enters selection) is the one
+  Picsart, Fotor, CapCut and Canva all use; it removes a click from every batch action.
+- The folder header follows Fotor: the header states where you are rather than where you
+  could go.
+- Level two comes from the YCO Feature Type sheet rather than invented families, so the
+  filter cannot drift back into a flat tool list as tools are added.
 - Both Surface Packs are provisional, so manager review judges behaviour, taxonomy and
   design-system compliance rather than visual similarity to a frozen production
   reference.
 
-## Layout review, 2026-09-15
+## Review log
+
+Append-only. Each pass is kept as it was written; the canonical list above already
+reflects it.
+
+### Layout review, 2026-09-15
 
 Decisions taken with the PM against an interactive wireframe, after the page had been
 composed from shared components. All of them replace earlier entries above.
@@ -167,7 +260,7 @@ composed from shared components. All of them replace earlier entries above.
   download. Four labelled groups — Open, Organise, Get, Remove — with move-to-trash last
   and marked destructive.
 
-## Follow-up decisions, 2026-09-15
+### Follow-up decisions, 2026-09-15
 
 - The folder view follows Fotor's header: entering a folder replaces the page title with
   the breadcrumb and hides both the level-one tab row and the capacity meter, so the
@@ -182,7 +275,7 @@ composed from shared components. All of them replace earlier entries above.
   session on the meta line. Revisit if sessions need their own lifecycle actions —
   renaming a conversation, or reopening it with its full context.
 
-## Capacity and toolbar review, 2026-09-16
+### Capacity and toolbar review, 2026-09-16
 
 - **Level two comes from the YCO Feature Type sheet.** Eighteen features under two types,
   AI Image and AI Video, rendered as two group headers in the level-two filter. The
@@ -194,6 +287,7 @@ composed from shared components. All of them replace earlier entries above.
 - **File size leaves the cell.** None of the four competitors shows it, and the reason it
   was kept — sorting largest-first to clear space — no longer exists. Size stays in the
   selection bar, where it answers "how much will this free".
+  _Reversed on 2026-09-16 — see the PM review below._
 - **Manage space is removed everywhere**: from the critical banner, the full dialog and the
   quota-failure cell. This reverses an earlier recorded principle that paying must never be
   the only exit, and it is a deliberate PM call, not an oversight. The consequence is that
@@ -210,7 +304,7 @@ composed from shared components. All of them replace earlier entries above.
   space they occupy, select-all, then export / move / delete as icon-plus-label actions
   with no fills. RD's filled-pill row stays the shared component's default.
 
-## Toolbar, trash and cell actions, 2026-09-16 (second pass)
+### Toolbar, trash and cell actions, 2026-09-16 (second pass)
 
 - **Sort keeps date fields only.** Name leaves the list; the field group is Date modified
   and Date created, the order group Newest / Oldest first.
@@ -236,6 +330,56 @@ composed from shared components. All of them replace earlier entries above.
 - **The full-storage dialog loses its red meter**, which overlapped the close control and
   repeated a number the page already shows.
 
+### PM review, 2026-09-16 (third pass)
+
+- **The level-two filter is called Type, and it is scoped to the tab's own medium.** It was
+  labelled Tool family, which named an internal taxonomy rather than the thing being
+  picked. On Images the menu now lists the eight AI Image features and nothing else; on
+  Videos, the ten AI Video ones. Offering the other medium's features on a single-medium tab
+  was offering eleven filters that can only ever empty the grid. The group headers go with
+  them on those two tabs, because a header there names the tab you are standing on. The
+  mixed tabs — Projects, AI Agent, Uploads — keep all eighteen under both headers, since
+  there a video feature is a real filter.
+- **File size returns to the grid cell**, as type, size, date, matching the order the list
+  view's columns already used. The 2026-09-16 decision to drop it reasoned from the removed
+  cleanup path and from competitors. Both still hold, and it is still being reversed: this
+  page carries a capacity meter that asks the user to decide about space on every visit, and
+  a cell that says what a file is and when it was made but not how big it is cannot support
+  that decision. The competitor set is not carrying a storage meter.
+- **Full capacity gets a banner of its own**, the same shape as the critical one and one
+  step up the same severity ramp — the error pair the meter's fill already uses at that
+  state. Until now, 100 percent was visible only in the meter until something failed; the
+  blocking dialog said so at the moment of a save, which is the worst moment to learn it.
+  The dialog is unchanged and still raises separately.
+- **Trash rows are selectable, and Empty Trash works.** Empty Trash had no handler at all —
+  a button that has always done nothing. It now raises a confirmation that states how many
+  items go, and the tab has an empty state, which it never needed before because nothing
+  could empty it. Selection in Trash uses the same bar the content tabs use, reporting the
+  same count and selected size, and offers Restore and Delete forever. It does not offer
+  Export: exporting out of Trash is a way to keep a file you have already thrown away.
+  Restore is a real move — the mock records which tab and folder each row came from — and
+  raises a short confirmation toast, because otherwise restoring and deleting look identical
+  from the grid.
+- **The list view and the Trash table are one component.** They were two CSS grids in the
+  same stylesheet with different row heights, paddings, header weights and row actions, so
+  the same product had two tables that did not look related. Both are now the shared
+  `data-table`, extracted from the guideline Figma table, and the only thing that differs is
+  which columns each declares. The library row's on-photo action pill goes with it: that
+  control exists to stay legible over a photograph, and on a white table it was the one
+  element that did not belong to the table. Both tables now carry the same plain row menu,
+  which is what Trash already used. Download stays reachable as its own icon button.
+- **The capacity meter's action uses the secondary brand button at tiny size**, replacing a
+  tertiary small one, so Expand storage and Upgrade sit at the weight the button set
+  intends for an inline action beside a metric.
+- **The Add storage overlay loses its blue title pill.** With one offer, the shared pricing
+  overlay falls back to RD's single-offer badge, which here restated the dialog's own title
+  immediately beneath it. Passing no tabs removes it without touching the shared component.
+- **The selection bar's icons are masked rather than painted.** They are RD's white glyphs,
+  drawn for its filled pills; on the ghost bar's light ground they were white on white. The
+  same asset now takes the button's own colour, which also carries the destructive action's
+  red onto its trash icon. The fix is in the shared component, so every ghost-variant
+  consumer gets it.
+
 ## Post-prototype TODO
 
 - Confirm the 5 GB free quota against YCO's real average asset size. If video generation
@@ -258,4 +402,3 @@ composed from shared components. All of them replace earlier entries above.
 - Decide how a blocked user clears space now that Manage space is gone. Deleting from the
   grid still works but nothing points at it from the banner or the full dialog, so the only
   signposted exit is payment. Worth watching in review.
-

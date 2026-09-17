@@ -25,14 +25,14 @@ implementation:
   removedDependencies: [i18n, browser-utils, caller-supplied-styles]
   localFiles:
     - path: platform/ui/selection-toolbar/SelectionToolbar.jsx
-      sha256: 10731636d1881ec44b5d47e418e051dc9325b67e073b416b116ec54741a9b480
+      sha256: 6ee32221dccf250fc48c2abdad57a200dd4365c90e421b89a10ee9700ea94aba
     - path: platform/ui/selection-toolbar/SelectionToolbar.module.scss
-      sha256: ffe4280b070e60b85ac9939fcc4ae34853afe6cbff5e95afac415823bd7c09c6
+      sha256: 8266b4721a042a69cf413220239d64c8e6cce832e5821d05ab2055b6acaa9957
     - path: platform/ui/selection-toolbar/SelectionToolbar.stories.jsx
       sha256: 5aa993c877cf6b5c35ff1256a787b07afab87325fcf008312bcd99bca46c99e7
     - path: platform/ui/selection-toolbar/index.js
       sha256: 8df947f130bfbf46c70f4a5bec997e258d06d5c6070fd03d0d9f01a2e2573da0
-  localFilesUpdated: 2026-09-15
+  localFilesUpdated: 2026-09-16
 publicApi:
   props:
     - { name: isEditing, required: true }
@@ -94,4 +94,4 @@ decisionBasis:
   - "Ghost variant, added 2026-09-16 at PM request after the selection UI was reviewed. RD's row is three filled pills — a brand Select/Cancel, a red Delete and an outlined Download — which in a selection bar outweighs the content being acted on. `variant=\"ghost\"` keeps RD's markup and drops the fills: icon plus label on a transparent ground, the destructive action carrying colour rather than a filled background, and a leading close control that leaves selection mode (RD expresses that as the Cancel pill, which ghost hides). `default` is unchanged, so RD's own treatment is still what a caller gets without asking."
   - "Tokens added for the ghost variant only: --fill-hover for the action hover ground, --text-error for the destructive action, --text-weaker for a disabled action, --corner-radius-8, --spacing-4/8/16 and --stroke-focus for the focus ring. No new colour was introduced and RD's own rules were not edited."
   - "Ghost slots and order, 2026-09-16. `children` sits between the close control and the actions, which is where a selection bar puts its count, its size and select-all; `extraActions` sits before the destructive action, so a consumer's own action (Cloud Storage's move-to-folder, which RD has no counterpart for) lands in the group without delete losing last place. Ghost also renders download before delete, matching the reference bar's export / move / delete order. RD's default keeps its own order — delete first — untouched."
-
+  - "Ghost-variant glyphs are masked rather than painted, 2026-09-16. RD ships these icons as white artwork for its filled pills; on the ghost row the ground is the page, so an `<img>` of one was white on white and the PM reported the bar as having no icons. `.ghostGlyph` sets `background-color: currentColor` and masks the same asset, so one file serves both grounds and the destructive action's `var(--text-error)` now reaches its trash glyph as well as its label. RD's own filled variant still renders the plain `<img>`, unchanged."

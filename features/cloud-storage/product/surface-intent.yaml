@@ -26,12 +26,10 @@ layoutIntent:
     - upload-feedback
     - trash-management
     - purchase-overlay
-  # componentRoles is read by two tools with opposite meanings: validate:intake
-  # requires it to list every role componentReuse resolves — the full
-  # composition — while the rendered check asserts every entry is VISIBLE at
-  # every viewport. Dialogs, hover menus and empty states cannot satisfy the
-  # second. The list is kept complete, because intake's reading is the one the
-  # schema enforces; the conflict is recorded in DESIGN-019.
+  # componentRoles is the complete composition: every role componentReuse
+  # resolves. Which of them are on screen before any interaction is declared in
+  # `presence` below, and the rendered check asserts only that at-rest set. This
+  # is the platform answer to the conflict DESIGN-019 recorded.
   componentRoles:
     - page-shell
     - category-rail
@@ -45,6 +43,7 @@ layoutIntent:
     - tool-family-filter
     - sort-control
     - view-control
+    - data-table
     - create-menu
     - storage-meter
     - storage-state-banner
@@ -73,6 +72,45 @@ layoutIntent:
     - Collapse the desktop category rail into the header drawer at the same breakpoint the shared header switches to its mobile row, so category navigation is never absent at any width.
     - Use the two-column masonry at narrow widths and keep the file size visible on every cell, because it is the only cleanup signal in the grid.
     - Keep the critical banner and the purchase overlay scrollable within the viewport without scrolling the page behind them.
+  # Everything not listed here is at rest on /features/cloud-storage/ (Projects
+  # tab, free plan, normal capacity) and is asserted at every viewport. `via`
+  # names the criterion whose check reaches the entry. The four pricing-overlay
+  # roles and empty-state / selection-action come from the pinned packs and are
+  # overridden here because they are modal or empty-only by nature.
+  presence:
+    zones:
+      folder-navigation: { presence: conditional, via: CS-012 }
+      purchase-overlay: { presence: on-interaction, via: CS-015 }
+      trash-management: { presence: conditional, via: CS-014 }
+      upload-feedback: { presence: on-interaction, via: CS-009 }
+    componentRoles:
+      category-rail: { presence: conditional, via: CS-021 }
+      empty-state: { presence: conditional, via: CS-001 }
+      selection-action: { presence: on-interaction, via: CS-017 }
+      batch-toolbar: { presence: on-interaction, via: CS-017 }
+      storage-state-banner: { presence: conditional, via: CS-007 }
+      storage-blocking-dialog: { presence: on-interaction, via: CS-008 }
+      folder-card: { presence: conditional, via: CS-012 }
+      folder-breadcrumb: { presence: conditional, via: CS-012 }
+      folder-create-dialog: { presence: on-interaction, via: CS-012 }
+      item-overflow-menu: { presence: on-interaction, via: CS-013 }
+      delete-confirm-dialog: { presence: on-interaction, via: CS-013 }
+      item-detail-dialog:
+        presence: deferred
+        reason: No cell opens a detail dialog until the media-generic API in DESIGN-015 exists.
+      next-action: { presence: on-interaction, via: CS-013 }
+      download-action: { presence: on-interaction, via: CS-017 }
+      upload-progress-cell: { presence: on-interaction, via: CS-009 }
+      trash-policy-banner: { presence: conditional, via: CS-014 }
+      trash-countdown: { presence: conditional, via: CS-014 }
+      close-action: { presence: on-interaction, via: CS-015 }
+      feature-list: { presence: on-interaction, via: CS-015 }
+      plan-tabs: { presence: on-interaction, via: CS-015 }
+      plan-list: { presence: on-interaction, via: CS-015 }
+      checkout-action: { presence: on-interaction, via: CS-016 }
+      storage-pack-selector: { presence: on-interaction, via: CS-015 }
+      purchase-summary: { presence: on-interaction, via: CS-015 }
+      data-table: { presence: on-interaction, via: CS-035 }
 deviations:
   - Level-one tabs are reduced from RD's five tool-named tabs to five stable buckets - Projects, Images, Videos, Uploads and Trash - and the tool identity moves into a level-two filter. This is a deliberate departure from the production taxonomy, taken so the tab row stops growing as tools are added.
   - The page heading gains a capacity meter and an adjacent upgrade entry. RD's gallery has no capacity surface at all, so this zone is new rather than adapted.
@@ -83,7 +121,7 @@ deviations:
   - The purchase overlay borrows the pricing-overlay module but adds a second path that sells capacity alone, which the RD pricing modal does not offer.
   - Sharing, search, favourites and drag-into-folder are intentionally absent; they are not deviations from the pack, but they are the four affordances a reviewer is most likely to look for.
 decisionBasis:
-  - "Resting versus transient component roles, split 2026-09-15. layoutIntent.componentRoles is what the rendered check asserts is visible at every viewport, so it now lists only the resting layout. The roles this surface composes but reaches through an interaction are: category-rail via CS-021; empty-state via CS-001; selection-action via CS-017; batch-toolbar via CS-017; storage-state-banner via CS-007; storage-blocking-dialog via CS-008; folder-card via CS-012; folder-create-dialog via CS-012; item-overflow-menu via CS-013; delete-confirm-dialog via CS-013; item-detail-dialog via null; next-action via CS-013; download-action via CS-017; upload-progress-cell via CS-009; trash-policy-banner via CS-014; trash-countdown via CS-014; close-action via CS-015; feature-list via CS-015; plan-tabs via CS-015; plan-list via CS-015; checkout-action via CS-016; storage-pack-selector via CS-015; purchase-summary via CS-015. item-detail-dialog has no criterion at all — it waits on the media-generic API in DESIGN-015, which is why no cell opens one. Note that the check also adds the primary pack's required slots and every borrowed-pack role to the required-visible set, which pulls in empty-state, selection-action and the five pricing-overlay roles; those are modal or empty-only by nature and cannot be visible at rest. That is a platform-tool question recorded in DESIGN-019, not something to fix by forcing a dialog open."
+  - "Presence, added 2026-09-16. layoutIntent.componentRoles stays the complete composition; layoutIntent.presence marks which zones and roles are not on screen before any interaction, with the criterion that reaches each one. The rendered check asserts only the at-rest set, so the conflict DESIGN-019 recorded between the intake reading and the rendered reading of one list is closed by the platform rather than by forcing a dialog open or deleting a zone the surface really has. item-detail-dialog is deferred: no cell opens one until the media-generic API in DESIGN-015 exists."
   - library/gallery@2026-09 is the only catalogued surface whose shell, tabs, justified grid, cell and empty state match /account/gallery, which is the page this feature evolves.
   - commerce/pricing-overlay@2026-09 already declares plan-tabs, plan-list, feature-list, checkout-action and close-action, and its plan-tabs slot is documented as switching subscription and pay-as-you-go offers, which is exactly the two-path purchase model the PM approved.
   - A hybrid strategy records that the purchase overlay is borrowed rather than forcing a commerce shell onto a library page, or pretending a library pack owns checkout.
@@ -93,7 +131,11 @@ decisionBasis:
 componentReuse:
   - role: view-control
     resolution: feature-only
-    evidence: "Added 2026-09-15 in the layout review. A two-state toggle between the justified grid and the list, feature-owned because it is one button with no RD counterpart — RD's gallery has a single view. The list rows it switches to are feature markup; the grid behind it is the catalogued gallery-grid."
+    evidence: "Added 2026-09-15 in the layout review. A two-state toggle between the justified grid and the list, feature-owned because it is one button with no RD counterpart — RD's gallery has a single view. The grid behind it is the catalogued gallery-grid; as of 2026-09-16 the list behind it is the catalogued data-table."
+  - role: data-table
+    resolution: existing-component
+    component: data-table
+    evidence: "platform/ui/data-table, extracted on 2026-09-16 from the guideline Figma table (Guideline_YCO_2025 node 14892:36402) after the PM reported that this feature's two tables did not look like the same product. The list view and the Trash table were separate CSS grids in one stylesheet — different column counts, row paddings and header weights — and neither matched the guideline. Both now declare columns against the same component. There is no RD counterpart to reuse instead: RD's gallery has no table view at any route in the vendored snapshot, which is why the contract is figma-only."
   - role: create-menu
     resolution: existing-component
     component: dropdown-select

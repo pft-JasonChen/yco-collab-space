@@ -5,5 +5,7 @@ argument-hint: <feature>
 
 Follow `agent-adapters/workflows/prototype-update.md` exactly for `$ARGUMENTS`.
 
-Use the current configured high-capability Claude model. Do not modify product or design
-source files. Phase 0 does not spawn a final-review subagent.
+The runnable Claude Code command is `.claude/commands/prototype-update.md`. Use the
+current configured high-capability Claude model to generate, the `prototype-validator`
+sub-agent for every gate run, and `npm run prototype:finish` to record the model id.
+Do not modify product or design source files.

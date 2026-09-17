@@ -650,6 +650,43 @@ const stories = [
       assert.equal(await page.locator('[data-plan-key="pack-100"]').getAttribute('aria-pressed'), 'true');
     },
   },
+  {
+    id: 'ui-data-table--default',
+    async interact(page) {
+      const table = page.locator('[data-component-role="data-table"]');
+      await table.waitFor({ state: 'visible' });
+      assert.equal(await table.locator('[role="columnheader"]').count(), 5);
+      assert.equal(await table.locator('[role="row"]').count(), 4); // header plus three rows
+
+      // The action glyphs are white artwork masked into the button's own
+      // colour. An unquoted url() token — which a bundler-inlined data URI
+      // produces — fails to parse, and the declaration is dropped silently:
+      // the background colour survives and the icon renders as a filled
+      // square. Asserting the computed mask is what catches that.
+      const glyph = table.locator('button[aria-label="Download"] span').first();
+      const mask = await glyph.evaluate((node) => getComputedStyle(node).maskImage);
+      assert.ok(mask.startsWith('url('), `expected a mask image, got ${mask}`);
+    },
+  },
+  {
+    id: 'ui-data-table--selectable',
+    async interact(page) {
+      const table = page.locator('[data-component-role="data-table"]');
+      await table.waitFor({ state: 'visible' });
+
+      const rows = table.locator('[role="row"][data-selected]');
+      assert.equal(await rows.count(), 3);
+      assert.equal(await rows.first().getAttribute('data-selected'), 'false');
+
+      // The native control is laid over the styled box rather than collapsed to
+      // nothing, so it is what a pointer actually hits.
+      await rows.first().locator('input[type="checkbox"]').click();
+      assert.equal(await rows.first().getAttribute('data-selected'), 'true');
+
+      await page.locator('[data-testid="table-select-all"]').click();
+      assert.equal(await rows.nth(2).getAttribute('data-selected'), 'true');
+    },
+  },
 ];
 
 async function serverReady() {

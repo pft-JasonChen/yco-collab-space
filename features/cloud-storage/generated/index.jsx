@@ -9,6 +9,13 @@ import ConfirmDialog, { Modal } from '../../../platform/ui/confirm-dialog/index.
 import PricingOverlay from '../../../platform/ui/pricing-overlay/index.js';
 import DropdownSelect from '../../../platform/ui/dropdown-select/index.js';
 import CellActions from '../../../platform/ui/cell-actions/index.js';
+import DataTable, {
+  TableActionsCell,
+  TableCell,
+  TableIconButton,
+  TableMediaCell,
+  TableRow,
+} from '../../../platform/ui/data-table/index.js';
 import EmptyImage from '../../../platform/ui/empty-image/index.js';
 import Button from '../../../platform/ui/button/index.js';
 import { createTranslator } from '../../../platform/runtime/i18n.js';
@@ -16,12 +23,13 @@ import dictionary from '../product/i18n.json';
 import mockData from '../product/mocks/cloud-storage.json';
 import {
   DemoWidget,
-  StorageCriticalBanner,
   StorageFullDialog,
   StorageMeter,
+  StorageStateBanner,
   resolveStorageState,
 } from './storage.jsx';
 import styles from './index.module.scss';
+import downloadGlyph from '../../../design-library/assets/icon/yco-home-gallery/images__icon_download_w.svg';
 
 import landscapeExpand from '../product/mock-assets/landscape-expand.jpg';
 import portraitHairstyle from '../product/mock-assets/portrait-hairstyle.jpg';
@@ -88,7 +96,28 @@ const EMPTY_COPY = {
   videos: t('cloud.storage.empty.videos'),
   agent: t('cloud.storage.empty.agent'),
   uploads: t('cloud.storage.empty.uploads'),
+  // Trash could not be emptied before, so it never had one.
+  trash: t('cloud.storage.empty.trash'),
 };
+
+// Both tables are the shared data-table now, so their difference is a column
+// list rather than a second stylesheet. `narrowHidden` replaces the hand-written
+// `:nth-child()` hiding the Trash table used below the tablet breakpoint.
+const LIST_COLUMNS = [
+  { key: 'name', label: t('cloud.storage.column.name') },
+  { key: 'type', label: t('cloud.storage.column.type'), width: '112px' },
+  { key: 'size', label: t('cloud.storage.column.size'), width: '96px', narrowHidden: true },
+  { key: 'modified', label: t('cloud.storage.column.modified'), width: '148px' },
+  { key: 'actions', label: '', srLabel: t('cloud.storage.column.actions'), width: '120px', align: 'end' },
+];
+
+const TRASH_COLUMNS = [
+  { key: 'name', label: t('cloud.storage.column.name') },
+  { key: 'type', label: t('cloud.storage.column.type'), width: '112px', narrowHidden: true },
+  { key: 'deleted', label: t('cloud.storage.column.deleted'), width: '148px', narrowHidden: true },
+  { key: 'remaining', label: t('cloud.storage.column.remaining'), width: '148px' },
+  { key: 'actions', label: '', srLabel: t('cloud.storage.column.actions'), width: '120px', align: 'end' },
+];
 
 const MEDIA_LABELS = {
   all: t('cloud.storage.filter.media.all'),
@@ -198,6 +227,33 @@ const TOOL_FAMILY_ITEMS = mockData.toolFamilies.map((entry) => ({
   dividerBefore: entry.groupFirst,
 }));
 
+// A tab that is already one medium does not need the other medium's features in
+// its Type menu: on Images the eleven video features can never match a row, and
+// picking one only empties the grid. Those two tabs therefore carry their own
+// half of the sheet, without a group header — the header would name the tab you
+// are standing on. The mixed tabs (Projects, AI Agent, Uploads) keep all
+// nineteen under both headers, because there a video feature is a real filter.
+const TAB_TOOL_FAMILY_GROUP = { images: 'image', videos: 'video' };
+
+const ALL_TOOL_FAMILY_ITEM = TOOL_FAMILY_ITEMS[0];
+
+const TOOL_FAMILY_ITEMS_BY_GROUP = Object.fromEntries(
+  ['image', 'video'].map((group) => [
+    group,
+    [
+      ALL_TOOL_FAMILY_ITEM,
+      ...mockData.toolFamilies
+        .filter((entry) => entry.group === group)
+        .map((entry) => ({ key: entry.id, label: entry.label })),
+    ],
+  ]),
+);
+
+function toolFamilyItemsFor(tabId) {
+  const group = TAB_TOOL_FAMILY_GROUP[tabId];
+  return group ? TOOL_FAMILY_ITEMS_BY_GROUP[group] : TOOL_FAMILY_ITEMS;
+}
+
 // The rail's items are resolved here because category-rail is presentational:
 // the shared component owns the markup and keyboard model, the consumer owns
 // what the rows are and what selecting one does. Navigation is inert in this
@@ -266,8 +322,13 @@ export default function CloudStorage() {
   const [moveId, setMoveId] = useState(null);
   const [lastRename, setLastRename] = useState(null);
   const [handoff, setHandoff] = useState(null);
-  const [deleteForeverId, setDeleteForeverId] = useState(null);
-  const [trashMenuId, setTrashMenuId] = useState(null);
+  // Trash is local state for the same reason the library is: restore, delete
+  // forever and Empty Trash all change it, and a Trash that offered those and
+  // then kept every row would be showing controls that do nothing.
+  const [trashItems, setTrashItems] = useState(mockData.trash.items);
+  const [deleteForeverIds, setDeleteForeverIds] = useState(null);
+  const [emptyTrashOpen, setEmptyTrashOpen] = useState(false);
+  const [restoreToast, setRestoreToast] = useState(false);
   const projectInputRef = useRef(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [narrow, setNarrow] = useState(false);
@@ -334,16 +395,22 @@ export default function CloudStorage() {
     return [...rows].sort(compare);
   }, [library, activeTab, openFolderId, mediaFilter, showMediaFilter, toolFamily, sortField, sortDirection]);
 
+  // Selection is cleared on every tab change, so whichever tab is open owns the
+  // whole of it. That lets Trash share one selection model with the library
+  // tabs — the rows differ, the count and the selected size do not.
+  const selectableRows = isTrash ? trashItems : items;
+
   const selectedBytes = useMemo(
     () =>
-      library
-        .filter((item) => selection.includes(item.id))
-        .reduce((total, item) => total + item.sizeBytes, 0),
-    [library, selection],
+      selectableRows
+        .filter((row) => selection.includes(row.id))
+        .reduce((total, row) => total + row.sizeBytes, 0),
+    [selectableRows, selection],
   );
 
   const openFolder = allFolders.find((folder) => folder.id === openFolderId) ?? null;
-  const allSelected = items.length > 0 && items.every((item) => selection.includes(item.id));
+  const allSelected =
+    selectableRows.length > 0 && selectableRows.every((row) => selection.includes(row.id));
   const uploading = uploads.some((entry) => entry.state === 'uploading');
 
   // Uploads still in flight tick forward on one interval rather than a timer
@@ -374,6 +441,13 @@ export default function CloudStorage() {
   function cancelSelection() {
     setIsEditing(false);
     setSelection([]);
+  }
+
+  // Select-all is reached from two places — the table header's own box and the
+  // batch bar — and both have to mean the same thing, including in Trash.
+  function selectAllRows() {
+    setIsEditing(true);
+    setSelection(allSelected ? [] : selectableRows.map((row) => row.id));
   }
 
   function changeTab(tabId) {
@@ -497,6 +571,50 @@ export default function CloudStorage() {
     }
   }
 
+  // Restoring puts the row back where it came from. The mock carries the tab and
+  // folder it was deleted out of, so this is a real move rather than a row that
+  // simply disappears — otherwise Restore and Delete forever would look the same
+  // from the grid.
+  function restoreFromTrash(ids) {
+    const restoring = trashItems.filter((entry) => ids.includes(entry.id));
+    if (restoring.length === 0) return;
+    setLibrary((current) => [
+      ...restoring.map((entry) => ({
+        id: `restored-${entry.id}`,
+        tab: entry.restoreTab,
+        folderId: entry.restoreFolderId,
+        name: entry.name,
+        type: entry.type,
+        toolFamily: 'all',
+        sizeBytes: entry.sizeBytes,
+        sizeLabel: entry.sizeLabel,
+        ratio: 1.5,
+        media: entry.type === 'Video' ? 'video' : 'image',
+        createdLabel: entry.deletedLabel,
+        modifiedLabel: entry.deletedLabel,
+        createdAt: 20260916,
+        modifiedAt: 20260916,
+      })),
+      ...current,
+    ]);
+    setTrashItems((current) => current.filter((entry) => !ids.includes(entry.id)));
+    setSelection((current) => current.filter((id) => !ids.includes(id)));
+    setRestoreToast(true);
+  }
+
+  function deleteForever(ids) {
+    setTrashItems((current) => current.filter((entry) => !ids.includes(entry.id)));
+    setSelection((current) => current.filter((id) => !ids.includes(id)));
+    setDeleteForeverIds(null);
+  }
+
+  function emptyTrash() {
+    setTrashItems([]);
+    setSelection([]);
+    setIsEditing(false);
+    setEmptyTrashOpen(false);
+  }
+
   function confirmFolder() {
     const name = folderName.trim() || t('cloud.storage.folder.name.default');
     const id = `folder-local-${createdFolders.length + 1}`;
@@ -531,15 +649,7 @@ export default function CloudStorage() {
       menuTestId="item-menu"
       menuItems={ITEM_MENU_ITEMS.map((entry) => ({
         ...entry,
-        onSelect: () => {
-          if (entry.key === 'trash') setTrashConfirmId(item.id);
-          if (entry.key === 'duplicate') duplicateItem(item.id);
-          if (entry.key === 'move') startMove(item.id);
-          if (entry.key === 'rename') {
-            setRenameValue(item.name);
-            setRenameId(item.id);
-          }
-        },
+        onSelect: () => onRowMenuSelect(item, entry.key),
       }))}
     />
   );
@@ -569,10 +679,14 @@ export default function CloudStorage() {
           <span className={styles.cellName} data-testid="cell-name">
             {item.name}
           </span>
-          {/* File size is deliberately absent: no competitor shows it, and the
-              cleanup path that justified it has been removed. */}
+          {/* Type, size, date — the same three facts, in the same order, that
+              the list view's columns carry. Size returned on 2026-09-16: a cell
+              that states what a file is and when it was made but not how big it
+              is cannot support any decision about space, which is the one thing
+              this page's meter keeps asking the user to make. */}
           <span className={styles.cellFacts}>
             <span data-testid="cell-type">{item.type}</span>
+            <span data-testid="cell-size">{item.sizeLabel}</span>
             <span data-testid="cell-date">{item.modifiedLabel}</span>
           </span>
           {/* A flat list of agent results would otherwise lose which ones came
@@ -680,32 +794,125 @@ export default function CloudStorage() {
     );
   }
 
+  // The row menu on a table is the same list of intents the on-photo pill
+  // carries, without the pill: CellActions exists to stay legible over a
+  // photograph, and on a white table its translucent dark ground is the one
+  // thing on the page that does not belong to the table. Trash's row menu was
+  // already this control, which is why the two tables can now share it.
+  const rowMenu = (item, items) => (
+    <DropdownSelect
+      items={items}
+      mode="menu"
+      variant="plain"
+      align="end"
+      menuFixed
+      ariaLabel={t('cloud.storage.action.more')}
+      testId="row-menu"
+      trigger={<span aria-hidden="true">···</span>}
+      onSelect={(key) => onRowMenuSelect(item, key)}
+    />
+  );
+
+  function onRowMenuSelect(item, key) {
+    if (key === 'trash') setTrashConfirmId(item.id);
+    if (key === 'duplicate') duplicateItem(item.id);
+    if (key === 'move') startMove(item.id);
+    if (key === 'rename') {
+      setRenameValue(item.name);
+      setRenameId(item.id);
+    }
+  }
+
   function renderRow(item) {
-    const selected = selection.includes(item.id);
     return (
-      <div className={styles.itemRow} key={item.id} data-testid="item-row">
-        <button
-          type="button"
-          className={styles.rowCheckbox}
-          role="checkbox"
-          aria-checked={selected}
-          aria-label={t('cloud.storage.select.item')}
-          data-selected={String(selected)}
-          onClick={() => toggleSelected(item.id)}
+      <TableRow
+        key={item.id}
+        data-testid="item-row"
+        selectable
+        selected={selection.includes(item.id)}
+        onToggleSelect={() => toggleSelected(item.id)}
+        selectLabel={t('cloud.storage.select.item')}
+        selectTestId="row-select"
+      >
+        <TableMediaCell
+          thumbnail={THUMBNAILS[item.id]}
+          primary={item.name}
+          secondary={
+            item.sessionName
+              ? t('cloud.storage.cell.session', { session: item.sessionName })
+              : undefined
+          }
+          secondaryTestId={item.sessionName ? 'cell-session' : undefined}
         />
-        <span
-          className={styles.rowThumbnail}
-          data-testid="row-thumbnail"
-          style={{ backgroundImage: `url(${THUMBNAILS[item.id]})` }}
+        <TableCell>{item.type}</TableCell>
+        <TableCell data-narrow-hidden="true">{item.sizeLabel}</TableCell>
+        <TableCell data-testid="row-modified">{item.modifiedLabel}</TableCell>
+        <TableActionsCell>
+          <TableIconButton
+            icon={downloadGlyph}
+            label={t('cloud.storage.action.download')}
+            testId="row-download"
+          />
+          {rowMenu(item, ITEM_MENU_ITEMS)}
+        </TableActionsCell>
+      </TableRow>
+    );
+  }
+
+  function renderTrashRow(entry) {
+    return (
+      <TableRow
+        key={entry.id}
+        data-testid="trash-row"
+        selectable
+        selected={selection.includes(entry.id)}
+        onToggleSelect={() => toggleSelected(entry.id)}
+        selectLabel={t('cloud.storage.select.item')}
+        selectTestId="trash-row-select"
+      >
+        <TableMediaCell
+          thumbnail={THUMBNAILS[entry.sourceId] ?? wideEnhance}
+          primary={entry.name}
+          secondary={entry.sizeLabel}
         />
-        <span className={styles.rowName}>{item.name}</span>
-        <span className={styles.rowFact}>{item.type}</span>
-        <span className={styles.rowFact}>{item.sizeLabel}</span>
-        <span className={styles.rowFact} data-testid="row-modified">
-          {item.modifiedLabel}
-        </span>
-        {itemMenu(item)}
-      </div>
+        <TableCell data-narrow-hidden="true">{entry.type}</TableCell>
+        <TableCell data-narrow-hidden="true">{entry.deletedLabel}</TableCell>
+        <TableCell
+          className={
+            entry.daysRemaining <= 1 ? styles.trashCountdownFinal : styles.trashCountdown
+          }
+          data-testid="trash-countdown"
+          data-component-role="trash-countdown"
+        >
+          {entry.daysRemaining <= 1
+            ? t('cloud.storage.trash.countdown.last')
+            : t('cloud.storage.trash.countdown', { days: entry.daysRemaining })}
+        </TableCell>
+        <TableActionsCell>
+          <DropdownSelect
+            items={[
+              { key: 'restore', label: t('cloud.storage.action.restore') },
+              {
+                key: 'delete-forever',
+                label: t('cloud.storage.action.delete.forever'),
+                destructive: true,
+                dividerBefore: true,
+              },
+            ]}
+            mode="menu"
+            variant="plain"
+            align="end"
+            menuFixed
+            ariaLabel={t('cloud.storage.action.more')}
+            testId="trash-row-menu"
+            trigger={<span aria-hidden="true">···</span>}
+            onSelect={(key) => {
+              if (key === 'restore') restoreFromTrash([entry.id]);
+              if (key === 'delete-forever') setDeleteForeverIds([entry.id]);
+            }}
+          />
+        </TableActionsCell>
+      </TableRow>
     );
   }
 
@@ -817,10 +1024,11 @@ export default function CloudStorage() {
             )}
           </header>
 
-          {storageState === 'critical' && (
-            <StorageCriticalBanner
+          {(storageState === 'critical' || storageState === 'full') && (
+            <StorageStateBanner
               t={t}
               usage={usageForMeter}
+              state={storageState}
               onExpand={() => openPurchase('packs')}
             />
           )}
@@ -855,7 +1063,7 @@ export default function CloudStorage() {
                   data-level="2"
                 >
                   <DropdownSelect
-                    items={TOOL_FAMILY_ITEMS}
+                    items={toolFamilyItemsFor(activeTab)}
                     selectedKey={toolFamily}
                     onSelect={setToolFamily}
                     label={t('cloud.storage.filter.tool')}
@@ -932,9 +1140,12 @@ export default function CloudStorage() {
               {isTrash && (
                 <Button
                   variant="secondary"
+                  tone="destructive"
                   size="small"
                   data-testid="trash-empty-all"
                   data-component-role="create-menu"
+                  disabled={trashItems.length === 0}
+                  onClick={() => setEmptyTrashOpen(true)}
                 >
                   {t('cloud.storage.action.empty.trash')}
                 </Button>
@@ -955,27 +1166,48 @@ export default function CloudStorage() {
                 onToggleEditing={cancelSelection}
                 deleteDisabled={selection.length === 0}
                 downloadDisabled={selection.length === 0}
-                onDelete={() => setTrashConfirmId(selection[0] ?? null)}
-                onDownload={() => {}}
+                onDelete={() =>
+                  isTrash
+                    ? setDeleteForeverIds(selection)
+                    : setTrashConfirmId(selection[0] ?? null)
+                }
+                /* Exporting out of Trash would be a way to keep a file you have
+                   already thrown away, so the bar there offers only the two
+                   things Trash is for. */
+                onDownload={isTrash ? undefined : () => {}}
                 labels={{
                   exit: t('cloud.storage.action.exit.selection'),
                   cancel: t('cloud.storage.action.cancel'),
                   select: t('cloud.storage.action.select.all'),
-                  delete: t('cloud.storage.action.trash'),
+                  delete: isTrash
+                    ? t('cloud.storage.action.delete.forever')
+                    : t('cloud.storage.action.trash'),
                   download: t('cloud.storage.action.export'),
                 }}
                 extraActions={
-                  /* Move has no RD counterpart — its editing toolbar has no
-                     batch move at all — so the feature supplies it through the
-                     ghost slot, which keeps delete last. */
-                  <button
-                    type="button"
-                    className={styles.batchGhost}
-                    data-testid="batch-move"
-                    disabled={selection.length === 0}
-                  >
-                    {t('cloud.storage.action.move')}
-                  </button>
+                  /* Neither Move nor Restore has an RD counterpart — its editing
+                     toolbar has no batch move at all — so the feature supplies
+                     them through the ghost slot, which keeps delete last. */
+                  isTrash ? (
+                    <button
+                      type="button"
+                      className={styles.batchGhost}
+                      data-testid="batch-restore"
+                      disabled={selection.length === 0}
+                      onClick={() => restoreFromTrash(selection)}
+                    >
+                      {t('cloud.storage.action.restore')}
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      className={styles.batchGhost}
+                      data-testid="batch-move"
+                      disabled={selection.length === 0}
+                    >
+                      {t('cloud.storage.action.move')}
+                    </button>
+                  )
                 }
               >
                 {/* The translator has no plural rules, so the singular is its
@@ -993,9 +1225,7 @@ export default function CloudStorage() {
                 <SelectAllHeader
                   isEditing={isEditing}
                   isSelectAll={allSelected}
-                  onToggleSelectAll={() =>
-                    setSelection(allSelected ? [] : items.map((item) => item.id))
-                  }
+                  onToggleSelectAll={selectAllRows}
                   labels={{ selectAll: t('cloud.storage.action.select.all') }}
                 />
               </SelectionToolbar>
@@ -1076,91 +1306,46 @@ export default function CloudStorage() {
                     {t('cloud.storage.trash.sort')}
                   </span>
 
-                  {/* A table, not cards: the reference lists name, type, when it
+                  {/* The shared table, same as the list view: name, type, when it
                       was deleted and how long is left. There is no People column
                       because sharing is out of scope for v1. */}
-                  <div className={styles.trashTable} data-testid="trash-table" role="table">
-                    <div className={styles.trashHead} role="row">
-                      <span role="columnheader">{t('cloud.storage.column.name')}</span>
-                      <span role="columnheader">{t('cloud.storage.column.type')}</span>
-                      <span role="columnheader">{t('cloud.storage.column.deleted')}</span>
-                      <span role="columnheader">{t('cloud.storage.column.remaining')}</span>
-                      <span />
+                  {trashItems.length === 0 ? (
+                    <div
+                      className={styles.empty}
+                      data-testid="empty-state"
+                      data-component-role="empty-state"
+                    >
+                      <EmptyImage type="general" />
+                      <p className={styles.emptyTitle}>{EMPTY_COPY.trash}</p>
                     </div>
-                    {mockData.trash.items.map((entry) => (
-                      <div
-                        className={styles.trashRow}
-                        data-testid="trash-row"
-                        role="row"
-                        key={entry.id}
-                      >
-                        <span className={styles.trashRowName} role="cell">
-                          <span
-                            className={styles.rowThumbnail}
-                            style={{ backgroundImage: `url(${THUMBNAILS[entry.sourceId] ?? wideEnhance})` }}
-                          />
-                          {entry.name}
-                        </span>
-                        <span className={styles.rowFact} role="cell">
-                          {entry.type}
-                        </span>
-                        <span className={styles.rowFact} role="cell">
-                          {entry.deletedLabel}
-                        </span>
-                        <span
-                          className={
-                            entry.daysRemaining <= 1
-                              ? styles.trashCountdownFinal
-                              : styles.trashCountdown
-                          }
-                          data-testid="trash-countdown"
-                          data-component-role="trash-countdown"
-                          role="cell"
-                        >
-                          {entry.daysRemaining <= 1
-                            ? t('cloud.storage.trash.countdown.last')
-                            : t('cloud.storage.trash.countdown', { days: entry.daysRemaining })}
-                        </span>
-                        <span role="cell">
-                          <DropdownSelect
-                            items={[
-                              { key: 'restore', label: t('cloud.storage.action.restore') },
-                              {
-                                key: 'delete-forever',
-                                label: t('cloud.storage.action.delete.forever'),
-                                destructive: true,
-                                dividerBefore: true,
-                              },
-                            ]}
-                            mode="menu"
-                            variant="plain"
-                            align="end"
-                            menuFixed
-                            ariaLabel={t('cloud.storage.action.more')}
-                            testId="trash-row-menu"
-                            trigger={<span aria-hidden="true">···</span>}
-                            onSelect={(key) =>
-                              key === 'delete-forever' && setDeleteForeverId(entry.id)
-                            }
-                          />
-                        </span>
-                      </div>
-                    ))}
-                  </div>
+                  ) : (
+                    <DataTable
+                      columns={TRASH_COLUMNS}
+                      testId="trash-table"
+                      selectable
+                      allSelected={allSelected}
+                      onToggleAll={selectAllRows}
+                      labels={{ selectAll: t('cloud.storage.action.select.all') }}
+                    >
+                      {trashItems.map(renderTrashRow)}
+                    </DataTable>
+                  )}
                 </div>
               ) : viewMode === 'list' ? (
                 <div className={styles.list}>
-                  <div className={styles.listHead}>
-                    <span />
-                    <span />
-                    <span>{t('cloud.storage.column.name')}</span>
-                    <span>{t('cloud.storage.column.type')}</span>
-                    <span>{t('cloud.storage.column.size')}</span>
-                    <span>{t('cloud.storage.column.modified')}</span>
-                    <span />
-                  </div>
-                  {uploads.map(renderUploadCell)}
-                  {items.map(renderRow)}
+                  {uploads.length > 0 && (
+                    <div className={styles.listUploads}>{uploads.map(renderUploadCell)}</div>
+                  )}
+                  <DataTable
+                    columns={LIST_COLUMNS}
+                    testId="item-table"
+                    selectable
+                    allSelected={allSelected}
+                    onToggleAll={selectAllRows}
+                    labels={{ selectAll: t('cloud.storage.action.select.all') }}
+                  >
+                    {items.map(renderRow)}
+                  </DataTable>
                 </div>
               ) : items.length === 0 && uploads.length === 0 ? (
                 <div
@@ -1218,21 +1403,62 @@ export default function CloudStorage() {
         </p>
       )}
 
-      {deleteForeverId && (
+      {/* One dialog for one row and for a selection: deleting permanently is the
+          same promise either way, and the body names what is going rather than
+          leaving the count to the bar behind the dialog. */}
+      {deleteForeverIds && deleteForeverIds.length > 0 && (
         <ConfirmDialog
           opened
           title={t('cloud.storage.trash.confirm.forever.title')}
-          description={t('cloud.storage.trash.confirm.forever.body', {
-            name: mockData.trash.items.find((entry) => entry.id === deleteForeverId)?.name ?? '',
-          })}
+          description={
+            deleteForeverIds.length === 1
+              ? t('cloud.storage.trash.confirm.forever.body', {
+                  name: trashItems.find((entry) => entry.id === deleteForeverIds[0])?.name ?? '',
+                })
+              : t('cloud.storage.trash.confirm.forever.body.many', {
+                  count: deleteForeverIds.length,
+                })
+          }
           confirmLabel={t('cloud.storage.action.delete.forever')}
           cancelLabel={t('cloud.storage.action.cancel')}
           tone="destructive"
           closeLabel={t('cloud.storage.action.close')}
-          onConfirm={() => setDeleteForeverId(null)}
-          onCancel={() => setDeleteForeverId(null)}
+          onConfirm={() => deleteForever(deleteForeverIds)}
+          onCancel={() => setDeleteForeverIds(null)}
           testId="delete-forever-dialog"
         />
+      )}
+
+      {emptyTrashOpen && (
+        <ConfirmDialog
+          opened
+          title={t('cloud.storage.trash.empty.title')}
+          description={
+            trashItems.length === 1
+              ? t('cloud.storage.trash.empty.body.one')
+              : t('cloud.storage.trash.empty.body', { count: trashItems.length })
+          }
+          confirmLabel={t('cloud.storage.action.empty.trash')}
+          cancelLabel={t('cloud.storage.action.cancel')}
+          tone="destructive"
+          closeLabel={t('cloud.storage.action.close')}
+          onConfirm={emptyTrash}
+          onCancel={() => setEmptyTrashOpen(false)}
+          testId="empty-trash-dialog"
+        />
+      )}
+
+      {/* Restoring moves a row to another tab, so without this the only visible
+          effect is that it vanished — the same thing deleting it looks like. */}
+      {restoreToast && (
+        <p
+          className={styles.successToast}
+          data-testid="trash-restore-toast"
+          role="status"
+          onClick={() => setRestoreToast(false)}
+        >
+          {t('cloud.storage.trash.restore.done')}
+        </p>
       )}
 
       {narrow && drawerOpen && (
@@ -1422,9 +1648,9 @@ export default function CloudStorage() {
               }
             : {
                 title: t('cloud.storage.purchase.pack.title'),
-                tabs: [
-                  { key: 'packs', label: t('cloud.storage.purchase.pack.title'), tone: 'plus' },
-                ],
+                // No tabs: with one offer the shared overlay falls back to RD's
+                // single-offer pill, which here just repeated the dialog's own
+                // title as a blue badge directly beneath it.
                 activeTabKey: 'packs',
                 plans: packs.map((pack) => ({
                   key: pack.id,

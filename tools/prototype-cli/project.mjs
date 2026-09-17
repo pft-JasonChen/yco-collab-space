@@ -89,6 +89,16 @@ export async function sha256File(absolutePath) {
   return createHash('sha256').update(contents).digest('hex');
 }
 
+// Research briefs and wireframes are PM review material that feeds Intake. The
+// prototype is generated from the confirmed product source Intake writes, so an
+// edit to either must not stale a generation or force a re-record.
+export const generationInputExclusions = ['product/research/', 'product/wireframe/'];
+
+export function isGenerationInput(relativePath) {
+  const normalised = String(relativePath).split(path.sep).join('/');
+  return !generationInputExclusions.some((prefix) => normalised.startsWith(prefix));
+}
+
 export async function hashFeatureInputs(feature, workspace = repositoryRoot) {
   const featureRoot = path.join(workspace, 'features', feature);
   const inputRoots = [
@@ -105,6 +115,7 @@ export async function hashFeatureInputs(feature, workspace = repositoryRoot) {
 
     for (const file of files) {
       const relativePath = path.relative(featureRoot, file).split(path.sep).join('/');
+      if (!isGenerationInput(relativePath)) continue;
       hash.update(relativePath);
       hash.update('\0');
       hash.update(await fs.readFile(file));

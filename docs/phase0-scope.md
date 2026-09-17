@@ -55,6 +55,28 @@ The repository now also implements:
 Still deferred are automatic Figma API ingestion, human CODEOWNERS enforcement,
 protected preview authentication, calibrated automated visual judgment, and the YCO-spec adapter.
 
+## Workflow harness extension (2026-09-16)
+
+Approved by the Product Owner as PM-process changes that do not alter Designer or RD
+boundaries:
+
+- `prototype-research` and `prototype-wireframe` workflows with PM-owned review
+  artifacts under `product/research/**` and `product/wireframe/**`, excluded from the
+  generation input hash;
+- `prototype-revise` as the PM feedback loop: source delta plus regeneration of only
+  the affected layers;
+- `layoutIntent.presence` in `surface-intent.yaml`, so the rendered check asserts only
+  the at-rest composition;
+- `status: planned` i18n keys at Intake; a canonical／review-log split in
+  `decisions.md`;
+- Claude Code hooks (write guard from the map's `writablePaths`, generated lint,
+  provenance stop), sub-agent roles with Claude and OpenAI model preferences, a
+  feature digest, a fast gate with per-check re-runs, and an intake rubric with four
+  new mutations.
+
+See `docs/architecture/2026-09-16-ai-workflow-optimization-review.md` for the review
+that motivated it.
+
 ## Decision basis
 
 - Intake must precede Surface selection because a new feature may not match any current

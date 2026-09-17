@@ -5,6 +5,27 @@ import downloadIcon from '../../../design-library/assets/icon/yco-home-gallery/i
 import tickIcon from '../../../design-library/assets/icon/yco-home-gallery/images__account__aiTools__aiHeadshot__icon_Tick.svg';
 import noticeIcon from '../../../design-library/assets/icon/yco-home-gallery/images__ico_yce_notice.svg';
 
+/**
+ * RD's action glyphs are white artwork drawn for its filled pills. On the ghost
+ * row the ground is the page, so painting them leaves a white icon on a white
+ * bar — invisible. Masking the same asset makes it take the button's own colour,
+ * which is also what carries the destructive action's red onto its trash glyph.
+ */
+function GhostGlyph({ src }) {
+  // The bundler inlines a small SVG as a data: URI, and those carry parentheses
+  // and quotes of their own, so an unquoted url() token fails to parse and the
+  // declaration is dropped silently — leaving a filled square, because the
+  // background colour survives and the mask does not.
+  const mask = `url("${String(src).replace(/"/g, '%22')}")`;
+  return (
+    <span
+      className={styles.ghostGlyph}
+      style={{ maskImage: mask, WebkitMaskImage: mask }}
+      aria-hidden="true"
+    />
+  );
+}
+
 const defaultLabels = {
   select: 'Select',
   cancel: 'Cancel',
@@ -159,7 +180,8 @@ export default function SelectionToolbar({
           aria-label={compact ? copy.download : undefined}
           data-testid="selection-download"
         >
-          {isGhost || compact ? <img src={downloadIcon} alt="" aria-hidden="true" /> : null}
+          {isGhost && <GhostGlyph src={downloadIcon} />}
+          {!isGhost && compact ? <img src={downloadIcon} alt="" aria-hidden="true" /> : null}
           {compact ? null : copy.download}
         </button>
       )}
@@ -179,7 +201,8 @@ export default function SelectionToolbar({
           data-testid="selection-delete"
           data-destructive={isGhost ? 'true' : undefined}
         >
-          {isGhost || compact ? <img src={trashIcon} alt="" aria-hidden="true" /> : null}
+          {isGhost && <GhostGlyph src={trashIcon} />}
+          {!isGhost && compact ? <img src={trashIcon} alt="" aria-hidden="true" /> : null}
           {compact ? null : copy.delete}
         </button>
       )}
