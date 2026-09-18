@@ -1,11 +1,11 @@
 {
   "schemaVersion": 3,
   "feature": "video-expansion",
-  "inputHash": "38a8fd5aa92759cd86b63979e73ba54400a28e4917bd6285d559868c4477b56d",
+  "inputHash": "c08fe7a06676c5b776901449c30c943fe41169ec8edcd956cf71a8b03208eaee",
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "claude-code",
   "model": "claude-opus-5",
-  "generatedAt": "2026-09-17T11:24:34.835Z",
+  "generatedAt": "2026-09-18T01:34:32.296Z",
   "files": [
     "README.md",
     "contract/integration.yaml",
@@ -876,7 +876,7 @@
         },
         {
           "path": "features/video-expansion/generated/index.jsx",
-          "sha256": "71876fe315eea94991fe96552a5349a703026a951b1a4d17623def6b17750b84"
+          "sha256": "25a2b4c6000ace1f3457f8e7d971e75fae1734d60daec642b1bd0e2bbc2ec9a7"
         },
         {
           "path": "features/video-expansion/generated/index.module.scss",
@@ -891,7 +891,7 @@
           "sha256": "079e42b2b35548096dba01684133d3ba6cb46f86648eae166d64c204c608eaed"
         }
       ],
-      "hash": "0ed45ca8ab52398cb335076b8203fb5cc3142b2cb23909e1157ef6f2c900082f"
+      "hash": "397a3a0e0eccaf1ad242582543801bcb198a9915e2faa06e510743efd282126a"
     },
     "dependencies": {
       "files": [
@@ -1913,7 +1913,7 @@
         },
         {
           "path": "features/video-expansion/generated/index.jsx",
-          "sha256": "71876fe315eea94991fe96552a5349a703026a951b1a4d17623def6b17750b84"
+          "sha256": "25a2b4c6000ace1f3457f8e7d971e75fae1734d60daec642b1bd0e2bbc2ec9a7"
         },
         {
           "path": "features/video-expansion/generated/index.module.scss",
@@ -1945,7 +1945,7 @@
         },
         {
           "path": "features/video-expansion/product/surface-intent.yaml",
-          "sha256": "e7a0916596afe616d7f2dc8940a6fb2e301fa787537540e3ba3754c0d8542775"
+          "sha256": "fa86cc8a460569485c9fdf47d629eddc5c6c0551ff9f8145efa51e4c50f21053"
         },
         {
           "path": "migration/ai-video-pilot.json",
@@ -3068,7 +3068,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "752e757fd8498ba2dd72aff02a0e502a3d945494034ab6fa7c5fb74a8cc4a7b5",
+      "hash": "f23f35a41e7a76e5b06ba613cb1ddce627415bc0db5b9943582b9ebe62e11f7e",
       "edges": [
         {
           "from": "design-library/assets/font/yco-interface-icons.style.css",
@@ -3867,6 +3867,6 @@
         "react-dom"
       ]
     },
-    "revisionHash": "4c24c7c70682788b16bacf19f67d37bdf27898b6fac7a0f66859b5364d464b4d"
+    "revisionHash": "f933c32900b1ad0e06d276edda30453d419f72a14a10da3c35690716ec32a564"
   }
 }

@@ -30,12 +30,15 @@
 - The complete source remains contained inside the target frame. Width and height
   cannot exceed the frame, positioning is clamped to the available interior space,
   and clipping is not accepted as containment.
-- The canvas viewport height is fixed within each responsive breakpoint. Ratio changes
-  resize the target frame and displayed video inside it, never the viewport. The full
-  blue target outline must remain inside the viewport. Checkerboard transparency is
-  limited to the selected target-ratio frame. The RD Video Object Remover-derived
-  playback timeline is positioned below the viewport, operates the visible canvas
-  video, and remains synchronized with its playback time.
+- The canvas viewport hugs the target frame instead of holding a fixed height: its
+  height is the frame's height at the viewport's current width plus a fixed inset,
+  bounded by the height its workspace actually has free. A ratio change therefore
+  resizes the viewport as well as the frame and displayed video inside it, and the
+  viewport never holds height it cannot use. The full blue target outline must remain
+  inside the viewport. Checkerboard transparency is limited to the selected
+  target-ratio frame. The RD Video Object Remover-derived playback timeline is
+  positioned below the viewport, operates the visible canvas video, and remains
+  synchronized with its playback time.
 - The canvas renders only the active source video and has no separate static poster
   layer. For the prototype, ten timeline thumbnails are captured locally in the
   browser at evenly spaced points across the selected trim segment. The implementation
@@ -122,6 +125,26 @@
   synthetic cost of 10" clause actually applies), `start-generation` keeps checking
   the post-click History-tab-activated + processing-card assertions, minus the now
   Edit-tab-only cost badge.
+- On 2026-09-17 the fixed-height canvas viewport was reversed, over a sequence of live
+  reports about the grey panel. Measured on a 1024x1366 screen, the viewport sat at its
+  640px ceiling while the 16:9 frame inside it was 252px tall — 194px of dead grey space
+  ("你會不會覺得在這個尺寸的螢幕，一個靠上一個置中很奇怪"); the PM chose, from the
+  options offered, to have the grey hug its content height. The ceiling that produced
+  that dead space was itself a remnant of the fixed-height rule, and on a wide screen it
+  made every ratio settle at the same 640px, so the viewport stopped answering to the
+  ratio at all and kept the height it refused to use blank below the timeline
+  ("你本來做切換ratio的時候canvas 也會切換高度，但是剛剛不知道為什麼又變成固定高度").
+  The viewport is now sized from the ratio and bounded only by the height its workspace
+  has free. This reverses the "fixed-height canvas viewport" clause of the 2026-09-02
+  requirement above — the "fully contained ratio frames" and "timeline-synchronized
+  visible video" clauses of that same requirement are unaffected and still hold. VE-013
+  was reworded to match, and the `data-fixed-height` attribute it asserted was removed:
+  the attribute was a hardcoded literal `"true"` that could not report anything, so the
+  two rendered-validation assertions reading it (in `portrait-ratio-frame-contained` and
+  `canvas-containment`) passed unconditionally and would have certified a fixed height
+  the prototype no longer has. Both assertions were removed with it. The remaining
+  assertions in those two scenarios are unchanged, and no acceptance criterion lost its
+  coverage.
 
 ## Post-prototype TODO
 

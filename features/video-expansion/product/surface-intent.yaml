@@ -98,7 +98,7 @@ componentReuse:
     component: credit-controls
     evidence: GenerateActionBar reproduces the RD ApplyButtonWithCoinCredit single-tool treatment on the shared Button.
 deviations:
-  - The canvas viewport height stays fixed while ratio frames resize entirely within it; checkerboard transparency is scoped to the selected target-ratio frame, and the synchronized timeline is a sibling below the viewport rather than an overlay.
+  - The canvas viewport height follows the ratio frame it holds, which still resizes entirely within it; checkerboard transparency is scoped to the selected target-ratio frame, and the synchronized timeline is a sibling below the viewport rather than an overlay.
   - The target frame renders only the current video element. Ten timeline previews are captured locally from evenly spaced points in the selected segment, so no static poster and no media-analysis service is introduced.
   - Direct four-direction canvas dragging positions the source inside the target frame. No RD component owns this, and DESIGN-004 kept it feature behaviour.
   - App launcher, intro, picker, purchase flow and social-sharing surfaces are intentionally omitted, while the surrounding chrome, synthetic credit display and tool-family menu remain visible.

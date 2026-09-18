@@ -100,10 +100,6 @@ checks:
         selector: "[data-testid='ratio-9-16']"
     assertions:
       - type: attribute
-        selector: "[data-testid='canvas-viewport']"
-        name: data-fixed-height
-        value: "true"
-      - type: attribute
         selector: "[data-testid='target-ratio-frame']"
         name: data-frame-contained
         value: "true"
@@ -222,10 +218,6 @@ checks:
       - type: attribute
         selector: "[data-testid='canvas-video']"
         name: data-draggable
-        value: "true"
-      - type: attribute
-        selector: "[data-testid='canvas-viewport']"
-        name: data-fixed-height
         value: "true"
       - type: attribute
         selector: "[data-testid='target-ratio-frame']"

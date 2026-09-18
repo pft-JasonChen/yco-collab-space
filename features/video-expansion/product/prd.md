@@ -49,9 +49,11 @@ production engine or service contract.
   is horizontal only. For a landscape source that touches the target's left and right
   edges, dragging is vertical only. When ratios match, dragging is allowed in all four
   directions.
-- The result canvas has a fixed viewport height for the current responsive breakpoint.
-  Changing ratio does not resize that viewport; it updates the target-frame and
-  displayed-video dimensions inside it without discarding the selected trim segment.
+- The result canvas sizes its viewport to the frame it holds: the viewport's height is
+  the target frame's height at the current width plus a fixed inset, bounded by the
+  height the surrounding workspace has free. Changing ratio therefore resizes the
+  viewport along with the target-frame and displayed-video dimensions inside it,
+  without discarding the selected trim segment.
 - Every supported ratio frame is fitted entirely inside the viewport. Its complete
   blue outline remains visible and no side may extend beyond or be clipped by the
   viewport.
@@ -61,7 +63,7 @@ production engine or service contract.
   crosses the frame. Hiding an out-of-frame portion with clipping is not sufficient.
 - Checkerboard transparency appears only inside the selected target-ratio frame rather
   than across the full result workspace or as a black background.
-- A shared Video Object Remover-derived timeline sits below the fixed canvas viewport,
+- A shared Video Object Remover-derived timeline sits below the canvas viewport,
   never overlays the transparent target area, and supports play/pause and seeking
   within the selected trim range. Timeline playback and seeking operate the same
   visible video element rendered inside the target frame, and timeline progress stays

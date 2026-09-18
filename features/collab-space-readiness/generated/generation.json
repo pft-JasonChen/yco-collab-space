@@ -5,7 +5,7 @@
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "claude-code",
   "model": "claude-opus-5",
-  "generatedAt": "2026-09-17T08:24:31.324Z",
+  "generatedAt": "2026-09-18T01:35:25.124Z",
   "files": [
     "feature.jsx",
     "feature.module.scss"
@@ -806,7 +806,7 @@
         },
         {
           "path": "features/video-expansion/product/surface-intent.yaml",
-          "sha256": "e7a0916596afe616d7f2dc8940a6fb2e301fa787537540e3ba3754c0d8542775"
+          "sha256": "fa86cc8a460569485c9fdf47d629eddc5c6c0551ff9f8145efa51e4c50f21053"
         },
         {
           "path": "migration/ai-video-pilot.json",
@@ -1929,7 +1929,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "efceb52b6b06564c717e88720cab00f312a51daef60f81f34b797919b5d2d39e",
+      "hash": "43bcc2c1577f5465912e7d6a8833cbf0c5609a4589e52c540cb2c65cd21438a6",
       "edges": [
         {
           "from": "features/collab-space-readiness/generated/feature.jsx",
@@ -1971,6 +1971,6 @@
         "react"
       ]
     },
-    "revisionHash": "a3018f55efbdd84fa7ffa6f04100f20eb4d50f21a8d0fcf6e5d1a0dd16bf1764"
+    "revisionHash": "84a3ba32726bebbfc09be2515195b39549512ff99c34bf6e8f38dce2684d0905"
   }
 }

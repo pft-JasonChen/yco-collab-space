@@ -124,9 +124,9 @@ acceptance:
     when: Its History card renders
     then: The card shows exactly one feature tag named Video Expansion and no model, engine, or ratio tag
   - id: VE-013
-    given: A source video is loaded in the fixed canvas viewport
+    given: A source video is loaded in the canvas viewport
     when: The user switches among supported ratios and controls playback from the timeline
-    then: The viewport height stays fixed, every complete blue ratio frame remains inside it, and the visible canvas video and timeline playback stay synchronized
+    then: The viewport height follows the selected ratio, every complete blue ratio frame remains inside it, and the visible canvas video and timeline playback stay synchronized
   - id: VE-014
     given: A source video and selected trim segment are loaded in the editor
     when: The canvas and playback timeline render
