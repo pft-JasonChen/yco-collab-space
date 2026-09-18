@@ -127,13 +127,10 @@
    rendered its font-family correctly and simply had nothing to draw. The
    comment above already says the font-face is scoped here specifically "so
    a shared component cannot assume [a global stylesheet] exists" — this
-   closes the gap that comment's own goal was written for. Codepoints
-   transcribed 1:1 from that same stylesheet (confirmed byte-identical font
-   file via checksum, design-library/assets/font/yco-home-rd/icomoon.woff ==
-   this component's own .../yco-category-rail/icomoon.woff), for every glyph
-   the shared font contains, not just the ones this component's own stories
-   currently use — a future consumer picking a new iconName from this same
-   RD icon set should not silently render blank. */
+   closes the gap that comment's own goal was written for. The original 32
+   mappings were transcribed 1:1 from that stylesheet. CategoryRail now uses
+   the user-provided complete IcoMoon build (icomoon-v260907), with the two
+   additional template mappings used by this component declared below. */
 :global(.icon-ic-arrow-right)::before {
   content: '\e93f';
 }
@@ -252,6 +249,14 @@
 
 :global(.icon-ic-video)::before {
   content: '\e903';
+}
+
+:global(.icon-ic-videos)::before {
+  content: '\e991';
+}
+
+:global(.icon-ic-images)::before {
+  content: '\e94c';
 }
 
 :global(.icon-ic-photo-editing)::before {
@@ -410,6 +415,7 @@
   }
 
   .item {
+    position: relative;
     width: 80px;
     height: auto;
     flex-direction: column;
@@ -426,7 +432,68 @@
     border-radius: var(--corner-radius-24);
   }
 
-  .newLabel,
+  /* Reference (2026-09-18, reported live against Figma's own Menu List
+     icon-state matrix, node 13026:43818 — "hover不會包著文字，我覺得你沒有認真
+     看figma"): the base `.item:hover`/`:active`/`[data-selected]` rules above
+     paint their background on `.item` itself, which is correct for the wide
+     row (Figma's own "Type=List" states pill the full icon+label row) but
+     wrong here — compact's "Type=Icon" states pill ONLY the 72px icon; the
+     label text below never gets a background at any state. Resetting `.item`
+     to transparent and re-applying each state's exact same colour to
+     `.iconFont` alone (via the same pseudo-classes/attributes, just scoped
+     one level deeper) fixes this without changing what any state's colour
+     actually is. */
+  .item,
+  .item:hover,
+  .item:active,
+  .item:focus-visible,
+  .item:focus:hover,
+  .item:focus:active,
+  .item[data-selected='true'],
+  .item[data-selected='true']:hover,
+  .item[data-selected='true']:active {
+    background-color: transparent;
+  }
+
+  .item:hover .iconFont {
+    background-color: var(--grey-neutral-light-25);
+  }
+
+  .item:active .iconFont {
+    background-color: var(--grey-neutral-light-50);
+  }
+
+  .item:focus-visible .iconFont {
+    background-color: var(--brand-light-50);
+  }
+
+  .item:focus:hover .iconFont {
+    background-color: var(--teal-dark-200);
+  }
+
+  .item:focus:active .iconFont {
+    background-color: var(--brand-light-50);
+  }
+
+  .item[data-selected='true'] .iconFont {
+    background-color: var(--brand-light-50);
+  }
+
+  .item[data-selected='true']:hover .iconFont {
+    background-color: var(--teal-dark-200);
+  }
+
+  .item[data-selected='true']:active .iconFont {
+    background-color: var(--brand-light-50);
+  }
+
+  .newLabel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+  }
+
   .externalLinkIcon {
     margin: 0 auto;
   }
@@ -437,6 +504,7 @@
 }
 
 .rail[data-compact='true'] .item {
+  position: relative;
   width: 80px;
   height: auto;
   flex-direction: column;
@@ -453,7 +521,59 @@
   border-radius: var(--corner-radius-24);
 }
 
-.rail[data-compact='true'] .newLabel,
+/* Same relocation as the <=992px block above, kept in step for `compact`
+   consumers who set the prop directly rather than only narrowing. */
+.rail[data-compact='true'] .item,
+.rail[data-compact='true'] .item:hover,
+.rail[data-compact='true'] .item:active,
+.rail[data-compact='true'] .item:focus-visible,
+.rail[data-compact='true'] .item:focus:hover,
+.rail[data-compact='true'] .item:focus:active,
+.rail[data-compact='true'] .item[data-selected='true'],
+.rail[data-compact='true'] .item[data-selected='true']:hover,
+.rail[data-compact='true'] .item[data-selected='true']:active {
+  background-color: transparent;
+}
+
+.rail[data-compact='true'] .item:hover .iconFont {
+  background-color: var(--grey-neutral-light-25);
+}
+
+.rail[data-compact='true'] .item:active .iconFont {
+  background-color: var(--grey-neutral-light-50);
+}
+
+.rail[data-compact='true'] .item:focus-visible .iconFont {
+  background-color: var(--brand-light-50);
+}
+
+.rail[data-compact='true'] .item:focus:hover .iconFont {
+  background-color: var(--teal-dark-200);
+}
+
+.rail[data-compact='true'] .item:focus:active .iconFont {
+  background-color: var(--brand-light-50);
+}
+
+.rail[data-compact='true'] .item[data-selected='true'] .iconFont {
+  background-color: var(--brand-light-50);
+}
+
+.rail[data-compact='true'] .item[data-selected='true']:hover .iconFont {
+  background-color: var(--teal-dark-200);
+}
+
+.rail[data-compact='true'] .item[data-selected='true']:active .iconFont {
+  background-color: var(--brand-light-50);
+}
+
+.rail[data-compact='true'] .newLabel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+}
+
 .rail[data-compact='true'] .externalLinkIcon {
   margin: 0 auto;
 }

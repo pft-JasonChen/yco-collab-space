@@ -5,7 +5,7 @@
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "claude-code",
   "model": "claude-sonnet-5",
-  "generatedAt": "2026-09-18T05:33:46.168Z",
+  "generatedAt": "2026-09-18T06:24:40.761Z",
   "files": [
     "README.md",
     "feature.jsx",
@@ -96,13 +96,13 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/category-rail/component.yaml",
-        "contractSha256": "fae8c4e524edd1f7b266d936b15218dd134bd62368f949e5849a0cae52642c98",
+        "contractSha256": "7dfbbdbeb83668c9183f7192f5c9ddb4ac68cfa51c2e4d8ca536f9b9fae758a9",
         "implementationImport": "platform/ui/category-rail/index.js",
-        "implementationSha256": "49780ed917bfa7f203dafd58968c91c6442c45241287204c3fc321607afd82d8",
+        "implementationSha256": "b28c92c18af405bdbc53bec81c6d09c079035680004de22423be053d227c0eb5",
         "runtimeAssets": [
           {
             "repositoryPath": "design-library/assets/font/yco-category-rail/icomoon.woff",
-            "sha256": "746d8b88009c7cf0c9b03a160361e1dc8de8406dc3ef893f65e2399e9054ebec"
+            "sha256": "b8d17e93378f5e27275322b6b9af1a125d56b47a6bd02eee7e93a589419bb196"
           }
         ]
       },
@@ -1922,7 +1922,7 @@
         },
         {
           "path": "design-library/assets/font/yco-category-rail/icomoon.woff",
-          "sha256": "746d8b88009c7cf0c9b03a160361e1dc8de8406dc3ef893f65e2399e9054ebec"
+          "sha256": "b8d17e93378f5e27275322b6b9af1a125d56b47a6bd02eee7e93a589419bb196"
         },
         {
           "path": "design-library/assets/font/yco-interface-icons/icomoon.woff",
@@ -2230,7 +2230,7 @@
         },
         {
           "path": "design-library/components/category-rail/component.yaml",
-          "sha256": "fae8c4e524edd1f7b266d936b15218dd134bd62368f949e5849a0cae52642c98"
+          "sha256": "7dfbbdbeb83668c9183f7192f5c9ddb4ac68cfa51c2e4d8ca536f9b9fae758a9"
         },
         {
           "path": "design-library/components/cell-actions/component.yaml",
@@ -2826,11 +2826,11 @@
         },
         {
           "path": "platform/ui/category-rail/CategoryRail.module.scss",
-          "sha256": "cbc0c71c0e51286ce4ceaccee98f434acd6a623547fbb854be583f9e43485209"
+          "sha256": "94400f5c790fd927d58aed95bdc4337c17a6c19cf02b0b188d893b5b7bcf8a1c"
         },
         {
           "path": "platform/ui/category-rail/CategoryRail.stories.jsx",
-          "sha256": "ed2546483a5635b53d09f694439b2d8ddaa9a5aeb97ca485d06d33a0d2adf630"
+          "sha256": "3886594447712093705c1cd4343dac8dace21ed8fca7f1056bdeaa024af7b86b"
         },
         {
           "path": "platform/ui/category-rail/index.js",
@@ -3334,7 +3334,7 @@
         },
         {
           "path": "tools/design-library/run-storybook-checks.mjs",
-          "sha256": "c5e17a758145f369fc85c8504b986058ccffaba18415baec81da48336b6bb8cd"
+          "sha256": "37e51a328029ef662679726e11a0dfe6a8636a20f4c09ce77578b0fee73c0183"
         },
         {
           "path": "tools/design-library/schemas/component-contract.schema.json",
@@ -3517,7 +3517,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "13687331ab205fb26333420366d738065d18b3a2bd93c317e554dabd308e788e",
+      "hash": "664899dfa3c68ccc85bda0f2dc66c20caac7b04bc729085f3eea74615e6128ea",
       "edges": [
         {
           "from": "features/cloud-storage/generated/feature.jsx",
@@ -4220,6 +4220,6 @@
         "react-dom"
       ]
     },
-    "revisionHash": "3832c98a8df6d9fff3769ae30d69d56b5de1b51857a1d220e0b106bbb292bf2c"
+    "revisionHash": "ad78e9eebd3f8962f02b11f87614787d6714578b1f919a24ac7b7fadfafc294d"
   }
 }

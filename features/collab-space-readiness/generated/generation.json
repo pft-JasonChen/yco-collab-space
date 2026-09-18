@@ -5,7 +5,7 @@
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "claude-code",
   "model": "claude-sonnet-5",
-  "generatedAt": "2026-09-18T05:33:45.344Z",
+  "generatedAt": "2026-09-18T06:24:39.898Z",
   "files": [
     "feature.jsx",
     "feature.module.scss"
@@ -694,7 +694,7 @@
         },
         {
           "path": "design-library/components/category-rail/component.yaml",
-          "sha256": "fae8c4e524edd1f7b266d936b15218dd134bd62368f949e5849a0cae52642c98"
+          "sha256": "7dfbbdbeb83668c9183f7192f5c9ddb4ac68cfa51c2e4d8ca536f9b9fae758a9"
         },
         {
           "path": "design-library/components/cell-actions/component.yaml",
@@ -1238,11 +1238,11 @@
         },
         {
           "path": "platform/ui/category-rail/CategoryRail.module.scss",
-          "sha256": "cbc0c71c0e51286ce4ceaccee98f434acd6a623547fbb854be583f9e43485209"
+          "sha256": "94400f5c790fd927d58aed95bdc4337c17a6c19cf02b0b188d893b5b7bcf8a1c"
         },
         {
           "path": "platform/ui/category-rail/CategoryRail.stories.jsx",
-          "sha256": "ed2546483a5635b53d09f694439b2d8ddaa9a5aeb97ca485d06d33a0d2adf630"
+          "sha256": "3886594447712093705c1cd4343dac8dace21ed8fca7f1056bdeaa024af7b86b"
         },
         {
           "path": "platform/ui/category-rail/index.js",
@@ -1746,7 +1746,7 @@
         },
         {
           "path": "tools/design-library/run-storybook-checks.mjs",
-          "sha256": "c5e17a758145f369fc85c8504b986058ccffaba18415baec81da48336b6bb8cd"
+          "sha256": "37e51a328029ef662679726e11a0dfe6a8636a20f4c09ce77578b0fee73c0183"
         },
         {
           "path": "tools/design-library/schemas/component-contract.schema.json",
@@ -1929,7 +1929,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "3e6abac7349fa61c9077b706dfd520e4b2d9ebe2e14cf109d9a5fb5d6bb5b7fc",
+      "hash": "b2143d084f259d6c8b23d1b5e5de5f6a8bca2630890337fd36f6e08159489767",
       "edges": [
         {
           "from": "features/collab-space-readiness/generated/feature.jsx",
@@ -1971,6 +1971,6 @@
         "react"
       ]
     },
-    "revisionHash": "0d41f4e4ab06dc6f61e1ceff07ebce63974db9f255e1eeffa87899afe4b28b47"
+    "revisionHash": "b01feaed2ed7c4505b5ebcef88e65eb0b160a7a58213188fc8355e039f64961f"
   }
 }

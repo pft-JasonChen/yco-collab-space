@@ -5,7 +5,7 @@
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "claude-code",
   "model": "claude-sonnet-5",
-  "generatedAt": "2026-09-18T05:33:44.322Z",
+  "generatedAt": "2026-09-18T06:24:38.642Z",
   "files": [
     "README.md",
     "contract/integration.yaml",
@@ -1773,7 +1773,7 @@
         },
         {
           "path": "design-library/components/category-rail/component.yaml",
-          "sha256": "fae8c4e524edd1f7b266d936b15218dd134bd62368f949e5849a0cae52642c98"
+          "sha256": "7dfbbdbeb83668c9183f7192f5c9ddb4ac68cfa51c2e4d8ca536f9b9fae758a9"
         },
         {
           "path": "design-library/components/cell-actions/component.yaml",
@@ -2377,11 +2377,11 @@
         },
         {
           "path": "platform/ui/category-rail/CategoryRail.module.scss",
-          "sha256": "cbc0c71c0e51286ce4ceaccee98f434acd6a623547fbb854be583f9e43485209"
+          "sha256": "94400f5c790fd927d58aed95bdc4337c17a6c19cf02b0b188d893b5b7bcf8a1c"
         },
         {
           "path": "platform/ui/category-rail/CategoryRail.stories.jsx",
-          "sha256": "ed2546483a5635b53d09f694439b2d8ddaa9a5aeb97ca485d06d33a0d2adf630"
+          "sha256": "3886594447712093705c1cd4343dac8dace21ed8fca7f1056bdeaa024af7b86b"
         },
         {
           "path": "platform/ui/category-rail/index.js",
@@ -2885,7 +2885,7 @@
         },
         {
           "path": "tools/design-library/run-storybook-checks.mjs",
-          "sha256": "c5e17a758145f369fc85c8504b986058ccffaba18415baec81da48336b6bb8cd"
+          "sha256": "37e51a328029ef662679726e11a0dfe6a8636a20f4c09ce77578b0fee73c0183"
         },
         {
           "path": "tools/design-library/schemas/component-contract.schema.json",
@@ -3068,7 +3068,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "e1df96279ff9de38a0f4909624db0e07ac2c53a469403c781091a2b87a7b03ef",
+      "hash": "6f1eae40ab181f569e6efeacfb96e00d72a24f36109502817f290db2a752e00d",
       "edges": [
         {
           "from": "design-library/assets/font/yco-interface-icons.style.css",
@@ -3867,6 +3867,6 @@
         "react-dom"
       ]
     },
-    "revisionHash": "0f0df59540d8c04e1991f949f070ad9d8ff98a7f46d27621f4c3d247f76e1d2a"
+    "revisionHash": "abcc80109b9a902b0f15c076c65e0ba307b087db479345224c108b8362b12fd3"
   }
 }

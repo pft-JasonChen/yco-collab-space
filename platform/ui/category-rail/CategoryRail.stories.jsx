@@ -9,13 +9,13 @@ const ITEMS = [
   { key: 'ai-agent', label: 'AI Agent', iconName: 'ic-ai-agent', isNew: true },
   { key: 'photo-editing', label: 'AI Photo Editing', iconName: 'ic-photo-editing' },
   { key: 'ai-image', label: 'AI Image', iconName: 'ic-ai-image' },
-  { key: 'ai-portrait', label: 'AI Portrait', iconName: 'ic-portrait' },
+  { key: 'ai-portrait', label: 'AI Portrait', iconName: 'ic-user-sparkle' },
   { key: 'ai-video', label: 'AI Video Editing', iconName: 'ic-ai-video' },
   { key: 'basic-editing', label: 'Basic Editing', iconName: 'ic-image' },
   { key: 'batch-editing', label: 'Batch Editing', iconName: 'ic-layers' },
-  { key: 'gallery', label: 'My Gallery', iconName: 'ic-history' },
-  { key: 'video-template', label: 'Video Template', iconName: 'ic-video', dividerBefore: true },
-  { key: 'image-template', label: 'Image Template', iconName: 'ic-image' },
+  { key: 'gallery', label: 'My Gallery', iconName: 'ic-image' },
+  { key: 'video-template', label: 'Video Template', iconName: 'ic-videos', dividerBefore: true },
+  { key: 'image-template', label: 'Image Template', iconName: 'ic-images' },
   { key: 'api', label: 'API', iconName: 'ic-api-b', external: true, dividerBefore: true },
 ];
 

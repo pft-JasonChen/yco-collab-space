@@ -601,6 +601,19 @@ const stories = [
       const rail = page.locator('[data-component-role="category-rail"]');
       await rail.waitFor({ state: 'visible' });
       assert.equal(await rail.getAttribute('data-compact'), 'true');
+
+      const agent = rail.locator('[data-key="ai-agent"]');
+      const badge = agent.getByText('NEW');
+      const [agentBox, badgeBox] = await Promise.all([
+        agent.boundingBox(),
+        badge.boundingBox(),
+      ]);
+      assert.ok(agentBox && badgeBox, 'compact AI Agent row and NEW badge must be measurable');
+      assert.ok(Math.abs(badgeBox.y - agentBox.y) < 1, 'NEW badge aligns to the compact row top');
+      assert.ok(
+        Math.abs((badgeBox.x + badgeBox.width) - (agentBox.x + agentBox.width)) < 1,
+        'NEW badge aligns to the compact row right edge',
+      );
     },
   },
   {
