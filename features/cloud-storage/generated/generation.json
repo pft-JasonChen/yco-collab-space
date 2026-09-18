@@ -4,8 +4,8 @@
   "inputHash": "6442ab12c9cdceaa01dd4cd9d949a6fd0b633eda7256711dc4b340eead0e910c",
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "claude-code",
-  "model": "claude-opus-5",
-  "generatedAt": "2026-09-18T01:35:26.098Z",
+  "model": "claude-sonnet-5",
+  "generatedAt": "2026-09-18T01:56:17.588Z",
   "files": [
     "README.md",
     "feature.jsx",
@@ -2286,7 +2286,7 @@
         },
         {
           "path": "design-library/components/result-page-shell/component.yaml",
-          "sha256": "dcf0e9940f9ed6078d58d93fac70f5af65a55b0e1cbaec9be9d71dc10bf296cb"
+          "sha256": "754721699c828b9031d43c3773a200d1847bee563de925dd3196b775f0371cd3"
         },
         {
           "path": "design-library/components/selection-toolbar/component.yaml",
@@ -3098,7 +3098,7 @@
         },
         {
           "path": "platform/ui/result-page-shell/ResultPageShell.module.scss",
-          "sha256": "2df4c0d7e7c9667c1a8bc66a3b5eac78024fe1e4378d96c05546ab681e69809c"
+          "sha256": "19031ff5b580c1691a2de3b3344520fb4e2062f65f65c232b9dcd66a8eea1e2d"
         },
         {
           "path": "platform/ui/result-page-shell/ResultPageShell.stories.jsx",
@@ -3517,7 +3517,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "3c0fbbc1fa5b07b68afc7698fa9bf4bc49aa81c36191d59db41507c880e08b0c",
+      "hash": "239c2ddecba85ed21003f7934bafed0c9c2a3271cb45fd371dbe155057945d80",
       "edges": [
         {
           "from": "features/cloud-storage/generated/feature.jsx",
@@ -4220,6 +4220,6 @@
         "react-dom"
       ]
     },
-    "revisionHash": "1d434483aa135d2dcee60b86dea04fc5de554e888e2cae48ee8792898dc074bf"
+    "revisionHash": "14214f5b9caa0be5d92bbaf141ebadbc82bee170da6b4a39c7ebc54e0d666601"
   }
 }

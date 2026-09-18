@@ -143,7 +143,9 @@
 
 .glyph {
   font-family: 'YcoInterfaceIcons', sans-serif;
-  font-size: 22px;
+  /* Reference (2026-09-18, requested live via a DevTools inspect —
+     ._glyph_nnjef_144 { font-size: 20px }): was 22px. */
+  font-size: 20px;
   font-style: normal;
   font-weight: normal;
   line-height: 1;
