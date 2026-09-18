@@ -84,7 +84,22 @@
   align-items: center;
   width: 260px;
   height: 44px;
-  color: var(--grey-neutral-solid-800);
+  /* Reference (2026-09-18, reported live against a Figma inspect of the
+     house icon's own "Selection colors: Icon/Neutral" — "你icon用錯color
+     了"): this was `--grey-neutral-solid-800` (a plain grey RD literal) — wrong for the label too, not just the icon, which only
+     inherits whatever this resolves to since neither `.iconFont` nor `.icon`
+     sets its own `color`. Figma's own Menu Title label uses `--text-strong`;
+     the icon layer is separately tagged `--icon-neutral` — but both alias
+     --grey-light-1000, so they are the exact same value, and fixing this one
+     shared declaration fixes both without needing a second rule on the icon
+     itself. That second rule was tried and reverted: giving `.iconFont` its
+     own static colour stops it from inheriting `--text-brand` in every
+     selected/focus state below, which all recolour via `.item`'s own
+     `color` and rely on the icon inheriting it — Figma's Active states do
+     show the icon recoloured to match the label, not held at Icon/Neutral,
+     so inheritance is the correct mechanism here, not something to route
+     around. */
+  color: var(--text-strong);
   font-size: var(--font-size-tiny);
   font-weight: var(--font-weight-strong);
   line-height: var(--line-height-tiny);
