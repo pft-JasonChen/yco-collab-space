@@ -5,7 +5,7 @@
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "claude-code",
   "model": "claude-sonnet-5",
-  "generatedAt": "2026-09-18T06:24:40.761Z",
+  "generatedAt": "2026-09-18T06:48:44.430Z",
   "files": [
     "README.md",
     "feature.jsx",
@@ -96,9 +96,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/category-rail/component.yaml",
-        "contractSha256": "7dfbbdbeb83668c9183f7192f5c9ddb4ac68cfa51c2e4d8ca536f9b9fae758a9",
+        "contractSha256": "ecc69485296085838ddb6382c5561888dcf474fcbcd4f0fa59391c4398b1fe27",
         "implementationImport": "platform/ui/category-rail/index.js",
-        "implementationSha256": "b28c92c18af405bdbc53bec81c6d09c079035680004de22423be053d227c0eb5",
+        "implementationSha256": "6b5bde54560398cda6dc26ab4c0eef51c6f3a5ba1eed70b64f0ef3af47b1686c",
         "runtimeAssets": [
           {
             "repositoryPath": "design-library/assets/font/yco-category-rail/icomoon.woff",
@@ -2230,7 +2230,7 @@
         },
         {
           "path": "design-library/components/category-rail/component.yaml",
-          "sha256": "7dfbbdbeb83668c9183f7192f5c9ddb4ac68cfa51c2e4d8ca536f9b9fae758a9"
+          "sha256": "ecc69485296085838ddb6382c5561888dcf474fcbcd4f0fa59391c4398b1fe27"
         },
         {
           "path": "design-library/components/cell-actions/component.yaml",
@@ -2826,7 +2826,7 @@
         },
         {
           "path": "platform/ui/category-rail/CategoryRail.module.scss",
-          "sha256": "94400f5c790fd927d58aed95bdc4337c17a6c19cf02b0b188d893b5b7bcf8a1c"
+          "sha256": "872845146ebc23cbedc6116dabc24044aed13ffe0901b305319743410fa1f50e"
         },
         {
           "path": "platform/ui/category-rail/CategoryRail.stories.jsx",
@@ -3517,7 +3517,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "664899dfa3c68ccc85bda0f2dc66c20caac7b04bc729085f3eea74615e6128ea",
+      "hash": "42c8a97238894634edb73585a70f56f00065da58b8deee962aadb3900fee76fd",
       "edges": [
         {
           "from": "features/cloud-storage/generated/feature.jsx",
@@ -4220,6 +4220,6 @@
         "react-dom"
       ]
     },
-    "revisionHash": "ad78e9eebd3f8962f02b11f87614787d6714578b1f919a24ac7b7fadfafc294d"
+    "revisionHash": "69986f9d34f8ea76bbdf56fc0a80d39e08a745c9f2d4b6ff454a8b8012263001"
   }
 }

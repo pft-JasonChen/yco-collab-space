@@ -304,12 +304,37 @@
   color: var(--text-brand);
 }
 
+/* Reference (2026-09-18, reported live against Figma's own Menu List
+   "Type=List" state matrix, node 13026:43818 — "你就少了這兩個狀態"): Active
+   Hover/Active Press are drawn there with a brand-blue ring that this port
+   never had — hover instead filled a mismatched --teal-dark-200 (a
+   different blue family entirely, not in Figma's spec at all) and press
+   reused the same fill as idle Active with no ring, so the two states were
+   visually indistinguishable from each other and from idle. Figma's own
+   fills for these two states resolve through this project's existing tokens
+   exactly: --fill-brand-hover and --fill-brand-weak are the SAME value
+   (both alias --brand-light-50), so hover's fill genuinely doesn't change
+   from idle — only the ring appears; --fill-brand-press aliases
+   --brand-light-200, a real step darker. --stroke-selected aliases
+   --brand-light-1000, Figma's own literal ring colour.
+
+   Drawn as an inset box-shadow rather than Figma's literal border
+   (2026-09-18, follow-up — "這個border出現的時候可以不要佔位，不要讓元件位
+   移嗎"): a real border on top of `box-sizing: border-box` keeps the OUTER
+   box the same size, but still eats into the padding, nudging the icon and
+   label inward by the border's own width whenever a state toggles it on.
+   `box-shadow` never participates in layout at all — appearing, changing
+   width, or disappearing moves nothing — so an inset shadow the same 2px
+   width reproduces the exact same ring pixel-for-pixel with zero shift, and
+   still follows `border-radius` correctly in every current browser. */
 .item[data-selected='true']:hover {
-  background-color: var(--teal-dark-200);
+  background-color: var(--fill-brand-hover);
+  box-shadow: inset 0 0 0 2px var(--stroke-selected);
 }
 
 .item[data-selected='true']:active {
-  background-color: var(--brand-light-50);
+  background-color: var(--fill-brand-press);
+  box-shadow: inset 0 0 0 2px var(--stroke-selected);
 }
 
 .item[disabled] {
@@ -479,12 +504,18 @@
     background-color: var(--brand-light-50);
   }
 
+  /* Same Active Hover/Active Press correction as the base rule above
+     (2026-09-18) — a mismatched hover fill fixed to the token Figma
+     actually specifies, plus an inset-box-shadow ring rather than a real
+     border so it never shifts the icon glyph inside this fixed-size pill. */
   .item[data-selected='true']:hover .iconFont {
-    background-color: var(--teal-dark-200);
+    background-color: var(--fill-brand-hover);
+    box-shadow: inset 0 0 0 2px var(--stroke-selected);
   }
 
   .item[data-selected='true']:active .iconFont {
-    background-color: var(--brand-light-50);
+    background-color: var(--fill-brand-press);
+    box-shadow: inset 0 0 0 2px var(--stroke-selected);
   }
 
   .newLabel {
@@ -559,12 +590,15 @@
   background-color: var(--brand-light-50);
 }
 
+/* Same Active Hover/Active Press correction as the base rule (2026-09-18). */
 .rail[data-compact='true'] .item[data-selected='true']:hover .iconFont {
-  background-color: var(--teal-dark-200);
+  background-color: var(--fill-brand-hover);
+  box-shadow: inset 0 0 0 2px var(--stroke-selected);
 }
 
 .rail[data-compact='true'] .item[data-selected='true']:active .iconFont {
-  background-color: var(--brand-light-50);
+  background-color: var(--fill-brand-press);
+  box-shadow: inset 0 0 0 2px var(--stroke-selected);
 }
 
 .rail[data-compact='true'] .newLabel {
