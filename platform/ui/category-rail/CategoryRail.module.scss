@@ -209,19 +209,30 @@
   margin-right: 16px;
 }
 
-/* RD's NewLabel badge. */
+/* RD's NewLabel badge.
+   Reference (2026-09-18, compared directly against Figma's own Navigation
+   Side node, 5847:59397): a fixed 35x15px box was RD's own literal — this
+   compares it against Figma's "New" component instead (px-[6px] py-[2px],
+   h-[16px], radius large enough to stay a full pill), which sizes to its
+   own text rather than a fixed box. Auto width matches either way at "NEW";
+   height 16px (line-height-micro, one token pixel taller than RD's 15) and
+   a 9999px radius — this codebase's existing fully-round convention
+   (CellActions' own badges) — read as the identical pill Figma shows.
+   Every colour/spacing value already matched exactly through the token
+   chain (--fill-badge -> --perfect-1000, resolving to Figma's own literal
+   pink; --spacing-4/6-ish padding) — this was the one real box-model
+   difference. */
 .newLabel {
-  width: 35px;
-  height: 15px;
+  height: var(--line-height-micro);
   color: var(--fill-white);
   background-color: var(--fill-badge);
   font-size: 10.13px;
-  line-height: 15px;
+  line-height: var(--line-height-micro);
   font-weight: var(--font-weight-strong);
   letter-spacing: 0.506px;
   margin: 0 16px 0 auto;
   padding: 2px 6px;
-  border-radius: 12px;
+  border-radius: 9999px;
   text-align: center;
   display: flex;
   align-items: center;

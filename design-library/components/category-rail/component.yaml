@@ -33,12 +33,12 @@ implementation:
     - path: platform/ui/category-rail/CategoryRail.jsx
       sha256: 83fef5923162070ab6a3722529dd6ce5d9d897500af69d220cd9b1b2b0760c5a
     - path: platform/ui/category-rail/CategoryRail.module.scss
-      sha256: 84a83ef6cc6035983c1035ade6989d0b53cc9bf9624a73717a6d084d276161cc
+      sha256: f1422b87752b713a7169599425bbfc982acc0b8f8df1be3b7432bdd3357a82bb
     - path: platform/ui/category-rail/CategoryRail.stories.jsx
       sha256: ed2546483a5635b53d09f694439b2d8ddaa9a5aeb97ca485d06d33a0d2adf630
     - path: platform/ui/category-rail/index.js
       sha256: 67eca5ef929b299644ead641110c76a632b4748ae7985bcd20d77664661c8a86
-  localFilesUpdated: 2026-09-16
+  localFilesUpdated: 2026-09-18
 publicApi:
   props:
     - { name: items, required: true }
@@ -92,3 +92,6 @@ decisionBasis:
   - "Keyboard model is RD's, with one addition: RD moves the roving tabindex on arrow keys but never moves focus, so the caret is left behind. Focus follows the index here, but only while focus is already inside the rail, so an external selection change never steals it."
   - "Scroller scrollbar restyled (2026-09-16, requested live — \"scrollbar在沒有滾動的時候可以不要顯示嗎？顏色也太深了，可以用Stroke/Weak\"): `.scroller` had `scrollbar-width: none` with no `::-webkit-scrollbar` counterpart, so Chromium/WebKit contexts that ignore `scrollbar-width` fell back to the browser default (thick, dark) scrollbar instead of actually hiding it. Given a real transparent-by-default/`--stroke-weak`-on-hover treatment instead of a full hide, since this list can genuinely overflow and a hover-revealed thumb is a real affordance, not just decoration."
   - "Auto-sync (2026-09-16): `CategoryRail.module.scss` hash updated — no documented public prop or decisionBasis-quoted value appears to have changed, so this synced automatically. Review if this doesn't look right."
+  - "Compared directly against Figma's own Navigation Side node (5847:59397, both the 300px expanded and 112px compact device variants), per a live question — \"我和你說本自己的Navigation side 做起來...這個元件我們先不管他\" (proposed forking a new component) — \"那就修 CategoryRail\" (decided instead to compare and correct this one). Every colour/spacing token already matched exactly through the alias chain (--fill-brand-strong active bg -> --brand-light-50, identical to what this file already used; --fill-badge -> --perfect-1000 -> #f23b77, Figma's literal hex) — this component is already RD-accurate to that Figma node, including the `leading` slot existing specifically for its Start Editing button. The one real box-model difference: `.newLabel` was a fixed 35x15px box; Figma sizes the NEW badge to its own text at a fixed 16px height (line-height-micro) with a full pill radius. Changed to `height: var(--line-height-micro)` (was 15px) and `border-radius: 9999px` (was 12px, a literal that happened to still read as fully-round at that height) — this codebase's own existing fully-round convention (CellActions' badges). Width was left auto rather than re-fixed at 35px; verified live it renders at ~35.3px for \"NEW\" regardless. No new component was created."
+  - "Auto-sync (2026-09-18): `CategoryRail.module.scss` hash updated — no documented public prop or decisionBasis-quoted value appears to have changed, so this synced automatically. Review if this doesn't look right."
+  - "Auto-sync (2026-09-18): `CategoryRail.module.scss` hash updated — no documented public prop or decisionBasis-quoted value appears to have changed, so this synced automatically. Review if this doesn't look right."
