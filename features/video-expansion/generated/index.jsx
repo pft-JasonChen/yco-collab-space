@@ -518,14 +518,14 @@ export default function VideoExpansionFeature() {
                 onRatioChange={(next) => { setRatio(next); setPosition({ x: 0, y: 0 }); }}
               />
             )}
-            footer={activeTab === 'edit' ? (
+            footer={(
               <GenerateActionBar
                 label={t('video.object.remover.generate.button')}
                 cost={mockData.credits.generateCost}
                 disabled={!canGenerate({ sourceState, trimStart, trimEnd })}
                 onClick={beginProcessing}
               />
-            ) : null}
+            )}
             result={(
               <VideoResultsSurface
                 title={featureName}

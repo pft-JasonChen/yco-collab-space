@@ -1,11 +1,11 @@
 {
   "schemaVersion": 3,
   "feature": "video-expansion",
-  "inputHash": "c08fe7a06676c5b776901449c30c943fe41169ec8edcd956cf71a8b03208eaee",
+  "inputHash": "c6a9e6421f979d4a4c8cb70c3624822ee3b2630ac29399fff41600fe8f11a133",
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "claude-code",
   "model": "claude-sonnet-5",
-  "generatedAt": "2026-09-18T01:56:15.805Z",
+  "generatedAt": "2026-09-18T03:33:38.079Z",
   "files": [
     "README.md",
     "contract/integration.yaml",
@@ -876,11 +876,11 @@
         },
         {
           "path": "features/video-expansion/generated/index.jsx",
-          "sha256": "25a2b4c6000ace1f3457f8e7d971e75fae1734d60daec642b1bd0e2bbc2ec9a7"
+          "sha256": "135abdc620a0e89b8f94d7c067a6c236104368fa5f60dd32a6741b3e11660b6a"
         },
         {
           "path": "features/video-expansion/generated/index.module.scss",
-          "sha256": "7bf59f3a9ff6a031caf95fcaf6dfa2c020b0759515ca09d021d5744d3dc36e8e"
+          "sha256": "1056c21d897a285fbe90cbd3296df461e717f17743b7c979b12f349a4d42103b"
         },
         {
           "path": "features/video-expansion/generated/settings/index.jsx",
@@ -891,7 +891,7 @@
           "sha256": "079e42b2b35548096dba01684133d3ba6cb46f86648eae166d64c204c608eaed"
         }
       ],
-      "hash": "397a3a0e0eccaf1ad242582543801bcb198a9915e2faa06e510743efd282126a"
+      "hash": "40b6274e90c97bde395f79cd32158715ef4ba59b909a1b69fafc206f651ed81b"
     },
     "dependencies": {
       "files": [
@@ -1913,11 +1913,11 @@
         },
         {
           "path": "features/video-expansion/generated/index.jsx",
-          "sha256": "25a2b4c6000ace1f3457f8e7d971e75fae1734d60daec642b1bd0e2bbc2ec9a7"
+          "sha256": "135abdc620a0e89b8f94d7c067a6c236104368fa5f60dd32a6741b3e11660b6a"
         },
         {
           "path": "features/video-expansion/generated/index.module.scss",
-          "sha256": "7bf59f3a9ff6a031caf95fcaf6dfa2c020b0759515ca09d021d5744d3dc36e8e"
+          "sha256": "1056c21d897a285fbe90cbd3296df461e717f17743b7c979b12f349a4d42103b"
         },
         {
           "path": "features/video-expansion/generated/settings/index.jsx",
@@ -3068,7 +3068,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "39e7d5bbe57decf8ceee09b4611e1983b2b8326c85ec9f66ebab48ce2a745d58",
+      "hash": "8e2ca3f22362d1400bc0fca4f39b983335e3b638a5811edce9dc747e5cddb3a9",
       "edges": [
         {
           "from": "design-library/assets/font/yco-interface-icons.style.css",
@@ -3867,6 +3867,6 @@
         "react-dom"
       ]
     },
-    "revisionHash": "a3e78ad15a684a88ffb9a4c7fe7ec1404555e032788cf990f81eb6d4020e85c8"
+    "revisionHash": "4fcb8d84abfc28d186d81b06bb9e9713531e3b8373bb1b3eecba393a17cd9f93"
   }
 }

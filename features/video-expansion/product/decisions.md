@@ -145,6 +145,12 @@
   the prototype no longer has. Both assertions were removed with it. The remaining
   assertions in those two scenarios are unchanged, and no acceptance criterion lost its
   coverage.
+- On 2026-09-18 the 2026-09-16 "History的tab不會有 generate這顆" request was scoped to
+  the phone ("我和你說切到history頁面不要出現Generate Button 是指手機版，桌機版是不
+  論切哪個tab都會在"): that entry's own implementation hid Generate on History at every
+  width, in JS. Generate is now always rendered; hiding it on History is a phone-only
+  CSS rule, matching the fixed-footer treatment the phone already gives it. Desktop
+  shows Generate on both Edit and History.
 
 ## Post-prototype TODO
 

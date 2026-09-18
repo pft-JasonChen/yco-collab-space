@@ -590,6 +590,17 @@
     box-shadow: 0 -2px 8px color-mix(in srgb, var(--fill-strong) 10%, transparent);
   }
 
+  /* Reference (2026-09-18, corrected live — "我和你說切到history頁面不要出現
+     Generate Button 是指手機版，桌機版是不論切哪個tab都會在"): the 2026-09-16
+     "History的tab不會有 generate這顆" request was implemented in JS
+     (`footer={activeTab === 'edit' ? ... : null}`), which hid it on History
+     at every width — Generate is now always rendered from JS and this rule
+     hides it on History for the phone alone, scoped the same way every other
+     mobile-only override in this file is. */
+  .page[data-tab='history'] [data-surface-zone='primary-action'] {
+    display: none;
+  }
+
   /* Reference (2026-09-16, requested live — "390 的手機沒辦法露出ratio 怕user
      找不到...我們先改這兩個地方看看能露出多少"): 96px was sized as a safety
      margin above Generate's own ~76px real footprint (44px button + 16px
