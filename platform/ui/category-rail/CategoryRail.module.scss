@@ -115,6 +115,153 @@
   speak: never;
 }
 
+/* Icons were invisible everywhere this component is actually used (reported
+   live, 2026-09-18, against a screenshot of a plain text list with no icons
+   at all — "icon怎麼都不見了"): the block above only sets font-family/style
+   on the glyph classes, never the `::before { content }` that actually picks
+   a character out of the font. That mapping lived only in a DIFFERENT global
+   stylesheet (app/src/surfaces/rd-port/home-icon-styles.css, itself imported
+   only by the Surface Browser's own RD-port preview, under a DIFFERENT
+   font-family "icomoon") — this component's own consumers (cloud-storage,
+   every Storybook story) never loaded it, so `<i class="icon-ic-home">`
+   rendered its font-family correctly and simply had nothing to draw. The
+   comment above already says the font-face is scoped here specifically "so
+   a shared component cannot assume [a global stylesheet] exists" — this
+   closes the gap that comment's own goal was written for. Codepoints
+   transcribed 1:1 from that same stylesheet (confirmed byte-identical font
+   file via checksum, design-library/assets/font/yco-home-rd/icomoon.woff ==
+   this component's own .../yco-category-rail/icomoon.woff), for every glyph
+   the shared font contains, not just the ones this component's own stories
+   currently use — a future consumer picking a new iconName from this same
+   RD icon set should not silently render blank. */
+:global(.icon-ic-arrow-right)::before {
+  content: '\e93f';
+}
+
+:global(.icon-ic-api-b)::before {
+  content: '\e91d';
+}
+
+:global(.icon-ic-api-r)::before {
+  content: '\e91e';
+}
+
+:global(.icon-ic-user-sparkle)::before {
+  content: '\e91c';
+}
+
+:global(.icon-ic-ai-colorize-3-3)::before {
+  content: '\e919';
+}
+
+:global(.icon-ic-ai-colorize-3-2)::before {
+  content: '\e91a';
+}
+
+:global(.icon-ic-ai-colorize-3-1)::before {
+  content: '\e91b';
+}
+
+:global(.icon-ic-ai-image)::before {
+  content: '\e917';
+}
+
+:global(.icon-ic-ai-video)::before {
+  content: '\e918';
+}
+
+:global(.icon-ic-thumbs-up)::before {
+  content: '\e90e';
+}
+
+:global(.icon-ic-thumbs-down)::before {
+  content: '\e90f';
+}
+
+:global(.icon-ic-upload)::before {
+  content: '\e910';
+}
+
+:global(.icon-ic-reuse)::before {
+  content: '\e911';
+}
+
+:global(.icon-ic-new-chat)::before {
+  content: '\e912';
+}
+
+:global(.icon-ic-download)::before {
+  content: '\e913';
+}
+
+:global(.icon-ic-history)::before {
+  content: '\e914';
+}
+
+:global(.icon-ic-copy)::before {
+  content: '\e915';
+}
+
+:global(.icon-ic-ai-agent)::before {
+  content: '\e916';
+}
+
+:global(.icon-ic-filter)::before {
+  content: '\e922';
+}
+
+:global(.icon-ic-retouch)::before {
+  content: '\e90b';
+}
+
+:global(.icon-ic-hair)::before {
+  content: '\e90c';
+}
+
+:global(.icon-ic-chevron-r)::before {
+  content: '\e906';
+}
+
+:global(.icon-ic-start-editing)::before {
+  content: '\e907';
+}
+
+:global(.icon-ic-chevron-u)::before {
+  content: '\e908';
+}
+
+:global(.icon-ic-chevron-l)::before {
+  content: '\e909';
+}
+
+:global(.icon-ic-chevron-d)::before {
+  content: '\e90a';
+}
+
+:global(.icon-ic-layers)::before {
+  content: '\e900';
+}
+
+:global(.icon-ic-image)::before {
+  content: '\e901';
+}
+
+:global(.icon-ic-home)::before {
+  content: '\e902';
+}
+
+:global(.icon-ic-video)::before {
+  content: '\e903';
+}
+
+:global(.icon-ic-photo-editing)::before {
+  content: '\e904';
+}
+
+:global(.icon-ic-portrait)::before {
+  content: '\e905';
+}
+
 .icon {
   width: 20px;
   height: 20px;
