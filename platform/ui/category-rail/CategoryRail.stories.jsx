@@ -11,7 +11,7 @@ const ITEMS = [
   { key: 'ai-image', label: 'AI Image', iconName: 'ic-ai-image' },
   { key: 'ai-portrait', label: 'AI Portrait', iconName: 'ic-user-sparkle' },
   { key: 'ai-video', label: 'AI Video Editing', iconName: 'ic-ai-video' },
-  { key: 'basic-editing', label: 'Basic Editing', iconName: 'ic-image' },
+  { key: 'basic-editing', label: 'Basic Editing', iconName: 'ic-sliders-horizontal' },
   { key: 'batch-editing', label: 'Batch Editing', iconName: 'ic-layers' },
   { key: 'gallery', label: 'My Gallery', iconName: 'ic-image' },
   { key: 'video-template', label: 'Video Template', iconName: 'ic-videos', dividerBefore: true },

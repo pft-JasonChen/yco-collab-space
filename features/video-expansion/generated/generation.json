@@ -5,7 +5,7 @@
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "claude-code",
   "model": "claude-sonnet-5",
-  "generatedAt": "2026-09-18T07:11:07.443Z",
+  "generatedAt": "2026-09-18T07:56:14.915Z",
   "files": [
     "README.md",
     "contract/integration.yaml",
@@ -1773,7 +1773,7 @@
         },
         {
           "path": "design-library/components/category-rail/component.yaml",
-          "sha256": "eda687862f79e35ffe248763990a419a64c80f8ac25e75fd04b42fde822355b6"
+          "sha256": "9c6643abd86f280d46a73902f69f342143cbfc8524d2cad23e488c61e112f8ab"
         },
         {
           "path": "design-library/components/cell-actions/component.yaml",
@@ -2377,11 +2377,11 @@
         },
         {
           "path": "platform/ui/category-rail/CategoryRail.module.scss",
-          "sha256": "85270348758f3a3a95421c4c7162091a6b42ce58d1336ab41452c0066382194a"
+          "sha256": "fe10e8edf916c31cc9e6a3702f567dea0a3b11d472edfec1bc55997a6b8986a4"
         },
         {
           "path": "platform/ui/category-rail/CategoryRail.stories.jsx",
-          "sha256": "3886594447712093705c1cd4343dac8dace21ed8fca7f1056bdeaa024af7b86b"
+          "sha256": "3d177b779c67d3b0c7646380efe5bb612c07dc2a5e07e2422eb406373c2102e5"
         },
         {
           "path": "platform/ui/category-rail/index.js",
@@ -3068,7 +3068,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "c3b339171ca83985f4d8fce37a5245e56f9bf97c3e7033d2462f2e4556eea87a",
+      "hash": "ce6d3b5e7386c9a16467097092fc3e42b74b0d998c38ff254df76082e563f375",
       "edges": [
         {
           "from": "design-library/assets/font/yco-interface-icons.style.css",
@@ -3867,6 +3867,6 @@
         "react-dom"
       ]
     },
-    "revisionHash": "f393fc376f6ba338144e187fc9868fb3db5f87b9fb9912c1684ff5e76046fe88"
+    "revisionHash": "c17651141908e430659c512a5179277214eb2dd1f2888a9c1f51d454afd0294c"
   }
 }

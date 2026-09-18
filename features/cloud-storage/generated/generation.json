@@ -5,7 +5,7 @@
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "claude-code",
   "model": "claude-sonnet-5",
-  "generatedAt": "2026-09-18T07:11:09.809Z",
+  "generatedAt": "2026-09-18T07:56:26.084Z",
   "files": [
     "README.md",
     "feature.jsx",
@@ -96,9 +96,9 @@
         "status": "pilot-approved",
         "figmaStatus": "pending",
         "contractPath": "design-library/components/category-rail/component.yaml",
-        "contractSha256": "eda687862f79e35ffe248763990a419a64c80f8ac25e75fd04b42fde822355b6",
+        "contractSha256": "9c6643abd86f280d46a73902f69f342143cbfc8524d2cad23e488c61e112f8ab",
         "implementationImport": "platform/ui/category-rail/index.js",
-        "implementationSha256": "85e3e9a7a484815df4e95a36d8aef40526afe83219f7031761c764e792a20e22",
+        "implementationSha256": "60eedd53b57a493dd0db0222ef1ac03f18bed339ebac2d11cf0d8fed06bcf78d",
         "runtimeAssets": [
           {
             "repositoryPath": "design-library/assets/font/yco-category-rail/icomoon.woff",
@@ -2230,7 +2230,7 @@
         },
         {
           "path": "design-library/components/category-rail/component.yaml",
-          "sha256": "eda687862f79e35ffe248763990a419a64c80f8ac25e75fd04b42fde822355b6"
+          "sha256": "9c6643abd86f280d46a73902f69f342143cbfc8524d2cad23e488c61e112f8ab"
         },
         {
           "path": "design-library/components/cell-actions/component.yaml",
@@ -2826,11 +2826,11 @@
         },
         {
           "path": "platform/ui/category-rail/CategoryRail.module.scss",
-          "sha256": "85270348758f3a3a95421c4c7162091a6b42ce58d1336ab41452c0066382194a"
+          "sha256": "fe10e8edf916c31cc9e6a3702f567dea0a3b11d472edfec1bc55997a6b8986a4"
         },
         {
           "path": "platform/ui/category-rail/CategoryRail.stories.jsx",
-          "sha256": "3886594447712093705c1cd4343dac8dace21ed8fca7f1056bdeaa024af7b86b"
+          "sha256": "3d177b779c67d3b0c7646380efe5bb612c07dc2a5e07e2422eb406373c2102e5"
         },
         {
           "path": "platform/ui/category-rail/index.js",
@@ -3517,7 +3517,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "561323c93977f425bb96e9c6e9f242394a00305571964039849cafd880db466f",
+      "hash": "3ba3cd6a018ff6fab0d6deaa5418eb19c05e6b1b9f70d1e2e4221260b9848465",
       "edges": [
         {
           "from": "features/cloud-storage/generated/feature.jsx",
@@ -4220,6 +4220,6 @@
         "react-dom"
       ]
     },
-    "revisionHash": "43ecc01e52a6ce9dafcc738e76482c43be0cc2183f3dda99b9d959406dd0d8a6"
+    "revisionHash": "486de87751ca60b820f8eb806855229ac8568d8c841737b28a35865af1a0d12f"
   }
 }

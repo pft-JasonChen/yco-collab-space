@@ -5,7 +5,7 @@
   "generatorInstructionsVersion": "collab-contract-v1",
   "adapter": "claude-code",
   "model": "claude-sonnet-5",
-  "generatedAt": "2026-09-18T07:11:08.648Z",
+  "generatedAt": "2026-09-18T07:56:20.562Z",
   "files": [
     "feature.jsx",
     "feature.module.scss"
@@ -694,7 +694,7 @@
         },
         {
           "path": "design-library/components/category-rail/component.yaml",
-          "sha256": "eda687862f79e35ffe248763990a419a64c80f8ac25e75fd04b42fde822355b6"
+          "sha256": "9c6643abd86f280d46a73902f69f342143cbfc8524d2cad23e488c61e112f8ab"
         },
         {
           "path": "design-library/components/cell-actions/component.yaml",
@@ -1238,11 +1238,11 @@
         },
         {
           "path": "platform/ui/category-rail/CategoryRail.module.scss",
-          "sha256": "85270348758f3a3a95421c4c7162091a6b42ce58d1336ab41452c0066382194a"
+          "sha256": "fe10e8edf916c31cc9e6a3702f567dea0a3b11d472edfec1bc55997a6b8986a4"
         },
         {
           "path": "platform/ui/category-rail/CategoryRail.stories.jsx",
-          "sha256": "3886594447712093705c1cd4343dac8dace21ed8fca7f1056bdeaa024af7b86b"
+          "sha256": "3d177b779c67d3b0c7646380efe5bb612c07dc2a5e07e2422eb406373c2102e5"
         },
         {
           "path": "platform/ui/category-rail/index.js",
@@ -1929,7 +1929,7 @@
           "sha256": "c006858823129b4d1b934a0c347d522bcb4642a62a3e898f7e89cd537a019a89"
         }
       ],
-      "hash": "6ea5487ec41e265115c8fb21e5bfe86bd09ebad5f277226a7f2814a14e71e135",
+      "hash": "3907b83f5eefae9615c49803336cfd0047ad9bf7a7058d0a7f8b65985f36d82e",
       "edges": [
         {
           "from": "features/collab-space-readiness/generated/feature.jsx",
@@ -1971,6 +1971,6 @@
         "react"
       ]
     },
-    "revisionHash": "1b644e82e7eba0388413cbaf72a47877392f76db10ef03cb86999a7e0d58d5eb"
+    "revisionHash": "be71424f916b13e327b5a015c601cb1019df00f8fb96a657aac6a437a2782707"
   }
 }

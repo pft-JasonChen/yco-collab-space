@@ -218,7 +218,10 @@
   content: '\e916';
 }
 
-:global(.icon-ic-filter)::before {
+// RD's own icon stylesheet names this codepoint "filter"; the fuller icomoon
+// build's glyph metadata and the live-rendered shape both confirm it's a
+// sliders/equalizer glyph, not a funnel — funnel lives at a different codepoint.
+:global(.icon-ic-sliders-horizontal)::before {
   content: '\e922';
 }
 

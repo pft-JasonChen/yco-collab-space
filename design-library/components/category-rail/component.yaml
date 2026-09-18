@@ -33,9 +33,9 @@ implementation:
     - path: platform/ui/category-rail/CategoryRail.jsx
       sha256: 83fef5923162070ab6a3722529dd6ce5d9d897500af69d220cd9b1b2b0760c5a
     - path: platform/ui/category-rail/CategoryRail.module.scss
-      sha256: 85270348758f3a3a95421c4c7162091a6b42ce58d1336ab41452c0066382194a
+      sha256: fe10e8edf916c31cc9e6a3702f567dea0a3b11d472edfec1bc55997a6b8986a4
     - path: platform/ui/category-rail/CategoryRail.stories.jsx
-      sha256: 3886594447712093705c1cd4343dac8dace21ed8fca7f1056bdeaa024af7b86b
+      sha256: 3d177b779c67d3b0c7646380efe5bb612c07dc2a5e07e2422eb406373c2102e5
     - path: platform/ui/category-rail/index.js
       sha256: 67eca5ef929b299644ead641110c76a632b4748ae7985bcd20d77664661c8a86
   localFilesUpdated: 2026-09-18
@@ -108,3 +108,5 @@ decisionBasis:
   - "Auto-sync (2026-09-18): `CategoryRail.module.scss` hash updated — no documented public prop or decisionBasis-quoted value appears to have changed, so this synced automatically. Review if this doesn't look right."
   - "Default row colour corrected to `--text-strong` (2026-09-18, reported live against a Figma inspect of the house icon's own \"Selection colors: Icon/Neutral\" — \"你icon用錯color了\"): `.item`'s colour was `--grey-neutral-solid-800`, a plain grey RD literal — wrong for the label too, not just the icon, which only ever inherited whatever this resolved to. Figma's own Menu Title label uses `--text-strong`; the icon layer is separately tagged `--icon-neutral` — both alias --grey-light-1000, the exact same value, so fixing this one shared declaration corrects both without a second rule on the icon. That second rule (an explicit `color` on `.iconFont`) was tried and reverted: it stops the icon from inheriting `--text-brand` in every selected/focus state, which all recolour via `.item` and rely on inheritance to reach the icon — Figma's own Active states show the icon recoloured to match the label, not held at Icon/Neutral, confirmed live (selected row: icon and label both read rgb(3,173,226); unselected row: both read rgba(9,22,26,0.95), the exact --icon-neutral value from the Figma inspector)."
   - "Auto-sync (2026-09-18): `CategoryRail.module.scss` hash updated — no documented public prop or decisionBasis-quoted value appears to have changed, so this synced automatically. Review if this doesn't look right."
+  - "Basic Editing icon corrected to `ic-sliders-horizontal` (2026-09-18, reported live — \"Basic Editing 用的 icon 是 ic-sliders-horizontal\"): the story item used `ic-image`, a plain photo glyph with no relation to editing controls. RD's own `home-icon-styles.css` names this codepoint (\\e922) `.icon-ic-filter`, which the earlier full-codepoint transcription (see the entry above about icons being invisible on every consumer) carried over verbatim — but the fuller icomoon build's own glyph-name metadata and a live canvas render of the actual loaded font both show \\e922 as a sliders/equalizer shape, not a funnel; the funnel glyph RD's name implied lives at a different codepoint the old 32-glyph set never mapped. Nothing in this repository consumed `.icon-ic-filter`, so the rule was renamed in place to `.icon-ic-sliders-horizontal` (same \\e922) rather than left duplicated under a name nothing needs."
+  - "Auto-sync (2026-09-18): `CategoryRail.module.scss`, `CategoryRail.stories.jsx` hashes updated — no documented public prop or decisionBasis-quoted value appears to have changed, so this synced automatically. Review if this doesn't look right."
